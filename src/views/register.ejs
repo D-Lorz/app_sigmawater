@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,7 +10,7 @@
 	<title>Registro de vendedor</title>
 
 	<!-- Favicons-->
-	<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
 	<link rel="stylesheet" href="./css/scrolls.css">
 
 	<link rel="stylesheet" href="./css/upload.css">
@@ -24,470 +25,7 @@
 	<link href="./css/menu.css" rel="stylesheet">
 	<link href="./css/animate.min.css" rel="stylesheet">
 	<link href="./css/icon_fonts/css/all_icons_min.css" rel="stylesheet">
-	<link href="./css/skins/square/gre
-	<%- include ('./partials/header.ejs') %> 
-	
-	
-		<main>
-			<div id="form_container">
-				<div class="row" > 
-					<!-- id="contenedorRegistro -->
-	
-					<div class="col-lg-7">
-	
-						<div id="wizard_container">
-							<div id="top-wizard">
-								<div id="progressbar"></div>
-							</div>
-	
-	
-							<!-- /top-wizard -->
-							<form action="/enviar" name="example-1" id="wrapped" method="post"  enctype="multipart/form-data" >
-									<input id="website" name="website" type="text" value="">
-								<!-- Leave for security protection, read docs for details -->
-								<div id="middle-wizard">
-	
-									<div class="step">
-	
-										<h3 class="main_question"><strong>1/4</strong>Registro de vendedor</h3>
-										<!-- <h7 class="main_question">3C Sigma Water System</h7> -->
-										<br>
-										<div class="row">
-	
-											<div class="col-md-4">
-												<div class="form-group">
-													<input type="text" name="nombres" id="nombres" class="form-control required"
-														placeholder="Nombres*">
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="form-group">
-													<input type="text"  name="apellidosform" id="apellidosform" class="form-control required"
-														placeholder="Apellidos *">
-												</div>
-											</div>
-											
-											<div class="col-md-4">
-											
-												<div class="form-group"><label id="nacimiento">fecha de nacimiento</label>
-													
-													<input type="date"name="fechaform" id="fechaform"  class="form-control required"
-														placeholder="Fecha de nacimiento*">
-												</div>
-											</div>
-	
-										</div>
-										<!-- /row -->
-	
-										<div class="row">
-											<div class="col-md-4">
-												<div class="form-group">
-													<input type="number"  name="telefonoform" id="telefonoform" class="form-control required"
-														placeholder="Numero de telefono*">
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="form-group">
-													<input type="email"  name="correo" id="correo"  class="form-control required"
-														placeholder="Correo*">
-												</div>
-											</div>
-	
-											<div class="col-md-4">
-	
-										
-											 <div class="form-group">
-										
-									 <input type="tel" name="seguro" id="seguro" placeholder="# de seguro social o ITIN " class="form-control required social"  required />  
-												</div> 
-											</div>
-	
-										</div>
-										<!-- /row -->
-	
-										<div class="row">
-	
-											<div class="col-md-4">
-												<div class="form-group">
-													<input type="text" name="ciudad" id="ciudad" class="form-control required"
-														placeholder="Ciudad donde vive*">
-												</div>
-											</div>
-	
-											<div class="col-md-4">
-												<div class="form-group">
-													<input type="text"  name="direccion" id="direccion"  pattern="[a-zA-Z]+"   class="form-control required"
-														placeholder="Direccion*">
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="form-group">
-													<input type="text" name="direccion2" id="Apt / Suite / Unidad"  class="form-control "
-														placeholder="Apt / Suite / Unidad">
-												</div>
-											</div>
-	
-	
-	
-	
-										</div>
-										<!-- /row -->
-	
-	
-										<div class="row">
-	
-											<div class="col-md-4">
-												<div class="form-group">
-													<input type="number" name="postal" id="postal" class="form-control required"
-														placeholder="Codigo postal*">
-												</div>
-											</div>
-	
-											<div class="col-md-4">
-												<div class="form-group">
-													<input   type="text" name="referido"  id="referido" 
-														class="form-control " pattern="[0-9]+" placeholder="Codigo de referido" maxlength="6">
-												</div>
-											</div>
-										
-	
-										</div>
-										<!-- /row -->
-	
-	
-	
-	
-									</div>
-									<!-- /step--2   CONFIGURACION BANCARIA -->
-	
-									<div class="step">
-										<h3 class="main_question" style="margin-bottom: 10%;">
-											<strong>2/4</strong>Cuenta bancaria
-										</h3>
-										<!-- <div class="row"> -->
-										<!-- <div class="col-md-12">
-												<div class="form-group">
-													<input type="text" name="address" class="form-control required" placeholder="Address">
-												</div>
-											</div> -->
-										<!-- /col-sm-12 -->
-										<!-- </div> -->
-										<!-- /row -->
-										<div class="row">
-											<div class="col-md-5">
-												<div class="form-group">
-													<input type="text"  name="banco" id="banco"  class="form-control required"
-													spellcheck="true"  pattern="[A-Za-z]+"	placeholder="Nombre del Banco*" >
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<input type="number"  name="cuenta" id="cuenta" class="form-control required"
-														placeholder="Numero de cuenta*" pattern="[0-9]+"  >
-												</div>
-											</div>
-	
-	
-										</div>
-										<!-- /row -->
-										<div class="row">
-											<div class="col-md-5">
-												<div class="form-group">
-													<input type="number" name="ruta" id="ruta"  class="form-control required"
-													maxlength="9" placeholder="Numero de ruta*" oninput="maxlengthNumber(this);" >
-												</div>
-											</div>
-											
-	
-											<div class="col-md-6">
-												<div class="form-group">
-													<input type="text"name="beneficiario" id="beneficiario"
-														class="form-control required"
-														placeholder="Nombre del beneficiario*">
-												</div>
-											</div>
-	
-	
-										</div>
-										<!-- /row -->
-									</div>
-									<!-- /step-->
-	
-									<!-- /step--3 -->
-	
-									<div class="step">
-	
-										<h3 class="main_question" style="margin-bottom: 10%;"><strong>3/4</strong>Carga tus
-											documentos</h3>
-	
-										<div class="row">
-											<div class="col-10">
-	
-												<label class="licencia"   >Por favor carga el documento solicitado para que
-													podamos realizar el proceso de verificación de identidad
-												<br>
-												</label>
-												<p class="titulolicencia">Licencia de conducir </p>
-	
-												<div class="input-group">
-													<label class="input-group-btn">
-														<span class="btn btn-primary" style="padding: 10px;">
-															Cargar anverso<input type="file" name="licencia"  id="campoFile"accept="image/jpg"   style="display: none;" id="licencia"   class="required" > 
-															<!-- style="display: none;" class="inputfile" multiple -->
-														</span>
-													</label>
-													<input type="text" class="form-control" style="font-size: 15px;	" placeholder=" Solo archivos .jpg o .png de max 4MB son permitidos"  readonly>
-												</div>
-	
-												<div class="input-group">
-													<label class="input-group-btn">
-														<span class="btn btn-primary" style="padding: 10px;">
-															Cargar reverso<input type="file" name="licencia_trasera"  id="campoFile" accept="image/jpg"  style="display: none;" id="licencia"   class="required" > 
-															
-														</span>
-													</label>
-													<input type="text" class="form-control" style="font-size: 15px;	" placeholder=" Solo archivos .jpg o .png de max 4MB son permitidos"  readonly>
-												</div>
-	
-	
-	
-												<!-- <div class="input-group">
-													<label class="input-group-btn">
-														<span class="btn btn-primary" style="padding: 10px;">
-															Cargar reverso<input type="file" name="licencia2" style="display: none;" id="licencia"   class="required" > 
-															
-														</span>
-													</label>
-													<input type="text" class="form-control" style="font-size: 15px;"  placeholder="  Solo archivos .jpg o .png de max 4MB son permitidos"  readonly>
-												</div>  -->
-	
-												 <!-- placeholder=" Solo archivos .jpg o .png son aceptados"  -->
-												<!-- style="display: none;" class="inputfile" multiple -->
-	
-											</div>
-											<!-- <div class="col-md-10">
-												<label>Foto para identificaion emitida</label>
-												<input type="file" id="file" class="required" name="temp">
-	
-												<br>
-												<label>Foto social o ITN</label>
-												<input type="file" id="file" class="required" name="temp">
-	
-												<br>
-												<label> Identificación con foto emitida por el estado</label>
-												<input type="file" id="file" class="required" name="temp">
-												<input class="browse btn btn-primary px-4" style="height: 24%;"
-													type="submit" value="enviar">
-											</div> -->
-	
-										</div>
-										<!-- --------------------------------------------------- -->
-	
-	
-										<!-- /row -->
-									</div>
-									<!-- /step-->
-	
-	
-	
-	
-									<div class="submit step">
-										<h3 class="main_question"><strong>4/4</strong>Firma tu solicitud</h3>
-										<div class="form-group">
-											<div class="container">
-												<!-- scroll------------------------------------------  -->
-	
-												<scroll-container>
-													<scroll-page>
-														<p>Magna dolor consectetur ipsum mollit ut nulla nisi. Cillum
-															laborum nulla ad proident quis amet do officia et consectetur.
-															Non duis ex ut aliquip cillum occaecat irure elit reprehenderit
-															occaecat veniam nostrud laboris. Ad sit id nostrud et mollit
-															elit ea laboris laborum sunt occaecat cillum amet
-															commodo.Consectetur aliqua laborum incididunt enim tempor duis
-															cillum culpa do quis. Veniam pariatur do consectetur ea.
-															Occaecat laboris sit incididunt commodo elit commodo.</p>
-														<p> dolore irure voluptate pariatur ut do excepteur. Ea adipisicing
-															et reprehenderit duis labore ea velit. Sunt nostrud irure non
-															nostrud tempor voluptate sint voluptate ut deserunt
-															reprehenderit esse anim.Veniam incididunt officia amet
-															exercitation est minim sint com culpa id Lorem elit eu
-															consequat. Nulla amet commodo magna.</p>
-														<p>veniam veniam et laboris id aliquip tempor culpa. Excepteur ea
-															tempor fugiat anim non ea proident consectetur id aute ullamco
-															dolor qui irure. Dolore esse est ipsum elit irure voluptate
-															consequat veniam amet reprehenderit adipisicing incididunt
-															voluptate. Qui officia ullamco id tempor quis ex quis quis
-															cillum nostrud ad sint. Amet Lorem eu pariatur voluptate ullamco
-															pariatur sit labore ex aliquip eiusmod commodo veniam
-															incididunt. Aliquip irure ea veniam quis esse enim labore anim
-															anim aliqua ea nulla.</p>
-	
-	
-													</scroll-page>
-												</scroll-container>
-	
-	
-											</div>
-	
-	
-	
-										</div>
-										<div class="form-group terms">
-											<input name="terms" type="checkbox"  value="yes" class="icheck required">
-											<label   >Debe aceptar los terminos y condiciones para seguir
-											</label>
-										</div>
-									</div>
-	
-	
-									<!-- /step- 4-->
-	
-	
-									<!-- <div class=" step">
-										<h3 class="main_question" >
-											<strong>5/5</strong>Firma de acuerdo
-										</h3>
-	
-										<div class="container col-12" style="margin-left: -3%;">
-	
-											<h3 style="font-size: 22px;">Firmar acuerdo de confidencialidad</h3>
-											<p style="text-align: justify;font-size: 14px;"> Para completar, por favor
-												presiona el boton <i style="font-weight: 700;">"Firmar documento".</i>
-												Accederas a un link donde podras realizar la firma del acuerdo usando tu
-												dedo, o mouse,
-												posteriormente descargar el PDF firmado y cargalo en el campo
-												correpondiente.
-	
-											</p>
-											<button type="button" class="btn btn-primary" style="margin-bottom: 5%;"> Firmar
-												documentos</button>
-											<br>
-											<div class="input-group">
-												<label class="input-group-btn">
-													<span class="btn btn-primary " style="margin-bottom: 5%; background:#9c9c9c;    /* margin-bottom: 5%; */
-														background: #9c9c9c;padding: 20px 27px -2px;text-align: center;	width: -20%;
-														text-align: justify;font-size: 100%;padding: 7px 21px 5px;line-height: 2; ">
-														Cargar <input type="file" id="file" class="required"
-															style="display: none;" multiple>
-													</span>
-												</label>
-												<input type="text" class="form-control required" style="border: 1px solid;border-radius: 6px;										padding: 7px;
-													margin-left: -1%;" placeholder=" Acuerdo de confidencialidad /PDF/" readonly>
-											</div>
-										</div> -->
-										<!-- /row -->
-	
-									<!-- </div> -->
-	
-								</div>
-	
-								<!-- /middle-wizard -->
-								<div id="bottom-wizard">
-									<button type="button" name="backward" class="backward">Retroceder </button>
-									<button type="button" name="forward" class="forward">Siguiente</button>
-									<!-- <button type="submit" name="process" class="submit">Submit</button> -->
-									<button name="process" onclick=""  class="submit">Enviar</button>
-								</div>
-								<!-- /bottom-wizard -->
-							</form>
-	
-							
-						</div>
-						<!-- /Wizard container -->
-					</div>
-	
-	
-					<div class="col-lg-5" id="videoderecho">
-						<!-- <img  src="/video/regis.gif" style="margin-left: 4%;height: -122px;padding: 40px 0 0;	width: 97%;"> -->
-						<video src="/video/Banner.mp4" id="videobanner" autoplay muted loop></video>
-	
-					</div>
-				</div>
-			</div><!-- /Row -->
-			</div><!-- /Form_container -->
-	
-		</main>
-	
-		<!-- <footer id="home" class="clearfix">
-			<p>© 2021 Mavia</p>
-			<ul>
-				<li><a href="#0" class="animated_link">Purchase this template</a></li>
-				<li><a href="#0" class="animated_link">Terms and conditions</a></li>
-				<li><a href="#0" class="animated_link">Contacts</a></li>
-			</ul> -->
-		</footer>
-		<!-- end footer-->
-	
-		<div class="cd-overlay-nav">
-			<span></span>
-		</div>
-		<!-- cd-overlay-nav -->
-	
-		<div class="cd-overlay-content">
-			<span></span>
-		</div>
-		<!-- cd-overlay-content -->
-	
-		<a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
-	
-		<!-- Modal terms -->
-		<div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" id="termsLabel">Terms and conditions</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>,
-							mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus,
-							pro ne quod dicunt sensibus.</p>
-						<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam
-							dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
-							sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum
-							accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum
-							sanctus, pro ne quod dicunt sensibus.</p>
-						<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam
-							dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
-							sensibus.</p>
-					</div>
-					<!-- <div class="modal-footer">
-						<button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
-					</div> -->
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-			//
-		</div>
-		<!-- /.modal -->
-	
-		<!-- Modal info -->
-		<!-- <div class="modal fade" id="more-info" tabindex="-1" role="dialog" aria-labelledby="more-infoLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" id="more-infoLabel">Frequently asked questions</h4>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-						<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-						<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
-					</div>
-				</div> -->
-		<!-- /.modal-content -->
-		<!-- </div> -->
-		<!-- /.modal-dialog -->
-		<!-- </div> -->
-		<!-- /.modal -->
-	
-		
-		<%- include ('./partials/footer.ejs') %> y.css" rel="stylesheet">
+	<link href="./css/skins/square/grey.css" rel="stylesheet">
 	<link rel="stylesheet" href="./css/alertify.css">
 	<link rel="stylesheet" href="./css/themes/default.css">
 
@@ -548,465 +86,471 @@
 	</header>
 	<!-- End Header -->
 
-	<main>
-		<div id="form_container">
-			<div class="row" > 
-				<!-- id="contenedorRegistro -->
-
-				<div class="col-lg-7">
-
-					<div id="wizard_container">
-						<div id="top-wizard">
-							<div id="progressbar"></div>
-						</div>
-
-
-						<!-- /top-wizard -->
-						<form action="/enviar" name="example-1" id="wrapped" method="post"  enctype="multipart/form-data" >
-								<input id="website" name="website" type="text" value="">
-							<!-- Leave for security protection, read docs for details -->
-							<div id="middle-wizard">
-
-								<div class="step">
-
-									<h3 class="main_question"><strong>1/4</strong>Registro de vendedor</h3>
-									<!-- <h7 class="main_question">3C Sigma Water System</h7> -->
-									<br>
-									<div class="row">
-
-										<div class="col-md-4">
-											<div class="form-group">
-												<input type="text" name="nombres" id="nombres" class="form-control required"
-													placeholder="Nombres*">
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<input type="text"  name="apellidosform" id="apellidosform" class="form-control required"
-													placeholder="Apellidos *">
-											</div>
-										</div>
-										
-										<div class="col-md-4">
-										
-											<div class="form-group"><label id="nacimiento">fecha de nacimiento</label>
-												
-												<input type="date"name="fechaform" id="fechaform"  class="form-control required"
-													placeholder="Fecha de nacimiento*">
-											</div>
-										</div>
-
-									</div>
-									<!-- /row -->
-
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<input type="number"  name="telefonoform" id="telefonoform" class="form-control required"
-													placeholder="Numero de telefono*">
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<input type="email"  name="correo" id="correo"  class="form-control required"
-													placeholder="Correo*">
-											</div>
-										</div>
-
-										<div class="col-md-4">
-
-									
-										 <div class="form-group">
-									
-								 <input type="tel" name="seguro" id="seguro" placeholder="# de seguro social o ITIN " class="form-control required social"  required />  
-											</div> 
-										</div>
-
-									</div>
-									<!-- /row -->
-
-									<div class="row">
-
-										<div class="col-md-4">
-											<div class="form-group">
-												<input type="text" name="ciudad" id="ciudad" class="form-control required"
-													placeholder="Ciudad donde vive*">
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<div class="form-group">
-												<input type="text"  name="direccion" id="direccion"  pattern="[a-zA-Z]+"   class="form-control required"
-													placeholder="Direccion*">
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<input type="text" name="direccion2" id="Apt / Suite / Unidad"  class="form-control "
-													placeholder="Apt / Suite / Unidad">
-											</div>
-										</div>
-
-
-
 
-									</div>
-									<!-- /row -->
-
-
-									<div class="row">
-
-										<div class="col-md-4">
-											<div class="form-group">
-												<input type="number" name="postal" id="postal" class="form-control required"
-													placeholder="Codigo postal*">
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<div class="form-group">
-												<input   type="text" name="referido"  id="referido" 
-													class="form-control " pattern="[0-9]+" placeholder="Codigo de referido" maxlength="6">
-											</div>
-										</div>
-									
-
-									</div>
-									<!-- /row -->
-
-
-
-
-								</div>
-								<!-- /step--2   CONFIGURACION BANCARIA -->
-
-								<div class="step">
-									<h3 class="main_question" style="margin-bottom: 10%;">
-										<strong>2/4</strong>Cuenta bancaria
-									</h3>
-									<!-- <div class="row"> -->
-									<!-- <div class="col-md-12">
-											<div class="form-group">
-												<input type="text" name="address" class="form-control required" placeholder="Address">
-											</div>
-										</div> -->
-									<!-- /col-sm-12 -->
-									<!-- </div> -->
-									<!-- /row -->
-									<div class="row">
-										<div class="col-md-5">
-											<div class="form-group">
-												<input type="text"  name="banco" id="banco"  class="form-control required"
-												spellcheck="true"  pattern="[A-Za-z]+"	placeholder="Nombre del Banco*" >
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<input type="number"  name="cuenta" id="cuenta" class="form-control required"
-													placeholder="Numero de cuenta*" pattern="[0-9]+"  >
-											</div>
-										</div>
-
-
-									</div>
-									<!-- /row -->
-									<div class="row">
-										<div class="col-md-5">
-											<div class="form-group">
-												<input type="number" name="ruta" id="ruta"  class="form-control required"
-												maxlength="9" placeholder="Numero de ruta*" oninput="maxlengthNumber(this);" >
-											</div>
-										</div>
-										
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<input type="text"name="beneficiario" id="beneficiario"
-													class="form-control required"
-													placeholder="Nombre del beneficiario*">
-											</div>
-										</div>
-
-
-									</div>
-									<!-- /row -->
-								</div>
-								<!-- /step-->
-
-								<!-- /step--3 -->
-
-								<div class="step">
-
-									<h3 class="main_question" style="margin-bottom: 10%;"><strong>3/4</strong>Carga tus
-										documentos</h3>
-
-									<div class="row">
-										<div class="col-10">
-
-											<label class="licencia"   >Por favor carga el documento solicitado para que
-												podamos realizar el proceso de verificación de identidad
-											<br>
-											</label>
-											<p class="titulolicencia">Licencia de conducir </p>
-
-											<div class="input-group">
-												<label class="input-group-btn">
-													<span class="btn btn-primary" style="padding: 10px;">
-														Cargar anverso<input type="file" name="licencia"  id="campoFile"accept="image/jpg"   style="display: none;" id="licencia"   class="required" > 
-														<!-- style="display: none;" class="inputfile" multiple -->
-													</span>
-												</label>
-												<input type="text" class="form-control" style="font-size: 15px;	" placeholder=" Solo archivos .jpg o .png de max 4MB son permitidos"  readonly>
-											</div>
-
-											<div class="input-group">
-												<label class="input-group-btn">
-													<span class="btn btn-primary" style="padding: 10px;">
-														Cargar reverso<input type="file" name="licencia_trasera"  id="campoFile" accept="image/jpg"  style="display: none;" id="licencia"   class="required" > 
-														
-													</span>
-												</label>
-												<input type="text" class="form-control" style="font-size: 15px;	" placeholder=" Solo archivos .jpg o .png de max 4MB son permitidos"  readonly>
-											</div>
-
-
-
-											<!-- <div class="input-group">
-												<label class="input-group-btn">
-													<span class="btn btn-primary" style="padding: 10px;">
-														Cargar reverso<input type="file" name="licencia2" style="display: none;" id="licencia"   class="required" > 
-														
-													</span>
-												</label>
-												<input type="text" class="form-control" style="font-size: 15px;"  placeholder="  Solo archivos .jpg o .png de max 4MB son permitidos"  readonly>
-											</div>  -->
-
-											 <!-- placeholder=" Solo archivos .jpg o .png son aceptados"  -->
-											<!-- style="display: none;" class="inputfile" multiple -->
-
-										</div>
-										<!-- <div class="col-md-10">
-											<label>Foto para identificaion emitida</label>
-											<input type="file" id="file" class="required" name="temp">
-
-											<br>
-											<label>Foto social o ITN</label>
-											<input type="file" id="file" class="required" name="temp">
-
-											<br>
-											<label> Identificación con foto emitida por el estado</label>
-											<input type="file" id="file" class="required" name="temp">
-											<input class="browse btn btn-primary px-4" style="height: 24%;"
-												type="submit" value="enviar">
-										</div> -->
-
-									</div>
-									<!-- --------------------------------------------------- -->
-
-
-									<!-- /row -->
-								</div>
-								<!-- /step-->
-
-
-
-
-								<div class="submit step">
-									<h3 class="main_question"><strong>4/4</strong>Firma tu solicitud</h3>
-									<div class="form-group">
-										<div class="container">
-											<!-- scroll------------------------------------------  -->
-
-											<scroll-container>
-												<scroll-page>
-													<p>Magna dolor consectetur ipsum mollit ut nulla nisi. Cillum
-														laborum nulla ad proident quis amet do officia et consectetur.
-														Non duis ex ut aliquip cillum occaecat irure elit reprehenderit
-														occaecat veniam nostrud laboris. Ad sit id nostrud et mollit
-														elit ea laboris laborum sunt occaecat cillum amet
-														commodo.Consectetur aliqua laborum incididunt enim tempor duis
-														cillum culpa do quis. Veniam pariatur do consectetur ea.
-														Occaecat laboris sit incididunt commodo elit commodo.</p>
-													<p> dolore irure voluptate pariatur ut do excepteur. Ea adipisicing
-														et reprehenderit duis labore ea velit. Sunt nostrud irure non
-														nostrud tempor voluptate sint voluptate ut deserunt
-														reprehenderit esse anim.Veniam incididunt officia amet
-														exercitation est minim sint com culpa id Lorem elit eu
-														consequat. Nulla amet commodo magna.</p>
-													<p>veniam veniam et laboris id aliquip tempor culpa. Excepteur ea
-														tempor fugiat anim non ea proident consectetur id aute ullamco
-														dolor qui irure. Dolore esse est ipsum elit irure voluptate
-														consequat veniam amet reprehenderit adipisicing incididunt
-														voluptate. Qui officia ullamco id tempor quis ex quis quis
-														cillum nostrud ad sint. Amet Lorem eu pariatur voluptate ullamco
-														pariatur sit labore ex aliquip eiusmod commodo veniam
-														incididunt. Aliquip irure ea veniam quis esse enim labore anim
-														anim aliqua ea nulla.</p>
-
-
-												</scroll-page>
-											</scroll-container>
-
-
-										</div>
-
-
-
-									</div>
-									<div class="form-group terms">
-										<input name="terms" type="checkbox"  value="yes" class="icheck required">
-										<label   >Debe aceptar los terminos y condiciones para seguir
-										</label>
-									</div>
-								</div>
-
-
-								<!-- /step- 4-->
-
-
-								<!-- <div class=" step">
-									<h3 class="main_question" >
-										<strong>5/5</strong>Firma de acuerdo
-									</h3>
-
-									<div class="container col-12" style="margin-left: -3%;">
-
-										<h3 style="font-size: 22px;">Firmar acuerdo de confidencialidad</h3>
-										<p style="text-align: justify;font-size: 14px;"> Para completar, por favor
-											presiona el boton <i style="font-weight: 700;">"Firmar documento".</i>
-											Accederas a un link donde podras realizar la firma del acuerdo usando tu
-											dedo, o mouse,
-											posteriormente descargar el PDF firmado y cargalo en el campo
-											correpondiente.
-
-										</p>
-										<button type="button" class="btn btn-primary" style="margin-bottom: 5%;"> Firmar
-											documentos</button>
-										<br>
-										<div class="input-group">
-											<label class="input-group-btn">
-												<span class="btn btn-primary " style="margin-bottom: 5%; background:#9c9c9c;    /* margin-bottom: 5%; */
-													background: #9c9c9c;padding: 20px 27px -2px;text-align: center;	width: -20%;
-													text-align: justify;font-size: 100%;padding: 7px 21px 5px;line-height: 2; ">
-													Cargar <input type="file" id="file" class="required"
-														style="display: none;" multiple>
-												</span>
-											</label>
-											<input type="text" class="form-control required" style="border: 1px solid;border-radius: 6px;										padding: 7px;
-												margin-left: -1%;" placeholder=" Acuerdo de confidencialidad /PDF/" readonly>
-										</div>
-									</div> -->
-									<!-- /row -->
-
-								<!-- </div> -->
-
-							</div>
-
-							<!-- /middle-wizard -->
-							<div id="bottom-wizard">
-								<button type="button" name="backward" class="backward">Retroceder </button>
-								<button type="button" name="forward" class="forward">Siguiente</button>
-								<!-- <button type="submit" name="process" class="submit">Submit</button> -->
-								<button name="process" onclick=""  class="submit">Enviar</button>
-							</div>
-							<!-- /bottom-wizard -->
-						</form>
-
-						
-					</div>
-					<!-- /Wizard container -->
-				</div>
-
-
-				<div class="col-lg-5" id="videoderecho">
-					<!-- <img  src="/video/regis.gif" style="margin-left: 4%;height: -122px;padding: 40px 0 0;	width: 97%;"> -->
-					<video src="/video/Banner.mp4" id="videobanner" autoplay muted loop></video>
-
-				</div>
-			</div>
-		</div><!-- /Row -->
-		</div><!-- /Form_container -->
-
-	</main>
-
-	<!-- <footer id="home" class="clearfix">
-		<p>© 2021 Mavia</p>
-		<ul>
-			<li><a href="#0" class="animated_link">Purchase this template</a></li>
-			<li><a href="#0" class="animated_link">Terms and conditions</a></li>
-			<li><a href="#0" class="animated_link">Contacts</a></li>
-		</ul> -->
-	</footer>
-	<!-- end footer-->
-
-	<div class="cd-overlay-nav">
-		<span></span>
-	</div>
-	<!-- cd-overlay-nav -->
-
-	<div class="cd-overlay-content">
-		<span></span>
-	</div>
-	<!-- cd-overlay-content -->
-
-	<a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
-
-	<!-- Modal terms -->
-	<div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="termsLabel">Terms and conditions</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>,
-						mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus,
-						pro ne quod dicunt sensibus.</p>
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam
-						dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
-						sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum
-						accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum
-						sanctus, pro ne quod dicunt sensibus.</p>
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam
-						dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
-						sensibus.</p>
-				</div>
-				<!-- <div class="modal-footer">
-					<button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
-				</div> -->
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-		//
-	</div>
-	<!-- /.modal -->
-
-	<!-- Modal info -->
-	<!-- <div class="modal fade" id="more-info" tabindex="-1" role="dialog" aria-labelledby="more-infoLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="more-infoLabel">Frequently asked questions</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-					<p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
-				</div>
-			</div> -->
-	<!-- /.modal-content -->
-	<!-- </div> -->
-	<!-- /.modal-dialog -->
-	<!-- </div> -->
-	<!-- /.modal -->
-
-	
+
+
+  <main>
+    <div id="form_container">
+      <div class="row">
+        <!-- id="contenedorRegistro -->
+
+        <div class="col-lg-7">
+
+          <div id="wizard_container">
+            <div id="top-wizard">
+              <div id="progressbar"></div>
+            </div>
+
+
+            <!-- /top-wizard -->
+            <form action="/enviar" name="example-1" id="wrapped" method="post" enctype="multipart/form-data">
+              <input id="website" name="website" type="text" value="">
+              <!-- Leave for security protection, read docs for details -->
+              <div id="middle-wizard">
+
+                <div class="step">
+
+                  <h3 class="main_question"><strong>1/4</strong>Registro de vendedor</h3>
+                  <!-- <h7 class="main_question">3C Sigma Water System</h7> -->
+                  <br>
+                  <div class="row">
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="text" name="nombres" id="nombres" class="form-control required"
+                          placeholder="Nombres*">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="text" name="apellidosform" id="apellidosform" class="form-control required"
+                          placeholder="Apellidos *">
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+
+                      <div class="form-group"><label id="nacimiento">fecha de nacimiento</label>
+
+                        <input type="date" name="fechaform" id="fechaform" class="form-control required"
+                          placeholder="Fecha de nacimiento*">
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- /row -->
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="number" name="telefonoform" id="telefonoform" class="form-control required"
+                          placeholder="Numero de telefono*">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="email" name="correo" id="correo" class="form-control required"
+                          placeholder="Correo*">
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+
+
+                      <div class="form-group">
+
+                        <input type="tel" name="seguro" id="seguro" placeholder="# de seguro social o ITIN "
+                          class="form-control required social" required />
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- /row -->
+
+                  <div class="row">
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="text" name="ciudad" id="ciudad" class="form-control required"
+                          placeholder="Ciudad donde vive*">
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="text" name="direccion" id="direccion" pattern="[a-zA-Z]+"
+                          class="form-control required" placeholder="Direccion*">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="text" name="direccion2" id="Apt / Suite / Unidad" class="form-control "
+                          placeholder="Apt / Suite / Unidad">
+                      </div>
+                    </div>
+
+
+
+
+                  </div>
+                  <!-- /row -->
+
+
+                  <div class="row">
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="number" name="postal" id="postal" class="form-control required"
+                          placeholder="Codigo postal*">
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="text" name="referido" id="referido" class="form-control " pattern="[0-9]+"
+                          placeholder="Codigo de referido" maxlength="6">
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <!-- /row -->
+
+
+
+
+                </div>
+                <!-- /step--2   CONFIGURACION BANCARIA -->
+
+                <div class="step">
+                  <h3 class="main_question" style="margin-bottom: 10%;">
+                    <strong>2/4</strong>Cuenta bancaria
+                  </h3>
+                  <!-- <div class="row"> -->
+                  <!-- <div class="col-md-12">
+                    <div class="form-group">
+                      <input type="text" name="address" class="form-control required" placeholder="Address">
+                    </div>
+                  </div> -->
+                  <!-- /col-sm-12 -->
+                  <!-- </div> -->
+                  <!-- /row -->
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <input type="text" name="banco" id="banco" class="form-control required" spellcheck="true"
+                          pattern="[A-Za-z]+" placeholder="Nombre del Banco*">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="number" name="cuenta" id="cuenta" class="form-control required"
+                          placeholder="Numero de cuenta*" pattern="[0-9]+">
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <!-- /row -->
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <input type="number" name="ruta" id="ruta" class="form-control required" maxlength="9"
+                          placeholder="Numero de ruta*" oninput="maxlengthNumber(this);">
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input type="text" name="beneficiario" id="beneficiario" class="form-control required"
+                          placeholder="Nombre del beneficiario*">
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <!-- /row -->
+                </div>
+                <!-- /step-->
+
+                <!-- /step--3 -->
+
+                <div class="step">
+
+                  <h3 class="main_question" style="margin-bottom: 10%;"><strong>3/4</strong>Carga tus
+                    documentos</h3>
+
+                  <div class="row">
+                    <div class="col-10">
+
+                      <label class="licencia">Por favor carga el documento solicitado para que
+                        podamos realizar el proceso de verificación de identidad
+                        <br>
+                      </label>
+                      <p class="titulolicencia">Licencia de conducir </p>
+
+                      <div class="input-group">
+                        <label class="input-group-btn">
+                          <span class="btn btn-primary" style="padding: 10px;">
+                            Cargar anverso<input type="file" name="licencia" id="campoFile" accept="image/jpg"
+                              style="display: none;" id="licencia" class="required">
+                            <!-- style="display: none;" class="inputfile" multiple -->
+                          </span>
+                        </label>
+                        <input type="text" class="form-control" style="font-size: 15px;	"
+                          placeholder=" Solo archivos .jpg o .png de max 4MB son permitidos" readonly>
+                      </div>
+
+                      <div class="input-group">
+                        <label class="input-group-btn">
+                          <span class="btn btn-primary" style="padding: 10px;">
+                            Cargar reverso<input type="file" name="licencia_trasera" id="campoFile" accept="image/jpg"
+                              style="display: none;" id="licencia" class="required">
+
+                          </span>
+                        </label>
+                        <input type="text" class="form-control" style="font-size: 15px;	"
+                          placeholder=" Solo archivos .jpg o .png de max 4MB son permitidos" readonly>
+                      </div>
+
+
+
+                      <!-- <div class="input-group">
+                      <label class="input-group-btn">
+                        <span class="btn btn-primary" style="padding: 10px;">
+                          Cargar reverso<input type="file" name="licencia2" style="display: none;" id="licencia"   class="required" > 
+                          
+                        </span>
+                      </label>
+                      <input type="text" class="form-control" style="font-size: 15px;"  placeholder="  Solo archivos .jpg o .png de max 4MB son permitidos"  readonly>
+                    </div>  -->
+
+                      <!-- placeholder=" Solo archivos .jpg o .png son aceptados"  -->
+                      <!-- style="display: none;" class="inputfile" multiple -->
+
+                    </div>
+                    <!-- <div class="col-md-10">
+                    <label>Foto para identificaion emitida</label>
+                    <input type="file" id="file" class="required" name="temp">
+
+                    <br>
+                    <label>Foto social o ITN</label>
+                    <input type="file" id="file" class="required" name="temp">
+
+                    <br>
+                    <label> Identificación con foto emitida por el estado</label>
+                    <input type="file" id="file" class="required" name="temp">
+                    <input class="browse btn btn-primary px-4" style="height: 24%;"
+                      type="submit" value="enviar">
+                  </div> -->
+
+                  </div>
+                  <!-- --------------------------------------------------- -->
+
+
+                  <!-- /row -->
+                </div>
+                <!-- /step-->
+
+
+
+
+                <div class="submit step">
+                  <h3 class="main_question"><strong>4/4</strong>Firma tu solicitud</h3>
+                  <div class="form-group">
+                    <div class="container">
+                      <!-- scroll------------------------------------------  -->
+
+                      <scroll-container>
+                        <scroll-page>
+                          <p>Magna dolor consectetur ipsum mollit ut nulla nisi. Cillum
+                            laborum nulla ad proident quis amet do officia et consectetur.
+                            Non duis ex ut aliquip cillum occaecat irure elit reprehenderit
+                            occaecat veniam nostrud laboris. Ad sit id nostrud et mollit
+                            elit ea laboris laborum sunt occaecat cillum amet
+                            commodo.Consectetur aliqua laborum incididunt enim tempor duis
+                            cillum culpa do quis. Veniam pariatur do consectetur ea.
+                            Occaecat laboris sit incididunt commodo elit commodo.</p>
+                          <p> dolore irure voluptate pariatur ut do excepteur. Ea adipisicing
+                            et reprehenderit duis labore ea velit. Sunt nostrud irure non
+                            nostrud tempor voluptate sint voluptate ut deserunt
+                            reprehenderit esse anim.Veniam incididunt officia amet
+                            exercitation est minim sint com culpa id Lorem elit eu
+                            consequat. Nulla amet commodo magna.</p>
+                          <p>veniam veniam et laboris id aliquip tempor culpa. Excepteur ea
+                            tempor fugiat anim non ea proident consectetur id aute ullamco
+                            dolor qui irure. Dolore esse est ipsum elit irure voluptate
+                            consequat veniam amet reprehenderit adipisicing incididunt
+                            voluptate. Qui officia ullamco id tempor quis ex quis quis
+                            cillum nostrud ad sint. Amet Lorem eu pariatur voluptate ullamco
+                            pariatur sit labore ex aliquip eiusmod commodo veniam
+                            incididunt. Aliquip irure ea veniam quis esse enim labore anim
+                            anim aliqua ea nulla.</p>
+
+
+                        </scroll-page>
+                      </scroll-container>
+
+
+                    </div>
+
+
+
+                  </div>
+                  <div class="form-group terms">
+                    <input name="terms" type="checkbox" value="yes" class="icheck required">
+                    <label>Debe aceptar los terminos y condiciones para seguir
+                    </label>
+                  </div>
+                </div>
+
+
+                <!-- /step- 4-->
+
+
+                <!-- <div class=" step">
+                <h3 class="main_question" >
+                  <strong>5/5</strong>Firma de acuerdo
+                </h3>
+
+                <div class="container col-12" style="margin-left: -3%;">
+
+                  <h3 style="font-size: 22px;">Firmar acuerdo de confidencialidad</h3>
+                  <p style="text-align: justify;font-size: 14px;"> Para completar, por favor
+                    presiona el boton <i style="font-weight: 700;">"Firmar documento".</i>
+                    Accederas a un link donde podras realizar la firma del acuerdo usando tu
+                    dedo, o mouse,
+                    posteriormente descargar el PDF firmado y cargalo en el campo
+                    correpondiente.
+
+                  </p>
+                  <button type="button" class="btn btn-primary" style="margin-bottom: 5%;"> Firmar
+                    documentos</button>
+                  <br>
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                      <span class="btn btn-primary " style="margin-bottom: 5%; background:#9c9c9c;    /* margin-bottom: 5%; */
+                        background: #9c9c9c;padding: 20px 27px -2px;text-align: center;	width: -20%;
+                        text-align: justify;font-size: 100%;padding: 7px 21px 5px;line-height: 2; ">
+                        Cargar <input type="file" id="file" class="required"
+                          style="display: none;" multiple>
+                      </span>
+                    </label>
+                    <input type="text" class="form-control required" style="border: 1px solid;border-radius: 6px;										padding: 7px;
+                      margin-left: -1%;" placeholder=" Acuerdo de confidencialidad /PDF/" readonly>
+                  </div>
+                </div> -->
+                <!-- /row -->
+
+                <!-- </div> -->
+
+              </div>
+
+              <!-- /middle-wizard -->
+              <div id="bottom-wizard">
+                <button type="button" name="backward" class="backward">Retroceder </button>
+                <button type="button" name="forward" class="forward">Siguiente</button>
+                <!-- <button type="submit" name="process" class="submit">Submit</button> -->
+                <button name="process" onclick="" class="submit">Enviar</button>
+              </div>
+              <!-- /bottom-wizard -->
+            </form>
+
+
+          </div>
+          <!-- /Wizard container -->
+        </div>
+
+
+        <div class="col-lg-5" id="videoderecho">
+          <!-- <img  src="/video/regis.gif" style="margin-left: 4%;height: -122px;padding: 40px 0 0;	width: 97%;"> -->
+          <video src="/video/Banner.mp4" id="videobanner" autoplay muted loop></video>
+
+        </div>
+      </div>
+    </div><!-- /Row -->
+    </div><!-- /Form_container -->
+
+  </main>
+
+  <!-- <footer id="home" class="clearfix">
+  <p>© 2021 Mavia</p>
+  <ul>
+    <li><a href="#0" class="animated_link">Purchase this template</a></li>
+    <li><a href="#0" class="animated_link">Terms and conditions</a></li>
+    <li><a href="#0" class="animated_link">Contacts</a></li>
+  </ul> -->
+  </footer>
+  <!-- end footer-->
+
+  <div class="cd-overlay-nav">
+    <span></span>
+  </div>
+  <!-- cd-overlay-nav -->
+
+  <div class="cd-overlay-content">
+    <span></span>
+  </div>
+  <!-- cd-overlay-content -->
+
+  <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
+
+  <!-- Modal terms -->
+  <div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="termsLabel">Terms and conditions</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>,
+            mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus,
+            pro ne quod dicunt sensibus.</p>
+          <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam
+            dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
+            sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum
+            accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum
+            sanctus, pro ne quod dicunt sensibus.</p>
+          <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam
+            dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
+            sensibus.</p>
+        </div>
+        <!-- <div class="modal-footer">
+        <button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
+      </div> -->
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+    //
+  </div>
+  <!-- /.modal -->
+
+  <!-- Modal info -->
+  <!-- <div class="modal fade" id="more-info" tabindex="-1" role="dialog" aria-labelledby="more-infoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="more-infoLabel">Frequently asked questions</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+        <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+        <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div> -->
+  <!-- /.modal-content -->
+  <!-- </div> -->
+  <!-- /.modal-dialog -->
+  <!-- </div> -->
+  <!-- /.modal -->
+
 	<!-- SCRIPTS -->
 	<!-- Jquery-->
 	<script src="./js/jquery-3.6.0.min.js"></script>
@@ -1033,7 +577,7 @@
 <!-- ====================================================================-->
 			<!-- ==== MASCARA PARA EL CAMPO SEGURO SOCIAL ==== -->
 <!-- ====================================================================-->
-<script src="./js/mascara.js"></script>
+<script src="/js/mascara.js"></script>
 	
 <!-- ====================================================================-->
 <!-- ====================================================================-->
