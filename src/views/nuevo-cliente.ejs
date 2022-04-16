@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./cssdash/css/scrolls.css">
 
 
+
  <link href="./cssdash/libs/dropzone/min/dropzone.min.css">
 
     <base href="#">
@@ -524,14 +525,14 @@
                                                                     <input class="form-check-input" type="radio"
                                                                         name="formRadios" id="formRadios1" checked>
                                                                     <label class="form-check-label" for="formRadios1">
-                                                                        Social
+                                                                        SSN 
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-check">
                                                                     <input class="form-check-input" type="radio"
                                                                         name="formRadios" id="formRadios2">
                                                                     <label class="form-check-label" for="formRadios2">
-                                                                        En
+                                                                        ITIN
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -663,48 +664,38 @@
                                                         <div class="col-md-5 justify-content-center">
                                                         <div>
 
-                                                            <p>Indique los datos del domicilio del solicitante / Indique
+                                                            <!-- <p>Indique los datos del domicilio del solicitante / Indique
                                                                 la información sobre la casa del solicitante
                                                                 ¿Está hipotecado, pagado o alquilado? esta hipotecada,
-                                                                pagada o rentada?</p>
+                                                                pagada o rentada?</p> -->
+
+                                                                <p>Indique la condición de si vivienda</p>
 
                                                             <div class="form-check mb-3">
                                                                 <input class="form-check-input" type="radio"
                                                                     name="formRadios" id="formRadios1">
                                                                 <label class="form-check-label" for="formRadios1">
-                                                                    Hipoteca </label>
+                                                                    Hipotecada </label>
                                                             </div>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
                                                                     name="formRadios" id="formRadios2">
                                                                 <label class="form-check-label"
-                                                                    for="formRadios2">Pagados</label>
+                                                                    for="formRadios2">Pagada</label>
                                                             </div>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
                                                                     name="formRadios" id="formRadios3">
                                                                 <label class="form-check-label"
-                                                                    for="formRadios3">Alquiler</label>
+                                                                    for="formRadios3">Rentada</label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     </div>
-
-
-
-                                                 
-
 
                                                     <div class="row justify-content-center">
-                                                        <div class="col-lg-4">
-                                                            <div class="mb-3">
-                                                                <label for="progresspill-firstname-input">Compañía
-                                                                    hipotecaria*</label>
-                                                                <input type="text" class="form-control required"
-                                                                    id="progresspill-firstname-input" required="">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
+
+                                                         <div class="col-lg-4">
                                                             <div class="mb-3">
                                                                 <label for="progresspill-firstname-input">Pago mensual
                                                                     $*</label>
@@ -712,11 +703,6 @@
                                                                     id="progresspill-firstname-input" required="">
                                                             </div>
                                                         </div>
-
-
-                                                    </div>
-
-                                                    <div class="row justify-content-center">
                                                         <div class="col-lg-4">
                                                             <div class="mb-3">
                                                                 <label for="progresspill-firstname-input">Años de residencia*</label>
@@ -768,8 +754,8 @@
                                                     <div class="row">
                                                         <div class="col-lg-4">
                                                             <div class="mb-3">
-                                                                <label for="progresspill-firstname-input">Empleado
-                                                                    solcitante*</label>
+                                                                <label for="progresspill-firstname-input">
+                                                                    Empleador de aplicante</label>
                                                                 <input type="text" class="form-control required"
                                                                     id="progresspill-firstname-input" required="">
                                                             </div>
@@ -800,7 +786,7 @@
                                                         <div class="col-lg-4">
                                                             <div class="mb-3">
                                                                 <label
-                                                                    for="progresspill-firstname-input">Ocupacion</label>
+                                                                    for="progresspill-firstname-input">Ocupación</label>
                                                                 <input type="text" class="form-control required"
                                                                     id="progresspill-firstname-input" required="">
                                                             </div>
@@ -894,7 +880,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-4" style="text-align: center;">
                                                         <div class="mb-3">
-                                                            <label for="progresspill-firstname-input">identificación / licencia de conducir*</label>
+                                                            <label for="progresspill-firstname-input">identificación / licencia de conducción*</label>
                                                             <input type="text" class="form-control required"
                                                                 id="progresspill-firstname-input" required="">
                                                         </div>
@@ -902,14 +888,14 @@
 
                                                     <div class="col-lg-4"  style="text-align: center;" >
                                                         <div class="mb-3">
-                                                            <label for="progresspill-firstname-input">Expedición:*</label>
+                                                            <label for="progresspill-firstname-input">Fecha de expedición de licencia*</label>
                                                             <input type="date" class="form-control required"
                                                                 id="progresspill-firstname-input" required="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4" style="text-align: center;"  >
                                                         <div class="mb-3">
-                                                            <label for="progresspill-firstname-input">Vencimiento:</label>
+                                                            <label for="progresspill-firstname-input">Fecha de vencimiento de licencia*</label>
                                                             <input type="date" class="form-control required"
                                                                 id="progresspill-firstname-input" required="">
                                                         </div>
@@ -917,15 +903,13 @@
 
                                                     <div class="col-lg-4" style="text-align: center;"  >
                                                         <div class="mb-3">
-                                                            <label for="progresspill-firstname-input">Seguro social / ITIN</label>
+                                                            <label for="progresspill-firstname-input">Numero de seguuro social/ITIN*</label>
                                                             <input type="number" class="form-control required"
                                                                 id="progresspill-firstname-input" required="">
                                                         </div>
                                                     </div>
 
-
-
-                                                    
+                                                   
                                                     <div class="col-md-1">
                                                         <div>
                                                             <div class="form-check
@@ -933,14 +917,14 @@
                                                                 <input class="form-check-input" type="radio"
                                                                     name="formRadios" id="formRadios1" checked>
                                                                 <label class="form-check-label" for="formRadios1">
-                                                                    Social
+                                                                    SSN
                                                                 </label>
                                                             </div>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
                                                                     name="formRadios" id="formRadios2">
                                                                 <label class="form-check-label" for="formRadios2">
-                                                                    En
+                                                                    ITIN
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -949,7 +933,7 @@
 
                                                     <div class="col-lg-3" style="text-align: center;">
                                                         <div class   ="mb-3">
-                                                            <label for="progresspill-firstname-input">Fecha de cumpleaños:*</label>
+                                                            <label for="progresspill-firstname-input">Fecha de nacimiento mm/dd/aaaa*</label>
                                                             <input type="date" class="form-control required"
                                                                 id="progresspill-firstname-input" required="">
                                                         </div>
@@ -957,8 +941,8 @@
                                                     <div class="col-lg-4" style="text-align: center;">
                                                         <div class="mb-3">
                                                             <label
-                                                                for="progresspill-firstname-input">Telefono movil</label>
-                                                            <input type="tel" class="form-control required"
+                                                                for="progresspill-firstname-input">Nombre</label>
+                                                            <input type="text" class="form-control required"
                                                                 id="progresspill-firstname-input" required="">
                                                         </div>
                                                     </div>
@@ -966,15 +950,15 @@
                                                     <div class="col-lg-4" style="text-align: center;">
                                                         <div class="mb-3">
                                                             <label
-                                                                for="progresspill-firstname-input">Telefono de casa</label>
-                                                            <input type="tel" class="form-control required"
+                                                                for="progresspill-firstname-input">Segundo nombre*</label>
+                                                            <input type="text" class="form-control required"
                                                                 id="progresspill-firstname-input" required="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4" style="text-align: center;">
                                                         <div class="mb-3">
                                                             <label
-                                                                for="progresspill-firstname-input">Apellido</label>
+                                                                for="progresspill-firstname-input">Apellido*</label>
                                                             <input type="text" class="form-control required"
                                                                 id="progresspill-firstname-input" required="">
                                                         </div>
@@ -982,15 +966,15 @@
                                                     <div class="col-lg-4" style="text-align: center;" >
                                                         <div class="mb-3">
                                                             <label
-                                                                for="progresspill-firstname-input">Primer nombre</label>
-                                                            <input type="text" class="form-control required"
+                                                                for="progresspill-firstname-input">Teléfono movil</label>
+                                                            <input type="tel" class="form-control required"
                                                                 id="progresspill-firstname-input" required="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4" style="text-align: center;">
                                                         <div class="mb-3">
                                                             <label
-                                                                for="progresspill-firstname-input">Inicio medio</label>
+                                                                for="progresspill-firstname-input">Teléfono secundario*</label>
                                                             <input type="number" class="form-control required"
                                                                 id="progresspill-firstname-input" required="">
                                                         </div>
@@ -1006,7 +990,7 @@
                                                  
                                                     <div class="col-lg-4 col-md-3" >
                                                         <div class="mb-3">
-                                                            <label for="progresspill-firstname-input" style="text-align: center;">Relacion / parentesco</label>
+                                                            <label for="progresspill-firstname-input" style="text-align: center;">Relación / parentesco</label>
                                                             <select class="form-control"
                                                                 data-trigger
                                                                 name="choices-single-default"
@@ -1033,7 +1017,7 @@
 
                                                         <div class="col-lg-4" style="text-align: center;">
                                                             <div class="mb-3">
-                                                                <label for="progresspill-firstname-input">Con el empleador</label>
+                                                                <label for="progresspill-firstname-input">Coa Employer</label>
                                                                 <input type="text" class="form-control required"
                                                                     id="progresspill-firstname-input" required="">
                                                             </div>
@@ -1072,7 +1056,7 @@
     
                                                         <div class="col-lg-4" style="text-align: center;"  >
                                                             <div class="mb-3">
-                                                                <label for="progresspill-firstname-input">Telefono</label>
+                                                                <label for="progresspill-firstname-input">Teléfono</label>
                                                                 <input type="tel" class="form-control required"
                                                                     id="progresspill-firstname-input" required="">
                                                             </div>
@@ -1135,13 +1119,13 @@
 
                                 <div class="text-center mb-4">
                                     <h5>REFERENCIAS</h5>
-                                    <p class="card-title-desc">Personal References / Referencias Personales</p>
+                                    <p class="card-title-desc">Referencias Personales</p>
                                 </div>
                                 <div class="moverp">
                                     <div class="row justify-content-center" >
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="progresspill-firstname-input">Nombre Referencia 1*</label>
+                                                <label for="progresspill-firstname-input"><b>1</b> Nombre de referencia*</label>
                                                 <input type="text" class="form-control required"
                                                     id="progresspill-firstname-input" required="">
                                             </div>
@@ -1150,7 +1134,7 @@
                                         <div class="col-lg-4">
                                             <div class="mb-3">
                                                 <label
-                                                    for="progresspill-firstname-input">Relación:*</label>
+                                                    for="progresspill-firstname-input">Relación/parentezco*</label>
                                                 <input type="text" class="form-control required"
                                                     id="progresspill-firstname-input" required="">
                                             </div>
@@ -1158,7 +1142,7 @@
                                         
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="progresspill-firstname-input"> Teléfono*</label>
+                                                <label for="progresspill-firstname-input">Teléfono movil*</label>
                                                 <input type="tel" class="form-control required"
                                                     id="progresspill-firstname-input" required="">
                                             </div>
@@ -1171,7 +1155,7 @@
                                         <div class="row justify-content-center" >
                                             <div class="col-lg-4">
                                                 <div class="mb-3">
-                                                    <label for="progresspill-firstname-input">Nombre Referencia 2*</label>
+                                                    <label for="progresspill-firstname-input"><b>2</b> Nombre de referencia*</label>
                                                     <input type="text" class="form-control required"
                                                         id="progresspill-firstname-input" required="">
                                                 </div>
@@ -1180,7 +1164,7 @@
                                             <div class="col-lg-4">
                                                 <div class="mb-3">
                                                     <label
-                                                        for="progresspill-firstname-input">Relación:*</label>
+                                                        for="progresspill-firstname-input">Relación/parentezco*</label>
                                                     <input type="text" class="form-control required"
                                                         id="progresspill-firstname-input" required="">
                                                 </div>
@@ -1188,7 +1172,7 @@
                                             
                                             <div class="col-lg-4">
                                                 <div class="mb-3">
-                                                    <label for="progresspill-firstname-input"> Teléfono*</label>
+                                                    <label for="progresspill-firstname-input"> Teléfono movil*</label>
                                                     <input type="tel" class="form-control required"
                                                         id="progresspill-firstname-input" required="">
                                                 </div>
@@ -1203,7 +1187,7 @@
                                     <div class="row justify-content-center" >
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="progresspill-firstname-input">Nombre Referencia 3*</label>
+                                                <label for="progresspill-firstname-input"><b>3</b> Nombre de referencia*</label>
                                                 <input type="text" class="form-control required"
                                                     id="progresspill-firstname-input" required="">
                                             </div>
@@ -1212,7 +1196,7 @@
                                         <div class="col-lg-4">
                                             <div class="mb-3">
                                                 <label
-                                                    for="progresspill-firstname-input">Relación:*</label>
+                                                    for="progresspill-firstname-input">Relación/parentezco*</label>
                                                 <input type="text" class="form-control required"
                                                     id="progresspill-firstname-input" required="">
                                             </div>
@@ -1220,7 +1204,7 @@
                                         
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="progresspill-firstname-input"> Teléfono*</label>
+                                                <label for="progresspill-firstname-input">Teléfono movil*</label>
                                                 <input type="tel" class="form-control required"
                                                     id="progresspill-firstname-input" required="">
                                             </div>
