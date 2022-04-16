@@ -1,55 +1,49 @@
-const express = require('express');
-const session = require('express-session')
-const morgan = require('morgan');
-const bodyParser = require('body-parser')
-const passport = require('passport') // Modulo para realizar la autenticación (Local o con Redes Sociales)
+const express = require('express')
+const dotenv = require('dotenv')
+const cookieParser = require('cookie-parser')
 const path = require('path');
-const csrf = require('csurf')
-const flash = require('connect-flash') // Para enviar mensajes de Flash en cualquier vista
 
-// Inicializaciones
-const app = express();
-// require('./lib/passport') // Para autenticación de usuarios
 
-// Configuraciones
-app.set('port', process.env.PORT || 3000);
 
+
+const app = express()
+
+//seteamos el motor de plantillas
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-/******* Middlewares *******/
-app.use(morgan('dev'))
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }))
-// parse application/json
-app.use(bodyParser.json())
-app.use(session({
-  secret: 'secret_3csigma-water',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { secure: false }
-}))
-app.use(flash())
-app.use(passport.initialize());
-app.use(passport.session()); // Inicio de sesiones persistentes
-//Protección contra los ataques csrf
-//app.use(csrf())
+//seteamos la carpeta public para archivos estáticos
+app.use(express.static(path.join(__dirname, './public')));
 
-/******** Variables Globales ********/
+//para procesar datos enviados desde forms
+app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+
+
+
+//seteamos las variables de entorno
+dotenv.config({path: './env/.env'})
+
+//para poder trabajar con las cookies
+app.use(cookieParser())
+
+
+
+// No almacenar caché
 app.use((req, res, next) => {
-  app.locals.user = req.user; //Variable de sesión de usuario
-  //app.locals.csrfToken = req.csrfToken(); //Token de seguridad
-  next();
-})
+    res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    next();
+  });
 
-// Carpeta de archivos publicos
-app.use(express.static(path.join(__dirname, 'public')))
+//llamar al router
+app.use('/', require('./routes/router'))
 
-// Rutas
-app.use(require('./routes'));           //Llamando a las Rutas del archivo index.js
-app.use(require('./routes/registro'));  //Llamando a las Rutas del archivo registro.js
 
-// Servidor corriendo desde el puerto asignado en este caso 3000
-app.listen(app.get('port'), () => {
-  console.log('Servidor corriendo in http://localhost:'+app.get('port'));
+
+/*========= ESCUCHANDO AL SERVIDOR EN EL PUERTO 3000 ===========*/
+app.listen(3000, () => {
+        console.log("***********************************************************")
+        console.log('=========>  SERVIDOR CORRIENDO  <======== en http://localhost:3000')
+        console.log("***********************************************************")
+
 });

@@ -1,0 +1,30 @@
+scroll-container {
+  display: block;
+  width: 997px;
+  height: 257px;
+  overflow-y: scroll;
+}
+scroll-page {
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  height: 68%;
+  /* margin-bottom: 55px; */
+  text-align: justify;
+  /* padding: 13px 29px; */
+  font-size: 13px;
+}
+
+scroll-container p {
+  margin: 20px;
+}
+scroll-container::-webkit-scrollbar {
+  background: #a9a9a9;
+  width: 10px;
+}
+
+scroll-container::-webkit-scrollbar-thumb {
+  background: #453b3b;
+  border-radius: 5px;
+}
+
