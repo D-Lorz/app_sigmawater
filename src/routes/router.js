@@ -6,7 +6,10 @@ const path = require('path');
 const multer = require('multer');
 
 
+
+
 let myArray = [];
+ 
 const rutaAlmacen = multer.diskStorage({
     destination: function (req, file, callback) {
         const rutaLicencia = path.join(__dirname, '../public/imglicencias')
@@ -22,6 +25,7 @@ const rutaAlmacen = multer.diskStorage({
         // console.log("HOLA Xd", req.nomArchivo)
         callback(null,  nomFile);
     }
+
 });
 
 
@@ -32,8 +36,11 @@ const cargar = multer ({
 
 const multiupload = cargar.fields([{ name:'licencia' }, {name:'licencia_trasera' }]);
 
+
+
 //TODO: VISTAS
 /*================== RUTAS PARA LAS VISTAS =====================*/
+
 router.get('/', (req, res) => {
     // res.redirect('/login') // Local=> localhost:3000 || Server=>app.3csigmawater.com/login
     res.render('index')
@@ -73,18 +80,29 @@ router.get('/referidos',authController.isAuthenticated, (req, res)=>{
     res.render('referidos' , {correo:req.correo})
 });
 
+
+
 // router.get('/confirmar-correo',authController.isAuthenticated, (req, res)=>{
 //     res.render('confirmar-correo' , {correo:req.correo})
 // })
 
 
+
+
+
+
 //FIXME: ========= PAGINAS DESHABILITADAS =============
+
 // router.get('/calendar', authController.isAuthenticated,(req, res)=>{
 //     res.render('calendar',{correo:req.correo})
 // })
 
 
+
+
 /*==================RUTAS =====================*/
+
+
 //TODO: router para los métodos del controller
 
 /*=============================================================*/
@@ -94,5 +112,7 @@ router.post('/login',authController.nologueado, authController.login)
 /*=============================================================*/
 router.get('/logout', authController.logout)
 /*=============================================================*/
+
+
 
 module.exports = router

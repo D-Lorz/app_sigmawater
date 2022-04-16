@@ -1,9 +1,36 @@
 const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
-const {promisify} = require('util')
+const {
+    promisify
+} = require('util')
 
-//TODO: REGISTER
+//procedimiento para registrarnos
+
+
+
+// exports.register = async (req, res)=>{    
+//     try {
+//         const name = req.body.name
+//         const user = req.body.user
+//         const pass = req.body.pass
+//         let passHash = await bcryptjs.hash(pass, 8)    
+//         //console.log(passHash)   
+//         conexion.query('INSERT INTO users SET ?', {user:user, name: name, pass:passHash}, (error, results)=>{
+//             if(error){console.log(error)}
+//             res.redirect('/')
+//         })
+//     } catch (error) {
+//         console.log(error)
+//     }       
+// }
+
+
+
+
+//FIXME: REGISTER
+
+
 exports.enviar = async (req, res) => {
     const nombres = req.body.nombres
     const apellidos = req.body.apellidosform
@@ -59,13 +86,15 @@ exports.enviar = async (req, res) => {
                 res.json(error)
                 console.log(error);
             } else {
-                console.log("Tu registro ha sido recibido Muchas gracias")
                 // req.flash = ("success", "Tu registro ha sido recibido Muchas gracias!");
                 // res.redirect('/mensaje');
             }
         }
     );
 }
+
+
+
 //TODO: LOGIN
 exports.login = async (req, res) => {
     try {
@@ -123,7 +152,9 @@ exports.login = async (req, res) => {
         console.log(error)
     }
 }
-//TODO: AUTENTICACION - VALIDAR SI YA ESTÁ LOGEADO
+
+//TODO: AUTENTICACION
+
 exports.isAuthenticated = async (req, res, next) => {
     if (req.cookies.jwt) {
         try {
@@ -143,16 +174,34 @@ exports.isAuthenticated = async (req, res, next) => {
         res.redirect('/login')
     }
 }
-//TODO: LOGOUT
+
 exports.logout = (req, res) => {
     res.clearCookie('jwt')
     return res.redirect('/dashboard')
 }
-//TODO: VALIDAR SI NO ESTÁ LOGEADO
+
+
+//TODO: VALIDACION CUNADO YA INICIA SESION
+
+
 exports.nologueado = async (req, res, next) => {
     if (!req.cookies.jwt) {
         return next()
+        // try {
+        //     const decodificada = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO)
+        //     conexion.query('SELECT * FROM tblformulario_registro WHERE id = ?', [decodificada.id], (error, results) => {
+        //         if (!results) {
+        //             return next()
+        //         }
+        //         req.correo = results[0]
+        //         return next()
+        //     })
+        // } catch (error) {
+        //     console.log(error)
+        //     return next()
+        // }
     } else {
+
         res.redirect('/dashboard')
     }
 }

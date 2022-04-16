@@ -2,9 +2,11 @@ const express = require('express')
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
 const path = require('path');
+
+
+
+
 const app = express()
-
-
 
 //seteamos el motor de plantillas
 app.set('views', __dirname + '/views');
@@ -17,11 +19,15 @@ app.use(express.static(path.join(__dirname, './public')));
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
+
+
 //seteamos las variables de entorno
 dotenv.config({path: './env/.env'})
 
 //para poder trabajar con las cookies
 app.use(cookieParser())
+
+
 
 // No almacenar caché
 app.use((req, res, next) => {
@@ -31,6 +37,7 @@ app.use((req, res, next) => {
 
 //llamar al router
 app.use('/', require('./routes/router'))
+
 
 
 /*========= ESCUCHANDO AL SERVIDOR EN EL PUERTO 3000 ===========*/
