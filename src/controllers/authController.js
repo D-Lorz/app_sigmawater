@@ -143,7 +143,7 @@ exports.login = async (req, res) => {
                         alertIcon: 'success',
                          showConfirmButton: false,
                         timer: 1200,
-                        ruta: './dashboard'
+                        ruta: './'
                     })
                 }
             })
@@ -177,7 +177,7 @@ exports.isAuthenticated = async (req, res, next) => {
 
 exports.logout = (req, res) => {
     res.clearCookie('jwt')
-    return res.redirect('/dashboard')
+    return res.redirect('/')
 }
 
 
@@ -187,21 +187,8 @@ exports.logout = (req, res) => {
 exports.nologueado = async (req, res, next) => {
     if (!req.cookies.jwt) {
         return next()
-        // try {
-        //     const decodificada = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO)
-        //     conexion.query('SELECT * FROM tblformulario_registro WHERE id = ?', [decodificada.id], (error, results) => {
-        //         if (!results) {
-        //             return next()
-        //         }
-        //         req.correo = results[0]
-        //         return next()
-        //     })
-        // } catch (error) {
-        //     console.log(error)
-        //     return next()
-        // }
-    } else {
+         } else {
 
-        res.redirect('/dashboard')
+        res.redirect('/')
     }
 }

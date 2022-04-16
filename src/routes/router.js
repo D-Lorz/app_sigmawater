@@ -41,10 +41,10 @@ const multiupload = cargar.fields([{ name:'licencia' }, {name:'licencia_trasera'
 //TODO: VISTAS
 /*================== RUTAS PARA LAS VISTAS =====================*/
 
-router.get('/', (req, res) => {
+// router.get('/', (req, res) => {
     // res.redirect('/login') // Local=> localhost:3000 || Server=>app.3csigmawater.com/login
-    res.render('index')
-});
+//     res.render('index')
+// });
 
 router.get('/register',authController.nologueado, (req, res)=>{
     res.render('register')
@@ -54,7 +54,7 @@ router.get('/login', authController.nologueado, (req, res)=>{
     res.render('login', {alert:false})
 });
 
-router.get('/dashboard', authController.isAuthenticated, (req, res)=>{    
+router.get('/', authController.isAuthenticated, (req, res)=>{    
     res.render('dashboard', {correo:req.correo})
 });
 
