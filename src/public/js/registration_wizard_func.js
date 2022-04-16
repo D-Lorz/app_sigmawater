@@ -7,7 +7,7 @@
 		// Phpmaimer text/html SMPT > phpmailer/registration_phpmailer_smtp.php
 		// PHPmailer with html template > phpmailer/registration_phpmailer_template.php
 		// PHPmailer with html template SMTP> phpmailer/registration_phpmailer_template_smtp.php
-		$('form#wrapped').attr('action', '/enviar');
+		$('form#wrapped').attr('action', '/registrar');
 		$("#wizard_container").wizard({
 			stepsWrapper: "#wrapped",
 			submit: ".submit",

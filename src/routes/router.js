@@ -34,6 +34,7 @@ const cargar = multer ({
     storage: rutaAlmacen,
 });
 
+//TODO: SIRVE PARA UNIFICAR LOS 2 CAMPOS UPLOAD DEL FORMULARIO REGISTER
 const multiupload = cargar.fields([{ name:'licencia' }, {name:'licencia_trasera' }]);
 
 
@@ -81,32 +82,13 @@ router.get('/referidos',authController.isAuthenticated, (req, res)=>{
 });
 
 
-
-// router.get('/confirmar-correo',authController.isAuthenticated, (req, res)=>{
-//     res.render('confirmar-correo' , {correo:req.correo})
-// })
-
-
-
-
-
-
-//FIXME: ========= PAGINAS DESHABILITADAS =============
-
-// router.get('/calendar', authController.isAuthenticated,(req, res)=>{
-//     res.render('calendar',{correo:req.correo})
-// })
-
-
-
-
 /*==================RUTAS =====================*/
 
 
 //TODO: router para los métodos del controller
 
 /*=============================================================*/
-router.post('/enviar',authController.nologueado, multiupload, authController.enviar);
+router.post('/registrar',authController.nologueado, multiupload, authController.registrar);
 /*=============================================================*/
 router.post('/login',authController.nologueado, authController.login)
 /*=============================================================*/
