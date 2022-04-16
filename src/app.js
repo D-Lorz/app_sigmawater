@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser')
 const path = require('path');
 const app = express()
 
+
+
 //seteamos el motor de plantillas
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
