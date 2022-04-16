@@ -3,7 +3,7 @@ const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 const {promisify} = require('util')
 
-//FIXME: REGISTER
+//TODO: REGISTER
 exports.enviar = async (req, res) => {
     const nombres = req.body.nombres
     const apellidos = req.body.apellidosform
@@ -66,9 +66,6 @@ exports.enviar = async (req, res) => {
         }
     );
 }
-
-
-
 //TODO: LOGIN
 exports.login = async (req, res) => {
     try {
@@ -126,7 +123,6 @@ exports.login = async (req, res) => {
         console.log(error)
     }
 }
-
 //TODO: AUTENTICACION - VALIDAR SI YA ESTÁ LOGEADO
 exports.isAuthenticated = async (req, res, next) => {
     if (req.cookies.jwt) {
@@ -147,13 +143,11 @@ exports.isAuthenticated = async (req, res, next) => {
         res.redirect('/login')
     }
 }
-
+//TODO: LOGOUT
 exports.logout = (req, res) => {
     res.clearCookie('jwt')
     return res.redirect('/dashboard')
 }
-
-
 //TODO: VALIDAR SI NO ESTÁ LOGEADO
 exports.nologueado = async (req, res, next) => {
     if (!req.cookies.jwt) {
