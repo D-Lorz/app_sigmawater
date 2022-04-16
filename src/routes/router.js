@@ -46,14 +46,14 @@ router.get('/', (req, res) => {
     res.render('index')
 });
 
-router.get('/register', (req, res)=>{
+router.get('/register',authController.nologueado, (req, res)=>{
     res.render('register')
 });
-// authController.nologueado,
-router.get('/login',(req, res)=>{
+
+router.get('/login', authController.nologueado, (req, res)=>{
     res.render('login', {alert:false})
 });
-// authController.nologueado, 
+
 router.get('/dashboard', authController.isAuthenticated, (req, res)=>{    
     res.render('dashboard', {correo:req.correo})
 });
@@ -106,10 +106,9 @@ router.get('/referidos',authController.isAuthenticated, (req, res)=>{
 //TODO: router para los métodos del controller
 
 /*=============================================================*/
-router.post('/enviar',multiupload, authController.enviar);
+router.post('/enviar',authController.nologueado, multiupload, authController.enviar);
 /*=============================================================*/
-router.post('/login',authController.login)
-// authController.nologueado, 
+router.post('/login',authController.nologueado, authController.login)
 /*=============================================================*/
 router.get('/logout', authController.logout)
 /*=============================================================*/

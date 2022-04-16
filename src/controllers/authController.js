@@ -184,11 +184,24 @@ exports.logout = (req, res) => {
 //TODO: VALIDACION CUNADO YA INICIA SESION
 
 
-// exports.nologueado = async (req, res, next) => {
-//     if (!req.cookies.jwt) {
-//         return next()
-//          } else {
+exports.nologueado = async (req, res, next) => {
+    if (!req.cookies.jwt) {
+        return next()
+        // try {
+        //     const decodificada = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO)
+        //     conexion.query('SELECT * FROM tblformulario_registro WHERE id = ?', [decodificada.id], (error, results) => {
+        //         if (!results) {
+        //             return next()
+        //         }
+        //         req.correo = results[0]
+        //         return next()
+        //     })
+        // } catch (error) {
+        //     console.log(error)
+        //     return next()
+        // }
+    } else {
 
-//         res.redirect('/dashboard')
-//     }
-// }
+        res.redirect('/dashboard')
+    }
+}
