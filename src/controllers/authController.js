@@ -53,7 +53,8 @@ exports.registrar = async (req, res)=>{
         numero_cuenta: numero_cuenta,
         ruta:ruta,
         beneficiario: beneficiario,
-        licencia_conduccion:licencia_conduccion}, (error, results)=>{
+        licencia_conduccion:licencia_conduccion
+    }, (error, results)=>{
             if (error) {
                 res.json(error)
                 console.log(error);
@@ -67,7 +68,7 @@ exports.registrar = async (req, res)=>{
               
 
 }catch (error) {
-  //conssole.log(error)
+  conssole.log(error)
 
 
     }
