@@ -67,7 +67,7 @@ exports.registrar = async (req, res)=>{
               
 
 }catch (error) {
-  conssole.log(error)
+  //conssole.log(error)
 
 
     }

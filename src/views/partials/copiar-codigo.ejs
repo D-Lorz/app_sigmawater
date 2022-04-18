@@ -5,10 +5,16 @@
             
             <h5 class="alertcard-title font-size-16">Comparte tu código</h5>
             <p class="font-size-13">Invita a nuevos vendedores a 3C Sigma Water System y aumenta tus ingresos.</p>
-            <p class="font-size-13"><b>#K6FF57</b></p>
+            <% if (correo) { %>
+                <span class="d-none d-xl-inline-block ms-1 fw-medium">
+                   #<%= correo.codigo_referido %>
+                </span>
+                <% } %>
 
             <a href="#!" class="btn btn-primary mt-2">Copiar código </a>
 
         </div>
     </div>
 </div>
+
+
