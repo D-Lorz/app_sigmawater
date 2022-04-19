@@ -1,81 +1,87 @@
 const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
-const {promisify} = require('util')
+const { promisify } = require('util')
 
 //procedimiento para registrarnos
 
-exports.registrar = async (req, res)=>{    
+exports.registrar = async (req, res) => {
     try {
 
-        const nombres =  req.body.nombres
-        const apellidos =   req.body.apellidos
-    //     const fecha_nacimiento =  req.body.fecha_nacimiento
-    //     const telefono_movil   =   req.body.telefono_movil
-    //     const correo  =   req.body.correo
-    //     const seguro_social  =  req.body.seguro_social
-    //     const ciudad =   req.body.ciudad
-    //     const direccion =   req.body.direccion
-    //     const apt_suite_unidad =  req.body.apt_suite_unidad
-    //     const codigo_postal  =  req.body.codigo_postal
-    //     const codigo_referido = req.body.codigo_referido
-    //     const nombre_banco  =  req.body.nombre_banco
-    //     const numero_cuenta =  req.body.numero_cuenta
-    //     const ruta =  req.body.ruta
-    //     const beneficiario =  req.body.beneficiario
-    //   console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
-    //   console.log("TRASERA:>>>  ", req.nomArchivo[1]);
+        const nombres = req.body.nombres
+        const apellidos = req.body.apellidos
+        //     const fecha_nacimiento =  req.body.fecha_nacimiento
+        //     const telefono_movil   =   req.body.telefono_movil
+        //     const correo  =   req.body.correo
+        //     const seguro_social  =  req.body.seguro_social
+        //     const ciudad =   req.body.ciudad
+        //     const direccion =   req.body.direccion
+        //     const apt_suite_unidad =  req.body.apt_suite_unidad
+        //     const codigo_postal  =  req.body.codigo_postal
+        //     const codigo_referido = req.body.codigo_referido
+        //     const nombre_banco  =  req.body.nombre_banco
+        //     const numero_cuenta =  req.body.numero_cuenta
+        //     const ruta =  req.body.ruta
+        //     const beneficiario =  req.body.beneficiario
+        //   console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
+        //   console.log("TRASERA:>>>  ", req.nomArchivo[1]);
 
-    //     const frontal = '../imglicencias/sigmaWater_' + req.nomArchivo[0]
-    //     const trasera = '../imglicencias/sigmaWater_' + req.nomArchivo[1]
-    //     const licencia_conduccion = JSON.stringify({
-    //      'frontal': frontal,
-    //      'trasera': trasera});
-
-
-    //   console.log(nombres +"_"+apellidos+"_"+fecha_nacimiento+"_"+telefono_movil+"_"+correo+"_"+seguro_social+"_"+ciudad+"_"+direccion+"_"+apt_suite_unidad+"_"+
-    //   codigo_postal+""+codigo_referido+"_"+nombre_banco+"_"+numero_cuenta+"_"+ruta+"_"+beneficiario );
-    //   console.log("Licencia Front-Back >>> ", licencia_conduccion);
-
-     conexion.query('INSERT INTO formulario_registro_vendedor SET ?', {
-        nombres:nombres,
-        apellidos: apellidos,
-        // fecha_nacimiento:fecha_nacimiento,
-        // telefono_movil: telefono_movil,
-        // correo:correo,
-        // seguro_social: seguro_social,
-        // ciudad:ciudad,
-        // direccion: direccion,
-        // apt_suite_unidad:apt_suite_unidad,
-        // codigo_postal: codigo_postal,
-        // codigo_referido:codigo_referido,
-        // nombre_banco:nombre_banco,
-        // numero_cuenta: numero_cuenta,
-        // ruta:ruta,
-        // beneficiario: beneficiario,
-        // licencia_conduccion:licencia_conduccion
-    }, (error, results)=>{
-            if (error) {
-                res.json(error)
-                console.log(error);
-            } else {
-                // req.flash = ("success", "Tu registro ha sido recibido Muchas gracias!");
-                // res.redirect('/mensaje');
-                res.json("Rgeistro exitoso!!", results)
-            }
+        //     const frontal = '../imglicencias/sigmaWater_' + req.nomArchivo[0]
+        //     const trasera = '../imglicencias/sigmaWater_' + req.nomArchivo[1]
+        //     const licencia_conduccion = JSON.stringify({
+        //      'frontal': frontal,
+        //      'trasera': trasera});
 
 
-        });
-              
+        //   console.log(nombres +"_"+apellidos+"_"+fecha_nacimiento+"_"+telefono_movil+"_"+correo+"_"+seguro_social+"_"+ciudad+"_"+direccion+"_"+apt_suite_unidad+"_"+
+        //   codigo_postal+""+codigo_referido+"_"+nombre_banco+"_"+numero_cuenta+"_"+ruta+"_"+beneficiario );
+        //   console.log("Licencia Front-Back >>> ", licencia_conduccion);
 
-}catch (error) {
-  conssole.log(error)
+        const newRegistro = { nombres, apellidos }
+        await conexion.query('INSERT INTO formulario_registro_vendedor SET ?', [newRegistro], (err, result) => {
+            if (err) throw err;
+            console.log("1 Registro insertado");
+            console.log(result);
+            res.redirect('/login')
+        })
+
+        //  conexion.query('INSERT INTO formulario_registro_vendedor SET ?', {
+        //     nombres:nombres,
+        //     apellidos: apellidos,
+        //     // fecha_nacimiento:fecha_nacimiento,
+        //     // telefono_movil: telefono_movil,
+        //     // correo:correo,
+        //     // seguro_social: seguro_social,
+        //     // ciudad:ciudad,
+        //     // direccion: direccion,
+        //     // apt_suite_unidad:apt_suite_unidad,
+        //     // codigo_postal: codigo_postal,
+        //     // codigo_referido:codigo_referido,
+        //     // nombre_banco:nombre_banco,
+        //     // numero_cuenta: numero_cuenta,
+        //     // ruta:ruta,
+        //     // beneficiario: beneficiario,
+        //     // licencia_conduccion:licencia_conduccion
+        // }, (error, results)=>{
+        //         if (error) {
+        //             res.json(error)
+        //             console.log(error);
+        //         } else {
+        //             // req.flash = ("success", "Tu registro ha sido recibido Muchas gracias!");
+        //             // res.redirect('/mensaje');
+        //             res.json(results)
+        //         }
 
 
+        //     });
+
+
+    } catch (error) {
+        conssole.log("Error de recepción de datos >>> ", error)
     }
 
 }
-              
+
 
 //         const user = req.body.user
 //          conexion.query('INSERT INTO users SET ?', {user:user, name: name}, (error, results)=>{
@@ -109,54 +115,54 @@ exports.registrar = async (req, res)=>{
 //     const numero_de_ruta = req.body.ruta
 //     const nombre_beneficiario = req.body.beneficiario
 
-    // const frontal = '/imglicencias/sigmaWater_' + req.body.licencia
-    // const trasera = '/imglicencias/sigmaWater_' + req.body.licencia_trasera
+// const frontal = '/imglicencias/sigmaWater_' + req.body.licencia
+// const trasera = '/imglicencias/sigmaWater_' + req.body.licencia_trasera
 
-    // const licencia_conduccion = JSON.stringify({'frontal':frontal,'trasera':trasera});
+// const licencia_conduccion = JSON.stringify({'frontal':frontal,'trasera':trasera});
 
-    // console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
-    // console.log("TRASERA:>>>  ", req.nomArchivo[1]);
+// console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
+// console.log("TRASERA:>>>  ", req.nomArchivo[1]);
 
-    // const frontal = '../imglicencias/sigmaWater_' + req.nomArchivo[0]
-    // const trasera = '../imglicencias/sigmaWater_' + req.nomArchivo[1]
+// const frontal = '../imglicencias/sigmaWater_' + req.nomArchivo[0]
+// const trasera = '../imglicencias/sigmaWater_' + req.nomArchivo[1]
 
-    // const licencia_conduccion = JSON.stringify({
-    //     'frontal': frontal,
-    //     'trasera': trasera
-    // });
+// const licencia_conduccion = JSON.stringify({
+//     'frontal': frontal,
+//     'trasera': trasera
+// });
 
-    // const nuevoRegistro = {
-    //     nombres,
-    //     apellidos,
-    //     fecha_nacimiento,
-    //     numero_telefono,
-    //     correo,
-    //     seguro_social,
-    //     ciudad_donde_vive,
-    //     direccion,
-    //     apt_suite_unidad,
-    //     codigo_postal,
-    //     numero_referido,
-    //     nombre_banco,
-    //     numero_de_cuenta,
-    //     numero_de_ruta,
-    //     nombre_beneficiario,
-    //     licencia_conduccion,
-    // }
+// const nuevoRegistro = {
+//     nombres,
+//     apellidos,
+//     fecha_nacimiento,
+//     numero_telefono,
+//     correo,
+//     seguro_social,
+//     ciudad_donde_vive,
+//     direccion,
+//     apt_suite_unidad,
+//     codigo_postal,
+//     numero_referido,
+//     nombre_banco,
+//     numero_de_cuenta,
+//     numero_de_ruta,
+//     nombre_beneficiario,
+//     licencia_conduccion,
+// }
 
-    // console.log("Licencia Front-Back >>> ", licencia_conduccion);
-    // await conexion.query('INSERT INTO tblformulario_registro SET ?', [nuevoRegistro],
+// console.log("Licencia Front-Back >>> ", licencia_conduccion);
+// await conexion.query('INSERT INTO tblformulario_registro SET ?', [nuevoRegistro],
 
-    //     (error, resultados) => {
-    //         if (error) {
-    //             res.json(error)
-    //             console.log(error);
-    //         } else {
-    //             req.flash = ("success", "Tu registro ha sido recibido Muchas gracias!");
-    //             res.redirect('/mensaje');
-    //         }
-    //     }
-    // );
+//     (error, resultados) => {
+//         if (error) {
+//             res.json(error)
+//             console.log(error);
+//         } else {
+//             req.flash = ("success", "Tu registro ha sido recibido Muchas gracias!");
+//             res.redirect('/mensaje');
+//         }
+//     }
+// );
 // }
 //TODO: LOGIN
 exports.login = async (req, res) => {
@@ -175,7 +181,7 @@ exports.login = async (req, res) => {
                 ruta: 'login'
             })
         } else {
-           await conexion.query('SELECT * FROM formulario_registro_vendedor WHERE correo = ?', [correo], async (error, results) => {
+            await conexion.query('SELECT * FROM formulario_registro_vendedor WHERE correo = ?', [correo], async (error, results) => {
                 if (results.length == 0 || !(await bcryptjs.compare(pass, results[0].pass))) {
                     res.render('login', {
                         alert: true,
@@ -189,7 +195,7 @@ exports.login = async (req, res) => {
                 } else {
                     //inicio de sesión OK
                     const id = results[0].id
-                    const token = jwt.sign({id: id}, process.env.JWT_SECRETO, {expiresIn: process.env.JWT_TIEMPO_EXPIRA})
+                    const token = jwt.sign({ id: id }, process.env.JWT_SECRETO, { expiresIn: process.env.JWT_TIEMPO_EXPIRA })
                     //generamos el token SIN fecha de expiracion
                     //const token = jwt.sign({id: id}, process.env.JWT_SECRETO)
                     console.log("TOKEN: " + token + " para el USUARIO : " + correo)
@@ -204,7 +210,7 @@ exports.login = async (req, res) => {
                         alertTitle: "¡Bienvenido!",
                         alertMessage: "",
                         alertIcon: 'success',
-                         showConfirmButton: false,
+                        showConfirmButton: false,
                         timer: 1200,
                         ruta: './'
                     })
@@ -244,7 +250,7 @@ exports.logout = (req, res) => {
 exports.nologueado = async (req, res, next) => {
     if (!req.cookies.jwt) {
         return next()
-         } else {
+    } else {
 
         res.redirect('/')
     }
