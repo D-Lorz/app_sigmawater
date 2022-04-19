@@ -10,35 +10,54 @@ exports.registrar = async (req, res) => {
 
         const nombres = req.body.nombres
         const apellidos = req.body.apellidos
-        //     const fecha_nacimiento =  req.body.fecha_nacimiento
-        //     const telefono_movil   =   req.body.telefono_movil
-        //     const correo  =   req.body.correo
-        //     const seguro_social  =  req.body.seguro_social
-        //     const ciudad =   req.body.ciudad
-        //     const direccion =   req.body.direccion
-        //     const apt_suite_unidad =  req.body.apt_suite_unidad
-        //     const codigo_postal  =  req.body.codigo_postal
-        //     const codigo_referido = req.body.codigo_referido
-        //     const nombre_banco  =  req.body.nombre_banco
-        //     const numero_cuenta =  req.body.numero_cuenta
-        //     const ruta =  req.body.ruta
-        //     const beneficiario =  req.body.beneficiario
-        //   console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
-        //   console.log("TRASERA:>>>  ", req.nomArchivo[1]);
+        const fecha_nacimiento = req.body.fecha_nacimiento
+        const telefono_movil = req.body.telefono_movil
+        const correo = req.body.correo
+        const seguro_social = req.body.seguro_social
+        const ciudad = req.body.ciudad
+        const direccion = req.body.direccion
+        const apt_suite_unidad = req.body.apt_suite_unidad
+        const codigo_postal = req.body.codigo_postal
+        const codigo_referido = req.body.codigo_referido
+        const nombre_banco = req.body.nombre_banco
+        const numero_cuenta = req.body.numero_cuenta
+        const ruta = req.body.ruta
+        const beneficiario = req.body.beneficiario
+        // console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
+        // console.log("TRASERA:>>>  ", req.nomArchivo[1]);
 
-        //     const frontal = '../imglicencias/sigmaWater_' + req.nomArchivo[0]
-        //     const trasera = '../imglicencias/sigmaWater_' + req.nomArchivo[1]
-        //     const licencia_conduccion = JSON.stringify({
-        //      'frontal': frontal,
-        //      'trasera': trasera});
+        // const frontal = '../imglicencias/sigmaWater_' + req.nomArchivo[0]
+        // const trasera = '../imglicencias/sigmaWater_' + req.nomArchivo[1]
+        // const licencia_conduccion = JSON.stringify({
+        //     'frontal': frontal,
+        //     'trasera': trasera
+        // });
 
 
         //   console.log(nombres +"_"+apellidos+"_"+fecha_nacimiento+"_"+telefono_movil+"_"+correo+"_"+seguro_social+"_"+ciudad+"_"+direccion+"_"+apt_suite_unidad+"_"+
         //   codigo_postal+""+codigo_referido+"_"+nombre_banco+"_"+numero_cuenta+"_"+ruta+"_"+beneficiario );
         //   console.log("Licencia Front-Back >>> ", licencia_conduccion);
 
-        const newRegistro = { nombres, apellidos }
-        await conexion.query('INSERT INTO formulario_registro_vendedor SET ?', [newRegistro], (err, result) => {
+        const nuevoRegistro = {
+            nombres,
+            apellidos,
+            fecha_nacimiento,
+            telefono_movil,
+            correo,
+            seguro_social,
+            ciudad,
+            direccion,
+            apt_suite_unidad,
+            codigo_postal,
+            codigo_referido,
+            nombre_banco,
+            numero_cuenta,
+            ruta,
+            beneficiario,
+            // licencia_conduccion,
+        }
+
+        await conexion.query('INSERT INTO formulario_registro_vendedor SET ?', [nuevoRegistro], (err, result) => {
             if (err) throw err;
             console.log("1 Registro insertado");
             console.log(result);
