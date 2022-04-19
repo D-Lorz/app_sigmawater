@@ -25,13 +25,14 @@ exports.registrar = async (req, res) => {
         const beneficiario = req.body.beneficiario
         console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
         console.log("TRASERA:>>>  ", req.nomArchivo[1]);
-
-        const frontal = '../imglicencias/sigmaWater_' + req.nomArchivo[0]
-        const trasera = '../imglicencias/sigmaWater_' + req.nomArchivo[1]
-        const licencia_conduccion = JSON.stringify({
-            'frontal': frontal,
-            'trasera': trasera
-        });
+        const licencia_conduccion_frontal = req.nomArchivo[0]
+        const licencia_conduccion_trasera = req.nomArchivo[1]
+        // const frontal = '../imglicencias/sigmaWater_' + req.nomArchivo[0]
+        // const trasera = '../imglicencias/sigmaWater_' + req.nomArchivo[1]
+        // const licencia_conduccion = JSON.stringify({
+        //     'frontal': frontal,
+        //     'trasera': trasera
+        // });
 
         const nuevoRegistro = {
             nombres,
@@ -49,7 +50,8 @@ exports.registrar = async (req, res) => {
             numero_cuenta,
             ruta,
             beneficiario,
-            licencia_conduccion,
+            licencia_conduccion_frontal,
+            licencia_conduccion_trasera
         }
 
         console.log("DATOS A INSERTAR >>>", nuevoRegistro)
