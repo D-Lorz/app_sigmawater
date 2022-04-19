@@ -5,7 +5,7 @@ const conexion = require('../database/db')
 const path = require('path');
 const multer = require('multer');
 
-
+let fechaActual = Math.floor(Date.now()/1000)
 
 
 let myArray = [];
@@ -18,7 +18,7 @@ const rutaAlmacen = multer.diskStorage({
       
     filename: function (req, file, callback) {
         console.log(myArray)
-        const nomFile = "_licencia_sigmaWater_" + file.originalname;
+        const nomFile = "Seller_Licence_" + file.originalname + "_" + fechaActual;
         // const nomFile = req.body.nombres+"_" + req.body.apellidosform +"_licencia_sigmaWater_" + file.originalname;
         myArray.push(nomFile);
         req.nomArchivo = myArray
