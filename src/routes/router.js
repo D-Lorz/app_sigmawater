@@ -16,12 +16,15 @@ const rutaAlmacen = multer.diskStorage({
     filename: function (req, file, callback) {
         const fechaActual = Math.floor(Date.now() / 1000)
         console.log("FECHA>>> ", fechaActual)
+        let nomValue;
         if (file.fieldname == 'licencia') {
             urlLicencias[0] = "Seller_Licence_Front_" + fechaActual + "_" + file.originalname;
+            nomValue = urlLicencias[0]
         } else {
             urlLicencias[1] = "Seller_Licence_Back_" + fechaActual + "_" + file.originalname;
+            nomValue = urlLicencias[1]
         }
-        callback(null, 'Licencias');
+        callback(null, nomValue, true);
     }
 
 });
