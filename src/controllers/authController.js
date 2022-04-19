@@ -61,6 +61,7 @@ exports.registrar = async (req, res)=>{
             } else {
                 // req.flash = ("success", "Tu registro ha sido recibido Muchas gracias!");
                 // res.redirect('/mensaje');
+                res.json("Rgeistro exitoso!!", results)
             }
 
 
