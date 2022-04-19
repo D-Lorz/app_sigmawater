@@ -42,7 +42,7 @@ exports.registrar = async (req, res) => {
             if (err) throw err;
             console.log("1 Registro insertado");
             console.log(result);
-            res.redirect('/login')
+            res.redirect('https://3csigmawater.com')
         })
 
         //  conexion.query('INSERT INTO formulario_registro_vendedor SET ?', {
