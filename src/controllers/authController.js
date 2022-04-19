@@ -27,12 +27,14 @@ exports.registrar = async (req, res) => {
     console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
     console.log("TRASERA:>>>  ", req.nomArchivo[1]);
 
-    const frontal = '../imglicencias/' + req.nomArchivo[0]
-    const trasera = '../imglicencias/' + req.nomArchivo[1]
+    const frontal = '../imagesLicence/' + req.nomArchivo[0]
+    const trasera = '../imagesLicence/' + req.nomArchivo[1]
     const licencia_conduccion = JSON.stringify({
         'frontal': frontal,
         'trasera': trasera
     });
+
+
 
     const newRegistro = {
         nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
