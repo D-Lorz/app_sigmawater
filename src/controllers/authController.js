@@ -7,7 +7,7 @@ const { promisify } = require('util')
 
 exports.registrar = async (req, res) => {
     try {
-
+//3dsd
         const nombres = req.body.nombres
         const apellidos = req.body.apellidos
         //     const fecha_nacimiento =  req.body.fecha_nacimiento
