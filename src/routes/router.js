@@ -1,13 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const authController = require('../controllers/authController')
-const conexion = require('../database/db')
 const path = require('path');
 const multer = require('multer');
 
 let fechaActual = Math.floor(Date.now()/1000)
-
-
 let myArray = [];
  
 const rutaAlmacen = multer.diskStorage({
@@ -18,8 +15,7 @@ const rutaAlmacen = multer.diskStorage({
       
     filename: function (req, file, callback) {
         console.log(myArray)
-        const nomFile = "Seller_Licence_" + file.originalname + "_" + fechaActual;
-        // const nomFile = req.body.nombres+"_" + req.body.apellidosform +"_licencia_sigmaWater_" + file.originalname;
+        const nomFile = "Seller_Licence_"+fechaActual+"_"+file.originalname;
         myArray.push(nomFile);
         req.nomArchivo = myArray
         // console.log("HOLA Xd", req.nomArchivo)
@@ -29,14 +25,12 @@ const rutaAlmacen = multer.diskStorage({
 });
 
 
-
 const cargar = multer ({
     storage: rutaAlmacen,
 });
 
 //TODO: SIRVE PARA UNIFICAR LOS 2 CAMPOS UPLOAD DEL FORMULARIO REGISTER
 const multiupload = cargar.fields([{ name:'licencia' }, {name:'licencia_trasera' }]);
-
 
 
 //TODO: VISTAS
