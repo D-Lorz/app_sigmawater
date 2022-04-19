@@ -9,7 +9,7 @@ let myArray = [];
  
 const rutaAlmacen = multer.diskStorage({
     destination: function (req, file, callback) {
-        const rutaLicencia = path.join(__dirname, '../public/imglicencias')
+        const rutaLicencia = path.join(__dirname, '../public/imagesLicence')
         callback(null, rutaLicencia);
     },
       
@@ -23,7 +23,6 @@ const rutaAlmacen = multer.diskStorage({
     }
 
 });
-
 
 const cargar = multer ({
     storage: rutaAlmacen,
