@@ -23,18 +23,21 @@ exports.registrar = async (req, res) => {
     const numero_cuenta = req.body.numero_cuenta
     const ruta = req.body.ruta
     const beneficiario = req.body.beneficiario
-    const licencia_conduccion = req.body.licencia_conduccion
-    //   console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
-    //   console.log("TRASERA:>>>  ", req.nomArchivo[1]);
+    // const licencia_conduccion = req.body.licencia_conduccion
+    console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
+    console.log("TRASERA:>>>  ", req.nomArchivo[1]);
 
-    //     const frontal = '../imglicencias/sigmaWater_' + req.nomArchivo[0]
-    //     const trasera = '../imglicencias/sigmaWater_' + req.nomArchivo[1]
-    //     const licencia_conduccion = JSON.stringify({
-    //      'frontal': frontal,
-    //      'trasera': trasera});
+    const frontal = '../imglicencias/sigmaWater_' + req.nomArchivo[0]
+    const trasera = '../imglicencias/sigmaWater_' + req.nomArchivo[1]
+    const licencia_conduccion = JSON.stringify({
+        'frontal': frontal,
+        'trasera': trasera
+    });
 
-    const newRegistro = { nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion, 
-        apt_suite_unidad, codigo_postal, codigo_referido, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion }
+    const newRegistro = {
+        nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
+        apt_suite_unidad, codigo_postal, codigo_referido, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion
+    }
 
     console.log(newRegistro)
     await conexion.query('INSERT INTO formulario_registro_vendedor SET ?', [newRegistro], (err, result) => {
