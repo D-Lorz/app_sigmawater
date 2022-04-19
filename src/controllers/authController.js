@@ -39,7 +39,8 @@ exports.registrar = async (req, res) => {
     await conexion.query('INSERT INTO formulario_registro_vendedor SET ?', [newRegistro], (err, result) => {
         if (err) throw err;
         console.log("1 Registro insertado");
-        res.json(result)
+        console.log(result)
+        res.redirect('https://3csigmawater.com')
     })
     // res.redirect('https://3csigmawater.com')
 
