@@ -6,7 +6,6 @@ const { promisify } = require('util')
 //procedimiento para registrarnos
 
 exports.registrar = async (req, res) => {
-    // try {
     //3dsd
     const nombres = req.body.nombres
     const apellidos = req.body.apellidos
@@ -23,32 +22,30 @@ exports.registrar = async (req, res) => {
     const numero_cuenta = req.body.numero_cuenta
     const ruta = req.body.ruta
     const beneficiario = req.body.beneficiario
-    // const licencia_conduccion = req.body.licencia_conduccion
-    console.log("FRONTAL:>>>  ", req.nomArchivo[0]);
-    console.log("TRASERA:>>>  ", req.nomArchivo[1]);
 
-    const frontal = '../imagesLicence/' + req.nomArchivo[0]
-    const trasera = '../imagesLicence/' + req.nomArchivo[1]
+    console.log("FRONTAL:>>>  ", urlLicencias[0]);
+    console.log("TRASERA:>>>  ", urlLicencias[1]);
+
+    const frontal = '../imagesLicence/' + urlLicencias[0]
+    const trasera = '../imagesLicence/' + urlLicencias[1]
     const licencia_conduccion = JSON.stringify({
         'frontal': frontal,
         'trasera': trasera
     });
 
-
-
-    const newRegistro = {
+    const nuevoRegistro = {
         nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
         apt_suite_unidad, codigo_postal, codigo_referido, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion
     }
 
-    console.log(newRegistro)
-    await conexion.query('INSERT INTO formulario_registro_vendedor SET ?', [newRegistro], (err, result) => {
+    console.log(nuevoRegistro)
+
+    await conexion.query('INSERT INTO formulario_registro_vendedor SET ?', [nuevoRegistro], (err, result) => {
         if (err) throw err;
         console.log("1 Registro insertado");
         console.log(result)
         res.redirect('https://3csigmawater.com')
     })
-    // res.redirect('https://3csigmawater.com')
 
 }
 
