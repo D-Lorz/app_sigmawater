@@ -3,28 +3,26 @@ const router = express.Router()
 const authController = require('../controllers/authController')
 const path = require('path');
 const multer = require('multer');
-let myArray = ['frontal', 'trasera'];
 
 const rutaAlmacen = multer.diskStorage({
 
     destination: function (req, file, callback) {
-        console.log("Hola desde función destination")
         const rutaLicencia = path.join(__dirname, '../public/imagesLicence')
         callback(null, rutaLicencia);
     },
 
     filename: function (req, file, callback) {
         const fechaActual = Math.floor(Date.now() / 1000)
-        console.log("FECHA>>> ", fechaActual)
-        let nomValue;
+        // let nomValue;
         if (file.fieldname == 'licencia') {
             urlLicencias[0] = "Seller_Licence_Front_" + fechaActual + "_" + file.originalname;
-            nomValue = urlLicencias[0]
+            // nomValue = urlLicencias[0]
+            callback(null, urlLicencias[0])
         } else {
             urlLicencias[1] = "Seller_Licence_Back_" + fechaActual + "_" + file.originalname;
-            nomValue = urlLicencias[1]
+            callback(null, urlLicencias[1])
         }
-        callback(null, nomValue, true);
+        // callback(null, nomValue);
     }
 
 });
@@ -79,7 +77,6 @@ router.get('/referidos', authController.isAuthenticated, (req, res) => {
 
 
 /*==================RUTAS =====================*/
-
 
 //TODO: router para los métodos del controller
 
