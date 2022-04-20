@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="./css/themes/default.css">
 
 	<!-- YOUR CUSTOM CSS -->
-
+  <link rel="stylesheet" href="./css/jquery.datetimepicker.min.css">
 
 	<script src="./js/modernizr.js"></script>
 	<!-- Modernizr -->
@@ -131,9 +131,9 @@
 
                     <div class="col-md-4">
 
-                      <div class="form-group"><label id="nacimiento">fecha de nacimiento</label>
+                      <div class="form-group">
 
-                        <input type="date" name="fecha_nacimiento" id="fechaform" class="form-control required"
+                        <input type="text" name="fecha_nacimiento" id="fechaform" class="form-control required"
                           placeholder="Fecha de nacimiento*">
                       </div>
                     </div>
@@ -565,13 +565,35 @@
 	<!-- Theme script -->
 	<script src="./js/functions.js"></script>
 	<script src="./js/upload.js"></script>
+  
+  <script src="./js/jquery.datetimepicker.full.js"></script>
+  <script src="./js/jquery.datetimepicker.full.min.js"></script>
+  <script src="./js/jquery.datetimepicker.min.js"></script>
 
+
+
+<!-- 
+  fechaform -->
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 	<script src="./js/alertify.min.js"></script>
 	<script src="./js/alertify.js"></script>
 
 
+  <script>
+$('#fechaform').datetimepicker({
+  timepicker: false,
+  datepicker: true,
+  format: 'y-m-d',
+  // value: '2019-8-1',
+  weeks: true
+
+
+
+})
+
+
+  </script>
 
 
 	
@@ -731,6 +753,16 @@ Swal.fire({
 		})
 
 });
+
+
+</script>
+
+
+<script>
+
+
+
+
 
 
 </script>
