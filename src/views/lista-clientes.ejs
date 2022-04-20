@@ -235,10 +235,11 @@
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="./cssdash/images/users/avatar-1.jpg"
                         alt="Header Avatar">
-                        <% if (correo) { %>
-                            <span class="d-none d-xl-inline-block ms-1 fw-medium"><%= correo.nombres + " "+correo.apellidos %> </span>
-                          <% } %>
-                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        
+   <!--==================FIXME:=====JALAR USUARIO====================  -->
+   <%- include ('partials/jalarusuario.ejs')%>
+   <!--==================FIXME:=====JALAR USUARIO====================  -->
+                     
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
