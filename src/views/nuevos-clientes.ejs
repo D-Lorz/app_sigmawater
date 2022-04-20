@@ -22,7 +22,10 @@
 <link rel="stylesheet" type="text/css" href="./cssdash/css/icons.min.css" />
 <!-- App Css-->
 <link rel="stylesheet" type="text/css" href="./cssdash/css/app.min.css" id="app-style" />
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCyPFPC87_eZICupDVjJN9z8nzDjhb28sc"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <!-- ==========FIXME: CSS DEL FORMULARIO ================= -->
 <%- include ('partials/partials-nuevo-cliente/link-de-css.ejs')%>
@@ -321,7 +324,7 @@
                     <div class="card">
                        <div class="card-content collapse show">
                             <div class="card-body">
-                                <form action="#" class="steps-validation wizard-circle">
+                                <form action="/register_nuevo_cliente"    class="steps-validation wizard-circle">
         
  <!--============= //FIXME:===== *SOLICITANTE* ======= FIXME:=========-->
                                     <!-- Step 1 -->
@@ -341,7 +344,7 @@
                                                 </div>
                                             </div>
         
-                                           <div class="col-md-4">
+                                       <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="id_clientef">
                                                         ID de cliente / DL
@@ -469,7 +472,7 @@
                                                         Apellidos
                                                         <span class="danger">*</span>
                                                     </label>
-                                                    <input type="number" class="form-control required" id="apellidosf" name="apellidos" >
+                                                    <input type="text" class="form-control required" id="apellidosf" name="apellidos" >
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -482,7 +485,7 @@
                                                     <input type="email" class="form-control required" id="Correof" name="correo">
                                                 </div>
                                             </div>
-                                        </div> 
+                                        </div>  
 
                                     </fieldset> 
 
@@ -506,13 +509,13 @@
                                                         Dirección
                                                         <span class="danger">*</span>
                                                     </label>
-                                                    <input type="text" class="form-control required" placeholder="Escriba su direccion..." id="autocomplete" name="direccion" >
+                                                    <input type="text" class="form-control required" placeholder="Escriba su direccion..." id="direccionf" name="direccion" >
                                                 </div>
                                             </div>
 
                                            
                                      
-                                            <div class="col-md-4">
+                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="ciudadf">
                                                         Ciudad
@@ -609,7 +612,7 @@
 
 
 
-                                        </div> 
+                                        </div>  
 
                                 
                                     </fieldset> 
@@ -644,8 +647,7 @@
                                                 </div>
                                                 
                                             </div>
-        
-                                            <div class="col-md-4">
+                                 <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="anios_trabajandof">
                                                         Años trabajando
@@ -731,7 +733,7 @@
                                                 </div>
                                             </div>
 
-                                        </div> 
+                                        </div>  
 
         
                                     </fieldset>
@@ -794,7 +796,7 @@
                                                     </label>
                                                     <input type="number" class="form-control required" id="numero_se_socialf" name="numero_se_social" >
                                                 
-                                                                      <!-- AQUI VA UN CHECKBOX -->
+                                                                      AQUI VA UN CHECKBOX -->
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="SSN" value="option1">
                                                 <label class="form-check-label" for="SSN">SSN</label>
@@ -988,7 +990,7 @@
                                      </div>
                                  </div>
 
-                             </div> 
+                             </div>  
 
                             </div>
                            </fieldset>
@@ -1094,70 +1096,60 @@
 
                  </div>
                          </fieldset> 
- <!--============= //FIXME:===== *REFERENCIAS* ============== FIXME:=========-->
+ <!--============= //FIXME: ===== *REFERENCIAS* ============== FIXME:=========-->
 
   <!--=============================TODO:TODO:=============================================================-->
 
-
-                                      <h6>Step 5</h6>
+<!--============= //FIXME:===== * TERMINOS Y CONDICIONES* ============== FIXME:=========-->
+                                      <h6><b>TERMINOS Y CONDICIONES</b></h6>
                                       <fieldset>
-                                          <div class="row text-align: center;">
-                                              <div class="col-md-6">
-                                                  <div class="form-group">
-                                                      <label for="meetingName3">
-                                                          Name of Meeting :
-                                                          <span class="danger">*</span>
-                                                      </label>
-                                                      <input type="text" class="form-control required" id="meetingName3" name="meetingName" >
-                                                  </div>
-          
-                                                  <div class="form-group">
-                                                      <label for="meetingLocation3">
-                                                          Location :
-                                                          <span class="danger">*</span>
-                                                      </label>
-                                                      <input type="text" class="form-control required" id="meetingLocation3" name="meetingLocation" >
-                                                  </div>
-          
-                                                  <div class="form-group">
-                                                      <label for="participants3">Names of Participants</label>
-                                                      <textarea name="participants" id="participants3" rows="4" class="form-control"></textarea>
-                                                  </div>
-                                              </div>
-          
-                                              <div class="col-md-6">
-                                                  <div class="form-group">
-                                                      <label for="decisions3">Decisions Reached</label>
-                                                      <textarea name="decisions" id="decisions3" rows="4" class="form-control"></textarea>
-                                                  </div>
-                                                  <div class="form-group">
-                                                      <label>Agenda Items :</label>
-                                                      <div class="c-inputs-stacked">
-                                                          <div class="custom-control custom-checkbox">
-                                                              <input type="checkbox" name="agenda3" class="custom-control-input" id="item31">
-                                                              <label class="custom-control-label" for="item31">1st item</label>
-                                                          </div>
-                                                          <div class="custom-control custom-checkbox">
-                                                              <input type="checkbox" name="agenda3" class="custom-control-input" id="item32">
-                                                              <label class="custom-control-label" for="item32">2nd item</label>
-                                                          </div>
-                                                          <div class="custom-control custom-checkbox">
-                                                              <input type="checkbox" name="agenda3" class="custom-control-input" id="item33">
-                                                              <label class="custom-control-label" for="item33">3rd item</label>
-                                                          </div>
-                                                          <div class="custom-control custom-checkbox">
-                                                              <input type="checkbox" name="agenda3" class="custom-control-input" id="item34">
-                                                              <label class="custom-control-label" for="item34">4th item</label>
-                                                          </div>
-                                                          <div class="custom-control custom-checkbox">
-                                                              <input type="checkbox" name="agenda3" class="custom-control-input" id="item35">
-                                                              <label class="custom-control-label" for="item35">5th item</label>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
+
+                                            <div class="row ">
+
+                                                        <div class="container " style="text-align: justify;">
+                                                       
+                                                  
+                                                              <p>Magna dolor consectetur ipsum mollit ut nulla nisi. Cillum
+                                                                laborum nulla ad proident quis amet do officia et consectetur.
+                                                                Non duis ex ut aliquip cillum occaecat irure elit reprehenderit
+                                                                occaecat veniam nostrud laboris. Ad sit id nostrud et mollit
+                                                                elit ea laboris laborum sunt occaecat cillum amet
+                                                                commodo.Consectetur aliqua laborum incididunt enim tempor duis
+                                                                cillum culpa do quis. Veniam pariatur do consectetur ea.
+                                                                Occaecat laboris sit incididunt commodo elit commodo.</p>
+                                                              <p> dolore irure voluptate pariatur ut do excepteur. Ea adipisicing
+                                                                et reprehenderit duis labore ea velit. Sunt nostrud irure non
+                                                                nostrud tempor voluptate sint voluptate ut deserunt
+                                                                reprehenderit esse anim.Veniam incididunt officia amet
+                                                                exercitation est minim sint com culpa id Lorem elit eu
+                                                                consequat. Nulla amet commodo magna.</p>
+                                                              <p>veniam veniam et laboris id aliquip tempor culpa. Excepteur ea
+                                                                tempor fugiat anim non ea proident consectetur id aute ullamco
+                                                                dolor qui irure. Dolore esse est ipsum elit irure voluptate
+                                                                consequat veniam amet reprehenderit adipisicing incididunt
+                                                                voluptate. Qui officia ullamco id tempor quis ex quis quis
+                                                                cillum nostrud ad sint. Amet Lorem eu pariatur voluptate ullamco
+                                                                pariatur sit labore ex aliquip eiusmod commodo veniam
+                                                                incididunt. Aliquip irure ea veniam quis esse enim labore anim
+                                                                anim aliqua ea nulla.</p>
+                                        
+                                                        </div> 
+                                                    
+                                               </div>
+
+
+                                               <div>  
+                                   <input type="checkbox" name="" required id="prueba">
+                                                      <label> <b> He leído y estoy de acuerdo con los términos</b> </label>
+                                            </div>
+
                                       </fieldset> 
+<!--============= //FIXME:===== *TERMINOS Y CONDICIONES* ============== FIXME:=========-->
+
+  <!--=============================TODO:TODO:=============================================================-->
+
+                                
+
                                 </form>
                             </div>
                         </div>
@@ -1252,23 +1244,23 @@ src="./cssdash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"><
 
 
 
-
 <script>
-let autocomplete;
-function initAutocomplete(){
-    autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('autocomplete'),
-        {
-
-            types: ['establishment'],
-            componentRestrictions:{'country': ['AU']},
-            fields: ['place_id','geometry','name']
-
-        });
-
-}
-</script>
-
+    var searchInput = 'direccionf';
+     
+    $(document).ready(function () {
+     var autocomplete;
+     autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+      types: ['geocode'],
+      /*componentRestrictions: {
+       country: "USA"
+      }*/
+     });
+      
+     google.maps.event.addListener(autocomplete, 'place_changed', function () {
+      var near_place = autocomplete.getPlace();
+     });
+    });
+    </script>
 
 
 <!-- TODO: ACCION PARA ACTIVAR EL CHECK DE PAGADO -->

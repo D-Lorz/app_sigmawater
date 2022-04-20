@@ -1,4 +1,8 @@
 
+::rot{
+    --primary-color:#000;
+}
+    
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -6,5 +10,25 @@
     }
     
     input[type=number] { -moz-appearance:textfield; }
-    
-    
+
+
+.signature-pad-form{
+        max-width: 300px;
+        margin:0 auto;
+  }
+
+.signature-pad{
+cursor: url(pen.png) 1 26, pointer;
+border: 2px solid var(--primary-color);
+border-radius: 4px;
+
+
+}
+.clear-button{
+    color: var(--primary-color);
+}
+@media (pointer:coarse){
+    body{
+        overflow: hidden;
+    }
+}

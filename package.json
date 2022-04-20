@@ -28,6 +28,7 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.15",
     "patch": "0.0.1",
-    "patch-package": "^6.4.7"
+    "patch-package": "^6.4.7",
+    "signature_pad": "^4.0.4"
   }
 }
