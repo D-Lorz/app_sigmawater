@@ -26,8 +26,8 @@ exports.registrar = async (req, res) => {
     console.log("FRONTAL:>>>  ", urlLicencias[0]);
     console.log("TRASERA:>>>  ", urlLicencias[1]);
 
-    const frontal = '../imagesLicence/' + urlLicencias[0]
-    const trasera = '../imagesLicence/' + urlLicencias[1]
+    const frontal = '../licences/' + urlLicencias[0]
+    const trasera = '../licences/' + urlLicencias[1]
     const licencia_conduccion = JSON.stringify({
         'frontal': frontal,
         'trasera': trasera

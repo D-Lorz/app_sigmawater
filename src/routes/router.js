@@ -7,7 +7,7 @@ const multer = require('multer');
 const rutaAlmacen = multer.diskStorage({
 
     destination: function (req, file, callback) {
-        const rutaLicencia = path.join(__dirname, '../public/imagesLicence')
+        const rutaLicencia = path.join(__dirname, '../public/licences')
         callback(null, rutaLicencia);
     },
 
