@@ -78,17 +78,17 @@ exports.login = async (req, res) => {
                         ruta: 'login'
                     })
                 } else {
-                    //inicio de sesión OK
-                    const id = results[0].id
-                    const token = jwt.sign({ id: id }, process.env.JWT_SECRETO, { expiresIn: process.env.JWT_TIEMPO_EXPIRA })
-                    //generamos el token SIN fecha de expiracion
-                    //const token = jwt.sign({id: id}, process.env.JWT_SECRETO)
-                    console.log("TOKEN: " + token + " para el USUARIO : " + correo)
+                 //inicio de sesión OK
+                 const id = results[0].id
+                 const token = jwt.sign({ id: id },  'super_secret_AppSigmaWater', { expiresIn: 3600 })
+                 //generamos el token SIN fecha de expiracion
+                 //const token = jwt.sign({id: id}, process.env.JWT_SECRETO)
+                 console.log("TOKEN: " + token + " para el USUARIO : " + correo)
 
-                    const cookiesOptions = {
-                        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
-                        httpOnly: true
-                    }
+                 const cookiesOptions = {
+                     expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+                     httpOnly: true
+                 }
                     res.cookie('jwt', token, cookiesOptions)
                     res.render('login', {
                         alert: true,

@@ -67,8 +67,8 @@ router.get('/lista-clientes', authController.isAuthenticated, (req, res) => {
     res.render('lista-clientes', { correo: req.correo })
 });
 
-router.get('/nuevo-cliente', authController.isAuthenticated, (req, res) => {
-    res.render('nuevo-cliente', { correo: req.correo })
+router.get('/nuevos-clientes', authController.isAuthenticated, (req, res) => {
+    res.render('nuevos-clientes', { correo: req.correo })
 });
 
 router.get('/referidos', authController.isAuthenticated, (req, res) => {
