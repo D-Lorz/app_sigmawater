@@ -1,0 +1,463 @@
+
+  <!-- //FIXME: ================================================================== -->
+
+     <!-- form mask -->
+     <script src="./cssdash/libs/imask/imask.min.js"></script>
+     <!-- form mask init -->
+     <script src="./cssdash/js/pages/form-mask.init.js"></script>
+
+ <!-- //FIXME: ================================================================== -->
+ 
+ 
+ 
+ <!-- JAVASCRIPT -->
+ <script src="./cssdash/libs/jquery/jquery.min.js"></script>
+ <script src="./cssdash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <script src="./cssdash/libs/metismenu/metisMenu.min.js"></script>
+ <script src="./cssdash/libs/simplebar/simplebar.min.js"></script>
+ <script src="./cssdash/libs/node-waves/waves.min.js"></script>
+ <script src="./cssdash/libs/feather-icons/feather.min.js"></script>
+ <!-- pace js -->
+ <script src="./cssdash/libs/pace-js/pace.min.js"></script>
+ 
+   
+
+ <script src="./cssdash/js/jquery.datetimepicker.full.js"></script>
+ <script src="./cssdash/js/jquery.datetimepicker.full.min.js"></script>
+ <script src="./cssdash/js/jquery.datetimepicker.min.js"></script>
+
+ 
+  <!-- Required datatable js -->
+  <script
+   src="./cssdash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script
+   src="./cssdash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+   <!-- Responsive examples -->
+  <script
+ src="./cssdash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script
+   src="./cssdash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+   <!-- init js -->
+  <script src="./cssdash/js/pages/datatable-pages.init.js"></script>
+   
+   <script src="./cssdash/js/app.js"></script>
+
+
+
+<!-- ==========FIXME: JS DEL FORMULARIO ================= -->
+
+<!-- BEGIN: Vendor JS-->
+<script src="../cssnuevocliente/js/vendors.min.js"></script>
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+<script src="../cssnuevocliente/js/jquery.sticky.js"></script>
+<script src="../cssnuevocliente/js/jquery.sparkline.min.js"></script>
+<script src="../cssnuevocliente/js/jquery.steps.min.js"></script>
+<script src="../cssnuevocliente/js/moment-with-locales.min.js"></script>
+<script src="../cssnuevocliente/js/daterangepicker.js"></script>
+<script src="../cssnuevocliente/js/picker.js"></script>
+<script src="../cssnuevocliente/js/picker.date.js"></script>
+<script src="../cssnuevocliente/js/jquery.validate.min.js"></script>
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+<script src="../cssnuevocliente/js/app-menu.min.js"></script>
+<script src="../cssnuevocliente/js/app.min.js"></script>
+<script src="../cssnuevocliente/js/customizer.min.js"></script>
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+<script src="../cssnuevocliente/js/breadcrumbs-with-stats.min.js"></script>
+<script src="../cssnuevocliente/js/wizard-steps.min.js"></script>
+
+<script src="../cssnuevocliente/js/estilosPropios.js"></script>
+<!-- END: Page JS-->
+ 
+<!-- ==========FIXME: JS DEL FORMULARIO ================= -->
+
+
+
+ <!--   TODO: ACCION PARA ACTIVAR EL CHECK DE PAGADO -->
+ <script>
+ 
+ $(document).ready(function(){
+ 
+ $('#pagada').on('click', function(){
+   var c = document.getElementById('pagada').checked;
+   if (c) {
+ 
+    $("#c_hipotecaria").hide();
+ 
+   }
+ 
+ });
+ 
+ $('#hipotecada').on('click', function(){
+   var c = document.getElementById('hipotecada').checked;
+   if (c) {
+ 
+    $("#c_hipotecaria").show();
+ 
+   }
+ 
+ });
+ 
+ $('#rentada').on('click', function(){
+   var c = document.getElementById('rentada').checked;
+   if (c) {
+ 
+    $("#c_hipotecaria").show();
+ 
+   }
+ 
+ });
+ 
+ 
+ });
+ 
+ </script>
+ <!--   TODO: ACCION PARA ACTIVAR EL CHECK DE PAGADO -->
+
+ <!-- //TODO: OCULTAR Y MOSTRAR CONTENIDO CON CHECK -->  
+ <script type="text/javascript">
+     function showContent() {
+         element = document.getElementById("content");
+         check = document.getElementById("check");
+         if (check.checked) {
+             element.style.display='block';
+         }
+         else {
+             element.style.display='none';
+         }
+     }
+ </script>
+ <!-- //TODO: OCULTAR Y MOSTRAR CONTENIDO CON CHECK -->  
+ 
+  
+ <!-- //TODO: OCULTAR Y MOSTRAR CONTENIDO CON CHECK CO-SOLICITANTE -->  
+ <script type="text/javascript">
+     function showContent() {
+         element = document.getElementById("contentt");
+         check = document.getElementById("mostrar");
+         if (check.checked) {
+             element.style.display='block';
+         }
+         else {
+             element.style.display='none';
+         }
+     }
+ </script>
+ <!-- //TODO: OCULTAR Y MOSTRAR CONTENIDO CON CHECK CO-SOLICITANTE -->  
+ 
+
+ <!-- //TODO: OCULTAR Y MOSTRAR CONTENIDO CON CHECK INGRESOS -->  
+ <script type="text/javascript">
+  function showContent() {
+      element = document.getElementById("contentt");
+      check = document.getElementById("mostrar");
+      if (check.checked) {
+          element.style.display='block';
+      }
+      else {
+          element.style.display='none';
+      }
+  }
+</script>
+<!--  //TODO: OCULTAR Y MOSTRAR CONTENIDO CON CHECK INGRESOS-->  
+
+
+ 
+<!--   /TODO: FUNCIONES PARA OCULTAR Y MOSTRAR APARTADO DE BANCARROTA - NUEVO CLIENTE  -->
+ <script> 
+
+ $(document).ready(function(){
+
+    
+    $('#no_bancarrota').on('click', function(){
+      var c = document.getElementById('no_bancarrota').checked;
+      if (c) {
+    
+       $("#acc_pendiente").hide();
+    
+      }
+    
+    });
+  
+    $('#si_bancarrota').on('click', function(){
+      var c = document.getElementById('si_bancarrota').checked;
+      if (c) {
+    
+       $("#acc_pendiente").show();
+    
+      }
+    
+    });
+
+    $('#no_bancarrota').on('click', function(){
+      var c = document.getElementById('no_bancarrota').checked;
+      if (c) {
+    
+       $("#tipo_bancarrota").hide();
+    
+      }
+    
+    });
+
+    $('#no_bancarrota').on('click', function(){
+      var c = document.getElementById('no_bancarrota').checked;
+      if (c) {
+    
+       $("#anio_bancarrotaid").hide();
+    
+      }
+    
+    });
+
+    $('#no_pendiente').on('click', function(){
+      var c = document.getElementById('no_pendiente').checked;
+      if (c) {
+    
+       $("#anio_bancarrotaid").hide();
+    
+      }
+    
+    });
+    
+    $('#si_pendiente').on('click', function(){
+      var c = document.getElementById('si_pendiente').checked;
+      if (c) {
+    
+       $("#anio_bancarrotaid").show();
+    
+      }
+    
+    });
+
+    $('#no_pendiente').on('click', function(){
+      var c = document.getElementById('no_pendiente').checked;
+      if (c) {
+    
+       $("#tipo_bancarrota").hide();
+    
+      }
+    
+    }); 
+
+    $('#si_pendiente').on('click', function(){
+      var c = document.getElementById('si_pendiente').checked;
+      if (c) {
+    
+       $("#tipo_bancarrota").show();
+    
+      }
+    
+    });
+ 
+    });
+ 
+ </script>
+ <!--  /TODO: FUNCIONES PARA OCULTAR Y MOSTRAR APARTADO DE BANCARROTA - NUEVO CLIENTE  -->
+
+
+
+
+ <!--  /TODO: FUNCIONES PARA MASCARA  -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    // Pattern (Phone)
+    var phoneMask = IMask(document.getElementById('phone-masktwo'), {
+        mask: '+{1} (000) 000-0000'
+    });
+
+    // Pattern (Phone)
+    var phoneMask = IMask(document.getElementById('phone-mask'), {
+        mask: '+{1} (000) 000-0000'
+    });
+
+
+
+// Pattern (Phone)
+var currencyMask = IMask(document.getElementById('currency-mask'), {
+    mask: '$num',
+    blocks: {
+    num: {
+            // nested masks are available!
+            mask: Number,
+            thousandsSeparator: ' '
+        }
+    }
+});
+
+
+});
+
+</script>
+ <!--  /TODO: FUNCIONES PARA MASCARA  -->
+
+
+
+
+ <!--  /TODO: FUNCIONES PARA MASCARA  -->
+ <script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+  
+  // Pattern (Phone)
+  var currencyMask = IMask(document.getElementById('currency-masktwo'), {
+      mask: '$num',
+      blocks: {
+      num: {
+              // nested masks are available!
+              mask: Number,
+              thousandsSeparator: ' '
+          }
+      }
+  });
+  
+  // Pattern (Phone)
+  var currencyMask = IMask(document.getElementById('currency-maskthree'), {
+      mask: '$num',
+      blocks: {
+      num: {
+              // nested masks are available!
+              mask: Number,
+              thousandsSeparator: ' '
+          }
+      }
+  });
+
+  
+  });
+  
+  </script>
+   <!--  /TODO: FUNCIONES PARA MASCARA  -->
+  
+   <!--  /TODO: FUNCIONES PARA MASCARA  -->
+
+   
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+  // Pattern (Phone)
+   var phoneMask = IMask(document.getElementById('phone-maskk'), {
+          mask: '+{1} (000) 000-0000'
+      });
+});
+
+
+  </script>
+
+
+
+<!--======//TODO: MASCARAS PARA LOS CAMPOS CO-SOLICITANTE=========  -->
+  <script>
+    //-----> MASCARA PARA EL CAMPO TELEFONO MOVIL //FIXME: DE CO-SOLICITANTE
+          document.addEventListener("DOMContentLoaded", function () {
+    // Pattern (Phone) 
+    var phoneMasktel = IMask(document.getElementById('phone-masktel'), {
+    mask: '+{1} (000) 000-0000'
+      });
+});
+
+    //-------> MASCARA PARA EL CAMPO TELEFONO MOVIL //FIXME: SECUNDARIO DE CO-SOLICITANTE
+          document.addEventListener("DOMContentLoaded", function () {
+    // Pattern (Phone) 
+    var phoneMaskteltwo = IMask(document.getElementById('phone-maskteltwo'), {
+    mask: '+{1} (000) 000-0000'
+      });
+});
+
+    //-------> MASCARA PARA EL CAMPO TELEFONO DE TRABAJO //FIXME: DE CO-SOLICITANTE
+    document.addEventListener("DOMContentLoaded", function () {
+    // Pattern (Phone) 
+    var phoneMaskteltrabajo = IMask(document.getElementById('phone-maskteltrabajo'), {
+    mask: '+{1} (000) 000-0000'
+      });
+});
+
+    //-------> MASCARA PARA EL CAMPO SALARIO MENSUAL //FIXME: SALARIO MENSUALES DE CO-SOLICITANTE
+ var currencyMasksalario = IMask(document.getElementById('currency-masksalario'), {
+      mask: '$num',
+      blocks: {
+      num: {
+              // nested masks are available!
+              mask: Number,
+              thousandsSeparator: ' '
+          }
+      }
+  });
+    
+  //-------> MASCARA PARA EL CAMPO INGRESO ADICIONAL//FIXME:  CO-SOLICITANTE
+    var currencyMaskingresosadi = IMask(document.getElementById('currency-maskingresoadi'), {
+      mask: '$num',
+      blocks: {
+      num: {
+              // nested masks are available!
+              mask: Number,
+              thousandsSeparator: ' '
+          }
+      }
+  });
+
+
+  </script>
+<!--======//TODO: MASCARAS PARA LOS CAMPOS CO-SOLICITANTE=========  -->
+
+
+<!--======//TODO: MASCARAS PARA LOS CAMPOS REFERENCIAS=========  -->
+  <script>
+    //-----> MASCARA PARA EL PRIMER CAMPO TELEFONO MOVIL //FIXME: REFERENCIAS
+       document.addEventListener("DOMContentLoaded", function () {
+
+          var phoneMasktelreferenciasone = IMask(document.getElementById('phone-masktelreferenciasone'), {
+          mask: '+{1} (000) 000-0000'
+            });
+  });
+
+    //-----> MASCARA PARA EL SEGUNDO CAMPO TELEFONO MOVIL //FIXME: REFERENCIAS
+      document.addEventListener("DOMContentLoaded", function () {
+      var phoneMasktelreferenciastwo = IMask(document.getElementById('phone-masktelreferenciastwo'), {
+      mask: '+{1} (000) 000-0000'
+        });
+
+  });
+  
+  //-----> MASCARA PARA EL TERCER CAMPO TELEFONO MOVIL //FIXME: REFERENCIAS
+     document.addEventListener("DOMContentLoaded", function () {
+        var phoneMasktelreferenciasthree = IMask(document.getElementById('phone-masktelreferenciasthree'), {
+        mask: '+{1} (000) 000-0000'
+          });
+
+  });
+
+  </script>
+<!--======//TODO: MASCARAS PARA LOS CAMPOS REFERENCIAS=========  -->
+
+
+
+
+<script>
+  $('#expedición_licenciaf').datetimepicker({
+    timepicker: false,
+    datepicker: true,
+    format: 'm-d-y',
+    // value: '2019-8-1',
+    weeks: true
+  });
+
+ 
+
+</script>
+
+
+
+
+ </body>
+ 
+ </html>
+ 
+ 

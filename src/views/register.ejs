@@ -1,93 +1,7 @@
 
-
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="author" content="Ansonika">
-	<title>Registro de vendedor</title>
-
-	<!-- Favicons-->
-	<link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
-	<link rel="stylesheet" href="./css/scrolls.css">
-
-	<link rel="stylesheet" href="./css/upload.css">
-	<!-- GOOGLE WEB FONT -->
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap"
-		rel="stylesheet">
-
-	<!-- BASE CSS -->
-	<link href="./css/bootstrap.min.css" rel="stylesheet">
-	<link href="./css/style.css" rel="stylesheet">
-	<link href="./css/responsive.css" rel="stylesheet">
-	<link href="./css/menu.css" rel="stylesheet">
-	<link href="./css/animate.min.css" rel="stylesheet">
-	<link href="./css/icon_fonts/css/all_icons_min.css" rel="stylesheet">
-	<link href="./css/skins/square/grey.css" rel="stylesheet">
-	<link rel="stylesheet" href="./css/alertify.css">
-	<link rel="stylesheet" href="./css/themes/default.css">
-
-	<!-- YOUR CUSTOM CSS -->
-  <link rel="stylesheet" href="./css/jquery.datetimepicker.min.css">
-
-	<script src="./js/modernizr.js"></script>
-	<!-- Modernizr -->
-
-</head>
-
-<body>
-	<div id="preloader">
-		<div data-loader="circle-side"></div>
-	</div><!-- /Preload -->
-
-	<!-- <div id="loader_form">
-		<div data-loader="circle-side-2"></div>
-	</div> -->
-	
-	<!-- /loader_form -->
-
-	<header>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-3">
-					<div id="logo_home">
-						<h1><a href="#"></a>
-						</h1>
-					</div>
-				</div>
-				<div class="col-9">
-					<div id="social">
-						<ul>
-							<li><a href="https://www.facebook.com/3csigmawater" target="_blank"><i
-										class="icon-facebook"></i></a></li>
-							<!-- <li><a href="#0"><i class="icon-twitter"></i></a></li> -->
-							<li><a href="https://instagram.com/3csigmawater" target="_blank"><i
-										class="icon-instagram"></i></a></li>
-							<!-- <li><a href="#0"><i class="icon-linkedin"></i></a></li> -->
-						</ul>
-					</div>
-					<!-- /social -->
-					<!-- <nav>
-                        <ul class="cd-primary-nav">
-                            <li><a href="index.html" class="animated_link">Register Version</a></li>
-                            <li><a href="reservation_version.html" class="animated_link">Reservation Version</a></li>
-                            <li><a href="questionare_version.html" class="animated_link">Questionare Version</a></li>
-                            <li><a href="review_version.html" class="animated_link">Review Version</a></li>
-                            <li><a href="about.html" class="animated_link">About Us</a></li>
-                            <li><a href="contacts.html" class="animated_link">Contact Us</a></li>
-                        </ul>
-                    </nav> -->
-				</div>
-			</div>
-		</div>
-		<!-- container -->
-	</header>
-	<!-- End Header -->
-
-
+  <!--==================FIXME:=====HEADER REGISTER====================  -->
+  <%- include ('partials/partials-register/header.ejs')%>
+  <!--==================FIXME:=====HEADER REGISTER=====================  -->
 
 
   <main>
@@ -133,7 +47,7 @@
 
                       <div class="form-group">
 
-                        <input type="text" name="fecha_nacimiento" id="fechaform" class="form-control required"
+                        <input type="text" name="fecha_nacimiento"  autocomplete="off"  id="fechaform" class="form-control required"
                           placeholder="Fecha de nacimiento*">
                       </div>
                     </div>
@@ -190,14 +104,7 @@
                       </div>
                     </div>
 
-
-
-
                   </div>
-
-                  
-                  <!-- /row -->
-
 
                   <div class="row">
 
@@ -219,9 +126,6 @@
                   </div>
                   <!-- /row -->
 
-
-
-
                 </div>
                 <!-- /step--2   CONFIGURACION BANCARIA -->
 
@@ -229,20 +133,11 @@
                   <h3 class="main_question" style="margin-bottom: 10%;">
                     <strong>2/4</strong>Cuenta bancaria
                   </h3>
-                  <!-- <div class="row"> -->
-                  <!-- <div class="col-md-12">
-                    <div class="form-group">
-                      <input type="text" name="address" class="form-control required" placeholder="Address">
-                    </div>
-                  </div> -->
-                  <!-- /col-sm-12 -->
-                  <!-- </div> -->
-                  <!-- /row -->
-                  <div class="row">
+                 <div class="row">
                     <div class="col-md-5">
                       <div class="form-group">
-                        <input type="text" name="nombre_banco" id="banco" class="form-control required" spellcheck="true"
-                          pattern="[A-Za-z]+" placeholder="Nombre del Banco*">
+                        <input type="text" name="nombre_banco" id="banco" class="form-control required"
+                          spellcheck="true" pattern="[A-Za-z]+" placeholder="Nombre del Banco*">
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -276,7 +171,6 @@
                   <!-- /row -->
                 </div>
                 <!-- /step-->
-
                 <!-- /step--3 -->
 
                 <div class="step">
@@ -318,47 +212,13 @@
                       </div>
 
 
-
-                      <!-- <div class="input-group">
-                      <label class="input-group-btn">
-                        <span class="btn btn-primary" style="padding: 10px;">
-                          Cargar reverso<input type="file" name="licencia2" style="display: none;" id="licencia"   class="required" > 
-                          
-                        </span>
-                      </label>
-                      <input type="text" class="form-control" style="font-size: 15px;"  placeholder="  Solo archivos .jpg o .png de max 4MB son permitidos"  readonly>
-                    </div>  -->
-
-                      <!-- placeholder=" Solo archivos .jpg o .png son aceptados"  -->
-                      <!-- style="display: none;" class="inputfile" multiple -->
-
                     </div>
-                    <!-- <div class="col-md-10">
-                    <label>Foto para identificaion emitida</label>
-                    <input type="file" id="file" class="required" name="temp">
-
-                    <br>
-                    <label>Foto social o ITN</label>
-                    <input type="file" id="file" class="required" name="temp">
-
-                    <br>
-                    <label> Identificación con foto emitida por el estado</label>
-                    <input type="file" id="file" class="required" name="temp">
-                    <input class="browse btn btn-primary px-4" style="height: 24%;"
-                      type="submit" value="enviar">
-                  </div> -->
+      
 
                   </div>
-                  <!-- --------------------------------------------------- -->
-
-
-                  <!-- /row -->
+         
                 </div>
-                <!-- /step-->
-
-
-
-
+      
                 <div class="submit step">
                   <h3 class="main_question"><strong>4/4</strong>Firma tu solicitud</h3>
                   <div class="form-group">
@@ -367,29 +227,24 @@
 
                       <scroll-container>
                         <scroll-page>
-                          <p>Magna dolor consectetur ipsum mollit ut nulla nisi. Cillum
-                            laborum nulla ad proident quis amet do officia et consectetur.
-                            Non duis ex ut aliquip cillum occaecat irure elit reprehenderit
-                            occaecat veniam nostrud laboris. Ad sit id nostrud et mollit
-                            elit ea laboris laborum sunt occaecat cillum amet
-                            commodo.Consectetur aliqua laborum incididunt enim tempor duis
-                            cillum culpa do quis. Veniam pariatur do consectetur ea.
-                            Occaecat laboris sit incididunt commodo elit commodo.</p>
-                          <p> dolore irure voluptate pariatur ut do excepteur. Ea adipisicing
-                            et reprehenderit duis labore ea velit. Sunt nostrud irure non
-                            nostrud tempor voluptate sint voluptate ut deserunt
-                            reprehenderit esse anim.Veniam incididunt officia amet
-                            exercitation est minim sint com culpa id Lorem elit eu
-                            consequat. Nulla amet commodo magna.</p>
-                          <p>veniam veniam et laboris id aliquip tempor culpa. Excepteur ea
-                            tempor fugiat anim non ea proident consectetur id aute ullamco
-                            dolor qui irure. Dolore esse est ipsum elit irure voluptate
-                            consequat veniam amet reprehenderit adipisicing incididunt
-                            voluptate. Qui officia ullamco id tempor quis ex quis quis
-                            cillum nostrud ad sint. Amet Lorem eu pariatur voluptate ullamco
-                            pariatur sit labore ex aliquip eiusmod commodo veniam
-                            incididunt. Aliquip irure ea veniam quis esse enim labore anim
-                            anim aliqua ea nulla.</p>
+                          <p>3C Sigma Holding puede recopilar esta información a través de un sitio web. Al completar
+                            esta información, nos está autorizando a recopilar, analizar y retener información
+                            relacionada con la prestación de los Servicios.</p>
+
+                          <p>Información que proporciona. Para registrarse como vendedor en 3C Sigma Holding, se le
+                            pedirá que proporcione cierta información, incluida su información personal. También se le
+                            pedirá que permita que 3C Sigma Holding recopile su información de ubicación desde su
+                            dispositivo cuando utilice la aplicación o utilice los servicios. Además, 3C Sigma Holding
+                            puede recopilar y almacenar cualquier Información personal que proporcione al usar los
+                            Servicios o de alguna otra manera. Esto puede incluir información de identificación, como su
+                            nombre, dirección, dirección de correo electrónico y número de teléfono y, si realiza
+                            transacciones comerciales con 3C Sigma Holding, información financiera, números de
+                            identificación del gobierno y fecha de nacimiento. Si se comunica con 3C Sigma Holding con
+                            un servicio de atención al cliente u otra consulta, le proporciona a 3C Sigma Holding el
+                            contenido de esa comunicación. Si nos proporciona su número de teléfono, también puede
+                            recibir mensajes que le enviamos por SMS como parte de la operación comercial normal de su
+                            uso de la Plataforma. Si no desea recibir comunicaciones nuestras, en la oficina principal
+                            de 3C Sigma Holding.</p>
 
 
                         </scroll-page>
@@ -408,45 +263,6 @@
                   </div>
                 </div>
 
-
-                <!-- /step- 4-->
-
-
-                <!-- <div class=" step">
-                <h3 class="main_question" >
-                  <strong>5/5</strong>Firma de acuerdo
-                </h3>
-
-                <div class="container col-12" style="margin-left: -3%;">
-
-                  <h3 style="font-size: 22px;">Firmar acuerdo de confidencialidad</h3>
-                  <p style="text-align: justify;font-size: 14px;"> Para completar, por favor
-                    presiona el boton <i style="font-weight: 700;">"Firmar documento".</i>
-                    Accederas a un link donde podras realizar la firma del acuerdo usando tu
-                    dedo, o mouse,
-                    posteriormente descargar el PDF firmado y cargalo en el campo
-                    correpondiente.
-
-                  </p>
-                  <button type="button" class="btn btn-primary" style="margin-bottom: 5%;"> Firmar
-                    documentos</button>
-                  <br>
-                  <div class="input-group">
-                    <label class="input-group-btn">
-                      <span class="btn btn-primary " style="margin-bottom: 5%; background:#9c9c9c;    /* margin-bottom: 5%; */
-                        background: #9c9c9c;padding: 20px 27px -2px;text-align: center;	width: -20%;
-                        text-align: justify;font-size: 100%;padding: 7px 21px 5px;line-height: 2; ">
-                        Cargar <input type="file" id="file" class="required"
-                          style="display: none;" multiple>
-                      </span>
-                    </label>
-                    <input type="text" class="form-control required" style="border: 1px solid;border-radius: 6px;										padding: 7px;
-                      margin-left: -1%;" placeholder=" Acuerdo de confidencialidad /PDF/" readonly>
-                  </div>
-                </div> -->
-                <!-- /row -->
-
-                <!-- </div> -->
 
               </div>
 
@@ -477,13 +293,6 @@
 
   </main>
 
-  <!-- <footer id="home" class="clearfix">
-  <p>© 2021 Mavia</p>
-  <ul>
-    <li><a href="#0" class="animated_link">Purchase this template</a></li>
-    <li><a href="#0" class="animated_link">Terms and conditions</a></li>
-    <li><a href="#0" class="animated_link">Contacts</a></li>
-  </ul> -->
   </footer>
   <!-- end footer-->
 
@@ -500,7 +309,7 @@
   <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
 
   <!-- Modal terms -->
-  <div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="terms-txt" tabindex="-1" role="dialog" aria-labelledby="termsLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -520,257 +329,16 @@
             dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt
             sensibus.</p>
         </div>
-        <!-- <div class="modal-footer">
-        <button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
-      </div> -->
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-    //
-  </div>
-  <!-- /.modal -->
-
-  <!-- Modal info -->
-  <!-- <div class="modal fade" id="more-info" tabindex="-1" role="dialog" aria-labelledby="more-infoLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="more-infoLabel">Frequently asked questions</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Lorem ipsum dolor sit amet, in porro albucius qui, in <strong>nec quod novum accumsan</strong>, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-        <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus. Lorem ipsum dolor sit amet, <strong>in porro albucius qui</strong>, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-        <p>Lorem ipsum dolor sit amet, in porro albucius qui, in nec quod novum accumsan, mei ludus tamquam dolores id. No sit debitis meliore postulant, per ex prompta alterum sanctus, pro ne quod dicunt sensibus.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn_1" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div> -->
-  <!-- /.modal-content -->
-  <!-- </div> -->
-  <!-- /.modal-dialog -->
-  <!-- </div> -->
-  <!-- /.modal -->
-
-	<!-- SCRIPTS -->
-	<!-- Jquery-->
-	<script src="./js/jquery-3.6.0.min.js"></script>
-	<!-- Common script -->
-	<script src="./js/common_scripts_min.js"></script>
-	<!-- Wizard script -->
-	<script src="./js/registration_wizard_func.js"></script>
-	<!-- Menu script -->
-	<script src="./js/velocity.min.js"></script>
-	<script src="./js/main.js"></script>
-	<!-- Theme script -->
-	<script src="./js/functions.js"></script>
-	<script src="./js/upload.js"></script>
-  
-  <script src="./js/jquery.datetimepicker.full.js"></script>
-  <script src="./js/jquery.datetimepicker.full.min.js"></script>
-  <script src="./js/jquery.datetimepicker.min.js"></script>
-
-
-
-<!-- 
-  fechaform -->
-
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
-	<script src="./js/alertify.min.js"></script>
-	<script src="./js/alertify.js"></script>
-
-
-  <script>
-$('#fechaform').datetimepicker({
-  timepicker: false,
-  datepicker: true,
-  format: 'y-m-d',
-  // value: '2019-8-1',
-  weeks: true
-
-
-
-})
-
-
-  </script>
-
-
-	
-<!-- ====================================================================-->
-			<!-- ==== MASCARA PARA EL CAMPO SEGURO SOCIAL ==== -->
-<!-- ====================================================================-->
-<script src="/js/mascara.js"></script>
-	
-<!-- ====================================================================-->
-<!-- ====================================================================-->
-
-<!-- /////////////////////////////////////////////////////////////////////////=-->
-
-<!-- ====================================================================-->
-<!--  === ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT == -->
-<!-- ====================================================================-->
-
-	 <script>
-
-		$(function () {
-
-		// This code will attach `fileselect` event to all file inputs on the page
-			$(document).on('change', ':file', function () {
-				var input = $(this),
-					numFiles = input.get(0).files ? input.get(0).files.length : 1,
-					label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-				input.trigger('fileselect', [numFiles, label]);
-			});
-	
-
-			$(document).ready(function () {
-				//below code executes on file input change and append name in text control
-				$(':file').on('fileselect', function (event, numFiles, label) {
-
-					var input = $(this).parents('.input-group').find(':text'),
-						log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-					if (input.length) {
-						input.val(log);
-					} else {
-						if (log) alert(log);
-					}
-
-				});
-			});
-
-		});
-
-	</script> 
-
-<!-- ======================================================= ============-->
-<!-- ======================================================= ==============-->
-
-<!-- /////////////////////////////////////////////////////////////////////////=-->
-
-<!-- =======================================================-->
-<!--======  VALIDAR LIMITANTE DEL CAMPO NUMBER ===== -->
-<!-- =======================================================-->
-
-<script>
-function maxlengthNumber (obj) {
-console.log(obj.value);
-if (obj.value.length > obj.maxLength) {
-obj.value = obj.value.slice(0, obj.maxLength);
-
-}
-	
-}
-
-
-</script>
-<!--================================ ======================-->
-<!--================================ ======================-->
-
-<!-- /////////////////////////////////////////////////////////////////////////=-->
-
-<!-- =======================================================-->
-<!--======  validar el campo licencia de conduccion ===== -->
-<!-- =======================================================-->
-<script>
-
-$(document).on('change','input[type="file"]',function(){
-	// this.files[0].size recupera el tamaño del archivo
-	// alert(this.files[0].size);
-	
-	var fileName = this.files[0].name;
-	var fileSize = this.files[0].size;
-
-	if(fileSize > 4000000){
-		alertify.set('notifier','position', 'top-center');
- 		alertify.error('El archivo supera los 4MB de peso' );
-		this.value = '';
-		this.files[0].name = '';
-	}else{
-		// recuperamos la extensión del archivo
-		var ext = fileName.split('.').pop();
-		
-		// Convertimos en minúscula porque 
-		// la extensión del archivo puede estar en mayúscula
-		ext = ext.toLowerCase();
     
-		// console.log(ext);
-		switch (ext) {
-			case'png':
-			case 'jpg':
-			break;
-			default:
-			alertify.set('notifier','position', 'top-center');
- 			alertify.error('Solo archivos .jpg o .png son aceptados' );
-
-				this.value = ''; // reset del valor
-				this.files[0].name = '';
-		}
-	}
-});
-</script>
-<!-- =========================================== ============-->
-<!-- =========================================== ============-->
-<!-- /////////////////////////////////////////////////////////////////////////=-->
+      </div>
+   
+    </div>
 
 
-
-<script>
-
-const d = document;
-
-d.addEventListener("submit", ()=>{
-// e.preventDefault();
-Swal.fire({
-			icon: 'success',
-			title: 'Tu registro ha sido recibido',
-			html: 'Tu información será verificada por un administrador y recibirás un correo cuando tu cuenta sea activada.',
-			grow: 'fullscreen',
-			padding: '129px 43px 80px',
-			backdrop: 'white',
-		    focusConfirm: false,
-			confirmButtonText: '<a href="/" style="color:white" >Aceptar</a> ',
-	
-
-			// timer: 6000,
-			// timerProgressBar: true,
-			// didOpen: () => {
-			// 	Swal.showLoading()
-			// 	const b = Swal.getHtmlContainer().querySelector('b')
-			// 	timerInterval = setInterval(() => {
-			// 		b.textContent = Swal.getTimerLeft()
-			// 	}, 100)
-			// },
-			willClose: () => {
-				clearInterval(timerInterval)
-			}
-		}).then((result) => {
-			/* Read more about handling dismissals below */
-			if (result.dismiss === Swal.DismissReason.timer) {
-				console.log('I was closed by the timer')
-			}
-		})
-
-});
+  </div> -->
+  <!-- /.modal -->
 
 
-</script>
-
-
-<script>
-
-
-
-
-
-
-</script>
-
-
-
-</body>
-
-</html>
+  <!--==================FIXME:=====FOOTER REGISTER====================  -->
+  <%- include ('partials/partials-register/footer.ejs')%>
+  <!--==================FIXME:=====FOOTER REGISTER=====================  -->

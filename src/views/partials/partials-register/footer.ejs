@@ -1,0 +1,204 @@
+
+  <!-- SCRIPTS -->
+  <!-- Jquery-->
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <!-- Common script -->
+  <script src="./js/common_scripts_min.js"></script>
+  <!-- Wizard script -->
+  <script src="./js/registration_wizard_func.js"></script>
+  <!-- Menu script -->
+  <script src="./js/velocity.min.js"></script>
+  <script src="./js/main.js"></script>
+  <!-- Theme script -->
+  <script src="./js/functions.js"></script>
+  <script src="./js/upload.js"></script>
+
+  <script src="./js/jquery.datetimepicker.full.js"></script>
+  <script src="./js/jquery.datetimepicker.full.min.js"></script>
+  <script src="./js/jquery.datetimepicker.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+  <script src="./js/alertify.min.js"></script>
+  <script src="./js/alertify.js"></script>
+
+
+  <script>
+    $('#fechaform').datetimepicker({
+      timepicker: false,
+      datepicker: true,
+      format: 'm-d-y',
+      // value: '2019-8-1',
+      weeks: true
+
+
+
+    })
+
+  </script>
+
+
+
+  <!-- ====================================================================-->
+  <!-- ==== MASCARA PARA EL CAMPO SEGURO SOCIAL ==== -->
+  <!-- ====================================================================-->
+  <script src="/js/mascara.js"></script>
+
+  <!-- ====================================================================-->
+  <!-- ====================================================================-->
+
+  <!-- /////////////////////////////////////////////////////////////////////////=-->
+
+  <!-- ====================================================================-->
+  <!--  === ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT == -->
+  <!-- ====================================================================-->
+
+  <script>
+
+    $(function () {
+
+      // This code will attach `fileselect` event to all file inputs on the page
+      $(document).on('change', ':file', function () {
+        var input = $(this),
+          numFiles = input.get(0).files ? input.get(0).files.length : 1,
+          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+      });
+
+
+      $(document).ready(function () {
+        //below code executes on file input change and append name in text control
+        $(':file').on('fileselect', function (event, numFiles, label) {
+
+          var input = $(this).parents('.input-group').find(':text'),
+            log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+          if (input.length) {
+            input.val(log);
+          } else {
+            if (log) alert(log);
+          }
+
+        });
+      });
+
+    });
+
+  </script>
+
+  <!-- ======================================================= ============-->
+  <!-- ======================================================= ==============-->
+
+  <!-- /////////////////////////////////////////////////////////////////////////=-->
+
+  <!-- =======================================================-->
+  <!--======  VALIDAR LIMITANTE DEL CAMPO NUMBER ===== -->
+  <!-- =======================================================-->
+
+  <script>
+    function maxlengthNumber(obj) {
+      console.log(obj.value);
+      if (obj.value.length > obj.maxLength) {
+        obj.value = obj.value.slice(0, obj.maxLength);
+
+      }
+
+    }
+
+
+  </script>
+  <!--================================ ======================-->
+  <!--================================ ======================-->
+
+  <!-- /////////////////////////////////////////////////////////////////////////=-->
+
+  <!-- =======================================================-->
+  <!--======  validar el campo licencia de conduccion ===== -->
+  <!-- =======================================================-->
+  <script>
+
+    $(document).on('change', 'input[type="file"]', function () {
+      // this.files[0].size recupera el tamaño del archivo
+      // alert(this.files[0].size);
+
+      var fileName = this.files[0].name;
+      var fileSize = this.files[0].size;
+
+      if (fileSize > 4000000) {
+        alertify.set('notifier', 'position', 'top-center');
+        alertify.error('El archivo supera los 4MB de peso');
+        this.value = '';
+        this.files[0].name = '';
+      } else {
+        // recuperamos la extensión del archivo
+        var ext = fileName.split('.').pop();
+
+        // Convertimos en minúscula porque 
+        // la extensión del archivo puede estar en mayúscula
+        ext = ext.toLowerCase();
+
+        // console.log(ext);
+        switch (ext) {
+          case 'png':
+          case 'jpg':
+            break;
+          default:
+            alertify.set('notifier', 'position', 'top-center');
+            alertify.error('Solo archivos .jpg o .png son aceptados');
+
+            this.value = ''; // reset del valor
+            this.files[0].name = '';
+        }
+      }
+    });
+  </script>
+  <!-- =========================================== ============-->
+  <!-- =========================================== ============-->
+  <!-- /////////////////////////////////////////////////////////////////////////=-->
+
+
+
+  <script>
+
+    const d = document;
+
+    d.addEventListener("submit", () => {
+      // e.preventDefault();
+      Swal.fire({
+        icon: 'success',
+        title: 'Tu registro ha sido recibido',
+        html: 'Tu información será verificada por un administrador y recibirás un correo cuando tu cuenta sea activada.',
+        grow: 'fullscreen',
+        padding: '129px 43px 80px',
+        backdrop: 'white',
+        focusConfirm: false,
+        confirmButtonText: '<a href="/" style="color:white" >Aceptar</a> ',
+
+
+        // timer: 6000,
+        // timerProgressBar: true,
+        // didOpen: () => {
+        // 	Swal.showLoading()
+        // 	const b = Swal.getHtmlContainer().querySelector('b')
+        // 	timerInterval = setInterval(() => {
+        // 		b.textContent = Swal.getTimerLeft()
+        // 	}, 100)
+        // },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+        }
+      })
+
+    });
+
+
+  </script>
+
+
+</body>
+
+</html>
