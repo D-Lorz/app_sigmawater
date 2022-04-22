@@ -5,13 +5,15 @@
      <script src="./cssnuevocliente/libs/imask/imask.min.js"></script>
      <!-- form mask init -->
      <script src="./cssdash/js/pages/form-mask.init.js"></script>
-
-
-
  <!-- //FIXME: ================================================================== -->
  
  
- 
+
+ <!-- <script src="./cssnuevocliente/js/jquery.datetimepicker.full"></script>
+ <script src="./cssnuevocliente/js/jquery.datetimepicker.full.min"></script>
+ <script src="./cssnuevocliente/js/jquery.datetimepicker"></script>
+ <script src="./cssnuevocliente/js/jquery.datetimepicker.min"></script> -->
+
  <!-- JAVASCRIPT -->
  <script src="./cssdash/libs/jquery/jquery.min.js"></script>
  <script src="./cssdash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -23,12 +25,8 @@
  <script src="./cssdash/libs/pace-js/pace.min.js"></script>
  
    
-
- <script src="./cssdash/js/jquery.datetimepicker.full.js"></script>
- <script src="./cssdash/js/jquery.datetimepicker.full.min.js"></script>
- <script src="./cssdash/js/jquery.datetimepicker.min.js"></script>
-
  
+
   <!-- Required datatable js -->
   <script
    src="./cssdash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -57,9 +55,11 @@
 <script src="./cssnuevocliente/js/jquery.sparkline.min.js"></script>
 <script src="./cssnuevocliente/js/jquery.steps.min.js"></script>
 <script src="./cssnuevocliente/js/moment-with-locales.min.js"></script>
+<!-- 
 <script src="./cssnuevocliente/js/daterangepicker.js"></script>
 <script src="./cssnuevocliente/js/picker.js"></script>
-<script src="./cssnuevocliente/js/picker.date.js"></script>
+<script src="./cssnuevocliente/js/picker.date.js"></script> -->
+
 <script src="./cssnuevocliente/js/jquery.validate.min.js"></script>
 <!-- END: Page Vendor JS-->
 
@@ -336,22 +336,19 @@ var currencyMask = IMask(document.getElementById('currency-mask'), {
   });
   
   </script>
-   <!--  /TODO: FUNCIONES PARA MASCARA  -->
+   <!--  TODO: FUNCIONES PARA MASCARA  -->
   
-   <!--  /TODO: FUNCIONES PARA MASCARA  -->
+   <!-- /TODO: FUNCIONES PARA MASCARA  -->
 
    
 <script>
-
   document.addEventListener("DOMContentLoaded", function () {
   // Pattern (Phone)
    var phoneMask = IMask(document.getElementById('phone-maskk'), {
           mask: '+{1} (000) 000-0000'
       });
 });
-
-
-  </script>
+ </script>
 
 
 
@@ -442,24 +439,38 @@ var currencyMask = IMask(document.getElementById('currency-mask'), {
 
 
 
+  <!-- =====TODO: DATE PIECKER REGISTER -->
+
+
+  </script>
+
+
+  <!-- =====TODO: DATE PIECKER REGISTER -->
+
+  
+<!-- ==   ==TODO: PARA LA API======================================= -->
+
 <script>
-  $('#expedición_licenciaf').datetimepicker({
-    timepicker: false,
-    datepicker: true,
-    format: 'm-d-y',
-    // value: '2019-8-1',
-    weeks: true
+  var searchInput = 'direccionf';
+  
+   
+  $(document).ready(function () {
+   var autocomplete;
+   autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+    types: ['geocode'],
+    /*componentRestrictions: {
+     country: "USA"
+    }*/
+   });
+    
+   google.maps.event.addListener(autocomplete, 'place_changed', function () {
+    var near_place = autocomplete.getPlace();
+   });
   });
-
- 
-
 </script>
-
-
-
+<!-- ==   ==TODO: PARA LA API======================================= -->
 
  </body>
  
  </html>
- 
  

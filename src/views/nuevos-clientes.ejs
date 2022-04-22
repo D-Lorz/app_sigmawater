@@ -262,8 +262,7 @@
       <div class="page-content">
         <div class="container-fluid">
           
-
-        <!-- start page title -->
+       <!-- start page title -->
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center
@@ -283,28 +282,25 @@
         </div>
         <!-- end page title -->
 
-
    <!--============================================================-->
    <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
    <!--============================================================-->
      
    <!-- BEGIN: Content-->
     <div class="app-content content" style="margin-top:-7px">
-
         <!-- Form wizard with step validation section start -->
         <section id="validation">
-
-            <div class="">
-
-        <form action="/register_nuevo_cliente"    class="steps-validation wizard-circle">
+            
+        <div class="card">
+            <div class="card-content collapse show">
+                  <form action="/register_nuevo_cliente"    class="steps-validation wizard-circle">
         
  <!--============= /FIXME:===== *SOLICITANTE* =======FIXME:=========-->
                                     <!-- Step 1 -->
-                                     <h6><b>SOLICITANTE</b></h6>
+                                <h6><b>SOLICITANTE</b></h6>
 
-                                    <fieldset>
-
-                                        <div class="row text-align: center;">
+                                 <fieldset>
+                                    <div class="row text-align: center;">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="primer_nombref">
@@ -317,8 +313,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="segundo_nombref">
-                                                        Segundo nombre
-                                                    
+                                                     Segundo nombre
                                                     </label>
                                                     <input type="tel" class="form-control " id="segundo_nombref" name="segundo_nombre">
                                                 </div>
@@ -333,8 +328,9 @@
                                                     <input type="text" class="form-control required" id="apellidosf" name="apellidos" >
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-4">
+                                        </div>
+                                        <div class="row text-align: center;">
+                                              <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="monto_financiarf">
                                                         Monto a financiar
@@ -346,13 +342,14 @@
         
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="monto_financiarf">
-                                                     Numero de Licencia
+                                                    <label for="num_licencia_solicitantef">
+                                                     Numero de licencia
                                                         <span class="danger">*</span>
                                                     </label>
-                                                    <input type="number" class="form-control required" id="monto_financiarf" name="monto_financiar" >
+                                                    <input type="number"class="form-control required"  id="num_licencia_solicitantef"  name="num_licencia_solicitante" >
                                                 </div>
                                             </div>
+
                                             <div class="col-md-4">
                                                 <label for="exampleDataList" class="form-label">Estado de licencia</label>
                                                 <span class="danger">*</span>
@@ -413,15 +410,16 @@
                                                 </datalist>
                                             </div>
                                     
-                                    
+                                         </div>
+                                         <div class="row text-align: center;">
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="fecha_exprediccionf">
+                                                    <label for="f_expediccion">
                                                         Fecha de expedición de licencia
                                                       <span class="danger">*</span>
                                                     </label>
-                                                    <input type="date" class="form-control required" id="fecha_exprediccionf" name="fecha_exprediccion">
+                                                    <input type="date" autocomplete="off" class="form-control required" id="f_expediccion" name="fecha_exprediccion">
                                                 </div>
                                             </div>
 
@@ -445,12 +443,12 @@
                                                     <input type="email" class="form-control required" id="Correof" name="correo">
                                                 </div>
                                             </div>
-                                        </div>
+                                             </div>
+                                         
+                                                                               
         
-                                        <div class="row">
-                                       
-
-                                            <div class="col-md-4">
+                                     <div class="row">
+                                        <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="segurof">
                                                         Numero de seguro
@@ -471,8 +469,8 @@
                                                         <label class="form-check-label" for="formRadios1">
                                                             SSN 
                                                         </label>
-                                                    </div>
-                                                    <div class="form-check">
+                                                 </div>
+                                                 <div class="form-check">
                                                         <input class="form-check-input" type="radio"
                                                             name="formRadios" id="formRadios2">
                                                         <label class="form-check-label" for="formRadios2">
@@ -481,13 +479,13 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="fecha_nacimientof">
                                                         Fecha de
                                                         nacimiento
-                                                                    
-                                                      <span class="danger">*</span>
+                                                       <span class="danger">*</span>
                                                     </label>
                                                     <input type="date" class="form-control required" id="fecha_nacimientof" name="fecha_nacimiento">
                                                 </div>
@@ -506,9 +504,8 @@
 
                                         </div>
         
-                                        <div class="row">
-                                     
-                                            <div class="col-md-4">
+                                     <div class="row">
+                                       <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="phone-masktwo">
                                                         Teléfono
@@ -519,13 +516,8 @@
                                                                                                    
                                                 </div>
                                             </div>
-                                    
-
-                                        </div>
-
-
-
-                                    </fieldset> 
+                                             </div>
+                                 </fieldset> 
 
 <!--============= //FIXME:===== *SOLICITANTE* =======FIXME:=========-->
 
@@ -747,9 +739,7 @@
                                                       </div>
                                                     </div>
 
-
-
-                                            </div>
+                                          </div>
         
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -781,37 +771,23 @@
                                                                                            
                                                 </div>
 
-
                                                 <div id="tipo_bancarrota">
                                                 <label for="exampleDataList" class="form-label">Tipo de bancarrota</label>
                                                 <span class="danger">*</span>
                                                 <input class="form-control required" list="datalistOptions" id="exampleDataList" >
                                                 <datalist id="datalistOptions">
-                                                    <option>Seleccione</option>
-                                                    <option>Non-adjudicated</option>
-                                                    <option>Dismissed CH-11</option>
-                                                    <option>Discharged CH-11</option>
-                                                    <option>CH-12 Filed</option>
-                                                    <option>Discharged CH-12</option>
-                                                    <option>involuntary CH-7</option>
-                                                    <option>Dismissed CH-12</option>
-                                                    <option>Dismissed CH-13</option>
-                                                    <option>Discharged CH-13</option>
-                                                    <option>Dismissed CH-7</option>
-                                                    <option>Voluntary CH-7</option>
-                                                    <option>CH-13 Filed</option>
-                                                    <option>CH-11 Filed</option>
-                                                    <option>Discharged CH-7</option>
+                                                    <option>Cuenta corriente </option>
+                                                    <option>Cuenta de ahorros</option>
+                                               
+                                                
                                                     
                                                 </datalist>
                                             </div>
-                                              
-                                                                                      
+
                                           </div>
+                                    </div>
 
-                                   </div>
-
-                                    <br>
+                                 <br>
                                              
                                                 
                                         <h4 style="text-align: center;" >Otros ingresos </h4>
@@ -1319,12 +1295,10 @@
 
   <!--=============================TODO:TODO:=============================================================-->
 
-                                </form>
-                            </div>
-                        
-                  
-           
-        </section>
+                </form>
+              </div>
+         </div>
+         </section>
         <!-- Form wizard with step validation section end -->
         
         </div>
