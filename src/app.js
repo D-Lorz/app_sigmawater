@@ -44,6 +44,8 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/router'))
 
 
+
+
 /*========= ESCUCHANDO AL SERVIDOR EN EL PUERTO 3000 O EL QUE TENGA LA VARIABLE DE ENTORNO ===========*/
 app.listen(app.get('port'), () => {
         console.log("***********************************************************")

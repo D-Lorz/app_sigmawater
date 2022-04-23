@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const authController = require('../controllers/authController')
+const sellerController = require('../controllers/sellerController')
 const path = require('path');
 const multer = require('multer');
 
@@ -87,7 +88,7 @@ router.post('/login', authController.nologueado, authController.login)
 /*=============================================================*/
 router.get('/logout', authController.logout)
 /*=============================================================*/
-
+router.post('/registrarnuevocliente',sellerController.registrarnuevocliente);
 
 
 module.exports = router

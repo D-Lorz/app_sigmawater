@@ -9,10 +9,6 @@
  
  
 
- <!-- <script src="./cssnuevocliente/js/jquery.datetimepicker.full"></script>
- <script src="./cssnuevocliente/js/jquery.datetimepicker.full.min"></script>
- <script src="./cssnuevocliente/js/jquery.datetimepicker"></script>
- <script src="./cssnuevocliente/js/jquery.datetimepicker.min"></script> -->
 
  <!-- JAVASCRIPT -->
  <script src="./cssdash/libs/jquery/jquery.min.js"></script>
@@ -55,10 +51,10 @@
 <script src="./cssnuevocliente/js/jquery.sparkline.min.js"></script>
 <script src="./cssnuevocliente/js/jquery.steps.min.js"></script>
 <script src="./cssnuevocliente/js/moment-with-locales.min.js"></script>
-<!-- 
-<script src="./cssnuevocliente/js/daterangepicker.js"></script>
+
+ <script src="./cssnuevocliente/js/daterangepicker.js"></script>
 <script src="./cssnuevocliente/js/picker.js"></script>
-<script src="./cssnuevocliente/js/picker.date.js"></script> -->
+<script src="./cssnuevocliente/js/picker.date.js"></script> 
 
 <script src="./cssnuevocliente/js/jquery.validate.min.js"></script>
 <!-- END: Page Vendor JS-->
@@ -66,7 +62,7 @@
 <!-- BEGIN: Theme JS-->
 <script src="./cssnuevocliente/js/app-menu.min.js"></script>
 <script src="./cssnuevocliente/js/app.min.js"></script>
-<script src="./cssnuevocliente/js/customizer.min.js"></script>
+<!-- <script src="./cssnuevocliente/js/customizer.min.js"></script> -->
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
@@ -269,17 +265,15 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
+  // Pattern (Phone) MASCARA PARA EL CAMPO TELEFONO DE SOLICITANTE
+    var phoneMasktelmovil = IMask(document.getElementById('phone-masktelmovil'), {
+        mask: '+{1} (000) 000-0000'
+    });
 
-    // Pattern (Phone)
+    // Pattern (Phone)  MASCARA PARA EL CAMPO TELEFONO SECUNDARIO DE SOLICITANTE
     var phoneMask = IMask(document.getElementById('phone-masktwo'), {
         mask: '+{1} (000) 000-0000'
     });
-
-    // Pattern (Phone)
-    var phoneMask = IMask(document.getElementById('phone-mask'), {
-        mask: '+{1} (000) 000-0000'
-    });
-
 
 
 // Pattern (Phone)

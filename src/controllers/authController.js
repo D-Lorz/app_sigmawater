@@ -3,10 +3,11 @@ const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 const { promisify } = require('util')
 
-//procedimiento para registrarnos
 
+
+//TODO: REGISTRAR
 exports.registrar = async (req, res) => {
-    //3dsd
+
     const nombres = req.body.nombres
     const apellidos = req.body.apellidos
     const fecha_nacimiento = req.body.fecha_nacimiento
@@ -48,7 +49,6 @@ exports.registrar = async (req, res) => {
     })
 
 }
-
 //TODO: LOGIN
 exports.login = async (req, res) => {
     try {
