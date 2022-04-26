@@ -5,6 +5,7 @@ const { promisify } = require('util')
 
 
 
+
 //TODO: REGISTRAR
 exports.registrar = async (req, res) => {
 
@@ -23,20 +24,22 @@ exports.registrar = async (req, res) => {
     const numero_cuenta = req.body.numero_cuenta
     const ruta = req.body.ruta
     const beneficiario = req.body.beneficiario
-
+  
     console.log("FRONTAL:>>>  ", urlLicencias[0]);
     console.log("TRASERA:>>>  ", urlLicencias[1]);
 
     const frontal = '../licences/' + urlLicencias[0]
     const trasera = '../licences/' + urlLicencias[1]
+    const id_vendedor = generateRandomString(6)
     const licencia_conduccion = JSON.stringify({
         'frontal': frontal,
         'trasera': trasera
+
     });
 
     const nuevoRegistro = {
         nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
-        apt_suite_unidad, codigo_postal, codigo_referido, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion
+        apt_suite_unidad, codigo_postal, codigo_referido, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion,id_vendedor
     }
 
     console.log(nuevoRegistro)
@@ -46,9 +49,14 @@ exports.registrar = async (req, res) => {
         console.log("1 Registro insertado");
         console.log(result)
         res.redirect('https://3csigmawater.com')
+
     })
 
+
 }
+
+
+
 //TODO: LOGIN
 exports.login = async (req, res) => {
     try {
@@ -131,7 +139,7 @@ exports.logout = (req, res) => {
     res.clearCookie('jwt')
     return res.redirect('/')
 }
-//TODO: VALIDACION CUNADO YA INICIA SESION
+//TODO: VALIDACION CUANDO YA INICIA SESION
 exports.nologueado = async (req, res, next) => {
     if (!req.cookies.jwt) {
         return next()
@@ -140,3 +148,18 @@ exports.nologueado = async (req, res, next) => {
         res.redirect('/')
     }
 }
+
+
+const  generateRandomString = (num) => {
+    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let result1= '';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < num; i++ ) {
+        result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result1;
+
+
+}
+

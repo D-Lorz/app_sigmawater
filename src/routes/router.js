@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const authController = require('../controllers/authController')
-const sellerController = require('../controllers/sellerController')
 const path = require('path');
 const multer = require('multer');
+const formularioControllers = require('../controllers/formularioControllers');
 
 const rutaAlmacen = multer.diskStorage({
 
@@ -36,6 +36,8 @@ const cargar = multer({
 const multiupload = cargar.fields([{ name: 'licencia' }, { name: 'licencia_trasera' }]);
 
 
+
+
 //TODO: VISTAS
 /*================== RUTAS PARA LAS VISTAS =====================*/
 
@@ -43,6 +45,9 @@ const multiupload = cargar.fields([{ name: 'licencia' }, { name: 'licencia_trase
 // res.redirect('/login') // Local=> localhost:3000 || Server=>app.3csigmawater.com/login
 //     res.render('index')
 // });
+
+
+
 
 router.get('/register', authController.nologueado, (req, res) => {
     res.render('register')
@@ -53,7 +58,9 @@ router.get('/login', authController.nologueado, (req, res) => {
 });
 
 router.get('/', authController.isAuthenticated, (req, res) => {
-    res.render('dashboard', { correo: req.correo })
+console.log(req.correor)
+res.render('dashboard', { correo: req.correo })
+    
 });
 
 router.get('/lista_facturas', authController.isAuthenticated, (req, res) => {
@@ -68,13 +75,14 @@ router.get('/lista-clientes', authController.isAuthenticated, (req, res) => {
     res.render('lista-clientes', { correo: req.correo })
 });
 
-router.get('/nuevos-clientes', authController.isAuthenticated, (req, res) => {
-    res.render('nuevos-clientes', { correo: req.correo })
+router.get('/nuevo-cliente', authController.isAuthenticated, (req, res) => {
+    res.render('nuevo-cliente', { correo: req.correo })
 });
 
 router.get('/referidos', authController.isAuthenticated, (req, res) => {
     res.render('referidos', { correo: req.correo })
 });
+
 
 
 /*==================RUTAS =====================*/
@@ -88,7 +96,5 @@ router.post('/login', authController.nologueado, authController.login)
 /*=============================================================*/
 router.get('/logout', authController.logout)
 /*=============================================================*/
-router.post('/registrarnuevocliente',sellerController.registrarnuevocliente);
-
 
 module.exports = router

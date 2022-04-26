@@ -238,9 +238,15 @@
                 </li>
            
 
+                     
                         <!--==================FIXME:=====ACUERDO DE VENDEDOR====================  -->
-                        <%- include ('partials/acuerdo-vendedor.ejs')%>
+                            <%- include ('partials/acuerdo-vendedor.ejs')%>
                         <!--==================FIXME:=====ACUERDO DE VENDEDOR====================  -->
+
+                        <!--==================FIXME:=====ACUERDO DE CONTRATISTA====================  -->
+                            <%- include ('partials/acuerdo-contratista.ejs')%>
+                        <!--==================FIXME:=====ACUERDO DE CONTRATISTA====================  -->
+
                         <!--==================FIXME:=====FACTURA CLIENTE====================  -->
                         <%- include ('partials/factura-cliente.ejs')%>
                         <!--==================FIXME:=====FACTURA CLIENTE====================  -->
@@ -293,8 +299,8 @@
             
         <div class="card">
             <div class="card-content collapse show">
-                  <form action="/registrarnuevocliente"  method="post" class="steps-validation wizard-circle">
-        
+                  <form action="/registrarclientela"  method="POST" class="steps-validation wizard-circle" ">
+                                                                        <!-- enctype="multipart/form-data -->
  <!--============= /FIXME:===== *SOLICITANTE* =======FIXME:=========-->
                                     <!-- Step 1 -->
                                 <h6><b>SOLICITANTE</b></h6>
@@ -319,7 +325,7 @@
                                                     <label for="apellidosf"> Apellidos <span class="danger">*</span></label>
                                                     <input type="text" class="form-control required" id="apellidosf" name="apellidos_cliente" >
                                                 </div>
-                                            </div>
+                                            </div> 
                                         </div>
                                          <div class="row text-align: center">
                                               <div class="col-md-4">
@@ -434,11 +440,11 @@
                                                 <div>
                                                     <div class="form-check mb-3 required">
                                                         <input class="form-check-input" type="radio" name="tipo_de_seguro" id="idssn" value="SSN" checked>
-                                                        <label class="form-check-label" for="formRadios1">SSN</label>
+                                                        <label class="form-check-label" for="idssn">SSN</label>
                                                  </div>
                                                  <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="tipo_de_seguro" id="iditin" value="ITIN">
-                                                        <label class="form-check-label" for="formRadios2"> ITIN</label>
+                                                        <label class="form-check-label" for="iditin"> ITIN</label>
                                                     </div>
                                                 </div>
                                         </div>
@@ -466,7 +472,7 @@
                                                                                                    
                                                 </div>
                                             </div>
-                                     </div>      
+                                     </div>     
                                  </fieldset>  
 
 <!--============= //FIXME:===== *SOLICITANTE* =======FIXME:=========-->
@@ -479,7 +485,7 @@
                                     <h6><b>CASA</b></h6>
                                     <fieldset  style="text-align: center"> 
 
-                              <div class="row justify-content-center" >
+                             <div class="row justify-content-center" >
                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="direccionf">  Dirección <span class="danger">*</span></label>
@@ -562,11 +568,11 @@
                                                     <div class="form-group"  >
                                                         <label for="meses_residencia">  Meses de residencia<span class="danger">*</span> </label>
                                                         <input type="number" class="form-control required"  id="meses_residencia"name="meses_residencia_cliente" >
-                                                    </div>
-                                                </div>
+                                                   </div>
+                                                </div> 
 
-                                            </div>
-                                        
+                                            </div> 
+                                
 
                                   </fieldset> 
 
@@ -580,7 +586,7 @@
                                     <h6><b>INGRESOS</b></h6>
                                     <fieldset>
 
-                                         <div class="row text-align: center;">
+                                  <div class="row text-align: center;">
                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="empleador_aplicantef"> Empleador del aplicante <span class="danger">*</span> </label>
@@ -726,7 +732,7 @@
                                                     <input type="text" class="form-control" id="currency-maskthree" id="ingresos_adicionalesf" name="ingresos_adicionales_ingresos">
                                                 </div>
                                             </div>
-                                         </div>       
+                                         </div>        
 
                                     </fieldset>
 
@@ -738,7 +744,7 @@
                                        <h6><b>INFORMACIÓN BANCARIA</b></h6>
                                                 <fieldset>
 
-                                         <div class="row text-align: center;">
+                                       <div class="row text-align: center;">
                                                    <div class="col-md-4">
                                                      <label for="exampleDataList" class="form-label">Tipo de cuenta</label> <span class="danger">*</span>
                                                             <input class="form-control required" list="datalistOptions" name="tipo_cuenta_bancaria" id="exampleDataList" placeholder="Seleccione" >
@@ -762,7 +768,7 @@
                                                     </div>
                                                 </div>
 
-                                                </div>   
+                                                </div>    
 
 
                                                 </fieldset> 
@@ -1074,6 +1080,58 @@
 
   <!--=============================TODO:TODO:=============================================================-->
 
+
+ <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
+
+                                <h6><b>REFERENCIAS</b></h6>
+                                <fieldset>
+
+
+              <div class="row">
+                    <div class="col-10">
+
+                      <label class="licencia">Por favor carga el documento solicitado para que
+                        podamos realizar el proceso de verificación de identidad
+                        <br>
+                      </label>
+                      <p class="titulolicencia">Licencia de conducir </p>
+
+                      <div class="input-group">
+                        <label class="input-group-btn">
+                          <span class="btn btn-primary" style="padding: 10px;">
+                            Cargar anverso<input type="file" name="licencia_cliente" id="campoFile" accept="image/jpg"
+                              style="display: none;" id="licencia_cliente" class="required">
+                            style="display: none;" class="inputfile" multiple 
+                          </span>
+                        </label>
+                        <input type="text" class="form-control" style="font-size: 15px;	"
+                          placeholder=" Solo archivos .jpg o .png de max 4MB son permitidos" readonly>
+                      </div>
+
+                      <div class="input-group">
+                        <label class="input-group-btn">
+                          <span class="btn btn-primary" style="padding: 10px;">
+                            Cargar reverso<input type="file" name="licencia_cliente_trasera" id="campoFile" accept="image/jpg"
+                              style="display: none;" id="licencia_cliente" class="required">
+
+                          </span>
+                        </label>
+                        <input type="text" class="form-control" style="font-size: 15px;	"
+                          placeholder=" Solo archivos .jpg o .png de max 4MB son permitidos" readonly>
+                      </div>
+
+
+                    </div>
+      
+
+                  </div> 
+              </fieldset> 
+
+ <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
+<!--=============================TODO:TODO:=============================================================-->
+
+
+
 <!--======== //======FIXME:== * TERMINOS Y CONDICIONES* FIXME:=========-->
                                       <h6><b>TERMINOS Y CONDICIONES</b></h6>
                                       <fieldset>
@@ -1118,7 +1176,7 @@
 <!--============= // FIXME:===== *TERMINOS Y CONDICIONES* FIXME:=========-->
 
   <!--=============================TODO:TODO:=============================================================-->
-                                            <input type="submit" value="enviar"  >
+                                            <input class="btn btn-primary" type="submit" value="enviar"  >
 
 
 

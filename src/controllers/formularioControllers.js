@@ -1,10 +1,14 @@
+
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
 const conexion = require("../database/db");
 const { promisify } = require("util");
 
-exports.registrarnuevocliente = async (req, res) => {
-  try {
+
+exports.registrarclientela = async (req, res) =>{
+
+try {
+
     const nombre_cliente = req.body.nombre_cliente;
     const segundo_nombre_cliente = req.body.segundo_nombre_cliente;
     const apellidos_cliente = req.body.apellidos_cliente;
@@ -75,92 +79,56 @@ exports.registrarnuevocliente = async (req, res) => {
     const nom_referencia3_co_solicitante = req.body.nom_referencia3_co_solicitante;
     const parentesco3_co_solicitante = req.body.parentesco3_co_solicitante;
     const tel_movil3_co_solicitante = req.body.tel_movil3_co_solicitante;
+    const id_cliente = generateRandomNumber(6);
 
 
 
-    const nuevoRegistroCliente = {
-      nombre_cliente,
-      segundo_nombre_cliente, 
-      apellidos_cliente, 
-      monto_financiar_cliente,
-      numero_licencia_cliente, 
-      estado_licencia_cliente,
-      fecha_expedicion_licencia_cliente,
-      fecha_vencimiento_licencia_cliente,
-      correo_cliente,
-      seguro_social_licencia,
-      tipo_de_seguro,
-      fecha_nacimiento_cliente,
-      telefono_movil_cliente,
-      telefono_secundario_cliente,
-      direccion_cliente,
-      ciudad_cliente,
-      estado_cliente,
-      code_postal_cliente,
-      condicion_vivienda,
-      compa_hipotecaria_cliente,
-      anio_residencia_cliente,
-      meses_residencia_cliente,
-      empleador_aplicante_cliente,
-      anios_trabajando_ingresos,
-      meses_trabajando_ingresos,
-      salario_mensual_ingresos,
-      bancarrota,
-      sacc_pendiente,
-      ocupacion_ingresos,anio_bancarrota_ingresos,
-      telefono_trabajo_ingresos,
-      tipo_bancarrota_ingresos,
-      empleador_anterior_ingresos,
-      otros_ingresos_ingresos,
-      ingresos_adicionales_ingresos,
-      tipo_cuenta_bancaria,
-      numero_ruta_bancaria,
-      numero_cuenta_bancaria,
-      licencia_co_solicitante,
-      expedición_licencia_co_solicitante,
-      vencimiento_licencia_co_solicitante,
-      numero_se_social_co_solicitante,
-      tipo_seguro_co_solicitante,
-      fecha_nacimiento_co_solicitante,
-      nombre_co_solicitante,
-      segundo_nombre_co_solicitante,
-      apellido_co_solicitante,
-      telefono_movil_co_solicitante,
-      tel_secundario_co_solicitante,
-      direccion_co_solicitante,
-      relacion_parentesco_co_solicitante,
-      militar_active,
-      empleador_co_solicitante,
-      anios_trabajando_co_solicitante
-      ,meses_trabajando_co_solicitante
-      ,salario_mensual_co_solicitante,
-      ocupacion_co_solicitante
-      ,telefono_trabajo_co_solicitante
-      ,empleador_anterior_co_solicitante
-      ,ingresos_co_solicitante,
-      ingresos_adicionales_co_solicitante
-      ,nom_referencia1_co_solicitante,
-      parentesco1_co_solicitante,
-      tel_movil1_co_solicitante,
-      nom_referencia2_co_solicitante,
-      parentesco2_co_solicitante,
-      tel_movil2_co_solicitante,
-      nom_referencia3_co_solicitante,
-      parentesco3_co_solicitante,
-      tel_movil3_co_solicitante 
-    
-    }
+    const objeto_datos = {
+      nombre_cliente, segundo_nombre_cliente,apellidos_cliente,  monto_financiar_cliente, numero_licencia_cliente,  estado_licencia_cliente,
+      fecha_expedicion_licencia_cliente, fecha_vencimiento_licencia_cliente, correo_cliente, seguro_social_licencia, tipo_de_seguro,
+      fecha_nacimiento_cliente,telefono_movil_cliente,telefono_secundario_cliente,  direccion_cliente, ciudad_cliente, estado_cliente,
+      code_postal_cliente, condicion_vivienda, compa_hipotecaria_cliente, anio_residencia_cliente, meses_residencia_cliente,
+      empleador_aplicante_cliente, anios_trabajando_ingresos, meses_trabajando_ingresos, salario_mensual_ingresos,  bancarrota,
+      sacc_pendiente, ocupacion_ingresos,anio_bancarrota_ingresos, telefono_trabajo_ingresos,tipo_bancarrota_ingresos,
+      empleador_anterior_ingresos,otros_ingresos_ingresos, ingresos_adicionales_ingresos, tipo_cuenta_bancaria, numero_ruta_bancaria,
+      numero_cuenta_bancaria, licencia_co_solicitante, expedición_licencia_co_solicitante, vencimiento_licencia_co_solicitante,
+      numero_se_social_co_solicitante,tipo_seguro_co_solicitante,fecha_nacimiento_co_solicitante,nombre_co_solicitante,
+      segundo_nombre_co_solicitante,apellido_co_solicitante,telefono_movil_co_solicitante,tel_secundario_co_solicitante,
+      direccion_co_solicitante,relacion_parentesco_co_solicitante, militar_active,empleador_co_solicitante,
+      anios_trabajando_co_solicitante,meses_trabajando_co_solicitante ,salario_mensual_co_solicitante, ocupacion_co_solicitante
+      ,telefono_trabajo_co_solicitante,empleador_anterior_co_solicitante,ingresos_co_solicitante,ingresos_adicionales_co_solicitante
+      ,nom_referencia1_co_solicitante,parentesco1_co_solicitante,tel_movil1_co_solicitante, nom_referencia2_co_solicitante,
+      parentesco2_co_solicitante, tel_movil2_co_solicitante,nom_referencia3_co_solicitante, parentesco3_co_solicitante, tel_movil3_co_solicitante,
+      id_cliente 
+     }
 
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+nuevoRegistroCliente)
-  await conexion.query('INSERT INTO formulario_registro_cliente SET ?', [nuevoRegistroCliente],  (err, result) => {
+
+  await conexion.query('INSERT INTO formulario_clientes SET ?', [objeto_datos],  (err, result) => {
     if (err) throw err;
     console.log("1 Registro insertado");
     console.log(result)
     res.redirect('https://3csigmawater.com')
+
 })
-  } catch (error) {
+
+
+    
+} catch (error) {
     console.log(error);
+}
+
+
+}
+
+const  generateRandomNumber = (num) => {
+  const characters ='0123456789';
+  let result1= '';
+  const charactersLength = characters.length;
+  for ( let i = 0; i < num; i++ ) {
+      result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
 
-  
-};
+  return result1;
+
+
+}

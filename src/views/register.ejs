@@ -18,7 +18,7 @@
 
 
             <!-- /top-wizard -->
-            <form action="/registrar" name="example-1" id="wizard" method="post" enctype="multipart/form-data">
+            <form action="/registrar" name="example-1" id="wizard" method="post"  enctype="multipart/form-data">
               <input id="website" name="website" type="text" value="">
               <!-- Leave for security protection, read docs for details -->
               <div id="middle-wizard">
@@ -28,8 +28,16 @@
                   <h3 class="main_question"><strong>1/4</strong>Registro de vendedor</h3>
                   <!-- <h7 class="main_question">3C Sigma Water System</h7> -->
                   <br>
+                  <!-- Mensaje de Correo no coincide -->
+                  <div class="alert alert-danger alert-border-left alert-dismissible fade show mt-2" id="alertaCorreos" style="padding: 8px 1rem; display: none" role="alert">
+                    <i class="fa-solid fa-circle-exclamation me-3 align-middle"></i>
+                    <label style="font-size: 14px;"><strong>Atención!</strong> - 
+                      <span style="font-weight: 300">Los correos no coinciden</span>
+                    </label>
+                  </div>
+                  <!-- Fin de Alerta -->
+                  <br>
                   <div class="row">
-
                     <div class="col-md-4">
                       <div class="form-group">
                         <input type="text" name="nombres" id="nombres" class="form-control required"
@@ -47,7 +55,7 @@
 
                       <div class="form-group">
 
-                        <input type="text" name="fecha_nacimiento"  autocomplete="off"  id="fechaform" class="form-control required"
+                        <input type="date" name="fecha_nacimiento"  id="fechaform" class="form-control required"
                           placeholder="Fecha de nacimiento*">
                       </div>
                     </div>
@@ -64,25 +72,30 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input type="email" name="correo" id="correo" class="form-control required"
+                        <input type="email" name="correo" id="correo"  class="form-control required"
                           placeholder="Correo*">
                       </div>
                     </div>
 
                     <div class="col-md-4">
-
-
                       <div class="form-group">
-
-                        <input type="tel" name="seguro_social" id="seguro" placeholder="# de seguro social o ITIN "
-                          class="form-control required social" required />
+                        <input type="email" name="confirmar_correo" id="confirmar_correo"  class="form-control required"
+                          placeholder="Confirmar correo*" onblur="validarCorreo()">
                       </div>
                     </div>
+                   
 
                   </div>
                   <!-- /row -->
 
                   <div class="row">
+
+                    <div class="col-md-4">
+                     <div class="form-group">
+                        <input type="tel" name="seguro_social" id="seguro" placeholder="# de seguro social o ITIN "
+                          class="form-control required social" required />
+                      </div>
+                    </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
@@ -97,16 +110,18 @@
                           class="form-control required" placeholder="Direccion*">
                       </div>
                     </div>
+                
+
+                  </div>
+
+                  <div class="row">
+
                     <div class="col-md-4">
                       <div class="form-group">
                         <input type="text" name="apt_suite_unidad" id="Apt / Suite / Unidad" class="form-control "
                           placeholder="Apt / Suite / Unidad">
                       </div>
                     </div>
-
-                  </div>
-
-                  <div class="row">
 
                     <div class="col-md-4">
                       <div class="form-group">
@@ -118,7 +133,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <input type="text" name="codigo_referido" id="referido" class="form-control " pattern="[0-9]+"
-                          placeholder="Codigo de afiliado" maxlength="6">
+                          placeholder="Codigo de afiliado" onKeyUp="javascript:this.value=this.value.toUpperCase();" minlength="6" maxlength="6">
                       </div>
                     </div>
 
@@ -269,9 +284,9 @@
               <!-- /middle-wizard -->
               <div id="bottom-wizard">
                 <button type="button" name="backward" class="backward">Retroceder </button>
-                <button type="button" name="forward" class="forward">Siguiente</button>
+                <button type="button" name="forward" class="forward" id="btnSgteRegistro">Siguiente</button>
                 <!-- <button type="submit" name="process" class="submit">Submit</button> -->
-                <button name="process" onclick="" class="submit">Enviar</button>
+                <button name="process" class="submit">Enviar</button>
               </div>
               <!-- /bottom-wizard -->
             </form>
@@ -338,6 +353,20 @@
   </div> -->
   <!-- /.modal -->
 
+  <script>
+
+    function check(a,b) {
+        var obja = document.getElementById(a)
+        var objb = document.getElementById(b)
+        if (obja.value != objb.value) {
+            alert("¡¡Los campos de correo electrónico no son los mismos!!")
+            return false;
+        }
+        return true;
+    }
+      </script>
+    
+    
 
   <!--==================FIXME:=====FOOTER REGISTER====================  -->
   <%- include ('partials/partials-register/footer.ejs')%>

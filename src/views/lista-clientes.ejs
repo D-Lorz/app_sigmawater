@@ -272,9 +272,16 @@
                 </li>
            
 
-                            <!--==================FIXME:=====FACTURA CLIENTE====================  -->
+                         
+                            <!--==================FIXME:=====ACUERDO DE VENDEDOR====================  -->
                             <%- include ('partials/acuerdo-vendedor.ejs')%>
-                                <!--==================FIXME:=====FACTURA CLIENTE====================  -->
+                                  <!--==================FIXME:=====ACUERDO DE VENDEDOR====================  -->
+
+
+                            <!--==================FIXME:=====ACUERDO DE CONTRATISTA====================  -->
+                            <%- include ('partials/acuerdo-contratista.ejs')%>
+                                  <!--==================FIXME:=====ACUERDO DE CONTRATISTA====================  -->
+
 
                                 <!--==================FIXME:=====FACTURA CLIENTE====================  -->
                                 <%- include ('partials/factura-cliente.ejs')%>
@@ -297,9 +304,9 @@
 
             </ul>
 
-            <!--==================FIXME:=====ELEMENTOS====================  -->
-    <%- include ('partials/copiar-codigo.ejs')%>
-    <!--==================FIXME:=====ELEMENTOS====================  -->
+                        <!--==================FIXME:=====ELEMENTOS====================  -->
+                <%- include ('partials/copiar-codigo.ejs')%>
+                <!--==================FIXME:=====ELEMENTOS====================  -->
 
         </div>
         <!-- Sidebar -->
@@ -406,11 +413,12 @@
                                         for="checkAll"></label>
                                 </div>
                             </th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Position</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Tags</th>
-                            <th style="width: 80px; min-width: 80px;">Action</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Correo electronico</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Direccion</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
@@ -424,40 +432,32 @@
                                         for="contacusercheck1"></label>
                                 </div>
                             </th>
+                            
                             <td>
-                                <!-- <img src="./cssdash/images/users/avatar-2.jpg"
-                                    alt="" class="avatar-sm rounded-circle
-                                    me-2"> -->
-                                <a href="#" class="text-body">Phyllis Gatlin</a>
-                            </td>
-                            <td>UI/UX Designer</td>
-                            <td>phyllisgatlin@minia.com</td>
+                              <% if (correo) { %>
+                                 <a href="#" class="text-body">  <%= correo.id %> </a>  
+                               <% } %>
+                             </td>
                             <td>
-                                <div class="d-flex gap-2">
-                                    <a href="#" class="badge
-                                        badge-soft-primary">Photoshop</a>
-                                    <a href="#" class="badge
-                                        badge-soft-primary">illustrator</a>
-                                </div>
+                                <% if (correo) { %>
+                                    <a href="#" class="text-body">  <%= correo.nombres+" "+correo.apellidos %> </a>  
+                                  <% } %>
                             </td>
                             <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-link font-size-16
-                                        shadow-none py-0 text-muted
-                                        dropdown-toggle" type="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="bx
-                                            bx-dots-horizontal-rounded"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another
-                                                action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something
-                                                else here</a></li>
-                                    </ul>
-                                </div>
+                                <% if (correo) { %>
+                                    <a href="#" class="text-body">  <%= correo.correo %> </a>  
+                                  <% } %>
+                            </td>
+                            <td>
+                                <% if (correo) { %>
+                                    <a href="#" class="text-body">  <%= correo.telefono_movil %> </a>  
+                                  <% } %>
+                            </td>
+
+                            <td>
+                                <% if (correo) { %>
+                                    <a href="#" class="text-body">  <%= correo.direccion %> </a>  
+                                  <% } %>
                             </td>
                         </tr>
                         <tr>

@@ -20,6 +20,10 @@
  <!-- pace js -->
  <script src="./cssdash/libs/pace-js/pace.min.js"></script>
  
+ 
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+ <script src="./js/alertify.min.js"></script>
+ <script src="./js/alertify.js"></script>
    
  
 
@@ -446,23 +450,129 @@ var currencyMask = IMask(document.getElementById('currency-mask'), {
 
 <script>
   var searchInput = 'direccionf';
-  
-   
+     
   $(document).ready(function () {
    var autocomplete;
    autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
+
     types: ['geocode'],
-    /*componentRestrictions: {
+    componentRestrictions: {
      country: "USA"
-    }*/
+    },
+    fields:["address_components"]
    });
     
    google.maps.event.addListener(autocomplete, 'place_changed', function () {
     var near_place = autocomplete.getPlace();
+
+    for(const component of place.address_components){
+   const componentType = component.types[0];
+
+    switch(componentType){
+    case "locality": 
+    document.querySelector("#ciudadf").value = component.long_name;
+    break;
+
+   }
+
+
+    }
+
    });
   });
 </script>
 <!-- ==   ==TODO: PARA LA API======================================= -->
+
+
+
+<script>
+
+  $(document).on('change', 'input[type="file"]', function () {
+    // this.files[0].size recupera el tamaño del archivo
+    // alert(this.files[0].size);
+
+    var fileName = this.files[0].name;
+    var fileSize = this.files[0].size;
+
+    if (fileSize > 5000000) {
+      alertify.set('notifier', 'position', 'top-center');
+      alertify.error('El archivo supera los 5MB de peso');
+      this.value = '';
+      this.files[0].name = '';
+    } else {
+      // recuperamos la extensión del archivo
+      var ext = fileName.split('.').pop();
+
+      // Convertimos en minúscula porque 
+      // la extensión del archivo puede estar en mayúscula
+      ext = ext.toLowerCase();
+
+      // console.log(ext);
+      switch (ext) {
+        case 'png':
+        case 'jpg':
+          break;
+        default:
+          alertify.set('notifier', 'position', 'top-center');
+          alertify.error('Solo archivos .jpg o .png son aceptados');
+
+          this.value = ''; // reset del valor
+          this.files[0].name = '';
+      }
+    }
+  });
+</script>
+<!-- =========================================== ============-->
+<!-- =========================================== ============-->
+<!-- /////////////////////////////////////////////////////////////////////////=-->
+
+
+
+  <!-- /////////////////////////////////////////////////////////////////////////=-->
+
+  <!-- ====================================================================-->
+  <!--  === ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT == -->
+  <!-- ====================================================================-->
+
+  <script>
+
+    $(function () {
+
+      // This code will attach `fileselect` event to all file inputs on the page
+      $(document).on('change', ':file', function () {
+        var input = $(this),
+          numFiles = input.get(0).files ? input.get(0).files.length : 1,
+          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+      });
+
+
+      $(document).ready(function () {
+        //below code executes on file input change and append name in text control
+        $(':file').on('fileselect', function (event, numFiles, label) {
+
+          var input = $(this).parents('.input-group').find(':text'),
+            log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+          if (input.length) {
+            input.val(log);
+          } else {
+            if (log) alert(log);
+          }
+
+        });
+      });
+
+    });
+
+  </script>
+
+  <!-- ======================================================= ============-->
+  <!-- ======================================================= ==============-->
+
+
+
+
 
  </body>
  

@@ -41,7 +41,9 @@ app.use((req, res, next) => {
   });
 
 //llamar al router
-app.use('/', require('./routes/router'))
+app.use('/', require('./routes/router'));
+//llamar al sellers
+app.use('/', require('./routes/sellers'));
 
 
 
