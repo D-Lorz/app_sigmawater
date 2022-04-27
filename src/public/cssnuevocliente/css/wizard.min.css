@@ -57,9 +57,9 @@
   cursor: default;
 }
 .app-content .wizard > .steps > ul > li.current .step {
-  border-color: #00b5b8;
+  border-color: #812082;
   background-color: #fff;
-  color: #00b5b8;
+  color: #812082;
 }
 .app-content .wizard > .steps > ul > li.disabled a,
 .app-content .wizard > .steps > ul > li.disabled a:focus,
@@ -73,9 +73,7 @@
   color: #999;
 }
 .app-content .wizard > .steps > ul > li.done .step {
-  background-color: #00b5b8;
-  border-color: #00b5b8;
-  color: #fff;
+  color: #fff; background: linear-gradient(189.55deg, #FED061 -131.52%, #812082 -11.9%, #50368C 129.46%);border-color: #ffffff;
 }
 .app-content .wizard > .steps > ul > li.error .step {
   border-color: #ff7588;
@@ -174,7 +172,7 @@
   top: 43px;
   width: 50%;
   height: 5px;
-  background-color: #00b5b8;
+  background-color: #812082;
 }
 .app-content .wizard.wizard-circle > .steps > ul > li.current:after,
 .app-content .wizard.wizard-circle > .steps > ul > li.current ~ li:after,

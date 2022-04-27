@@ -33,6 +33,8 @@ app.use(cookieParser())
 
 /** VARIABLES GLOBALES */
 global.urlLicencias = ['front', 'back'];
+global.urlLicenciasClientes = ['front', 'back'];
+
 
 // No almacenar caché
 app.use((req, res, next) => {
@@ -42,8 +44,9 @@ app.use((req, res, next) => {
 
 //llamar al router
 app.use('/', require('./routes/router'));
-//llamar al sellers
 app.use('/', require('./routes/sellers'));
+
+
 
 
 

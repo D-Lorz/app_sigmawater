@@ -3,7 +3,7 @@ const router = express.Router()
 const authController = require('../controllers/authController')
 const path = require('path');
 const multer = require('multer');
-const formularioControllers = require('../controllers/formularioControllers');
+// const formularioControllers = require('../controllers/formularioControllers');
 
 const rutaAlmacen = multer.diskStorage({
 
@@ -79,6 +79,7 @@ router.get('/nuevo-cliente', authController.isAuthenticated, (req, res) => {
     res.render('nuevo-cliente', { correo: req.correo })
 });
 
+
 router.get('/referidos', authController.isAuthenticated, (req, res) => {
     res.render('referidos', { correo: req.correo })
 });
@@ -96,5 +97,6 @@ router.post('/login', authController.nologueado, authController.login)
 /*=============================================================*/
 router.get('/logout', authController.logout)
 /*=============================================================*/
+
 
 module.exports = router

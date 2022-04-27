@@ -8,6 +8,10 @@
  <!-- //FIXME: ================================================================== -->
  
  
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <!-- Google Maps JavaScript library -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDnXrGToxsOSdtK01dW0yynlYxRsv8D6ro&callback=initAutocomplete"></script>
+
 
 
  <!-- JAVASCRIPT -->
@@ -22,8 +26,8 @@
  
  
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
- <script src="./js/alertify.min.js"></script>
- <script src="./js/alertify.js"></script>
+ <script src="./cssnuevocliente/js/alertify.min.js"></script>
+ <script src="./cssnuevocliente/js/alertify.js"></script>
    
  
 
@@ -445,44 +449,7 @@ var currencyMask = IMask(document.getElementById('currency-mask'), {
 
   <!-- =====TODO: DATE PIECKER REGISTER -->
 
-  
-<!-- ==   ==TODO: PARA LA API======================================= -->
-
-<script>
-  var searchInput = 'direccionf';
-     
-  $(document).ready(function () {
-   var autocomplete;
-   autocomplete = new google.maps.places.Autocomplete((document.getElementById(searchInput)), {
-
-    types: ['geocode'],
-    componentRestrictions: {
-     country: "USA"
-    },
-    fields:["address_components"]
-   });
-    
-   google.maps.event.addListener(autocomplete, 'place_changed', function () {
-    var near_place = autocomplete.getPlace();
-
-    for(const component of place.address_components){
-   const componentType = component.types[0];
-
-    switch(componentType){
-    case "locality": 
-    document.querySelector("#ciudadf").value = component.long_name;
-    break;
-
-   }
-
-
-    }
-
-   });
-  });
-</script>
-<!-- ==   ==TODO: PARA LA API======================================= -->
-
+ 
 
 
 <script>
@@ -569,6 +536,83 @@ var currencyMask = IMask(document.getElementById('currency-mask'), {
 
   <!-- ======================================================= ============-->
   <!-- ======================================================= ==============-->
+ 
+<!-- ==   ==TODO: PARA LA API======================================= -->
+
+<script>
+
+  let autocomplete;
+  let postalField = document.getElementById('postalcode')
+  let address1Field = document.getElementById('address1')
+  function initAutocomplete() {
+      autocomplete = new google.maps.places.Autocomplete(
+          document.getElementById('autocomplete'), {
+              //types: ['establishment'],
+              types: ['address'],
+              componentrestrictions: {'country': ['US']},
+              fields: ['address_components']
+              //fields: ['place_id', 'geometry', 'name', 'address_components']
+          }
+      );
+
+      //autocomplete.addListener('place_changed', onPlaceChanged)
+      autocomplete.addListener('place_changed', fillInAddress)
+
+  }
+
+  function onPlaceChanged () {
+      var place = autocomplete.getPlace();
+
+      if (!place.geometry) {
+          // No se ha seleccionado una predicción - restablecer el campo
+          document.getElementById('autocomplete').placeholder = 'Introduce una dirección';
+      } else {
+          // Muestra detalles acerca de la dirección validada
+          document.getElementById('details').innerHTML = place.name
+      }
+  }
+
+  function fillInAddress() {
+      const place = autocomplete.getPlace();
+      let address1 = "";
+      let postcode = "";
+
+      for (const component of place.address_components){
+          const componentType = component.types[0];
+
+          switch (componentType) {
+              case "postal_code": {
+                  postcode = `${component.long_name}${postcode}`;
+                  break;
+              }
+
+              case "postal_code_suffix": {
+                  postcode = `${postcode}-${component.long_name}`;
+                  break;
+              }
+              case "locality":
+                  document.querySelector("#ciudad").value = component.long_name;
+                  break;
+              case "administrative_area_level_1": {
+                  document.querySelector("#estado").value = component.short_name;
+                  break;
+              }
+              /*
+              case "country":
+                  document.querySelector("#pais").value = component.long_name;
+                  break;
+              */
+          }
+      }
+      //address1Field.value = address1;
+      postalField.value = postcode;
+  }
+
+  window.initAutocomplete = initAutocomplete;
+
+</script>
+
+<!-- ==   ==TODO: PARA LA API======================================= -->
 
 
 

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="3c Sigma Wataer" content="Ansonika">
+  <title>Registro de vendedor</title>
+
+  <!-- Favicons-->
+  <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./css/scrolls.css">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="./css/upload.css">
+  <!-- GOOGLE WEB FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- BASE CSS -->
+  <link href="./css/bootstrap.min.css" rel="stylesheet">
+   <link href="./css/style.css" rel="stylesheet">
+  <link href="./css/responsive.css" rel="stylesheet">
+  <link href="./css/menu.css" rel="stylesheet">
+  <link href="./css/animate.min.css" rel="stylesheet">
+  <link href="./css/icon_fonts/css/all_icons_min.css" rel="stylesheet">
+  <link href="./css/skins/square/grey.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/alertify.css">
+  <link rel="stylesheet" href="./css/themes/default.css">
+
+
+      
+  <script src="./js/modernizr.js"></script>
+  <!-- Modernizr -->
+
+</head>
+
+<body>
+  <div id="preloader">
+    <div data-loader="circle-side"></div>
+  </div><!-- /Preload -->
+
+   <header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3">
+          <div id="logo_home">
+            <h1><a href="#"></a>
+            </h1>
+          </div>
+        </div>
+        <div class="col-9">
+          <div id="social">
+            <ul>
+              <li><a href="https://www.facebook.com/3csigmawater" target="_blank"><i class="icon-facebook"></i></a></li>
+              <!-- <li><a href="#0"><i class="icon-twitter"></i></a></li> -->
+              <li><a href="https://instagram.com/3csigmawater" target="_blank"><i class="icon-instagram"></i></a></li>
+              <!-- <li><a href="#0"><i class="icon-linkedin"></i></a></li> -->
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- container -->
+  </header>
+  <!-- End Header -->
+<body>
+
+<div class="container">
+    <div class="row">
+        <!-- <form action="/pruebaprueba" method="POST" enctype="multipart/form-data"> -->
+        <div class="col-6" >
+
+          <label class="licencia">Por favor carga el documento solicitado para que
+            podamos realizar el proceso de verificación de identidad
+            <br>
+          </label>
+          <p class="titulolicencia">Licencia de conducir </p>
+
+          <div class="input-group">
+            <label class="input-group-btn">
+              <span class="btn btn-primary" style="padding: 10px;">
+                Cargar anverso<input type="file" name="pruebafotofrontal" id="campoFile" accept="image/jpg"
+                  style="display: none;" id="licencia" required>
+                <!-- style="display: none;" class="inputfile" multiple -->
+              </span>
+            </label>
+            <input type="text" class="form-control" style="font-size: 15px;	"
+              placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required   readonly>
+          </div>
+          <br>
+          
+          <div class="input-group">
+            <label class="input-group-btn">
+              <span class="btn btn-primary" style="padding: 10px;">
+                Cargar reverso<input type="file" name="pruebafototrasera" id="campoFile" accept="image/jpg"
+                  style="display: none;" id="licencia" required>
+
+              </span>
+            </label>
+            <input type="text" class="form-control" style="font-size: 15px;	"
+              placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required  readonly>
+          </div>
+
+
+        </div>
+<!-- 
+        <button type="submit" class="btn btn-success" >Enviar</button>
+    </form>
+       -->
+      </div>  
+
+    </div>
+
+  <!-- SCRIPTS -->
+  <!-- Jquery-->
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <!-- Common script -->
+  <script src="./js/common_scripts_min.js"></script>
+  <!-- Wizard script -->
+  <script src="./js/registration_wizard_func.js"></script>
+  <!-- Menu script -->
+  <script src="./js/velocity.min.js"></script>
+  <script src="./js/main.js"></script>
+  <!-- Theme script -->
+  <script src="./js/functions.js"></script>
+  <script src="./js/upload.js"></script>
+
+  <!-- <script src="./js/jquery.datetimepicker.full.js"></script>
+  <script src="./js/jquery.datetimepicker.full.min.js"></script>
+  <script src="./js/jquery.datetimepicker.min.js"></script> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+  <script src="./js/alertify.min.js"></script>
+  <script src="./js/alertify.js"></script>
+
+  <!-- Script Personalizados -->
+  <script src="./js/scripts_personalizados.js"></script>
+
+
+
+
+  <!-- ====================================================================-->
+  <!-- ==== MASCARA PARA EL CAMPO SEGURO SOCIAL ==== -->
+  <!-- ====================================================================-->
+  <script src="/js/mascara.js"></script>
+
+  <!-- ====================================================================-->
+  <!-- ====================================================================-->
+
+  <!-- /////////////////////////////////////////////////////////////////////////=-->
+
+  <!-- ====================================================================-->
+  <!--  === ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT == -->
+  <!-- ====================================================================-->
+
+  <script>
+
+    $(function () {
+
+      // This code will attach `fileselect` event to all file inputs on the page
+      $(document).on('change', ':file', function () {
+        var input = $(this),
+          numFiles = input.get(0).files ? input.get(0).files.length : 1,
+          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+      });
+
+
+      $(document).ready(function () {
+        //below code executes on file input change and append name in text control
+        $(':file').on('fileselect', function (event, numFiles, label) {
+
+          var input = $(this).parents('.input-group').find(':text'),
+            log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+          if (input.length) {
+            input.val(log);
+          } else {
+            if (log) alert(log);
+          }
+
+        });
+      });
+
+    });
+
+  </script>
+
+  <!-- ======================================================= ============-->
+  <!-- ======================================================= ==============-->
+
+  <!-- /////////////////////////////////////////////////////////////////////////=-->
+
+  <!-- =======================================================-->
+  <!--======  VALIDAR LIMITANTE DEL CAMPO NUMBER ===== -->
+  <!-- =======================================================-->
+
+  <script>
+    function maxlengthNumber(obj) {
+      console.log(obj.value);
+      if (obj.value.length > obj.maxLength) {
+        obj.value = obj.value.slice(0, obj.maxLength);
+
+      }
+
+    }
+
+
+  </script>
+  <!--================================ ======================-->
+  <!--================================ ======================-->
+
+  <!-- /////////////////////////////////////////////////////////////////////////=-->
+
+  <!-- =======================================================-->
+  <!--======  validar el campo licencia de conduccion ===== -->
+  <!-- =======================================================-->
+  <script>
+
+    $(document).on('change', 'input[type="file"]', function () {
+      // this.files[0].size recupera el tamaño del archivo
+      // alert(this.files[0].size);
+
+      var fileName = this.files[0].name;
+      var fileSize = this.files[0].size;
+
+      if (fileSize > 5000000) {
+        alertify.set('notifier', 'position', 'top-center');
+        alertify.error('El archivo supera los 5MB de peso');
+        this.value = '';
+        this.files[0].name = '';
+      } else {
+        // recuperamos la extensión del archivo
+        var ext = fileName.split('.').pop();
+
+        // Convertimos en minúscula porque 
+        // la extensión del archivo puede estar en mayúscula
+        ext = ext.toLowerCase();
+
+        // console.log(ext);
+        switch (ext) {
+          case 'png':
+          case 'jpg':
+            break;
+          default:
+            alertify.set('notifier', 'position', 'top-center');
+            alertify.error('Solo archivos .jpg o .png son aceptados');
+
+            this.value = ''; // reset del valor
+            this.files[0].name = '';
+        }
+      }
+    });
+  </script>
+  <!-- =========================================== ============-->
+  <!-- =========================================== ============-->
+  <!-- /////////////////////////////////////////////////////////////////////////=-->
+
+
+
+  <script>
+
+    const d = document;
+
+    d.addEventListener("submit", () => {
+      // e.preventDefault();
+      Swal.fire({
+        icon: 'success',
+        title: 'Tu registro ha sido recibido',
+        html: 'Tu información será verificada por un administrador y recibirás un correo cuando tu cuenta sea activada.',
+        grow: 'fullscreen',
+        padding: '129px 43px 80px',
+        backdrop: 'white',
+        focusConfirm: false,
+        confirmButtonText: '<a href="/" style="color:white" >Aceptar</a> ',
+
+
+        // timer: 6000,
+        // timerProgressBar: true,
+        // didOpen: () => {
+        // 	Swal.showLoading()
+        // 	const b = Swal.getHtmlContainer().querySelector('b')
+        // 	timerInterval = setInterval(() => {
+        // 		b.textContent = Swal.getTimerLeft()
+        // 	}, 100)
+        // },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+        }
+      })
+
+    });
+
+
+
+  </script>
+
+
+
+
+
+</body>
+
+</html>
+
+</body>
+</html>
+
+
+
+
+
+

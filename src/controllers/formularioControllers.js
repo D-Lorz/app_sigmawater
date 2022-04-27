@@ -79,12 +79,20 @@ try {
     const nom_referencia3_co_solicitante = req.body.nom_referencia3_co_solicitante;
     const parentesco3_co_solicitante = req.body.parentesco3_co_solicitante;
     const tel_movil3_co_solicitante = req.body.tel_movil3_co_solicitante;
+    console.log("FRONTAL:>>>  ", urlLicencias[0]);
+    console.log("TRASERA:>>>  ", urlLicencias[1]);
+
+    const frontal = '../licences_customers/' + urlLicencias[0]
+    const trasera = '../licences_customers/' + urlLicencias[1]
+  
+    const licencia_cliente = JSON.stringify({
+        'frontal': frontal, 
+        'trasera': trasera
+
+    });
     const id_cliente = generateRandomNumber(6);
 
-
-
-    const objeto_datos = {
-      nombre_cliente, segundo_nombre_cliente,apellidos_cliente,  monto_financiar_cliente, numero_licencia_cliente,  estado_licencia_cliente,
+    const objeto_datos = {nombre_cliente, segundo_nombre_cliente,apellidos_cliente,  monto_financiar_cliente, numero_licencia_cliente,  estado_licencia_cliente,
       fecha_expedicion_licencia_cliente, fecha_vencimiento_licencia_cliente, correo_cliente, seguro_social_licencia, tipo_de_seguro,
       fecha_nacimiento_cliente,telefono_movil_cliente,telefono_secundario_cliente,  direccion_cliente, ciudad_cliente, estado_cliente,
       code_postal_cliente, condicion_vivienda, compa_hipotecaria_cliente, anio_residencia_cliente, meses_residencia_cliente,
@@ -99,7 +107,7 @@ try {
       ,telefono_trabajo_co_solicitante,empleador_anterior_co_solicitante,ingresos_co_solicitante,ingresos_adicionales_co_solicitante
       ,nom_referencia1_co_solicitante,parentesco1_co_solicitante,tel_movil1_co_solicitante, nom_referencia2_co_solicitante,
       parentesco2_co_solicitante, tel_movil2_co_solicitante,nom_referencia3_co_solicitante, parentesco3_co_solicitante, tel_movil3_co_solicitante,
-      id_cliente 
+      licencia_cliente,id_cliente 
      }
 
 
