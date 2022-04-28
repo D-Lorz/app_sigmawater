@@ -39,6 +39,9 @@ const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente
 router.get('/hola', authController.isAuthenticated, (req, res) => {
     res.render('hola', { correo: req.correo })
 });
+router.get('/documento', authController.isAuthenticated, (req, res) => {
+    res.render('documento', { correo: req.correo })
+});
 
 
 /*==================RUTAS =====================*/

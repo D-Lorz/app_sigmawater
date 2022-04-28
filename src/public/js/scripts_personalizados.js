@@ -16,3 +16,17 @@ function validarCorreo() {
     alertaCorreos.style.display = 'none'
   }
 }
+
+
+
+function validarCorreo() {
+  const l_frontral = document.getElementById("licencia_cliente_frontal1");
+  const l_trasera = document.getElementById("licencia_cliente_trasera1");
+
+
+if (l_frontral.value != l_trasera.value) {
+alert("hola")
+} else {
+  alert("no")
+}
+}
