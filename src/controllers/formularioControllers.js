@@ -9,41 +9,41 @@ exports.registrarclientela = async (req, res) =>{
 
 try {
 
-    // const nombre_cliente = req.body.nombre_cliente;
-    // const segundo_nombre_cliente = req.body.segundo_nombre_cliente;
-    // const apellidos_cliente = req.body.apellidos_cliente;
-    // const monto_financiar_cliente = req.body.monto_financiar_cliente;
-    // const numero_licencia_cliente = req.body.numero_licencia_cliente;
-    // const estado_licencia_cliente = req.body.estado_licencia_cliente;
-    // const fecha_expedicion_licencia_cliente = req.body.fecha_expedicion_licencia_cliente;
-    // const fecha_vencimiento_licencia_cliente =  req.body.fecha_vencimiento_licencia_cliente;
-    // const correo_cliente = req.body.correo_cliente;
-    // const seguro_social_licencia = req.body.seguro_social_licencia;
-    // const tipo_de_seguro = req.body.tipo_de_seguro;
-    // const fecha_nacimiento_cliente = req.body.fecha_nacimiento_cliente;
-    // const telefono_movil_cliente = req.body.telefono_movil_cliente;
-    // const telefono_secundario_cliente = req.body.telefono_secundario_cliente;
-    // const direccion_cliente = req.body.direccion_cliente;
-    // const ciudad_cliente = req.body.ciudad_cliente;
-    // const estado_cliente = req.body.estado_cliente;
-    // const code_postal_cliente = req.body.code_postal_cliente;
-    // const condicion_vivienda = req.body.condicion_vivienda;
-    // const compa_hipotecaria_cliente = req.body.compa_hipotecaria_cliente;
-    // const anio_residencia_cliente = req.body.anio_residencia_cliente;
-    // const meses_residencia_cliente = req.body.meses_residencia_cliente;
-    // const empleador_aplicante_cliente = req.body.empleador_aplicante_cliente;
-    // const anios_trabajando_ingresos = req.body.anios_trabajando_ingresos;
-    // const meses_trabajando_ingresos = req.body.meses_trabajando_ingresos;
-    // const salario_mensual_ingresos = req.body.salario_mensual_ingresos;
-    // const bancarrota = req.body.bancarrota;
-    // const sacc_pendiente = req.body.sacc_pendiente;
-    // const ocupacion_ingresos = req.body.ocupacion_ingresos;
-    // const anio_bancarrota_ingresos = req.body.anio_bancarrota_ingresos;
-    // const telefono_trabajo_ingresos = req.body.telefono_trabajo_ingresos;
-    // const tipo_bancarrota_ingresos = req.body.tipo_bancarrota_ingresos;
-    // const empleador_anterior_ingresos = req.body.empleador_anterior_ingresos;
-    // const otros_ingresos_ingresos = req.body.otros_ingresos_ingresos;
-    // const ingresos_adicionales_ingresos =  req.body.ingresos_adicionales_ingresos;
+    const nombre_cliente = req.body.nombre_cliente;
+    const segundo_nombre_cliente = req.body.segundo_nombre_cliente;
+    const apellidos_cliente = req.body.apellidos_cliente;
+    const monto_financiar_cliente = req.body.monto_financiar_cliente;
+    const numero_licencia_cliente = req.body.numero_licencia_cliente;
+    const estado_licencia_cliente = req.body.estado_licencia_cliente;
+    const fecha_expedicion_licencia_cliente = req.body.fecha_expedicion_licencia_cliente;
+    const fecha_vencimiento_licencia_cliente =  req.body.fecha_vencimiento_licencia_cliente;
+    const correo_cliente = req.body.correo_cliente;
+    const seguro_social_licencia = req.body.seguro_social_licencia;
+    const tipo_de_seguro = req.body.tipo_de_seguro;
+    const fecha_nacimiento_cliente = req.body.fecha_nacimiento_cliente;
+    const telefono_movil_cliente = req.body.telefono_movil_cliente;
+    const telefono_secundario_cliente = req.body.telefono_secundario_cliente;
+    const direccion_cliente = req.body.direccion_cliente;
+    const ciudad_cliente = req.body.ciudad_cliente;
+    const estado_cliente = req.body.estado_cliente;
+    const code_postal_cliente = req.body.code_postal_cliente;
+    const condicion_vivienda = req.body.condicion_vivienda;
+    const compa_hipotecaria_cliente = req.body.compa_hipotecaria_cliente;
+    const anio_residencia_cliente = req.body.anio_residencia_cliente;
+    const meses_residencia_cliente = req.body.meses_residencia_cliente;
+    const empleador_aplicante_cliente = req.body.empleador_aplicante_cliente;
+    const anios_trabajando_ingresos = req.body.anios_trabajando_ingresos;
+    const meses_trabajando_ingresos = req.body.meses_trabajando_ingresos;
+    const salario_mensual_ingresos = req.body.salario_mensual_ingresos;
+    const bancarrota = req.body.bancarrota;
+    const sacc_pendiente = req.body.sacc_pendiente;
+    const ocupacion_ingresos = req.body.ocupacion_ingresos;
+    const anio_bancarrota_ingresos = req.body.anio_bancarrota_ingresos;
+    const telefono_trabajo_ingresos = req.body.telefono_trabajo_ingresos;
+    const tipo_bancarrota_ingresos = req.body.tipo_bancarrota_ingresos;
+    const empleador_anterior_ingresos = req.body.empleador_anterior_ingresos;
+    const otros_ingresos_ingresos = req.body.otros_ingresos_ingresos;
+    const ingresos_adicionales_ingresos =  req.body.ingresos_adicionales_ingresos;
     const tipo_cuenta_bancaria = req.body.tipo_cuenta_bancaria;
     const numero_ruta_bancaria = req.body.numero_ruta_bancaria;
     const numero_cuenta_bancaria = req.body.numero_cuenta_bancaria;
@@ -93,13 +93,13 @@ try {
     const id_cliente = generateRandomNumber(6);
 
     const objeto_datos = {
-      // nombre_cliente, segundo_nombre_cliente,apellidos_cliente,  monto_financiar_cliente, numero_licencia_cliente,  estado_licencia_cliente,
-      // fecha_expedicion_licencia_cliente, fecha_vencimiento_licencia_cliente, correo_cliente, seguro_social_licencia, tipo_de_seguro,
-      // fecha_nacimiento_cliente,telefono_movil_cliente,telefono_secundario_cliente,  direccion_cliente, ciudad_cliente, estado_cliente,
-      // code_postal_cliente, condicion_vivienda, compa_hipotecaria_cliente, anio_residencia_cliente, meses_residencia_cliente,
-      // empleador_aplicante_cliente, anios_trabajando_ingresos, meses_trabajando_ingresos, salario_mensual_ingresos,  bancarrota,
-      // sacc_pendiente, ocupacion_ingresos,anio_bancarrota_ingresos, telefono_trabajo_ingresos,tipo_bancarrota_ingresos,
-      // empleador_anterior_ingresos,otros_ingresos_ingresos, ingresos_adicionales_ingresos,
+      nombre_cliente, segundo_nombre_cliente,apellidos_cliente,  monto_financiar_cliente, numero_licencia_cliente,  estado_licencia_cliente,
+      fecha_expedicion_licencia_cliente, fecha_vencimiento_licencia_cliente, correo_cliente, seguro_social_licencia, tipo_de_seguro,
+      fecha_nacimiento_cliente,telefono_movil_cliente,telefono_secundario_cliente,  direccion_cliente, ciudad_cliente, estado_cliente,
+      code_postal_cliente, condicion_vivienda, compa_hipotecaria_cliente, anio_residencia_cliente, meses_residencia_cliente,
+      empleador_aplicante_cliente, anios_trabajando_ingresos, meses_trabajando_ingresos, salario_mensual_ingresos,  bancarrota,
+      sacc_pendiente, ocupacion_ingresos,anio_bancarrota_ingresos, telefono_trabajo_ingresos,tipo_bancarrota_ingresos,
+      empleador_anterior_ingresos,otros_ingresos_ingresos, ingresos_adicionales_ingresos,
        tipo_cuenta_bancaria, numero_ruta_bancaria,
       numero_cuenta_bancaria, licencia_co_solicitante, expedición_licencia_co_solicitante, vencimiento_licencia_co_solicitante,
       numero_se_social_co_solicitante,tipo_seguro_co_solicitante,fecha_nacimiento_co_solicitante,nombre_co_solicitante,
