@@ -1,8 +1,7 @@
 
-const jwt = require("jsonwebtoken");
-const bcryptjs = require("bcryptjs");
 const conexion = require("../database/db");
 const { promisify } = require("util");
+const authController = require('../controllers/authController')
 
 
 exports.registrarclientela = async (req, res) =>{
@@ -81,16 +80,22 @@ try {
     const tel_movil3_co_solicitante = req.body.tel_movil3_co_solicitante;
     console.log("FRONTAL:>>>  ", urlLicencias[0]);
     console.log("TRASERA:>>>  ", urlLicencias[1]);
+    console.log("ACUERDO FIRMADO:>>>  ", urlLicencias[2]);
 
     const frontal = '../licences_customers/' + urlLicencias[0]
     const trasera = '../licences_customers/' + urlLicencias[1]
-  
+    const firma = '../licences_customers/' + urlLicencias[2]
+
     const licencia_cliente = JSON.stringify({
         'frontal': frontal, 
         'trasera': trasera
 
     });
+    const acuerdo_firmado = JSON.stringify({
+      'Firma':firma
+  });
     const id_cliente = generateRandomNumber(6);
+  
 
     const objeto_datos = {
       nombre_cliente, segundo_nombre_cliente,apellidos_cliente,  monto_financiar_cliente, numero_licencia_cliente,  estado_licencia_cliente,
@@ -109,7 +114,7 @@ try {
       ,telefono_trabajo_co_solicitante,empleador_anterior_co_solicitante,ingresos_co_solicitante,ingresos_adicionales_co_solicitante
       ,nom_referencia1_co_solicitante,parentesco1_co_solicitante,tel_movil1_co_solicitante, nom_referencia2_co_solicitante,
       parentesco2_co_solicitante, tel_movil2_co_solicitante,nom_referencia3_co_solicitante, parentesco3_co_solicitante, tel_movil3_co_solicitante,
-      licencia_cliente,id_cliente 
+      licencia_cliente,acuerdo_firmado,id_cliente
      }
 
 

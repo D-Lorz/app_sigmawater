@@ -279,7 +279,7 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript:
                                 void(0);">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Listado de facturas</li>
+                        <li class="breadcrumb-item active">Nuevo cliente</li>
                     </ol>
                 </div>
 
@@ -299,19 +299,22 @@
             
         <div class="card">
             <div class="card-content collapse show">
-                  <form action="/registrarclientela"  method="POST" class="steps-validation wizard-circle" enctype="multipart/form-data">
+                  <form action="/registrarclientela"  autocomplete="nope" method="POST" class="steps-validation wizard-circle" id="validarForm" enctype="multipart/form-data">
                                                                       
  <!--============= /FIXME:===== *SOLICITANTE* =======FIXME:=========-->
                                     <!-- Step 1 -->
                                 <h6><b>SOLICITANTE</b></h6>
 
                                 <fieldset>
-                           <!-- <div class="row text-align: center;">
+                          <div class="row text-align: center;">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="primer_nombref"> Primer nombre<span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required" id="primer_nombref" name="nombre_cliente">
+                                                    <input type="text" onkeyup="validar()" onblur="validar()"  class="form-control required" id="primer_nombref" name="nombre_cliente">
                                                 </div>
+                                <div id="message" style="position: absolute;left: 125px;top: 4px; z-index: 10; border-radius: 9px;font-size: 12px; color: #FF7588;" hidden>
+                                                    Introduzca solo letras (A-Z) o (a-z).
+                                                  </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -408,14 +411,15 @@
                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="f_expediccion">Fecha de expedición de licencia <span class="danger">*</span></label>
-                                                    <input type="date" autocomplete="off" class="form-control required" id="f_expediccion" name="fecha_expedicion_licencia_cliente">
+                                                    <input type="text" autocomplete="nope"
+                                                    class="form-control required" id="f_expediccion" name="fecha_expedicion_licencia_cliente" readonly="">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="fecha_vencimientof">Fecha de vencimiento de licencia<span class="danger">*</span></label>
-                                                    <input type="date" class="form-control required" id="fecha_vencimientof" name="fecha_vencimiento_licencia_cliente">
+                                                    <input type="text" class="form-control required" id="fecha_vencimientof" name="fecha_vencimiento_licencia_cliente" readonly="">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -472,7 +476,7 @@
                                                                                                    
                                                 </div>
                                             </div>
-                                     </div>       -->
+                                     </div>        
                                  </fieldset>  
 
 <!--============= //FIXME:===== *SOLICITANTE* =======FIXME:=========-->
@@ -482,10 +486,10 @@
 
  <!--============= /FIXME:===== *CASA* ==============FIXME:=========-->
                                     <!-- Step 2 -->
-                                    <h6><b>CASA</b></h6>
+                                    <!-- <h6><b>CASA</b></h6>
                                     <fieldset  style="text-align: center"> 
 
-                             <!-- <div class="row justify-content-center" >
+                               <div class="row justify-content-center" >
                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="direccionf">  Dirección <span class="danger">*</span></label>
@@ -557,7 +561,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group"  >
                                                         <label for="anio_residencia"> Años de residencia<span class="danger">*</span></label>
-                                                        <input type="number" class="form-control required" id="anio_residencia" name="anio_residencia_cliente" >
+                                                        <input type="number"  oninput="maxlengthNumber(this);" minlength="1" maxlength="2" class="form-control required" id="anio_residencia" name="anio_residencia_cliente" >
                                                     </div>
                                                 </div>
 
@@ -567,14 +571,14 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group"  >
                                                         <label for="meses_residencia">  Meses de residencia<span class="danger">*</span> </label>
-                                                        <input type="number" class="form-control required"  id="meses_residencia"name="meses_residencia_cliente" >
+                                                        <input type="number" oninput="maxlengthNumber(this);" minlength="1" maxlength="2"  class="form-control required"  id="meses_residencia"name="meses_residencia_cliente" >
                                                    </div>
                                                 </div> 
 
                                             </div>  
-                                 -->
+                                
 
-                                  </fieldset> 
+                                  </fieldset>  -->
 
 <!--============= //FIXME:===== *CASA* ======= ===== FIXME:=========-->
 
@@ -583,10 +587,10 @@
  <!--============= /FIXME:===== *INGRESOS* ========  FIXME:=========-->
 
                                     <!-- Step 3 -->
-                                    <h6><b>INGRESOS</b></h6>
+                                    <!-- <h6><b>INGRESOS</b></h6>
                                     <fieldset>
 
-                                   <!-- <div class="row text-align: center;">
+                             <div class="row text-align: center;">
                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="empleador_aplicantef"> Empleador del aplicante <span class="danger">*</span> </label>
@@ -608,14 +612,14 @@
                                       <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="anios_trabajandof">Años trabajando <span class="danger">*</span> </label>
-                                                    <input type="number" class="form-control required" id="anios_trabajandof" name="anios_trabajando_ingresos" >
+                                                    <input type="number"  oninput="maxlengthNumber(this);" minlength="1" maxlength="2"  class="form-control required" id="anios_trabajandof" name="anios_trabajando_ingresos" >
                                                 </div>
                                            </div>
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="meses_trabajandof"> Meses trabajando <span class="danger">*</span></label>
-                                                    <input type="number" class="form-control required" id="meses_trabajandof" name="meses_trabajando_ingresos">
+                                                    <input type="number" oninput="maxlengthNumber(this);" minlength="1" maxlength="2"   class="form-control required" id="meses_trabajandof" name="meses_trabajando_ingresos">
                                                 </div>
                                             </div>
 
@@ -634,12 +638,12 @@
                                            
                                                 <div class="form-check form-check-inline ">
                                                     <label class="form-check-label" for="si_bancarrota">Si</label>
-                                                    <input class="form-check-input required" type="radio" name="bancarrota" id="si_bancarrota" value="Si">
+                                                    <input class="form-check-input required" type="radio" name="bancarrota" id="si_bancarrota" value="Si" checked>
                                                     
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                        <label class="form-check-label"   for="no_bancarrita">No</label>
-                                                    <input class="form-check-input"  type="radio" name="bancarrota" id="no_bancarrota" value="No">
+                                                        <label class="form-check-label"   for="no_bancarrota">No</label>
+                                                    <input class="form-check-input"  type="radio" name="bancarrota" id="no_bancarrota" value="No" >
                                                 
                                                 </div>
                                                   
@@ -732,9 +736,9 @@
                                                     <input type="text" class="form-control" id="currency-maskthree" id="ingresos_adicionalesf" name="ingresos_adicionales_ingresos">
                                                 </div>
                                             </div>
-                                         </div>          -->
+                                         </div>           
 
-                                    </fieldset>
+                                    </fieldset> -->
 
 <!--============= / FIXME:===== *INGRESOS* ==========FIXME:=========-->
 
@@ -743,8 +747,8 @@
 <!--============= //FIXME:===== *INFORMACION BANCARIA* ======= FIXME:=========-->
                                        <h6><b>INFORMACIÓN BANCARIA</b></h6>
                                                 <fieldset>
-
-                                        <!-- <div class="row text-align: center;">
+<!-- 
+                                      <div class="row text-align: center;">
                                                    <div class="col-md-4">
                                                      <label for="exampleDataList" class="form-label">Tipo de cuenta</label> <span class="danger">*</span>
                                                             <input class="form-control required" list="datalistOptions" name="tipo_cuenta_bancaria" id="exampleDataList" placeholder="Seleccione" >
@@ -768,10 +772,10 @@
                                                     </div>
                                                 </div>
 
-                                                </div>      -->
+                                                </div>       -->
 
 
-                                                </fieldset> 
+                                                </fieldset>  
 <!--============= //FIXME: ===== *CONFIGURACION BANCARIA* ===== FIXME:=========-->
 
  <!--=============================TODO:TODO:=============================================================-->
@@ -819,7 +823,7 @@
                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="numero_se_socialf"> Numero de seguro social/ITIN <span class="danger">*</span></label>
-                                                <input type="number" class="form-control required" id="numero_se_socialf" name="numero_se_social_co_solicitante" >
+                                                <input type="text" class="form-control required social" id="numero_se_socialf" name="numero_se_social_co_solicitante" >
                                                 
                                         </div>
 
@@ -927,14 +931,14 @@
                                          <div class="col-md-4">
                                              <div class="form-group">
                                                  <label for="anios_trabajando_cof"> Años trabajando<span class="danger">*</span> </label>
-                                                 <input type="number" class="form-control required" id="anios_trabajando_cof" name="anios_trabajando_co_solicitante">
+                                                 <input type="number"  oninput="maxlengthNumber(this);" minlength="1" maxlength="2" class="form-control required" id="anios_trabajando_cof" name="anios_trabajando_co_solicitante">
                                              </div>
                                          </div>
 
                                          <div class="col-md-4">
                                              <div class="form-group">
                                                  <label for="meses_trabajando_cof">  Meses trabajando <span class="danger">*</span>  </label>
-                                                 <input type="text" class="form-control required"  id="meses_trabajando_cof" name="meses_trabajando_co_solicitante">
+                                                 <input type="number"  oninput="maxlengthNumber(this);" minlength="1" maxlength="2" class="form-control required"  id="meses_trabajando_cof" name="meses_trabajando_co_solicitante">
                                              </div>
                                          </div>
 
@@ -1085,57 +1089,56 @@
 
                                 <h6><b>CARGAR ARCHIVOS</b></h6>
                                 <fieldset>
+<!-- 
+
+                                <div class="container">
+                                    <div class="row">
+                                
+                                        <div class="col-6" >
+
+                                        <label class="licencia">Por favor carga el documento solicitado para que
+                                            podamos realizar el proceso de verificación de identidad
+                                            <br>
+                                        </label>
+                                        <p class="titulolicencia">Licencia de conducir </p>
+                                        
+
+                                        <div class="input-group">
+                                            <label class="input-group-btn">
+                                            <span class="btn btn-primary" style="padding: 10px;">
+                                                Cargar anverso
+
+                                                <input type="file" name="cliente_frontal" id="campoFile" accept="image/jpg"
+                                                style="display: none;" id="licencia_cliente_frontal1" required> 
+                                        
+                                            </span>
+                                            </label>
+                                            <input type="text" class="form-control" style="font-size: 15px;height: 43px;" 
+                                             placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required   readonly>
+                                        </div>
+                                        <br>
+                                        
+                                        <div class="input-group">
+                                            <label class="input-group-btn">
+                                            <span class="btn btn-primary" style="padding: 10px;">
+                                                Cargar reverso
+
+                                                <input type="file" name="cliente_trasera" id="campoFile" accept="image/jpg"
+                                                style="display: none;" id="licencia_cliente_trasera1" required>
+
+                                            </span>
+                                            </label>
+                                            <input type="text" class="form-control" style="font-size: 15px; height: 43px;"
+                                            placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required  readonly>
+                                        </div>
 
 
-              
-<div class="container">
-    <div class="row">
-   
-        <div class="col-6" >
+                                        </div> 
 
-          <label class="licencia">Por favor carga el documento solicitado para que
-            podamos realizar el proceso de verificación de identidad
-            <br>
-          </label>
-          <p class="titulolicencia">Licencia de conducir </p>
-        
+                                        
+                                    </div>  
 
-          <div class="input-group">
-            <label class="input-group-btn">
-              <span class="btn btn-primary" style="padding: 10px;">
-                Cargar anverso
-
-                <input type="file" name="cliente_frontal" id="campoFile" accept="image/jpg"
-                  style="display: none;" id="licencia_cliente_frontal1" required>
-                <!-- style="display: none;" class="inputfile" multiple -->
-              </span>
-            </label>
-            <input type="text" class="form-control" style="font-size: 15px;	"
-              placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required   readonly>
-          </div>
-          <br>
-          
-          <div class="input-group">
-            <label class="input-group-btn">
-              <span class="btn btn-primary" style="padding: 10px;">
-                Cargar reverso
-
-                <input type="file" name="cliente_trasera" id="campoFile" accept="image/jpg"
-                  style="display: none;" id="licencia_cliente_trasera1" required>
-
-              </span>
-            </label>
-            <input type="text" class="form-control" style="font-size: 15px;	"
-              placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required  readonly>
-          </div>
-
-
-        </div> 
-
-        
-      </div>  
-
-    </div>
+                                    </div>   -->
               </fieldset> 
 
  <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
@@ -1150,41 +1153,48 @@
                                             <div class="row ">
                                                 
                                                
-                                                        <div class="container " style="text-align: justify;">
+                                                        <div class="container " style="text-align: center; text-align: justify;margin-bottom: 19px;">
                                                        
                                                   
-                                                              <p>Magna dolor consectetur ipsum mollit ut nulla nisi. Cillum
-                                                                laborum nulla ad proident quis amet do officia et consectetur.
-                                                                Non duis ex ut aliquip cillum occaecat irure elit reprehenderit
-                                                                occaecat veniam nostrud laboris. Ad sit id nostrud et mollit
-                                                                elit ea laboris laborum sunt occaecat cillum amet
-                                                                commodo.Consectetur aliqua laborum incididunt enim tempor duis
-                                                                cillum culpa do quis. Veniam pariatur do consectetur ea.
-                                                                Occaecat laboris sit incididunt commodo elit commodo.</p>
-                                                              <p> dolore irure voluptate pariatur ut do excepteur. Ea adipisicing
-                                                                et reprehenderit duis labore ea velit. Sunt nostrud irure non
-                                                                nostrud tempor voluptate sint voluptate ut deserunt
-                                                                reprehenderit esse anim.Veniam incididunt officia amet
-                                                                exercitation est minim sint com culpa id Lorem elit eu
-                                                                consequat. Nulla amet commodo magna.</p>
-                                                              <p>veniam veniam et laboris id aliquip tempor culpa. Excepteur ea
-                                                                tempor fugiat anim non ea proident consectetur id aute ullamco
-                                                                dolor qui irure. Dolore esse est ipsum elit irure voluptate
-                                                                consequat veniam amet reprehenderit adipisicing incididunt
-                                                                voluptate. Qui officia ullamco id tempor quis ex quis quis
-                                                                cillum nostrud ad sint. Amet Lorem eu pariatur voluptate ullamco
-                                                                pariatur sit labore ex aliquip eiusmod commodo veniam
-                                                                incididunt. Aliquip irure ea veniam quis esse enim labore anim
-                                                                anim aliqua ea nulla.</p>
+                                                            <h6><b>DIVULGACIÓN DE RESPONSABILIDAD</b></h6>
+                                                             
+                                                                <p>Al hacer clic en Continuar, promete que toda la información es verdadera y completa Tiene la intención de que el
+                                                                    vendedor y/o el dealer confíen en esta información para decidir si le otorgan o no crédito Usted autoriza una
+                                                                    investigación completa y la divulgación de su historial crediticio y su historial laboral También autoriza al
+                                                                    vendedor y/o dealer a divulgar información sobre la experiencia crediticia con ellos Usted acepta recibir
+                                                                    llamadas de mensajes pregrabados o marcados automáticamente de nosotros o de aquellos que actúan en nuestro
+                                                                    nombre en cualquier número de teléfono móvil que nos proporcione.</p>
+
+                                                            <p><b>AVISO DE INFORME DE CRÉDITO:</b> Podemos solicitar un informe de crédito para cualquier propósito legítimo asociado
+                                                                con su solicitud de crédito, extensión de crédito, modificación de los términos de su contrato de crédito o
+                                                                cobro en su cuenta. Si lo solicita, le informaremos si se ordenó dicho informe y le daremos el nombre y la
+                                                                dirección de la agencia de informes crediticios que proporcionó el informe.</p>
+                                                        
                                         
-                                                        </div> 
-                                                     </div>
-                                               
-                                                     <!-- Button trigger modal -->
+                                                        </div>   
+                                                        <div class="col-5" >
+                                                        <!-- Button trigger modal -->
                                                      <label type="button" class="btn btn-primary" id="prueba" >
                                                       <input type="checkbox" required data-toggle="modal"  data-target="#exampleModalCenter" name="" id="prueba" required> 
-                                                      <b>Aceptar y firmar los términos</b>
-                                                   </label>
+                                                      Aceptar y firmar los términos
+                                                      </label>
+                                                      </div>
+                                                  
+                          
+                                                     </div>
+                                               
+                                                     <div class="col-5" >
+            
+                                                        <div class="input-group">
+                                                            <label class="input-group-btn">
+                                                        <span class="btn btn-primary" style="padding: 10px;">
+                                                          Cargar pdf firmado
+                                                          <input type="file" name="acuerdo_firmado" id="pdfFirmado" accept="image/jpg" style="display: none;"  required> 
+                                                           </span>
+                                                            </label>
+                                                            <input type="text" class="form-control" id="icono-placeholder" style="font-size: 15px; height: 42px;" placeholder="  Cargar archivo firmado" required   readonly>
+                                                        </div>
+                                                   </div> 
                                                   
                                                    <!-- Modal -->
                                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1202,18 +1212,26 @@
                                                                <br>
                                                                <button type="button" class="btn btn-danger" id="btnLimpiar">Limpiar</button>
                                                                 <!-- <button type="button"  class="btn btn-warning"  id="btnDescargar">Descargar</button> -->
-                                                               <button type="button" class="btn btn-info" id="btnGenerarDocumento">Pasar a documento</button>
+                                                                <!-- <button type="button" class="btn btn-info" id="btnGenerarDocumento">Pasar a documento</button>  -->
                                                               
                                                            </div>
-                                                           <div class="modal-footer">
-                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                           <input class="btn btn-primary" type="submit" value="enviar" >
+                                                           <div class="modal-footer" id="ocultar">
+                                                         <button type="button" class="btn btn-primary" id="btnGenerarDocumento" data-dismiss="modal">Siguiente</button>
+                                                       
                                                            </div>
                                                        </div>
-                                                       </div>
                                                       
+                                                       </div>
+                                                   
+                                                       
                                                    </div>
-                                                  
+                                                   
+                                                            <div style="margin-top: 28px;background: red;width: 3%;float: right;/* margin: 0; */">
+                                                       hola
+                                                   </div>                
+                             
+                                                   <br>
+                                                   <input class="btn btn-primary" type="submit" value="Enviar" >
 
                                       </fieldset> 
 <!--============= // FIXME:===== *TERMINOS Y CONDICIONES* FIXME:=========-->

@@ -1,4 +1,13 @@
 
+
+@import url("https://fonts.cdnfonts.com/css/oblivian-text");
+
+
+body {
+    background:white;
+    font-family: "Oblivian Text" !important;
+  }
+
 #canvas {
     border: 1px solid black;
     border: 2px groove #a31111;
@@ -10,4 +19,40 @@
     width: 51%;
     margin-top: 3%;
     text-align: justify
+}
+
+  
+.contenedor{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.texto-encima{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.centrado{
+    text-align: justify;
+    position: absolute;
+    top: 48%;
+    width: 88%;
+    left: 51%;
+    /* margin-bottom: 9%; */
+    transform: translate(-50%, -50%);
+}
+
+.containers
+{
+
+background:red;
+
+}
+#icono-placeholder{
+    text-align: center;
+    background-image: url(../img/icono_pdf.png);
+    background-size: 30px 27px;
+    background-repeat: no-repeat;
+    background-position: left center;
 }

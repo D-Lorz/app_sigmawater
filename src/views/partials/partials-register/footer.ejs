@@ -23,9 +23,9 @@
 
   <!-- Script Personalizados -->
   <script src="./js/scripts_personalizados.js"></script>
+  <script type="text/javascript" src="./js/jquery-ui2.js"></script>
+  <script type="text/javascript" src="./js/jquery.js"></script>
 
-  <script type="text/javascript" src="./js/jquery-ui.min.js"></script>
-  <script type="text/javascript" src="./js/jquery-ui.js"></script>
 
 
   <!-- ====================================================================-->
@@ -206,3 +206,12 @@
 </body>
 
 </html>
+
+<script>
+  $( function() {
+    $( "#fechaform" ).datepicker({
+      changeMonth: true,
+      changeYear: true
+    });
+  } );
+  </script>

@@ -30,13 +30,17 @@ exports.registrar = async (req, res) => {
 
     const frontal = '../licences/' + urlLicencias[0]
     const trasera = '../licences/' + urlLicencias[1]
-    const id_vendedor = generateRandomString(6)
+   
     const licencia_conduccion = JSON.stringify({
         'frontal': frontal,
         'trasera': trasera
 
     });
 
+    const id_vendedor = generateRandomString(6)
+
+
+    
     const nuevoRegistro = {
         nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
         apt_suite_unidad, codigo_postal, codigo_referido, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion,id_vendedor
