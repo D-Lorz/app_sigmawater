@@ -220,13 +220,12 @@
                                         src="./cssdash/images/users/avatar-1.jpg" alt="Header Avatar">
 
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium">
-                                              <%= user.nombres + " "+user.apellidos %> 
+                                            <% if (user) { %>
+                                              <%= user.nombres %> <%=user.apellidos%>
+                                            <%}%>
                                         </span>
                                         <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
 
-                                    <!--==================FIXME:=====JALAR USUARIO====================  -->
-                                    <!-- <%- include ('partials/jalarusuario.ejs')%> -->
-                                    <!--==================FIXME:=====JALAR USUARIO====================  -->
                      
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end">
