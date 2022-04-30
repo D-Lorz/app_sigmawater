@@ -5,9 +5,9 @@
             
             <h5 class="alertcard-title font-size-16">Comparte tu código</h5>
             <p class="font-size-13">Invita a nuevos vendedores a 3C Sigma Water System y aumenta tus ingresos.</p>
-            <% if (correo) { %>
+            <% if (user) { %>
                 <span class="d-none d-xl-inline-block ms-1 fw-medium">
-                   <%= correo.id_vendedor %>
+                   <%= user.id_vendedor %>
                 </span>
                 <% } %>
 

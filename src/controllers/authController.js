@@ -53,6 +53,7 @@ exports.registrar = async (req, res) => {
         console.log("1 Registro insertado");
         console.log(result)
         res.redirect('https://3csigmawater.com')
+       
 
     })
 
@@ -95,7 +96,8 @@ exports.login = async (req, res) => {
                  const token = jwt.sign({ id: id },  'super_secret_AppSigmaWater', { expiresIn: 3600 })
                  //generamos el token SIN fecha de expiracion
                  //const token = jwt.sign({id: id}, process.env.JWT_SECRETO)
-                 console.log("TOKEN: " + token + " para el USUARIO : " + correo)
+                 console.log("TOKEN>>>>>: " + token + " para el USUARIO : " + correo)
+             
 
                  const cookiesOptions = {
                      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
@@ -127,7 +129,7 @@ exports.isAuthenticated = async (req, res, next) => {
                 if (!results) {
                     return next()
                 }
-                req.correo = results[0]
+               req.user = results[0]
                 return next()
             })
         } catch (error) {

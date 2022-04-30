@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const authController = require('../controllers/authController')
 const path = require('path');
 const multer = require('multer');
-// const formularioControllers = require('../controllers/formularioControllers');
+const { isAuthenticated, nologueado, registrar, login, logout } = require('../controllers/authController');
+const { listarClientes } = require('../controllers/formularioControllers');
 
 const rutaAlmacen = multer.diskStorage({
 
@@ -36,66 +36,50 @@ const cargar = multer({
 const multiupload = cargar.fields([{ name: 'licencia' }, { name: 'licencia_trasera' }]);
 
 
-
-
-//TODO: VISTAS
-/*================== RUTAS PARA LAS VISTAS =====================*/
-
-// router.get('/', (req, res) => {
-// res.redirect('/login') // Local=> localhost:3000 || Server=>app.3csigmawater.com/login
-//     res.render('index')
-// });
-
-
-
-
-router.get('/register', authController.nologueado, (req, res) => {
+router.get('/register', nologueado, (req, res) => {
     res.render('register')
 });
 
-router.get('/login', authController.nologueado, (req, res) => {
+router.get('/login', nologueado, (req, res) => {
     res.render('login', { alert: false })
 });
 
-router.get('/', authController.isAuthenticated, (req, res) => {
-console.log(req.correor)
-res.render('dashboard', { correo: req.correo })
+router.get('/', isAuthenticated, (req, res) => {
+    console.log(">>>>>>>>>>")
+console.log(req.user)
+res.render('dashboard', { user: req.user })
     
 });
 
-router.get('/lista_facturas', authController.isAuthenticated, (req, res) => {
-    res.render('lista_facturas', { correo: req.correo })
+router.get('/lista_facturas', isAuthenticated, (req, res) => {
+    res.render('lista_facturas', { user: req.user })
 });
 
-router.get('/detalle_facturas', authController.isAuthenticated, (req, res) => {
-    res.render('detalle_facturas', { correo: req.correo })
+router.get('/detalle_facturas', isAuthenticated, (req, res) => {
+    res.render('detalle_facturas', { user: req.user })
 });
 
-router.get('/lista-clientes', authController.isAuthenticated, (req, res) => {
-    res.render('lista-clientes', { correo: req.correo })
-});
+router.get('/lista-clientes', isAuthenticated, listarClientes)
 
-router.get('/nuevo-cliente', authController.isAuthenticated, (req, res) => {
-    res.render('nuevo-cliente', { correo: req.correo })
-});
-
-
-router.get('/referidos', authController.isAuthenticated, (req, res) => {
-    res.render('referidos', { correo: req.correo })
+router.get('/nuevo-cliente', isAuthenticated, (req, res) => {
+    res.render('nuevo-cliente', { user: req.user })
 });
 
 
+router.get('/referidos', isAuthenticated, (req, res) => {
+    res.render('referidos', { user: req.user })
+});
 
 /*==================RUTAS =====================*/
 
 //TODO: router para los métodos del controller
 
 /*=============================================================*/
-router.post('/registrar', authController.nologueado, multiupload, authController.registrar);
+router.post('/registrar', nologueado, multiupload, registrar);
 /*=============================================================*/
-router.post('/login', authController.nologueado, authController.login)
+router.post('/login', nologueado, login)
 /*=============================================================*/
-router.get('/logout', authController.logout)
+router.get('/logout', logout)
 /*=============================================================*/
 
 

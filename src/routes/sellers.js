@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const authController = require('../controllers/authController')
 const path = require('path');
 const multer = require('multer');
-const formularioControllers = require('../controllers/formularioControllers')
+const { isAuthenticated, nologueado, registrar, login, logout } = require('../controllers/authController');
+const {registrarclientela} = require('../controllers/formularioControllers')
 
 const rutaAlmacen = multer.diskStorage({
 
@@ -40,11 +40,11 @@ const cargar = multer({
 const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente_trasera' }, { name: 'acuerdo_firmado' }]);
 
 
-router.get('/hola', authController.isAuthenticated, (req, res) => {
-    res.render('hola', { correo: req.correo })
+router.get('/hola', isAuthenticated, (req, res) => {
+    res.render('hola', { user: req.user })
 });
 router.get('/documento', (req, res) => {
-    res.render('documento', { correo: req.correo })
+    res.render('documento', { user: req.user })
 });
 
 
@@ -53,7 +53,7 @@ router.get('/documento', (req, res) => {
 //TODO: router para los métodos del controller
 
 /*=============================================================*/
-router.post('/registrarclientela',authController.isAuthenticated,multiupload, formularioControllers.registrarclientela);
+router.post('/registrarclientela', isAuthenticated, multiupload, registrarclientela);
 /*=============================================================*/
 
 module.exports = router
