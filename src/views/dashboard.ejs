@@ -105,8 +105,8 @@
                         <!-- =======FIXME: OCULTANDO OPCIONES DE REDES========================== -->
                         <%- include ('partials/opcionesredes.ejs')%>
                             <!-- =======FIXME: OCULTANDO OPCIONES DE REDES========================== -->
-
-                            <div class="dropdown d-inline-block">
+                            <!-- NOTIFICACIONES -->
+                            <!-- <div class="dropdown d-inline-block">
                                 <button type="button" class="btn header-item noti-icon position-relative"
                                     id="page-header-notifications-dropdown" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
@@ -203,13 +203,14 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="dropdown d-inline-block">
+                            <!-- RUEDA DE CONFIGURACIONES -->
+                            <!-- <div class="dropdown d-inline-block">
                                 <button type="button" class="btn header-item right-bar-toggle me-2">
                                     <i data-feather="settings" class="icon-lg"></i>
                                 </button>
-                            </div>
+                            </div> -->
 
                             <div class="dropdown d-inline-block">
                                 <button type="button" class="btn header-item bg-soft-light border-start border-end"
@@ -218,10 +219,14 @@
                                     <img class="rounded-circle header-profile-user"
                                         src="./cssdash/images/users/avatar-1.jpg" alt="Header Avatar">
 
+                                        <span class="d-none d-xl-inline-block ms-1 fw-medium">
+                                              <%= user.nombres + " "+user.apellidos %> 
+                                        </span>
+                                        <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
 
-   <!--==================FIXME:=====JALAR USUARIO====================  -->
-   <%- include ('partials/jalarusuario.ejs')%>
-   <!--==================FIXME:=====JALAR USUARIO====================  -->
+                                    <!--==================FIXME:=====JALAR USUARIO====================  -->
+                                    <!-- <%- include ('partials/jalarusuario.ejs')%> -->
+                                    <!--==================FIXME:=====JALAR USUARIO====================  -->
                      
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end">
