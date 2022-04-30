@@ -299,7 +299,7 @@
             
         <div class="card">
             <div class="card-content collapse show">
-                  <form action="/registrarclientela"  autocomplete="nope" method="POST" class="steps-validation wizard-circle" id="validarForm" enctype="multipart/form-data">
+                  <form action="/registrarclientela"  method="POST" class="steps-validation wizard-circle" id="validarForm" enctype="multipart/form-data">
                                                                       
  <!--============= /FIXME:===== *SOLICITANTE* =======FIXME:=========-->
                                     <!-- Step 1 -->
@@ -411,15 +411,15 @@
                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="f_expediccion">Fecha de expedición de licencia <span class="danger">*</span></label>
-                                                    <input type="text" autocomplete="nope"
-                                                    class="form-control required" id="f_expediccion" name="fecha_expedicion_licencia_cliente" readonly="">
+                                                    <input type="date" autocomplete="nope"
+                                                    class="form-control required" id="f_expediccion" name="fecha_expedicion_licencia_cliente" >
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="fecha_vencimientof">Fecha de vencimiento de licencia<span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required" id="fecha_vencimientof" name="fecha_vencimiento_licencia_cliente" readonly="">
+                                                    <input type="date" class="form-control required" id="fecha_vencimientof" name="fecha_vencimiento_licencia_cliente" >
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -436,7 +436,7 @@
                                         <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="segurof"> Numero de seguro Social / ITIN<span class="danger">*</span></label>
-                                                    <input type="number" class="form-control required" id="segurof" name="seguro_social_licencia">
+                                                    <input type="number" class="form-control required " id="segurof" name="seguro_social_licencia">
                                                 </div>
                                             </div>
 
@@ -486,7 +486,7 @@
 
  <!--============= /FIXME:===== *CASA* ==============FIXME:=========-->
                                     <!-- Step 2 -->
-                                    <!-- <h6><b>CASA</b></h6>
+                                   <h6><b>CASA</b></h6>
                                     <fieldset  style="text-align: center"> 
 
                                <div class="row justify-content-center" >
@@ -497,7 +497,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="ciudadf"> Ciudad <span class="danger">*</span></label>
                                                     <input type="text" class="form-control required" id="ciudadf" name="ciudad_cliente" >
@@ -576,9 +576,9 @@
                                                 </div> 
 
                                             </div>  
-                                
+                                 
 
-                                  </fieldset>  -->
+                                  </fieldset> 
 
 <!--============= //FIXME:===== *CASA* ======= ===== FIXME:=========-->
 
@@ -587,10 +587,10 @@
  <!--============= /FIXME:===== *INGRESOS* ========  FIXME:=========-->
 
                                     <!-- Step 3 -->
-                                    <!-- <h6><b>INGRESOS</b></h6>
+                                   <h6><b>INGRESOS</b></h6>
                                     <fieldset>
 
-                             <div class="row text-align: center;">
+                              <div class="row text-align: center;">
                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="empleador_aplicantef"> Empleador del aplicante <span class="danger">*</span> </label>
@@ -738,7 +738,7 @@
                                             </div>
                                          </div>           
 
-                                    </fieldset> -->
+                                    </fieldset>
 
 <!--============= / FIXME:===== *INGRESOS* ==========FIXME:=========-->
 
@@ -747,7 +747,7 @@
 <!--============= //FIXME:===== *INFORMACION BANCARIA* ======= FIXME:=========-->
                                        <h6><b>INFORMACIÓN BANCARIA</b></h6>
                                                 <fieldset>
-<!-- 
+
                                       <div class="row text-align: center;">
                                                    <div class="col-md-4">
                                                      <label for="exampleDataList" class="form-label">Tipo de cuenta</label> <span class="danger">*</span>
@@ -772,7 +772,7 @@
                                                     </div>
                                                 </div>
 
-                                                </div>       -->
+                                                </div>      
 
 
                                                 </fieldset>  
@@ -784,7 +784,7 @@
                                     <!-- Step 4 -->
                         <h6><b>CO-SOLICITANTE</b></h6>
 
-                                 <fieldset>
+                              <fieldset>
 
                                   <center><b>La solicitud tiene co-solicitante</b>
                                         <br>
@@ -990,7 +990,7 @@
                                  </div>
 
                              </div>  
-                         </div>   
+                         </div>    
 
                              </fieldset>
 
@@ -1003,7 +1003,7 @@
                            <h6><b>REFERENCIAS</b></h6>
                            <fieldset>
 
-                             <div class="row text-align: center;">
+                           <div class="row text-align: center;">
                                 <div class="col-md-4">
                                  <div class="form-group">
                                      <label for="nom_referencia1_cof">Nombre de referencia</label>
@@ -1089,7 +1089,7 @@
 
                                 <h6><b>CARGAR ARCHIVOS</b></h6>
                                 <fieldset>
-<!-- 
+
 
                                 <div class="container">
                                     <div class="row">
@@ -1138,7 +1138,7 @@
                                         
                                     </div>  
 
-                                    </div>   -->
+                                    </div>   
               </fieldset> 
 
  <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
@@ -1186,7 +1186,7 @@
                                                      <div class="col-5" >
             
                                                         <div class="input-group">
-                                                            <label class="input-group-btn">
+                                                  <label class="input-group-btn">
                                                         <span class="btn btn-primary" style="padding: 10px;">
                                                           Cargar pdf firmado
                                                           <input type="file" name="acuerdo_firmado" id="pdfFirmado" accept="image/jpg" style="display: none;"  required> 

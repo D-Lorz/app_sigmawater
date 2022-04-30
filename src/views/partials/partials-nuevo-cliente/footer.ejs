@@ -13,7 +13,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDnXrGToxsOSdtK01dW0yynlYxRsv8D6ro&callback=initAutocomplete"></script>
 
 
-
  <!-- JAVASCRIPT -->
  <script src="./cssdash/libs/jquery/jquery.min.js"></script>
  <script src="./cssdash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -21,9 +20,10 @@
  <script src="./cssdash/libs/simplebar/simplebar.min.js"></script>
  <script src="./cssdash/libs/node-waves/waves.min.js"></script>
  <script src="./cssdash/libs/feather-icons/feather.min.js"></script>
+
  <!-- pace js -->
  <script src="./cssdash/libs/pace-js/pace.min.js"></script>
-   <!-- Script Personalizados -->
+  <!-- Script Personalizados -->
    <script src="./js/scripts_personalizados.js"></script>
  
  
@@ -84,6 +84,26 @@
 <script src="./cssnuevocliente/js/script_canvas.js"></script>
  
 <!-- ==========FIXME: JS DEL FORMULARIO ================= -->
+
+
+  <!-- =======================================================-->
+  <!--======  VALIDAR LIMITANTE DEL CAMPO NUMBER ===== -->
+  <!-- =======================================================-->
+
+  <script>
+    function maxlengthNumber(obj) {
+      console.log(obj.value);
+      if (obj.value.length > obj.maxLength) {
+        obj.value = obj.value.slice(0, obj.maxLength);
+
+      }
+
+    }
+
+
+  </script>
+  <!--================================ ======================-->
+  <!--================================ ======================-->
 
 
 
@@ -445,11 +465,9 @@ var currencyMask = IMask(document.getElementById('currency-mask'), {
 
 
 
-
-
 <script>
 
-  $(document).on('change', 'input[type="file"]', function () {
+  $(document).on('change', '#campoFile', function () {
     // this.files[0].size recupera el tamaño del archivo
     // alert(this.files[0].size);
 
@@ -487,6 +505,122 @@ var currencyMask = IMask(document.getElementById('currency-mask'), {
 <!-- =========================================== ============-->
 <!-- =========================================== ============-->
 <!-- /////////////////////////////////////////////////////////////////////////=-->
+
+
+<script>
+
+  $(document).on('change', '#pdfFirmado', function () {
+    // this.files[0].size recupera el tamaño del archivo
+    // alert(this.files[0].size);
+
+    var fileName = this.files[0].name;
+    var fileSize = this.files[0].size;
+
+    if (fileSize > 3000000) {
+      alertify.set('notifier', 'position', 'top-center');
+      alertify.error('El archivo supera los 3MB de peso');
+      this.value = '';
+      this.files[0].name = '';
+    } else {
+      // recuperamos la extensión del archivo
+      var ext = fileName.split('.').pop();
+
+      // Convertimos en minúscula porque 
+      // la extensión del archivo puede estar en mayúscula
+      ext = ext.toLowerCase();
+
+      // console.log(ext);
+      switch (ext) {
+        case 'pdf':
+     
+          break;
+        default:
+          alertify.set('notifier', 'position', 'top-center');
+          alertify.error('Solo archivos pdf son aceptados');
+
+          this.value = ''; // reset del valor
+          this.files[0].name = '';
+      }
+    }
+  });
+</script>
+<!-- =========================================== ============-->
+<!-- =========================================== ============-->
+<!-- /////////////////////////////////////////////////////////////////////////=-->
+
+
+<script>
+
+
+ // La siguiente funcion valida el elemento input
+ function validar() {
+      // Variable que usaremos para determinar si el input es valido
+      let isValid = false;
+
+      // El input que queremos validar
+      const input = document.forms['validarForm']['primer_nombref'];
+
+      //El div con el mensaje de advertencia:
+      const message = document.getElementById('message');
+
+      input.willValidate = false;
+
+      // El tamaño maximo para nuestro input
+      const maximo = 35;
+
+      // El pattern que vamos a comprobar
+      const pattern = new RegExp('^[A-Z]+$', 'i');
+
+      // Primera validacion, si input esta vacio entonces no es valido
+      if(!input.value) {
+        isValid = false;
+      } else {
+        // Segunda validacion, si input es mayor que 35
+        if(input.value.length > maximo) {
+          isValid = false;
+        } else {
+          // Tercera validacion, si input contiene caracteres diferentes a los permitidos
+          if(!pattern.test(input.value)){ 
+          // Si queremos agregar letras acentuadas y/o letra ñ debemos usar
+          // codigos de Unicode (ejemplo: Ñ: \u00D1  ñ: \u00F1)
+            isValid = false;
+          } else {
+            // Si pasamos todas la validaciones anteriores, entonces el input es valido
+            isValid = true;
+          }
+        }
+      }
+
+      //Ahora coloreamos el borde de nuestro input
+      if(!isValid) {
+        // rojo: no es valido
+        input.style.borderColor = 'salmon'; // me parece que 'salmon' es un poco menos agresivo que 'red'
+        // mostramos mensaje
+        message.hidden = false;
+      } else {
+        // verde: si es valido
+        input.style.borderColor = 'palegreen'; // 'palegreen' se ve mejor que 'green' en mi opinion
+        // ocultamos mensaje;
+        message.hidden = true;
+      }
+
+      // devolvemos el valor de isValid
+      return isValid;
+    }
+
+    // Por último, nuestra función que verifica si el campo es válido antes de realizar cualquier otra acción.
+    function verificar() {
+      const valido = validar();
+      if (!valido) {
+        alert('El campo no es válido.');
+      } else {
+        alert('El campo es válido');
+      }
+    }
+
+</script>
+
+
 
 
 

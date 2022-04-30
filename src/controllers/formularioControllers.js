@@ -100,7 +100,8 @@ try {
     const objeto_datos = {
       nombre_cliente, segundo_nombre_cliente,apellidos_cliente,  monto_financiar_cliente, numero_licencia_cliente,  estado_licencia_cliente,
       fecha_expedicion_licencia_cliente, fecha_vencimiento_licencia_cliente, correo_cliente, seguro_social_licencia, tipo_de_seguro,
-      fecha_nacimiento_cliente,telefono_movil_cliente,telefono_secundario_cliente,  direccion_cliente, ciudad_cliente, estado_cliente,
+      fecha_nacimiento_cliente,telefono_movil_cliente,telefono_secundario_cliente,
+       direccion_cliente, ciudad_cliente, estado_cliente,
       code_postal_cliente, condicion_vivienda, compa_hipotecaria_cliente, anio_residencia_cliente, meses_residencia_cliente,
       empleador_aplicante_cliente, anios_trabajando_ingresos, meses_trabajando_ingresos, salario_mensual_ingresos,  bancarrota,
       sacc_pendiente, ocupacion_ingresos,anio_bancarrota_ingresos, telefono_trabajo_ingresos,tipo_bancarrota_ingresos,
