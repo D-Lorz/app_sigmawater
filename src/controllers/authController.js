@@ -39,8 +39,6 @@ exports.registrar = async (req, res) => {
 
     const id_vendedor = generateRandomString(6)
 
-
-    
     const nuevoRegistro = {
         nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
         apt_suite_unidad, codigo_postal, codigo_referido, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion,id_vendedor
@@ -53,14 +51,8 @@ exports.registrar = async (req, res) => {
         console.log("1 Registro insertado");
         console.log(result)
         res.redirect('https://3csigmawater.com')
-       
-
     })
-
-
 }
-
-
 
 //TODO: LOGIN
 exports.login = async (req, res) => {
