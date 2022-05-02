@@ -40,8 +40,8 @@ const cargar = multer({
 const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente_trasera' }, { name: 'acuerdo_firmado' }]);
 
 
-router.get('/hola', isAuthenticated, (req, res) => {
-    res.render('hola', { user: req.user })
+router.get('/hola', (req, res) => {
+    res.render('hola')
 });
 router.get('/documento', (req, res) => {
     res.render('documento', { user: req.user })

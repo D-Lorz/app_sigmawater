@@ -1,5 +1,6 @@
 /**
- * Validar Campos de Correo que sean iguales
+ * *Validar Campos de Correo que sean iguales
+ * 
  */
 
 function validarCorreo() {
