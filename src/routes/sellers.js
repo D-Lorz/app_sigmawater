@@ -36,21 +36,21 @@ const cargar = multer({
     storage: rutaAlmacen,
 });
 
-//TODO: SIRVE PARA UNIFICAR LOS 3 CAMPOS UPLOAD DEL FORMULARIO CLIENTE
+// * SIRVE PARA UNIFICAR LOS 3 CAMPOS UPLOAD DEL FORMULARIO CLIENTE
 const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente_trasera' }, { name: 'acuerdo_firmado' }]);
 
 
-router.get('/hola', (req, res) => {
-    res.render('hola')
+router.get('/hola', isAuthenticated,(req, res) => {
+    res.render('hola',{ user: req.user })
 });
-router.get('/documento', (req, res) => {
+router.get('/documento',isAuthenticated, (req, res) => {
     res.render('documento', { user: req.user })
 });
 
 
 /*==================RUTAS =====================*/
 
-//TODO: router para los métodos del controller
+//* router para los métodos del controller
 
 /*=============================================================*/
 router.post('/registrarclientela', isAuthenticated, multiupload, registrarclientela);
