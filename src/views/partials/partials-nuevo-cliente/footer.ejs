@@ -85,41 +85,36 @@
   /*jslint browser:true*/
   /*global jQuery, document  #' */
 
+  
   jQuery(document).ready(function () {
       'use strict';
 
       jQuery('#f_expediccion').datetimepicker({
         timepicker: false,
         datapicker: true,
-        format:	'm/d/Y',
+        format:	'm-d-Y',
         yearStart:1800,
-        yearEnd:(new Date().getFullYear())
+        yearEnd:(new Date().getFullYear()),
         
+              
       });
+      
       jQuery('#fecha_vencimientof').datetimepicker({
         timepicker: false,
         datapicker: true,
-        format:	'm/d/Y',
+        format:	'm-d-Y',
         yearStart:(new Date().getFullYear()),
         yearEnd: 3000,
  
       });
 
-      const mayorEdad = 18
-
-
-
-      const fechaActual = new Date();
-      const anioActual = parseInt(fechaActual.getFullYear());
-
-      const edad = mayorEdad- anioActual
-
+   
       jQuery('#fecha_nacimientof,#fecha_nacif').datetimepicker({
         timepicker: false,
         datapicker: true,
-        format:	'm/d/Y',
+        format:	'm-d-Y',
         yearStart:1800,
-        yearEnd: edad
+        yearEnd: (new Date().getFullYear() -18)
   
       });
   

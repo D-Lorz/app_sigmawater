@@ -66,8 +66,8 @@ router.get('/nuevo-cliente', isAuthenticated, (req, res) => {
 });
 
 
-router.get('/referidos', isAuthenticated, (req, res) => {
-    res.render('referidos', { user: req.user })
+router.get('/afiliados', isAuthenticated, (req, res) => {
+    res.render('afiliados', { user: req.user })
 });
 
 /*==================RUTAS =====================*/

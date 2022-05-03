@@ -1,5 +1,14 @@
 
   <!-- * =================== SCRIPTS ========= -->
+
+<!-- FIXME: ================================================================== -->
+<!-- form mask -->
+<script src="./cssnuevocliente/libs/imask/imask.min.js"></script>
+<!-- form mask init -->
+<script src="./cssdash/js/pages/form-mask.init.js"></script>
+<!--FIXME: ================================================================== -->
+
+
   <!-- Jquery-->
   <script src="./js/jquery-3.6.0.min.js"></script>
   <!-- Common script -->
@@ -27,7 +36,7 @@
   <!-- ====================================================================-->
   <!-- ====================================================================-->
 <!-- * SCRIPTS DEL CALENDARIO DE REGISTER -->
-        <script src="./js/jquery.js"></script>
+        <!-- <script src="./js/jquery.js"></script> -->
         <script src="./js/jquery.datetimepicker.js"></script>
         <script src="./js/jquery.datetimepicker.full.min.js"></script>
 <!-- * SCRIPTS DEL CALENDARIO DE REGISTER -->
@@ -46,11 +55,10 @@
               jQuery('#filter-date').datetimepicker({
                 timepicker: false,
                 datapicker: true,
-              	format:	'm/d/Y',
-                yearStart: 1800,
-                yearEnd: 2022
-         
-                
+                format:	'm-d-Y',
+                yearStart:1800,
+                yearEnd: (new Date().getFullYear() -18)
+                                
 
               });
               
@@ -58,6 +66,21 @@
       
 
   /////////////////////////////////////////////////////////////////////////=-->
+
+
+  //  /TODO: FUNCIONES PARA MASCARA  -->
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+// Pattern (Phone) MASCARA PARA EL CAMPO TELEFONO DE SOLICITANTE
+var phoneMaskRegister = IMask(document.getElementById('telefonoform'), {
+  mask: '+{1} (000) 000-0000'
+});
+
+});
+
+//  /TODO: FUNCIONES PARA MASCARA  -->
+
 
   // ====================================================================-->
    //=== ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT == -->
