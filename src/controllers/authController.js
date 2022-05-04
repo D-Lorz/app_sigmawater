@@ -19,7 +19,7 @@ exports.registrar = async (req, res) => {
     const direccion = req.body.direccion
     const apt_suite_unidad = req.body.apt_suite_unidad
     const codigo_postal = req.body.codigo_postal
-    const codigo_referido = req.body.codigo_referido
+    const codigo_afiliado = req.body.codigo_afiliado
     const nombre_banco = req.body.nombre_banco
     const numero_cuenta = req.body.numero_cuenta
     const ruta = req.body.ruta
@@ -41,7 +41,7 @@ exports.registrar = async (req, res) => {
 
     const nuevoRegistro = {
         nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
-        apt_suite_unidad, codigo_postal, codigo_referido, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion,id_vendedor
+        apt_suite_unidad, codigo_postal, codigo_afiliado, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion,id_vendedor
     }
 
     console.log(nuevoRegistro)
