@@ -1,60 +1,61 @@
   <!--==================FIXME:=====HEADER NUEVOS-CLIENTES====================  -->
   <%- include ('partials/partials-nuevo-cliente/header.ejs')%>
   <!--==================FIXME:=====HEADER NUEVOS-CLIENTES====================  -->
+  
+  <body>
 
+      <!-- Begin page -->
+      <div id="layout-wrapper">
 
-<body>
+          <!-- =======FIXME: MENU ========================== -->
+          <%- include ('./partials/menu.ejs')%>
+          <!-- =======FIXME: MENU ========================== -->
 
-  <!-- Begin page -->
-  <div id="layout-wrapper">
+          <div class="main-content">
+              <div class="page-content">
+                  <div class="container-fluid">
 
-        <!-- =======FIXME: MENU ========================== -->
-        <%- include ('./partials/menu.ejs')%>
-        <!-- =======FIXME: MENU ========================== -->
-
-    <div class="main-content">
-      <div class="page-content">
-        <div class="container-fluid">
-          
-       <!-- start page title -->
-       <div class="row">
-        <div class="col-12">
-            <div class="page-title-box d-sm-flex align-items-center
+                      <!-- start page title -->
+                      <div class="row">
+                          <div class="col-12">
+                              <div class="page-title-box d-sm-flex align-items-center
                 justify-content-between">
-                <h4 class="mb-sm-0 font-size-18">Nuevo cliente</h4>
+                                  <h4 class="mb-sm-0 font-size-18">Nuevo cliente</h4>
 
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript:
+                                  <div class="page-title-right">
+                                      <ol class="breadcrumb m-0">
+                                          <li class="breadcrumb-item"><a href="javascript:
                                 void(0);">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Nuevo cliente</li>
-                    </ol>
-                </div>
+                                          <li class="breadcrumb-item active">Nuevo cliente</li>
+                                      </ol>
+                                  </div>
 
-            </div>
-        </div>
-    </div>
-        <!-- end page title -->
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end page title -->
 
-   <!--============================================================-->
-   <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
-   <!--============================================================-->
-     
-   <!-- BEGIN: Content-->
-    <div class="app-content content" style="margin-top:-7px">
-        <!-- Form wizard with step validation section start -->
-        <section id="validation">
-            
-        <div class="card">
-            <div class="card-content collapse show">
-                  <form action="/registrarclientela"  method="POST" class="steps-validation wizard-circle" id="validarForm" enctype="multipart/form-data">
-                                                                      
- <!--============= /FIXME:===== *SOLICITANTE* =======FIXME:=========-->
-                                    <!-- Step 1 -->
-                                <h6><b>SOLICITANTE</b></h6>
+                      <!--============================================================-->
+                      <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
+                      <!--============================================================-->
 
-                                <fieldset>
-                   <div class="row justify-content-center">
+                      <!-- BEGIN: Content-->
+                      <div class="app-content content" style="margin-top:-7px">
+                          <!-- Form wizard with step validation section start -->
+                          <section id="validation">
+
+                              <div class="card">
+                                  <div class="card-content collapse show">
+                                      <form action="/registrarclientela" method="POST"
+                                          class="steps-validation wizard-circle" id="validarForm"
+                                          enctype="multipart/form-data">
+
+                                          <!--============= /FIXME:===== *SOLICITANTE* =======FIXME:=========-->
+                                          <!-- Step 1 -->
+                                          <h6><b>SOLICITANTE</b></h6>
+
+                                          <fieldset>
+                                          <div class="row justify-content-center">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="primer_nombref"> Primer nombre<span class="danger">*</span></label>
@@ -88,7 +89,7 @@
                                             <div class="col-md-4">
                                                 <label for="exampleDataList" class="form-label">Sistema</label>
                                                 <span class="danger">*</span>
-                                                <input class="form-control required" list="estado_sistema"  name="sistema" placeholder="Eliga el sistema deseado">
+                                                <input class="form-control required" list="estado_sistema"  name="sistema" placeholder="Eliga el sistema deseado" >
                                                 <datalist id="estado_sistema">
                                                       <option value="Sistema completo"></option>
                                                     <option value="Sistema de osmosis inversa"></option>
@@ -169,14 +170,14 @@
                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="f_expediccion">Fecha de expedición de licencia <span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required"  id="f_expediccion" name="fecha_expedicion_licencia_cliente" >
+                                                    <input type="text" class="form-control required" placeholder="Precione aqui para elegir fecha" id="f_expediccion" name="fecha_expedicion_licencia_cliente" readonly >
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="fecha_vencimientof">Fecha de vencimiento de licencia<span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required" id="fecha_vencimientof" name="fecha_vencimiento_licencia_cliente" >
+                                                    <input type="text" class="form-control required" placeholder="Precione aqui para elegir fecha" id="fecha_vencimientof" name="fecha_vencimiento_licencia_cliente" readonly>
                                                 </div>
                                             </div>
                                          
@@ -213,7 +214,7 @@
                                          <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="fecha_nacimientof">Fecha de nacimiento <span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required" id="fecha_nacimientof" name="fecha_nacimiento_cliente">
+                                                    <input type="text" class="form-control required"  placeholder="Precione aqui para elegir fecha" id="fecha_nacimientof" name="fecha_nacimiento_cliente" readonly>
                                                 </div>
                                         </div>
                                         
@@ -234,20 +235,20 @@
                                                                                                    
                                                 </div>
                                             </div>
-                                     </div>        
-                                 </fieldset>  
+                                     </div>         
+                                          </fieldset> 
 
-<!--============= //FIXME:===== *SOLICITANTE* =======FIXME:=========-->
+                                          <!--============= //FIXME:===== *SOLICITANTE* =======FIXME:=========-->
 
 
-  <!--==========================/TODO:TODO:=============================================================-->
+                                          <!--==========================/TODO:TODO:=============================================================-->
 
- <!--============= /FIXME:===== *CASA* ==============FIXME:=========-->
-                                    <!-- Step 2 -->
-                                   <h6><b>CASA</b></h6>
-                                    <fieldset  style="text-align: center"> 
+                                          <!--============= /FIXME:===== *CASA* ==============FIXME:=========-->
+                                          <!-- Step 2 -->
+                                      <h6><b>CASA</b></h6>
+                                          <fieldset style="text-align: center">
 
-                              <div class="row justify-content-center" >
+                                            <div class="row justify-content-center" >
                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="direccionf">  Dirección <span class="danger">*</span></label>
@@ -333,22 +334,22 @@
                                                    </div>
                                                 </div> 
 
-                                            </div>  
+                                            </div>   
                              
 
-                                  </fieldset> 
+                                          </fieldset>  
 
-<!--============= //FIXME:===== *CASA* ======= ===== FIXME:=========-->
+                                          <!--============= //FIXME:===== *CASA* ======= ===== FIXME:=========-->
 
-<!--=============================TODO:TODO:=============================================================-->
+                                          <!--=============================TODO:TODO:=============================================================-->
 
- <!--============= /FIXME:===== *INGRESOS* ========  FIXME:=========-->
+                                          <!--============= /FIXME:===== *INGRESOS* ========  FIXME:=========-->
 
-                                    <!-- Step 3 -->
-                                   <h6><b>INGRESOS</b></h6>
-                                    <fieldset>
+                                          <!-- Step 3 -->
+                                          <h6><b>INGRESOS</b></h6>
+                                          <fieldset>
 
-                             <div class="row text-align: center;">
+                                             <div class="row text-align: center;">
                                          <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="empleador_aplicantef"> Empleador del aplicante <span class="danger">*</span> </label>
@@ -494,18 +495,18 @@
                                                     <input type="text" class="form-control" id="currency-maskthree" id="ingresos_adicionalesf" name="ingresos_adicionales_ingresos">
                                                 </div>
                                             </div>
-                                         </div>          
+                                         </div>           
 
-                                    </fieldset>
+                                          </fieldset> 
 
-<!--============= / FIXME:===== *INGRESOS* ==========FIXME:=========-->
+                                          <!--============= / FIXME:===== *INGRESOS* ==========FIXME:=========-->
 
- <!--=============================TODO:TODO:=============================================================-->
+                                          <!--=============================TODO:TODO:=============================================================-->
 
-<!--============= //FIXME:===== *INFORMACION BANCARIA* ======= FIXME:=========-->
-                                       <h6><b>INFORMACIÓN BANCARIA</b></h6>
-                                                <fieldset>
-
+                                          <!--============= //FIXME:===== *INFORMACION BANCARIA* ======= FIXME:=========-->
+                                          <h6><b>INFORMACIÓN BANCARIA</b></h6>
+                                          <fieldset>
+                                              
                                    <div class="row text-align: center;">
                                                    <div class="col-md-4">
                                                      <label for="exampleDataList" class="form-label">Tipo de cuenta</label> <span class="danger">*</span>
@@ -533,323 +534,409 @@
                                                 </div>      
 
 
-                                                </fieldset>  
-<!--============= //FIXME: ===== *CONFIGURACION BANCARIA* ===== FIXME:=========-->
+                                          </fieldset>
+                                          <!--============= //FIXME: ===== *CONFIGURACION BANCARIA* ===== FIXME:=========-->
 
- <!--=============================TODO:TODO:=============================================================-->
+                                          <!--=============================TODO:TODO:=============================================================-->
 
-<!--============= / FIXME:===== *CO-SOLICITANTE* === FIXME:=========-->
-                                    <!-- Step 4 -->
-                        <h6><b>CO-SOLICITANTE</b></h6>
+                                          <!--============= / FIXME:===== *CO-SOLICITANTE* === FIXME:=========-->
+                                          <!-- Step 4 -->
+                                          <h6><b>CO-SOLICITANTE</b></h6>
 
-                              <fieldset>
+                                          <fieldset>
 
-                                  <center><b>La solicitud tiene co-solicitante</b>
-                                        <br>
-                                      <input type="checkbox" name="mostrar" id="mostrar" value="1" onchange="javascript:showContent()" />
-                                    </center>
+                                              <center><b>La solicitud tiene co-solicitante</b>
+                                                  <br>
+                                                  <input type="checkbox" name="mostrar" id="mostrar" value="1"
+                                                      onchange="javascript:showContent()" />
+                                              </center>
 
-                                    <br>
-                            
-                                     <div id="contentt" style="display: none; ">
+                                              <br>
 
-                                        <div class="row text-align: center;">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="licenciaf"> Identificación / licencia de conducción <span class="danger">*</span></label>
-                                                    <input type="number" class="form-control required" id="licenciaf" name="licencia_co_solicitante" >
-                                                </div>
-                                            </div>
-        
-                                             <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="expedición_licenciaf"> Fecha de expedición de licencia <span class="danger">*</span> </label>
-                                                    <input type="date" class="form-control required" id="expedición_licenciaf" name="expedición_licencia_co_solicitante" >
-                                                </div>
-                                            </div>
+                                              <div id="contentt" style="display: none; ">
 
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="vencimiento_licenciaf">Fecha de vencimiento de licencia <span class="danger">*</span>  </label>
-                                                    <input type="date" class="form-control required" id="vencimiento_licenciaf" name="vencimiento_licencia_co_solicitante">
-                                                </div>
-                                            </div>
+                                                  <div class="row text-align: center;">
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="licenciaf"> Identificación / licencia de
+                                                                  conducción <span class="danger">*</span></label>
+                                                              <input type="number" class="form-control required"
+                                                                  id="licenciaf" name="licencia_co_solicitante">
+                                                          </div>
+                                                      </div>
 
-                                        </div>
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="expedición_licenciaf"> Fecha de expedición de
+                                                                  licencia <span class="danger">*</span> </label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="expedición_licenciaf"
+                                                                  name="expedición_licencia_co_solicitante" placeholder="Precione aqui para elegir fecha" readonly>
+                                                          </div>
+                                                      </div>
 
-                                        <div class="row text-align: center;">
-                                           <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="numero_se_socialf"> Numero de seguro social/ITIN <span class="danger">*</span></label>
-                                                <input type="text" class="form-control required social" id="numero_se_socialf" name="numero_se_social_co_solicitante" >
-                                                
-                                        </div>
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="vencimiento_licenciaf">Fecha de vencimiento de
+                                                                  licencia <span class="danger">*</span> </label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="vencimiento_licenciaf"
+                                                                  name="vencimiento_licencia_co_solicitante" placeholder="Precione aqui para elegir fecha" readonly>
+                                                          </div>
+                                                      </div>
 
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input " type="radio" name="tipo_seguro_co_solicitante" id="SSNco" value="SSN" checked >
-                                            <label class="form-check-label" for="SSNco">SSN</label>
-                                          </div>
-                                          <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="tipo_seguro_co_solicitante" id="ITINco" value="ITIN" >
-                                            <label class="form-check-label" for="ITINco">ITIN</label>
-                                          </div>
-                                        </div>
+                                                  </div>
 
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="fecha_nacif"> Fecha de nacimiento  <span class="danger">*</span> </label>
-                                                    <input type="text" class="form-control required" id="fecha_nacif" name="fecha_nacimiento_co_solicitante">
-                                                </div>
-                                            </div>
+                                                  <div class="row text-align: center;">
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="numero_se_socialf"> Numero de seguro
+                                                                  social/ITIN <span class="danger">*</span></label>
+                                                              <input type="text" class="form-control required social"
+                                                                  id="numero_se_socialf"
+                                                                  name="numero_se_social_co_solicitante">
 
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="nombre_cof"> Nombre <span class="danger">*</span> </label>
-                                                    <input type="text" class="form-control required" id="nombre_cof" name="nombre_co_solicitante" >
-                                                </div>
-                                            </div>
-                                        </div>
+                                                          </div>
 
-                                        <div class="row text-align: center;">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="segundo_nombre_cof"> Segundo nombre</label>
-                                                    <input type="text" class="form-control " id="segundo_nombre_cof" name="segundo_nombre_co_solicitante" >
-                                                </div>
-                                            </div>
+                                                          <div class="form-check form-check-inline">
+                                                              <input class="form-check-input " type="radio"
+                                                                  name="tipo_seguro_co_solicitante" id="SSNco"
+                                                                  value="SSN" checked>
+                                                              <label class="form-check-label" for="SSNco">SSN</label>
+                                                          </div>
+                                                          <div class="form-check form-check-inline">
+                                                              <input class="form-check-input" type="radio"
+                                                                  name="tipo_seguro_co_solicitante" id="ITINco"
+                                                                  value="ITIN">
+                                                              <label class="form-check-label" for="ITINco">ITIN</label>
+                                                          </div>
+                                                      </div>
 
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="apelli_cof"> Apellidos <span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required" id="apelli_cof" name="apellido_co_solicitante">
-                                                </div>
-                                            </div>
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="fecha_nacif"> Fecha de nacimiento <span
+                                                                      class="danger">*</span> </label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="fecha_nacif"
+                                                                  name="fecha_nacimiento_co_solicitante" placeholder="Precione aqui para elegir fecha" readonly>
+                                                          </div>
+                                                      </div>
 
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="phone-masktel">
-                                                        Teléfono móvil  <span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required" id="phone-masktel" name="telefono_movil_co_solicitante" >
-                                                </div>
-                                            </div>
-                                         </div>
-                                        
-                                        <div class="row text-align: center;">
-                                               <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="phone-maskteltwo"> Teléfono secundario </label>
-                                                    <input type="text" class="form-control " id="phone-maskteltwo" name="tel_secundario_co_solicitante" >
-                                                </div>
-                                            </div>
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="nombre_cof"> Nombre <span
+                                                                      class="danger">*</span> </label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="nombre_cof" name="nombre_co_solicitante">
+                                                          </div>
+                                                      </div>
+                                                  </div>
 
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="direc_co_solicitantef"> Dirección del co-solicitante  <span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required" id="direc_co_solicitantef" name="direccion_co_solicitante">
-                                                </div>
-                                            </div>
+                                                  <div class="row text-align: center;">
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="segundo_nombre_cof"> Segundo nombre</label>
+                                                              <input type="text" class="form-control "
+                                                                  id="segundo_nombre_cof"
+                                                                  name="segundo_nombre_co_solicitante">
+                                                          </div>
+                                                      </div>
 
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="relacionf"> Relación/parentesco <span class="danger">*</span></label>
-                                                    <input type="text" class="form-control required" placeholder="Ej. Amigo, pareja, padre..." id="relacionf" name="relacion_parentesco_co_solicitante">
-                                                </div>
-                                            </div>
-                                     </div> 
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="apelli_cof"> Apellidos <span
+                                                                      class="danger">*</span></label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="apelli_cof" name="apellido_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="phone-masktel">
+                                                                  Teléfono móvil <span class="danger">*</span></label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="phone-masktel"
+                                                                  name="telefono_movil_co_solicitante">
+                                                          </div>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="row text-align: center;">
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="phone-maskteltwo"> Teléfono secundario
+                                                              </label>
+                                                              <input type="text" class="form-control "
+                                                                  id="phone-maskteltwo"
+                                                                  name="tel_secundario_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="direc_co_solicitantef"> Dirección del
+                                                                  co-solicitante <span class="danger">*</span></label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="direc_co_solicitantef"
+                                                                  name="direccion_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="relacionf"> Relación/parentesco <span
+                                                                      class="danger">*</span></label>
+                                                              <input type="text" class="form-control required"
+                                                                  placeholder="Ej. Amigo, pareja, padre..."
+                                                                  id="relacionf"
+                                                                  name="relacion_parentesco_co_solicitante">
+                                                          </div>
+                                                      </div>
+                                                  </div>
 
 
-                                      <label>¿Es militar activo?</label>
-                                            <br>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input inline required" type="radio" name="militar_active" id="si_activo" value="si">
-                                                <label class="form-check-label" for="si_activo">Si</label>
+                                                  <label>¿Es militar activo?</label>
+                                                  <br>
+                                                  <div class="form-check form-check-inline">
+                                                      <input class="form-check-input inline required" type="radio"
+                                                          name="militar_active" id="si_activo" value="si">
+                                                      <label class="form-check-label" for="si_activo">Si</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                      <input class="form-check-input inline" type="radio"
+                                                          name="militar_active" id="no_activo" value="no" checked>
+                                                      <label class="form-check-label" for="no_activo">No</label>
+                                                      <br>
+                                                  </div>
+
+
+
+
+                                                  <h4 style="text-align: center;">Empleo del co-solicitante</h4>
+
+                                                  <br>
+                                                  <br>
+
+                                                  <div class="row text-align: center;">
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="empleador_cof"> Empleador del co-solicitante
+                                                                  <span class="danger">*</span> </label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="empleador_cof" name="empleador_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="anios_trabajando_cof"> Años trabajando<span
+                                                                      class="danger">*</span> </label>
+                                                              <input type="number" oninput="maxlengthNumber(this);"
+                                                                  minlength="1" maxlength="2"
+                                                                  class="form-control required"
+                                                                  id="anios_trabajando_cof"
+                                                                  name="anios_trabajando_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="meses_trabajando_cof"> Meses trabajando <span
+                                                                      class="danger">*</span> </label>
+                                                              <input type="number" oninput="maxlengthNumber(this);"
+                                                                  minlength="1" maxlength="2"
+                                                                  class="form-control required"
+                                                                  id="meses_trabajando_cof"
+                                                                  name="meses_trabajando_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                  </div>
+
+                                                  <div class="row text-align: center;">
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="currency-masksalario"> Salario mensual <span
+                                                                      class="danger">*</span> </label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="currency-masksalario"
+                                                                  name="salario_mensual_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="ocupacion_cof"> Ocupación <span
+                                                                      class="danger">*</span> </label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="ocupacion_cof" name="ocupacion_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="phone-maskteltrabajo"> Teléfono de
+                                                                  trabajo<span class="danger">*</span> </label>
+                                                              <input type="text" class="form-control required"
+                                                                  id="phone-maskteltrabajo"
+                                                                  name="telefono_trabajo_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                  </div>
+                                                  <div class="row text-align: center;">
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="empleador_anterior_cof">Empleador anterior
+                                                              </label>
+                                                              <input type="text" class="form-control "
+                                                                  id="empleador_anterior_cof"
+                                                                  name="empleador_anterior_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="ingresos_cof"> Fuente de otros
+                                                                  ingresos</label>
+                                                              <input type="text" class="form-control " id="ingresos_cof"
+                                                                  name="ingresos_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="col-md-4">
+                                                          <div class="form-group">
+                                                              <label for="currency-maskingresoadi"> Ingresos adicionales
+                                                              </label>
+                                                              <input type="text" class="form-control "
+                                                                  id="currency-maskingresoadi"
+                                                                  name="ingresos_adicionales_co_solicitante">
+                                                          </div>
+                                                      </div>
+
+                                                  </div>
                                               </div>
-                                              <div class="form-check form-check-inline">
-                                                <input class="form-check-input inline" type="radio" name="militar_active" id="no_activo" value="no" checked>
-                                                <label class="form-check-label" for="no_activo">No</label>
-                                                <br>
-                                              </div> 
-                                              
+
+                                          </fieldset>
+
+                                          <!--============= //FIXME:===== *CO-SOLICITANTE* ==== FIXME:=========-->
+
+                                          <!--=============================TODO:TODO:=============================================================-->
+
+                                          <!--============= //FIXME:===== *REFERENCIAS* ======= FIXME:=========-->
+
+                                          <h6><b>REFERENCIAS</b></h6>
+                                          <fieldset>
+
+                                              <div class="row text-align: center;">
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label for="nom_referencia1_cof">Nombre de referencia</label>
+                                                          <input type="text" class="form-control "
+                                                              id="nom_referencia1_cof"
+                                                              name="nom_referencia1_co_solicitante">
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label for="parentesco1_cof"> Relación/parentesco </label>
+                                                          <input type="text" class="form-control " id="parentesco1_cof"
+                                                              name="parentesco1_co_solicitante">
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label for="phone-masktelreferenciasone">Teléfono
+                                                              móvil</label>
+                                                          <input type="text" class="form-control "
+                                                              id="phone-masktelreferenciasone"
+                                                              name="tel_movil1_co_solicitante">
+                                                      </div>
+                                                  </div>
+
+                                              </div>
+                                              <hr class="bg-primary" style="padding:2px; background:#812082!important">
+
+                                              <div class="row text-align: center;">
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label for="nom_referencia2_cof">Nombre de referencia </label>
+                                                          <input type="text" class="form-control "
+                                                              id="nom_referencia2_cof"
+                                                              name="nom_referencia2_co_solicitante">
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label for="parentesco2_cof"> Relación/parentesco </label>
+                                                          <input type="text" class="form-control " id="parentesco2_cof"
+                                                              name="parentesco2_co_solicitante">
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label for="phone-masktelreferenciastwo"> Teléfono
+                                                              móvil</label>
+                                                          <input type="text" class="form-control "
+                                                              id="phone-masktelreferenciastwo"
+                                                              name="tel_movil2_co_solicitante">
+                                                      </div>
+                                                  </div>
+
+                                              </div>
 
 
-
-                                        <h4 style="text-align: center;">Empleo del co-solicitante</h4>
-
-                                        <br>
-                                        <br>
-
-                                        <div class="row text-align: center;">
-                                            <div class="col-md-4">
-                                             <div class="form-group">
-                                                 <label for="empleador_cof">  Empleador del co-solicitante <span class="danger">*</span>  </label>
-                                                 <input type="text" class="form-control required" id="empleador_cof" name="empleador_co_solicitante" >
-                                             </div>
-                                         </div>
-
-                                         <div class="col-md-4">
-                                             <div class="form-group">
-                                                 <label for="anios_trabajando_cof"> Años trabajando<span class="danger">*</span> </label>
-                                                 <input type="number"  oninput="maxlengthNumber(this);" minlength="1" maxlength="2" class="form-control required" id="anios_trabajando_cof" name="anios_trabajando_co_solicitante">
-                                             </div>
-                                         </div>
-
-                                         <div class="col-md-4">
-                                             <div class="form-group">
-                                                 <label for="meses_trabajando_cof">  Meses trabajando <span class="danger">*</span>  </label>
-                                                 <input type="number"  oninput="maxlengthNumber(this);" minlength="1" maxlength="2" class="form-control required"  id="meses_trabajando_cof" name="meses_trabajando_co_solicitante">
-                                             </div>
-                                         </div>
-
-                                     </div> 
-
-                                 <div class="row text-align: center;">
-                                        <div class="col-md-4">
-                                         <div class="form-group">
-                                             <label for="currency-masksalario">  Salario mensual <span class="danger">*</span> </label>
-                                             <input type="text" class="form-control required" id="currency-masksalario" name="salario_mensual_co_solicitante" >
-                                         </div>
-                                     </div>
-
-                                     <div class="col-md-4">
-                                         <div class="form-group">
-                                             <label for="ocupacion_cof">  Ocupación <span class="danger">*</span> </label>
-                                             <input type="text" class="form-control required" id="ocupacion_cof" name="ocupacion_co_solicitante">
-                                         </div>
-                                     </div>
-
-                                     <div class="col-md-4">
-                                         <div class="form-group">
-                                             <label for="phone-maskteltrabajo"> Teléfono de trabajo<span class="danger">*</span> </label>
-                                             <input type="text" class="form-control required"  id="phone-maskteltrabajo" name="telefono_trabajo_co_solicitante">
-                                         </div>
-                                     </div>
-
-                                 </div> 
-                                 <div class="row text-align: center;">
-                                    <div class="col-md-4">
-                                     <div class="form-group">
-                                         <label for="empleador_anterior_cof">Empleador anterior </label>
-                                         <input type="text" class="form-control " id="empleador_anterior_cof" name="empleador_anterior_co_solicitante" >
-                                     </div>
-                                 </div>
-
-                                 <div class="col-md-4">
-                                     <div class="form-group">
-                                         <label for="ingresos_cof">  Fuente de otros ingresos</label>
-                                         <input type="text" class="form-control " id="ingresos_cof" name="ingresos_co_solicitante">
-                                     </div>
-                                 </div>
-
-                                 <div class="col-md-4">
-                                     <div class="form-group">
-                                         <label for="currency-maskingresoadi"> Ingresos adicionales </label>
-                                         <input type="text" class="form-control "  id="currency-maskingresoadi" name="ingresos_adicionales_co_solicitante">
-                                     </div>
-                                 </div>
-
-                             </div>  
-                         </div>    
-
-                             </fieldset>
-
-<!--============= //FIXME:===== *CO-SOLICITANTE* ==== FIXME:=========-->
-
- <!--=============================TODO:TODO:=============================================================-->
-
-<!--============= //FIXME:===== *REFERENCIAS* ======= FIXME:=========-->
-
-                           <h6><b>REFERENCIAS</b></h6>
-                           <fieldset>
-
-                           <div class="row text-align: center;">
-                                <div class="col-md-4">
-                                 <div class="form-group">
-                                     <label for="nom_referencia1_cof">Nombre de referencia</label>
-                                     <input type="text" class="form-control " id="nom_referencia1_cof" name="nom_referencia1_co_solicitante" >
-                                 </div>
-                             </div>
-
-                             <div class="col-md-4">
-                                 <div class="form-group">
-                                     <label for="parentesco1_cof"> Relación/parentesco </label>
-                                     <input type="text" class="form-control " id="parentesco1_cof" name="parentesco1_co_solicitante">
-                                 </div>
-                             </div>
-
-                             <div class="col-md-4">
-                                 <div class="form-group">
-                                     <label for="phone-masktelreferenciasone">Teléfono móvil</label>
-                                     <input type="text" class="form-control "  id="phone-masktelreferenciasone" name="tel_movil1_co_solicitante">
-                                 </div>
-                             </div>
-
-                         </div> 
-                         <hr class="bg-primary" style="padding:2px; background:#812082!important">
-
-                         <div class="row text-align: center;">
-                            <div class="col-md-4">
-                             <div class="form-group">
-                                 <label for="nom_referencia2_cof">Nombre de referencia </label>
-                                 <input type="text" class="form-control " id="nom_referencia2_cof" name="nom_referencia2_co_solicitante" >
-                             </div>
-                         </div>
-
-                         <div class="col-md-4">
-                             <div class="form-group">
-                                 <label for="parentesco2_cof"> Relación/parentesco </label>
-                                 <input type="text" class="form-control " id="parentesco2_cof" name="parentesco2_co_solicitante">
-                             </div>
-                         </div>
-
-                         <div class="col-md-4">
-                             <div class="form-group">
-                                 <label for="phone-masktelreferenciastwo"> Teléfono móvil</label>
-                                 <input type="text" class="form-control "  id="phone-masktelreferenciastwo" name="tel_movil2_co_solicitante">
-                             </div>
-                         </div>
-
-                     </div>
+                                              <hr class="bg-primary" style="padding:2px; background:#812082!important">
 
 
-                     <hr class="bg-primary" style="padding:2px; background:#812082!important">
+                                              <div class="row text-align: center;">
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label for="nom_referencia2_cof"> Nombre de referencia
+                                                          </label>
+                                                          <input type="text" class="form-control "
+                                                              id="nom_referencia2_cof"
+                                                              name="nom_referencia3_co_solicitante">
+                                                      </div>
+                                                  </div>
 
-                     
-                     <div class="row text-align: center;">
-                        <div class="col-md-4">
-                         <div class="form-group">
-                             <label for="nom_referencia2_cof"> Nombre de referencia </label>
-                             <input type="text" class="form-control " id="nom_referencia2_cof" name="nom_referencia3_co_solicitante" >
-                         </div>
-                     </div>
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label for="parentesco2_cof"> Relación/parentesco </label>
+                                                          <input type="text" class="form-control " id="parentesco2_cof"
+                                                              name="parentesco3_co_solicitante">
+                                                      </div>
+                                                  </div>
 
-                     <div class="col-md-4">
-                         <div class="form-group">
-                             <label for="parentesco2_cof">  Relación/parentesco </label>
-                             <input type="text" class="form-control " id="parentesco2_cof" name="parentesco3_co_solicitante">
-                         </div>
-                     </div>
+                                                  <div class="col-md-4">
+                                                      <div class="form-group">
+                                                          <label for="phone-masktelreferenciasthree">Teléfono móvil
+                                                          </label>
+                                                          <input type="text" class="form-control "
+                                                              id="phone-masktelreferenciasthree"
+                                                              name="tel_movil3_co_solicitante">
+                                                      </div>
+                                                  </div>
 
-                     <div class="col-md-4">
-                         <div class="form-group">
-                             <label for="phone-masktelreferenciasthree">Teléfono móvil  </label>
-                             <input type="text" class="form-control "  id="phone-masktelreferenciasthree" name="tel_movil3_co_solicitante">
-                         </div>
-                     </div>
+                                              </div>
+                                          </fieldset>
+                                          <!--============= //FIXME: ===== *REFERENCIAS* ===== FIXME:=========-->
 
-                 </div>   
-                         </fieldset> 
- <!--============= //FIXME: ===== *REFERENCIAS* ===== FIXME:=========-->
-
-  <!--=============================TODO:TODO:=============================================================-->
-
-
- <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
-
-                                <h6><b>CARGAR ARCHIVOS</b></h6>
-                                <fieldset>
+                                          <!--=============================TODO:TODO:=============================================================-->
 
 
-                          <div class="container">
+                                          <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
+
+                                          <h6><b>CARGAR ARCHIVOS</b></h6>
+                                          <fieldset>
+
+
+                                            <div class="container">
                                     <div class="row">
                                 
                                         <div class="col-6" >
@@ -896,154 +983,171 @@
                                         
                                     </div>  
 
-                                    </div>    
-              </fieldset> 
+                                    </div>     
+                                          </fieldset>
 
- <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
-<!--=============================TODO:TODO:=============================================================-->
+                                          <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
+                                          <!--=============================TODO:TODO:=============================================================-->
 
 
 
-<!--======== //======FIXME:== * TERMINOS Y CONDICIONES* FIXME:=========-->
-                                      <h6><b>TERMINOS Y CONDICIONES</b></h6>
-                                      <fieldset>
+                                          <!--======== //======FIXME:== * TERMINOS Y CONDICIONES* FIXME:=========-->
+                                          <h6><b>TERMINOS Y CONDICIONES</b></h6>
+                                          <fieldset>
 
-                                            <div class="row ">
-                                                
-                                               
-                                                        <div class="container " style="text-align: center; text-align: justify;margin-bottom: 19px;">
-                                                       
-                                                  
-                                                            <h6><b>DIVULGACIÓN DE RESPONSABILIDAD</b></h6>
-                                                             
-                                                                <p>Al hacer clic en Continuar, promete que toda la información es verdadera y completa Tiene la intención de que el
-                                                                    vendedor y/o el dealer confíen en esta información para decidir si le otorgan o no crédito Usted autoriza una
-                                                                    investigación completa y la divulgación de su historial crediticio y su historial laboral También autoriza al
-                                                                    vendedor y/o dealer a divulgar información sobre la experiencia crediticia con ellos Usted acepta recibir
-                                                                    llamadas de mensajes pregrabados o marcados automáticamente de nosotros o de aquellos que actúan en nuestro
-                                                                    nombre en cualquier número de teléfono móvil que nos proporcione.</p>
+                                              <div class="row ">
 
-                                                            <p><b>AVISO DE INFORME DE CRÉDITO:</b> Podemos solicitar un informe de crédito para cualquier propósito legítimo asociado
-                                                                con su solicitud de crédito, extensión de crédito, modificación de los términos de su contrato de crédito o
-                                                                cobro en su cuenta. Si lo solicita, le informaremos si se ordenó dicho informe y le daremos el nombre y la
-                                                                dirección de la agencia de informes crediticios que proporcionó el informe.</p>
-                                                        
-                                        
-                                                        </div>   
-                                                        <div class="col-5" >
-                                                        <!-- Button trigger modal -->
-                                                     <label type="button" class="btn btn-primary" id="prueba" >
-                                                      <input type="checkbox" required data-toggle="modal"  data-target="#exampleModalCenter" name="" id="prueba" required> 
-                                                      Aceptar y firmar los términos
+
+                                                  <div class="container "
+                                                      style="text-align: center; text-align: justify;margin-bottom: 19px;">
+
+
+                                                      <h6><b>DIVULGACIÓN DE RESPONSABILIDAD</b></h6>
+
+                                                      <p>Al hacer clic en Continuar, promete que toda la información es
+                                                          verdadera y completa Tiene la intención de que el
+                                                          vendedor y/o el dealer confíen en esta información para
+                                                          decidir si le otorgan o no crédito Usted autoriza una
+                                                          investigación completa y la divulgación de su historial
+                                                          crediticio y su historial laboral También autoriza al
+                                                          vendedor y/o dealer a divulgar información sobre la
+                                                          experiencia crediticia con ellos Usted acepta recibir
+                                                          llamadas de mensajes pregrabados o marcados automáticamente de
+                                                          nosotros o de aquellos que actúan en nuestro
+                                                          nombre en cualquier número de teléfono móvil que nos
+                                                          proporcione.</p>
+
+                                                      <p><b>AVISO DE INFORME DE CRÉDITO:</b> Podemos solicitar un
+                                                          informe de crédito para cualquier propósito legítimo asociado
+                                                          con su solicitud de crédito, extensión de crédito,
+                                                          modificación de los términos de su contrato de crédito o
+                                                          cobro en su cuenta. Si lo solicita, le informaremos si se
+                                                          ordenó dicho informe y le daremos el nombre y la
+                                                          dirección de la agencia de informes crediticios que
+                                                          proporcionó el informe.</p>
+
+
+                                                  </div>
+                                                  <div class="col-5">
+                                                      <!-- Button trigger modal -->
+                                                      <label type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modalFirmar">
+                                                          <input type="checkbox" id="btnAceptar" required>
+                                                          Aceptar y firmar los términos
                                                       </label>
-                                                      </div>
-                                                  
-                          
-                                                     </div>
-                                               
-                                                     <div class="col-5" >
-            
-                                                        <div class="input-group">
-                                                  <label class="input-group-btn">
-                                                        <span class="btn btn-primary" style="padding: 10px;">
-                                                          Cargar pdf firmado
-                                                          <input type="file" name="acuerdo_firmado" id="code_base64" accept="image/jpg" style="display: none;"  required> 
-                                                          
-                                                                     <!-- <img src="" alt="Firma del usuario" id="pdfFirmado">  -->
-                                                           </span>
-                                                            </label>
-                                                            <input type="text" class="form-control"  id="icono-placeholder" style="font-size: 15px; height: 42px;" placeholder="  Cargar archivo firmado" required   readonly>
-                                                        </div>
-                                                   </div> 
-                                                  
-                                                   <!-- Modal -->
-                                                   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                       <div class="modal-dialog modal-dialog-centered" role="document">
-                                                       <div class="modal-content">
-                                                           <div class="modal-header">
-                                                           <h5 class="modal-title" id="exampleModalLongTitle">Firmar a continuación</h5>
-                                                           <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  </div>
+
+
+                                              </div>
+
+                                              <div class="col-5">
+
+                                                  <div class="input-group" hidden>
+                                                      <label class="input-group-btn">
+                                                          <span class="btn btn-primary" style="padding: 10px;">
+                                                              Cargar pdf firmado
+                                                              <input type="hidden" name="acuerdo_firmado" id="code_base64" value="" required>
+                                                              <!-- <img src="" alt="Firma del usuario" id="pdfFirmado">  -->
+                                                          </span>
+                                                      </label>
+                                                      <input type="text" class="form-control" id="miFirma_png"
+                                                          style="font-size: 15px; height: 42px;"
+                                                          placeholder="Cargar archivo firmado" value="" required readonly>
+                                                  </div>
+                                              </div>
+
+                                              <!-- Modal -->
+                                              <div class="modal fade" id="modalFirmar" tabindex="-1"
+                                                  role="dialog" aria-labelledby="modalFirmarTitle"
+                                                  aria-hidden="true">
+                                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <h5 class="modal-title" id="modalFirmarLongTitle">Firmar
+                                                                  a continuación</h5>
+                                                              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                <span aria-hidden="true">&times;</span>
                                                            </button> -->
-                                                           </div>
-                                                           <div class="modal-body">
-                                                               <canvas id="canvas"></canvas>
-                                                               <br>
-                                                               <br>
-                                                               <button type="button" class="btn btn-danger" id="btnLimpiar">Limpiar</button>
-                                                               <button type="button"  class="btn btn-warning"  id="btnDescargar">Descargar</button>  
-                                                             <!-- <button type="button" class="btn btn-info" id="btnGenerarDocumento">Pasar a documento</button>  -->
-                                                              
-                                                           </div>
-                                                           <div class="modal-footer" id="ocultar">
-                                                         <button type="button" class="btn btn-primary" id="btnGenerarDocumento" data-dismiss="modal">Siguiente</button>
-                                                       
-                                                           </div>
-                                                       </div>
-                                                      
-                                                       </div>
-                                                   
-                                                       
-                                                   </div>
-                                                   
-                                                            <div style="margin-top: 28px;background: red;width: 3%;float: right;/* margin: 0; */">
-                                                       hola
-                                                   </div>                
-                             
-                                                   <br>
-                                                   <input class="btn btn-primary" type="submit" value="Enviar" >
+                                                          </div>
+                                                          <div class="modal-body">
+                                                              <canvas id="canvas"></canvas>
+                                                              <br>
+                                                              <br>
+                                                              <button type="button" class="btn btn-danger"
+                                                                  id="btnLimpiar">Limpiar</button>
+                                                              <button type="button" class="btn btn-warning" hidden
+                                                                  id="btnDescargar">Descargar</button>
+                                                              <!-- <button type="button" class="btn btn-info" id="btnGenerarDocumento">Pasar a documento</button>  -->
 
-                                      </fieldset> 
-<!--============= // FIXME:===== *TERMINOS Y CONDICIONES* FIXME:=========-->
+                                                          </div>
+                                                          <div class="modal-footer" id="ocultar">
+                                                              <button type="button" class="btn btn-primary"
+                                                                  id="btnSiguienteFirmado"
+                                                                  data-dismiss="modal">Siguiente</button>
 
-  <!--=============================TODO:TODO:=============================================================-->
-                   
-                </form>
+                                                          </div>
+                                                      </div>
 
-   
+                                                  </div>
+
+
+                                              </div>
+
+                                              <br>
+                                              <input class="btn btn-primary" type="submit" value="Enviar"
+                                           
+                                              >
+
+                                          </fieldset>
+                                          <!--============= // FIXME:===== *TERMINOS Y CONDICIONES* FIXME:=========-->
+
+                                          <!--=============================TODO:TODO:=============================================================-->
+
+                                      </form>
+
+
+                                  </div>
+                              </div>
+                          </section>
+                          <!-- Form wizard with step validation section end -->
+
+                      </div>
+                      <!-- End: Customizer-->
+
+                      <!--============================================================-->
+                      <!--============== TODO:===== *FORMULARIO* ======= TODO:=========-->
+                      <!--============================================================-->
+
+                  </div>
               </div>
-         </div>
-         </section>
-        <!-- Form wizard with step validation section end -->
-        
-        </div>
-        <!-- End: Customizer-->
-        
-   <!--============================================================-->
-   <!--============== TODO:===== *FORMULARIO* ======= TODO:=========-->
-   <!--============================================================-->
 
-        </div>
+              <!-- =======FIXME: copyright ========================== -->
+              <%- include ('./partials/copyright.ejs')%>
+              <!-- =======FIXME: copyright ========================== -->
+
+
+          </div>
       </div>
 
-  <!-- =======FIXME: copyright ========================== -->
-  <%- include ('./partials/copyright.ejs')%>
-  <!-- =======FIXME: copyright ========================== -->
 
+      <!-- Right Sidebar -->
+      <div class="right-bar">
+          <div data-simplebar class="h-100">
+              <div class="rightbar-title d-flex align-items-center bg-dark p-3">
 
-    </div>
-  </div>
+                  <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
 
-  
-<!-- Right Sidebar -->
-<div class="right-bar">
-    <div data-simplebar class="h-100">
-        <div class="rightbar-title d-flex align-items-center bg-dark p-3">
+                  <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                      <i class="mdi mdi-close noti-icon"></i>
+                  </a>
+              </div>
 
-            <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
+              <!-- Settings -->
 
-            <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                <i class="mdi mdi-close noti-icon"></i>
-            </a>
-        </div>
+              <%- include ('partials/customizar-tema.ejs')%>
 
-        <!-- Settings -->
-    
-        <%- include ('partials/customizar-tema.ejs')%>
+          </div> <!-- end slimscroll-menu-->
+      </div>
 
-    </div> <!-- end slimscroll-menu-->
-</div>
-
-  <!--==================FIXME:=====FOOTER NUEVOS-CLIENTES====================  -->
-            <%- include ('partials/partials-nuevo-cliente/footer.ejs')%>
-  <!--==================FIXME:=====FOOTER NUEVOS-CLIENTES====================  -->
+      <!--==================FIXME:=====FOOTER NUEVOS-CLIENTES====================  -->
+      <%- include ('partials/partials-nuevo-cliente/footer.ejs')%>
+      <!--==================FIXME:=====FOOTER NUEVOS-CLIENTES====================  -->

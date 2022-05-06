@@ -107,7 +107,7 @@
         const yrRange = '1900' + ":" + (dateToday.getFullYear());
         const hoy = new Date().getDate();
       $(function () {
-      $("#f_expediccion").datepicker({
+      $("#f_expediccion, #expedición_licenciaf").datepicker({
         yearRange: yrRange,
         maxDate:hoy,
         changeMonth: true,
@@ -129,7 +129,7 @@ $.datepicker.regional['es'] = {
         firstDay: 1,
         isRTL: false,
         showMonthAfterYear: false,
-        yearSuffix: 'Seleccione fecha de vencimiento',
+        yearSuffix: '',
        
         };
         $.datepicker.setDefaults($.datepicker.regional['es']);
@@ -138,7 +138,7 @@ $.datepicker.regional['es'] = {
         const yrRangeFuture = (dateToday.getFullYear()) + ":" + '3000';
         const hoyFuture = new Date().getDate();
       $(function () {
-      $("#fecha_vencimientof").datepicker({
+      $("#fecha_vencimientof, #vencimiento_licenciaf").datepicker({
       yearRange: yrRangeFuture,
       minDate: '1M',
       changeMonth: true,
@@ -162,7 +162,7 @@ $.datepicker.regional['es'] = {
         firstDay: 1,
         isRTL: false,
         showMonthAfterYear: false,
-        yearSuffix: 'Seleccione fecha nacimiento',
+        yearSuffix: '',
        
         };
         $.datepicker.setDefaults($.datepicker.regional['es']);
@@ -176,12 +176,7 @@ $.datepicker.regional['es'] = {
          changeMonth: true,
         changeYear: true,
       
-//     jQuery('#fecha_nacimientof,#fecha_nacif').datetimepicker({
-  //       timepicker: false,
-  //       datapicker: true,
-  //       format:	'm-d-Y',
-  //       yearStart:1800,
-  //       yearEnd: (new Date().getFullYear() -18)
+
   
       });
 

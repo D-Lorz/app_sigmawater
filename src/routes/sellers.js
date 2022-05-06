@@ -23,10 +23,7 @@ const rutaAlmacen = multer.diskStorage({
             urlLicencias[1] = "Licencia_Cliente_Trasera_" + fechaActual + "_" + file.originalname;
             callback(null, urlLicencias[1])
           
-        } if (file.fieldname == 'acuerdo_firmado') {
-            urlLicencias[2] = "Acuerdo_Firmado" + fechaActual + "_" + file.originalname;
-            callback(null, urlLicencias[2])
-        }
+        } 
       
     }
 
@@ -37,7 +34,7 @@ const cargar = multer({
 });
 
 // * SIRVE PARA UNIFICAR LOS 3 CAMPOS UPLOAD DEL FORMULARIO CLIENTE
-const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente_trasera' }, { name: 'acuerdo_firmado' }]);
+const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente_trasera' }]);
 
 
 router.get('/hola', isAuthenticated,(req, res) => {

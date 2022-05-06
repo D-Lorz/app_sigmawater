@@ -12,7 +12,8 @@ exports.registrarclientela = async (req, res) => {
     const nombre_cliente = req.body.nombre_cliente;
     const segundo_nombre_cliente = req.body.segundo_nombre_cliente;
     const apellidos_cliente = req.body.apellidos_cliente;
-    const monto_financiar_cliente = req.body.monto_financiar_cliente.replace(/[$ ]/g, '');   
+    let monto_financiar_cliente = req.body.monto_financiar_cliente.replace(/[$ ]/g, '');
+    // monto_financiar_cliente = monto_financiar_cliente.replace(/[$ ]/g, '');
     console.log(">>>>>>>>:"+monto_financiar_cliente);
     const sistema = req.body.sistema 
     const numero_licencia_cliente = req.body.numero_licencia_cliente;
@@ -88,20 +89,16 @@ exports.registrarclientela = async (req, res) => {
 
     console.log("FRONTAL:>>>  ", urlLicencias[0]);
     console.log("TRASERA:>>>  ", urlLicencias[1]);
-    console.log("ACUERDO FIRMADO:>>>  ", urlLicencias[2]);
-
+    
     const frontal = '../licences_customers/' + urlLicencias[0]
     const trasera = '../licences_customers/' + urlLicencias[1]
-    const firma = '../licences_customers/' + urlLicencias[2]
 
     const licencia_cliente = JSON.stringify({
       'frontal': frontal,
       'trasera': trasera
 
     });
-    const acuerdo_firmado = JSON.stringify({
-      'Firma': firma
-    });
+    const acuerdo_firmado = req.body.acuerdo_firmado
     const id_cliente = generateRandomNumber(6);
 
 
