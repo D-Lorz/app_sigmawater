@@ -18,14 +18,32 @@ function validarCorreo() {
   }
 }
 
-const button=document.querySelector('#botonCopy');
 
-const input =docunent.querySelector('.clipboard');
 
-button.addEventListener('click', function(){
-   input.focus();
-  document.execConnand('selectAll');
-  document.execConnand('copy');
+// * COPIAR CODIGO
 
-});
+
+
+
+// * COPIAR CODIGO
+
+const elemento = document.querySelector('#contenido-texto');
+
+document.querySelector('#botonCopy').addEventListener('click',()=>{
+  copyToClipBoard(elemento);
+
+})
+
+function copyToClipBoard(elemento){
+    const inputOculto = document.createElement('input');
+
+    inputOculto.setAttribute('value', elemento.innerText);
+
+    document.body.appendChild(inputOculto);
+
+    inputOculto.select();
+
+    document.execCommand('copy');
+    document.body.removeChild(inputOculto);
+}
 

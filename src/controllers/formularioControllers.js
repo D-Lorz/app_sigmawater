@@ -12,7 +12,9 @@ exports.registrarclientela = async (req, res) => {
     const nombre_cliente = req.body.nombre_cliente;
     const segundo_nombre_cliente = req.body.segundo_nombre_cliente;
     const apellidos_cliente = req.body.apellidos_cliente;
-    const monto_financiar_cliente = req.body.monto_financiar_cliente;
+    const monto_financiar_cliente = req.body.monto_financiar_cliente.replace(/[$ ]/g, '');   
+    console.log(">>>>>>>>:"+monto_financiar_cliente);
+    const sistema = req.body.sistema 
     const numero_licencia_cliente = req.body.numero_licencia_cliente;
     const estado_licencia_cliente = req.body.estado_licencia_cliente;
     const fecha_expedicion_licencia_cliente = req.body.fecha_expedicion_licencia_cliente;
@@ -34,7 +36,8 @@ exports.registrarclientela = async (req, res) => {
     const empleador_aplicante_cliente = req.body.empleador_aplicante_cliente;
     const anios_trabajando_ingresos = req.body.anios_trabajando_ingresos;
     const meses_trabajando_ingresos = req.body.meses_trabajando_ingresos;
-    const salario_mensual_ingresos = req.body.salario_mensual_ingresos;
+    const salario_mensual_ingresos = req.body.salario_mensual_ingresos.replace(/[$ ]/g, '');   
+    console.log(">>>>>>>>:"+salario_mensual_ingresos);
     const bancarrota = req.body.bancarrota;
     const sacc_pendiente = req.body.sacc_pendiente;
     const ocupacion_ingresos = req.body.ocupacion_ingresos;
@@ -43,7 +46,8 @@ exports.registrarclientela = async (req, res) => {
     const tipo_bancarrota_ingresos = req.body.tipo_bancarrota_ingresos;
     const empleador_anterior_ingresos = req.body.empleador_anterior_ingresos;
     const otros_ingresos_ingresos = req.body.otros_ingresos_ingresos;
-    const ingresos_adicionales_ingresos = req.body.ingresos_adicionales_ingresos;
+    const ingresos_adicionales_ingresos = req.body.ingresos_adicionales_ingresos.replace(/[$ ]/g, '');   
+    console.log(">>>>>>>>:"+ingresos_adicionales_ingresos);
     const tipo_cuenta_bancaria = req.body.tipo_cuenta_bancaria;
     const numero_ruta_bancaria = req.body.numero_ruta_bancaria;
     const numero_cuenta_bancaria = req.body.numero_cuenta_bancaria;
@@ -64,12 +68,14 @@ exports.registrarclientela = async (req, res) => {
     const empleador_co_solicitante = req.body.empleador_co_solicitante;
     const anios_trabajando_co_solicitante = req.body.anios_trabajando_co_solicitante;
     const meses_trabajando_co_solicitante = req.body.meses_trabajando_co_solicitante;
-    const salario_mensual_co_solicitante = req.body.salario_mensual_co_solicitante;
+    const salario_mensual_co_solicitante = req.body.salario_mensual_co_solicitante.replace(/[$ ]/g, '');   
+    console.log(">>>>>>>>:"+salario_mensual_co_solicitante);
     const ocupacion_co_solicitante = req.body.ocupacion_co_solicitante;
     const telefono_trabajo_co_solicitante = req.body.telefono_trabajo_co_solicitante;
     const empleador_anterior_co_solicitante = req.body.empleador_anterior_co_solicitante;
     const ingresos_co_solicitante = req.body.ingresos_co_solicitante;
-    const ingresos_adicionales_co_solicitante = req.body.ingresos_adicionales_co_solicitante;
+    const ingresos_adicionales_co_solicitante = req.body.ingresos_adicionales_co_solicitante.replace(/[$ ]/g, '');   
+    console.log(">>>>>>>>:"+ingresos_adicionales_co_solicitante);
     const nom_referencia1_co_solicitante = req.body.nom_referencia1_co_solicitante;
     const parentesco1_co_solicitante = req.body.parentesco1_co_solicitante;
     const tel_movil1_co_solicitante = req.body.tel_movil1_co_solicitante;
@@ -100,13 +106,14 @@ exports.registrarclientela = async (req, res) => {
 
 
     const id_vendedor_fk = req.user.id
-
+  
 
     const objeto_datos = {
       nombre_cliente,
       segundo_nombre_cliente,
       apellidos_cliente,
       monto_financiar_cliente,
+      sistema,
       numero_licencia_cliente,
       estado_licencia_cliente,
       fecha_expedicion_licencia_cliente,

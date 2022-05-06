@@ -1,3 +1,4 @@
+
 <div class="card sidebar-alert border-0 text-center mx-4 mb-0 mt-5">
     <div class="card-body">
         <img src="./cssdash/images/Codigoreferido.svg" alt="" style="margin-bottom: -17%;">
@@ -5,17 +6,18 @@
             
             <h5 class="alertcard-title font-size-16">Comparte tu código</h5>
             <p class="font-size-13">Invita a nuevos vendedores a 3C Sigma Water System y aumenta tus ingresos.</p>
-            <!-- <% if (user) { %> -->
-                <span class="d-none d-xl-inline-block ms-1 fw-medium">
+  
+
+                <span class="d-none d-xl-inline-block ms-1 fw-medium"id="contenido-texto" >
                     <% if (user) { %>
-               <%= user.id_vendedor %>
+                      <%= user.id_vendedor %>
                     <% } %>
                 </span>
-                <!-- <% } %> -->
+   
 
-            <button class="btn btn-primary mt-2" id="botonCopy"><i class="fa fa-cppy"></i> Copiar código </button>
-
+            <button class="btn btn-primary mt-2" id="botonCopy"></i> Copiar código </button>
         </div>
+        <!-- <div class="mensaje-copy" > <p>¡Copiado al portapapeles!</p></div> -->
     </div>
 </div>
 
