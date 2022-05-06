@@ -199,7 +199,9 @@ exports.registrarclientela = async (req, res) => {
 }
 
 exports.listarClientes = async (req, res) => {
-  const id_vendendor = req.user.id // Capturando el id del Vendedor actual
+  
+  // Capturando el id del Vendedor actual
+  const id_vendendor = req.user.id 
   // Consultando en DB los clientes que pertenecen al vendedor actual
   conexion.query('SELECT * FROM formulario_clientes WHERE id_vendedor_fk = ?', [id_vendendor], (err, result) => {
     if (err) throw err;
