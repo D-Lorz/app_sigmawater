@@ -27,6 +27,7 @@ href="./cssdash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="s
 <!-- App Css-->
 <link rel="stylesheet" type="text/css" href="./cssdash/css/app.min.css" id="app-style" />
 
+
 </head>
 
 <body>
@@ -53,7 +54,7 @@ href="./cssdash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="s
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript:
-                                    void(0);"># de clientes</a></li>
+                                    void(0);">Clientes</a></li>
                             <li class="breadcrumb-item active">Lista de clientes</li>
                         </ol>
                     </div>
@@ -69,10 +70,10 @@ href="./cssdash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="s
 
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <h5 class="card-title">Contact List <span
                                 class="text-muted fw-normal ms-2">(834)</span></h5>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="col-md-6">
@@ -87,18 +88,18 @@ href="./cssdash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="s
                                         data-bs-placement="top" title="List"><i
                                             class="bx bx-list-ul"></i></a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link"
                                         href="contacts-grid"
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="Grid"><i
                                             class="bx bx-grid-alt"></i></a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         <div>
-                            <a href="#" class="btn btn-light"><i class="bx
-                                    bx-plus me-1"></i> Add New</a>
+                            <a href="/nuevo-cliente" class="btn btn-light"><i class="bx
+                                    bx-plus me-1"></i> Agregar nuevo cliente</a>
                         </div>
 
                         <div class="dropdown">
@@ -110,11 +111,9 @@ href="./cssdash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="s
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another
-                                        action</a></li>
-                                <li><a class="dropdown-item" href="#">Something
-                                        else here</a></li>
+                                <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
+                                <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
+                                <li><a class="dropdown-item" href="#">Eliminar cliente</a></li>
                             </ul>
                         </div>
                     </div>
@@ -128,7 +127,7 @@ href="./cssdash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="s
                     table-check nowrap" style="border-collapse: collapse;
                     border-spacing: 0 8px; width: 100%;">
                     <thead>
-                        <tr>
+                        <!-- <tr>
                             <th scope="col" style="width: 50px;">
                                 <div class="form-check font-size-16">
                                     <input type="checkbox"
@@ -136,7 +135,7 @@ href="./cssdash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="s
                                     <label class="form-check-label"
                                         for="checkAll"></label>
                                 </div>
-                            </th>
+                            </th> -->
                             <th scope="col">ID</th>
                             <th scope="col">Nombres</th>
                             <th scope="col">Apellidos</th>
@@ -207,6 +206,7 @@ href="./cssdash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="s
 <!-- Right bar overlay-->
 <!-- <div class="rightbar-overlay"></div> -->
   <!-- JAVASCRIPT -->
+  <script src="./cssdash/js/scripts_personalizadosdash.js"></script>
 <script src="./cssdash/libs/jquery/jquery.min.js"></script>
 <script src="./cssdash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="./cssdash/libs/metismenu/metisMenu.min.js"></script>

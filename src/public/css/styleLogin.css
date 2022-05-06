@@ -173,10 +173,6 @@ a {
   position: relative;
 }
 
-#iconosLogin{
-  float: left;
-}
-
 /* Position Relative */
 .pos-absolute {
   position: absolute;
@@ -252,12 +248,12 @@ h1 {
 
 .main-top-intro {
   background-image: url("/img/banner_login.jpg");
-  background-size: cover; 
+  background-size: cover;
   -webkit-background-size: cover;
-  -moz-background-size: cover; 
-   background-attachment: fixed;
-  position: relative; 
-   min-height: 100vh;
+  -moz-background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  min-height: 100vh;
 }
 
 .bg-layer {
@@ -265,80 +261,7 @@ h1 {
 }
 
 /*-- //slide --*/
-/*General links color*/
-a {
-	color: #409fff;
-	text-decoration: none;
-	-webkit-transition: all 0.2s ease;
-	transition: all 0.2s ease;
-	outline: none;
-}
 
-a:hover,
-a:focus {
-	color: #333;
-	text-decoration: none;
-	outline: none;
-}
-
-a.animated_link {
-	position: relative;
-	text-decoration: none;
-}
-
-a.animated_link:before {
-	content: "";
-	position: absolute;
-	width: 100%;
-	height: 2px;
-	bottom: -5px;
-	opacity: 1;
-	left: 0;
-	background-color: rgb(238, 234, 234);
-	visibility: hidden;
-	-webkit-transform: scaleX(0);
-	transform: scaleX(0);
-	-webkit-transition: all 0.3s ease-in-out 0s;
-	transition: all 0.3s ease-in-out 0s;
-}
-
-a.animated_link:hover:before {
-	visibility: visible;
-	-webkit-transform: scaleX(1);
-	transform: scaleX(1);
-}
-
-a.animated_link_2 {
-	position: relative;
-	text-decoration: none;
-	color: #555;
-}
-
-a.animated_link_2:hover {
-	color: #111;
-}
-
-a.animated_link_2:before {
-	content: "";
-	position: absolute;
-	width: 100%;
-	height: 1px;
-	bottom: -5px;
-	opacity: 1;
-	left: 0;
-	background-color: #111;
-	visibility: hidden;
-	-webkit-transform: scaleX(0);
-	transform: scaleX(0);
-	-webkit-transition: all 0.3s ease-in-out 0s;
-	transition: all 0.3s ease-in-out 0s;
-}
-
-a.animated_link_2:hover:before {
-	visibility: visible;
-	-webkit-transform: scaleX(1);
-	transform: scaleX(1);
-}
 /*--header start here--*/
 header {
   padding: 2em 0;
@@ -422,20 +345,20 @@ nav ul {
 
 /* Positioning the navigation items inline */
 nav ul li {
-  /* margin: 0px;
+  margin: 0px;
   display: inline-block;
-  float: left; */
+  float: left;
 }
 
 /* Styling the links */
 nav a {
-  /* text-transform: capitalize;
+  text-transform: capitalize;
   color: #fff;
   letter-spacing: 1px;
   font-size: 15px;
   font-weight: 400;
   display: block;
-  padding: 10px 15px; */
+  padding: 10px 15px;
 }
 
 nav ul li ul li:hover {
@@ -776,14 +699,9 @@ a {
 
 input {
   color: #000000;
-  /* text-align: justify; */
-  opacity: 0.29;
-  width: 81%;
-  padding: 13px 8px 1px 9px;
-  /* height: 10%; */
-  height: 46px;
-  margin-top: -1%;
-  border-radius: 7px;
+  text-align: justify;
+  padding: 14px 2px 1px 9px;
+  /* height: 10%;*/
 }
 
 .form-w3ls-left-info input[type="password"] {
@@ -803,10 +721,17 @@ input {
   margin-top: 27px;
   color: #76368f;
   font-size: 14px;
+ 
   padding: 0.7em 3em;
+  /* letter-spacing: 1px; */
   transition: 0.5s all;
+  /* -webkit-transition: 0.5s all; */
   -moz-transition: 0.5s all;
   -o-transition: 0.5s all;
+  /* display: inline-block; */
+  /* cursor: pointer; */
+  /* outline: none; */
+  /* border: none; */
   float: left;
 }
 
@@ -856,10 +781,9 @@ button.btn.reg {
   color: #fff;
   line-height: 1.8em;
   float: right;
-  margin-top:-3%;
-  
-
+  margin-top: -5%;
 }
+
 
 .copy-w3layouts-inf p a {
   color: #fff;
@@ -948,7 +872,6 @@ ul.w3layouts-icons li a.vk:hover {
 @media (max-width: 736px) {
   .copy-w3layouts-inf p {
     float: none;
-    margin-top: 18%;
     text-align: center;
   }
 
@@ -994,7 +917,7 @@ ul.w3layouts-icons li a.vk:hover {
   }
 
   .content-inner-info {
-    padding-top: 5em;
+    padding-top: 8em;
   }
 
   .form-w3layouts-grid .search {
@@ -1006,54 +929,6 @@ ul.w3layouts-icons li a.vk:hover {
     margin-top: 1em;
     padding: 1em 0;
   }
-  
-  body h2 {
-    font-size: 2.3em;
-    margin: 1em 0 0 0;
-
-}
-
-img {
-  max-width: 100%;
-  margin-top: 8%;
-}
-#iconosLogin {
-  float: left;
-  margin-top: 1rem;
-}
-.form-w3ls-left-info input[type="email"] {
-  width: 122%;
-  height: 47px;
-  left: 72px;
-  font-size: 13px;
-  top: 357px;
-  border: none;
-  opacity: 0.29;
-  border-radius: 5px;
-}
-
-.form-w3ls-left-info input[type="password"] {
-  width: 122%;
-  height: 47px;
-  left: 76px;
-  top: 357px;
-  border: none;
-  font-size: 13px;
-  opacity: 0.29;
-  border-radius: 5px;
-  margin-bottom: -10px;
-}
-
-
-
-
-.form-w3ls-left-info p a {
-  font-size: 12px;
-  color: #fff;
-  margin-left: 67px;
-}
-
-
 }
 
 @media (max-width: 480px) {
@@ -1069,25 +944,20 @@ img {
 @media (max-width: 441px) {
   .form-w3ls-left-info input[type="email"],
   .form-w3ls-left-info input[type="password"] {
-    width: 80%;
-
-    
+    width: 91%;
   }
-
 
   .nav_w3pvt {
     float: left;
     width: 60%;
     margin: 1em 0 0 0;
   }
-
-
 }
 
 @media (max-width: 384px) {
   body h2 {
     font-size: 1.75em;
-    margin: 1em 0 0 0;
+    margin: 2em 0 0 0;
   }
 
   .content-w3layouts-main {
@@ -1096,39 +966,14 @@ img {
   }
 
   .content-inner-info {
-    padding-top: 6em;
+    padding-top: 7em;
   }
-.form-w3ls-left-info button.btn {
-  background: #ffffff;
-  margin-top: 27px;
-  color: #76368f;
-  font-size: 14px;
-  margin-left: 29%;
-    padding: 0.7em 3em;
-  transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  float: left;
-}
-img {
-  max-width: 100%;
-  margin-top: 8%;
-}
-.form-w3ls-left-info p a {
-  font-size: 12px;
-  color: #fff;
-  margin-left: 29%;
-}
-#iconosLogin {
-  float: left;
-  margin-top: 1rem;
-}
 }
 
 @media (max-width: 350px) {
   body h2 {
     font-size: 1.6em;
-      }
+  }
 }
 
 /*--//responsive--*/
