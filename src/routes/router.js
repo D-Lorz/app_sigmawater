@@ -51,13 +51,13 @@ res.render('dashboard', { user: req.user })
     
 });
 
-router.get('/lista_facturas', isAuthenticated, (req, res) => {
-    res.render('lista_facturas', { user: req.user })
-});
+// router.get('/atencion-al-cliente"', isAuthenticated, (req, res) => {
+//     res.render('atencion-al-cliente"', { user: req.user })
+// });
 
-router.get('/detalle_facturas', isAuthenticated, (req, res) => {
-    res.render('detalle_facturas', { user: req.user })
-});
+// router.get('/detalle_facturas', isAuthenticated, (req, res) => {
+//     res.render('detalle_facturas', { user: req.user })
+// });
 
 router.get('/lista-clientes', isAuthenticated, listarClientes)
 

@@ -201,6 +201,7 @@ nav.horizontal ul li {
 /* horizontal menu */
 img {
   max-width: 100%;
+
 }
 
 /*-- end reset --*/
@@ -433,9 +434,84 @@ li > a:only-child:after {
 }
 
 /* Media Queries
---------------------------------------------- */
+-----
 
-@media all and (max-width: 992px) {
+
+---------------------------------------- */
+@media (min-width: 1600px) {
+  .content-inner-info {
+    padding-top: 8em;
+  }
+
+
+  .content-inner-info {
+    padding-top: 8em;
+  }
+
+  .form-w3layouts-grid .search {
+    outline: none;
+    padding: 10px 10px;
+  }
+
+  #copycopy {
+    margin-top: 25%;
+   
+  }
+
+  body h2 {
+    /* width: 327px; */
+    /* height: 38px; */
+    /* margin-top: -2%; */
+    /* padding-top: 7%; */
+    /* top: 243px; */
+    /* margin-bottom: 1%; */
+    font-weight: 800;
+    font-size: 32px;
+    /* line-height: 38px; */
+    color: #ffffff;
+}
+
+  .form-w3ls-left-info input[type="email"],
+  .form-w3ls-left-info input[type="password"] {
+    width: 99%;
+  }
+
+  img {
+    max-width: 100%;
+    margin-top: 7%;
+  
+  }
+
+  .form-w3ls-left-info p a {
+    font-size: 12px;
+    color: #fff;
+   float: right;
+    /* letter-spacing: 2px; */
+    /* text-transform: uppercase; */
+    /* text-decoration: underline; */
+}
+
+  .cd-nav-trigger {
+    top: 10px;
+    right: 15px;
+    height: 44px;
+    width: 44px;
+    z-index: 5;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+
+.redesSociales{
+  padding-top: 23%;
+
+ }
+
+
+
+
+}
+@media (min-width: 992px) {
   #logo {
     display: block;
     padding: 0;
@@ -455,7 +531,7 @@ li > a:only-child:after {
   nav ul {
     width: 100%;
   }
-
+  
   /* Hide the navigation menu by default */
   /* Also hide the  */
   .toggle + a,
@@ -651,6 +727,7 @@ px
 
 .content-inner-info {
   padding-top: 6em;
+  width: 100.2%;
 }
 
 a {
@@ -755,6 +832,7 @@ button.btn.reg {
 .form-w3ls-left-info p a {
     font-size: 12px;
     color: #fff;
+   
     /* letter-spacing: 2px; */
     /* text-transform: uppercase; */
     /* text-decoration: underline; */
@@ -771,7 +849,7 @@ button.btn.reg {
 
 /*-- copyright --*/
 .copy-w3layouts-inf {
-  margin-top: 2em;
+  margin-top: 3em;
   padding: 2em 0;
 }
 
@@ -906,7 +984,7 @@ ul.w3layouts-icons li a.vk:hover {
   }
 
   body h2 {
-    font-size: 2.3em;
+    font-size: 2.0em;
     margin: 2em 0 0 0;
   }
 }
@@ -926,9 +1004,65 @@ ul.w3layouts-icons li a.vk:hover {
   }
 
   .copy-w3layouts-inf {
-    margin-top: 1em;
+    margin-top: 10em;
     padding: 1em 0;
   }
+
+
+
+  .form-w3ls-left-info input[type="email"],
+  .form-w3ls-left-info input[type="password"] {
+    width: 99%;
+  }
+
+  img {
+    max-width: 100%;
+    margin-top: 7%;
+  
+  }
+
+  .form-w3ls-left-info p a {
+    font-size: 12px;
+    color: #fff;
+   float: right;
+    /* letter-spacing: 2px; */
+    /* text-transform: uppercase; */
+    /* text-decoration: underline; */
+}
+  .form-w3ls-left-info button.btn {
+    background: #ffffff;
+    margin-top: 27px;
+    color: #76368f;
+    font-size: 14px;
+    padding: 0.7em 3em;
+  margin-left: 30%;
+    transition: 0.5s all;
+    /* -webkit-transition: 0.5s all; */
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    /* display: inline-block; */
+    /* cursor: pointer; */
+    /* outline: none; */
+    /* border: none; */
+    /* float: left; */
+}
+  .cd-nav-trigger {
+    top: 10px;
+    right: -11px;
+    height: 44px;
+    width: 44px;
+    z-index: 5;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+
+.redesSociales{
+  padding-top: 23%;
+  padding-right: 42%;
+  
+ }
+
 }
 
 @media (max-width: 480px) {
@@ -939,19 +1073,30 @@ ul.w3layouts-icons li a.vk:hover {
   .menu .toggle {
     width: 62%;
   }
+
+
+.bienvenida {
+  color: #ffffff;
+  text-align: center;
+}
+.form-w3ls-left-info input[type="email"], .form-w3ls-left-info input[type="password"] {
+  width: 100.1%;
 }
 
+
+}
+
+
 @media (max-width: 441px) {
-  .form-w3ls-left-info input[type="email"],
-  .form-w3ls-left-info input[type="password"] {
-    width: 91%;
-  }
+
 
   .nav_w3pvt {
     float: left;
     width: 60%;
     margin: 1em 0 0 0;
   }
+
+  
 }
 
 @media (max-width: 384px) {
@@ -968,6 +1113,8 @@ ul.w3layouts-icons li a.vk:hover {
   .content-inner-info {
     padding-top: 7em;
   }
+
+
 }
 
 @media (max-width: 350px) {
@@ -1005,3 +1152,23 @@ label {
   margin-top: -25px
 
 }
+
+.redesSociales li {
+  display:inline;
+  padding-left:3px;
+  padding-right:3px;
+
+}
+
+.redesSociales{
+  float: right;
+  margin-top: -3%;
+}
+
+
+.icon-instagram:hover{
+  color:#D2358B;
+}
+
+
+    
