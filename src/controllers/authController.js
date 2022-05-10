@@ -88,7 +88,7 @@ exports.login = async (req, res) => {
                 } else {
                  //inicio de sesión OK
                  const id = results[0].id
-                 const token = jwt.sign({ id: id },  'super_secret_AppSigmaWater', { expiresIn: 86400 })
+                 const token = jwt.sign({ id: id },  'super_secret_AppSigmaWater', { expiresIn: 3600 })
                  //generamos el token SIN fecha de expiracion
                  //const token = jwt.sign({id: id}, process.env.JWT_SECRETO)
                  console.log("TOKEN>>>>>: " + token + " para el USUARIO : " + correo)
@@ -129,7 +129,7 @@ exports.isAuthenticated = async (req, res, next) => {
             })
         } catch (error) {
             console.log(error)
-            return false
+            return next()
         }
     } else {
         res.redirect('/login')
