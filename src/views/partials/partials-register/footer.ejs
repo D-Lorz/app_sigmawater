@@ -1,68 +1,88 @@
-  <!-- * =================== SCRIPTS ========= -->
+<!-- * =================== SCRIPTS ========= -->
 
 <!-- FIXME: ================================================================== -->
 <!-- form mask -->
-<script src="./cssnuevocliente/libs/imask/imask.min.js"></script>
+<script src="./directorio_nuevoCliente/libs/imask/imask.min.js"></script>
 <!-- form mask init -->
-<script src="./cssdash/js/pages/form-mask.init.js"></script>
+<script src="./directorio_dash/js/pages/form-mask.init.js"></script>
 <!--FIXME: ================================================================== -->
 
 
-  <!-- Jquery-->
-    <script src="./js/jquery-3.6.0.min.js"></script>
-  <!-- Common script -->
-  <script src="./js/common_scripts_min.js"></script>
-  <!-- Wizard script -->
-  <script src="./js/registration_wizard_func.js"></script>
-  <!-- Menu script -->
-  <script src="./js/velocity.min.js"></script>
-  <script src="./js/main.js"></script>
-  <!-- Theme script -->
-  <script src="./js/functions.js"></script>
- 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
-  <script src="./js/alertify.min.js"></script>
-  <script src="./js/alertify.js"></script>
+<!-- Jquery-->
+<script src="./js/jquery-3.6.0.min.js"></script>
+<!-- Common script -->
+<script src="./js/common_scripts_min.js"></script>
+<!-- Wizard script -->
+<script src="./js/registration_wizard_func.js"></script>
+<!-- Menu script -->
+<script src="./js/velocity.min.js"></script>
+<script src="./js/main.js"></script>
+<!-- Theme script -->
+<script src="./js/functions.js"></script>
 
-  <!-- Script Personalizados -->
-  <script src="./js/scripts_personalizados.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+<script src="./js/alertify.min.js"></script>
+<script src="./js/alertify.js"></script>
 
-  <!-- ====================================================================-->
-  <!-- ==== MASCARA PARA EL CAMPO SEGURO SOCIAL ==== -->
-  <!-- ====================================================================-->
-  <script src="./js/mascara.js"></script>
+<!-- Script Personalizados -->
+<script src="./js/scripts_personalizados.js"></script>
 
-  <!-- ====================================================================-->
-  <!-- ====================================================================-->
+<!-- ====================================================================-->
+<!-- ==== MASCARA PARA EL CAMPO SEGURO SOCIAL ==== -->
+<!-- ====================================================================-->
+<script src="./js/mascara.js"></script>
+
+<!-- ====================================================================-->
+<!-- ====================================================================-->
 <!-- * SCRIPTS DEL CALENDARIO DE REGISTER -->
-        <!-- <script src="./js/jquery.js"></script> -->
-        <script src="./js/jquery.datetimepicker.js"></script>
-        <script src="./js/jquery.datetimepicker.full.min.js"></script>
+<!-- <script src="./js/jquery.js"></script> -->
+<script src="./js/jquery.datetimepicker.js"></script>
+<script src="./js/jquery.datetimepicker.full.min.js"></script>
 <!-- * SCRIPTS DEL CALENDARIO DE REGISTER -->
-  <!-- *==================== SCRIPTS =================================== -->
+<!-- *==================== SCRIPTS =================================== -->
 
 
-  <!-- ====================================================================-->
- <!-- === CALENDARIO == --> 
-        <script>
-          /*jslint browser:true*/
-          /*global jQuery, document*/
+<!-- ====================================================================-->
+<!-- === CALENDARIO == -->
+<script>
 
-          jQuery(document).ready(function () {
-              'use strict';
 
-              jQuery('#filter-date').datetimepicker({
-                timepicker: false,
-                datapicker: true,
-                format:	'm-d-Y',
-                yearStart:1800,
-                yearEnd: (new Date().getFullYear() -18)
-                                
+  /*jslint browser:true*/
+  /*global jQuery, document*/
 
-              });
-              
-          });
-      
+  jQuery(document).ready(function () {
+    'use strict';
+
+   
+   const urlParams = new URLSearchParams(location.search);
+   const afiliado =  $('#afiliado').removeAttr("disabled");
+
+  if (location.search) {
+
+    let codeAfiliado = []
+    for (const value of urlParams.values()) {
+      codeAfiliado.push(value)
+    }
+    $('#afiliado').val(codeAfiliado[0])
+    $('#afiliado').attr("disabled", true);
+  }
+
+  //  console.log(codeAfiliado[0])
+
+
+
+    jQuery('#filter-date').datetimepicker({
+      timepicker: false,
+      datapicker: true,
+      format: 'm-d-Y',
+      yearStart: 1800,
+      yearEnd: (new Date().getFullYear() - 18)
+
+
+    });
+
+  });
+
 
   /////////////////////////////////////////////////////////////////////////=-->
 
@@ -71,165 +91,165 @@
 
   document.addEventListener("DOMContentLoaded", function () {
 
-// Pattern (Phone) MASCARA PARA EL CAMPO TELEFONO DE SOLICITANTE
-var phoneMaskRegister = IMask(document.getElementById('telefonoform'), {
-  mask: '+{1} (000) 000-0000'
-});
+    // Pattern (Phone) MASCARA PARA EL CAMPO TELEFONO DE SOLICITANTE
+    var phoneMaskRegister = IMask(document.getElementById('telefonoform'), {
+      mask: '+{1} (000) 000-0000'
+    });
 
-});
+  });
 
-//  /TODO: FUNCIONES PARA MASCARA  -->
+  //  /TODO: FUNCIONES PARA MASCARA  -->
 
 
   // ====================================================================-->
-   //=== ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT == -->
+  //=== ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT == -->
   //====================================================================-->
 
 
 
-    $(function () {
+  $(function () {
 
-      // This code will attach `fileselect` event to all file inputs on the page
-      $(document).on('change', ':file', function () {
-        var input = $(this),
-          numFiles = input.get(0).files ? input.get(0).files.length : 1,
-          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-        input.trigger('fileselect', [numFiles, label]);
+    // This code will attach `fileselect` event to all file inputs on the page
+    $(document).on('change', ':file', function () {
+      var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+      input.trigger('fileselect', [numFiles, label]);
+    });
+
+
+    $(document).ready(function () {
+      //below code executes on file input change and append name in text control
+      $(':file').on('fileselect', function (event, numFiles, label) {
+
+        var input = $(this).parents('.input-group').find(':text'),
+          log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+        if (input.length) {
+          input.val(log);
+        } else {
+          if (log) alert(log);
+        }
+
       });
+    });
+
+  });
 
 
-      $(document).ready(function () {
-        //below code executes on file input change and append name in text control
-        $(':file').on('fileselect', function (event, numFiles, label) {
+  //  ==========>   ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT
 
-          var input = $(this).parents('.input-group').find(':text'),
-            log = numFiles > 1 ? numFiles + ' files selected' : label;
+  /////////////////////////////////////////////////////////////////////////=-->
 
-          if (input.length) {
-            input.val(log);
-          } else {
-            if (log) alert(log);
-          }
+  ////VALIDAR LIMITANTE DEL CAMPO NUMBER///=-->
 
-        });
-      });
-      
-     });
-
-
-//  ==========>   ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT
-
-/////////////////////////////////////////////////////////////////////////=-->
-
-////VALIDAR LIMITANTE DEL CAMPO NUMBER///=-->
-
-    function maxlengthNumber(obj) {
-      console.log(obj.value);
-      if (obj.value.length > obj.maxLength) {
-        obj.value = obj.value.slice(0, obj.maxLength);
-
-      }
+  function maxlengthNumber(obj) {
+    console.log(obj.value);
+    if (obj.value.length > obj.maxLength) {
+      obj.value = obj.value.slice(0, obj.maxLength);
 
     }
-// ======> VALIDAR LIMITANTE DEL CAMPO NUMBER
- 
-/////////////////////////////////////////////////////////////////////////=-->
 
-// ============ validar el campo licencia de conduccion ===== -->
+  }
+  // ======> VALIDAR LIMITANTE DEL CAMPO NUMBER
 
- // V1: validación el tamaño maximo 5 MB 
- // V2: convertir minusculas a mayusculas
- // V3: tipo de archivo aceptados
+  /////////////////////////////////////////////////////////////////////////=-->
 
-    $(document).on('change', 'input[type="file"]', function () { 
-      // this.files[0].size recupera el tamaño del archivo
-      // alert(this.files[0].size);
+  // ============ validar el campo licencia de conduccion ===== -->
 
-      var fileName = this.files[0].name;
-      var fileSize = this.files[0].size;
+  // V1: validación el tamaño maximo 5 MB 
+  // V2: convertir minusculas a mayusculas
+  // V3: tipo de archivo aceptados
 
-      if (fileSize > 5000000) { //  V1 --> validacion del tamaño de archivo
-        alertify.set('notifier', 'position', 'top-center');
-        alertify.error('El archivo supera los 5MB de peso');
-        this.value = '';
-        this.files[0].name = '';
-      } else {
-        // recuperamos la extensión del archivo
-        var ext = fileName.split('.').pop();
+  $(document).on('change', 'input[type="file"]', function () {
+    // this.files[0].size recupera el tamaño del archivo
+    // alert(this.files[0].size);
 
-        // V2: --> Convertimos en minúscula porque la extensión del archivo puede estar en mayúscula
-        ext = ext.toLowerCase();
+    var fileName = this.files[0].name;
+    var fileSize = this.files[0].size;
 
-        // console.log(ext);
-        switch (ext) { // V3: --> aqui eligo el formato del restringido 
-          case 'png':
-          case 'jpg':
-            break;
-          default:
-            alertify.set('notifier', 'position', 'top-center');
-            alertify.error('Solo archivos .jpg o .png son aceptados');
+    if (fileSize > 5000000) { //  V1 --> validacion del tamaño de archivo
+      alertify.set('notifier', 'position', 'top-center');
+      alertify.error('El archivo supera los 5MB de peso');
+      this.value = '';
+      this.files[0].name = '';
+    } else {
+      // recuperamos la extensión del archivo
+      var ext = fileName.split('.').pop();
 
-            this.value = ''; // reset del valor
-            this.files[0].name = '';
-        }
+      // V2: --> Convertimos en minúscula porque la extensión del archivo puede estar en mayúscula
+      ext = ext.toLowerCase();
+
+      // console.log(ext);
+      switch (ext) { // V3: --> aqui eligo el formato del restringido 
+        case 'png':
+        case 'jpg':
+          break;
+        default:
+          alertify.set('notifier', 'position', 'top-center');
+          alertify.error('Solo archivos .jpg o .png son aceptados');
+
+          this.value = ''; // reset del valor
+          this.files[0].name = '';
       }
+    }
 
-    });
-// =====> validar el campo licencia de conduccion ===== -->
+  });
+  // =====> validar el campo licencia de conduccion ===== -->
 
-/////////////////////////////////////////////////////////////////////////=-->
+  /////////////////////////////////////////////////////////////////////////=-->
 
-// <!-- =========================MENSAJE DE REGISTRO EXITOSO ============ ============-->
-
- 
-    const d = document;
-
-    d.addEventListener("submit", () => {
-      // e.preventDefault();
-      Swal.fire({
-        icon: 'success',
-        title: 'Tu registro ha sido recibido',
-        html: 'Tu información será verificada por un administrador y recibirás un correo cuando tu cuenta sea activada.',
-        grow: 'fullscreen',
-        padding: '129px 43px 80px',
-        backdrop: 'white',
-        focusConfirm: false,
-        confirmButtonText: '<a href="/" style="color:white" >Aceptar</a> ',
+  // <!-- =========================MENSAJE DE REGISTRO EXITOSO ============ ============-->
 
 
-        // timer: 6000,
-        // timerProgressBar: true,
-        // didOpen: () => {
-        // 	Swal.showLoading()
-        // 	const b = Swal.getHtmlContainer().querySelector('b')
-        // 	timerInterval = setInterval(() => {
-        // 		b.textContent = Swal.getTimerLeft()
-        // 	}, 100)
-        // },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('I was closed by the timer')
-        }
-      })
+  const d = document;
 
-    });
+  d.addEventListener("submit", () => {
+    // e.preventDefault();
+    Swal.fire({
+      icon: 'success',
+      title: 'Tu registro ha sido recibido',
+      html: 'Tu información será verificada por un administrador y recibirás un correo cuando tu cuenta sea activada.',
+      grow: 'fullscreen',
+      padding: '129px 43px 80px',
+      backdrop: 'white',
+      focusConfirm: false,
+      confirmButtonText: '<a href="/" style="color:white" >Aceptar</a> ',
+
+
+      // timer: 6000,
+      // timerProgressBar: true,
+      // didOpen: () => {
+      // 	Swal.showLoading()
+      // 	const b = Swal.getHtmlContainer().querySelector('b')
+      // 	timerInterval = setInterval(() => {
+      // 		b.textContent = Swal.getTimerLeft()
+      // 	}, 100)
+      // },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+
+  });
 
 
   // =========================================== ============-->
- //=========================MENSAJE DE REGISTRO EXITOSO ============ ============-->
- // =========================================== ============-->
+  //=========================MENSAJE DE REGISTRO EXITOSO ============ ============-->
+  // =========================================== ============-->
 
 
 
+  // ==========   ==============================
 
 
+</script>
 
-
-  </script>
 
 
 </body>

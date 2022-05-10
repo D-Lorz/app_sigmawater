@@ -20,39 +20,107 @@
                       <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
                       <!--============================================================-->
 
-                      
-                                        <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box d-sm-flex align-items-center
-                                    justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Nuevo cliente</h4>
+                                            
+                                                                <!-- start page title -->
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="page-title-box d-sm-flex align-items-center
+                                                            justify-content-between">
+                                                            <h4 class="mb-sm-0 font-size-18">Nuevo cliente</h4>
 
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0" style="text-transform: initial;">
-                                            <li class="breadcrumb-item"><a href="javascript:
-                                                    void(0);">Afiliados</a></li>
-                                            <li class="breadcrumb-item active" id="reparartexto">Lista de Afiliados</li>
-                                        </ol>
-                                    </div>
+                                                            <div class="page-title-right">
+                                                                <ol class="breadcrumb m-0" style="text-transform: initial;">
+                                                                    <li class="breadcrumb-item"><a href="javascript:
+                                                                            void(0);">Afiliados</a></li>
+                                                                    <li class="breadcrumb-item active" id="reparartexto">Lista de Afiliados</li>
+                                                                </ol>
+                                                            </div>
 
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end page title -->
-                      <!-- BEGIN: Content-->
-                      <div class="app-content content" style="margin-top:-7px">
-                          <!-- Form wizard with step validation section start -->
-                          <section id="validation">
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                              <div class="card">
-                                  <div class="card-content collapse show">
-                                      <form action="/registrarclientela" method="POST"
-                                          class="steps-validation wizard-circle" id="validarForm"
-                                          enctype="multipart/form-data">
+                                                <!-- end page title -->
+                                            <!-- BEGIN: Content-->
+                                            <div class="app-content content" style="margin-top:-7px">
+                                                <!-- Form wizard with step validation section start -->
+                                              <section id="validation">
+
+                                                 <div class="card">
+                                                     <div class="card-content collapse show">
+
+                                                      <form action="/registrarclientela" method="POST" class="steps-validation wizard-circle" id="validarForm"
+                                                            enctype="multipart/form-data">
+    
+                                          <!-- ==============   PRE FORMULARIO  ========================== -->
+                                              
+                                                    <h6><b>...</b></h6>
+                                                    <fieldset>
+
+                                                        <div class="row  justify-content: center;">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="nombreP">Nombre</label>
+                                                                    <input type="text" class="form-control" id="nombreP" name="nombre_preformulario">
+                                                                </div>
+                                                            </div>
+                                                                  
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="apellidoP"> Apellidos</label>
+                                                                    <input type="text" class="form-control" id="apellidoP" name="apellidos_preformulario" >
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="correoP"> Correo</label>
+                                                                    <input type="email" class="form-control" id="correoP" name="correo_preformulario" >
+                                                                </div>
+                                                            </div> 
+                                                         </div>
+                                              <!-- * ========== Segunda fila =======  -->
+                                                         <div class="row  justify-content: center;">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="telefonoP">Teléfono</label>
+                                                                    <input type="text" class="form-control" id="telefonoP" name="telefono_preformulario">
+                                                                </div>
+                                                            </div>
+                                                                  
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="direccionP">Dirección</label>
+                                                                    <input type="text" class="form-control" placeholder="Escriba su direccion..." id="direccionP" name="" >
+                                                                </div>
+                                                            </div>
+                
+                                                             <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Ciudad</label>
+                                                                    <input type="text" class="form-control" id="" name="" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                         <!-- * ========== Tercera fila =======  --> 
+                                                     <div class="row " >
+                                                         <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Estado<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" id="" name="" >
+                                                                </div>
+                                                            </div>
+                        
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="codigo_postalP">Codigo postal </label>
+                                                                    <input type="text" class="form-control" id="codigo_postalP" name="" >
+                                                             </div>
+                                                         </div>
+                                                 </fieldset>  
+                                             
 
                                           <!--============= /FIXME:===== *SOLICITANTE* =======FIXME:=========-->
-                                          <!-- Step 1 -->
+                                          <!-- Step 1
                                            <h6><b>SOLICITANTE</b></h6>
 
                                           <fieldset>
@@ -218,9 +286,8 @@
                                                     <input type="text" class="form-control required"  placeholder="Precione aqui para elegir fecha" id="fecha_nacimientof" name="fecha_nacimiento_cliente" readonly>
                                                 </div>
                                         </div>
-                                        
-                                    
-                                 </div> 
+                                     
+                                </div> 
         
                                   <div class="row">
                                     <div class="col-md-4">
@@ -237,7 +304,7 @@
                                                 </div>
                                             </div>
                                      </div>         
-                                          </fieldset>  
+                                          </fieldset> -->
 
                                           <!--============= //FIXME:===== *SOLICITANTE* =======FIXME:=========-->
 
@@ -246,7 +313,7 @@
 
                                           <!--============= /FIXME:===== *CASA* ==============FIXME:=========-->
                                           <!-- Step 2 -->
-                                      <h6><b>CASA</b></h6>
+                                      <!-- <h6><b>CASA</b></h6>
                                           <fieldset style="text-align: center">
 
                                             <div class="row justify-content-center" >
@@ -338,7 +405,7 @@
                                             </div>   
                              
 
-                                          </fieldset>  
+                                          </fieldset>-->
 
                                           <!--============= //FIXME:===== *CASA* ======= ===== FIXME:=========-->
 
@@ -347,7 +414,7 @@
                                           <!--============= /FIXME:===== *INGRESOS* ========  FIXME:=========-->
 
                                           <!-- Step 3 -->
-                                          <h6><b>INGRESOS</b></h6>
+                                          <!-- <h6><b>INGRESOS</b></h6>
                                           <fieldset>
 
                                              <div class="row text-align: center;">
@@ -498,14 +565,14 @@
                                             </div>
                                          </div>           
 
-                                          </fieldset>  
+                                          </fieldset>   -->
 
                                           <!--============= / FIXME:===== *INGRESOS* ==========FIXME:=========-->
 
                                           <!--=============================TODO:TODO:=============================================================-->
 
                                           <!--============= //FIXME:===== *INFORMACION BANCARIA* ======= FIXME:=========-->
-                                          <h6><b>INFORMACIÓN BANCARIA</b></h6>
+                                          <!-- <h6><b>INFORMACIÓN BANCARIA</b></h6>
                                           <fieldset>
                                               
                                    <div class="row text-align: center;">
@@ -535,14 +602,14 @@
                                                 </div>      
 
 
-                                          </fieldset> 
+                                          </fieldset>  -->
                                           <!--============= //FIXME: ===== *CONFIGURACION BANCARIA* ===== FIXME:=========-->
 
                                           <!--=============================TODO:TODO:=============================================================-->
 
                                           <!--============= / FIXME:===== *CO-SOLICITANTE* === FIXME:=========-->
                                           <!-- Step 4 -->
-                                          <h6><b>CO-SOLICITANTE</b></h6>
+                                          <!-- <h6><b>CO-SOLICITANTE</b></h6>
 
                                           <fieldset>
 
@@ -819,7 +886,7 @@
                                                   </div>
                                               </div>
 
-                                          </fieldset>
+                                          </fieldset> -->
 
                                           <!--============= //FIXME:===== *CO-SOLICITANTE* ==== FIXME:=========-->
 
@@ -827,7 +894,7 @@
 
                                           <!--============= //FIXME:===== *REFERENCIAS* ======= FIXME:=========-->
 
-                                          <h6><b>REFERENCIAS</b></h6>
+                                          <!-- <h6><b>REFERENCIAS</b></h6>
                                           <fieldset>
 
                                               <div class="row text-align: center;">
@@ -925,7 +992,7 @@
                                                   </div>
 
                                               </div>
-                                          </fieldset>
+                                          </fieldset> -->
                                           <!--============= //FIXME: ===== *REFERENCIAS* ===== FIXME:=========-->
 
                                           <!--=============================TODO:TODO:=============================================================-->
@@ -933,7 +1000,7 @@
 
                                           <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
 
-                                         <h6><b>CARGAR ARCHIVOS</b></h6>
+                                         <!-- <h6><b>CARGAR ARCHIVOS</b></h6>
                                           <fieldset>
 
 
@@ -985,7 +1052,7 @@
                                     </div>  
 
                                     </div>     
-                                          </fieldset> 
+                                          </fieldset>  -->
 
                                           <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
                                           <!--=============================TODO:TODO:=============================================================-->
@@ -993,7 +1060,7 @@
 
 
                                           <!--======== //======FIXME:== * TERMINOS Y CONDICIONES* FIXME:=========-->
-                                          <h6><b>TERMINOS Y CONDICIONES</b></h6>
+                                          <!-- <h6><b>TERMINOS Y CONDICIONES</b></h6>
                                           <fieldset>
 
                                               <div class="row ">
@@ -1030,7 +1097,7 @@
 
                                                   </div>
                                                   <div class="col-5">
-                                                      <!-- Button trigger modal -->
+                                                     
                                                       <label type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modalFirmar">
                                                           <input type="checkbox" id="btnAceptar" name="" class="required" >
                                                           Aceptar y firmar los términos
@@ -1047,28 +1114,28 @@
                                                           <span class="btn btn-primary" style="padding: 10px;">
                                                               Cargar pdf firmado
                                                               <input type="hidden" name="acuerdo_firmado" id="code_base64" value="" required>
-                                                              <!-- <img src="" alt="Firma del usuario" id="pdfFirmado">  -->
+                                                            
                                                           </span>
                                                       </label>
                                                       <input type="text" class="form-control" id="miFirma_png"
                                                           style="font-size: 15px; height: 42px;"
                                                           placeholder="Cargar archivo firmado" value="" required readonly>
                                                   </div>
-                                              </div>
+                                              </div> -->
 
                                               <!-- Modal -->
-                                              <div class="modal fade" id="modalFirmar" tabindex="-1"
+                                              <!-- <div class="modal fade" id="modalFirmar" tabindex="-1"
                                                   role="dialog" aria-labelledby="modalFirmarTitle"
                                                   aria-hidden="true">
                                                   <div class="modal-dialog modal-dialog-centered" role="document">
                                                       <div class="modal-content">
                                                           <div class="modal-header">
                                                               <h5 class="modal-title" id="modalFirmarLongTitle">Firmar
-                                                                  a continuación</h5>
-                                                              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                  a continuación</h5> -->
+                                                              <!-- todo No descomentar    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                <span aria-hidden="true">&times;</span>
                                                            </button> -->
-                                                          </div>
+                                                          <!-- </div>
                                                           <div class="modal-body">
                                                               <canvas id="canvas"></canvas>
                                                               <br>
@@ -1076,9 +1143,9 @@
                                                               <button type="button" class="btn btn-danger"
                                                                   id="btnLimpiar">Limpiar</button>
                                                               <button type="button" class="btn btn-warning" hidden
-                                                                  id="btnDescargar">Descargar</button>
-                                                              <!-- <button type="button" class="btn btn-info" id="btnGenerarDocumento">Pasar a documento</button>  -->
-
+                                                                  id="btnDescargar">Descargar</button> -->
+                                                              <!-- todo no descomentar <button type="button" class="btn btn-info" id="btnGenerarDocumento">Pasar a documento</button>  -->
+<!-- 
                                                           </div>
                                                           <div class="modal-footer" id="ocultar">
                                                               <button type="button" class="btn btn-primary"
@@ -1107,7 +1174,7 @@
                                               border-radius: 2px;
                                               border: 1px solid transparent; height: 39px;">
 
-                                          </fieldset>
+                                          </fieldset> -->
                                           <!--============= // FIXME:===== *TERMINOS Y CONDICIONES* FIXME:=========-->
 
                                           <!--=============================TODO:TODO:=============================================================-->
