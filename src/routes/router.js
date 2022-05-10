@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const path = require('path');
 const multer = require('multer');
-const { isAuthenticated, nologueado, registrar, login, logout } = require('../controllers/authController');
-const { listarClientes } = require('../controllers/formularioControllers');
+const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados } = require('../controllers/authController');
+const { listarClientes, listarCantidadClientes} = require('../controllers/formularioControllers');
 
 const rutaAlmacen = multer.diskStorage({
 
@@ -44,9 +44,9 @@ router.get('/login', nologueado, (req, res) => {
     res.render('login', { alert: false })
 });
 
-router.get('/', isAuthenticated, (req, res) => {
+router.get('/', isAuthenticated, listarCantidadClientes,(req, res) => {
     console.log(">>>>>>>>>>")
-console.log(req.user)
+    console.log(req.user)
 res.render('dashboard', { user: req.user })
     
 });
@@ -66,7 +66,8 @@ router.get('/nuevo-cliente', isAuthenticated, (req, res) => {
 });
 
 
-router.get('/afiliados', isAuthenticated, (req, res) => {
+router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
+
     res.render('afiliados', { user: req.user })
 });
 

@@ -99,6 +99,7 @@ exports.registrarclientela = async (req, res) => {
 
     });
     const acuerdo_firmado = req.body.acuerdo_firmado
+    const estado = 0
     const id_cliente = generateRandomNumber(6);
 
 
@@ -179,6 +180,7 @@ exports.registrarclientela = async (req, res) => {
       tel_movil3_co_solicitante,
       licencia_cliente,
       acuerdo_firmado,
+      estado,
       id_cliente,
       id_vendedor_fk
     }
@@ -199,17 +201,48 @@ exports.registrarclientela = async (req, res) => {
 }
 
 exports.listarClientes = async (req, res) => {
-  
-  // Capturando el id del Vendedor actual
-  const id_vendendor = req.user.id 
-  // Consultando en DB los clientes que pertenecen al vendedor actual
+
+ // Capturando el id del Vendedor actual
+  const id_vendendor = req.user.id;
+
+// Consultando en DB los clientes que pertenecen al vendedor actual
   conexion.query('SELECT * FROM formulario_clientes WHERE id_vendedor_fk = ?', [id_vendendor], (err, result) => {
     if (err) throw err;
     res.render('lista-clientes', {user: req.user, clientes: result})
+    
   })
-  
+    
+}
+
+exports.listarCantidadClientes = async (req, res) => {
+    // Capturando el id del Vendedor actual
+  const id_vendendor = req.user.id;
+  // Consultando en DB los clientes que pertenecen al vendedor actual
+conexion.query('SELECT COUNT(*) AS Total_de_clientes FROM formulario_clientes  WHERE id_vendedor_fk = ? ', [id_vendendor], (err, result) => {
+
+  if (err) throw err;
+    res.render('dashboard', {user: req.user, result: result})
+    console.log("// ------------------------------");
+    console.log(result);
+    console.log("// ------------------------------");
+   
+  })
+
+
+  // const id_vendendorR = req.user.id;
+  // conexion.query('SELECT  COUNT(*) as estado_aprobado FROM formulario_clientes WHERE estado = 1', [id_vendendorR], (err, result) => {
+  //   if (err) throw err;
+  //   res.render('dashboard', {user: req.user, result: result})
+  //   console.log("// ------------------------------");
+  //   console.log(result);
+  //   console.log("// ------------------------------");
+ 
+   
+  // })
+
   
 }
+
 
 const generateRandomNumber = (num) => {
   const characters = '0123456789';

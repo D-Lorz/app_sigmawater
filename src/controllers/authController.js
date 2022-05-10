@@ -38,10 +38,13 @@ exports.registrar = async (req, res) => {
     });
 
     const id_vendedor = generateRandomString(6)
+    const nivel = 1
+    const numero_de_ventas = 0
+    const total_ventas = 0
 
     const nuevoRegistro = {
         nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
-        apt_suite_unidad, codigo_postal, codigo_afiliado, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion,id_vendedor
+        apt_suite_unidad, codigo_postal, codigo_afiliado, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion,id_vendedor,nivel, numero_de_ventas,total_ventas
     }
 
     console.log(nuevoRegistro)
@@ -85,7 +88,7 @@ exports.login = async (req, res) => {
                 } else {
                  //inicio de sesión OK
                  const id = results[0].id
-                 const token = jwt.sign({ id: id },  'super_secret_AppSigmaWater', { expiresIn: 3600 })
+                 const token = jwt.sign({ id: id },  'super_secret_AppSigmaWater', { expiresIn: 86400 })
                  //generamos el token SIN fecha de expiracion
                  //const token = jwt.sign({id: id}, process.env.JWT_SECRETO)
                  console.log("TOKEN>>>>>: " + token + " para el USUARIO : " + correo)
@@ -126,7 +129,7 @@ exports.isAuthenticated = async (req, res, next) => {
             })
         } catch (error) {
             console.log(error)
-            return next()
+            return false
         }
     } else {
         res.redirect('/login')
@@ -146,6 +149,41 @@ exports.nologueado = async (req, res, next) => {
         res.redirect('/')
     }
 }
+
+exports.listarAfiliados= async (req, res) => {
+
+    // Capturando el id del Vendedor actual
+     const id_vendedorA = req.user.id_vendedor;
+   
+   // Consultando en DB los clientes que pertenecen al vendedor actual
+     conexion.query('SELECT * FROM formulario_registro_vendedor WHERE codigo_afiliado = ?', [id_vendedorA], (err, result) => {
+       if (err) throw err;
+       res.render('afiliados', {user: req.user, result: result})
+       console.log(result);
+     })
+       
+   }
+
+
+   exports.listarCantidadClientes = async (req, res) => {
+    // Capturando el id del Vendedor actual
+  const id_vendedor = req.user.id_vendedor;
+  // Consultando en DB los clientes que pertenecen al vendedor actual
+conexion.query('SELECT COUNT(*) AS total_afiliados FROM formulario_clientes  WHERE codigo_afiliado = ? ', [id_vendedor], (err, result) => {
+  if (err) throw err;
+
+  console.log("// ------------------------------");
+  console.log(result);
+  console.log("// ------------------------------");
+
+    res.render('dashboard', {user: req.user,  result: result})
+
+   
+  })
+
+ }
+
+ 
 
 
 const  generateRandomString = (num) => {

@@ -15,11 +15,12 @@
 
         <div class="d-flex">
 
-            <div class="dropdown d-inline-block d-lg-none ms-2">
+            <!-- <div class="dropdown d-inline-block d-lg-none ms-2">
                 <button type="button" class="btn header-item" id="page-header-search-dropdown" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <i data-feather="search" class="icon-lg"></i>
                 </button>
+
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
                     aria-labelledby="page-header-search-dropdown">
 
@@ -33,7 +34,12 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> -->
+
+            <!-- =======FIXME: OCULTANDO OPCIONES DE REDES========================== -->
+            <%- include ('../partials/opcionesredes.ejs')%>
+            <!-- =======FIXME: OCULTANDO OPCIONES DE REDES========================== -->
+
 
             <div class="dropdown d-none d-sm-inline-block">
                 <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
@@ -83,11 +89,7 @@
                 </button>
             </div>
 
-
-            <!-- =======FIXME: OCULTANDO OPCIONES DE REDES========================== -->
-            <%- include ('../partials/opcionesredes.ejs')%>
-            <!-- =======FIXME: OCULTANDO OPCIONES DE REDES========================== -->
-
+            
                 <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item bg-soft-light border-start border-end"
                         id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -95,13 +97,10 @@
                         <img class="rounded-circle header-profile-user" src="./cssdash/images/users/avatar-1.jpg"
                             alt="Header Avatar">
 
-
-
-
-   <!--==================FIXME:=====JALAR USUARIO====================  -->
-                 <%- include ('../partials/jalarusuario.ejs')%>  
-   <!--==================FIXME:=====JALAR USUARIO====================  -->
-             
+            <!--==================FIXME:=====JALAR USUARIO====================  -->
+                            <%- include ('../partials/jalarusuario.ejs')%>  
+            <!--==================FIXME:=====JALAR USUARIO====================  -->
+                        
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->

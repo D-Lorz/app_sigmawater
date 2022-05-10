@@ -127,21 +127,16 @@ href="./cssdash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="s
                     table-check nowrap" style="border-collapse: collapse;
                     border-spacing: 0 8px; width: 100%;">
                     <thead>
-                        <!-- <tr>
-                            <th scope="col" style="width: 50px;">
-                                <div class="form-check font-size-16">
-                                    <input type="checkbox"
-                                        class="form-check-input" id="checkAll">
-                                    <label class="form-check-label"
-                                        for="checkAll"></label>
-                                </div>
-                            </th> -->
+                    
+                            <th scope="col"></th>
                             <th scope="col">ID</th>
                             <th scope="col">Nombres</th>
                             <th scope="col">Apellidos</th>
                             <th scope="col">Correo electronico</th>
                             <th scope="col">Telefono</th>
                             <th scope="col">Direccion</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Monto aprobado</th>
                           
                         </tr>
                     </thead>
@@ -163,6 +158,25 @@ href="./cssdash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="s
                                 <td><%= user.correo_cliente %></td>
                                 <td><%= user.telefono_movil_cliente %></td>
                                 <td><%= user.direccion_cliente %></td>
+
+                                                             
+                                       <% if (user.estado == 0 ) {%>
+                                            <%user.estado = "En revisión" %>
+                                             <td><div class="badge badge-soft-warning font-size-12" ><%= user.estado %></div></td>
+                                    <% } else {%>
+                                        <%  if (user.estado==1) { %>
+                                                <% user.estado = "Aprobado" %>
+                                                <td><div class="badge badge-soft-success font-size-12" ><%= user.estado %></div></td>
+                                     <%  } else {%>
+                                        <%  if (user.estado==2) {%>
+                                            <% user.estado = "Rechazado"%>
+                                            <td><div class="badge badge-soft-danger font-size-12" ><%= user.estado %></div></td>
+                                            <% } %>
+                                        <% }%>
+                                    <% }%>
+                                 
+                                <!-- <td><div class="badge badge-soft-warning font-size-12" ><%= user.estado %></div></td> -->
+                                <td><div class="badge badge-soft-success font-size-12">$0<%= user.monto_aprobado %></div></td>
 
                             </tr>
                         <%})%>
