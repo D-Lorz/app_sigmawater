@@ -159,7 +159,7 @@ exports.listarAfiliados= async (req, res) => {
      conexion.query('SELECT * FROM formulario_registro_vendedor WHERE codigo_afiliado = ?', [id_vendedorA], (err, result) => {
        if (err) throw err;
        res.render('afiliados', {user: req.user, result: result})
-       console.log(result);
+    //    console.log(result);
      })
        
    }
@@ -172,9 +172,9 @@ exports.listarAfiliados= async (req, res) => {
 conexion.query('SELECT COUNT(*) AS total_afiliados FROM formulario_clientes  WHERE codigo_afiliado = ? ', [id_vendedor], (err, result) => {
   if (err) throw err;
 
-  console.log("// ------------------------------");
-  console.log(result);
-  console.log("// ------------------------------");
+//   console.log("// ------------------------------");
+//   console.log(result);
+//   console.log("// ------------------------------");
 
     res.render('dashboard', {user: req.user,  result: result})
 

@@ -4,7 +4,7 @@ const {
 } = require("util");
 const authController = require('../controllers/authController')
 
-
+// todo registrar clientes
 exports.registrarclientela = async (req, res) => {
 
   try {
@@ -99,10 +99,8 @@ exports.registrarclientela = async (req, res) => {
 
     });
     const acuerdo_firmado = req.body.acuerdo_firmado
-    const estado = 0
-    const id_cliente = generateRandomNumber(6);
-
-
+    const estado = 0 //* <-------------------------->  el estadi entrara a la base de datos valiendo 0
+    const id_cliente = generateRandomNumber(6); // * Se almacena el ID del cliente codigo numerico
     const id_vendedor_fk = req.user.id
   
 
@@ -199,7 +197,7 @@ exports.registrarclientela = async (req, res) => {
     console.log(error);
   }
 }
-
+// todo Listar clientes
 exports.listarClientes = async (req, res) => {
 
  // Capturando el id del Vendedor actual
@@ -213,8 +211,8 @@ exports.listarClientes = async (req, res) => {
   })
     
 }
-  
 
+  // todo Generar codigo numero aleatorio de clientes
 const generateRandomNumber = (num) => {
   const characters = '0123456789';
   let result1 = '';

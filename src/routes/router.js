@@ -45,9 +45,7 @@ router.get('/login', nologueado, (req, res) => {
 });
 
 router.get('/', isAuthenticated, (req, res) => {
-    console.log(">>>>>>>>>>")
-    console.log(req.user)
-res.render('dashboard', { user: req.user })
+   res.render('dashboard', { user: req.user })
     
 });
 
