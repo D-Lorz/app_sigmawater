@@ -18,13 +18,3 @@ if (correo1.value != correo2.value) {
 }
 }
 
-// const button=document.querySelector('#botonCopy');
-
-// const input =docunent.querySelector('.clipboard');
-
-// button.addEventListener('click', function(){
-//  input.focus();
-// document.execConnand('selectAll');
-// document.execConnand('copy');
-
-// });

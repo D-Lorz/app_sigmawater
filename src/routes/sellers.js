@@ -33,7 +33,7 @@ const cargar = multer({
     storage: rutaAlmacen,
 });
 
-// * SIRVE PARA UNIFICAR LOS 3 CAMPOS UPLOAD DEL FORMULARIO CLIENTE
+// * SIRVE PARA UNIFICAR LOS 2 CAMPOS UPLOAD DEL FORMULARIO CLIENTE
 const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente_trasera' }]);
 
 

@@ -57,15 +57,17 @@ router.get('/', isAuthenticated, (req, res) => {
 //     res.render('detalle_facturas', { user: req.user })
 // });
 
-router.get('/lista-clientes', isAuthenticated, listarClientes)
+router.get('/pre-formulario', isAuthenticated, (req, res) => {
+    res.render('pre-formulario', { user: req.user })
+});
 
 router.get('/nuevo-cliente', isAuthenticated, (req, res) => {
     res.render('nuevo-cliente', { user: req.user })
 });
 
+router.get('/lista-clientes', isAuthenticated, listarClientes)
 
 router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
-
     res.render('afiliados', { user: req.user })
 });
 
