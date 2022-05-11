@@ -44,7 +44,7 @@ router.get('/login', nologueado, (req, res) => {
     res.render('login', { alert: false })
 });
 
-router.get('/', isAuthenticated, listarCantidadClientes,(req, res) => {
+router.get('/', isAuthenticated, (req, res) => {
     console.log(">>>>>>>>>>")
     console.log(req.user)
 res.render('dashboard', { user: req.user })

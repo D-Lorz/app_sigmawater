@@ -53,7 +53,7 @@ exports.registrarclientela = async (req, res) => {
     const numero_ruta_bancaria = req.body.numero_ruta_bancaria;
     const numero_cuenta_bancaria = req.body.numero_cuenta_bancaria;
     const licencia_co_solicitante = req.body.licencia_co_solicitante;
-    const expedición_licencia_co_solicitante = req.body.expedición_licencia_co_solicitante;
+    const expedicion_licencia_co_solicitante = req.body.expedicion_licencia_co_solicitante;
     const vencimiento_licencia_co_solicitante = req.body.vencimiento_licencia_co_solicitante;
     const numero_se_social_co_solicitante = req.body.numero_se_social_co_solicitante;
     const tipo_seguro_co_solicitante = req.body.tipo_seguro_co_solicitante;
@@ -147,7 +147,7 @@ exports.registrarclientela = async (req, res) => {
       numero_ruta_bancaria,
       numero_cuenta_bancaria,
       licencia_co_solicitante,
-      expedición_licencia_co_solicitante,
+      expedicion_licencia_co_solicitante,
       vencimiento_licencia_co_solicitante,
       numero_se_social_co_solicitante,
       tipo_seguro_co_solicitante,
@@ -213,36 +213,7 @@ exports.listarClientes = async (req, res) => {
   })
     
 }
-
-exports.listarCantidadClientes = async (req, res) => {
-    // Capturando el id del Vendedor actual
-  const id_vendendor = req.user.id;
-  // Consultando en DB los clientes que pertenecen al vendedor actual
-conexion.query('SELECT COUNT(*) AS Total_de_clientes FROM formulario_clientes  WHERE id_vendedor_fk = ? ', [id_vendendor], (err, result) => {
-
-  if (err) throw err;
-    res.render('dashboard', {user: req.user, result: result})
-    console.log("// ------------------------------");
-    console.log(result);
-    console.log("// ------------------------------");
-   
-  })
-
-
-  // const id_vendendorR = req.user.id;
-  // conexion.query('SELECT  COUNT(*) as estado_aprobado FROM formulario_clientes WHERE estado = 1', [id_vendendorR], (err, result) => {
-  //   if (err) throw err;
-  //   res.render('dashboard', {user: req.user, result: result})
-  //   console.log("// ------------------------------");
-  //   console.log(result);
-  //   console.log("// ------------------------------");
- 
-   
-  // })
-
   
-}
-
 
 const generateRandomNumber = (num) => {
   const characters = '0123456789';
