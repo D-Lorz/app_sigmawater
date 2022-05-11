@@ -6,7 +6,7 @@ const { promisify } = require('util')
 
 
 
-//TODO: REGISTRAR
+// todo: REGISTRAR
 exports.registrar = async (req, res) => {
 
     const nombres = req.body.nombres
@@ -56,8 +56,7 @@ exports.registrar = async (req, res) => {
         res.redirect('https://3csigmawater.com')
     })
 }
-
-//TODO: LOGIN
+// todo: LOGIN
 exports.login = async (req, res) => {
     try {
         const correo = req.body.correo
@@ -115,7 +114,8 @@ exports.login = async (req, res) => {
         console.log(error)
     }
 }
-//TODO: AUTENTICACION
+
+// todo: AUTENTICACION
 exports.isAuthenticated = async (req, res, next) => {
     if (req.cookies.jwt) {
         try {
@@ -135,12 +135,12 @@ exports.isAuthenticated = async (req, res, next) => {
         res.redirect('/login')
     }
 }
-//TODO: LOGOUT
+// todo: LOGOUT
 exports.logout = (req, res) => {
     res.clearCookie('jwt')
     return res.redirect('/')
 }
-//TODO: VALIDACION CUANDO YA INICIA SESION
+// todo: VALIDACION CUANDO YA INICIA SESION
 exports.nologueado = async (req, res, next) => {
     if (!req.cookies.jwt) {
         return next()
@@ -150,6 +150,7 @@ exports.nologueado = async (req, res, next) => {
     }
 }
 
+// todo: MOSTRAR LISTA DE VENDEDORES AFILIADOS
 exports.listarAfiliados= async (req, res) => {
 
     // Capturando el id del Vendedor actual
@@ -164,28 +165,7 @@ exports.listarAfiliados= async (req, res) => {
        
    }
 
-
-   exports.listarCantidadClientes = async (req, res) => {
-    // Capturando el id del Vendedor actual
-  const id_vendedor = req.user.id_vendedor;
-  // Consultando en DB los clientes que pertenecen al vendedor actual
-conexion.query('SELECT COUNT(*) AS total_afiliados FROM formulario_clientes  WHERE codigo_afiliado = ? ', [id_vendedor], (err, result) => {
-  if (err) throw err;
-
-//   console.log("// ------------------------------");
-//   console.log(result);
-//   console.log("// ------------------------------");
-
-    res.render('dashboard', {user: req.user,  result: result})
-
-   
-  })
-
- }
-
- 
-
-
+ // todo: GENERADOR DE CODIGO DE VENDEDOR APHANUMERICO
 const  generateRandomString = (num) => {
     const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let result1= '';

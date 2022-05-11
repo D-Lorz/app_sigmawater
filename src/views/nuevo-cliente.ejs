@@ -11,120 +11,128 @@
           <%- include ('./partials/menu.ejs')%>
           <!-- =======FIXME: MENU ========================== -->
 
-            <div class="main-content">
-                <div class="page-content">
-                    <div class="container-fluid">
-                                                
-                                                                <!-- start page title -->
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="page-title-box d-sm-flex align-items-center
-                                                            justify-content-between">
-                                                            <h4 class="mb-sm-0 font-size-18">Nuevo cliente</h4>
+          <div class="main-content">
+              <div class="page-content">
+                  <div class="container-fluid">
 
-                                                            <div class="page-title-right">
-                                                                <ol class="breadcrumb m-0" style="text-transform: initial;">
-                                                                    <li class="breadcrumb-item"><a href="javascript:
-                                                                            void(0);">Clientes</a></li>
-                                                                    <li class="breadcrumb-item active" id="reparartexto">Nuevo cliente</li>
-                                                                </ol>
-                                                            </div>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
+                      <!--============================================================-->
+                      <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
+                      <!--============================================================-->
 
-                                                <!-- end page title -->
-                                            <!-- BEGIN: Content-->
-                                            <div class="app-content content" style="margin-top:-7px">
-                                                <!-- Form wizard with step validation section start -->
-                                              <section id="validation">
+                      
+                                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center
+                                    justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Nuevo cliente</h4>
 
-                                                 <div class="">
-                                                     <div class="card-content collapse show">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0" style="text-transform: initial;">
+                                            <li class="breadcrumb-item"><a href="javascript:
+                                                    void(0);">Afiliados</a></li>
+                                            <li class="breadcrumb-item active" id="reparartexto">Lista de Afiliados</li>
+                                        </ol>
+                                    </div>
 
-                                <!--============================================================-->
-                                <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
-                                <!--============================================================-->
-                               <form action="/registrarclientela" method="POST" class="steps wizard-circle" id="validarForm">
-    
-                                     <!-- ==============   PRE FORMULARIO  ========================== -->
-                                    
-                                              
-                                             
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- end page title -->
+                      <!-- BEGIN: Content-->
+                      <div class="app-content content" style="margin-top:-7px">
+                          <!-- Form wizard with step validation section start -->
+                          <section id="validation">
+
+                                 <div class="card-content collapse show">
+                                      <form action="/registrarClientes" method="POST" class="steps wizard-circle" id="validarForm">
+                                        
+                                          <!-- ==============   PRE FORMULARIO  ========================== -->
+                                                   <fieldset>
+
                                                         <div class="row  justify-content: center;">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="nombreP">Nombre</label>
-                                                                    <input type="text" class="form-control" id="nombreP" name="nombre_preformulario">
+                                                                    <label for="nombreP">Nombre<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="nombreP" name="nombre">
                                                                 </div>
                                                             </div>
                                                                   
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="apellidoP"> Apellidos</label>
-                                                                    <input type="text" class="form-control" id="apellidoP" name="apellidos_preformulario" >
+                                                                    <label for="apellidoP"> Apellidos<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="apellidoP" name="apellido" >
                                                                 </div>
                                                             </div> 
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="correoP"> Correo</label>
-                                                                    <input type="email" class="form-control" id="correoP" name="correo_preformulario" >
+                                                                    <label for="correoP"> Correo<span class="danger">*</span></label>
+                                                                    <input type="email" class="form-control" required id="correoP" name="correo" >
                                                                 </div>
                                                             </div> 
                                                          </div>
                                               <!-- * ========== Segunda fila =======  -->
+
                                                          <div class="row  justify-content: center;">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="telefonoP">Teléfono</label>
-                                                                    <input type="text" class="form-control" id="telefonoP" name="telefono_preformulario">
+                                                                    <label for="telefonoP">Teléfono<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="telefonoP" name="telefono">
                                                                 </div>
                                                             </div>
                                                                   
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="direccionP">Dirección</label>
-                                                                    <input type="text" class="form-control" placeholder="Escriba su direccion..." id="direccionP" name="direccion_preformulario" >
+                                                                    <label for="direccionP">Dirección<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control"  required placeholder="Escriba su direccion..." id="direccionf" name="direccion" >
                                                                 </div>
                                                             </div>
                 
                                                              <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="ciudadP">Ciudad</label>
-                                                                    <input type="text" class="form-control" id="ciudadP" name="ciudad_preformulario" >
+                                                                    <label for="ciudadP">Ciudad<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="ciudadf" name="ciudad" >
                                                                 </div>
                                                             </div>
                                                         </div>
-                                             <!-- * ========== Tercera fila =======  --> 
+                                         <!-- * ========== Tercera fila =======  --> 
+
                                                      <div class="row " >
                                                          <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="">Estado<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" id="estadoP" name="estado_preformulario" >
+                                                                    <input type="text" class="form-control" required id="estadof" name="estado" >
                                                                 </div>
                                                             </div>
                         
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="codigo_postalP">Codigo postal </label>
-                                                                    <input type="text" class="form-control" id="codigo_postalP" name="codigoPostal_preformulario" >
+                                                                    <label for="postalcode">Codigo postal </label>
+                                                                    <input type="text" class="form-control"  id="postalcode" name="codigo_postal" >
                                                              </div>
                                                          </div>
-                                                       </div>
-                                             <!-- * ========== Tercera fila fin =======  --> 
-                                           <center><button type="submit" class="btn btn-primary">Guardar</button><center>
-                                            </form>
-                                <!--============================================================-->
-                                <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
-                                <!--============================================================-->
-                                        </div>
-                                   
-                                </section>
-                        
+                                                 </fieldset>  
+                                                                                   
+                                          <!--============= / FIXME:===== *CO-SOLICITANTE* === FIXME:=========-->
+                                    <fieldset>
+                                        <input hidden id="currency-masksalario">
+                                        <input hidden id="currency-maskingresoadi"> 
+                                   </fieldset>
+                                      
 
+                        <center><button type="submit" class="btn btn-primary">Guardar</button></center>
+
+                                      </form>
+
+
+                                  </div>
+                            
+                          </section>
+                          
                       </div>
-                  
+            
                   </div>
               </div>
 
