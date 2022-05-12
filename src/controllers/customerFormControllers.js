@@ -17,23 +17,27 @@ exports.registrarClientes = async (req, res) => {
   const estado = req.body.estado;
   const codigo_postal = req.body.codigo_postal;
 
-  const nuevoRegistroClientes = {nombre,apellido,correo,telefono,direccion,ciudad,estado,codigo_postal}
-  console.log(nuevoRegistroClientes)
 
+  const estadoSolicitud = 0  //* <------------------>  el estado entrara a la base de datos valiendo 0
+  const id_cliente = generateRandomNumber(6);   // * Se almacena el ID del cliente codigo numerico
+  const id_vendedor = req.user.id
+  
+
+  const nuevoRegistroClientes = {nombre,apellido,correo,telefono,direccion,ciudad,estado,codigo_postal,estadoSolicitud,id_cliente,id_vendedor}
+  console.log(nuevoRegistroClientes)
 
   await conexion.query('INSERT INTO formulario_clientes SET ?', [nuevoRegistroClientes], (err, result) => {
     if (err) throw err;
-    console.log(" ==>> 1 Registro Cliente ");
+    console.log(" ========>> 1 Registro Cliente ");
     console.log(result)
-    res.redirect('/nuevo-cliente')
+    console.log(" ========>> 1 Registro Cliente ");
+    res.redirect('/lista-clientes')
 })
   } catch (error) {
     console.log(error);
 
   }
   }
-
-
 
 // todo FORMULARIO SOLICITAR CREDITO
 // exports.solicitarCredito = async (req, res) => {
@@ -130,7 +134,7 @@ exports.registrarClientes = async (req, res) => {
 
     // });
     // const acuerdo_firmado = req.body.acuerdo_firmado
-    // const estado = 0 
+    // const estado = 0
     //* <-------------------------->  el estado entrara a la base de datos valiendo 0
     // const id_cliente = generateRandomNumber(6);
      // * Se almacena el ID del cliente codigo numerico
@@ -230,39 +234,56 @@ exports.registrarClientes = async (req, res) => {
 //     console.log(error);
 //   }
 // }
+
 // todo MOSTRAR CLIENTES
+
 exports.listarClientes = async (req, res) => {
 
  // Capturando el id del Vendedor actual
-  const id_vendendor = req.user.id;
+  const id_vendedor = req.user.id;
 
 // Consultando en DB los clientes que pertenecen al vendedor actual
-  conexion.query('SELECT * FROM formulario_solicitar_credito WHERE id_vendedor_fk = ?', [id_vendendor], (err, result) => {
+  conexion.query('SELECT * FROM formulario_clientes WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
     if (err) throw err;
     res.render('lista-clientes', {user: req.user, clientes: result})
-    
+  
   })
-    
+ 
 }
 
-// todo: MOSTRAR CANTIDAD DE CLIENTES
-exports.listarCantidadClientes = async (req, res) => {
+exports.listarClientes_PerfilClientes = async (req, res) => {
+
   // Capturando el id del Vendedor actual
-const id_vendedor = req.user.id_vendedor;
+   const id_vendedor = req.user.id;
+ 
+ // Consultando en DB los clientes que pertenecen al vendedor actual
+   conexion.query('SELECT * FROM formulario_clientes WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
+     if (err) throw err;
+     res.render('perfil-clientes', {user: req.user, clientes2: result})
+   
+   })
+  
+ }
+
+
+// // todo: MOSTRAR CANTIDAD DE CLIENTES
+// exports.listarCantidadClientes = async (req, res) => {
+  // Capturando el id del Vendedor actual
+// const id_vendedor = req.user.id_vendedor;
 // Consultando en DB los clientes que pertenecen al vendedor actual
-conexion.query('SELECT COUNT(*) AS total_afiliados FROM formulario_solicitar_credito  WHERE codigo_afiliado = ? ', [id_vendedor], (err, result) => {
-if (err) throw err;
+// conexion.query('SELECT COUNT(*) AS total_afiliados FROM formulario_solicitar_credito  WHERE codigo_afiliado = ? ', [id_vendedor], (err, result) => {
+// if (err) throw err;
 
 //   console.log("// ------------------------------");
 //   console.log(result);
 //   console.log("// ------------------------------");
 
-  res.render('dashboard', {user: req.user,  result: result})
+//   res.render('dashboard', {user: req.user,  result: result})
 
  
-})
+// })
 
-}
+// }
 
   // todo GENERAR CODIGO NUMERICO PARA CLIENTE
 const generateRandomNumber = (num) => {

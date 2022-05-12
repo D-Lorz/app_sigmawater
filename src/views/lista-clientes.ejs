@@ -9,25 +9,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
   <meta content="Themesbrand" name="author">
-<!-- App favicon -->
-<link rel="shortcut icon" href="./directorio_dash/images/favicon.png">
+  <!-- App favicon -->
+  <link rel="shortcut icon" href="./directorio_dash/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="./css/colors.min.css">
 
-<base href="#">
-<!-- DataTables -->
-<link
-href="./directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"rel="stylesheet" type="text/css" />
-<!-- Responsive datatable examples -->
-<link href="./directorio_dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
-<!-- preloader css -->
+  <base href="#">
+
+  
+
+    <!-- DataTables -->
+    <link
+        href="./directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+        rel="stylesheet" type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link
+        href="./directorio_dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+        rel="stylesheet" type="text/css" />
+
+    
+  
+  <!-- preloader css -->
 <link rel="stylesheet" href="./directorio_dash/css/preloader.min.css" type="text/css" />
+
 <!-- Bootstrap Css -->
 <link rel="stylesheet" type="text/css" href="./directorio_dash/css/bootstrap.min.css" id="bootstrap-style" />
 <!-- Icons Css -->
 <link rel="stylesheet" type="text/css" href="./directorio_dash/css/icons.min.css" />
 <!-- App Css-->
 <link rel="stylesheet" type="text/css" href="./directorio_dash/css/app.min.css" id="app-style" />
-<link rel="stylesheet" type="text/css" href="./css/colors.min.css">
-
 
 </head>
 
@@ -36,91 +46,91 @@ href="./directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.cs
   <!-- Begin page -->
   <div id="layout-wrapper">
 
-        <!-- =======FIXME: MENU ========================== -->
-        <%- include ('./partials/menu.ejs')%>
-        <!-- =======FIXME: MENU ========================== -->
+   <!-- =======FIXME: MENU ========================== -->
+   <%- include ('./partials/menu.ejs')%>
+   <!-- =======FIXME: MENU ========================== -->
 
-    <div class="main-content">
-      <div class="page-content">
-        <div class="container-fluid">
-          
-
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center
-                    justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Lista de clientes</h4>
-
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript:
-                                    void(0);">Clientes</a></li>
-                            <li class="breadcrumb-item active">Lista de clientes</li>
-                        </ol>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- end page title -->
-
+   <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
         
-          
-          
 
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <!-- <div class="mb-3">
-                        <h5 class="card-title">Contact List <span
-                                class="text-muted fw-normal ms-2">(834)</span></h5>
-                    </div> -->
-                </div>
+      <!-- start page title -->
+      <div class="row">
+          <div class="col-12">
+              <div class="page-title-box d-sm-flex align-items-center
+                  justify-content-between">
+                  <h4 class="mb-sm-0 font-size-18">Lista de clientes</h4>
 
-                <div class="col-md-6">
-                    <div class="d-flex flex-wrap align-items-center
-                        justify-content-end gap-2 mb-3">
-                        <div>
-                            <ul class="nav nav-pills">
-                                <li class="nav-item">
-                                    <a class="nav-link active"
-                                        href="contacts-list"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="List"><i
-                                            class="bx bx-list-ul"></i></a>
-                                </li>
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link"
-                                        href="contacts-grid"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Grid"><i
-                                            class="bx bx-grid-alt"></i></a>
-                                </li> -->
-                            </ul>
-                        </div>
-                        <div>
-                            <a href="/nuevo-cliente" class="btn btn-light"><i class="bx
-                                    bx-plus me-1"></i> Agregar nuevo cliente</a>
-                        </div>
+                  <div class="page-title-right">
+                      <ol class="breadcrumb m-0">
+                          <li class="breadcrumb-item"><a href="javascript:
+                                  void(0);">Clientes</a></li>
+                          <li class="breadcrumb-item active">Lista de clientes</li>
+                      </ol>
+                  </div>
 
-                        <div class="dropdown">
-                            <a class="btn btn-link text-muted py-1 font-size-16
-                                shadow-none dropdown-toggle" href="#"
-                                role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-horizontal-rounded"></i>
-                            </a>
+              </div>
+          </div>
+      </div>
+      <!-- end page title -->
 
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
-                                <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
-                                <li><a class="dropdown-item" href="#">Eliminar cliente</a></li>
-                            </ul>
-                        </div>
-                    </div>
+      
+        
+        
 
-                </div>
-            </div>
+          <div class="row align-items-center">
+              <div class="col-md-6">
+                  <!-- <div class="mb-3">
+                      <h5 class="card-title">Contact List <span
+                              class="text-muted fw-normal ms-2">(834)</span></h5>
+                  </div> -->
+              </div>
+
+              <div class="col-md-6">
+                  <div class="d-flex flex-wrap align-items-center
+                      justify-content-end gap-2 mb-3">
+                      <div>
+                          <ul class="nav nav-pills">
+                              <li class="nav-item">
+                                  <a class="nav-link active"
+                                      href="contacts-list"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-placement="top" title="List"><i
+                                          class="bx bx-list-ul"></i></a>
+                              </li>
+                              <!-- <li class="nav-item">
+                                  <a class="nav-link"
+                                      href="contacts-grid"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-placement="top" title="Grid"><i
+                                          class="bx bx-grid-alt"></i></a>
+                              </li> -->
+                          </ul>
+                      </div>
+                      <div>
+                          <a href="/nuevo-cliente" class="btn btn-light"><i class="bx
+                                  bx-plus me-1"></i> Agregar nuevo cliente</a>
+                      </div>
+
+                      <div class="dropdown">
+                          <a class="btn btn-link text-muted py-1 font-size-16
+                              shadow-none dropdown-toggle" href="#"
+                              role="button" data-bs-toggle="dropdown"
+                              aria-expanded="false">
+                              <i class="bx bx-dots-horizontal-rounded"></i>
+                          </a>
+
+                          <ul class="dropdown-menu dropdown-menu-end">
+                              <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
+                              <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
+                              <li><a class="dropdown-item" href="#">Eliminar cliente</a></li>
+                          </ul>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
             <!-- end row -->
 
             <div class="table-responsive mb-4">
@@ -129,16 +139,16 @@ href="./directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.cs
                     border-spacing: 0 8px; width: 100%;">
                     <thead>
                     
-                            <th scope="col"></th>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nombres</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">Correo electronico</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Direccion</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Monto aprobado</th>
-                          
+                        <th scope="col"></th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Correo electronico</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Monto aprobado</th>
+                                                 
                         </tr>
                     </thead>
                     <tbody>
@@ -153,32 +163,36 @@ href="./directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.cs
                                             for="contacusercheck1"></label>
                                     </div>
                                 </th>
-                                <td><%= user.id_cliente %></td>
-                                <td><%= user.nombre_cliente %> <%= user.segundo_nombre_cliente %></td>
-                                <td><%= user.apellidos_cliente %></td>
-                                <td><%= user.correo_cliente %></td>
-                                <td><%= user.telefono_movil_cliente %></td>
-                                <td><%= user.direccion_cliente %></td>
+                                <td ><a href="/perfil-clientes"><%= user.id_cliente %></a></td>
+                                <td><a href="/perfil-clientes"><%= user.nombre %></a></td>
+                                <td><a href="/perfil-clientes"><%= user.apellido %></a></td>
+                                <td><a href="/perfil-clientes"><%= user.correo %></a></td>
+                                <td><a href="/perfil-clientes"><%= user.telefono %></a></td>
+                                <td><a href="/perfil-clientes"><%= user.direccion %></a></td>
 
-                                                             
-                                       <% if (user.estado == 0 ) {%>
-                                            <%user.estado = "En revisión" %>
-                                             <td><div class="badge badge-soft-warning font-size-12" ><%= user.estado %></div></td>
+                              <% if (user.estadoSolicitud == 0 ) {%>
+                                    <% user.estadoSolicitud = "Creado" %>
+                                     <td><a href="/perfil-clientes"><div class="badge badge-soft-dark font-size-12" ><%= user.estadoSolicitud %></div></a></td>
+                            <% } else {%>
+                                <%  if (user.estadoSolicitud==1) { %>
+                                   <% user.estadoSolicitud = "En revisión" %>
+                                     <td><a href="/perfil-clientes"><div class="badge badge-soft-warning font-size-12" ><%= user.estadoSolicitud %></div></a></td>
+                             <%  } else {%>
+                                <%  if (user.estadoSolicitud==2) {%>
+                                    <% user.estadoSolicitud = "Aprobado"%>
+                                    <td><a href="/perfil-clientes"><div class="badge badge-soft-success font-size-12" ><%= user.estadoSolicitud %></div></a></td>
                                     <% } else {%>
-                                        <%  if (user.estado==1) { %>
-                                                <% user.estado = "Aprobado" %>
-                                                <td><div class="badge badge-soft-success font-size-12" ><%= user.estado %></div></td>
-                                     <%  } else {%>
-                                        <%  if (user.estado==2) {%>
-                                            <% user.estado = "Rechazado"%>
-                                            <td><div class="badge badge-soft-danger font-size-12" ><%= user.estado %></div></td>
-                                            <% } %>
-                                        <% }%>
-                                    <% }%>
-                                 
-                                <!-- <td><div class="badge badge-soft-warning font-size-12" ><%= user.estado %></div></td> -->
-                                <td><div class="badge badge-soft-success font-size-12">$0<%= user.monto_aprobado %></div></td>
-
+                                        <%  if (user.estadoSolicitud==3) {%>
+                                            <% user.estadoSolicitud = "Rechazado"%>
+                                            <td><a href="/perfil-clientes"><div class="badge badge-soft-danger font-size-12" ><%= user.estadoSolicitud %></div></a></td>
+                                     <%}%> 
+                                   <%}%>
+                               <% }%>
+                            <% }%>
+                         
+                        <!-- <td><div class="badge badge-soft-warning font-size-12" ><= user.estadoSolicitud %></div></td>  -->
+                        <td><div class="badge badge-soft-success font-size-12">$0<%= user.monto_aprobado %></div></td>
+               
                             </tr>
                         <%})%>
                     </tbody>
@@ -186,14 +200,13 @@ href="./directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.cs
                 <!-- end table -->
             </div>
             <!-- end table responsive -->
-
             
         </div>
       </div>
-     <!-- =======FIXME: copyright ========================== -->
-      <%- include ('./partials/copyright.ejs')%>
-      <!-- =======FIXME: copyright ========================== -->
-    
+    <!-- =======FIXME: copyright ========================== -->
+    <%- include ('./partials/copyright.ejs')%>
+    <!-- =======FIXME: copyright ========================== -->
+  
     </div>
   </div>
 
@@ -222,28 +235,29 @@ href="./directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.cs
 <!-- <div class="rightbar-overlay"></div> -->
   <!-- JAVASCRIPT -->
   <script src="./directorio_dash/js/scripts_personalizadosdash.js"></script>
-<script src="./libs/jquery/jquery.min.js"></script>
-<script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="./libs/metismenu/metisMenu.min.js"></script>
-<script src="./libs/simplebar/simplebar.min.js"></script>
-<script src="./libs/node-waves/waves.min.js"></script>
-<script src="./libs/feather-icons/feather.min.js"></script>
+<script src="./directorio_dash/libs/jquery/jquery.min.js"></script>
+<script src="./directorio_dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="./directorio_dash/libs/metismenu/metisMenu.min.js"></script>
+<script src="./directorio_dash/libs/simplebar/simplebar.min.js"></script>
+<script src="./directorio_dash/libs/node-waves/waves.min.js"></script>
+<script src="./directorio_dash/libs/feather-icons/feather.min.js"></script>
 <!-- pace js -->
-<script src="./libs/pace-js/pace.min.js"></script>
+<script src="./directorio_dash/libs/pace-js/pace.min.js"></script>
 
   
 
                 <!-- Required datatable js -->
-              <script  src="./libs/datatables.net/js/jquery.dataTables.min.js"></script>
-                <script 
-                    src="./libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+                <script
+                    src="./directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+                <script
+                    src="./directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
                 <!-- Responsive examples -->
                 <script
-                    src="./libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+                    src="./directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
                 <script
-                    src="./libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+                    src="./directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
                 <!-- init js -->
-                <!-- <script src="./directorio_dash/js/pages/datatable-pages.init.js"></script> -->
+                <script src="./directorio_dash/js/pages/datatable-pages.init.js"></script>
                 
                 
 

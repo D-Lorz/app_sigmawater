@@ -44,7 +44,8 @@ exports.registrar = async (req, res) => {
 
     const nuevoRegistro = {
         nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
-        apt_suite_unidad, codigo_postal, codigo_afiliado, nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion,id_vendedor,nivel, numero_de_ventas,total_ventas
+        apt_suite_unidad, codigo_postal, codigo_afiliado, nombre_banco, numero_cuenta, ruta, beneficiario, 
+        licencia_conduccion,id_vendedor,nivel, numero_de_ventas,total_ventas
     }
 
     console.log(nuevoRegistro)

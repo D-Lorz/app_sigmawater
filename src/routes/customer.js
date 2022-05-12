@@ -3,7 +3,7 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados } = require('../controllers/authController');
-const { listarClientes, listarCantidadClientes,registrarClientes, solicitarCredito} = require('../controllers/customerFormControllers');
+const { listarClientes, listarCantidadClientes,registrarClientes, listarClientes_PerfilClientes,solicitarCredito} = require('../controllers/customerFormControllers');
 
 
 
@@ -50,10 +50,14 @@ router.get('/nuevo-cliente', isAuthenticated, (req, res) => {
 
 router.get('/lista-clientes', isAuthenticated, listarClientes)
 
-
 router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
     res.render('afiliados', { user: req.user })
 });
+
+router.get('/perfil-clientes', isAuthenticated, listarClientes_PerfilClientes, (req, res) => {
+    res.render('perfil-clientes', { user: req.user })
+});
+
 
 // *   ================ ===== ↑↑ ==============================
 
