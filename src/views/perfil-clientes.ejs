@@ -9,32 +9,33 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="./directorio_perfilClientes/images/favicon.png">
-    <link rel="stylesheet" type="text/css" href="./css/colors.min.css">
+    <link rel="shortcut icon" href="../directorio_perfilClientes/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="../css/colors.min.css">
 
     <base href="#">
 
 
 
     <!-- DataTables -->
-    <link href="./directorio_perfilClientes/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+    <link href="../directorio_perfilClientes/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet"
         type="text/css" />
 
     <!-- Responsive datatable examples -->
-    <link href="./directorio_perfilClientes/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
-        type="text/css" />
+    <link href="../directorio_perfilClientes/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+        rel="stylesheet" type="text/css" />
 
 
 
     <!-- preloader css -->
-    <link rel="stylesheet" href="./directorio_perfilClientes/css/preloader.min.css" type="text/css" />
+    <link rel="stylesheet" href="../directorio_perfilClientes/css/preloader.min.css" type="text/css" />
 
     <!-- Bootstrap Css -->
-    <link rel="stylesheet" type="text/css" href="./directorio_perfilClientes/css/bootstrap.min.css" id="bootstrap-style" />
+    <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/bootstrap.min.css"
+        id="bootstrap-style" />
     <!-- Icons Css -->
-    <link rel="stylesheet" type="text/css" href="./directorio_perfilClientes/css/icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/icons.min.css" />
     <!-- App Css-->
-    <link rel="stylesheet" type="text/css" href="./directorio_perfilClientes/css/app.min.css" id="app-style" />
+    <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/app.min.css" id="app-style" />
 
 </head>
 
@@ -44,7 +45,9 @@
     <div id="layout-wrapper">
 
         <!-- =======FIXME: MENU ========================== -->
+
         <%- include ('./partials/menu.ejs')%>
+
             <!-- =======FIXME: MENU ========================== -->
 
             <div class="main-content">
@@ -53,195 +56,192 @@
 
 
                         <div class="row">
-                            <div class="col-xl-7">
-                                <div class="card">
-                                  
+                            <div class="col-xl-9">
+                                <div class="">
                                     <div class="card-body">
+                                        <!-- box-shadow: 0px 0px 12px #dddddd; -->
+                                        <div class="row">
+                                            <div class="col-lg-14">
+                                                <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
+                                                    <div class="card-header bg-transparent border-primary">
+                                                        <h5 class="my-0 text-primary">
+                                                            <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5>
+                                                            <a class="btn btn-primary" href="/solicitar-credito/<%= clientes2.id_cliente %>" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Solicitar credito</a>
+                                                    </div>
+                                                    <div class="card-body">
 
-                                        <div class="accordion" id="accordionPanelsStayOpenExample">
-                                        <!-- <button type="button" class="btn btn-primary btn btn-primary btn-sm waves-effect waves-light"  >asas</button> -->
-                                          
-                                            <div class="accordion-item">
-                                             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
-                                                        aria-expanded="true" aria-controls="panelsStayOpen-collapseOne"><i class="far fa-user-circle"></i>&nbsp
-                                                       <strong>Datos del cliente</strong> 
-                                                   </button>
-                                                
+                                                        <div class="table-responsive">
+                                                            <table class="table mb-0">
 
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                                    <div class="accordion-body">
-                                                                                                    
-                                                          <% clientes2.forEach((user)=>{ %>
-                                                            <table class="table table-bordered">
-                                                          
                                                                 <tbody>
-                                                                  <tr>
-                                                                    <td>ID</td>
-                                                                    <td><b><%= user.id_cliente %></b></td>
-                                                                    <td>Teléfono</td>
-                                                                    <td><b><%= user.telefono %></b></td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                    <td>Nombre</td>
-                                                                    <td><b><%= user.nombre %></b></td>
-                                                                    <td>Direccion</td>
-                                                                    <td><b><%= user.direccion %></b></td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                    <td>Apellido</td>
-                                                                    <td><b><%= user.apellido %></b></td>
-                                                                    <td>Estado</td>
-                                                                    <% if (user.estadoSolicitud == 0 ) {%>
-                                                                   <% user.estadoSolicitud = "Creado" %>
-                                                                         <td><div class="badge badge-soft-dark font-size-12" ><%= user.estadoSolicitud %></div></td>
-                                                                    <% } else {%>
-                                                                        <%  if (user.estadoSolicitud==1) { %>
-                                                                           <% user.estadoSolicitud = "En revisión" %>
-                                                                             <td><div class="badge badge-soft-warning font-size-12" ><%= user.estadoSolicitud %></div></td>
-                                                                     <%  } else {%>
-                                                                        <%  if (user.estadoSolicitud==2) {%>
-                                                                            <% user.estadoSolicitud = "Aprobado"%>
-                                                                            <td><div class="badge badge-soft-success font-size-12" ><%= user.estadoSolicitud %></div></td>
-                                                                            <% } else {%>
-                                                                                <%  if (user.estadoSolicitud==3) {%>
-                                                                                    <% user.estadoSolicitud = "Rechazado"%>
-                                                                                    <td><div class="badge badge-soft-danger font-size-12" ><%= user.estadoSolicitud %></div></td>
-                                                                             <%}%> 
-                                                                           <%}%>
-                                                                       <% }%>
-                                                                    <% }%>
-                                                                  </tr>
-                                                                  <tr>
-                                                                    <td>Correo electronico</td>
-                                                                    <td><b><%= user.correo %></b></td>
-                                                                    <td>Monto aprobado</td>
-                                                                    <td><div class="badge badge-soft-success font-size-12">$0<%= user.monto_aprobado %></div></td>
-               
-                                                            
-                                                                  </tr>
-                                                                
-                                                        <%})%>
-                                                                 </tbody>
-    
-                                                              </table>
+                                                                    <tr>
+                                                                        
+                                                                         <td style="width: 19%;">ID</td>
+                                                                         <td><b><%= clientes2.id_cliente %></b></td>
+                                                                         <td>Teléfono</td>
+                                                                         <td><b><%= clientes2.telefono %></b></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Nombre</td>
+                                                                        <td><b><%= clientes2.nombre %></b></td>
+                                                                        <td>Direccion</td>
+                                                                        <td><b><%= clientes2.direccion %></b></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Apellido</td>
+                                                                        <td><b><%= clientes2.apellido %></b></td>
+                                                                        <td>Estado</td>
 
 
-                                                  
+                                                                        <% if (clientes2.estado_de_la_cuenta == 0 ) {%>
+
+                                                                       <% clientes2.estado_de_la_cuenta = "Activo" %>
+                                                                             <td><div class="badge badge-soft-primary font-size-12" ><%= clientes2.estado_de_la_cuenta %></div></td>
+                                                                        <% } else {%>estado_de_la_cuenta
+                                                                            <%  if (clientes2.estado_de_la_cuenta==1) { %>
+                                                                               <% clientes2.estado_de_la_cuenta = "En revisión" %>
+                                                                               <td><div class="badge badge-soft-warning font-size-12" ><%= clientes2.estado_de_la_cuenta %></div></td>
+                                                                         <%  } else {%>
+                                                                            <%  if (clientes2.estado_de_la_cuenta==2) {%>
+                                                                                <% clientes2.estado_de_la_cuenta = "Aprobado"%>
+                                                                                <td><div class="badge badge-soft-success font-size-12" ><%= clientes2.estado_de_la_cuenta %></div></td>
+                                                                                <% } else {%>
+                                                                                    <%  if (clientes2.estado_de_la_cuenta==3) {%>
+                                                                                        <% clientes2.estado_de_la_cuenta = "Rechazado"%>
+                                                                                        <td><div class="badge badge-soft-danger font-size-12" ><%= clientes2.estado_de_la_cuenta %></div></td>
+
+                                                                                 <%}%> 
+                                                                               <%}%>
+                                                                           <% }%>
+                                                                        <% }%>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Correo electronico</td>
+                                                                        <td><b><%= user.correo %></b></td>
+                                                                        <td style="width: 19%;">Monto aprobado</td>
+                                                                        <td><div class="badge badge-soft-success font-size-12">$0<%= clientes2.monto_aprobado %></div></td>
+                   
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                                    <button class="accordion-button collapsed" type="button"  data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo"
-                                                        aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                                                        Accordion Item #2
-                                                    </button>
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                                                    <div class="accordion-body">
-                                                        <strong>This is the second item's accordion body.</strong> It is
-                                                        hidden by default, until the collapse plugin adds the
-                                                        appropriate classes that we use to style each element. These
-                                                        classes control the overall appearance, as well as the showing
-                                                        and hiding via CSS transitions. You can modify any of this with
-                                                        custom CSS or overriding our default variables. It's also worth
-                                                        noting that just about any HTML can go within the
-                                                        <code>.accordion-body</code>, though the transition does limit
-                                                        overflow.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                                        Accordion Item #3
-                                                    </button>
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                                                    <div class="accordion-body">
-                                                        <strong>This is the third item's accordion body.</strong> It is
-                                                        hidden by default, until the collapse plugin adds the
-                                                        appropriate classes that we use to style each element. These
-                                                        classes control the overall appearance, as well as the showing
-                                                        and hiding via CSS transitions. You can modify any of this with
-                                                        custom CSS or overriding our default variables. It's also worth
-                                                        noting that just about any HTML can go within the
-                                                        <code>.accordion-body</code>, though the transition does limit
-                                                        overflow.
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </div><!-- end col -->
                                         </div>
-                                    </div><!-- end card-body -->
+                                        <!-- end card-body -->
+                                    </div>
+                                    <!-- end card -->
+                                </div><!-- end col -->
                                 </div>
-                                <!-- end card -->
-                            </div><!-- end col -->
 
+                            </div>
+                            <!--  end row -->
+                            <div class="row">
+                                <div class="col-xl-8">
+                                    <div class="">
+    
+                                        <div class="card-body">
+    
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="card border border-primary">
+                                                        <div class="card-header bg-transparent border-primary">
+                                                            <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Primary outline Card</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">card title</h5>
+                                                            <p class="card-text">
+                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                                Minus dolores asperiores obcaecati voluptatem, quisquam illo
+                                                                tempora fugit enim repellat perspiciatis neque praesentium
+                                                                eaque, atque quaerat laboriosam! Ullam ratione natus
+                                                                ducimus?
+                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                                Minus dolores asperiores obcaecati voluptatem, quisquam illo
+                                                                tempora fugit enim repellat perspiciatis neque praesentium
+                                                                eaque, atque quaerat laboriosam! Ullam ratione natus
+                                                                ducimus?
+                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                                Minus dolores asperiores obcaecati voluptatem, quisquam illo
+                                                                tempora fugit enim repellat perspiciatis neque praesentium
+                                                                eaque, atque quaerat laboriosam! Ullam ratione natus
+                                                                ducimus?
+    
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- end col -->
+                                            </div>
+                                            <!-- end card-body -->
+                                        </div>
+                                        <!-- end card -->
+                                    </div><!-- end col -->
+                                    </div>
+    
+                                </div>
+                                <!--  end row -->
 
                         </div>
-                        <!--  end row -->
-
-
                     </div>
-                </div>
-                <!-- =======FIXME: copyright ========================== -->
-                <%- include ('./partials/copyright.ejs')%>
                     <!-- =======FIXME: copyright ========================== -->
+                    <%- include ('./partials/copyright.ejs')%>
+                        <!-- =======FIXME: copyright ========================== -->
 
-            </div>
-    </div>
-
-
-    <!-- Right Sidebar -->
-    <div class="right-bar">
-        <div data-simplebar class="h-100">
-            <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-
-                <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
-
-                <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                    <i class="mdi mdi-close noti-icon"></i>
-                </a>
+                </div>
             </div>
 
-            <!-- Settings -->
 
-            <%- include ('partials/customizar-tema.ejs')%>
+            <!-- Right Sidebar -->
+            <div class="right-bar">
+                <div data-simplebar class="h-100">
+                    <div class="rightbar-title d-flex align-items-center bg-dark p-3">
 
-        </div> <!-- end slimscroll-menu-->
-    </div>
-    <!-- /Right-bar -->
+                        <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
 
-    <!-- Right bar overlay-->
-    <!-- <div class="rightbar-overlay"></div> -->
-    <!-- JAVASCRIPT -->
-    <script src="./directorio_perfilClientes/js/scripts_personalizadosdash.js"></script>
-    <script src="./directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
-    <script src="./directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="./directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
-    <script src="./directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
-    <script src="./directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
-    <script src="./directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
-    <!-- pace js -->
-    <script src="./directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
+                        <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                            <i class="mdi mdi-close noti-icon"></i>
+                        </a>
+                    </div>
 
+                    <!-- Settings -->
 
+                    <%- include ('partials/customizar-tema.ejs')%>
 
-    <!-- Required datatable js -->
-    <script src="./directorio_perfilClientes/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="./directorio_perfilClientes/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <!-- Responsive examples -->
-    <script src="./directorio_perfilClientes/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="./directorio_perfilClientes/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-    <!-- init js -->
-    <script src="./directorio_perfilClientes/js/pages/datatable-pages.init.js"></script>
+                </div> <!-- end slimscroll-menu-->
+            </div>
+            <!-- /Right-bar -->
 
+        
+            <!-- JAVASCRIPT -->
+            <script src="../directorio_perfilClientes/js/scripts_personalizadosdash.js"></script>
+            <script src="../directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
+            <script src="../directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="../directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
+            <script src="../directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
+            <script src="../directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
+            <script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
+            <!-- pace js -->
+            <script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
 
 
-    <script src="./directorio_perfilClientes/js/app.js"></script>
+
+            <!-- Required datatable js -->
+            <script src="../directorio_perfilClientes/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+            <script src="../directorio_perfilClientes/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+            <!-- Responsive examples -->
+            <script
+                src="../directorio_perfilClientes/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+            <script
+                src="../directorio_perfilClientes/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+            <!-- init js -->
+            <script src="../directorio_perfilClientes/js/pages/datatable-pages.init.js"></script>
+
+
+
+            <script src="../directorio_perfilClientes/js/app.js"></script>
 
 
 </body>

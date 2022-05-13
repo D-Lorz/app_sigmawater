@@ -139,7 +139,7 @@
                     border-spacing: 0 8px; width: 100%;">
                     <thead>
                     
-                        <th scope="col"></th>
+                       
                         <th scope="col">ID</th>
                         <th scope="col">Nombres</th>
                         <th scope="col">Apellidos</th>
@@ -153,8 +153,10 @@
                     </thead>
                     <tbody>
                         <% clientes.forEach((user)=>{ %>
+                           
                             <tr>
-                                <th scope="row">
+                             
+                                <!-- <th scope="row">
                                     <div class="form-check font-size-16">
                                         <input type="checkbox"
                                             class="form-check-input"
@@ -162,36 +164,37 @@
                                         <label class="form-check-label"
                                             for="contacusercheck1"></label>
                                     </div>
-                                </th>
-                                <td ><a href="/perfil-clientes"><%= user.id_cliente %></a></td>
-                                <td><a href="/perfil-clientes"><%= user.nombre %></a></td>
-                                <td><a href="/perfil-clientes"><%= user.apellido %></a></td>
-                                <td><a href="/perfil-clientes"><%= user.correo %></a></td>
-                                <td><a href="/perfil-clientes"><%= user.telefono %></a></td>
-                                <td><a href="/perfil-clientes"><%= user.direccion %></a></td>
+                                </th> -->
+                               
+                                <td> <a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.id_cliente %></a></td>
+                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.nombre %></a></td>
+                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.apellido %></a></td>
+                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.correo %></a></td>
+                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.telefono %></a></td>
+                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.direccion %></a></td>
 
-                              <% if (user.estadoSolicitud == 0 ) {%>
-                                    <% user.estadoSolicitud = "Creado" %>
-                                     <td><a href="/perfil-clientes"><div class="badge badge-soft-dark font-size-12" ><%= user.estadoSolicitud %></div></a></td>
+                              <% if (user.estado_de_la_cuenta == 0 ) {%>
+                                    <% user.estado_de_la_cuenta = "Activo" %>
+                                     <td><a href="/perfil-clientes/<%- user.id_cliente %>"><div class="badge badge-soft-primary font-size-12" ><%= user.estado_de_la_cuenta %></div></a></td>
                             <% } else {%>
-                                <%  if (user.estadoSolicitud==1) { %>
-                                   <% user.estadoSolicitud = "En revisión" %>
-                                     <td><a href="/perfil-clientes"><div class="badge badge-soft-warning font-size-12" ><%= user.estadoSolicitud %></div></a></td>
+                                <%  if (user.estado_de_la_cuenta==1) { %>
+                                   <% user.estado_de_la_cuenta = "En revisión" %>
+                                     <td><a href="/perfil-clientes/<%- user.id_cliente %>"><div class="badge badge-soft-warning font-size-12" ><%= user.estado_de_la_cuenta %></div></a></td>
                              <%  } else {%>
-                                <%  if (user.estadoSolicitud==2) {%>
-                                    <% user.estadoSolicitud = "Aprobado"%>
-                                    <td><a href="/perfil-clientes"><div class="badge badge-soft-success font-size-12" ><%= user.estadoSolicitud %></div></a></td>
+                                <%  if (user.estado_de_la_cuenta==2) {%>
+                                    <% user.estado_de_la_cuenta = "Aprobado"%>
+                                    <td><a href="/perfil-clientes/<%- user.id_cliente %>"><div class="badge badge-soft-success font-size-12" ><%= user.estado_de_la_cuenta %></div></a></td>
                                     <% } else {%>
-                                        <%  if (user.estadoSolicitud==3) {%>
-                                            <% user.estadoSolicitud = "Rechazado"%>
-                                            <td><a href="/perfil-clientes"><div class="badge badge-soft-danger font-size-12" ><%= user.estadoSolicitud %></div></a></td>
+                                        <%  if (user.estado_de_la_cuenta==3) {%>
+                                            <% user.estado_de_la_cuenta = "Rechazado"%>
+                                            <td><a href="/perfil-clientes/<%- user.id_cliente %>"><div class="badge badge-soft-danger font-size-12" ><%= user.estado_de_la_cuenta %></div></a></td>
                                      <%}%> 
                                    <%}%>
                                <% }%>
                             <% }%>
                          
-                        <!-- <td><div class="badge badge-soft-warning font-size-12" ><= user.estadoSolicitud %></div></td>  -->
-                        <td><div class="badge badge-soft-success font-size-12">$0<%= user.monto_aprobado %></div></td>
+                        <!-- <td><div class="badge badge-soft-warning font-size-12" ><= user.estado_cliente %></div></td>  -->
+           <td><a href="/perfil-clientes/<%- user.id_cliente %>"><div class="badge badge-soft-success font-size-12">$0<%= user.monto_aprobado %></div></a></td>
                
                             </tr>
                         <%})%>

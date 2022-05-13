@@ -3,7 +3,7 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados } = require('../controllers/authController');
-const { listarClientes, listarCantidadClientes,registrarClientes, listarClientes_PerfilClientes,solicitarCredito} = require('../controllers/customerFormControllers');
+const { listarClientes, listarCantidadClientes,getSolicitudCreditos,registrarClientes, listarClientes_PerfilClientes,solicitarCredito} = require('../controllers/customerFormControllers');
 
 
 
@@ -40,8 +40,6 @@ const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente
 
 
 
-
-
  // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
 router.get('/nuevo-cliente', isAuthenticated, (req, res) => {
@@ -54,14 +52,10 @@ router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
     res.render('afiliados', { user: req.user })
 });
 
-router.get('/perfil-clientes', isAuthenticated, listarClientes_PerfilClientes, (req, res) => {
-    res.render('perfil-clientes', { user: req.user })
-});
+router.get('/perfil-clientes/:id', isAuthenticated, listarClientes_PerfilClientes)
 
-
+router.get('/solicitar-credito/:id', isAuthenticated ,getSolicitudCreditos)
 // *   ================ ===== ↑↑ ==============================
-
-
 
 
 //* router para los métodos del customerFormControllers
@@ -69,9 +63,8 @@ router.get('/perfil-clientes', isAuthenticated, listarClientes_PerfilClientes, (
 /*=============================================================*/
 router.post('/registrarClientes', isAuthenticated, registrarClientes);
 /*=============================================================*/
-
 /*=============================================================*/
-// router.post('/solicitarCredito', isAuthenticated, multiupload,solicitarCredito);
+  router.post('/solicitarCredito', isAuthenticated, multiupload, solicitarCredito);
 /*=============================================================*/
 
 module.exports = router
