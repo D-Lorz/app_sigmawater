@@ -13,6 +13,7 @@ exports.registrarClientes = async (req, res) => {
   const correo = req.body.correo;
   const telefono = req.body.telefono ;
   const direccion = req.body.direccion;
+  const direccion2 = req.body.direccion2;
   const ciudad = req.body.ciudad;
   const estado_ubicacion = req.body.estado_ubicacion;
   const codigo_postal = req.body.codigo_postal;
@@ -23,7 +24,7 @@ exports.registrarClientes = async (req, res) => {
   const id_vendedor = req.user.id
     
 
-  const nuevoRegistroClientes = {nombre,apellido,correo,telefono,direccion,ciudad,estado_ubicacion,codigo_postal,id_cliente,id_vendedor}
+  const nuevoRegistroClientes = {nombre,apellido,correo,telefono,direccion,direccion2,ciudad,estado_ubicacion,codigo_postal,id_cliente,id_vendedor}
   console.log(nuevoRegistroClientes)
 
   await conexion.query('INSERT INTO formulario_clientes SET ?', [nuevoRegistroClientes], (err, result) => {
