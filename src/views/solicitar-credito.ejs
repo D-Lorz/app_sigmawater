@@ -59,26 +59,30 @@
                                                 <!-- Step 1 -->
                                                  <h6><b>SOLICITANTE</b></h6>
       
-                                                <fieldset>
+                                             <fieldset>
+                                               
+
                                                 <div class="row  justify-content: center;">
                                                   <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="primer_nombref"> Primer nombre<span class="danger">*</span></label>
-                                                          <!-- <input type="text" class="form-control required" id="primer_nombref" name="nombre_cliente"> -->
+                                                          <input type="text" class="form-control required" id="primer_nombref" value="<%= cliente.nombre %>" name="nombre">  
+                                                          <input type="hidden" hidden name="id_cliente" value="<%= cliente.id %>">
+                                                          <input type="hidden" hidden name="numCliente" value="<%= cliente.id_cliente %>">
+                                                     
                                                       </div>
-                                                   
-                                                 </div>
+                                                    </div>
                                                   <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="segundo_nombref">Segundo nombre</label>
-                                                          <!-- <input type="tel" class="form-control " id="segundo_nombref" name="segundo_nombre_cliente"> -->
-                                                      </div>
+                                                           <input type="tel" class="form-control" id="segundo_nombref" value="<%= cliente.segundo_nombre%>"  name="segundo_nombre" > 
+                                                       </div>
                                                   </div>
       
                                                   <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="apellidosf"> Apellidos <span class="danger">*</span></label>
-                                                          <!-- <input type="text" class="form-control required" id="apellidosf" name="apellidos_cliente" > -->
+                                                           <input type="text" class="form-control required" id="apellidosf" value="<%= cliente.apellido%>" name="apellido" >
                                                       </div>
                                                   </div> 
                                               </div>
@@ -98,17 +102,18 @@
                                                           <option value="Sistema de osmosis inversa"></option>
                                                         
                                                       </datalist>
-                                                  </div>
-                                                  
+                                                  </div> 
+                                             
+                                           
                                                   <div class="col-md-4">
                                                       <div class="form-group">
-                                                          <label for="num_licencia_solicitantef"> Numero de licencia<span class="danger">*</span></label>
+                                                        <label for="num_licencia_solicitantef"> Numero de licencia<span class="danger">*</span></label>
                                                           <input type="number"class="form-control required"  id="num_licencia_solicitantef"  name="numero_licencia_cliente" >
                                                       </div>
                                                   </div>
       
                                                                                     
-                                               </div>
+                                             </div>
       
                                            <div class="row text-align: center;">
                                               <div class="col-md-4">
@@ -191,7 +196,7 @@
                                               <div class="col-md-4">
                                                   <div class="form-group">
                                                       <label for="Correof">Correo electronico <span class="danger">*</span></label>
-                                                      <!-- <input type="email" class="form-control required" id="Correof" name="correo_cliente"> -->
+                                                      <input type="email" class="form-control required" id="Correof"  value="<%= cliente.correo %>" name="correo">
                                                   </div>
                                               </div>
                                               <div class="col-md-4">
@@ -227,7 +232,7 @@
                                           <div class="col-md-4">
                                               <div class="form-group">
                                                   <label for="phone-masktelmovil"> Teléfono móvil <span class="danger">*</span> </label>
-                                                  <!-- <input type="text" class="form-control required" id="phone-masktelmovil" name="telefono_movil_cliente"> -->
+                                                  <input type="text" class="form-control required" id="phone-masktelmovil"  value="<%= cliente.telefono %>" name="telefono"> 
                                               </div>
                                       </div>
                                              <div class="col-md-4">
@@ -237,7 +242,7 @@
                                                                                                          
                                                       </div>
                                                   </div>
-                                           </div>         
+                                           </div>          
                                                 </fieldset> 
       
                                                 <!--============= //FIXME:===== *SOLICITANTE* =======FIXME:=========-->
@@ -247,21 +252,21 @@
       
                                                 <!--============= /FIXME:===== *CASA* ==============FIXME:=========-->
                                                 <!-- Step 2 -->
-                                            <h6><b>CASA</b></h6>
+                                             <h6><b>CASA</b></h6>
                                                 <fieldset style="text-align: center">
       
                                                   <div class="row justify-content-center" >
                                                <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="direccionf">  Dirección <span class="danger">*</span></label>
-                                                          <!-- <input type="text" class="form-control required" placeholder="Escriba su direccion..." id="direccionf" name="direccion_cliente" > -->
+                                                          <input type="text" class="form-control required" id="direccionf" value="<%= cliente.direccion %>" name="direccion" > 
                                                       </div>
                                                   </div>
       
                                                    <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="ciudadf"> Ciudad <span class="danger">*</span></label>
-                                                          <!-- <input type="text" class="form-control required" id="ciudadf" name="ciudad_cliente" > -->
+                                                           <input type="text" class="form-control required" id="ciudadf" value="<%= cliente.ciudad %>" name="ciudad" > 
                                                       </div>
                                                   </div>
                                               </div>
@@ -270,14 +275,14 @@
                                                <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="estadof"> Estado <span class="danger">*</span></label>
-                                                          <!-- <input type="text" class="form-control required" id="estadof" name="estado_cliente" > -->
+                                                           <input type="text" class="form-control required" id="estadof" value="<%= cliente.estado_ubicacion %>" name="estado_ubicacion" > 
                                                       </div>
                                                   </div>
               
                                                   <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="postalcode"> Codigo postal <span class="danger">*</span> </label>
-                                                          <!-- <input type="text" class="form-control required" id="postalcode" name="code_postal_cliente" > -->
+                                                           <input type="text" class="form-control required" id="postalcode" value="<%= cliente.codigo_postal %>" name="codigo_postal" > 
                                                    </div>
                                                       
       
@@ -339,7 +344,7 @@
                                                   </div>   
                                    
       
-                                                </fieldset>
+                                                </fieldset> 
       
                                                 <!--============= //FIXME:===== *CASA* ======= ===== FIXME:=========-->
       
@@ -500,13 +505,13 @@
                                                </div>           
       
                                                 </fieldset>   
-      
+       
                                                 <!--============= / FIXME:===== *INGRESOS* ==========FIXME:=========-->
       
                                                 <!--=============================TODO:TODO:=============================================================-->
       
                                                 <!--============= //FIXME:===== *INFORMACION BANCARIA* ======= FIXME:=========-->
-                                                <h6><b>INFORMACIÓN BANCARIA</b></h6>
+                                                 <h6><b>INFORMACIÓN BANCARIA</b></h6>
                                                 <fieldset>
                                                     
                                          <div class="row text-align: center;">
@@ -536,14 +541,14 @@
                                                       </div>      
       
       
-                                                </fieldset>  
+                                                </fieldset>   
                                                 <!--============= //FIXME: ===== *CONFIGURACION BANCARIA* ===== FIXME:=========-->
       
                                                 <!--=============================TODO:TODO:=============================================================-->
       
                                                 <!--============= / FIXME:===== *CO-SOLICITANTE* === FIXME:=========-->
                                                 <!-- Step 4 -->
-                                                 <h6><b>CO-SOLICITANTE</b></h6>
+                                                  <h6><b>CO-SOLICITANTE</b></h6>
       
                                                 <fieldset>
       
@@ -713,9 +718,7 @@
                                                         </div>
       
       
-      
-      
-                                                        <h4 style="text-align: center;">Empleo del co-solicitante</h4>
+                                                  <h4 style="text-align: center;">Empleo del co-solicitante</h4>
       
                                                         <br>
                                                         <br>
@@ -820,14 +823,14 @@
                                                         </div>
                                                     </div>
       
-                                                </fieldset> 
+                                                </fieldset>  
       
                                                 <!--============= //FIXME:===== *CO-SOLICITANTE* ==== FIXME:=========-->
       
                                                 <!--=============================TODO:TODO:=============================================================-->
       
                                                 <!--============= //FIXME:===== *REFERENCIAS* ======= FIXME:=========-->
-      
+       
                                                <h6><b>REFERENCIAS</b></h6>
                                                 <fieldset>
       
@@ -926,7 +929,7 @@
                                                         </div>
       
                                                     </div>
-                                                </fieldset> 
+                                                </fieldset>  
                                                 <!--============= //FIXME: ===== *REFERENCIAS* ===== FIXME:=========-->
       
                                                 <!--=============================TODO:TODO:=============================================================-->
@@ -986,14 +989,12 @@
                                           </div>  
       
                                           </div>   
-                                                </fieldset>  
+                                                </fieldset>   
       
                                                 <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
                                                 <!--=============================TODO:TODO:=============================================================-->
-      
-      
-      
-                                                <!--======== //======FIXME:== * TERMINOS Y CONDICIONES* FIXME:=========-->
+           
+                                           <!--======== //======FIXME:== * TERMINOS Y CONDICIONES* FIXME:=========-->
                                                  <h6><b>TERMINOS Y CONDICIONES</b></h6>
                                                 <fieldset>
       
@@ -1055,21 +1056,21 @@
                                                                 style="font-size: 15px; height: 42px;"
                                                                 placeholder="Cargar archivo firmado" value="" required readonly>
                                                         </div>
-                                                    </div> 
+                                                    </div>  
       
                                                     <!-- Modal -->
-                                                    <div class="modal fade" id="modalFirmar" tabindex="-1"
+                                                     <div class="modal fade" id="modalFirmar" tabindex="-1"
                                                         role="dialog" aria-labelledby="modalFirmarTitle"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h5 class="modal-title" id="modalFirmarLongTitle">Firmar
-                                                                        a continuación</h5> -->
+                                                                        a continuación</h5>  
                                                                     <!-- todo No descomentar    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                      <span aria-hidden="true">&times;</span>
                                                                  </button> -->
-                                                                 </div>
+                                                                  </div>
                                                                 <div class="modal-body">
                                                                     <canvas id="canvas"></canvas>
                                                                     <br>
@@ -1093,7 +1094,7 @@
       
       
                                                     </div>
-      
+       
                                                     <br>
                                                     <input class="btn btn-primary" type="submit" value="Enviar"
                                                     style="float: left;

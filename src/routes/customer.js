@@ -3,7 +3,9 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados } = require('../controllers/authController');
-const { listarClientes, listarCantidadClientes,getSolicitudCreditos,registrarClientes, listarClientes_PerfilClientes,solicitarCredito} = require('../controllers/customerFormControllers');
+const { listarClientes, getSolicitudCreditos,registrarClientes, desactivarBoton,listarClientes_PerfilClientes,solicitarCredito} = require('../controllers/customerFormControllers');
+
+
 
 
 
@@ -52,9 +54,13 @@ router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
     res.render('afiliados', { user: req.user })
 });
 
-router.get('/perfil-clientes/:id', isAuthenticated, listarClientes_PerfilClientes)
+router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes)
 
 router.get('/solicitar-credito/:id', isAuthenticated ,getSolicitudCreditos)
+
+router.get('/hola', (req, res) => {
+    res.render('hola')
+});
 // *   ================ ===== ↑↑ ==============================
 
 
@@ -66,5 +72,6 @@ router.post('/registrarClientes', isAuthenticated, registrarClientes);
 /*=============================================================*/
   router.post('/solicitarCredito', isAuthenticated, multiupload, solicitarCredito);
 /*=============================================================*/
+
 
 module.exports = router

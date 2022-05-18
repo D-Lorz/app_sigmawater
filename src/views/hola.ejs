@@ -1,105 +1,25 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Input In Container Fixed To Bottom Of Viewport | datetimepicker Tests</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Demo</title>
+</head>
+<body>
+  <div class="card-body">
 
-        <link rel="stylesheet" type="text/css" href="./css/jquery.datetimepicker.css"/>
-        <link rel="stylesheet" type="text/css" href="./css/jquery.datetimepicker.min.css"/>
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-            }
+    <div class="table-responsive">
+        <table class="table mb-0">
 
-            main {
-                width: 960px;
-                margin: 0 auto;
-            }
-
-            #search {
-                position: fixed;
-                bottom: 0;
-                z-index: 3;
-                width: 100%;
-                color: #f0f0f0;
-                background-color: #333;
-                opacity: 0.9;
-                -webkit-opacity: 0.9;
-                -moz-opacity: 0.9;
-            }
-
-            #search form {
-                width: 960px;
-                margin: 0 auto;
-                padding: 0.5em;
-            }
-
-            #search form > div,
-            #filters form > div {
-                display: inline;
-            }
-        </style>
-    </head>
-
-    <body>
-        <main>
-            <h1>Input In Container Fixed To Bottom Of Viewport</h1>
-
-            <div id="filters">
-                <form method="post" action="?">
-                    <div>
-                        <label for="filter-date">Date</label>
-                        <input type="text" name="filter-date" id="filter-date"/>
-                    </div>
-
-                    <div>
-                        <input type="submit" value="Filter"/>
-                    </div>
-                </form>
-            </div>
-
-            <ul>
-                <span class="d-none d-xl-inline-block ms-1 fw-medium">
-                
-                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                
-        </main>
-
-        <footer>
-            <div id="search">
-                <form method="post" action="?">
-                    <div>
-                        <label for="search-from-date">Date from</label>
-                        <input type="text" name="search-from-date" id="search-from-date"/>
-                    </div>
-
-                    <div>
-                        <label for="search-to-date">Date to</label>
-                        <input type="text" name="search-to-date" id="search-to-date"/>
-                    </div>
-
-                    <div>
-                        <input type="submit" value="Search"/>
-                    </div>
-                </form>
-            </div>
-        </footer>
-
-        <script src="./js/jquery.js"></script>
-        <script src="./js/jquery.datetimepicker.js"></script>
-        <script src="./js/jquery.datetimepicker.full.min.js"></script>
-
-        <script>
-            /*jslint browser:true*/
-            /*global jQuery, document*/
-
-            jQuery(document).ready(function () {
-                'use strict';
-
-                jQuery('#filter-date').datetimepicker();
-            });
-        </script>
-    </body>
+            <tbody>
+                <tr>
+         
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+</body>
 </html>

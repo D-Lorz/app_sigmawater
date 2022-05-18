@@ -59,15 +59,19 @@
                             <div class="col-xl-9">
                                 <div class="">
                                     <div class="card-body">
-                                        <!-- box-shadow: 0px 0px 12px #dddddd; -->
+                                      
                                         <div class="row">
                                             <div class="col-lg-14">
                                                 <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
                                                     <div class="card-header bg-transparent border-primary">
                                                         <h5 class="my-0 text-primary">
                                                             <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5>
-                                                            <a class="btn btn-primary" href="/solicitar-credito/<%= clientes2.id_cliente %>" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Solicitar credito</a>
-                                                    </div>
+
+                                                            <a href="/solicitar-credito/<%= clientes2.id_cliente %>" id="verBtn">
+                                                                <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Solicitar credito</button>
+                                                            </a> 
+
+                                                      </div>
                                                     <div class="card-body">
 
                                                         <div class="table-responsive">
@@ -85,43 +89,21 @@
                                                                         <td>Nombre</td>
                                                                         <td><b><%= clientes2.nombre %></b></td>
                                                                         <td>Direccion</td>
-                                                                        <td><b><%= clientes2.direccion %></b></td>
+                                                                        <td><b><%= clientes2.direccion %> <%= clientes2.ciudad %> <%= clientes2.estado_ubicacion %> <%= clientes2.codigo_postal %> </b></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Apellido</td>
                                                                         <td><b><%= clientes2.apellido %></b></td>
-                                                                        <td>Estado</td>
-
-
-                                                                        <% if (clientes2.estado_de_la_cuenta == 0 ) {%>
-
-                                                                       <% clientes2.estado_de_la_cuenta = "Activo" %>
-                                                                             <td><div class="badge badge-soft-primary font-size-12" ><%= clientes2.estado_de_la_cuenta %></div></td>
-                                                                        <% } else {%>estado_de_la_cuenta
-                                                                            <%  if (clientes2.estado_de_la_cuenta==1) { %>
-                                                                               <% clientes2.estado_de_la_cuenta = "En revisión" %>
-                                                                               <td><div class="badge badge-soft-warning font-size-12" ><%= clientes2.estado_de_la_cuenta %></div></td>
-                                                                         <%  } else {%>
-                                                                            <%  if (clientes2.estado_de_la_cuenta==2) {%>
-                                                                                <% clientes2.estado_de_la_cuenta = "Aprobado"%>
-                                                                                <td><div class="badge badge-soft-success font-size-12" ><%= clientes2.estado_de_la_cuenta %></div></td>
-                                                                                <% } else {%>
-                                                                                    <%  if (clientes2.estado_de_la_cuenta==3) {%>
-                                                                                        <% clientes2.estado_de_la_cuenta = "Rechazado"%>
-                                                                                        <td><div class="badge badge-soft-danger font-size-12" ><%= clientes2.estado_de_la_cuenta %></div></td>
-
-                                                                                 <%}%> 
-                                                                               <%}%>
-                                                                           <% }%>
-                                                                        <% }%>
+                                                                        <td>Estado de credito</td>
+                                                                        <td><div class="badge <%=estado.color%> font-size-12" ><%= estado.txt %></div></td>
                                                                     </tr>
+                                                           
                                                                     <tr>
                                                                         <td>Correo electronico</td>
-                                                                        <td><b><%= user.correo %></b></td>
+                                                                        <td><b><%= clientes2.correo %></b></td>
                                                                         <td style="width: 19%;">Monto aprobado</td>
                                                                         <td><div class="badge badge-soft-success font-size-12">$0<%= clientes2.monto_aprobado %></div></td>
-                   
-                                                                    </tr>
+                                                                         </tr>
                                                                    
                                                                 </tbody>
                                                             </table>
@@ -213,6 +195,15 @@
                 </div> <!-- end slimscroll-menu-->
             </div>
             <!-- /Right-bar -->
+
+            <!-- VALIDACIONES BREVES -->
+            <% if (!estado.verBtn){%>
+            <script>
+                const boton = document.getElementById("btn_credito")
+                boton.setAttribute("disabled", "")
+                boton.style.filter = "grayscale(1)";
+            </script>
+            <%}%>
 
         
             <!-- JAVASCRIPT -->
