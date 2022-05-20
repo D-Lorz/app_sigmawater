@@ -1,3 +1,15 @@
+
+
+body::-webkit-scrollbar {
+ width: 8px;
+ 
+}
+body::-webkit-scrollbar-thumb{
+  background: linear-gradient(189.55deg, #FED061 -131.52%, #812082 -11.9%, #50368C 129.46%);
+  border-radius: 5px;
+}
+
+
 scroll-container {
   display: block;
   width: 632px;
@@ -27,4 +39,5 @@ scroll-container::-webkit-scrollbar-thumb {
   background: #453b3b;
   border-radius: 5px;
 }
+
 

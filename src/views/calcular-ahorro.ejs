@@ -1,5 +1,5 @@
   <!--==================FIXME:=====HEADER NUEVOS-CLIENTES====================  -->
-  <%- include ('partials/partials-test-de-agua/header.ejs')%>
+  <%- include ('partials/partials-ahorro/header.ejs')%>
   <!--==================FIXME:=====HEADER NUEVOS-CLIENTES====================  -->
   
   <body>
@@ -23,13 +23,13 @@
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center
                                     justify-content-between" style="margin-bottom: 3%;">
-                                    <h4 class="mb-sm-0 font-size-18">Test de agua</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Calcular ahorro</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0" style="text-transform: initial;">
                                             <li class="breadcrumb-item"><a href="javascript:
                                                     void(0);">Perfil cliente</a></li>
-                                            <li class="breadcrumb-item active" id="reparartexto">Test de agua</li>
+                                            <li class="breadcrumb-item active" id="reparartexto"> Calcular ahorro </li>
                                         </ol>
                                     </div>
 
@@ -44,35 +44,29 @@
                           <section id="validation">
 
                     <div class="card-content collapse show">
-                                      <form action="/testAgua" method="POST" class="steps wizard-circle" id="validarForm">
-                                        <!-- const fecha_test = new Date().toLocalDateString("en-US") -->
+                                      <form action="/calcularAhorro" method="POST" class="steps wizard-circle" id="validarForm">
+                                        
                                           <!-- * ============== Primera fila  ========================== -->
                                                    <fieldset>
 
                                                         <div class="row  justify-content: center;">
-                                                            <!-- <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label for="">Fecha del test<span class="danger">*</span></label>
-                                                                       <span id="fechaActual"></span>
-                                                                  <input type="datetime" class="form-control" required id="fechaActual" name="fecha_test" value=""> 
-                                                                </div>
-                                                            </div> -->
+                                                        
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="nombreP">Hardness (grains per gallon)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="hardness">
+                                                                    <label for="">Agua embotellada<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="" name="agua_embotellada">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="nombreP">Iron (grains per gallon)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="iron">
+                                                                    <label for="nombreP">Jabones<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="" name="jabones">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="nombreP">TDS (total dissolved solids)</label>
-                                                                    <input type="text" class="form-control" id="" name="tds">
+                                                                    <label for="nombreP">Productos de limpieza</label>
+                                                                    <input type="text" class="form-control" id="" name="productos_limpieza">
                                                                 </div>
                                                             </div>
                                                                   
@@ -85,21 +79,21 @@
                                                         
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="apellidoP">Chlorine (parts per million)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="chlorine" >
+                                                                    <label for="apellidoP">Agua caliente<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="" name="agua_caliente" >
                                                                 </div>
                                                             </div> 
                                                           
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="correoP">pH<span class="danger">*</span></label>
-                                                                    <input type="email" class="form-control" required id="" name="ph" >
+                                                                    <label for="correoP">Plomería y electrodomésticos<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="" name="plomeria_electrodomesticos" >
                                                                 </div>
                                                             </div> 
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="">Sulfur (parts per million)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control"  required id="" name="sulfur" >
+                                                                    <label for="">Ropa y lencería<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control"  required id="" name="ropa_lenceria" >
                                                                 </div>
                                                             </div>
                                                         
@@ -107,7 +101,7 @@
                                          <!-- * ========== Tercera fila =======  --> 
                                       
                                             
-                                                     <div class="row" >
+                                                     <!-- <div class="row" >
                                                               <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="">Tannin (parts per million)<span class="danger">*</span></label>
@@ -135,16 +129,9 @@
                                                          </div>
 
                                                  
-                                                    </div>
+                                                    </div> -->
                                                  </fieldset>  
-                                            
-                     
-                                          <!--============= / FIXME:===== *CO-SOLICITANTE* === FIXME:=========-->
-                                    <fieldset>
-                                        <input hidden id="currency-masksalario">
-                                        <input hidden id="currency-maskingresoadi"> 
-                                   </fieldset>
-                                      
+                                 
 
                         <center><button type="submit" class="btn btn-primary">Guardar</button></center>
 
@@ -189,5 +176,5 @@
       </div>
 
       <!--==================FIXME:=====FOOTER NUEVOS-CLIENTES====================  -->
-      <%- include ('partials/partials-test-de-agua/footer.ejs')%>
+      <%- include ('partials/partials-ahorro/footer.ejs')%>
       <!--==================FIXME:=====FOOTER NUEVOS-CLIENTES====================  -->

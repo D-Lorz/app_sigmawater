@@ -50,7 +50,7 @@ exports.registrar = async (req, res) => {
 
     console.log(nuevoRegistro)
 
-    await conexion.query('INSERT INTO formulario_registro_vendedor SET ?', [nuevoRegistro], (err, result) => {
+    await conexion.query('INSERT INTO registro_de_vendedores SET ?', [nuevoRegistro], (err, result) => {
         if (err) throw err;
         console.log("1 Registro insertado");
         console.log(result)
@@ -74,7 +74,7 @@ exports.login = async (req, res) => {
                 ruta: 'login'
             })
         } else {
-            await conexion.query('SELECT * FROM formulario_registro_vendedor WHERE correo = ?', [correo], async (error, results) => {
+            await conexion.query('SELECT * FROM registro_de_vendedores WHERE correo = ?', [correo], async (error, results) => {
                 if (results.length == 0 || !(await bcryptjs.compare(pass, results[0].pass))) {
                     res.render('login', {
                         alert: true,
@@ -121,7 +121,7 @@ exports.isAuthenticated = async (req, res, next) => {
     if (req.cookies.jwt) {
         try {
             const decodificada = await promisify(jwt.verify)(req.cookies.jwt, 'super_secret_AppSigmaWater');
-            conexion.query('SELECT * FROM formulario_registro_vendedor WHERE id = ?', [decodificada.id], (error, results) => {
+            conexion.query('SELECT * FROM registro_de_vendedores WHERE id = ?', [decodificada.id], (error, results) => {
                 if (!results) {
                     return next()
                 }
@@ -158,7 +158,7 @@ exports.listarAfiliados= async (req, res) => {
      const id_vendedorA = req.user.id_vendedor;
    
    // Consultando en DB los clientes que pertenecen al vendedor actual
-     conexion.query('SELECT * FROM formulario_registro_vendedor WHERE codigo_afiliado = ?', [id_vendedorA], (err, result) => {
+     conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA], (err, result) => {
        if (err) throw err;
        res.render('afiliados', {user: req.user, result: result})
     //    console.log(result);

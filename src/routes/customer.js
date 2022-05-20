@@ -56,9 +56,14 @@ router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
 
 router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes)
 router.get('/solicitar-credito/:id', isAuthenticated ,getSolicitudCreditos)
+
 router.get('/test-de-agua', isAuthenticated, (req, res) => {
     res.render('test-de-agua', { user: req.user })
 });
+router.get('/calcular-ahorro', isAuthenticated, (req, res) => {
+    res.render('calcular-ahorro', { user: req.user })
+});
+
 
 router.get('/hola', (req, res) => {
     res.render('hola')
@@ -71,10 +76,9 @@ router.get('/hola', (req, res) => {
 /*=============================================================*/
 router.post('/registrarClientes', isAuthenticated, registrarClientes);
 /*=============================================================*/
-/*=============================================================*/
   router.post('/solicitarCredito', isAuthenticated, multiupload, solicitarCredito);
 /*=============================================================*/
-/*=============================================================*/
-// router.post('/registrarClientes', isAuthenticated, registrarClientes);
+ router.post('/calcularAhorro', isAuthenticated, registrarClientes);
+ 
 
 module.exports = router

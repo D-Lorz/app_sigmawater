@@ -35,6 +35,8 @@
     <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/app.min.css" id="app-style" />
     <!-- Tipo de letra -->
     <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
+    <!-- scroll -->
+    <link rel="stylesheet" href="../css/scrolls.css">
 
 </head>
 
@@ -52,9 +54,9 @@
             <div class="main-content">
                 <div class="page-content">
                     <div class="container-fluid">
-                                            
-                  
-            <!-- * =============>> Datos del cliente  <<===================== -->
+
+          <!-- * =============>> Datos del cliente  <<===================== -->
+          
                     <div class="row">
                             <div class="col-xl-8" >
                                 <div class="">
@@ -149,6 +151,8 @@
             <!-- * =============>> FIN Datos del cliente  <<===================== -->
 
             <!-- * =============>> Test de agua  <<===================== -->
+
+         
                         <div class="row">
                             <div class="col-xl-8" >
                                 <div class="" >
@@ -161,52 +165,217 @@
                                                         <h5 class="my-0 text-primary">
                                                             <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
 
-                                                            <a href="test-de-agua" id="verBtn">
-                                                                <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Realizar test</button>
+                                                            <a href="/test-de-agua" >
+                                                                <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Realizar test</button>
                                                             </a> 
 
+                                                            <style type="text/css">
+                                                               div.scroll_vertical {
+                                                                height: 337px;
+                                                                /* width: 747px; */
+                                                                overflow: auto;
+                                                                /* border: 1px solid #666; */
+                                                                /* background-color: #ccc; */
+                                                                padding: 8px;
+                                                            }
+                                                            .scroll_vertical::-webkit-scrollbar {
+                                                               width:10px;
+                                                            }
+                                                            .scroll_vertical::-webkit-scrollbar-thumb {
+                                                                background: linear-gradient(189.55deg, #FED061 -131.52%, #812082 -11.9%, #50368C 129.46%);
+                                                                border-radius: 5px;
+                                                                }
+                                                            div.scroll_horizontal {
+                                                                overflow: auto;
+                                                                padding: 8px;
+                                                            }
+
+                                                            div.scroll_horizontal::-webkit-scrollbar-horizontal {
+                                                                width:5px;
+                                                                background:red;
+                                                                }
+                                                            div.scroll_horizontal::-webkit-scrollbar-thumb {
+                                                                background: linear-gradient(189.55deg, #FED061 -131.52%, #812082 -11.9%, #50368C 129.46%);
+                                                                border-radius: 5px;
+                                                                }
+
+
+                                                        </style>
+
+
                                                       </div>
-                                                    <div class="card-body">
-
-                                                        <div class="table-responsive">
-                                                            <table class="table mb-0">
-
-                                                                <tbody>
-                                                                    <tr>
+                                                      <div class="card-body">
+                                                 
+                                                        <div class="scroll_vertical scroll_horizontal">
+                                                         
+                                                            <div class="table-responsive">
+                                                               
+                                                                <table class="table table-striped mb-0">
+                                                             
+                                                                    <thead class="table-light">
+                                                                        <tr>
+                                                                            <!-- <th>#</th> -->
+                                                                            <th>Hardness (grains per gallon)</th>
+                                                                            <th>Iron (parts per gallon)</th>
+                                                                            <th>TPH (Iron ppm (x4) + Hardness)</th>
+                                                                            <th>TDS</th>
+                                                                            <th>Chlorine</th>
+                                                                            <th>pH</th>
+                                                                            <th>Fecha del test</th>
+                                                                            <th>Sulfur </th>
+                                                                            <th>Tannin  </th>
+                                                                            <th>Nitrate  </th>
+                                                                            <th>Other </th>
+                                                                            <th>Notes </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                         
+                                                                            <td>Marerterteertertertertertrteerk</td>
+                                                                            <td>Ottodsdfsdfsdfsd</td>
+                                                                            <td>@mdosdfsdfsdfsdfsf</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdosdfsdfsdfsdsf</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                        </tr>
+                                                                        <tr>
                                                                         
-                                                                         <td style="width: 26%;">Total compensated hardness (Iron ppm (x4) + Hardness)</td>
-                                                                         <td><b>xxxxxx</b></td>
-                                                                         <td>Sulfur (parts per million)</td>
-                                                                         <td><b>xxxxxx</b></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>TDS (total dissolved solids)</td>
-                                                                        <td><b>xxxxxx</b></td>
-                                                                        <td>Tannin (parts per million)</td>
-                                                                        <td><b>xxxxxx</b></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Chlorine (parts per million)</td>
-                                                                         <td><b>xxxxxx</b></td>
-                                                                        <td>Nitrate (parts per million)</td>
-                                                                         <td><b>xxxxxx</b></td>
-                                                                    </tr>
-                                                           
-                                                                    <tr>
-                                                                        <td>pH</td>
-                                                                         <td><b>xxxxxx</b></td>
-                                                                         <td>Other</td>
-                                                                         <td><b>xxxxxx</b></td>
-                                                                    </tr>
-                                                                    <td>Fecha del test</td>
-                                                                         <td><b>xxxxxxx</b></td>
-                                                                         <td style="width: 26%;">Notes</td>
-                                                                         <td><b>xxxxxx</b></td>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-   
+                                                                             <td>Marerterterteerk</td>
+                                                                            <td>Ottosdfsdfsdfsdf</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                          
+                                                                             <td>Marerterterteerk</td>
+                                                                            <td>Otto</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            
+                                                                              <td>Marerterterteerk</td>
+                                                                            <td>Otto</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                           
+                                                                            <td>Marerterterteerk</td>
+                                                                            <td>Otto</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            
+                                                                            <td>Marerterterteerk</td>
+                                                                            <td>Otto</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                           
+                                                                            <td>Marerterterteerk</td>
+                                                                            <td>Otto</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            
+                                                                            <td>Marerterterteerk</td>
+                                                                            <td>Otto</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                           
+                                                                             <td>Marerterterteerk</td>
+                                                                            <td>Otto</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                            <td>@mdo</td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                                
+                                                            </div>
+                                                        
                                                     </div>
+                                                    </div>
+                                                    <!-- end card body -->
+                                                </div>
+                                                <!-- end card -->
 
                                                 </div>
                                             </div><!-- end col -->
@@ -217,23 +386,22 @@
                                     <!-- end card -->
 
                                 </div><!-- end col -->
+                                <div class="col-lg-4 ">
+                                    <div class="card" style="margin-top: 5%;">
+                                        <div class="card-header">
+                                            <h4 class="card-title mb-0">Calidad de agua del hogar</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="column_chart" data-colors='["#a99bcb", "#50368c"]' class="apex-charts" dir="ltr"></div>                                      
+                                        </div>
+                                    </div>
+                                    <!--end card-->
+                                </div>
                               </div>
 
-                                      
-                        <div class="col-lg-4 ">
-                            <div class="card" style="margin-top: 5%;">
-                                <div class="card-header">
-                                    <h4 class="card-title mb-0">Calidad de agua del hogar</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div id="column_chart" data-colors='["#a99bcb", "#50368c"]' class="apex-charts" dir="ltr"></div>                                      
-                                </div>
-                            </div>
-                            <!--end card-->
-                        </div>
-                    
-
-          </div>
+                     
+                  
+                         </div>
             <!-- * =============>> FIN Test de agua  <<===================== -->
 
             <!-- * =============>> Ahorro  <<===================== -->
@@ -249,8 +417,8 @@
                                                             <h5 class="my-0 text-primary">
                                                                 <i class="fas fa-money-bill"></i>&nbsp; Ahorro</h5>
     
-                                                                <a href="" id="verBtn">
-                                                                    <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Calcular</button>
+                                                                <a href="/calcular-ahorro" >
+                                                                    <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Calcular</button>
                                                                 </a> 
     
                                                           </div>

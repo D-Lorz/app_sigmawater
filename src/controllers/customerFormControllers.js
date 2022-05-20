@@ -41,7 +41,7 @@ exports.registrarClientes = async (req, res) => {
     }
     console.log(nuevoRegistroClientes)
 
-    await conexion.query('INSERT INTO formulario_clientes SET ?', [nuevoRegistroClientes], (err, result) => {
+    await conexion.query('INSERT INTO nuevos_cliente SET ?', [nuevoRegistroClientes], (err, result) => {
       if (err) throw err;
       console.log(" ========>> 1 Registro Cliente ");
       console.log(result)
@@ -58,7 +58,7 @@ exports.registrarClientes = async (req, res) => {
 exports.getSolicitudCreditos = async (req, res) => {
   const id = req.params.id
 
-  await conexion.query('SELECT * FROM formulario_clientes WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
+  await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
     if (err) throw err;
 
     res.render('solicitar-credito', {
@@ -237,14 +237,14 @@ exports.solicitarCredito = async (req, res) => {
   const estado_ubicacion = req.body.estado_ubicacion;
   const codigo_postal = req.body.codigo_postal;
 
-  // Número aleatorio de cliente
+  // --> Número aleatorio de cliente
   const numCliente = req.body.numCliente
 
   const actualizarCliente = { nombre, segundo_nombre, apellido, correo, telefono, direccion, ciudad, estado_ubicacion, codigo_postal }
 
-  await conexion.query("UPDATE formulario_clientes SET ? WHERE id = ?", [actualizarCliente, id_cliente])
+  await conexion.query("UPDATE nuevos_cliente SET ? WHERE id = ?", [actualizarCliente, id_cliente])
   // * --> Insertar datos de la solicitud de crédito del cliente
-  await conexion.query("INSERT INTO formulario_solicitar_credito SET ?", [objeto_datos], (err, result) => {
+  await conexion.query("INSERT INTO solicitar_credito SET ?", [objeto_datos], (err, result) => {
     if (err) throw err;
     if (result) { res.redirect('/perfil-clientes/'+numCliente) }
   })
@@ -258,7 +258,7 @@ exports.listarClientes = async (req, res) => {
   const id_vendedor = req.user.id;
 
   // Consultando en DB los clientes que pertenecen al vendedor actual
-  conexion.query('SELECT * FROM formulario_clientes WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
+  conexion.query('SELECT * FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
     if (err)
       throw err;
     res.render('lista-clientes', {
@@ -275,10 +275,10 @@ exports.listarClientes = async (req, res) => {
 exports.listarClientes_PerfilClientes = async (req, res) => {
 
   const id_cliente = req.params.id
-  let clientes2 = await conexion.query('SELECT * FROM formulario_clientes WHERE id_cliente = ? LIMIT 1', [id_cliente])
+  let clientes2 = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id_cliente])
   clientes2 = clientes2[0]
 
-  let credito = await conexion.query('SELECT * FROM formulario_solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
+  let credito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
   let estado = []
   estado.txt = "No solicitado";
   estado.color = 'badge-soft-dark'
@@ -304,9 +304,62 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       estado.verBtn = false;
     }
   }
-
+  
     res.render('perfil-clientes', { user: req.user, clientes2, estado})
 }
+
+
+// todo --> Formulario de calcular ahorro
+exports.registrarClientes = async (req, res) => {
+  try {
+    const agua_embotellada = req.body.agua_embotellada;
+    const jabones = req.body.jabones;
+    const productos_limpieza = req.body.productos_limpieza;
+    const agua_caliente = req.body.agua_caliente;
+    const plomeria_electrodomesticos = req.body.plomeria_electrodomesticos;
+    const ropa_lenceria = req.body.ropa_lenceria;
+ 
+    const datos_calcular_ahorros = {
+      agua_embotellada,
+      jabones,
+      productos_limpieza,
+      agua_caliente,
+      plomeria_electrodomesticos,
+      ropa_lenceria
+    }
+    console.log(datos_calcular_ahorros)
+
+    await conexion.query('INSERT INTO ahorro SET ?', [datos_calcular_ahorros], (err, result) => {
+      if (err) throw err;
+      console.log(" ========>> 1 Registro Cliente ");
+      console.log(result)
+      console.log(" ========>> 1 Registro Cliente ");
+      res.redirect('/lista-clientes')
+    })
+  } catch (error) {
+    console.log(error);
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // todo --> actualizar datos del cliente
 // exports.ActualizarDatos = async (req, res) => {
@@ -315,7 +368,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
 //   console.log(actualiazarDatos)
 
-//   await conexion.query('UPDATE formulario_clientes SET apellido WHERE id_clientes = ?', [{apellido:apellido}], (err, result) => {
+//   await conexion.query('UPDATE nuevos_cliente SET apellido WHERE id_clientes = ?', [{apellido:apellido}], (err, result) => {
 //     if (err) throw err;
 //     console.log(" ========>> 1 Registro Cliente ");
 //     console.log(result)
@@ -331,7 +384,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 // Capturando el id del Vendedor actual
 // const id_vendedor = req.user.id_vendedor;
 // Consultando en DB los clientes que pertenecen al vendedor actual
-// conexion.query('SELECT COUNT(*) AS total_afiliados FROM formulario_solicitar_credito  WHERE codigo_afiliado = ? ', [id_vendedor], (err, result) => {
+// conexion.query('SELECT COUNT(*) AS total_afiliados FROM solicitar_credito  WHERE codigo_afiliado = ? ', [id_vendedor], (err, result) => {
 // if (err) throw err;
 
 //   console.log("// ------------------------------");
