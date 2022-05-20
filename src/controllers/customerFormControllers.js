@@ -283,6 +283,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   estado.txt = "No solicitado";
   estado.color = 'badge-soft-dark'
   estado.verBtn = true;
+
   if (credito.length > 0) {
     credito = credito[0]
     if (credito.estado_del_credito === '0') {
@@ -304,11 +305,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     }
   }
 
-  res.render('perfil-clientes', {
-    user: req.user,
-    clientes2,
-    estado
-  })
+    res.render('perfil-clientes', { user: req.user, clientes2, estado})
 }
 
 // todo --> actualizar datos del cliente
@@ -328,7 +325,6 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
 
 //   }
-
 
 // // todo: MOSTRAR CANTIDAD DE CLIENTES
 // exports.listarCantidadClientes = async (req, res) => {

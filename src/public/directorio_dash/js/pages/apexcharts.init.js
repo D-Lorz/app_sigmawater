@@ -113,6 +113,7 @@ chart.render();
 
 
 //  line chart datalabel  
+
 var lineDashedColors = getChartColorsArray("#line_chart_dashed");
 var options = {
     chart: {
@@ -200,6 +201,7 @@ options
 chart.render();
 
 //   spline_area
+
 var splneAreaColors = getChartColorsArray("#spline_area");
 var options = {
     chart: {
@@ -246,6 +248,7 @@ var chart = new ApexCharts(
 chart.render();
 
 // column chart
+
 var columnColors = getChartColorsArray("#column_chart");
 var options = {
     chart: {
@@ -281,7 +284,7 @@ var options = {
     }],
     colors: columnColors,
     xaxis: {
-        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+        categories: ['Total compensated hardness', 'TDS (total dissolved solids)', 'Chlorine (parts per million)', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
     },
     yaxis: {
         title: {

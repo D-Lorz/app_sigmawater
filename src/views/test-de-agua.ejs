@@ -1,0 +1,184 @@
+  <!--==================FIXME:=====HEADER NUEVOS-CLIENTES====================  -->
+  <%- include ('partials/partials-test-de-agua/header.ejs')%>
+  <!--==================FIXME:=====HEADER NUEVOS-CLIENTES====================  -->
+  
+  <body>
+
+      <!-- Begin page -->
+      <div id="layout-wrapper">
+
+          <!-- =======FIXME: MENU ========================== -->
+          <%- include ('./partials/menu.ejs')%>
+          <!-- =======FIXME: MENU ========================== -->
+
+          <div class="main-content">
+              <div class="page-content">
+                  <div class="container-fluid">
+
+
+                      <!--============================================================-->
+                      <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
+                      <!--============================================================-->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center
+                                    justify-content-between" style="margin-bottom: 3%;">
+                                    <h4 class="mb-sm-0 font-size-18">Test de agua</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0" style="text-transform: initial;">
+                                            <li class="breadcrumb-item"><a href="javascript:
+                                                    void(0);">Perfil cliente</a></li>
+                                            <li class="breadcrumb-item active" id="reparartexto">Test de agua</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- end page title -->
+                      <!-- BEGIN: Content-->
+                      <div class="app-content content" style="margin-top:-7px">
+                          <!-- Form wizard with step validation section start -->
+                          <section id="validation">
+
+                                 <div class="card-content collapse show">
+                                      <form action="/registrarClientes" method="POST" class="steps wizard-circle" id="validarForm">
+                                        
+                                          <!-- * ============== Primera fila  ========================== -->
+                                                   <fieldset>
+
+                                                        <div class="row  justify-content: center;">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="nombreP">Total compensated hardness (Iron ppm (x4) + Hardness)<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="" name="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="nombreP">TDS (total dissolved solids)</label>
+                                                                    <input type="text" class="form-control" id="" name="">
+                                                                </div>
+                                                            </div>
+                                                                  
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="apellidoP">Chlorine (parts per million)<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="" name="" >
+                                                                </div>
+                                                            </div> 
+                                                          
+                                                         </div>
+                                              <!-- * ========== Segunda fila =======  -->
+
+                                                         <div class="row  justify-content: center;">
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="correoP">pH<span class="danger">*</span></label>
+                                                                    <input type="email" class="form-control" required id="" name="" >
+                                                                </div>
+                                                            </div> 
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="telefonoP">Fecha del test<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="" name="">
+                                                                </div>
+                                                            </div>
+                                                                  
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="direccionP">Sulfur (parts per million)<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control"  required id="" name="" >
+                                                                </div>
+                                                            </div>
+                                                         
+                
+                                                           
+                                                        </div>
+                                         <!-- * ========== Tercera fila =======  --> 
+
+                                                     <div class="row ">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="">Tannin (parts per million)<span class="danger">*</span></label>
+                                                                <input type="text" class="form-control" name="" >
+                                                         </div>
+                                                         </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="ciudadP">Nitrate (parts per million)<span class="danger">*</span></label>
+                                                                <input type="text" class="form-control" required id="" name="" >
+                                                            </div>
+                                                        </div>
+                                                         <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Other<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="" name="" >
+                                                                </div>
+                                                            </div>
+                        
+                                                            <div class="col-md-10">
+                                                                <div class="form-group">
+                                                                    <label for="postalcode">Notes<span class="danger">*</span></label>
+                                                                    <textarea class="form-control" required id="" name="" ></textarea>
+                                                             </div>
+                                                         </div>
+
+                                                    </div>
+                                                 </fieldset>  
+                                                                                   
+                                          <!--============= / FIXME:===== *CO-SOLICITANTE* === FIXME:=========-->
+                                    <fieldset>
+                                        <input hidden id="currency-masksalario">
+                                        <input hidden id="currency-maskingresoadi"> 
+                                   </fieldset>
+                                      
+
+                        <center><button type="submit" class="btn btn-primary">Guardar</button></center>
+
+                                      </form>
+
+
+                                  </div>
+                            
+                          </section>
+                          
+                      </div>
+            
+                  </div>
+              </div>
+
+              <!-- =======FIXME: copyright ========================== -->
+              <%- include ('./partials/copyright.ejs')%>
+              <!-- =======FIXME: copyright ========================== -->
+
+
+          </div>
+      </div>
+
+
+      <!-- Right Sidebar -->
+      <div class="right-bar">
+          <div data-simplebar class="h-100">
+              <div class="rightbar-title d-flex align-items-center bg-dark p-3">
+
+                  <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
+
+                  <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                      <i class="mdi mdi-close noti-icon"></i>
+                  </a>
+              </div>
+
+              <!-- Settings -->
+
+              <%- include ('partials/customizar-tema.ejs')%>
+
+          </div> <!-- end slimscroll-menu-->
+      </div>
+
+      <!--==================FIXME:=====FOOTER NUEVOS-CLIENTES====================  -->
+      <%- include ('partials/partials-test-de-agua/footer.ejs')%>
+      <!--==================FIXME:=====FOOTER NUEVOS-CLIENTES====================  -->

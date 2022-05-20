@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Lista de clientes</title>
+    <title>Perfil clientes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
@@ -18,13 +18,10 @@
 
     <!-- DataTables -->
     <link href="../directorio_perfilClientes/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-        type="text/css" />
-
+       type="text/css" />
     <!-- Responsive datatable examples -->
     <link href="../directorio_perfilClientes/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
         rel="stylesheet" type="text/css" />
-
-
 
     <!-- preloader css -->
     <link rel="stylesheet" href="../directorio_perfilClientes/css/preloader.min.css" type="text/css" />
@@ -36,6 +33,8 @@
     <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/icons.min.css" />
     <!-- App Css-->
     <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/app.min.css" id="app-style" />
+    <!-- Tipo de letra -->
+    <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
 
 </head>
 
@@ -44,19 +43,20 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        <!-- =======FIXME: MENU ========================== -->
+        <!-- =======FIXME: MENU ========= -->
 
         <%- include ('./partials/menu.ejs')%>
 
-            <!-- =======FIXME: MENU ========================== -->
+            <!-- =======FIXME: MENU ====== -->
 
             <div class="main-content">
                 <div class="page-content">
                     <div class="container-fluid">
-
-
-                        <div class="row">
-                            <div class="col-xl-9">
+                                            
+                  
+            <!-- * =============>> Datos del cliente  <<===================== -->
+                    <div class="row">
+                            <div class="col-xl-8" >
                                 <div class="">
                                     <div class="card-body">
                                       
@@ -80,16 +80,24 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         
-                                                                         <td style="width: 19%;">ID</td>
+                                                                         <td style="width: 23%;">ID</td>
                                                                          <td><b><%= clientes2.id_cliente %></b></td>
                                                                          <td>Teléfono</td>
                                                                          <td><b><%= clientes2.telefono %></b></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Nombre</td>
-                                                                        <td><b><%= clientes2.nombre %></b></td>
-                                                                        <td>Direccion</td>
+                                                                        <td style="width: 29%;"><b><%= clientes2.nombre %></b></td>
+                                                                        <td style="width:20%">Dirección</td>
                                                                         <td><b><%= clientes2.direccion %> <%= clientes2.ciudad %> <%= clientes2.estado_ubicacion %> <%= clientes2.codigo_postal %> </b></td>
+                                                                     
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Segundo nombre</td>
+                                                                        <td><b><%= clientes2.segundo_nombre %></b></td>
+                                                                        <td>Dirección 2</td>
+                                                                        <td><b><%=clientes2.direccion2%></b></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Apellido</td>
@@ -101,72 +109,294 @@
                                                                     <tr>
                                                                         <td>Correo electronico</td>
                                                                         <td><b><%= clientes2.correo %></b></td>
-                                                                        <td style="width: 19%;">Monto aprobado</td>
+                                                                        <td style="width: 24%;">Monto aprobado</td>
                                                                         <td><div class="badge badge-soft-success font-size-12">$0<%= clientes2.monto_aprobado %></div></td>
                                                                          </tr>
                                                                    
                                                                 </tbody>
                                                             </table>
                                                         </div>
-                                                        
+   
                                                     </div>
+
                                                 </div>
                                             </div><!-- end col -->
-                                        </div>
+
+                                             </div>
                                         <!-- end card-body -->
                                     </div>
                                     <!-- end card -->
-                                </div><!-- end col -->
-                                </div>
 
+                                </div><!-- end col -->
+                              </div>
+
+                                <div class="col-lg-4">
+                                    <div class="card bg-primary border-primary text-white-50"
+                                     style=" background: linear-gradient(189.55deg, #FED061 -131.52%, #a39e9e -11.9%, #7b748d 129.46%);margin-top: 6%;">
+                                        <div class="card-body">
+                                            <h6 class="mb-3 text-white">Estado del servicio</h6>
+                                            <p class="card-text" style="color:white;">
+                                                Hasta la fecha el cliente no ha sido visitado 
+                                                por un vendedor
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+                                 
+                                </div>
+                                <!-- end col -->
+                     </div>
+            <!-- * =============>> FIN Datos del cliente  <<===================== -->
+
+            <!-- * =============>> Test de agua  <<===================== -->
+                        <div class="row">
+                            <div class="col-xl-8" >
+                                <div class="" >
+                                    <div class="card-body">
+                                      
+                                        <div class="row">
+                                            <div class="col-lg-14">
+                                                <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
+                                                    <div class="card-header bg-transparent border-primary">
+                                                        <h5 class="my-0 text-primary">
+                                                            <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
+
+                                                            <a href="test-de-agua" id="verBtn">
+                                                                <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Realizar test</button>
+                                                            </a> 
+
+                                                      </div>
+                                                    <div class="card-body">
+
+                                                        <div class="table-responsive">
+                                                            <table class="table mb-0">
+
+                                                                <tbody>
+                                                                    <tr>
+                                                                        
+                                                                         <td style="width: 26%;">Total compensated hardness (Iron ppm (x4) + Hardness)</td>
+                                                                         <td><b>xxxxxx</b></td>
+                                                                         <td>Sulfur (parts per million)</td>
+                                                                         <td><b>xxxxxx</b></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>TDS (total dissolved solids)</td>
+                                                                        <td><b>xxxxxx</b></td>
+                                                                        <td>Tannin (parts per million)</td>
+                                                                        <td><b>xxxxxx</b></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Chlorine (parts per million)</td>
+                                                                         <td><b>xxxxxx</b></td>
+                                                                        <td>Nitrate (parts per million)</td>
+                                                                         <td><b>xxxxxx</b></td>
+                                                                    </tr>
+                                                           
+                                                                    <tr>
+                                                                        <td>pH</td>
+                                                                         <td><b>xxxxxx</b></td>
+                                                                         <td>Other</td>
+                                                                         <td><b>xxxxxx</b></td>
+                                                                    </tr>
+                                                                    <td>Fecha del test</td>
+                                                                         <td><b>xxxxxxx</b></td>
+                                                                         <td style="width: 26%;">Notes</td>
+                                                                         <td><b>xxxxxx</b></td>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+   
+                                                    </div>
+
+                                                </div>
+                                            </div><!-- end col -->
+
+                                             </div>
+                                        <!-- end card-body -->
+                                    </div>
+                                    <!-- end card -->
+
+                                </div><!-- end col -->
+                              </div>
+
+                                      
+                        <div class="col-lg-4 ">
+                            <div class="card" style="margin-top: 5%;">
+                                <div class="card-header">
+                                    <h4 class="card-title mb-0">Calidad de agua del hogar</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div id="column_chart" data-colors='["#a99bcb", "#50368c"]' class="apex-charts" dir="ltr"></div>                                      
+                                </div>
                             </div>
-                            <!--  end row -->
+                            <!--end card-->
+                        </div>
+                    
+
+          </div>
+            <!-- * =============>> FIN Test de agua  <<===================== -->
+
+            <!-- * =============>> Ahorro  <<===================== -->
                             <div class="row">
                                 <div class="col-xl-8">
                                     <div class="">
-    
                                         <div class="card-body">
-    
+                                          
                                             <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="card border border-primary">
+                                                <div class="col-lg-14">
+                                                    <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
                                                         <div class="card-header bg-transparent border-primary">
-                                                            <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Primary outline Card</h5>
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">card title</h5>
-                                                            <p class="card-text">
-                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                                Minus dolores asperiores obcaecati voluptatem, quisquam illo
-                                                                tempora fugit enim repellat perspiciatis neque praesentium
-                                                                eaque, atque quaerat laboriosam! Ullam ratione natus
-                                                                ducimus?
-                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                                Minus dolores asperiores obcaecati voluptatem, quisquam illo
-                                                                tempora fugit enim repellat perspiciatis neque praesentium
-                                                                eaque, atque quaerat laboriosam! Ullam ratione natus
-                                                                ducimus?
-                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                                Minus dolores asperiores obcaecati voluptatem, quisquam illo
-                                                                tempora fugit enim repellat perspiciatis neque praesentium
-                                                                eaque, atque quaerat laboriosam! Ullam ratione natus
-                                                                ducimus?
+                                                            <h5 class="my-0 text-primary">
+                                                                <i class="fas fa-money-bill"></i>&nbsp; Ahorro</h5>
     
-                                                            </p>
+                                                                <a href="" id="verBtn">
+                                                                    <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Calcular</button>
+                                                                </a> 
+    
+                                                          </div>
+                                                          <div class="card-body">
+
+                                                            <div class="table-responsive">
+                                                                <table class="table mb-0">
+    
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            
+                                                                             <td style="width: 26%;"><strong style="font-weight: 800 !important;color: black;">1.</strong> Agua embotellada</td>
+                                                                             <td><b>xxxxxx</b></td>
+                                                                             <td><strong style="font-weight: 800 !important;color: black;">4.</strong> Agua caliente</td>
+                                                                             <td><b>xxxxxx</b></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                           
+                                                                            <td><strong style="font-weight: 800 !important;color: black;">2.</strong> Jabones</td>
+                                                                            <td><b>xxxxxx</b></td>
+                                                                            <td><strong style="font-weight: 800 !important;color: black;">5.</strong> Plomería y electrodomésticos</td>
+                                                                            <td><b>xxxxxx</b></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><strong style="font-weight: 800 !important;color: black;">3.</strong> Productos de limpieza</td>
+                                                                             <td><b>xxxxxx</b></td>
+                                                                            <td style="width: 26%;"><strong style="font-weight: 800 !important;color: black;">6.</strong> Ropa y lencería</td>
+                                                                             <td><b>xxxxxx</b></td>
+                                                                        </tr>
+                                                               
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+       
                                                         </div>
+    
+    
                                                     </div>
                                                 </div><!-- end col -->
-                                            </div>
+    
+                                                 </div>
                                             <!-- end card-body -->
                                         </div>
                                         <!-- end card -->
-                                    </div><!-- end col -->
-                                    </div>
     
-                                </div>
-                                <!--  end row -->
+                                    </div><!-- end col -->
+                                 </div>
+    
+                                  
+                                 <div class="col-xl-4">
+                                    <!-- card -->
+                                    <div class="card" style="margin-top: 5%;">
+                                        <div class="card-header">
+                                            <h4 class="card-title mb-0">Ahorro total</h4>
+                                        </div>
+                                        <!-- card body -->
+                                        <div class="card-body">
 
+                                        
+                
+                                            <div class="row align-items-center">
+                                                <div class="col-xl-13">
+                                                    <div>
+                                                        <div id="market-overview" data-colors='["#a99bcb", "#50368c"]' class="apex-charts"></div>
+                                                    </div>
+                                                </div>
+                                              
+                                            </div>
+                                        </div>
+                                        <!-- end card -->
+                                    </div>
+                                    <!-- end col -->
+                                </div>
+                                <!-- end row-->
+                
+
+    
+                             </div>
+            <!-- * =============>> FIN Ahorro  <<===================== -->
+     
+            <!-- * =============>> Servicio  <<===================== -->
+            <div class="row">
+                <div class="col-xl-8">
+                    <div class="">
+                        <div class="card-body">
+                          
+                            <div class="row">
+                                <div class="col-lg-14">
+                                    <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
+                                        <div class="card-header bg-transparent border-primary">
+                                            <h5 class="my-0 text-primary">
+                                                <i class="fas fa-wrench"></i>&nbsp; Instalación</h5>
+
+                                                <a href="" id="verBtn">
+                                                    <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Registrar Instalación</button>
+                                                </a> 
+
+                                          </div>
+                                          <div class="card-body">
+
+                                            <div class="table-responsive">
+                                                <table class="table mb-0">
+
+                                                    <tbody>
+                                                        <tr>
+                                                            
+                                                             <td style="width: 26%;">Fecha de instalación</td>
+                                                             <td><b>xxxxxx</b></td>
+                                                             <td>Instalador</td>
+                                                             <td><b>xxxxxx</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                           
+                                                            <td>Prodcuto instalado</td>
+                                                            <td><b>xxxxxx</b></td>
+                                                            <td>Nota de instalación</td>
+                                                            <td><b>xxxxxx</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                        
+                                               
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div><!-- end col -->
+
+                                 </div>
+                            <!-- end card-body -->
                         </div>
+                        <!-- end card -->
+
+                    </div><!-- end col -->
+                 </div>
+
+             
+             </div>
+            <!-- * =============>> FIN Servicio  <<===================== -->
+
+
+
+                </div>
                     </div>
                     <!-- =======FIXME: copyright ========================== -->
                     <%- include ('./partials/copyright.ejs')%>
@@ -217,6 +447,13 @@
             <!-- pace js -->
             <script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
 
+  <!-- apexcharts js -->
+  <script src="../directorio_perfilClientes/libs/apexcharts/apexcharts.min.js"></script>
+
+  <!-- apexcharts init -->
+  <script src="../directorio_perfilClientes/js/pages/apexcharts.init.js"></script>
+    <!-- dashboard init -->
+    <script src="../directorio_perfilClientes/js/pages/dashboard.init.js"></script>
 
 
             <!-- Required datatable js -->

@@ -22,237 +22,240 @@ function getChartColorsArray(chartId) {
 }
 
 //  line chart datalabel
-var lineDatalabelColors = getChartColorsArray("#line_chart_datalabel");
-var options = {
-    chart: {
-      height: 380,
-      type: 'line',
-      zoom: {
-        enabled: false
-      },
-      toolbar: {
-        show: false
-      }
-    },
-    colors: lineDatalabelColors,
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      width: [3, 3],
-      curve: 'straight'
-    },
-    series: [{
-      name: "High - 2018",
-      data: [26, 24, 32, 36, 33, 31, 33]
-    },
-    {
-      name: "Low - 2018",
-      data: [14, 11, 16, 12, 17, 13, 12]
-    }
-    ],
-    title: {
-      text: 'Average High & Low Temperature',
-      align: 'left',
-      style: {
-        fontWeight:  '500',
-      },
-    },
-    grid: {
-      row: {
-        colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
-        opacity: 0.2
-      },
-      borderColor: '#f1f1f1'
-    },
-    markers: {
-      style: 'inverted',
-      size: 0
-    },
-    xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-      title: {
-        text: 'Month'
-      }
-    },
-    yaxis: {
-      title: {
-        text: 'Temperature'
-      },
-      min: 5,
-      max: 40
-    },
-    legend: {
-      position: 'top',
-      horizontalAlign: 'right',
-      floating: true,
-      offsetY: -25,
-      offsetX: -5
-    },
-    responsive: [{
-      breakpoint: 600,
-      options: {
-        chart: {
-          toolbar: {
-            show: false
-          }
-        },
-        legend: {
-          show: false
-        },
-      }
-    }]
-}
+// var lineDatalabelColors = getChartColorsArray("#line_chart_datalabel");
+// var options = {
+//     chart: {
+//       height: 380,
+//       type: 'line',
+//       zoom: {
+//         enabled: false
+//       },
+//       toolbar: {
+//         show: false
+//       }
+//     },
+//     colors: lineDatalabelColors,
+//     dataLabels: {
+//       enabled: false,
+//     },
+//     stroke: {
+//       width: [3, 3],
+//       curve: 'straight'
+//     },
+//     series: [{
+//       name: "High - 2018",
+//       data: [26, 24, 32, 36, 33, 31, 33]
+//     },
+//     {
+//       name: "Low - 2018",
+//       data: [14, 11, 16, 12, 17, 13, 12]
+//     }
+//     ],
+//     title: {
+//       text: 'Average High & Low Temperature',
+//       align: 'left',
+//       style: {
+//         fontWeight:  '500',
+//       },
+//     },
+//     grid: {
+//       row: {
+//         colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
+//         opacity: 0.2
+//       },
+//       borderColor: '#f1f1f1'
+//     },
+//     markers: {
+//       style: 'inverted',
+//       size: 0
+//     },
+//     xaxis: {
+//       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+//       title: {
+//         text: 'Month'
+//       }
+//     },
+//     yaxis: {
+//       title: {
+//         text: 'Temperature'
+//       },
+//       min: 5,
+//       max: 40
+//     },
+//     legend: {
+//       position: 'top',
+//       horizontalAlign: 'right',
+//       floating: true,
+//       offsetY: -25,
+//       offsetX: -5
+//     },
+//     responsive: [{
+//       breakpoint: 600,
+//       options: {
+//         chart: {
+//           toolbar: {
+//             show: false
+//           }
+//         },
+//         legend: {
+//           show: false
+//         },
+//       }
+//     }]
+// }
   
-var chart = new ApexCharts(
-    document.querySelector("#line_chart_datalabel"),
-    options
-);
+// var chart = new ApexCharts(
+//     document.querySelector("#line_chart_datalabel"),
+//     options
+// );
   
-chart.render();
+// chart.render();
 
 
 //  line chart datalabel  
-var lineDashedColors = getChartColorsArray("#line_chart_dashed");
-var options = {
-    chart: {
-      height: 380,
-      type: 'line',
-      zoom: {
-        enabled: false
-      },
-      toolbar: {
-        show: false,
-    }
-    },
-    colors: lineDashedColors,
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      width: [3, 4, 3],
-      curve: 'straight',
-      dashArray: [0, 8, 5]
-    },
-    series: [{
-        name: "Session Duration",
-        data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-      },
-      {
-        name: "Page Views",
-        data: [36, 42, 60, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-      },
-      {
-        name: 'Total Visits',
-        data: [89, 56, 74, 98, 72, 38, 64, 46, 84, 58, 46, 49]
-      }
-    ],
-    title: {
-      text: 'Page Statistics',
-      align: 'left',
-      style: {
-        fontWeight:  '500',
-      },
-    },
-    markers: {
-      size: 0,
 
-      hover: {
-        sizeOffset: 6
-      }
-    },
-    xaxis: {
-      categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-        '10 Jan', '11 Jan', '12 Jan'
-      ],
-    },
-    tooltip: {
-      y: [{
-        title: {
-          formatter: function (val) {
-            return val + " (mins)"
-          }
-        }
-      }, {
-        title: {
-          formatter: function (val) {
-            return val + " per session"
-          }
-        }
-      }, {
-        title: {
-          formatter: function (val) {
-            return val;
-          }
-        }
-      }]
-    },
-    grid: {
-      borderColor: '#f1f1f1',
-    }
-}
+// var lineDashedColors = getChartColorsArray("#line_chart_dashed");
+// var options = {
+//     chart: {
+//       height: 380,
+//       type: 'line',
+//       zoom: {
+//         enabled: false
+//       },
+//       toolbar: {
+//         show: false,
+//     }
+//     },
+//     colors: lineDashedColors,
+//     dataLabels: {
+//       enabled: false
+//     },
+//     stroke: {
+//       width: [3, 4, 3],
+//       curve: 'straight',
+//       dashArray: [0, 8, 5]
+//     },
+//     series: [{
+//         name: "Session Duration",
+//         data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+//       },
+//       {
+//         name: "Page Views",
+//         data: [36, 42, 60, 42, 13, 18, 29, 37, 36, 51, 32, 35]
+//       },
+//       {
+//         name: 'Total Visits',
+//         data: [89, 56, 74, 98, 72, 38, 64, 46, 84, 58, 46, 49]
+//       }
+//     ],
+//     title: {
+//       text: 'Page Statistics',
+//       align: 'left',
+//       style: {
+//         fontWeight:  '500',
+//       },
+//     },
+//     markers: {
+//       size: 0,
 
-var chart = new ApexCharts(
-document.querySelector("#line_chart_dashed"),
-options
-);
+//       hover: {
+//         sizeOffset: 6
+//       }
+//     },
+//     xaxis: {
+//       categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
+//         '10 Jan', '11 Jan', '12 Jan'
+//       ],
+//     },
+//     tooltip: {
+//       y: [{
+//         title: {
+//           formatter: function (val) {
+//             return val + " (mins)"
+//           }
+//         }
+//       }, {
+//         title: {
+//           formatter: function (val) {
+//             return val + " per session"
+//           }
+//         }
+//       }, {
+//         title: {
+//           formatter: function (val) {
+//             return val;
+//           }
+//         }
+//       }]
+//     },
+//     grid: {
+//       borderColor: '#f1f1f1',
+//     }
+// }
 
-chart.render();
+// var chart = new ApexCharts(
+// document.querySelector("#line_chart_dashed"),
+// options
+// );
+
+// chart.render();
 
 //   spline_area
-var splneAreaColors = getChartColorsArray("#spline_area");
-var options = {
-    chart: {
-        height: 350,
-        type: 'area',
-        toolbar: {
-            show: false,
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: 'smooth',
-        width: 3,
-    },
-    series: [{
-        name: 'series1',
-        data: [34, 40, 28, 52, 42, 109, 100]
-    }, {
-        name: 'series2',
-        data: [32, 60, 34, 46, 34, 52, 41]
-    }],
-    colors: splneAreaColors,
-    xaxis: {
-        type: 'datetime',
-        categories: ["2018-09-19T00:00:00", "2018-09-19T01:30:00", "2018-09-19T02:30:00", "2018-09-19T03:30:00", "2018-09-19T04:30:00", "2018-09-19T05:30:00", "2018-09-19T06:30:00"],                
-    },
-    grid: {
-        borderColor: '#f1f1f1',
-    },
-    tooltip: {
-        x: {
-            format: 'dd/MM/yy HH:mm'
-        },
-    }
-}
 
-var chart = new ApexCharts(
-    document.querySelector("#spline_area"),
-    options
-);
+// var splneAreaColors = getChartColorsArray("#spline_area");
+// var options = {
+//     chart: {
+//         height: 350,
+//         type: 'area',
+//         toolbar: {
+//             show: false,
+//         }
+//     },
+//     dataLabels: {
+//         enabled: false
+//     },
+//     stroke: {
+//         curve: 'smooth',
+//         width: 3,
+//     },
+//     series: [{
+//         name: 'series1',
+//         data: [34, 40, 28, 52, 42, 109, 100]
+//     }, {
+//         name: 'series2',
+//         data: [32, 60, 34, 46, 34, 52, 41]
+//     }],
+//     colors: splneAreaColors,
+//     xaxis: {
+//         type: 'datetime',
+//         categories: ["2018-09-19T00:00:00", "2018-09-19T01:30:00", "2018-09-19T02:30:00", "2018-09-19T03:30:00", "2018-09-19T04:30:00", "2018-09-19T05:30:00", "2018-09-19T06:30:00"],                
+//     },
+//     grid: {
+//         borderColor: '#f1f1f1',
+//     },
+//     tooltip: {
+//         x: {
+//             format: 'dd/MM/yy HH:mm'
+//         },
+//     }
+// }
 
-chart.render();
+// var chart = new ApexCharts(
+//     document.querySelector("#spline_area"),
+//     options
+// );
+
+// chart.render();
 
 // column chart
+
 var columnColors = getChartColorsArray("#column_chart");
 var options = {
     chart: {
         height: 350,
         type: 'bar',
         toolbar: {
-            show: false,
+            show: true,
         }
     },
     plotOptions: {
@@ -270,22 +273,22 @@ var options = {
         colors: ['transparent']
     },
     series: [{
-        name: 'Net Profit',
+        name: 'Primer test',
         data: [46, 57, 59, 54, 62, 58, 64, 60, 66]
     }, {
-        name: 'Revenue',
+        name: 'Último test',
         data: [74, 83, 102, 97, 86, 106, 93, 114, 94]
     }, {
-        name: 'Free Cash Flow',
-        data: [37, 42, 38, 26, 47, 50, 54, 55, 43]
+        // name: 'Free Cash Flow',
+        // data: [37, 42, 38, 26, 47, 50, 54, 55, 43]
     }],
     colors: columnColors,
     xaxis: {
-        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+        categories: ['TPH', 'TDS', 'Chlorine', 'pH', 'Sulfur', 'Tannin ', 'Nitrate ', '	Other'],
     },
     yaxis: {
         title: {
-            text: '$ (thousands)',
+            text: 'Partes por millon',
             style: {
                 fontWeight:  '500',
               },

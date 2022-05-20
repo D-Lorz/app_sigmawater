@@ -219,9 +219,9 @@ var options = {
 var chart = new ApexCharts(document.querySelector("#wallet-balance"), options);
 chart.render();
 
-//
+
 // Invested Overview
-//
+
 
 var radialchartColors = getChartColorsArray("#invested-overview");
 var options = {
@@ -236,7 +236,7 @@ var options = {
             endAngle: 130,
             dataLabels: {
                 name: {
-                    show: false
+                    show: true
                 },
                 value: {
                     offsetY: 10,
@@ -269,8 +269,8 @@ var options = {
     legend: {
         show: false
     },
-    series: [80],
-    labels: ['Series A'],
+    series: [100],
+    labels: ['Pagado'],
 }
 
 var chart = new ApexCharts(
@@ -302,7 +302,7 @@ var options = {
     },
     plotOptions: {
         bar: {
-            columnWidth: '20%',
+            // columnWidth: '20%',
         },
     },
     colors: barchartColors,
@@ -323,7 +323,9 @@ var options = {
         }
     },
     xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        categories:
+         ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+         ,
         labels: {
             rotate: -90
         }
