@@ -3,7 +3,7 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados } = require('../controllers/authController');
-const { listarClientes, getSolicitudCreditos,registrarClientes, desactivarBoton,listarClientes_PerfilClientes,solicitarCredito} = require('../controllers/customerFormControllers');
+const { listarClientes, getSolicitudCreditos,getAhorro,getTestAgua,listarAhorros,registrarClientes,ahorro ,testAgua,listarClientes_PerfilClientes,solicitarCredito} = require('../controllers/customerFormControllers');
 
 
 
@@ -54,15 +54,18 @@ router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
     res.render('afiliados', { user: req.user })
 });
 
-router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes)
+router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes,listarAhorros)
+
 router.get('/solicitar-credito/:id', isAuthenticated ,getSolicitudCreditos)
 
-router.get('/test-de-agua', isAuthenticated, (req, res) => {
-    res.render('test-de-agua', { user: req.user })
-});
-router.get('/calcular-ahorro', isAuthenticated, (req, res) => {
-    res.render('calcular-ahorro', { user: req.user })
-});
+router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro)
+
+router.get('/test-de-agua/:id', isAuthenticated, getTestAgua) 
+    
+
+
+   
+
 
 
 router.get('/hola', (req, res) => {
@@ -78,7 +81,10 @@ router.post('/registrarClientes', isAuthenticated, registrarClientes);
 /*=============================================================*/
   router.post('/solicitarCredito', isAuthenticated, multiupload, solicitarCredito);
 /*=============================================================*/
- router.post('/calcularAhorro', isAuthenticated, registrarClientes);
+ router.post('/calcularAhorro', isAuthenticated, ahorro);
+ /*=============================================================*/
+ router.post('/testAgua', isAuthenticated, testAgua);
+ /*=============================================================*/
  
 
 module.exports = router

@@ -7,7 +7,7 @@ const conexion = require("../database/db");
 
 // todo --> formulario para crear un nuevo cliente
 exports.registrarClientes = async (req, res) => {
-  try {
+
     const nombre = req.body.nombre;
     const segundo_nombre = req.body.segundo_nombre;
     const apellido = req.body.apellido;
@@ -19,25 +19,13 @@ exports.registrarClientes = async (req, res) => {
     const estado_ubicacion = req.body.estado_ubicacion;
     const codigo_postal = req.body.codigo_postal;
 
-
-
-    const id_cliente = generateRandomNumber(6); // * Se almacena el ID del cliente codigo numerico
+     const id_cliente = generateRandomNumber(6); // * Se almacena el ID del cliente codigo numerico
     const id_vendedor = req.user.id
 
 
     const nuevoRegistroClientes = {
-      nombre,
-      segundo_nombre,
-      apellido,
-      correo,
-      telefono,
-      direccion,
-      direccion2,
-      ciudad,
-      estado_ubicacion,
-      codigo_postal,
-      id_cliente,
-      id_vendedor
+      nombre,segundo_nombre,apellido,correo, telefono,direccion, direccion2,
+       ciudad,estado_ubicacion,codigo_postal, id_cliente,id_vendedor
     }
     console.log(nuevoRegistroClientes)
 
@@ -48,28 +36,42 @@ exports.registrarClientes = async (req, res) => {
       console.log(" ========>> 1 Registro Cliente ");
       res.redirect('/lista-clientes')
     })
-  } catch (error) {
-    console.log(error);
 
-  }
 
 }
 
+//------------------------------------------------
 exports.getSolicitudCreditos = async (req, res) => {
   const id = req.params.id
 
   await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
     if (err) throw err;
-
-    res.render('solicitar-credito', {
-      user: req.user,
-      cliente: result[0]
-    });
+    res.render('solicitar-credito', { user: req.user, cliente: result[0] });
 
   })
 
 }
+exports.getAhorro = async (req, res) => {
+  const id = req.params.id
 
+  await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
+    if (err) throw err;
+    res.render('calcular-ahorro', { user: req.user, ahorroCliente: result[0] });
+
+  })
+
+}
+exports.getTestAgua = async (req, res) => {
+  const id = req.params.id
+
+  await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
+    if (err) throw err;
+    res.render('test-de-agua', { user: req.user, testAgua: result[0] });
+
+  })
+
+}
+//------------------------------------------------
 // todo -->  formulario para solicitar credito
 exports.solicitarCredito = async (req, res) => {
 
@@ -157,72 +159,26 @@ exports.solicitarCredito = async (req, res) => {
   const id_cliente = req.body.id_cliente
 
   const objeto_datos = {
-    monto_financiar_cliente,
-    sistema,
-    numero_licencia_cliente,
-    estado_licencia_cliente,
-    fecha_expedicion_licencia_cliente,
-    fecha_vencimiento_licencia_cliente,
-    seguro_social_licencia,
-    tipo_de_seguro,
-    fecha_nacimiento_cliente,
-    telefono_secundario_cliente,
-    condicion_vivienda,
-    compa_hipotecaria_cliente,
-    anio_residencia_cliente,
-    meses_residencia_cliente,
-    empleador_aplicante_cliente,
-    anios_trabajando_ingresos,
-    meses_trabajando_ingresos,
-    salario_mensual_ingresos,
-    bancarrota,
-    sacc_pendiente,
-    ocupacion_ingresos,
-    anio_bancarrota_ingresos,
-    telefono_trabajo_ingresos,
-    tipo_bancarrota_ingresos,
-    empleador_anterior_ingresos,
-    otros_ingresos_ingresos,
-    ingresos_adicionales_ingresos,
-    tipo_cuenta_bancaria,
-    numero_ruta_bancaria,
-    numero_cuenta_bancaria,
-    licencia_co_solicitante,
-    expedicion_licencia_co_solicitante,
-    vencimiento_licencia_co_solicitante,
-    numero_se_social_co_solicitante,
-    tipo_seguro_co_solicitante,
-    fecha_nacimiento_co_solicitante,
-    nombre_co_solicitante,
-    segundo_nombre_co_solicitante,
-    apellido_co_solicitante,
-    telefono_movil_co_solicitante,
-    tel_secundario_co_solicitante,
-    direccion_co_solicitante,
-    relacion_parentesco_co_solicitante,
-    militar_active,
-    empleador_co_solicitante,
-    anios_trabajando_co_solicitante,
-    meses_trabajando_co_solicitante,
-    salario_mensual_co_solicitante,
-    ocupacion_co_solicitante,
-    telefono_trabajo_co_solicitante,
-    empleador_anterior_co_solicitante,
-    ingresos_co_solicitante,
-    ingresos_adicionales_co_solicitante,
-    nom_referencia1_co_solicitante,
-    parentesco1_co_solicitante,
-    tel_movil1_co_solicitante,
-    nom_referencia2_co_solicitante,
-    parentesco2_co_solicitante,
-    tel_movil2_co_solicitante,
-    nom_referencia3_co_solicitante,
-    parentesco3_co_solicitante,
-    tel_movil3_co_solicitante,
-    licencia_cliente,
-    acuerdo_firmado,
-    id_cliente
-
+    monto_financiar_cliente, sistema,numero_licencia_cliente, estado_licencia_cliente,
+    fecha_expedicion_licencia_cliente, fecha_vencimiento_licencia_cliente, seguro_social_licencia,
+    tipo_de_seguro,fecha_nacimiento_cliente,telefono_secundario_cliente, condicion_vivienda,
+    compa_hipotecaria_cliente,anio_residencia_cliente, meses_residencia_cliente,
+    empleador_aplicante_cliente,anios_trabajando_ingresos,meses_trabajando_ingresos,
+    salario_mensual_ingresos, bancarrota, sacc_pendiente, ocupacion_ingresos,
+    anio_bancarrota_ingresos,telefono_trabajo_ingresos,tipo_bancarrota_ingresos,
+    empleador_anterior_ingresos, otros_ingresos_ingresos, ingresos_adicionales_ingresos,
+    tipo_cuenta_bancaria,numero_ruta_bancaria, numero_cuenta_bancaria,
+    licencia_co_solicitante,expedicion_licencia_co_solicitante, vencimiento_licencia_co_solicitante,
+    numero_se_social_co_solicitante,tipo_seguro_co_solicitante, fecha_nacimiento_co_solicitante,
+    nombre_co_solicitante, segundo_nombre_co_solicitante, apellido_co_solicitante,
+    telefono_movil_co_solicitante,tel_secundario_co_solicitante, direccion_co_solicitante,
+    relacion_parentesco_co_solicitante, militar_active, empleador_co_solicitante,
+    anios_trabajando_co_solicitante, meses_trabajando_co_solicitante,salario_mensual_co_solicitante,
+    ocupacion_co_solicitante,telefono_trabajo_co_solicitante, empleador_anterior_co_solicitante,
+    ingresos_co_solicitante,ingresos_adicionales_co_solicitante, nom_referencia1_co_solicitante,
+    parentesco1_co_solicitante,tel_movil1_co_solicitante,nom_referencia2_co_solicitante,
+    parentesco2_co_solicitante, tel_movil2_co_solicitante, nom_referencia3_co_solicitante,
+    parentesco3_co_solicitante, tel_movil3_co_solicitante, licencia_cliente, acuerdo_firmado, id_cliente
 
   }
   
@@ -243,7 +199,7 @@ exports.solicitarCredito = async (req, res) => {
   const actualizarCliente = { nombre, segundo_nombre, apellido, correo, telefono, direccion, ciudad, estado_ubicacion, codigo_postal }
 
   await conexion.query("UPDATE nuevos_cliente SET ? WHERE id = ?", [actualizarCliente, id_cliente])
-  // * --> Insertar datos de la solicitud de crédito del cliente
+  //  --> Insertar datos de la solicitud de crédito del cliente
   await conexion.query("INSERT INTO solicitar_credito SET ?", [objeto_datos], (err, result) => {
     if (err) throw err;
     if (result) { res.redirect('/perfil-clientes/'+numCliente) }
@@ -261,10 +217,7 @@ exports.listarClientes = async (req, res) => {
   conexion.query('SELECT * FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
     if (err)
       throw err;
-    res.render('lista-clientes', {
-      user: req.user,
-      clientes: result
-    })
+    res.render('lista-clientes', { user: req.user,clientes: result })
 
   })
 
@@ -308,40 +261,115 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     res.render('perfil-clientes', { user: req.user, clientes2, estado})
 }
 
+// todo --> Formulario Test de agua
+exports.testAgua = async (req, res) => {
 
-// todo --> Formulario de calcular ahorro
-exports.registrarClientes = async (req, res) => {
-  try {
-    const agua_embotellada = req.body.agua_embotellada;
-    const jabones = req.body.jabones;
-    const productos_limpieza = req.body.productos_limpieza;
-    const agua_caliente = req.body.agua_caliente;
-    const plomeria_electrodomesticos = req.body.plomeria_electrodomesticos;
-    const ropa_lenceria = req.body.ropa_lenceria;
+  const event = new Date();
+  var fecha_test= event.toLocaleString({ timeZone: 'UTC' });
+  console.log("FECHA >>>>>>>>");
+  console.log(fecha_test);
  
-    const datos_calcular_ahorros = {
-      agua_embotellada,
-      jabones,
-      productos_limpieza,
-      agua_caliente,
-      plomeria_electrodomesticos,
-      ropa_lenceria
-    }
-    console.log(datos_calcular_ahorros)
+  const dureza_gmXgalon = req.body.dureza_gmXgalon;
+  const hierro = req.body.hierro;
+  const totalDureza_compensada =  parseFloat(dureza_gmXgalon)*4+parseFloat(hierro);
+  const tsd = req.body.tsd;
+  const cloro = req.body.cloro;
+  const ph = req.body.ph;
+  const azufre = req.body.azufre;
+  const tanino = req.body.tanino;
+  const nitrato = req.body.nitrato;
+  const otro = req.body.otro;
+  const nota = req.body.nota;
+  
+   
+  const id_cliente = req.body.id_cliente
+  const codigo_cliente = req.body.codigo_cliente
 
-    await conexion.query('INSERT INTO ahorro SET ?', [datos_calcular_ahorros], (err, result) => {
-      if (err) throw err;
-      console.log(" ========>> 1 Registro Cliente ");
-      console.log(result)
-      console.log(" ========>> 1 Registro Cliente ");
-      res.redirect('/lista-clientes')
-    })
-  } catch (error) {
-    console.log(error);
+ const Datos_testAgua = {
+  fecha_test, dureza_gmXgalon, hierro,totalDureza_compensada, tsd,cloro,ph,azufre, tanino, nitrato, otro ,nota,id_cliente}
 
-  }
+await conexion.query('INSERT INTO test_agua SET ?', [Datos_testAgua], (err, result) => {
+  if (err) throw err;
+  if (result) { res.redirect('/perfil-clientes/'+codigo_cliente) }
+    
+   })
+
 
 }
+// todo -->  tarjeta -test agua- en la vista perfil clientes
+exports.listarAhorros = async (req, res) => {
+
+  const id_cliente = req.params.id
+
+  let ahorroDecliente = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ? LIMIT 1', [id_cliente])
+  ahorroDecliente = ahorroDecliente[0]
+  
+ res.render('perfil-clientes', { user: req.user, ahorroDecliente})
+}
+
+// todo --> Formulario de calcular ahorro
+exports.ahorro = async (req, res) => {
+
+  const agua_embotellada = req.body.agua_embotellada.replace(/[$ ]/g, '');
+  const ahorroMensual_aguaEmbotellada =  agua_embotellada * 1
+  const ahorroAnual_aguaEmbotellada = ahorroMensual_aguaEmbotellada * 12 
+
+  const jabones = req.body.jabones.replace(/[$ ]/g, '');
+  const ahorroMensual_jabon =  jabones * 0.75
+  const ahorroAnual_jabon = ahorroMensual_jabon * 12 
+
+  const productos_limpieza = req.body.productos_limpieza.replace(/[$ ]/g, '');
+  const ahorroMensual_productos_limpieza =  productos_limpieza * 0.75
+  const ahorroAnual_productos_limpieza = ahorroMensual_productos_limpieza * 12 
+ 
+
+  const agua_caliente = req.body.agua_caliente.replace(/[$ ]/g, '');
+  const ahorroMensual_agua_caliente =  agua_caliente * 0.2
+  const ahorroAnual_agua_caliente = ahorroMensual_agua_caliente * 12 
+ 
+  const plomeria_electrodomesticos = req.body.plomeria_electrodomesticos.replace(/[$ ]/g, '');
+  const ahorroMensual_plomeria_electrodomesticos =  plomeria_electrodomesticos * 0.75
+  const ahorroAnual_plomeria_electrodomesticos = ahorroMensual_plomeria_electrodomesticos * 12 
+ 
+  const ropa_lenceria = req.body.ropa_lenceria.replace(/[$ ]/g, '');
+  const ahorroMensual_ropa_lenceria =  ropa_lenceria * 0.3
+  const ahorroAnual_ropa_lenceria = ahorroMensual_ropa_lenceria * 12 
+ 
+
+   const id_cliente = req.body.id_cliente
+   const codigo_cliente = req.body.codigo_cliente
+
+  const datos_calcular_ahorros = {
+      agua_embotellada, jabones, productos_limpieza, agua_caliente,
+      plomeria_electrodomesticos, ropa_lenceria,
+      ahorroMensual_aguaEmbotellada,ahorroAnual_aguaEmbotellada,
+      ahorroMensual_jabon, ahorroAnual_jabon,
+      ahorroMensual_productos_limpieza, ahorroAnual_productos_limpieza,
+      ahorroMensual_agua_caliente, ahorroAnual_agua_caliente,
+      ahorroMensual_plomeria_electrodomesticos, ahorroAnual_plomeria_electrodomesticos,
+      ahorroMensual_ropa_lenceria, ahorroAnual_ropa_lenceria, id_cliente  
+    
+    }
+
+ await conexion.query('INSERT INTO ahorro SET ?', [datos_calcular_ahorros], (err, result) => {
+      if (err) throw err;
+      if (result) { res.redirect('/perfil-clientes/'+codigo_cliente) }
+     
+    })
+
+
+}
+// todo -->  tarjeta -ahorro- en la vista perfil clientes
+exports.listarAhorros = async (req, res) => {
+
+  const id_cliente = req.params.id
+
+  let clientes3 = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ? LIMIT 1', [id_cliente])
+  clientes3 = clientes3[0]
+  
+ res.render('perfil-clientes', { user: req.user, clientes3})
+}
+
 
 
 

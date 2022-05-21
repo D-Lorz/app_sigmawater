@@ -50,23 +50,26 @@
                                                    <fieldset>
 
                                                         <div class="row  justify-content: center;">
-                                                        
+
+                                                            <input type="hidden" hidden name="id_cliente" value="<%= ahorroCliente.id %>">
+                                                            <input type="hidden" hidden name="codigo_cliente" value="<%= ahorroCliente.id_cliente %>">
+                                                            
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="">Agua embotellada<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="agua_embotellada">
+                                                                    <label for="agua">Agua embotellada<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="agua" name="agua_embotellada">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="nombreP">Jabones<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="jabones">
+                                                                    <label for="jabones">Jabones<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="jabones" name="jabones">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="nombreP">Productos de limpieza</label>
-                                                                    <input type="text" class="form-control" id="" name="productos_limpieza">
+                                                                    <label for="pLimpieza">Productos de limpieza</label>
+                                                                    <input type="text" class="form-control" id="pLimpieza" name="productos_limpieza">
                                                                 </div>
                                                             </div>
                                                                   
@@ -79,21 +82,21 @@
                                                         
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="apellidoP">Agua caliente<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="agua_caliente" >
+                                                                    <label for="aguaCaliente">Agua caliente<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="aguaCaliente" name="agua_caliente" >
                                                                 </div>
                                                             </div> 
                                                           
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="correoP">Plomería y electrodomésticos<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="plomeria_electrodomesticos" >
+                                                                    <label for="plomElectro">Plomería y electrodomésticos<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control" required id="plomElectro" name="plomeria_electrodomesticos" >
                                                                 </div>
                                                             </div> 
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="">Ropa y lencería<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control"  required id="" name="ropa_lenceria" >
+                                                                    <label for="ropa">Ropa y lencería<span class="danger">*</span></label>
+                                                                    <input type="text" class="form-control"  required id="ropa" name="ropa_lenceria" >
                                                                 </div>
                                                             </div>
                                                         

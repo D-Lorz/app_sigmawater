@@ -45,61 +45,55 @@
 
                     <div class="card-content collapse show">
                                       <form action="/testAgua" method="POST" class="steps wizard-circle" id="validarForm">
-                                        <!-- const fecha_test = new Date().toLocalDateString("en-US") -->
+                                      
                                           <!-- * ============== Primera fila  ========================== -->
                                                    <fieldset>
-
+                                                    <input type="hidden" hidden name="id_cliente" value="<%= testAgua.id %>">
+                                                    <input type="hidden" hidden name="codigo_cliente" value="<%= testAgua.id_cliente %>">
+                                                    
                                                         <div class="row  justify-content: center;">
-                                                            <!-- <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label for="">Fecha del test<span class="danger">*</span></label>
-                                                                       <span id="fechaActual"></span>
-                                                                  <input type="datetime" class="form-control" required id="fechaActual" name="fecha_test" value=""> 
-                                                                </div>
-                                                            </div> -->
+                                                         
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="nombreP">Hardness (grains per gallon)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="hardness">
+                                                                    <label for="nombreP">Dureza (gramos por galón)<span class="danger">*</span></label>
+                                                                    <input type="number" class="form-control" required id="" name="dureza_gmXgalon">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="nombreP">Iron (grains per gallon)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="iron">
+                                                                    <label for="nombreP">Hierro (ppm)<span class="danger">*</span></label>
+                                                                    <input type="number" class="form-control" id="" name="hierro">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="nombreP">TDS (total dissolved solids)</label>
-                                                                    <input type="text" class="form-control" id="" name="tds">
+                                                                    <label for="correoP">TSD (total de solidos disueltos)<span class="danger">*</span></label>
+                                                                    <input type="number" class="form-control" required id="" name="tsd" >
                                                                 </div>
-                                                            </div>
-                                                                  
-                                                           
+                                                            </div> 
+                                                                                                                      
                                                          </div>
                                               <!-- * ========== Segunda fila =======  -->
 
                                                          <div class="row  justify-content: center;">
 
-                                                        
-                                                            <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label for="apellidoP">Chlorine (parts per million)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="chlorine" >
-                                                                </div>
-                                                            </div> 
                                                           
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="correoP">pH<span class="danger">*</span></label>
-                                                                    <input type="email" class="form-control" required id="" name="ph" >
+                                                                    <label for="">Cloro (ppm)<span class="danger">*</span></label>
+                                                                    <input type="number" class="form-control"  required id="" name="cloro" >
                                                                 </div>
-                                                            </div> 
+                                                            </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="">Sulfur (parts per million)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control"  required id="" name="sulfur" >
+                                                                    <label for="">pH<span class="danger">*</span></label>
+                                                                    <input type="number" class="form-control" name="ph" >
+                                                                 </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Azufre (ppm)<span class="danger">*</span></label>
+                                                                    <input type="number" class="form-control" required id="" name="azufre" >
                                                                 </div>
                                                             </div>
                                                         
@@ -108,28 +102,33 @@
                                       
                                             
                                                      <div class="row" >
-                                                              <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="">Tannin (parts per million)<span class="danger">*</span></label>
-                                                                <input type="text" class="form-control" name="tannin" >
-                                                         </div>
-                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="">Nitrate (parts per million)<span class="danger">*</span></label>
-                                                                <input type="text" class="form-control" required id="" name="nitrate" >
-                                                            </div>
-                                                        </div>
+                                                     
+                                                       
                                                          <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="">Other<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control" required id="" name="otro" >
+                                                                    <label for="">tanino (ppm)<span class="danger">*</span></label>
+                                                                    <input type="number" class="form-control" required id="" name="tanino" >
                                                                 </div>
                                                             </div>
                         
-                                                            <div >
+                                                            <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="postalcode">Notes<span class="danger">*</span></label>
+                                                                    <label for="">Nitrato (ppm)<span class="danger">*</span></label>
+                                                                    <input type="number" class="form-control" required id="" name="nitrato" >
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label for="">Otro<span class="danger">*</span></label>
+                                                                    <input type="number" class="form-control" required id="" name="otro" >
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div>
+                                                                <div class="form-group">
+                                                                    <label for="postalcode">Nota<span class="danger">*</span></label>
                                                                     <textarea class="form-control" required id="" name="nota" ></textarea>
                                                              </div>
                                                          </div>

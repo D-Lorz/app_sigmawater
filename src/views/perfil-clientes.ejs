@@ -55,8 +55,7 @@
                 <div class="page-content">
                     <div class="container-fluid">
 
-          <!-- * =============>> Datos del cliente  <<===================== -->
-          
+           <!-- * =============>> Datos del cliente  <<========================== -->
                     <div class="row">
                             <div class="col-xl-8" >
                                 <div class="">
@@ -147,13 +146,11 @@
                                  
                                 </div>
                                 <!-- end col -->
-                     </div>
+                    </div>
             <!-- * =============>> FIN Datos del cliente  <<===================== -->
 
-            <!-- * =============>> Test de agua  <<===================== -->
-
-         
-                        <div class="row">
+            <!-- * =============>> Test de agua  <<============================== -->
+                    <div class="row">
                             <div class="col-xl-8" >
                                 <div class="" >
                                     <div class="card-body">
@@ -165,7 +162,7 @@
                                                         <h5 class="my-0 text-primary">
                                                             <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
 
-                                                            <a href="/test-de-agua" >
+                                                            <a href="/test-de-agua/<%= clientes2.id_cliente %>" >
                                                                 <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Realizar test</button>
                                                             </a> 
 
@@ -185,21 +182,7 @@
                                                                 background: linear-gradient(189.55deg, #FED061 -131.52%, #812082 -11.9%, #50368C 129.46%);
                                                                 border-radius: 5px;
                                                                 }
-                                                            div.scroll_horizontal {
-                                                                overflow: auto;
-                                                                padding: 8px;
-                                                            }
-
-                                                            div.scroll_horizontal::-webkit-scrollbar-horizontal {
-                                                                width:5px;
-                                                                background:red;
-                                                                }
-                                                            div.scroll_horizontal::-webkit-scrollbar-thumb {
-                                                                background: linear-gradient(189.55deg, #FED061 -131.52%, #812082 -11.9%, #50368C 129.46%);
-                                                                border-radius: 5px;
-                                                                }
-
-
+                                                          
                                                         </style>
 
 
@@ -214,27 +197,26 @@
                                                              
                                                                     <thead class="table-light">
                                                                         <tr>
-                                                                            <!-- <th>#</th> -->
-                                                                            <th>Hardness (grains per gallon)</th>
-                                                                            <th>Iron (parts per gallon)</th>
-                                                                            <th>TPH (Iron ppm (x4) + Hardness)</th>
-                                                                            <th>TDS</th>
-                                                                            <th>Chlorine</th>
-                                                                            <th>pH</th>
                                                                             <th>Fecha del test</th>
-                                                                            <th>Sulfur </th>
-                                                                            <th>Tannin  </th>
-                                                                            <th>Nitrate  </th>
-                                                                            <th>Other </th>
-                                                                            <th>Notes </th>
+                                                                            <th>Dureza (gramos por galón)</th>
+                                                                            <th>Hierro (ppm)</th>
+                                                                            <th>Total dureza compensada</th>
+                                                                            <th>TSD (total de solidos disueltos)</th>
+                                                                            <th>Cloro (ppm)</th>
+                                                                            <th>pH</th>
+                                                                            <th>Azufre (ppm)</th>
+                                                                            <th>tanino (ppm)</th>
+                                                                            <th>Nitrato (ppm)</th>
+                                                                            <th>Otro </th>
+                                                                            <th>Notas </th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
                                                                          
-                                                                            <td>Marerterteertertertertertrteerk</td>
-                                                                            <td>Ottodsdfsdfsdfsd</td>
-                                                                            <td>@mdosdfsdfsdfsdfsf</td>
+                                                                            <td></td>
+                                                                            <td>Ottodsdfsd</td>
+                                                                            <td>@mdosdfsdsf</td>
                                                                             <td>@mdo</td>
                                                                             <td>@mdo</td>
                                                                             <td>@mdo</td>
@@ -397,15 +379,11 @@
                                     </div>
                                     <!--end card-->
                                 </div>
-                              </div>
+                    </div>
+            <!-- * =============>> FIN Test de agua  <<=============================->
 
-                     
-                  
-                         </div>
-            <!-- * =============>> FIN Test de agua  <<===================== -->
-
-            <!-- * =============>> Ahorro  <<===================== -->
-                            <div class="row">
+            <!-- * =============>> Ahorro  <<===================================== -->
+                    <div class="row">
                                 <div class="col-xl-8">
                                     <div class="">
                                         <div class="card-body">
@@ -417,7 +395,7 @@
                                                             <h5 class="my-0 text-primary">
                                                                 <i class="fas fa-money-bill"></i>&nbsp; Ahorro</h5>
     
-                                                                <a href="/calcular-ahorro" >
+                                                                <a href="/calcular-ahorro/<%= clientes2.id_cliente %>" >
                                                                     <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Calcular</button>
                                                                 </a> 
     
@@ -431,14 +409,14 @@
                                                                         <tr>
                                                                             
                                                                              <td style="width: 26%;"><strong style="font-weight: 800 !important;color: black;">1.</strong> Agua embotellada</td>
-                                                                             <td><b>xxxxxx</b></td>
+                                                                             <td><b><%= clientes2.agua_embotellada %></b></td>
                                                                              <td><strong style="font-weight: 800 !important;color: black;">4.</strong> Agua caliente</td>
                                                                              <td><b>xxxxxx</b></td>
                                                                         </tr>
                                                                         <tr>
                                                                            
                                                                             <td><strong style="font-weight: 800 !important;color: black;">2.</strong> Jabones</td>
-                                                                            <td><b>xxxxxx</b></td>
+                                                                            <td><b><%= clientes2.jabones %></b></td>
                                                                             <td><strong style="font-weight: 800 !important;color: black;">5.</strong> Plomería y electrodomésticos</td>
                                                                             <td><b>xxxxxx</b></td>
                                                                         </tr>
@@ -496,74 +474,74 @@
                 
 
     
-                             </div>
-            <!-- * =============>> FIN Ahorro  <<===================== -->
+                    </div>
+            <!-- * =============>> FIN Ahorro  <<================================ -->
      
-            <!-- * =============>> Servicio  <<===================== -->
-            <div class="row">
-                <div class="col-xl-8">
-                    <div class="">
-                        <div class="card-body">
-                          
-                            <div class="row">
-                                <div class="col-lg-14">
-                                    <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
-                                        <div class="card-header bg-transparent border-primary">
-                                            <h5 class="my-0 text-primary">
-                                                <i class="fas fa-wrench"></i>&nbsp; Instalación</h5>
+            <!-- * =============>> Servicio  <<================================== -->
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <div class="">
+                                <div class="card-body">
+                                
+                                    <div class="row">
+                                        <div class="col-lg-14">
+                                            <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
+                                                <div class="card-header bg-transparent border-primary">
+                                                    <h5 class="my-0 text-primary">
+                                                        <i class="fas fa-wrench"></i>&nbsp; Instalación</h5>
 
-                                                <a href="" id="verBtn">
-                                                    <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Registrar Instalación</button>
-                                                </a> 
+                                                        <a href="" id="verBtn">
+                                                            <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Registrar Instalación</button>
+                                                        </a> 
 
-                                          </div>
-                                          <div class="card-body">
+                                                </div>
+                                                <div class="card-body">
 
-                                            <div class="table-responsive">
-                                                <table class="table mb-0">
+                                                    <div class="table-responsive">
+                                                        <table class="table mb-0">
 
-                                                    <tbody>
-                                                        <tr>
-                                                            
-                                                             <td style="width: 26%;">Fecha de instalación</td>
-                                                             <td><b>xxxxxx</b></td>
-                                                             <td>Instalador</td>
-                                                             <td><b>xxxxxx</b></td>
-                                                        </tr>
-                                                        <tr>
-                                                           
-                                                            <td>Prodcuto instalado</td>
-                                                            <td><b>xxxxxx</b></td>
-                                                            <td>Nota de instalación</td>
-                                                            <td><b>xxxxxx</b></td>
-                                                        </tr>
-                                                        <tr>
-                                                        
-                                               
-                                                    </tbody>
-                                                </table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    
+                                                                    <td style="width: 26%;">Fecha de instalación</td>
+                                                                    <td><b>xxxxxx</b></td>
+                                                                    <td>Instalador</td>
+                                                                    <td><b>xxxxxx</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                
+                                                                    <td>Prodcuto instalado</td>
+                                                                    <td><b>xxxxxx</b></td>
+                                                                    <td>Nota de instalación</td>
+                                                                    <td><b>xxxxxx</b></td>
+                                                                </tr>
+                                                                <tr>
+                                                                
+                                                    
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+
+
                                             </div>
+                                        </div><!-- end col -->
 
                                         </div>
+                                    <!-- end card-body -->
+                                </div>
+                                <!-- end card -->
 
-
-                                    </div>
-                                </div><!-- end col -->
-
-                                 </div>
-                            <!-- end card-body -->
+                            </div><!-- end col -->
                         </div>
-                        <!-- end card -->
 
-                    </div><!-- end col -->
-                 </div>
-
-             
-             </div>
-            <!-- * =============>> FIN Servicio  <<===================== -->
+                    
+                    </div>
+            <!-- * =============>> FIN Servicio  <<============================== -->
 
 
-
+        </div>
                 </div>
                     </div>
                     <!-- =======FIXME: copyright ========================== -->
