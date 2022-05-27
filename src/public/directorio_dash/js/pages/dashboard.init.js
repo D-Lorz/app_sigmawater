@@ -269,7 +269,7 @@ var options = {
     legend: {
         show: false
     },
-    series: [100],
+    series: [2],
     labels: ['Pagado'],
 }
 

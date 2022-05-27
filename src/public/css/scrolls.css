@@ -41,3 +41,18 @@ scroll-container::-webkit-scrollbar-thumb {
 }
 
 
+.scroll_vertical {
+  height: 337px;
+  /* width: 747px; */
+  overflow: auto;
+  /* border: 1px solid #666; */
+  /* background-color: #ccc; */
+  padding: 8px;
+}
+.scroll_vertical::-webkit-scrollbar {
+ width:10px;
+}
+.scroll_vertical::-webkit-scrollbar-thumb {
+  background: linear-gradient(189.55deg, #FED061 -131.52%, #812082 -11.9%, #50368C 129.46%);
+  border-radius: 5px;
+  }

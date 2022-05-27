@@ -67,7 +67,7 @@ var colors = [0, 0, 0];
 var select = document.getElementById('input-select');
 
 // Append the option elements
-for (var i = -20; i <= 40; i++) {
+for (var i = -0; i <= 23; i++) {
 
     var option = document.createElement("option");
     option.text = i;
@@ -79,11 +79,11 @@ for (var i = -20; i <= 40; i++) {
 var html5Slider = document.getElementById('html5');
 
 noUiSlider.create(html5Slider, {
-    start: [10, 30],
+    start: [0, 10],
     connect: true,
     range: {
-        'min': -20,
-        'max': 40
+        'min': -0,
+        'max': 23
     }
 });
 

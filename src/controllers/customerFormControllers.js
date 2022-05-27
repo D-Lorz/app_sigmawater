@@ -71,6 +71,16 @@ exports.getTestAgua = async (req, res) => {
   })
 
 }
+exports.getAgendarinstalacion = async (req, res) => {
+  const id = req.params.id
+
+  await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
+    if (err) throw err;
+    res.render('agendar-instalacion', { user: req.user, agendarInstalacion: result[0] });
+
+  })
+
+}
 //------------------------------------------------
 // todo -->  formulario para solicitar credito
 exports.solicitarCredito = async (req, res) => {
@@ -209,7 +219,6 @@ exports.solicitarCredito = async (req, res) => {
 
 // todo -->  mostrar lista de clientes total por vendedor
 exports.listarClientes = async (req, res) => {
-
   // Capturando el id del Vendedor actual
   const id_vendedor = req.user.id;
 
@@ -218,19 +227,19 @@ exports.listarClientes = async (req, res) => {
     if (err)
       throw err;
     res.render('lista-clientes', { user: req.user,clientes: result })
-
   })
-
 
 }
 
+
 // todo -->  tarjetas en la vista perfil clientes
 exports.listarClientes_PerfilClientes = async (req, res) => {
-
+// ? ===============================
   const id_cliente = req.params.id
   let clientes2 = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id_cliente])
-  clientes2 = clientes2[0]
-
+   clientes2 = clientes2[0]
+// ? ===============================
+// ? ===============================>>> Estado del solicitar credito
   let credito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
   let estado = []
   estado.txt = "No solicitado";
@@ -257,8 +266,78 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       estado.verBtn = false;
     }
   }
+  // ? ===============================
+  // ? ===============================>> mostrar información del test de agua del cliente
+    let vartestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
   
-    res.render('perfil-clientes', { user: req.user, clientes2, estado})
+      // * -->> Estados del testeo (visita al cliente)
+      let consultaEstados = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [clientes2.id])
+        let estadoServicio = []
+        estadoServicio.txt = "A la fecha el cliente aun no ha sido visitado";
+        estadoServicio.color = '';
+        estadoServicio.background = 'noVisitado';
+        
+      if (consultaEstados.length > 0) {
+          consultaEstados = consultaEstados[0]
+
+      if (consultaEstados.estado_visita_test === '0') {
+          estadoServicio.txt= "Se realizó un test de agua el";
+          estadoServicio.background= 'visitado';
+          
+        } else if (consultaEstados.estado_visita_test == 1) {
+          estadoServicio.txt = "Instalado";
+          estadoServicio.color = 'badge-soft-info'
+          } 
+        
+      }
+
+   let consultaUltimoTest = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [clientes2.id])
+   
+   if(consultaUltimoTest.length > 0 ){
+    consultaUltimoTest = consultaUltimoTest[0]
+  }
+
+     console.log(">>>>>>>>ULTIMO TESTEO>>>>");
+
+      console.log(consultaUltimoTest);
+  // ? ===============================
+
+
+  // * -->> mostrar información del ahorro del cliente
+  let varAhorro = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [clientes2.id])
+   if(varAhorro.length > 0 ){
+    varAhorro = varAhorro[0]
+  }
+ 
+// ? ===============================>> Estados de la agenda para instalar el producto
+    let consultaEstado_instalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [clientes2.id])
+
+        let estado_intalacion = []
+        estado_intalacion.txt = "La instalación del producto no ha sido agendada";
+        estado_intalacion.background = 'noVisitado';
+        
+        if (consultaEstado_instalacion.length > 0) {
+          consultaEstado_instalacion = consultaEstado_instalacion[0]
+
+        if (consultaEstado_instalacion.estado_agenda === '0') {
+          estado_intalacion.txt= "Listo para instalar";
+          estado_intalacion.background= 'visitado';
+          
+        } else if (consultaEstado_instalacion.estado_agenda == 1) {
+          estado_intalacion.txt= "Instalado";
+          estado_intalacion.background= 'producto_instalado';
+        
+          } 
+        }
+ // ? ===============================     
+  res.render('perfil-clientes', { user: req.user, clientes2, estado,vartestAgua,varAhorro,estadoServicio,estado_intalacion,
+    consultaUltimoTest
+  
+  
+  
+  })
+
+
 }
 
 // todo --> Formulario Test de agua
@@ -271,14 +350,22 @@ exports.testAgua = async (req, res) => {
  
   const dureza_gmXgalon = req.body.dureza_gmXgalon;
   const hierro = req.body.hierro;
-  const totalDureza_compensada =  parseFloat(dureza_gmXgalon)*4+parseFloat(hierro);
+  const totalDureza_compensada =  (parseFloat(dureza_gmXgalon)*4)+parseFloat(hierro);
+  console.log("SUMA >>>>>>>>>>");
+  console.log(totalDureza_compensada);
   const tsd = req.body.tsd;
   const cloro = req.body.cloro;
   const ph = req.body.ph;
   const azufre = req.body.azufre;
   const tanino = req.body.tanino;
   const nitrato = req.body.nitrato;
-  const otro = req.body.otro;
+  const alcalinidad = req.body.alcalinidad;
+  const otro1 = req.body.otro1[0];
+  const concentracion1 = req.body.concentracion1[0]
+  const otro2 = req.body.otro1[1];
+  const concentracion2 = req.body.concentracion1[1]
+  const otro3 = req.body.otro1[2];
+  const concentracion3 = req.body.concentracion1[2]
   const nota = req.body.nota;
   
    
@@ -286,7 +373,13 @@ exports.testAgua = async (req, res) => {
   const codigo_cliente = req.body.codigo_cliente
 
  const Datos_testAgua = {
-  fecha_test, dureza_gmXgalon, hierro,totalDureza_compensada, tsd,cloro,ph,azufre, tanino, nitrato, otro ,nota,id_cliente}
+  fecha_test, dureza_gmXgalon, hierro,totalDureza_compensada, tsd,cloro,ph,azufre, tanino, nitrato,alcalinidad,
+   otro1,concentracion1,
+   otro2,concentracion2,
+   otro3,concentracion3,
+   nota,
+   id_cliente
+  }
 
 await conexion.query('INSERT INTO test_agua SET ?', [Datos_testAgua], (err, result) => {
   if (err) throw err;
@@ -294,17 +387,6 @@ await conexion.query('INSERT INTO test_agua SET ?', [Datos_testAgua], (err, resu
     
    })
 
-
-}
-// todo -->  tarjeta -test agua- en la vista perfil clientes
-exports.listarAhorros = async (req, res) => {
-
-  const id_cliente = req.params.id
-
-  let ahorroDecliente = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ? LIMIT 1', [id_cliente])
-  ahorroDecliente = ahorroDecliente[0]
-  
- res.render('perfil-clientes', { user: req.user, ahorroDecliente})
 }
 
 // todo --> Formulario de calcular ahorro
@@ -359,18 +441,70 @@ exports.ahorro = async (req, res) => {
 
 
 }
-// todo -->  tarjeta -ahorro- en la vista perfil clientes
-exports.listarAhorros = async (req, res) => {
+// todo --> Formulario agendar instalacion
+exports.agendarInstalacionProducto = async (req, res) => {
 
-  const id_cliente = req.params.id
+ const lunes = req.body.lunes
+ const martes = req.body.martes
+ const miercoles = req.body.miercoles
+ const jueves = req.body.jueves
+ const viernes = req.body.viernes
+ const sabado = req.body.sabado
+ const domingo = req.body.domingo
+ const fechaInicial = req.body.fechaInicial
+ const fechaFinal = req.body.fechaFinal
+ const nota_solicitud  = req.body.nota_solicitud
+ 
+//  const horaInstalacion =  req.body.horaInstalacion
+ 
+const id_cliente = req.body.id_cliente
+const codigo_cliente = req.body.codigo_cliente
 
-  let clientes3 = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ? LIMIT 1', [id_cliente])
-  clientes3 = clientes3[0]
-  
- res.render('perfil-clientes', { user: req.user, clientes3})
+ const Datos_agendarSolicitud = {lunes,martes,miercoles,jueves,viernes,sabado,domingo,fechaInicial,fechaFinal,nota_solicitud,id_cliente}
+
+await conexion.query('INSERT INTO agendar_instalacion SET ?', [Datos_agendarSolicitud], (err, result) => {
+  if (err) throw err;
+  if (result) { res.redirect('/perfil-clientes/'+codigo_cliente) }
+    
+   })
+
+}
+
+// todo --> Generar codigo numero aleatorio del cliente
+const generateRandomNumber = (num) => {
+  const characters = '0123456789';
+  let result1 = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < num; i++) {
+    result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result1;
 }
 
 
+
+// todo --> Formulario servicio instalado
+// exports.servicioInstaladosx = async (req, res) => {
+
+//   const fecha_instalacion = req.body.fecha_instalacion;
+//   const producto_instalado = req.body.producto_instalado;
+//   const instalador = req.body.instalador;
+//   const evidencia = '../evidenciaServicio/' + urlLicencias[0]
+//   const evidencia_fotografica = JSON.stringify({'evidencia': evidencia,});
+//   const nota = req.body.nota;
+
+//    const id_cliente = req.body.id_cliente
+//    const codigo_cliente = req.body.codigo_cliente
+
+//  const Datos_servicio = {fecha_instalacion, producto_instalado, instalador,evidencia_fotografica,nota,id_cliente }
+
+// await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], (err, result) => {
+//   if (err) throw err;
+//   if (result) { res.redirect('/perfil-clientes/'+codigo_cliente) }
+    
+//    })
+
+// }
 
 
 
@@ -427,13 +561,3 @@ exports.listarAhorros = async (req, res) => {
 // }
 
 // todo GENERAR CODIGO NUMERICO PARA CLIENTE
-
-const generateRandomNumber = (num) => {
-  const characters = '0123456789';
-  let result1 = '';
-  const charactersLength = characters.length;
-  for (let i = 0; i < num; i++) {
-    result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result1;
-}

@@ -115,7 +115,6 @@ exports.login = async (req, res) => {
         console.log(error)
     }
 }
-
 // todo: AUTENTICACION
 exports.isAuthenticated = async (req, res, next) => {
     if (req.cookies.jwt) {
@@ -164,7 +163,7 @@ exports.listarAfiliados= async (req, res) => {
     //    console.log(result);
      })
        
-   }
+}
 
  // todo: GENERADOR DE CODIGO DE VENDEDOR APHANUMERICO
 const  generateRandomString = (num) => {

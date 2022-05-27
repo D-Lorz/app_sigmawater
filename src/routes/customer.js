@@ -3,10 +3,18 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados } = require('../controllers/authController');
-const { listarClientes, getSolicitudCreditos,getAhorro,getTestAgua,listarAhorros,registrarClientes,ahorro ,testAgua,listarClientes_PerfilClientes,solicitarCredito} = require('../controllers/customerFormControllers');
-
-
-
+const { listarClientes, 
+        getSolicitudCreditos,
+        getAhorro,
+        getTestAgua,
+        getAgendarinstalacion,
+        registrarClientes,
+        ahorro,
+        testAgua,
+        listarClientes_PerfilClientes,
+        solicitarCredito,
+        agendarInstalacionProducto
+        } = require('../controllers/customerFormControllers');
 
 
 const rutaAlmacen = multer.diskStorage({
@@ -37,10 +45,46 @@ const cargar = multer({
     storage: rutaAlmacen,
 });
 
+
 // * SIRVE PARA UNIFICAR LOS 2 CAMPOS UPLOAD DEL FORMULARIO CLIENTE
 const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente_trasera' }]);
 
 
+
+
+// todo ===>> subir evidencia fotografica del servicio instalado
+const rutaCarpeta = multer.diskStorage({
+
+    destination: function (req, file, callback) {
+        const rutaLicencia = path.join(__dirname, '../public/evidenciaServicio')
+        callback(null, rutaLicencia);
+    },
+
+    filename: function (req, file, callback) {
+        const fechaActual = Math.floor(Date.now() / 1000)
+  
+        if (file.fieldname == 'evidencia_fotografica') {
+            urlLicencias[0] = "Evidencia_fotografica" + fechaActual + "_" + file.originalname;
+        
+            callback(null, urlLicencias[0])
+        } 
+        else {
+            urlLicencias[1] = "xxxx" + fechaActual + "_" + file.originalname;
+            callback(null, urlLicencias[1])
+          
+        } 
+      
+    }
+
+});
+
+const cargarEvidencia = multer({
+    storage: rutaCarpeta,
+});
+
+const oneUpload = cargarEvidencia.fields([{ name: 'evidencia_fotografica' }, { name: 'xxx' }]);
+
+// todo =========================================================
 
  // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
@@ -54,7 +98,7 @@ router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
     res.render('afiliados', { user: req.user })
 });
 
-router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes,listarAhorros)
+router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes)
 
 router.get('/solicitar-credito/:id', isAuthenticated ,getSolicitudCreditos)
 
@@ -62,20 +106,15 @@ router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro)
 
 router.get('/test-de-agua/:id', isAuthenticated, getTestAgua) 
     
+ router.get('/agendar-instalacion/:id', isAuthenticated,getAgendarinstalacion) 
 
 
-   
-
-
-
-router.get('/hola', (req, res) => {
-    res.render('hola')
-});
 // *   ================ ===== ↑↑ ==============================
-
+ router.get('/hola', isAuthenticated, (req, res) => {
+    res.render('hola', { user: req.user })
+ });
 
 //* router para los métodos del customerFormControllers
-
 /*=============================================================*/
 router.post('/registrarClientes', isAuthenticated, registrarClientes);
 /*=============================================================*/
@@ -85,6 +124,7 @@ router.post('/registrarClientes', isAuthenticated, registrarClientes);
  /*=============================================================*/
  router.post('/testAgua', isAuthenticated, testAgua);
  /*=============================================================*/
- 
+ router.post('/agendarInstalacion', isAuthenticated,agendarInstalacionProducto);
+ /*=============================================================*/
 
 module.exports = router

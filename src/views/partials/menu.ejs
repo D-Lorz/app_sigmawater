@@ -2,9 +2,27 @@
     <div class="navbar-header">
         <div class="d-flex">
 
-            <!-- LOGO -->
-            <%- include ('../partials/logonav.ejs')%>
-             <!-- LOGO -->
+            <div class="navbar-brand-box">
+
+                <a href="#" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="../directorio_dash/images/3clogo.svg" alt="" >
+                    </span>
+                    <span class="logo-lg">
+                        <img src="../directorio_dash/images/logo.svg" alt=""   style="width: 64%;" > <span class="logo-txt"></span>
+                    </span>
+                </a>
+            
+                <a href="#" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="../directorio_dash/images/3clogo.svg" alt="" >
+                    </span>
+                    <span class="logo-lg">
+                        <img src="../directorio_dash/images/logo.svg" alt=""   style="width: 64%;" > <span class="logo-txt"></span>
+                    </span>
+                </a>
+                
+            </div>
 
                 <button type="button" class="btn btn-sm px-3 font-size-16 header-item" id="vertical-menu-btn">
                     <i class="fa fa-fw fa-bars"></i>
@@ -15,30 +33,12 @@
 
         <div class="d-flex">
 
-            <!-- <div class="dropdown d-inline-block d-lg-none ms-2">
-                <button type="button" class="btn header-item" id="page-header-search-dropdown" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i data-feather="search" class="icon-lg"></i>
-                </button>
+        
 
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                    aria-labelledby="page-header-search-dropdown">
-
-                    <form class="p-3">
-                        <div class="form-group m-0">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Buscar" aria-label="Search Result">
-
-                                <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div> -->
-
-            <!-- =======FIXME: OCULTANDO OPCIONES DE REDES========================== -->
-            <%- include ('../partials/opcionesredes.ejs')%>
-            <!-- =======FIXME: OCULTANDO OPCIONES DE REDES========================== -->
+           
+  <a href="https://3csigmawatersystem.secure.simplybook.me/" target="_blank" type="button" class="btn btn-primary"
+  style="height: 41px;margin-top: 4%;font-size: 12px;border-radius: 17px; width: 36%;">
+  <p style="margin: inherit;">Agendar cita <i class="fas fa-calendar-alt" style="margin-left:8%;"></i></p></a>
 
 
             <div class="dropdown d-none d-sm-inline-block">
@@ -97,10 +97,13 @@
                         <img class="rounded-circle header-profile-user" src="../directorio_dash/images/users/avatar-1.jpg"
                             alt="Header Avatar">
 
-            <!--==================FIXME:=====JALAR USUARIO====================  -->
-                            <%- include ('../partials/jalarusuario.ejs')%>  
-            <!--==================FIXME:=====JALAR USUARIO====================  -->
-                        
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium">
+                                <% if (user) { %>
+                                  <%= user.nombres %> <%=user.apellidos%> 
+                                <% } %>
+                                </span>
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                  
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->

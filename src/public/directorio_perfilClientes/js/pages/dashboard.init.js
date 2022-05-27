@@ -6,6 +6,9 @@ Contact: themesbrand@gmail.com
 File: Dashboard Init Js File
 */
 
+
+  
+  
 // get colors array from the string
 function getChartColorsArray(chartId) {
     var colors = $(chartId).attr('data-colors');
@@ -283,10 +286,25 @@ function getChartColorsArray(chartId) {
 //
 // Market Overview
 //
+
+// let url = '/perfil-clientes'
+
+
+// fetch(url)
+// .then( response => response.json() )
+// .then(datos => mostrarAhorros(datos) )
+// .catch( error => console.log(error) ) 
+
+
+
+
+
+// res.render('perfil-clientes', { user: req.user, clientes2,consultaEstadosyyy })
+  
 var barchartColors = getChartColorsArray("#market-overview");
 var options = {
     series: [{
-        name: 'Ahorro mensual ',
+        name: 'Ahorro mensual ', 
         data: [20, 30, 50, 20, 36,45
             
             //  18.2, 14.16, 11.1, 8.09, 16.34, 12.88
@@ -337,6 +355,8 @@ var options = {
     //     }
     // }
 };
+
+
 
 var chart = new ApexCharts(document.querySelector("#market-overview"), options);
 chart.render();

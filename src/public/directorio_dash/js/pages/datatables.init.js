@@ -10,13 +10,28 @@ $(document).ready(function() {
     $('#datatable').DataTable();
 
     //Buttons examples
-    var table = $('#datatable-buttons').DataTable({
+    var table = $('#copyahorro').DataTable({
         lengthChange: false,
         buttons: ['copy', 'excel', 'pdf', 'colvis']
     });
 
     table.buttons().container()
-        .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+        .appendTo('#copyahorro_wrapper .col-md-6:eq(0)');
+
+    $(".dataTables_length select").addClass('form-select form-select-sm');
+});
+
+$(document).ready(function() {
+    $('#datatable').DataTable();
+
+    //Buttons examples
+    var table = $('#idahorro').DataTable({
+        lengthChange: false,
+        buttons: ['copy', 'excel']
+    });
+
+    table.buttons().container()
+        .appendTo('#idahorro_wrapper .col-md-6:eq(0)');
 
     $(".dataTables_length select").addClass('form-select form-select-sm');
 });

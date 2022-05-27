@@ -75,7 +75,7 @@
                                                   <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="segundo_nombref">Segundo nombre</label>
-                                                           <input type="tel" class="form-control" id="segundo_nombref" value="<%= cliente.segundo_nombre%>"  name="segundo_nombre" > 
+                                                           <input type="text" class="form-control" id="segundo_nombref" value="<%= cliente.segundo_nombre%>"  name="segundo_nombre" > 
                                                        </div>
                                                   </div>
       
@@ -98,8 +98,8 @@
                                                       <span class="danger">*</span>
                                                       <input class="form-control required" list="estado_sistema"  name="sistema" placeholder="Eliga el sistema deseado" >
                                                       <datalist id="estado_sistema">
-                                                            <option value="Sistema completo"></option>
-                                                          <option value="Sistema de osmosis inversa"></option>
+                                                        <option value="Whole System"></option>
+                                                        <option value="Reverse Osmosis System"></option>
                                                         
                                                       </datalist>
                                                   </div> 
@@ -255,8 +255,8 @@
                                              <h6><b>CASA</b></h6>
                                                 <fieldset style="text-align: center">
       
-                                                  <div class="row justify-content-center" >
-                                               <div class="col-md-4">
+                                               <div class="row justify-content-center" >
+                                                <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="direccionf">  Dirección <span class="danger">*</span></label>
                                                           <input type="text" class="form-control required" id="direccionf" value="<%= cliente.direccion %>" name="direccion" > 

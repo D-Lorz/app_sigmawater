@@ -1,135 +1,102 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
 
-<head>
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>Forms Advanced Plugins | Minia - Minimal Admin & Dashboard Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="../directorio_dash/images/favicon.ico">
 
-  <meta charset="utf-8" />
-  <title>Perfil clientes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
-  <meta content="Themesbrand" name="author">
-  <!-- App favicon -->
-  <link rel="shortcut icon" href="../directorio_perfilClientes/images/favicon.png">
-  <link rel="stylesheet" type="text/css" href="../css/colors.min.css">
+        <!-- choices css -->
+        <link href="../directorio_dash/libs/choices.js/public/../directorio_dash/styles/choices.min.css" rel="stylesheet" type="text/css" />
 
-  <base href="#">
+        <!-- color picker css -->
+        <link rel="stylesheet" href="../directorio_dash/libs/@simonwep/pickr/themes/classic.min.css"/> <!-- 'classic' theme -->
+        <link rel="stylesheet" href="../directorio_dash/libs/@simonwep/pickr/themes/monolith.min.css"/> <!-- 'monolith' theme -->
+        <link rel="stylesheet" href="../directorio_dash/libs/@simonwep/pickr/themes/nano.min.css"/> <!-- 'nano' theme -->
 
+        <!-- datepicker css -->
+        <link rel="stylesheet" href="../directorio_dash/libs/flatpickr/flatpickr.min.css">
 
+        <!-- preloader css -->
+        <link rel="stylesheet" href="../directorio_dash/css/preloader.min.css" type="text/css" />
 
-  <!-- DataTables -->
-  <link href="../directorio_perfilClientes/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-    type="text/css" />
-  <!-- Responsive datatable examples -->
-  <link href="../directorio_perfilClientes/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
-    rel="stylesheet" type="text/css" />
+        <!-- Bootstrap Css -->
+        <link href="../directorio_dash/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="../directorio_dash/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="../directorio_dash/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
-  <!-- preloader css -->
-  <link rel="stylesheet" href="../directorio_perfilClientes/css/preloader.min.css" type="text/css" />
+    </head>
 
-  <!-- Bootstrap Css -->
-  <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/bootstrap.min.css"
-    id="bootstrap-style" />
-  <!-- Icons Css -->
-  <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/icons.min.css" />
-  <!-- App Css-->
-  <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/app.min.css" id="app-style" />
-  <!-- Tipo de letra -->
-  <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
+    <body>
 
-</head>
+    <!-- <body data-layout="horizontal"> -->
 
-<body>
+        <!-- Begin page -->
+        <div id="layout-wrapper">
 
-  <html>
+            ============================================================= -->
+            <div class="main-content">
 
-  <head>
-    <title>Untitled Document</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+                <div class="page-content">
+                    <div class="container-fluid">
 
-  </head>
+                              
+                                               
+                                            <div class="col-lg-4">
+                                                    <div class="mt-3 mt-lg-0">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Timepicker</label>
+                                                            <input type="text" class="form-control" id="datepicker-timepicker">
+                                                        </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="mt-3 mt-lg-0">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Timepicker</label>
+                                                            <input type="text" class="form-control" id="datepicker-timepicker">
+                                                        </div>
+                                                  </div>
+                                                </div>
+                                           
+                                              </div>
+                                            </div>
+                                    
+                                          </div>
+                                
+                                    </div>
+                            
+  
+        <!-- JAVASCRIPT -->
+        <script src="../directorio_dash/libs/jquery/jquery.min.js"></script>
+        <script src="../directorio_dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../directorio_dash/libs/metismenu/metisMenu.min.js"></script>
+        <script src="../directorio_dash/libs/simplebar/simplebar.min.js"></script>
+        <script src="../directorio_dash/libs/node-waves/waves.min.js"></script>
+        <script src="../directorio_dash/libs/feather-icons/feather.min.js"></script>
+        <!-- pace js -->
+        <script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
 
-  <body>
-
-    <style type="text/css">
-  div.scroll_vertical {
-    height: 397px;
-    width: 851px;
-    overflow: auto;
-    border: 1px solid #666;
-    background-color: #ccc;
-    padding: 8px;
-}
-    </style>
-
-    <div class="scroll_vertical">
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi debitis in praesentium eveniet magni placeat,
-      culpa, ipsum explicabo, cumque beatae sunt. Laudantium eligendi incidunt et earum, sapiente sint nisi deserunt!
-
-    </div>
-    <div id="mostrarHora"><script type="text/javascript">mostrarHora();</script></div>
-
-
-
-    <script>
-
-      function mostrarHora(){
-          momentoActual=new Date();
+       
+        <!-- color picker js -->
+        <script src="../directorio_dash/libs/@simonwep/pickr/pickr.min.js"></script>
       
-          hora = momentoActual.getHours();
-          minuto = momentoActual.getMinutes();
-          segundo  = momentoActual.getSeconds();
-          horaImprimible=hora+":"+minuto+":"+ segundo;
-          // salida.
-          document.getElementById('mostrarHora'). innerHtml = horaImprimible;
-                                             }
-                                  </script>
 
-  </body>
+        <!-- datepicker js -->
+        <script src="../directorio_dash/libs/flatpickr/flatpickr.min.js"></script>
 
-  </html>
+        <!-- init js -->
+        <script src="../directorio_dash/js/pages/form-advanced.init.js"></script>
+
+        <script src="../directorio_dash/js/app.js"></script>
+
+    </body>
+</html>

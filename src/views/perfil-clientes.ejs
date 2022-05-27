@@ -16,27 +16,23 @@
 
 
 
-    <!-- DataTables -->
-    <link href="../directorio_perfilClientes/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-       type="text/css" />
-    <!-- Responsive datatable examples -->
-    <link href="../directorio_perfilClientes/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
-        rel="stylesheet" type="text/css" />
+ <!-- App favicon -->
+ <link rel="shortcut icon" href="./directorio_perfilClientes/images/favicon.ico">
 
-    <!-- preloader css -->
-    <link rel="stylesheet" href="../directorio_perfilClientes/css/preloader.min.css" type="text/css" />
+ <!-- Responsive Table css -->
+ <link href="../directorio_dash/libs/admin-resources/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" />
 
-    <!-- Bootstrap Css -->
-    <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/bootstrap.min.css"
-        id="bootstrap-style" />
-    <!-- Icons Css -->
-    <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/icons.min.css" />
-    <!-- App Css-->
-    <link rel="stylesheet" type="text/css" href="../directorio_perfilClientes/css/app.min.css" id="app-style" />
-    <!-- Tipo de letra -->
-    <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
-    <!-- scroll -->
-    <link rel="stylesheet" href="../css/scrolls.css">
+ <!-- preloader css -->
+ <link rel="stylesheet" href="../directorio_perfilClientes/css/preloader.min.css" type="text/css" />
+
+ <!-- Bootstrap Css -->
+ <link href="../directorio_perfilClientes/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+ <!-- Icons Css -->
+ <link href="../directorio_perfilClientes/css/icons.min.css" rel="stylesheet" type="text/css" />
+ <!-- App Css-->
+ <link href="../directorio_perfilClientes/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+ <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
+
 
 </head>
 
@@ -130,256 +126,160 @@
 
                                 </div><!-- end col -->
                               </div>
+                          
+                              <style>
+                                    .noVisitado{
+                                         background: #50515c;
+                                         }
+                                         .letra{
+                                             color:white;
+                                         }
+                                     .visitado{
+                                         background: #89c278;
+                                     }
+                                     .producto_instalado{
+                                        background: #89c278;
+                                     }
+                                   
+                                </style>
+
 
                                 <div class="col-lg-4">
-                                    <div class="card bg-primary border-primary text-white-50"
-                                     style=" background: linear-gradient(189.55deg, #FED061 -131.52%, #a39e9e -11.9%, #7b748d 129.46%);margin-top: 6%;">
+                                    <div class="card border-primary text-white-50 <%= estadoServicio.background %>" style="margin-top: 5%;">
                                         <div class="card-body">
-                                            <h6 class="mb-3 text-white">Estado del servicio</h6>
+                                            <h6 class="mb-3 text-white">Estado de visitas</h6>
                                             <p class="card-text" style="color:white;">
-                                                Hasta la fecha el cliente no ha sido visitado 
-                                                por un vendedor
+                                                <td><div class="badge <%= estadoServicio.color %> font-size-12 letra" > <%= estadoServicio.txt  %> <%= consultaUltimoTest.fecha_test %></div></td>
+                                                    </p>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="card  border-primary text-white-50 <%= estado_intalacion.background %>">
+                                        <div class="card-body">
+                                            <h6 class="mb-3 text-white">Estado de la instalación del producto</h6>
+                                            <p class="card-text" style="color:white;">
+                                                <td><div class="badge <%= estado_intalacion.color %> font-size-12 letra" > <%= estado_intalacion.txt %> </div></td>
+
                                             </p>
                                             
                                         </div>
                                     </div>
-                                 
                                 </div>
-                                <!-- end col -->
+                                
+                              
                     </div>
             <!-- * =============>> FIN Datos del cliente  <<===================== -->
 
             <!-- * =============>> Test de agua  <<============================== -->
-                    <div class="row">
-                            <div class="col-xl-8" >
-                                <div class="" >
+            <div class="row">
+                <div class="col-xl-8">
+                    <div class="">
+                    
+                        <div class="row">
+                            <div class="col-lg-14">
+                                <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
+
+                                   <div class="card-header bg-transparent border-primary">
+                                        <h5 class="my-0 text-primary">
+                                            <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
+
+                                            <a href="/test-de-agua/<%= clientes2.id_cliente %>" >
+                                                <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Realizar test</button>
+                                            </a> 
+                                    </div> 
+                  
                                     <div class="card-body">
-                                      
-                                        <div class="row">
-                                            <div class="col-lg-14">
-                                                <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">
-                                                            <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
-
-                                                            <a href="/test-de-agua/<%= clientes2.id_cliente %>" >
-                                                                <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Realizar test</button>
-                                                            </a> 
-
-                                                            <style type="text/css">
-                                                               div.scroll_vertical {
-                                                                height: 337px;
-                                                                /* width: 747px; */
-                                                                overflow: auto;
-                                                                /* border: 1px solid #666; */
-                                                                /* background-color: #ccc; */
-                                                                padding: 8px;
-                                                            }
-                                                            .scroll_vertical::-webkit-scrollbar {
-                                                               width:10px;
-                                                            }
-                                                            .scroll_vertical::-webkit-scrollbar-thumb {
-                                                                background: linear-gradient(189.55deg, #FED061 -131.52%, #812082 -11.9%, #50368C 129.46%);
-                                                                border-radius: 5px;
-                                                                }
-                                                          
-                                                        </style>
-
-
-                                                      </div>
-                                                      <div class="card-body">
-                                                 
-                                                        <div class="scroll_vertical scroll_horizontal">
-                                                         
-                                                            <div class="table-responsive">
+                                        <div class="">
+                                            <div class="table-responsive" >
                                                                
-                                                                <table class="table table-striped mb-0">
-                                                             
-                                                                    <thead class="table-light">
+                                                <table class="table table-striped" id="idahorro" class="dataTables_filter" 
+                                                         id="tech-companies-1" class="dataTables_info" style="margin-top: 2%;">
+                                                          
+                                                                    <thead class="">
                                                                         <tr>
-                                                                            <th>Fecha del test</th>
-                                                                            <th>Dureza (gramos por galón)</th>
+                                                                            <th>Numero de test</th>
+                                                                            <th>Fecha</th>
+                                                                            <th>Dureza (gpg)</th>
                                                                             <th>Hierro (ppm)</th>
                                                                             <th>Total dureza compensada</th>
-                                                                            <th>TSD (total de solidos disueltos)</th>
+                                                                            <th >TSD (Total de solidos disueltos)</th>
                                                                             <th>Cloro (ppm)</th>
                                                                             <th>pH</th>
                                                                             <th>Azufre (ppm)</th>
-                                                                            <th>tanino (ppm)</th>
+                                                                            <th>Tanino (ppm)</th>
                                                                             <th>Nitrato (ppm)</th>
-                                                                            <th>Otro </th>
-                                                                            <th>Notas </th>
+                                                                            <th>Alcalinidad</th>
+                                                                            <th>Otro</th>
+                                                                            <th>Concentración</th>
+                                                                            <th>Otro</th>
+                                                                            <th>Concentración</th>
+                                                                            <th>Otro</th>
+                                                                            <th>Concentración</th>
+                                                                            <th>Nota</th>
+                                                                           
+                                                                           
+                                                                           
                                                                         </tr>
                                                                     </thead>
+
                                                                     <tbody>
-                                                                        <tr>
-                                                                         
-                                                                            <td></td>
-                                                                            <td>Ottodsdfsd</td>
-                                                                            <td>@mdosdfsdsf</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdosdfsdfsdfsdsf</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                        
-                                                                             <td>Marerterterteerk</td>
-                                                                            <td>Ottosdfsdfsdfsdf</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                          
-                                                                             <td>Marerterterteerk</td>
-                                                                            <td>Otto</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            
-                                                                              <td>Marerterterteerk</td>
-                                                                            <td>Otto</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                           
-                                                                            <td>Marerterterteerk</td>
-                                                                            <td>Otto</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            
-                                                                            <td>Marerterterteerk</td>
-                                                                            <td>Otto</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                           
-                                                                            <td>Marerterterteerk</td>
-                                                                            <td>Otto</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            
-                                                                            <td>Marerterterteerk</td>
-                                                                            <td>Otto</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                           
-                                                                             <td>Marerterterteerk</td>
-                                                                            <td>Otto</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                            <td>@mdo</td>
-                                                                        </tr>
+                                                                      
+                                                                        <% vartestAgua.forEach((user)=>{ %>
+                                                                                                                                                    
+                                                                            <tr>
+                                                                                <td><%= user.id %></td>
+                                                                                  <td><%= user.fecha_test %></td>
+                                                                                  <td><%= user.dureza_gmXgalon %></td>
+                                                                                  <td><%= user.hierro %></td>
+                                                                                  <td><%= user.totalDureza_compensada %></td>
+                                                                                  <td><%= user.tsd %></td>
+                                                                                  <td><%= user.cloro %></td>
+                                                                                  <td><%= user.ph %></td>
+                                                                                  <td><%= user.azufre %></td>
+                                                                                  <td><%= user.tanino %></td>
+                                                                                  <td><%= user.nitrato %></td>
+                                                                                  <td><%= user.alcalinidad %></td>
+                                                                                  <td><%= user.otro1 %></td>
+                                                                                  <td><%= user.concentracion1 %></td>
+                                                                                  <td><%= user.otro2 %></td>
+                                                                                  <td><%= user.concentracion2 %></td>
+                                                                                  <td><%= user.otro3 %></td>
+                                                                                  <td><%= user.concentracion3 %></td>   
+                                                                                  <td><%= user.nota %></td>    
+                                                                     
+                                                                            </tr>
+                                                                   
+                                                                                  <%})%>
 
-                                                                    </tbody>
-                                                                </table>
-                                                                
+                                                                                </tbody>
+                                                                            </table>
+                                                                                
+                                                                            </div>
+                                        
+                                                                        </div>
+
+                                                                    </div>
+                                                        <!-- end card -->
                                                             </div>
-                                                        
+                                                        </div>
+                                                        </div>
                                                     </div>
-                                                    </div>
-                                                    <!-- end card body -->
+                                                    <!-- end card -->
+                                                </div> <!-- end col -->
+                                
+
+                                        <div class="col-lg-4 ">
+                                            <div class="card" style="margin-top: 5%;">
+                                                <div class="card-header">
+                                                    <h4 class="card-title mb-0">Calidad de agua del hogar</h4>
                                                 </div>
-                                                <!-- end card -->
-
+                                                <div class="card-body">
+                                                    <div id="column_chart" data-colors='["#a99bcb", "#50368c"]' class="apex-charts" dir="ltr"></div>                                      
                                                 </div>
-                                            </div><!-- end col -->
-
-                                             </div>
-                                        <!-- end card-body -->
-                                    </div>
-                                    <!-- end card -->
-
-                                </div><!-- end col -->
-                                <div class="col-lg-4 ">
-                                    <div class="card" style="margin-top: 5%;">
-                                        <div class="card-header">
-                                            <h4 class="card-title mb-0">Calidad de agua del hogar</h4>
+                                            </div>
+                                            <!--end card-->
                                         </div>
-                                        <div class="card-body">
-                                            <div id="column_chart" data-colors='["#a99bcb", "#50368c"]' class="apex-charts" dir="ltr"></div>                                      
-                                        </div>
-                                    </div>
-                                    <!--end card-->
                                 </div>
-                    </div>
             <!-- * =============>> FIN Test de agua  <<=============================->
 
             <!-- * =============>> Ahorro  <<===================================== -->
@@ -401,37 +301,82 @@
     
                                                           </div>
                                                           <div class="card-body">
-
-                                                            <div class="table-responsive">
-                                                                <table class="table mb-0">
-    
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            
-                                                                             <td style="width: 26%;"><strong style="font-weight: 800 !important;color: black;">1.</strong> Agua embotellada</td>
-                                                                             <td><b><%= clientes2.agua_embotellada %></b></td>
-                                                                             <td><strong style="font-weight: 800 !important;color: black;">4.</strong> Agua caliente</td>
-                                                                             <td><b>xxxxxx</b></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                           
-                                                                            <td><strong style="font-weight: 800 !important;color: black;">2.</strong> Jabones</td>
-                                                                            <td><b><%= clientes2.jabones %></b></td>
-                                                                            <td><strong style="font-weight: 800 !important;color: black;">5.</strong> Plomería y electrodomésticos</td>
-                                                                            <td><b>xxxxxx</b></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td><strong style="font-weight: 800 !important;color: black;">3.</strong> Productos de limpieza</td>
-                                                                             <td><b>xxxxxx</b></td>
-                                                                            <td style="width: 26%;"><strong style="font-weight: 800 !important;color: black;">6.</strong> Ropa y lencería</td>
-                                                                             <td><b>xxxxxx</b></td>
-                                                                        </tr>
+                                                            <div class="table-responsive" style="overflow-x: hidden;" >
                                                                
+                                                                <table class="table table-striped mb-0" 
+                                                                 id="copyahorro" class="dataTables_filter" 
+                                                                  class="dataTables_paginate "
+                                                                  class="dataTables_info" style="margin-top: 2%;">
+                                                             <style>
+                                                               
+                                                                .dataTables_filter{
+                                                                     display: none;
+                                                                 }
+                                                                 .dataTables_paginate{
+                                                                     display: none;
+                                                                 }
+                                                                 .dataTables_info{
+                                                                     display: none;
+                                                                 } 
+
+                                                             </style>
+                                                                    <thead class="table-light">
+                                                                        <tr>
+                                                                            <th ></th>
+                                                                            <th>Gasto mensual</th>
+                                                                            <th>Ahorro mensual</th>
+                                                                            <th>Ahorro anual</th>
+                                                                           
+                                                                           
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                    <tbody>
+                                                                      
+                                                                        <tr>
+                                                                            <td>Agua embotellada</td>
+                                                                            <td>$ <%= varAhorro.agua_embotellada %></td>
+                                                                            <td>$ <%= varAhorro.ahorroMensual_aguaEmbotellada %></td>  
+                                                                            <td>$ <%= varAhorro.ahorroAnual_aguaEmbotellada %></td>                                                                      
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Jabones</td>
+                                                                            <td>$ <%= varAhorro.jabones %></td>   
+                                                                            <td>$ <%= varAhorro.ahorroMensual_jabon %></td>  
+                                                                            <td>$ <%= varAhorro.ahorroAnual_jabon %></td>                                                             
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Productos de limpieza</td>
+                                                                            <td>$ <%= varAhorro.productos_limpieza %></td>    
+                                                                            <td>$ <%= varAhorro.ahorroMensual_productos_limpieza %></td>      
+                                                                            <td>$ <%= varAhorro.ahorroAnual_productos_limpieza %></td>                                                  
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Agua caliente</td>
+                                                                            <td>$ <%= varAhorro.agua_caliente %></td>     
+                                                                            <td>$ <%= varAhorro.ahorroMensual_agua_caliente %></td>   
+                                                                            <td>$ <%= varAhorro.ahorroAnual_agua_caliente %></td>                                                            
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Plomería y electrodomésticos</td>
+                                                                            <td>$ <%= varAhorro.plomeria_electrodomesticos %></td>    
+                                                                            <td>$ <%= varAhorro.ahorroMensual_plomeria_electrodomesticos %></td>    
+                                                                            <td>$ <%= varAhorro.ahorroAnual_plomeria_electrodomesticos %></td>                                                             
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Ropa y lencería</td>
+                                                                            <td>$ <%= varAhorro.ropa_lenceria %></td>         
+                                                                            <td>$ <%= varAhorro.ahorroMensual_ropa_lenceria %></td>        
+                                                                            <td>$ <%= varAhorro.ahorroAnual_ropa_lenceria %></td>                                              
+                                                                        </tr>
+
                                                                     </tbody>
                                                                 </table>
+                                                                
                                                             </div>
        
                                                         </div>
+    
     
     
                                                     </div>
@@ -477,7 +422,7 @@
                     </div>
             <!-- * =============>> FIN Ahorro  <<================================ -->
      
-            <!-- * =============>> Servicio  <<================================== -->
+            <!-- * =============>> Agendar instalación  <<================================== -->
                     <div class="row">
                         <div class="col-xl-8">
                             <div class="">
@@ -488,10 +433,10 @@
                                             <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
                                                 <div class="card-header bg-transparent border-primary">
                                                     <h5 class="my-0 text-primary">
-                                                        <i class="fas fa-wrench"></i>&nbsp; Instalación</h5>
+                                                        <i class="fas fa-wrench"></i>&nbsp; Agendar instalación</h5>
 
-                                                        <a href="" id="verBtn">
-                                                            <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Registrar Instalación</button>
+                                                        <a href="/agendar-instalacion/<%= clientes2.id_cliente %>" >
+                                                            <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Solicitar instalación</button>
                                                         </a> 
 
                                                 </div>
@@ -502,21 +447,29 @@
 
                                                             <tbody>
                                                                 <tr>
-                                                                    
+                                                                  
                                                                     <td style="width: 26%;">Fecha de instalación</td>
-                                                                    <td><b>xxxxxx</b></td>
+                                                                    <td><b>----</b></td>
                                                                     <td>Instalador</td>
-                                                                    <td><b>xxxxxx</b></td>
+                                                                    <td><b>----</b></td>
+                                                                   
+                                                                    
                                                                 </tr>
                                                                 <tr>
                                                                 
                                                                     <td>Prodcuto instalado</td>
-                                                                    <td><b>xxxxxx</b></td>
+                                                                    <td>---</td>
                                                                     <td>Nota de instalación</td>
-                                                                    <td><b>xxxxxx</b></td>
-                                                                </tr>
+                                                                    <td><b>-----</b></td>
+                                                                                                                                    </tr>
                                                                 <tr>
+                                                                    <tr>
                                                                 
+                                                                        <td>Serial del producto</td>
+                                                                        <td>---</td>
+                                                                       
+                                                                                                                                        </tr>
+                                                                    <tr>
                                                     
                                                             </tbody>
                                                         </table>
@@ -538,7 +491,7 @@
 
                     
                     </div>
-            <!-- * =============>> FIN Servicio  <<============================== -->
+            <!-- * =============>> FIN Agendar instalación  <<============================== -->
 
 
         </div>
@@ -581,9 +534,9 @@
             </script>
             <%}%>
 
-        
+           
+    
             <!-- JAVASCRIPT -->
-            <script src="../directorio_perfilClientes/js/scripts_personalizadosdash.js"></script>
             <script src="../directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
             <script src="../directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
             <script src="../directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
@@ -592,32 +545,41 @@
             <script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
             <!-- pace js -->
             <script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
+            <!-- * ====== Scripts de las graficas ======= -->
+                    <!-- apexcharts js -->
+                    <script src="../directorio_perfilClientes/libs/apexcharts/apexcharts.min.js"></script>
+                    <!-- apexcharts init -->
+                    <script src="../directorio_perfilClientes/js/pages/apexcharts.init.js"></script>
+                    <!-- dashboard init -->
+                    <script src="../directorio_perfilClientes/js/pages/dashboard.init.js"></script>
+            <!-- * ====== Scripts de las graficas ======= -->
+ 
+        <!-- Required datatable js -->
+        <script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <!-- Responsive Table js -->
+        <script src="../directorio_dash/libs/admin-resources/rwd-table/rwd-table.min.js"></script>
+        <!-- Responsive examples -->
+        <script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+  
 
-  <!-- apexcharts js -->
-  <script src="../directorio_perfilClientes/libs/apexcharts/apexcharts.min.js"></script>
+        <!-- Buttons examples -->
+        <script src="../directorio_dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="../directorio_dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+        <script src="../directorio_dash/libs/jszip/jszip.min.js"></script>
+        <script src="../directorio_dash/libs/pdfmake/build/pdfmake.min.js"></script>
+        <script src="../directorio_dash/libs/pdfmake/build/vfs_fonts.js"></script>
+        <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 
-  <!-- apexcharts init -->
-  <script src="../directorio_perfilClientes/js/pages/apexcharts.init.js"></script>
-    <!-- dashboard init -->
-    <script src="../directorio_perfilClientes/js/pages/dashboard.init.js"></script>
-
-
-            <!-- Required datatable js -->
-            <script src="../directorio_perfilClientes/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-            <!-- Responsive examples -->
-            <script
-                src="../directorio_perfilClientes/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-            <script
-                src="../directorio_perfilClientes/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-            <!-- init js -->
-            <script src="../directorio_perfilClientes/js/pages/datatable-pages.init.js"></script>
-
-
-
-            <script src="../directorio_perfilClientes/js/app.js"></script>
-
-
-</body>
-
-</html>
+         <!-- Init js -->
+         <script src="../directorio_dash/js/pages/table-responsive.init.js"></script>
+         <script src="../directorio_perfilClientes/js/app.js"></script>
+             
+         <!-- Datatable init js -->
+         <script src="../directorio_dash/js/pages/datatables.init.js"></script>    
+ 
+    </body>
+    </html>

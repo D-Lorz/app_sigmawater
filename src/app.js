@@ -34,6 +34,8 @@ app.use(cookieParser())
 /** VARIABLES GLOBALES */
 global.urlLicencias = ['front', 'back'];
 global.urlLicenciasClientes = ['front', 'back','acuerdo'];
+global.urlEvidenciaServicioInstalado = ['front'];
+
 
 
 // No almacenar caché
