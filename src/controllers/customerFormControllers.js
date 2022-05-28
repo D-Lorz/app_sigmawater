@@ -329,13 +329,14 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
         
           } 
         }
+
+        const grafica = JSON.stringify(varAhorro);
+
+
  // ? ===============================     
-  res.render('perfil-clientes', { user: req.user, clientes2, estado,vartestAgua,varAhorro,estadoServicio,estado_intalacion,
+  res.render('perfil-clientes', { user: req.user, clientes2, estado,vartestAgua,varAhorro,grafica,estadoServicio,estado_intalacion,
     consultaUltimoTest
-  
-  
-  
-  })
+   })
 
 
 }

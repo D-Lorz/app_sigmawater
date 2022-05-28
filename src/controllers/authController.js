@@ -4,8 +4,6 @@ const conexion = require('../database/db')
 const { promisify } = require('util')
 
 
-
-
 // todo: REGISTRAR
 exports.registrar = async (req, res) => {
 
@@ -38,14 +36,12 @@ exports.registrar = async (req, res) => {
     });
 
     const id_vendedor = generateRandomString(6)
-    const nivel = 1
-    const numero_de_ventas = 0
-    const total_ventas = 0
+    
 
     const nuevoRegistro = {
         nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
         apt_suite_unidad, codigo_postal, codigo_afiliado, nombre_banco, numero_cuenta, ruta, beneficiario, 
-        licencia_conduccion,id_vendedor,nivel, numero_de_ventas,total_ventas
+        licencia_conduccion,id_vendedor
     }
 
     console.log(nuevoRegistro)
@@ -57,12 +53,15 @@ exports.registrar = async (req, res) => {
         res.redirect('https://3csigmawater.com')
     })
 }
+
+
+
 // todo: LOGIN
 exports.login = async (req, res) => {
     try {
         const correo = req.body.correo
         const pass = req.body.pass
-
+    
         if (!correo || !pass) {
             res.render('login', {
                 alert: true,
@@ -89,17 +88,14 @@ exports.login = async (req, res) => {
                  //inicio de sesión OK
                  const id = results[0].id
                  const token = jwt.sign({ id: id }, 'super_secret_AppSigmaWater')
-                  //generamos el token SIN fecha de expiracion
-                 //const token = jwt.sign({id: id}, process.env.JWT_SECRETO)
-                //  console.log("TOKEN>>>>>: " + token + " para el USUARIO : " + correo)
-             
-
+            
                  const cookiesOptions = {
                      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
                      httpOnly: true
                  }
+                
                     res.cookie('jwt', token, cookiesOptions)
-                    res.render('login', {
+                    let options =  {
                         alert: true,
                         alertTitle: "¡Bienvenido!",
                         alertMessage: "",
@@ -107,10 +103,15 @@ exports.login = async (req, res) => {
                         showConfirmButton: false,
                         timer: 1200,
                         ruta: './'
-                    })
+                    }
+                   
+                    res.render('login', options )
+
+
                 }
             })
         }
+       
     } catch (error) {
         console.log(error)
     }
@@ -140,6 +141,7 @@ exports.logout = (req, res) => {
     res.clearCookie('jwt')
     return res.redirect('/')
 }
+
 // todo: VALIDACION CUANDO YA INICIA SESION
 exports.nologueado = async (req, res, next) => {
     if (!req.cookies.jwt) {
@@ -149,6 +151,9 @@ exports.nologueado = async (req, res, next) => {
         res.redirect('/')
     }
 }
+
+
+
 
 // todo: MOSTRAR LISTA DE VENDEDORES AFILIADOS
 exports.listarAfiliados= async (req, res) => {

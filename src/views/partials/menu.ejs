@@ -139,6 +139,8 @@
                     </a>
                 </li>
 
+
+
                  <!--==================FIXME:=====ACUERDO DE VENDEDOR=======================  -->
                  <%- include ('../partials/acuerdo-vendedor.ejs')%>
                  <!--==================FIXME:=====ACUERDO DE VENDEDOR=======================  -->
@@ -152,9 +154,14 @@
                  <!--==================FIXME:===== ATENCION CLIENTE===========================  -->
              
             </ul>
+            <% if(!(user.rol === "administrador")) {%> 
+
                  <!--==================FIXME:=====COPIAR CODIGO=============================  -->
                  <%- include ('../partials/copiar-codigo.ejs')%>
                  <!--==================FIXME:=====COPIAR CODIGO=============================  -->
+
+            <% } %> 
+
 
         </div>
         <!-- Sidebar -->

@@ -10,6 +10,7 @@
         <!-- =======FIXME: MENU ========================== -->
 
           
+
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
@@ -59,7 +60,9 @@
                                     <div class="text-nowrap">
                                         <span class="badge bg-soft-success
                                 text-success">+$20.9k</span>
-                                        <span class="ms-1 text-muted font-size-13">Since
+                                        <span class="ms-1 text-muted font-size-13">
+                                            
+                                            Since
                                             last week</span>
                                     </div>
                                 </div><!-- end card body -->
@@ -250,7 +253,6 @@
                                                     <div id="invested-overview" data-colors='[" #5156be" ," #34c38f"]' class="apex-charts"></div>
                                                 </div>
                                                 <div class="col-sm align-self-center">
-                                                    <div class="mt-4 mt-sm-0"><p class="mb-1">Deuda inicial</p> <h4 style="font-size: 19px;">$ <%= user.deuda_inicial %></h4>
 
                                                         <p class="text-muted mb-4"></p>
 
@@ -264,7 +266,6 @@
                                                             <div class="col-6">
                                                                 <div>
                                                                     <p class="mb-2 text-muted text-uppercase font-size-11">Restante</p>
-                                                                    <h5 class="fw-medium">$  <%= user.deuda_inicial %></h5>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -430,13 +431,7 @@
                             mb-4">
                                         <h5 class="card-title me-2">Comparativas de ventas
 
-                                            <% if(user.rol === "administrador") {%>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus non nostrum facilis voluptatibus animi, 
-                                                    sint facere adipisci temporibus inventore odit numquam, 
-                                                    ipsa eveniet perspiciatis vero saepe fugit consequuntur! Itaque, commodi!</p>
-                                                
-                                                                <% } %> 
-
+                                         
 
                                         </h5>
                                         <div class="ms-auto">
@@ -2154,7 +2149,6 @@
 
                 <!-- Settings -->
 
-            
             </div> <!-- end slimscroll-menu-->
         </div>
         <!-- /Right-bar -->

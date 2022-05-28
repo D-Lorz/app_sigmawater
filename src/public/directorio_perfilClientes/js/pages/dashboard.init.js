@@ -287,79 +287,87 @@ function getChartColorsArray(chartId) {
 // Market Overview
 //
 
-// let url = '/perfil-clientes'
+// let url = '/viewAhorro'
+// let varAhorro
 
-
-// fetch(url)
+// fetch(url,{method:'POST'} )
 // .then( response => response.json() )
-// .then(datos => mostrarAhorros(datos) )
+// .then(data => console.log(+data) )
 // .catch( error => console.log(error) ) 
 
 
+// (function(){ 
+//     document.write("Hola  "+graficaAhorro);
+//     document.write("Hola  "+valores);
+//     let valores = document.getElementById('graficaAhorro').value()
+//     alert(valores)
+// })();
 
 
 
+
+// valores = JSON.parse(valores);
 // res.render('perfil-clientes', { user: req.user, clientes2,consultaEstadosyyy })
-  
-var barchartColors = getChartColorsArray("#market-overview");
-var options = {
-    series: [{
-        name: 'Ahorro mensual ', 
-        data: [20, 30, 50, 20, 36,45
-            
-            //  18.2, 14.16, 11.1, 8.09, 16.34, 12.88
-            ]
-    }, {
-        name: 'Ahorro anual',
-        data: [300, 600, 100, 250, 750, 250
-            // , 
-            // -18.2, -14.16, -11.1, -7.09, -15.34, -11.88
-        ]
-    }],
-    chart: {
-         type: 'bar',
-         height: 400,
-         stacked: true,
-        toolbar: {
-            show: true
+ 
+let valores,graficaAhorroMensual,graficaAhorroAanual
+$( function(){
+     valores = $('#datosAhorro').val();
+     valores = JSON.parse(valores);
+     graficaAhorroMensual= [valores.ahorroMensual_aguaEmbotellada,valores.ahorroMensual_jabon,
+                            valores.ahorroMensual_productos_limpieza,valores.ahorroMensual_agua_caliente,
+                            valores.ahorroMensual_plomeria_electrodomesticos,valores.ahorroMensual_ropa_lenceria]
+     graficaAhorroAanual = [valores.ahorroAnual_aguaEmbotellada,valores.ahorroAnual_jabon,
+                            valores.ahorroAnual_productos_limpieza,valores.ahorroAnual_agua_caliente,
+                            valores.ahorroAnual_plomeria_electrodomesticos, valores.ahorroAnual_ropa_lenceria]
+    //  alert( hola)
+    
+    var barchartColors = getChartColorsArray("#market-overview");
+    var options = {
+        series: [{
+            name: 'Ahorro mensual ', 
+            data: graficaAhorroMensual
+                
+                //  18.2, 14.16, 11.1, 8.09, 16.34, 12.88
+                
+        }, {
+            name: 'Ahorro anual',
+            data: graficaAhorroAanual
+              
+        }],
+        chart: {
+             type: 'bar',
+             height: 400,
+             stacked: true,
+            toolbar: {
+                show: true
+            },
         },
-    },
-    plotOptions: {
-        bar: {
-             columnWidth: '25%',
+        plotOptions: {
+            bar: {
+                 columnWidth: '25%',
+            },
         },
-    },
-    colors: barchartColors,
-    fill: {
-        opacity: 1
-    },
-    dataLabels: {
-        enabled: false,
-    },
-    legend: {
-        show: true,
-    },
-    // yaxis: {
-    //     labels: {
-    //         formatter: function (y) {
-    //             return y.toFixed(0) + "%";
-    //         }
-    //     }
-    // },
-    // xaxis: {
-    //     categories:
-    //      ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    //      ,
-    //     labels: {
-    //         rotate: -90
-    //     }
-    // }
-};
+        colors: barchartColors,
+        fill: {
+            opacity: 1
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        legend: {
+            show: true,
+        },
+    
+    };
+    
+    
+    var chart = new ApexCharts(document.querySelector("#market-overview"), options);
+    chart.render();
+
+});
 
 
 
-var chart = new ApexCharts(document.querySelector("#market-overview"), options);
-chart.render();
 
 // MAp
 
