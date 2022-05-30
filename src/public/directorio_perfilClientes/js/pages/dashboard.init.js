@@ -288,7 +288,7 @@ function getChartColorsArray(chartId) {
 //
 
 // let url = '/viewAhorro'
-// let varAhorro
+// let ahorroCalculado
 
 // fetch(url,{method:'POST'} )
 // .then( response => response.json() )
@@ -307,19 +307,21 @@ function getChartColorsArray(chartId) {
 
 
 // valores = JSON.parse(valores);
-// res.render('perfil-clientes', { user: req.user, clientes2,consultaEstadosyyy })
+// res.render('perfil-clientes', { user: req.user, clientes2,consultaEstado_testAgua })
  
-let valores,graficaAhorroMensual,graficaAhorroAanual
+let valoresDel_ahorro,graficaAhorroMensual,graficaAhorroAnual
 $( function(){
-     valores = $('#datosAhorro').val();
-     valores = JSON.parse(valores);
-     graficaAhorroMensual= [valores.ahorroMensual_aguaEmbotellada,valores.ahorroMensual_jabon,
-                            valores.ahorroMensual_productos_limpieza,valores.ahorroMensual_agua_caliente,
-                            valores.ahorroMensual_plomeria_electrodomesticos,valores.ahorroMensual_ropa_lenceria]
-     graficaAhorroAanual = [valores.ahorroAnual_aguaEmbotellada,valores.ahorroAnual_jabon,
-                            valores.ahorroAnual_productos_limpieza,valores.ahorroAnual_agua_caliente,
-                            valores.ahorroAnual_plomeria_electrodomesticos, valores.ahorroAnual_ropa_lenceria]
-    //  alert( hola)
+     valoresDel_ahorro = $('#datosJson_ahorroCalculado').val();
+     valoresDel_ahorro = JSON.parse(valoresDel_ahorro);
+
+     graficaAhorroMensual= [valoresDel_ahorro.ahorroMensual_agua_caliente,valoresDel_ahorro.ahorroMensual_aguaEmbotellada,
+                            valoresDel_ahorro.ahorroMensual_jabon,valoresDel_ahorro.ahorroMensual_plomeria_electrodomesticos,
+                            valoresDel_ahorro.ahorroMensual_productos_limpieza,valoresDel_ahorro.ahorroMensual_ropa_lenceria]
+
+     graficaAhorroAnual = [valoresDel_ahorro.ahorroAnual_agua_caliente,valoresDel_ahorro.ahorroAnual_aguaEmbotellada,
+                            valoresDel_ahorro.ahorroAnual_jabon,valoresDel_ahorro.ahorroAnual_plomeria_electrodomesticos,
+                            valoresDel_ahorro.ahorroAnual_productos_limpieza,valoresDel_ahorro.ahorroAnual_ropa_lenceria]
+    
     
     var barchartColors = getChartColorsArray("#market-overview");
     var options = {
@@ -327,13 +329,14 @@ $( function(){
             name: 'Ahorro mensual ', 
             data: graficaAhorroMensual
                 
-                //  18.2, 14.16, 11.1, 8.09, 16.34, 12.88
-                
-        }, {
+             }, {
             name: 'Ahorro anual',
-            data: graficaAhorroAanual
+            data: graficaAhorroAnual
               
         }],
+        xaxis: {
+            categories: ['Agua caliente', ' Agua embotellada', 'Jabones', 'Plomería...', 'Productos de limpieza', 'Ropa y lencería '],
+        },
         chart: {
              type: 'bar',
              height: 400,
@@ -365,8 +368,6 @@ $( function(){
     chart.render();
 
 });
-
-
 
 
 // MAp

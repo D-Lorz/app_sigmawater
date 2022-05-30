@@ -145,11 +145,11 @@
 
 
                                 <div class="col-lg-4">
-                                    <div class="card border-primary text-white-50 <%= estadoServicio.background %>" style="margin-top: 5%;">
+                                    <div class="card border-primary text-white-50 <%= estadoVisita_testAgua.background %>" style="margin-top: 5%;">
                                         <div class="card-body">
                                             <h6 class="mb-3 text-white">Estado de visitas</h6>
                                             <p class="card-text" style="color:white;">
-                                                <td><div class="badge <%= estadoServicio.color %> font-size-12 letra" > <%= estadoServicio.txt  %> <%= consultaUltimoTest.fecha_test %></div></td>
+                                                <td><div class="badge <%= estadoVisita_testAgua.color %> font-size-12 letra" > <%= estadoVisita_testAgua.txt  %> <%= consulta_UltimoTestAgua.fecha_test %></div></td>
                                                     </p>
                                             
                                         </div>
@@ -224,7 +224,7 @@
 
                                                                     <tbody>
                                                                       
-                                                                        <% vartestAgua.forEach((user)=>{ %>
+                                                                        <% informacionTestAgua.forEach((user)=>{ %>
                                                                                                                                                     
                                                                             <tr>
                                                                                 <td><%= user.id %></td>
@@ -253,8 +253,13 @@
 
                                                                                 </tbody>
                                                                             </table>
-                                                                                
-                                                                            </div>
+                                                                            
+                                                                            
+                                                                            <input type="hidden" id="datosJson_PrimerTestagua" value="<%= datosJson_PrimerTestagua %>">
+                                                                            <input type="hidden" id="datosJson_UltimoTestagua" value="<%= datosJson_UltimoTestagua %>">
+                                                                           
+                                                                        </div>
+                                                                            
                                         
                                                                         </div>
 
@@ -334,46 +339,46 @@
                                                                     <tbody>
                                                                       
                                                                         <tr>
-                                                                            <td>Agua embotellada</td>
-                                                                            <td>$ <%= varAhorro.agua_embotellada %></td>
-                                                                            <td>$ <%= varAhorro.ahorroMensual_aguaEmbotellada %></td>  
-                                                                            <td>$ <%= varAhorro.ahorroAnual_aguaEmbotellada %></td>                                                                      
+                                                                            <td><b style="color: black;font-weight: 800;" >2.</b> Agua embotellada</td>
+                                                                            <td>$ <%= ahorroCalculado.agua_embotellada %></td>
+                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_aguaEmbotellada %></td>  
+                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_aguaEmbotellada %></td>                                                                      
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>Jabones</td>
-                                                                            <td>$ <%= varAhorro.jabones %></td>   
-                                                                            <td>$ <%= varAhorro.ahorroMensual_jabon %></td>  
-                                                                            <td>$ <%= varAhorro.ahorroAnual_jabon %></td>                                                             
+                                                                            <td><b style="color: black;font-weight: 800;">3.</b> Jabones</td>
+                                                                            <td>$ <%= ahorroCalculado.jabones %></td>   
+                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_jabon %></td>  
+                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_jabon %></td>                                                             
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>Productos de limpieza</td>
-                                                                            <td>$ <%= varAhorro.productos_limpieza %></td>    
-                                                                            <td>$ <%= varAhorro.ahorroMensual_productos_limpieza %></td>      
-                                                                            <td>$ <%= varAhorro.ahorroAnual_productos_limpieza %></td>                                                  
+                                                                            <td><b style="color: black;font-weight: 800;">5.</b> Productos de limpieza</td>
+                                                                            <td>$ <%= ahorroCalculado.productos_limpieza %></td>    
+                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_productos_limpieza %></td>      
+                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_productos_limpieza %></td>                                                  
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>Agua caliente</td>
-                                                                            <td>$ <%= varAhorro.agua_caliente %></td>     
-                                                                            <td>$ <%= varAhorro.ahorroMensual_agua_caliente %></td>   
-                                                                            <td>$ <%= varAhorro.ahorroAnual_agua_caliente %></td>                                                            
+                                                                            <td><b style="color: black;font-weight: 800;">1.</b> Agua caliente</td>
+                                                                            <td>$ <%= ahorroCalculado.agua_caliente %></td>     
+                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_agua_caliente %></td>   
+                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_agua_caliente %></td>                                                            
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>Plomería y electrodomésticos</td>
-                                                                            <td>$ <%= varAhorro.plomeria_electrodomesticos %></td>    
-                                                                            <td>$ <%= varAhorro.ahorroMensual_plomeria_electrodomesticos %></td>    
-                                                                            <td>$ <%= varAhorro.ahorroAnual_plomeria_electrodomesticos %></td>                                                             
+                                                                            <td><b style="color: black;font-weight: 800;">4.</b> Plomería y electrodomésticos</td>
+                                                                            <td>$ <%= ahorroCalculado.plomeria_electrodomesticos %></td>    
+                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_plomeria_electrodomesticos %></td>    
+                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_plomeria_electrodomesticos %></td>                                                             
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>Ropa y lencería</td>
-                                                                            <td>$ <%= varAhorro.ropa_lenceria %></td>         
-                                                                            <td>$ <%= varAhorro.ahorroMensual_ropa_lenceria %></td>        
-                                                                            <td>$ <%= varAhorro.ahorroAnual_ropa_lenceria %></td>                                              
+                                                                            <td><b style="color: black;font-weight: 800;">6.</b> Ropa y lencería</td>
+                                                                            <td>$ <%= ahorroCalculado.ropa_lenceria %></td>         
+                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_ropa_lenceria %></td>        
+                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_ropa_lenceria %></td>                                              
                                                                         </tr>
 
                                                                     </tbody>
                                                                 </table>
                                                                 
-                                                                <input type="hidden" id="datosAhorro" value="<%= grafica %>">
+                                                                <input type="hidden" id="datosJson_ahorroCalculado" value="<%= datosJson_ahorroCalculado %>">
                                                                 
                                                                 
                                                             </div>

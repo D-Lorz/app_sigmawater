@@ -249,6 +249,23 @@ function getChartColorsArray(chartId) {
 
 // column chart
 
+let valores_PrimerTest,valores_UltimoTest,graficaPrimer_test,graficaUltimo_test
+$( function(){
+     valores_PrimerTest = $('#datosJson_PrimerTestagua').val();
+     valores_PrimerTest = JSON.parse(valores_PrimerTest);
+
+     valores_UltimoTest = $('#datosJson_UltimoTestagua').val();
+     valores_UltimoTest = JSON.parse(valores_UltimoTest);
+
+     graficaPrimer_test = [valores_PrimerTest.totalDureza_compensada,valores_PrimerTest.tsd,valores_PrimerTest.cloro, 
+                           valores_PrimerTest.ph, valores_PrimerTest.azufre,valores_PrimerTest.tanino,
+                           valores_PrimerTest.nitrato,valores_PrimerTest.alcalinidad]
+
+     graficaUltimo_test= [valores_UltimoTest.totalDureza_compensada,valores_UltimoTest.tsd,valores_UltimoTest.cloro, 
+                          valores_UltimoTest.ph, valores_UltimoTest.azufre,valores_UltimoTest.tanino,
+                          valores_UltimoTest.nitrato,valores_UltimoTest.alcalinidad]
+    
+    
 var columnColors = getChartColorsArray("#column_chart");
 var options = {
     chart: {
@@ -274,17 +291,17 @@ var options = {
     },
     series: [{
         name: 'Primer test',
-        data: [46, 57, 59, 54, 62, 58, 64, 60, 66]
+        data: graficaPrimer_test
     }, {
         name: 'Último test',
-        data: [74, 83, 102, 97, 86, 106, 93, 114, 94]
+        data: graficaUltimo_test
     }, {
         // name: 'Free Cash Flow',
         // data: [37, 42, 38, 26, 47, 50, 54, 55, 43]
     }],
     colors: columnColors,
     xaxis: {
-        categories: ['TPH', 'TDS', 'Chlorine', 'pH', 'Sulfur', 'Tannin ', 'Nitrate ', '	Other'],
+        categories: ['TPH', 'TDS', 'Cloro', 'pH', 'Azsasufre', 'Tanino ', 'Nitrato ', 'Alcalinidad'],
     },
     yaxis: {
         title: {
@@ -300,14 +317,14 @@ var options = {
     fill: {
         opacity: 1
 
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return "$ " + val + " thousands"
-            }
-        }
     }
+    // tooltip: {
+    //     y: {
+    //         formatter: function (val) {
+    //             return "$ " + val + " thousands"
+    //         }
+    //     }
+    // }
 }
 
 var chart = new ApexCharts(
@@ -316,6 +333,11 @@ var chart = new ApexCharts(
 );
 
 chart.render();
+
+
+
+
+});
 
 
 // column chart with datalabels

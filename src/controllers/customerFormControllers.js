@@ -82,7 +82,7 @@ exports.getAgendarinstalacion = async (req, res) => {
 
 }
 //------------------------------------------------
-// todo -->  formulario para solicitar credito
+// todo -->  Formulario para solicitar credito
 exports.solicitarCredito = async (req, res) => {
 
   const monto_financiar_cliente = req.body.monto_financiar_cliente.replace(/[$ ]/g, '');
@@ -217,7 +217,7 @@ exports.solicitarCredito = async (req, res) => {
 
 }
 
-// todo -->  mostrar lista de clientes total por vendedor
+// todo -->  Mostrar lista de clientes total por vendedor
 exports.listarClientes = async (req, res) => {
   // Capturando el id del Vendedor actual
   const id_vendedor = req.user.id;
@@ -232,84 +232,89 @@ exports.listarClientes = async (req, res) => {
 }
 
 
-// todo -->  tarjetas en la vista perfil clientes
+// ! >>>>>>>>>  Tarjetas en la vista perfil clientes <<<<<<<<<<<
 exports.listarClientes_PerfilClientes = async (req, res) => {
-// ? ===============================
+
   const id_cliente = req.params.id
   let clientes2 = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id_cliente])
    clientes2 = clientes2[0]
-// ? ===============================
-// ? ===============================>>> Estado del solicitar credito
+
+// todo ===============================>>> Estado del solicitar credito
   let credito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
-  let estado = []
-  estado.txt = "No solicitado";
-  estado.color = 'badge-soft-dark'
-  estado.verBtn = true;
+      let estado = []
+      estado.txt = "No solicitado";
+      estado.color = 'badge-soft-dark'
+      estado.verBtn = true;
 
-  if (credito.length > 0) {
-    credito = credito[0]
-    if (credito.estado_del_credito === '0') {
-      estado.txt = "En revisión";
-      estado.color = 'badge-soft-warning'
-      estado.verBtn = false;
-    } else if (credito.estado_del_credito == 1) {
-      estado.txt = "Aprobado";
-      estado.color = 'badge-soft-success'
-      estado.verBtn = false;
-    } else if (credito.estado_del_credito == 2) {
-      estado.txt = "Rechazado";
-      estado.color = 'badge-soft-danger'
-      estado.verBtn = false;
-    } else if (credito.estado_del_credito == 3) {
-      estado.txt = "Pagado";
-      estado.color = 'badge-soft-info'
-      estado.verBtn = false;
-    }
-  }
-  // ? ===============================
-  // ? ===============================>> mostrar información del test de agua del cliente
-    let vartestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
+      if (credito.length > 0) {
+        credito = credito[0]
+        if (credito.estado_del_credito === '0') {
+          estado.txt = "En revisión";
+          estado.color = 'badge-soft-warning'
+          estado.verBtn = false;
+        } else if (credito.estado_del_credito == 1) {
+          estado.txt = "Aprobado";
+          estado.color = 'badge-soft-success'
+          estado.verBtn = false;
+        } else if (credito.estado_del_credito == 2) {
+          estado.txt = "Rechazado";
+          estado.color = 'badge-soft-danger'
+          estado.verBtn = false;
+        } else if (credito.estado_del_credito == 3) {
+          estado.txt = "Pagado";
+          estado.color = 'badge-soft-info'
+          estado.verBtn = false;
+        }
+      }
+    
+  // todo =========================>> Mostrar información del test de agua del cliente
+    let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
   
-      // * -->> Estados del testeo (visita al cliente)
-      let consultaEstados = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [clientes2.id])
-        let estadoServicio = []
-        estadoServicio.txt = "A la fecha el cliente aun no ha sido visitado";
-        estadoServicio.color = '';
-        estadoServicio.background = 'noVisitado';
+      // * >>> Estados del testeo (visita al cliente)
+      let consultaEstado_testAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [clientes2.id])
+       
+       let estadoVisita_testAgua = []
+        estadoVisita_testAgua.txt = "A la fecha el cliente aun no ha sido visitado";
+        estadoVisita_testAgua.color = '';
+        estadoVisita_testAgua.background = 'noVisitado';
         
-      if (consultaEstados.length > 0) {
-          consultaEstados = consultaEstados[0]
+      if (consultaEstado_testAgua.length > 0) {
+        consultaEstado_testAgua = consultaEstado_testAgua[0]
 
-      if (consultaEstados.estado_visita_test === '0') {
-          estadoServicio.txt= "Se realizó un test de agua el";
-          estadoServicio.background= 'visitado';
+      if (consultaEstado_testAgua.estado_visita_test === '0') {
+          estadoVisita_testAgua.txt= "Se realizó un test de agua el";
+          estadoVisita_testAgua.background= 'visitado';
           
-        } else if (consultaEstados.estado_visita_test == 1) {
-          estadoServicio.txt = "Instalado";
-          estadoServicio.color = 'badge-soft-info'
-          } 
+        } 
         
       }
-
-   let consultaUltimoTest = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [clientes2.id])
+      
+  // todo =========================>> Consulta del PRIMER test de agua para y grafica
+  let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id DESC LIMIT 1, 1', [clientes2.id])
    
-   if(consultaUltimoTest.length > 0 ){
-    consultaUltimoTest = consultaUltimoTest[0]
+  if(consulta_PrimerTestAgua.length > 0 ){
+    consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]
   }
-
-     console.log(">>>>>>>>ULTIMO TESTEO>>>>");
-
-      console.log(consultaUltimoTest);
-  // ? ===============================
+  const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
 
 
-  // * -->> mostrar información del ahorro del cliente
-  let varAhorro = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [clientes2.id])
-   if(varAhorro.length > 0 ){
-    varAhorro = varAhorro[0]
-  }
- 
-// ? ===============================>> Estados de la agenda para instalar el producto
+
+   // todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
+   let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [clientes2.id])
+   
+      if(consulta_UltimoTestAgua.length > 0 ){
+        consulta_UltimoTestAgua = consulta_UltimoTestAgua[0]
+      }
+      const datosJson_UltimoTestagua = JSON.stringify(consulta_UltimoTestAgua);
+
+ // todo =========================>> Mostrar información del ahorro del cliente
+  let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [clientes2.id])
+        if(ahorroCalculado.length > 0 ){
+          ahorroCalculado = ahorroCalculado[0]
+        }
+      const datosJson_ahorroCalculado = JSON.stringify(ahorroCalculado);
+
+// todo =========================>> Estados de la agenda para instalar el producto
     let consultaEstado_instalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [clientes2.id])
 
         let estado_intalacion = []
@@ -330,12 +335,18 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
           } 
         }
 
-        const grafica = JSON.stringify(varAhorro);
-
-
- // ? ===============================     
-  res.render('perfil-clientes', { user: req.user, clientes2, estado,vartestAgua,varAhorro,grafica,estadoServicio,estado_intalacion,
-    consultaUltimoTest
+// * >>> Renderizado <<<<<
+  res.render('perfil-clientes', { user: req.user, clientes2, estado,
+    informacionTestAgua,
+    estadoVisita_testAgua,
+    consulta_PrimerTestAgua,
+    datosJson_PrimerTestagua,
+    consulta_UltimoTestAgua,
+    datosJson_UltimoTestagua,
+    ahorroCalculado,
+    datosJson_ahorroCalculado,
+    estado_intalacion
+    
    })
 
 

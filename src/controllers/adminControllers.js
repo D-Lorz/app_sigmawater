@@ -13,12 +13,12 @@ const { promisify } = require('util')
 //        clientes2 = clientes2[0]
 
 //        const id = req.params.id
-//        let varAhorro = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1')
-//      if(varAhorro.length > 0 ){
-//       varAhorro = varAhorro[0]
+//        let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1')
+//      if(ahorroCalculado.length > 0 ){
+//       ahorroCalculado = ahorroCalculado[0]
 //      }
 
-//      res.send(varAhorro)
+//      res.send(ahorroCalculado)
 // }
 
 
