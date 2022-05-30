@@ -18,10 +18,10 @@ const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados } 
        res.render('dashboard', { user: req.user })
             
      });
-   //    router.get('/administrador', isAuthenticated, (req, res) => {
-   //     res.render('administrador', { user: req.user })
+    //    router.get('/administrador', isAuthenticated, (req, res) => {
+    //   res.render('administrador', { user: req.user })
            
-   //  });
+    //  });
 
  // *   ================ ===== ↑↑ ==============================
 

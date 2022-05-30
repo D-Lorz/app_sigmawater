@@ -267,7 +267,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
         }
       }
     
-  // todo =========================>> Mostrar información del test de agua del cliente
+// todo =========================>> Mostrar información del test de agua del cliente
     let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
   
       // * >>> Estados del testeo (visita al cliente)
@@ -289,17 +289,15 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
         
       }
       
-  // todo =========================>> Consulta del PRIMER test de agua para y grafica
-  let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id DESC LIMIT 1, 1', [clientes2.id])
+// todo =========================>> Consulta del PRIMER test de agua para y grafica
+  let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id ASC LIMIT 1', [clientes2.id])
    
   if(consulta_PrimerTestAgua.length > 0 ){
     consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]
   }
   const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
 
-
-
-   // todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
+// todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
    let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [clientes2.id])
    
       if(consulta_UltimoTestAgua.length > 0 ){
@@ -307,7 +305,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       }
       const datosJson_UltimoTestagua = JSON.stringify(consulta_UltimoTestAgua);
 
- // todo =========================>> Mostrar información del ahorro del cliente
+// todo =========================>> Mostrar información del ahorro del cliente
   let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [clientes2.id])
         if(ahorroCalculado.length > 0 ){
           ahorroCalculado = ahorroCalculado[0]
@@ -348,8 +346,6 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     estado_intalacion
     
    })
-
-
 }
 
 // todo --> Formulario Test de agua

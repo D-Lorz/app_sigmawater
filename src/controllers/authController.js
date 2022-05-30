@@ -102,13 +102,12 @@ exports.login = async (req, res) => {
                         alertIcon: 'success',
                         showConfirmButton: false,
                         timer: 1200,
-                        ruta: './'
-                    }
-                   
-                    res.render('login', options )
-
-
-                }
+                        ruta: 'administrador'
+                    } 
+                    
+                        res.render('login', options )
+                       
+                 }
             })
         }
        
@@ -151,9 +150,6 @@ exports.nologueado = async (req, res, next) => {
         res.redirect('/')
     }
 }
-
-
-
 
 // todo: MOSTRAR LISTA DE VENDEDORES AFILIADOS
 exports.listarAfiliados= async (req, res) => {

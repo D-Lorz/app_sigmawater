@@ -12,7 +12,7 @@ $(document).ready(function() {
     //Buttons examples
     var table = $('#idahorro').DataTable({
         lengthChange: false,
-        buttons: ['copy', 'excel', 'pdf', 'colvis']
+        buttons: ['copy', 'excel', 'pdf']
     });
 
     table.buttons().container()

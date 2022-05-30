@@ -19,7 +19,7 @@ pool.getConnection((err, connection) => {
         }
     } else {
         if (connection) connection.release();
-        console.log('-- CONEXIÓN EXITOSA A LA BASE DE DATOS --');
+        console.log('===>  CONEXIÓN EXITOSA A LA BASE DE DATOS ');
         console.log('***********************************************************\n')
         return;
     }

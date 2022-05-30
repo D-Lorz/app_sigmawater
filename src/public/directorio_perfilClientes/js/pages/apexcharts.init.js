@@ -301,11 +301,11 @@ var options = {
     }],
     colors: columnColors,
     xaxis: {
-        categories: ['TPH', 'TDS', 'Cloro', 'pH', 'Azsasufre', 'Tanino ', 'Nitrato ', 'Alcalinidad'],
+        categories: ['TDC', 'TSD', 'Cloro', 'pH', 'Azufre', 'Tanino ', 'Nitrato ', 'Alcalinidad'],
     },
     yaxis: {
         title: {
-            text: 'Partes por millon',
+            text: 'Valor',
             style: {
                 fontWeight:  '500',
               },
@@ -333,7 +333,6 @@ var chart = new ApexCharts(
 );
 
 chart.render();
-
 
 
 

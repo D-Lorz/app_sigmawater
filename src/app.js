@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/router'));
 app.use('/', require('./routes/sellers'));
 app.use('/', require('./routes/customer'));
-// app.use('/', require('./routes/consultas.js'));
+app.use('/', require('./routes/admin'));
 
 
 
