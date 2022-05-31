@@ -1,6 +1,4 @@
-const {
-  promisify
-} = require("util");
+const { promisify} = require("util");
 const conexion = require("../database/db");
 
 
@@ -20,7 +18,7 @@ exports.registrarClientes = async (req, res) => {
     const codigo_postal = req.body.codigo_postal;
 
      const id_cliente = generateRandomNumber(6); // * Se almacena el ID del cliente codigo numerico
-    const id_vendedor = req.user.id
+    const id_vendedor = req.user.id_vendedorAceptado
 
 
     const nuevoRegistroClientes = {
@@ -220,7 +218,7 @@ exports.solicitarCredito = async (req, res) => {
 // todo -->  Mostrar lista de clientes total por vendedor
 exports.listarClientes = async (req, res) => {
   // Capturando el id del Vendedor actual
-  const id_vendedor = req.user.id;
+  const id_vendedor = req.user.id_vendedorAceptado;
 
   // Consultando en DB los clientes que pertenecen al vendedor actual
   conexion.query('SELECT * FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
@@ -231,13 +229,12 @@ exports.listarClientes = async (req, res) => {
 
 }
 
-
 // ! >>>>>>>>>  Tarjetas en la vista perfil clientes <<<<<<<<<<<
 exports.listarClientes_PerfilClientes = async (req, res) => {
 
-  const id_cliente = req.params.id
-  let clientes2 = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id_cliente])
-   clientes2 = clientes2[0]
+   const id_cliente = req.params.id
+   let clientes2 = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id_cliente])
+    clientes2 = clientes2[0]
 
 // todo ===============================>>> Estado del solicitar credito
   let credito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
@@ -290,7 +287,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       }
       
 // todo =========================>> Consulta del PRIMER test de agua para y grafica
-  let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id ASC LIMIT 1', [clientes2.id])
+  let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id DESC LIMIT 1, 1', [clientes2.id])
    
   if(consulta_PrimerTestAgua.length > 0 ){
     consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]
@@ -346,6 +343,8 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     estado_intalacion
     
    })
+
+
 }
 
 // todo --> Formulario Test de agua

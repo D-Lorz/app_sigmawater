@@ -2,35 +2,28 @@ const express = require('express')
 const router = express.Router()
 const path = require('path');
 const multer = require('multer');
-const { isAuthenticated,  } = require('../controllers/authController');
-const { } = require('../controllers/customerFormControllers');
-const { listar_vendedores,vistaInterna_vendedores} = require('../controllers/adminControllers');
+const { isAuthenticated,listarAfiliados } = require('../controllers/authController');
+const { listarVendedores, listarClientes_PerfilClientes,generar_usuario_vendedor,getVendedores } = require('../controllers/adminControllers');
 
 
-// todo =========================================================
 
- // * ========== Renderizado de vistas admin ==========
+
+
+
+ // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
-router.get('/administrador', isAuthenticated, (req, res) => {
-   res.render('administrador', { user: req.user })
-});
-router.get('/vendedores', isAuthenticated, listar_vendedores)
 
-// router.get('/perfil-vendedores/:id', isAuthenticated)
+router.get('/vendedores', isAuthenticated, listarVendedores)
 
-router.get('/perfil-vendedores', isAuthenticated, (req, res) => {
-   res.render('perfil-vendedores', { user: req.user })
-});
-
-
-
-// router.get('/clientes', isAuthenticated, (req, res) => {
-//   res.render('clientes', { user: req.user })
-// });
-
+router.get('/perfil-vendedores/:id', isAuthenticated,listarClientes_PerfilClientes)
 
 // *   ================ ===== ↑↑ ==============================
 
-//* router para los métodos del adminControllers
+           
+// * ROUTER: para los métodos del controller
+ /*=============================================================*/  
+ router.post('/aprobarVendedor', isAuthenticated,generar_usuario_vendedor);
+ /*=============================================================*/
+
 
 module.exports = router

@@ -108,21 +108,21 @@
                         <th scope="col">Apellidos</th>
                         <th scope="col">Correo electronico</th>
                         <th scope="col">Teléfono</th>
-                        <th scope="col">Dirección</th>
+                        <th scope="col">Afiliado a</th>
                         <th scope="col">Estado de la cuenta</th>
                                                                          
                         </tr>
                     </thead>
                     <tbody>
-                        <% vendedores.forEach((datosVendedores)=>{ %>
+                        <% lista_vendedores.forEach((datosVendedores)=>{ %>
                            
                             <tr>
-                                <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= datosVendedores.id_vendedor%></a></td>
+                                <td><a href="/perfil-vendedores/<%- datosVendedores.id_vendedor %>"><%= datosVendedores.id_vendedor%></a></td>
                                 <td><%= datosVendedores.nombres%></td>
                                 <td><%= datosVendedores.apellidos%></td>
                                 <td><%= datosVendedores.correo%></td>
                                 <td><%= datosVendedores.telefono_movil%></td>
-                                <td><%= datosVendedores.direccion%></td>
+                                <td>Jean carlos tovio leiva  </td>
                                 <td><%= datosVendedores.estado_de_la_cuenta%></td>
                                 
                             </tr>
