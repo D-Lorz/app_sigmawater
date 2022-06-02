@@ -6,8 +6,11 @@ Contact: themesbrand@gmail.com
 File: Datatables Js File
 */
 
+
+
+
 $(document).ready(function() {
-    $('#datatable').DataTable();
+    $('#').DataTable();
 
     //Buttons examples
     var table = $('#copyahorro').DataTable({
@@ -20,6 +23,8 @@ $(document).ready(function() {
 
     $(".dataTables_length select").addClass('form-select form-select-sm');
 });
+
+
 
 $(document).ready(function() {
     $('#datatable').DataTable();
@@ -35,3 +40,4 @@ $(document).ready(function() {
 
     $(".dataTables_length select").addClass('form-select form-select-sm');
 });
+

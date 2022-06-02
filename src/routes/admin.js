@@ -2,21 +2,20 @@ const express = require('express')
 const router = express.Router()
 const path = require('path');
 const multer = require('multer');
-const { isAuthenticated,listarAfiliados } = require('../controllers/authController');
-const { listarVendedores, listarClientes_PerfilClientes,generar_usuario_vendedor,getVendedores } = require('../controllers/adminControllers');
-
-
+const { isAuthenticated } = require('../controllers/authController');
+const { listarVendedores,isAdmin, listarVendedores_PerfilVendedores,generar_usuario_vendedor,listarAfiliadosAdmin } = require('../controllers/adminControllers');
 
 
 
 
  // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
+router.get('/vendedores', isAuthenticated, listarVendedores,isAdmin )
+router.get('/perfil-vendedores/:id', isAuthenticated,listarVendedores_PerfilVendedores,isAdmin)
 
-router.get('/vendedores', isAuthenticated, listarVendedores)
-
-router.get('/perfil-vendedores/:id', isAuthenticated,listarClientes_PerfilClientes)
-
+router.get('/prueba', isAuthenticated,isAdmin ,(req, res) => {
+       res.render('./1-admin/prueba', { user: req.user })
+});
 // *   ================ ===== ↑↑ ==============================
 
            

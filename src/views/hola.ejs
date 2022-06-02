@@ -1,245 +1,204 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
-<head>
-  
-  <meta charset="utf-8" />
-  <title>Lista de clientes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
-  <meta content="Themesbrand" name="author">
-  <!-- App favicon -->
-  <link rel="shortcut icon" href="./directorio_dash/images/favicon.png">
-    <link rel="stylesheet" type="text/css" href="./css/colors.min.css">
-
-  <base href="#">
-
-  
-
-    <!-- DataTables -->
-    <link
-        href="./directorio_perfilClientes/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
-        rel="stylesheet" type="text/css" />
-
-    <!-- Responsive datatable examples -->
-    <link
-        href="./directorio_perfilClientes/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
-        rel="stylesheet" type="text/css" />
-
-    
-  
-  <!-- preloader css -->
-<link rel="stylesheet" href="./directorio_perfilClientes/css/preloader.min.css" type="text/css" />
-
-<!-- Bootstrap Css -->
-<link rel="stylesheet" type="text/css" href="./directorio_perfilClientes/css/bootstrap.min.css" id="bootstrap-style" />
-<!-- Icons Css -->
-<link rel="stylesheet" type="text/css" href="./directorio_perfilClientes/css/icons.min.css" />
-<!-- App Css-->
-<link rel="stylesheet" type="text/css" href="./directorio_perfilClientes/css/app.min.css" id="app-style" />
-<!-- Tipo de letra -->
-<link rel="stylesheet" href="./css/typeFont.css" type="text/css" />
-  <!-- scroll -->
-  <link rel="stylesheet" href="../css/scrolls.css">
-
-</head>
-
-<body>
-
-  <!-- Begin page -->
-  <div id="layout-wrapper">
-
-   <!-- =======FIXME: MENU ========================== -->
-   <%- include ('./partials/menu.ejs')%>
-   <!-- =======FIXME: MENU ========================== -->
-
-   <div class="main-content">
-    <div class="page-content">
-      <div class="container-fluid">
+    <head>
         
+        <meta charset="utf-8" />
+        <title>Responsive tables | Minia - Minimal Admin & Dashboard Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="../directorio_perfilClientes/images/favicon.ico">
 
-      <!-- start page title -->
-      <div class="row">
-          <div class="col-12">
-              <div class="page-title-box d-sm-flex align-items-center
-                  justify-content-between">
-                  <h4 class="mb-sm-0 font-size-18">Lista de clientes</h4>
+        <!-- Responsive Table css -->
+        <link href="../directorio_perfilClientes/libs/admin-resources/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" />
 
-                  <div class="page-title-right">
-                      <ol class="breadcrumb m-0">
-                          <li class="breadcrumb-item"><a href="javascript:
-                                  void(0);">Clientes</a></li>
-                          <li class="breadcrumb-item active">Lista de clientes</li>
-                      </ol>
-                  </div>
+        <!-- preloader css -->
+        <link rel="stylesheet" href="../directorio_perfilClientes/css/preloader.min.css" type="text/css" />
 
-              </div>
-          </div>
-      </div>
-      <!-- end page title -->
+        <!-- Bootstrap Css -->
+        <link href="../directorio_perfilClientes/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="../directorio_perfilClientes/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="../directorio_perfilClientes/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
-      
+    </head>
+
+    <body>
+
+    <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+          
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Example</h4>
+                                        <p class="card-title-desc">This is an experimental awesome solution for responsive tables with complex data.</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                                <table id="tech-companies-1" class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Company</th>
+                                                            <th data-priority="1">Last Trade</th>
+                                                            <th data-priority="3">Trade Time</th>
+                                                            <th data-priority="1">Change</th>
+                                                            <th data-priority="3">Prev Close</th>
+                                                            <th data-priority="3">Open</th>
+                                                            <th data-priority="6">Bid</th>
+                                                            <th data-priority="6">Ask</th>
+                                                            <th data-priority="6">1y Target Est</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>GOOG <span class="co-name">Google Inc.</span></th>
+                                                            <td>597.74</td>
+                                                            <td>12:12PM</td>
+                                                            <td>14.81 (2.54%)</td>
+                                                            <td>582.93</td>
+                                                            <td>597.95</td>
+                                                            <td>597.73 x 100</td>
+                                                            <td>597.91 x 300</td>
+                                                            <td>731.10</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>AAPL <span class="co-name">Apple Inc.</span></th>
+                                                            <td>378.94</td>
+                                                            <td>12:22PM</td>
+                                                            <td>5.74 (1.54%)</td>
+                                                            <td>373.20</td>
+                                                            <td>381.02</td>
+                                                            <td>378.92 x 300</td>
+                                                            <td>378.99 x 100</td>
+                                                            <td>505.94</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>AMZN <span class="co-name">Amazon.com Inc.</span></th>
+                                                            <td>191.55</td>
+                                                            <td>12:23PM</td>
+                                                            <td>3.16 (1.68%)</td>
+                                                            <td>188.39</td>
+                                                            <td>194.99</td>
+                                                            <td>191.52 x 300</td>
+                                                            <td>191.58 x 100</td>
+                                                            <td>240.32</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>ORCL <span class="co-name">Oracle Corporation</span></th>
+                                                            <td>31.15</td>
+                                                            <td>12:44PM</td>
+                                                            <td>1.41 (4.72%)</td>
+                                                            <td>29.74</td>
+                                                            <td>30.67</td>
+                                                            <td>31.14 x 6500</td>
+                                                            <td>31.15 x 3200</td>
+                                                            <td>36.11</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>MSFT <span class="co-name">Microsoft Corporation</span></th>
+                                                            <td>25.50</td>
+                                                            <td>12:27PM</td>
+                                                            <td>0.66 (2.67%)</td>
+                                                            <td>24.84</td>
+                                                            <td>25.37</td>
+                                                            <td>25.50 x 71100</td>
+                                                            <td>25.51 x 17800</td>
+                                                            <td>31.50</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>CSCO <span class="co-name">Cisco Systems, Inc.</span></th>
+                                                            <td>18.65</td>
+                                                            <td>12:45PM</td>
+                                                            <td>0.97 (5.49%)</td>
+                                                            <td>17.68</td>
+                                                            <td>18.23</td>
+                                                            <td>18.65 x 10300</td>
+                                                            <td>18.66 x 24000</td>
+                                                            <td>21.12</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>YHOO <span class="co-name">Yahoo! Inc.</span></th>
+                                                            <td>15.81</td>
+                                                            <td>12:25PM</td>
+                                                            <td>0.11 (0.67%)</td>
+                                                            <td>15.70</td>
+                                                            <td>15.94</td>
+                                                            <td>15.79 x 6100</td>
+                                                            <td>15.80 x 17000</td>
+                                                            <td>18.16</td>
+                                                        </tr>
+                                                        <!-- Repeat -->
+                                                      
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
         
+                                        </div>
         
+                                    </div>
+                                </div>
+                                <!-- end card -->
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
 
-          <div class="row align-items-center">
-              <div class="col-md-6">
-                  <!-- <div class="mb-3">
-                      <h5 class="card-title">Contact List <span
-                              class="text-muted fw-normal ms-2">(834)</span></h5>
-                  </div> -->
-
-
-                  
-              </div>
-
-              <div class="col-md-6">
-                  <div class="d-flex flex-wrap align-items-center
-                      justify-content-end gap-2 mb-3">
-                      <div>
-                          <!-- <ul class="nav nav-pills">
-                              <li class="nav-item">
-                                  <a class="nav-link active"
-                                      href="contacts-list"
-                                      data-bs-toggle="tooltip"
-                                      data-bs-placement="top" title="List"><i
-                                          class="bx bx-list-ul"></i></a>
-                              </li> -->
-                              <!-- <li class="nav-item">
-                                  <a class="nav-link"
-                                      href="contacts-grid"
-                                      data-bs-toggle="tooltip"
-                                      data-bs-placement="top" title="Grid"><i
-                                          class="bx bx-grid-alt"></i></a>
-                              </li> -->
-                          <!-- </ul> -->
-                      </div>
-                      <div>
-                          <a href="/nuevo-cliente" class="btn btn-light"><i class="bx
-                                  bx-plus me-1"></i> Agregar nuevo cliente</a>
-                      </div>
-
-                      <div class="dropdown">
-                          <a class="btn btn-link text-muted py-1 font-size-16
-                              shadow-none dropdown-toggle" href="#"
-                              role="button" data-bs-toggle="dropdown"
-                              aria-expanded="false">
-                              <i class="bx bx-dots-horizontal-rounded"></i>
-                          </a>
-
-                          <ul class="dropdown-menu dropdown-menu-end">
-                              <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
-                              <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
-                              <li><a class="dropdown-item" href="#">Eliminar cliente</a></li>
-                          </ul>
-                      </div>
-                  </div>
-
-              </div>
-          </div>
-            <!-- end row -->
-
-            <div class="table-responsive mb-4">
-                <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse;
-                    border-spacing: 0 8px; width: 100%;">
-                    <thead>
-                    
-                       
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombres</th>
-                        <th scope="col">Apellidos</th>
-                        <th scope="col">Correo electronico</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Estado de crédito</th>
-                        <th scope="col">Monto aprobado</th>
-                                                 
-                        </tr>
-                    </thead>
-                    <tbody>
-                  
-                           
-                            <tr>
-                          
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-
-                            
-                            </tr>
-                    
-                    </tbody>
-                </table>
-                <!-- end table -->
+                
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <script>document.write(new Date().getFullYear())</script> © Minia.
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-sm-end d-none d-sm-block">
+                                    Design & Develop by <a href="#!" class="text-decoration-underline">Themesbrand</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
-            <!-- end table responsive -->
-            
+            <!-- end main content-->
+
         </div>
-      </div>
-    <!-- =======FIXME: copyright ========================== -->
-    <%- include ('./partials/copyright.ejs')%>
-    <!-- =======FIXME: copyright ========================== -->
-  
-    </div>
-  </div>
+     
+        <!-- JAVASCRIPT -->
+        <script src="../directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
+        <script src="../directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
+        <script src="../directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
+        <script src="../directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
+        <script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
+        <!-- pace js -->
+        <script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
 
-  
-<!-- Right Sidebar -->
-<div class="right-bar">
-    <div data-simplebar class="h-100">
-        <div class="rightbar-title d-flex align-items-center bg-dark p-3">
+        <!-- Responsive Table js -->
+        <script src="../directorio_perfilClientes/libs/admin-resources/rwd-table/rwd-table.min.js"></script>
 
-            <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
+        <!-- Init js -->
+        <script src="../directorio_perfilClientes/js/pages/table-responsive.init.js"></script>
 
-            <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                <i class="mdi mdi-close noti-icon"></i>
-            </a>
-        </div>
+        <script src="../directorio_perfilClientes/js/app.js"></script>
 
-        <!-- Settings -->
-    
-    
-    </div> <!-- end slimscroll-menu-->
-</div>
-<!-- /Right-bar -->
-
-<!-- Right bar overlay-->
-<!-- <div class="rightbar-overlay"></div> -->
-  <!-- JAVASCRIPT -->
-<script src="./directorio_perfilClientes/js/scripts_personalizadosdash.js"></script>
-<script src="./directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
-<script src="./directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="./directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
-<script src="./directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
-<script src="./directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
-<script src="./directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
-<!-- pace js -->
-<script src="./directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
-
-  
-
-                <!-- Required datatable js -->
-                <script
-                    src="./directorio_perfilClientes/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-                <script
-                    src="./directorio_perfilClientes/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-                <!-- Responsive examples -->
-                <script
-                    src="./directorio_perfilClientes/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-                <script
-                    src="./directorio_perfilClientes/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-                <!-- init js -->
-                <script src="./directorio_perfilClientes/js/pages/datatable-pages.init.js"></script>
-                
-                
-
-  <script src="./directorio_perfilClientes/js/app.js"></script>
-
-  
-</body>
-
+    </body>
 </html>

@@ -153,7 +153,19 @@ exports.isAuthenticated = async (req, res, next) => {
     
    
 // }
+exports.isSellers= async (req, res, next) => {
+    try {
+        if(!(req.user.rol ==="vendedor")){
+            res.redirect('./administrador')
+         }
 
+     } catch (error) {
+            console.log(error)
+            return next()
+     }
+    
+   
+}
 
 // todo: LOGOUT
 exports.logout = (req, res) => {
@@ -178,7 +190,7 @@ exports.listarAfiliados= async (req, res) => {
      const id_vendedorA = req.user.id_vendedor;
    
    // Consultando en DB los clientes que pertenecen al vendedor actual
-     conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA], (err, result) => {
+     conexion.query('SELECT * FROM usuarios WHERE codigo_afiliado = ?', [id_vendedorA], (err, result) => {
        if (err) throw err;
        res.render('afiliados', {user: req.user, result: result})
     //    console.log(result);
