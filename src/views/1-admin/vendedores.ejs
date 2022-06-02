@@ -105,7 +105,7 @@
             <!--! =========  NO BORRAR ========== -->
                         
                                     <div class="card-body">
-                                        <div class="table-rep-plugin">
+                                       
                                         <table id="datatable-buttons" class="table table dt-responsive nowrap w-100">
                                             <thead>
                                             <tr>
@@ -116,8 +116,8 @@
                                                 <th>Correo</th>
                                                 <th>Afiliado a</th>
                                                 <th>Nivel</th>
-                                                <th>Ventas</th>
                                                 <th>Deuda</th>
+                                                <th>Ventas</th>
                                                 <th>Estado</th>
                                             </tr>
                                             </thead>
@@ -127,26 +127,27 @@
                                                 <% lista_vendedores.forEach((user)=>{ %>
                                                     <tr> 
                                                         <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.id_vendedor %></a></td>
-                                                        <td><%= user.nombres %></td>
-                                                        <td><%= user.apellidos %></td>
-                                                        <td><%= user.telefono_movil %></td>
-                                                        <td><%= user.correo %></td>
+                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.nombres %></a></td>
+                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.apellidos %></a></td>
+                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.telefono_movil %></a></td>
+                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.correo %></a></td>
                                                         <td> <% if(user.codigo_afiliado) {%> 
-                                                            <a href="/perfil-vendedores/<%- user.codigo_afiliado%>"> <%= user.codigo_afiliado %> </a>
+                                                            <div class="badge badge-soft-dark font-size-12" ><a href="/perfil-vendedores/<%- user.codigo_afiliado%>"> <%= user.codigo_afiliado %> </a></div>
                                                             <% } else { %> 
                                                                  N/A 
                                                             <% }%>
                                                             </td>
-                                                        <td><div class="badge badge-soft-info font-size-12" ><%= user.nivel %></div></td>
-                                                        <td><div class="badge badge-soft-success font-size-12" >$ <%= user.total_ventas %></div></td>
-                                                        <td><div class="badge badge-soft-danger font-size-12" >$ <%= user.deuda_inicial %></div></td>
-                                                        <td><div class="badge <%= user.estadoVendedor.color%> font-size-12"><%= user.estadoVendedor.txt %></div></td>
+                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.nivel %></a></td>
+                                                        
+                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>">$ <%= user.deuda_inicial %></a></td>
+                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><div class="badge badge-soft-success font-size-12" >$ <%= user.total_ventas %></div></a></td>
+                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><div class="badge <%= user.estadoVendedor.color%> font-size-12"><%= user.estadoVendedor.txt %></div></a></td>
                                                         
                                                     </tr>
                                                     <%})%>
                                             </tbody>
                                         </table>
-                                        </div>
+                                       
                                     </div>
                                 
                                 </div>
