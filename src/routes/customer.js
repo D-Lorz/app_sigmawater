@@ -80,7 +80,7 @@ const oneUpload = cargarEvidencia.fields([{ name: 'evidencia_fotografica' }, { n
 
  // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
-router.get('/nuevo-cliente', isAuthenticated, (req, res) => {
+router.get('/nuevo-cliente', isAuthenticated,(req, res) => {
     if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
     res.render('nuevo-cliente', { user: req.user })
 });

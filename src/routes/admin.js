@@ -3,7 +3,7 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const { isAuthenticated } = require('../controllers/authController');
-const { listarVendedores,isAdmin, listarVendedores_PerfilVendedores,generar_usuario_vendedor,listarAfiliadosAdmin } = require('../controllers/adminControllers');
+const { listarVendedores,isAdmin, listarVendedores_PerfilVendedores,listarClientes_PerfilClientes,generar_usuario_vendedor,listarClientes } = require('../controllers/adminControllers');
 
 
 
@@ -13,8 +13,11 @@ const { listarVendedores,isAdmin, listarVendedores_PerfilVendedores,generar_usua
 router.get('/vendedores', isAuthenticated, listarVendedores,isAdmin )
 router.get('/perfil-vendedores/:id', isAuthenticated,listarVendedores_PerfilVendedores,isAdmin)
 
+router.get('/listar-clientes', isAuthenticated ,listarClientes)
+router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
+
 router.get('/prueba', isAuthenticated,isAdmin ,(req, res) => {
-       res.render('./1-admin/prueba', { user: req.user })
+       res.render('./1-admin/clientes', { user: req.user })
 });
 // *   ================ ===== ↑↑ ==============================
 

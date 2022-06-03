@@ -5,16 +5,14 @@
 <head>
   
   <meta charset="utf-8" />
-  <title> Vendedores </title>
+  <title> Clientes de vendedores </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
   <meta content="Themesbrand" name="author">
   <!-- App favicon -->
   <link rel="shortcut icon" href="../directorio_dash/images/favicon.png">
     <link rel="stylesheet" type="text/css" href="../css/colors.min.css">
-
-  <base href="#">
-
+s <base href="#">
 
 <!-- DataTables -->
 <link href="../directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -62,13 +60,13 @@
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center
                 justify-content-between">
-                <h4 class="mb-sm-0 font-size-18">Lista de vendedores</h4>
+                <h4 class="mb-sm-0 font-size-18">Lista de clientes</h4>
 
                 <div class="page-title-right">
                     <ul class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript:
-                                void(0);">Vendedores</a></li>
-                        <li class="breadcrumb-item active">Lista de vendedores</li>
+                                void(0);">Clientes</a></li>
+                        <li class="breadcrumb-item active">Lista de clientes</li>
                     </ul>
                 </div>
 
@@ -76,73 +74,37 @@
         </div>
     </div> 
     <!-- end page title -->
-    <!--! =========  NO BORRAR ========== -->
-    <!-- <div class="row align-items-center">
-          
-            <div class="col-md-6">
-                <div class="d-flex flex-wrap align-items-center
-                    justify-content-end gap-2 mb-3">
-                   
-               
-                    <div class="dropdown">
-                        <a class="btn btn-link text-muted py-1 font-size-16
-                            shadow-none dropdown-toggle" href="#"
-                            role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="bx bx-dots-horizontal-rounded"></i>
-                        </a>
-                     
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
-                            <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
-                            <li><a class="dropdown-item" href="#">Eliminar cliente</a></li>
-                        </ul>
-                    </div>
-                </div>
 
-            </div>
-        </div>  -->
-            <!--! =========  NO BORRAR ========== -->
                         
                                     <div class="card-body">
                                        
-                                        <table id="datatable-buttons" class="table table dt-responsive nowrap w-100">
+                                        <table id="datatable-buttonss" class="table table dt-responsive nowrap w-100">
                                             <thead>
                                             <tr>
-                                                <th>Codigo</th>
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
                                                 <th>Teléfono</th>
-                                                <th>Correo</th>
-                                                <th>Afiliado a</th>
-                                                <th>Nivel</th>
-                                                <th>Deuda</th>
-                                                <th>Ventas</th>
-                                                <th>Estado</th>
+                                                <th>Dirección</th>
+                                                <th>Vendedor</th>
+                                                <th>Producto</th>
+                                                <th>Estado de credito</th>
+                                                <th>Estado de instalación</th>
                                             </tr>
                                             </thead>
         
         
                                             <tbody>
-                                                <% lista_vendedores.forEach((user)=>{ %>
+                                                <% lista_clientes.forEach((user)=>{ %>
                                                     <tr> 
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.id_vendedor %></a></td>
-                                                        <td><a href="perfil-vendedores/<%- user.id_vendedor %>"><%= user.nombres %></a></td>
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.apellidos %></a></td>
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.telefono_movil %></a></td>
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.correo %></a></td>
-                                                        <td> <% if(user.codigo_afiliado) {%> 
-                                                            <div class="badge badge-soft-dark font-size-12" ><a href="/perfil-vendedores/<%- user.codigo_afiliado%>"> <%= user.codigo_afiliado %> </a></div>
-                                                            <% } else { %> 
-                                                                 N/A 
-                                                            <% }%>
-                                                            </td>
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.nivel %></a></td>
-                                                        
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>">$ <%= user.deuda_inicial %></a></td>
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><div class="badge badge-soft-success font-size-12" >$ <%= user.total_ventas %></div></a></td>
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><div class="badge <%= user.estadoVendedor.color%> font-size-12"><%= user.estadoVendedor.txt %></div></a></td>
-                                                        
+                                                        <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.nombre %></a></td>
+                                                        <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.apellido %></a></td>
+                                                        <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.telefono %></a></td>
+                                                        <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.direccion %></a></td>
+                                                        <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.codigo_id_vendedor %></a></td>
+                                                        <td>xxxx</td>
+                                                        <td>xxxx</td>
+                                                        <td>xxxx</td>
+
                                                     </tr>
                                                     <%})%>
                                             </tbody>

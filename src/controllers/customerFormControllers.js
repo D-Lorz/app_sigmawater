@@ -17,14 +17,14 @@ exports.registrarClientes = async (req, res) => {
     const estado_ubicacion = req.body.estado_ubicacion;
     const codigo_postal = req.body.codigo_postal;
 
-     const id_cliente = generateRandomNumber(6); // * Se almacena el ID del cliente codigo numerico
-    const id_vendedor = req.user.id_vendedorAceptado
+    const id_cliente = generateRandomNumber(6); // * Se almacena el ID del cliente codigo numerico
+    const id_vendedor = req.user.id_vendedorAceptado //del admin saca el id consecutivo del vendedor aprobado 
+    const codigo_id_vendedor = req.user.id_vendedor//del admin saca el id alfanumero del vendedor aprobado
 
 
     const nuevoRegistroClientes = {
       nombre,segundo_nombre,apellido,correo, telefono,direccion, direccion2,
-       ciudad,estado_ubicacion,codigo_postal, id_cliente,id_vendedor
-    }
+       ciudad,estado_ubicacion,codigo_postal, id_cliente,id_vendedor,codigo_id_vendedor }
     console.log(nuevoRegistroClientes)
 
     await conexion.query('INSERT INTO nuevos_cliente SET ?', [nuevoRegistroClientes], (err, result) => {
@@ -39,6 +39,7 @@ exports.registrarClientes = async (req, res) => {
 }
 
 //------------------------------------------------
+
 exports.getSolicitudCreditos = async (req, res) => {
   const id = req.params.id
 
@@ -222,9 +223,8 @@ exports.listarClientes = async (req, res) => {
 
   // Consultando en DB los clientes que pertenecen al vendedor actual
   conexion.query('SELECT * FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
-    if (err)
-      throw err;
-    res.render('lista-clientes', { user: req.user,clientes: result })
+    if (err) throw err;
+    res.render('lista-clientes', { user: req.user,clientes: result})
   })
 
 }
@@ -344,7 +344,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     
    })
 
-
+ 
 }
 
 // todo --> Formulario Test de agua

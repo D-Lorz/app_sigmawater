@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Perfil vendedores</title>
+    <title>Perfil clientes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
@@ -43,7 +43,7 @@
 
       
         <!-- =======FIXME: MENU ========================== -->
-        <%- include ('./1-admin/menu.ejs')%>
+        <%- include ('../1-admin/menu.ejs')%>
         <!-- =======FIXME: MENU ========================== -->
 
             <div class="main-content">
@@ -62,18 +62,11 @@
                                         <h5 class="my-0 text-primary">
                                             <i class="fa fa-user-circle"></i>&nbsp; Datos del vendedor</h5>
 
-                                            <form action="/aprobarVendedor" method="POST">
+                                                                                        
                                                 
-                                                
-                                                <input type="hidden" hidden name="id_consecutivo" value="<%= info_vendedor.id %>">
-                                                <input type="hidden" hidden name="id_vendedor" value="<%= info_vendedor.id_vendedor%>">
-                                                <input type="hidden" hidden name="correo" value="<%= info_vendedor.correo%>">
-                                                <input type="hidden" hidden name="codigo_afiliado" value="<%= info_vendedor.codigo_afiliado%>">
-
-                                            <a href="/perfil-vendedores/<%= info_vendedor.id_vendedor %>" >
-                                                <button class="btn btn-primary"  type="submit" style="float: right;margin-top: -4%;border-radius:13px;">Aprobar </button>
-                                            </a> 
-                                        </form>
+                                                <input type="hidden" hidden name="id_consecutivo" value="<%= info_clientes.id %>">
+                                                <input type="hidden" hidden name="id_cliente" value="<%= info_clientes.id_cliente%>">
+                 
 
                                       </div>
                                     <div class="card-body">
@@ -84,7 +77,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td style="width: 23%;">ID</td>
-                                                        <td><b><%= info_vendedor.id_vendedor %></b></td> 
+                                                        <td><b><%= info_clientes.id_cliente%></b></td>  
                                                         <td>Teléfono</td>
                                                         <td><b>xxxxx</b></td>
 
@@ -145,7 +138,7 @@
                 </div>
             </div>
                         <!-- =======FIXME: copyright ========================== -->
-                    <%- include ('./partials/copyright.ejs')%>
+                    <%- include ('../partials/copyright.ejs')%>
                         <!-- =======FIXME: copyright ========================== -->
 
                 </div>

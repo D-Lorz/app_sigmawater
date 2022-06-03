@@ -1,6 +1,4 @@
-const {
-  promisify
-} = require("util");
+const { promisify} = require("util");
 const conexion = require("../database/db");
 
 exports.isAdmin = async (req, res, next) => {
@@ -16,6 +14,9 @@ exports.isAdmin = async (req, res, next) => {
 
 
 
+
+
+// ? ========>>> ZONA DE VENDEDORES <<<========
 // todo ===========>>>  Mostrar lista de VENDEDORES
 exports.listarVendedores = async (req, res) => {
 
@@ -53,29 +54,53 @@ exports.listarVendedores = async (req, res) => {
 
   });
 
-  res.render("./1-admin/vendedores", {
-    user: req.user,
-    lista_vendedores
-  });
-
+  res.render("./1-admin/vendedores", { user: req.user,  lista_vendedores });
 };
-
 
 // ! >>>>>>>>>  Tarjetas en la vista perfil vendedores <<<<<<<<<<<
 exports.listarVendedores_PerfilVendedores = async (req, res) => {
   const id_vendedor = req.params.id;
-  let info_vendedor = await conexion.query(
-    "SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ",
-    [id_vendedor]
-  );
+  let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ", [id_vendedor] );
   info_vendedor = info_vendedor[0];
 
   // * >>> Renderizado <<<<<
-  res.render("perfil-vendedores", {
-    user: req.user,
-    info_vendedor
-  });
+  res.render("./1-admin/perfil-vendedores", {  user: req.user, info_vendedor });
 };
+// ? ========>>> ZONA DE VENDEDORES <<<========
+
+
+
+
+
+
+// ? ========>>> ZONA DE CLIENTES <<<========
+// todo ===========>>>  Mostrar lista de CLIENTES y referencia de su vendedor
+exports.listarClientes= async (req, res) => {
+
+  conexion.query("SELECT * FROM nuevos_cliente ", (err, result) => {
+    if (err) throw err;
+  
+  // * >>> Renderizado <<<<<
+  res.render("./1-admin/listar-clientes", {  user: req.user, lista_clientes:result });
+
+  })
+}
+
+// ! >>>> Tarjetas en la vista perfil clientes <<<<<<<<<<<
+exports.listarClientes_PerfilClientes= async (req, res) => {
+
+  const id_cliente = req.params.id;
+  let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?" , [id_cliente] );
+  info_clientes = info_clientes[0];
+
+  // * >>> Renderizado <<<<<
+  res.render("./1-admin/perfil-cliente", {  user: req.user, info_clientes });
+};
+// ? ========>>> ZONA DE CLIENTES <<<========
+
+
+
+
 
 // todo ===========>>> Enviar contraseña y usuario a la tabla USUARIOS
 exports.generar_usuario_vendedor = async (req, res) => {
@@ -85,21 +110,14 @@ exports.generar_usuario_vendedor = async (req, res) => {
   const id_vendedorAceptado = req.body.id_consecutivo;
   const id_vendedor = req.body.id_vendedor;
   const codigo_afiliado = req.body.codigo_afiliado;
-  const Datos_agendarSolicitud = {
-    correo,
-    pass,
-    id_vendedorAceptado,
-    id_vendedor,
-    codigo_afiliado,
-  };
+
+  const Datos_agendarSolicitud = { correo,   pass, id_vendedorAceptado,  id_vendedor,  codigo_afiliado, };
 
   await conexion.query(
-    "INSERT INTO usuarios SET ? ",
-    [Datos_agendarSolicitud],
-    (err, result) => {
+    "INSERT INTO usuarios SET ? ", [Datos_agendarSolicitud], (err, result) => {
       if (err) throw err;
       if (result) {
-        res.redirect("/perfil-vendedores/" + id_vendedor);
+        res.redirect("./1-admin/perfil-vendedores/" + id_vendedor);
       }
     }
   );

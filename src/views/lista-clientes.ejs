@@ -146,14 +146,14 @@
                     <thead>
                     
                        
-                        <th scope="col">ID</th>
+                       
                         <th scope="col">Nombres</th>
                         <th scope="col">Apellidos</th>
                         <th scope="col">Correo electronico</th>
                         <th scope="col">Teléfono</th>
                         <th scope="col">Dirección</th>
                         <th scope="col">Estado de crédito</th>
-                        <th scope="col">Monto aprobado</th>
+                        <th scope="col">Estado de instalación</th>
                                                  
                         </tr>
                     </thead>
@@ -162,7 +162,7 @@
                            
                             <tr>
                           
-                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.id_cliente %></a></td>
+                               
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.nombre %></a></td>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.apellido %></a></td>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.correo %></a></td>
@@ -178,12 +178,13 @@
                                      <td><a href="/perfil-clientes/<%- user.id_cliente %>"><div class="badge badge-soft-danger font-size-12" ><%= user.estado_de_la_cuenta %></div></a></td>
                              <%}%>
                           <%}%>
-                         
+                          
+                          <!-- <td><div class="badge <= estado_intalacion.color %> font-size-12 letra" > <= estado_intalacion.txt %> </div></td> -->
+
                         <!-- <td><div class="badge badge-soft-warning font-size-12" ><= user.estado_cliente %></div></td>  -->
-           <td><a href="/perfil-clientes/<%- user.id_cliente %>"><div class="badge badge-soft-success font-size-12">$0<%= user.monto_aprobado %></div></a></td>
-               
+        
                             </tr>
-                        <%})%>
+                        <%})%> 
                     </tbody>
                 </table>
                 <!-- end table -->
@@ -192,6 +193,7 @@
             
         </div>
       </div>
+      
     <!-- =======FIXME: copyright ========================== -->
     <%- include ('./partials/copyright.ejs')%>
     <!-- =======FIXME: copyright ========================== -->
