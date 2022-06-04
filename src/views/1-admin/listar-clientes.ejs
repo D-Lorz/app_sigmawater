@@ -12,7 +12,7 @@
   <!-- App favicon -->
   <link rel="shortcut icon" href="../directorio_dash/images/favicon.png">
     <link rel="stylesheet" type="text/css" href="../css/colors.min.css">
-s <base href="#">
+ <base href="#">
 
 <!-- DataTables -->
 <link href="../directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -84,11 +84,11 @@ s <base href="#">
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
                                                 <th>Teléfono</th>
-                                                <th>Dirección</th>
                                                 <th>Vendedor</th>
                                                 <th>Producto</th>
-                                                <th>Estado de credito</th>
-                                                <th>Estado de instalación</th>
+                                                <th>Crédito</th>
+                                                <th>Visita</th>
+                                                <th>Instalación</th>
                                             </tr>
                                             </thead>
         
@@ -99,23 +99,41 @@ s <base href="#">
                                                         <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.nombre %></a></td>
                                                         <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.apellido %></a></td>
                                                         <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.telefono %></a></td>
-                                                        <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.direccion %></a></td>
-                                                        <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.codigo_id_vendedor %></a></td>
-                                                        <td>xxxx</td>
-                                                        <td>xxxx</td>
-                                                        <td>xxxx</td>
+                                                        <td><a href="/perfil-vendedores/<%- user.codigo_id_vendedor %>"><%- user.codigo_id_vendedor %></a></td>
+                                                        <td> <% if(user.sistema) {%>
+                                                           <a href="/perfil-cliente/<%- user.id_cliente%>"> <%= user.sistema %> </a>
+                                                            <% } else { %> 
+                                                                 N/A 
+                                                            <% }%>
+                                                            </td>
 
-                                                    </tr>
-                                                    <%})%>
-                                            </tbody>
-                                        </table>
-                                       
-                                    </div>
-                                
-                                </div>
-                            </div> <!-- end col -->
-                        </div> <!-- end row -->
-        
+                                                            <td> <% if(user.estadoCredito) {%>
+                                                                <a href="/perfil-cliente/<%- user.id_cliente%>"> <div class="badge <%= user.estadoCredito.color %> font-size-12" ><%= user.estadoCredito.txt %></div> </a>
+                                                                 <% }%>
+                                                                 </td>
+                                                                 <td> <% if(user.fecha_test) {%>
+                                                                    <a href="/perfil-cliente/<%- user.id_cliente%>"> <%= user.fecha_test %> </a>
+                                                                     <% } else { %> 
+                                                                          N/A 
+                                                                     <% }%>
+                                                                     </td>
+                                                                     <td> <% if(user.estadoAgenda) {%>
+                                                                        <a href="/perfil-cliente/<%- user.id_cliente%>"> <div class="badge <%= user.estadoAgenda.color %> font-size-12" ><%= user.estadoAgenda.txt %></div> </a>
+                                                                         <% }%>
+                                                                         </td>
+                                                          
+
+                                                                        </tr>
+                                                                        <%})%>
+                                                                </tbody>
+                                                            </table>
+                                                        
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </div> <!-- end col -->
+                                            </div> <!-- end row -->
+                            
                   
                     </div> <!-- container-fluid -->
                 </div>

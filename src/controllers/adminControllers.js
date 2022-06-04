@@ -1,5 +1,10 @@
-const { promisify} = require("util");
+const {
+  promisify
+} = require("util");
 const conexion = require("../database/db");
+const {} = require('../controllers/adminControllers');
+
+
 
 exports.isAdmin = async (req, res, next) => {
   try {
@@ -54,48 +59,105 @@ exports.listarVendedores = async (req, res) => {
 
   });
 
-  res.render("./1-admin/vendedores", { user: req.user,  lista_vendedores });
+  res.render("./1-admin/vendedores", {
+    user: req.user,
+    lista_vendedores
+  });
 };
 
 // ! >>>>>>>>>  Tarjetas en la vista perfil vendedores <<<<<<<<<<<
 exports.listarVendedores_PerfilVendedores = async (req, res) => {
   const id_vendedor = req.params.id;
-  let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ", [id_vendedor] );
+  let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ", [id_vendedor]);
   info_vendedor = info_vendedor[0];
 
   // * >>> Renderizado <<<<<
-  res.render("./1-admin/perfil-vendedores", {  user: req.user, info_vendedor });
+  res.render("./1-admin/perfil-vendedores", {
+    user: req.user,
+    info_vendedor
+  });
 };
 // ? ========>>> ZONA DE VENDEDORES <<<========
 
 
 
-
-
-
 // ? ========>>> ZONA DE CLIENTES <<<========
 // todo ===========>>>  Mostrar lista de CLIENTES y referencia de su vendedor
-exports.listarClientes= async (req, res) => {
+exports.listarClientes = async (req, res) => {
 
-  conexion.query("SELECT * FROM nuevos_cliente ", (err, result) => {
-    if (err) throw err;
+  let lista_clientes = await conexion.query("SELECT N.* , S.sistema ,S.estado_del_credito , A.estado_agenda, T.fecha_test FROM nuevos_cliente N LEFT JOIN solicitar_credito S ON N.id = S.id_cliente LEFT JOIN agendar_instalacion A ON N.id = A.id_cliente LEFT JOIN test_agua T ON N.id = T.id_cliente;");
+
+  lista_clientes.forEach(c => {
+
+    /** Estado del Crédito */
+    c.estadoCredito = {}
+    c.estadoCredito.txt = "No solicitado";
+    c.estadoCredito.color = "badge-soft-dark";
+
+    if (c.estado_del_credito == 0) {
+      c.estadoCredito.txt = "En revisión";
+      c.estadoCredito.color = "badge-soft-warning";
+    }
+
+    if (c.estado_del_credito == 1) {
+      c.estadoCredito.txt = "Aprobado";
+      c.estadoCredito.color = "badge-soft-success";
+    }
+
+    if (c.estado_del_credito == 2) {
+      c.estadoCredito.txt = "Pagado";
+      c.estadoCredito.color = "badge-soft-success";
+    }
+
+    if (c.estado_del_credito == 3) {
+      c.estadoCredito.txt = "Rechazado";
+      c.estadoCredito.color = "badge-soft-danger";
+    }
+
+    /** Estado de la instalación */
+    c.estadoAgenda = {}
+    c.estadoAgenda.txt = "No instalado";
+    c.estadoAgenda.color = "badge-soft-dark";
+
+    if (c.estado_agenda == 0) {
+      c.estadoAgenda.txt = "Listo para instalar";
+      c.estadoAgenda.color = "badge-soft-success";
+    }
+
+    /** Formateando la fecha */
+    // const f = new Date(c.fecha_test)
+    // c.fecha_test = f.toLocaleDateString("en-US")
+
+  });
+
   
-  // * >>> Renderizado <<<<<
-  res.render("./1-admin/listar-clientes", {  user: req.user, lista_clientes:result });
 
-  })
+  // * >>> Renderizado <<<<<
+  res.render("./1-admin/listar-clientes", {
+    user: req.user,
+    lista_clientes
+  });
+
+
 }
 
+
 // ! >>>> Tarjetas en la vista perfil clientes <<<<<<<<<<<
-exports.listarClientes_PerfilClientes= async (req, res) => {
+exports.listarClientes_PerfilClientes = async (req, res) => {
 
   const id_cliente = req.params.id;
-  let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?" , [id_cliente] );
+  let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?", [id_cliente]);
   info_clientes = info_clientes[0];
 
   // * >>> Renderizado <<<<<
-  res.render("./1-admin/perfil-cliente", {  user: req.user, info_clientes });
+  res.render("./1-admin/perfil-cliente", {
+    user: req.user,
+    info_clientes
+  });
 };
+
+
+
 // ? ========>>> ZONA DE CLIENTES <<<========
 
 
@@ -111,7 +173,13 @@ exports.generar_usuario_vendedor = async (req, res) => {
   const id_vendedor = req.body.id_vendedor;
   const codigo_afiliado = req.body.codigo_afiliado;
 
-  const Datos_agendarSolicitud = { correo,   pass, id_vendedorAceptado,  id_vendedor,  codigo_afiliado, };
+  const Datos_agendarSolicitud = {
+    correo,
+    pass,
+    id_vendedorAceptado,
+    id_vendedor,
+    codigo_afiliado,
+  };
 
   await conexion.query(
     "INSERT INTO usuarios SET ? ", [Datos_agendarSolicitud], (err, result) => {

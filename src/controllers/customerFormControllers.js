@@ -351,7 +351,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 exports.testAgua = async (req, res) => {
 
   const event = new Date();
-  var fecha_test= event.toLocaleString({ timeZone: 'UTC' });
+  var fecha_test= event.toLocaleDateString("en-US");
   console.log("FECHA >>>>>>>>");
   console.log(fecha_test);
  
