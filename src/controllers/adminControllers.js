@@ -73,14 +73,14 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
 
 // todo===========>>>  Mostrar afiliados a tal vendedor
    // Capturando el id del Vendedor actual
-  const id_vendedorA = req.body.codigo_afiliadoOn;
+   const id_vendedorA = req.params.id_vendedor;
    
-  // Consultando en DB los clientes que pertenecen al vendedor actual
-let afiliado=  conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA])
-
+   // Consultando en DB los clientes que pertenecen al vendedor actual
+ let afiliado=  conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA])
+ 
 
   // * >>> Renderizado <<<<<
-  res.render("./1-admin/perfil-vendedores", { user: req.user,  info_vendedor ,afiliado});
+  res.render("./1-admin/perfil-vendedores", { user: req.user,  info_vendedor,afiliado});
 };
 // todo ===========>>>  Actualizar estado de vendedores 
 exports.ActualizarNivel = async (req, res) => {
@@ -91,12 +91,12 @@ exports.ActualizarNivel = async (req, res) => {
   
   await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ? ", [datosNivel,id_vendedor], (err, result) => {
     if (err) throw err;
-    if (result) { res.redirect('/perfil-vendedores/'+id_vendedor )}
+
+
+    if (result) { res.redirect('/perfil-vendedores/'+id_vendedor  )}
    
   })
 };
-
-
 
 // ? ========>>> ZONA DE VENDEDORES <<<========
 
