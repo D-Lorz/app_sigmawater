@@ -65,18 +65,39 @@ exports.listarVendedores = async (req, res) => {
   });
 };
 
-// ! >>>>>>>>>  Tarjetas en la vista perfil vendedores <<<<<<<<<<<
+// ! >>>>>>>>> Vista perfil vendedores <<<<<<<<<<<
 exports.listarVendedores_PerfilVendedores = async (req, res) => {
   const id_vendedor = req.params.id;
   let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ", [id_vendedor]);
   info_vendedor = info_vendedor[0];
 
+// todo===========>>>  Mostrar afiliados a tal vendedor
+   // Capturando el id del Vendedor actual
+  const id_vendedorA = req.body.codigo_afiliadoOn;
+   
+  // Consultando en DB los clientes que pertenecen al vendedor actual
+let afiliado=  conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA])
+
+
   // * >>> Renderizado <<<<<
-  res.render("./1-admin/perfil-vendedores", {
-    user: req.user,
-    info_vendedor
-  });
+  res.render("./1-admin/perfil-vendedores", { user: req.user,  info_vendedor ,afiliado});
 };
+// todo ===========>>>  Actualizar estado de vendedores 
+exports.ActualizarNivel = async (req, res) => {
+  const id_vendedor = req.body.coodigoActualizarxs;
+  const nivel = req.body.nivel;
+
+  const datosNivel = {nivel,id_vendedor}
+  
+  await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ? ", [datosNivel,id_vendedor], (err, result) => {
+    if (err) throw err;
+    if (result) { res.redirect('/perfil-vendedores/'+id_vendedor )}
+   
+  })
+};
+
+
+
 // ? ========>>> ZONA DE VENDEDORES <<<========
 
 
@@ -141,7 +162,6 @@ exports.listarClientes = async (req, res) => {
 
 }
 
-
 // ! >>>> Tarjetas en la vista perfil clientes <<<<<<<<<<<
 exports.listarClientes_PerfilClientes = async (req, res) => {
 
@@ -155,8 +175,6 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     info_clientes
   });
 };
-
-
 
 // ? ========>>> ZONA DE CLIENTES <<<========
 
