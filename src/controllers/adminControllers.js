@@ -72,15 +72,19 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
   info_vendedor = info_vendedor[0];
 
 // todo===========>>>  Mostrar afiliados a tal vendedor
-   // Capturando el id del Vendedor actual
-   const id_vendedorA = req.params.id_vendedor;
-   
-   // Consultando en DB los clientes que pertenecen al vendedor actual
- let afiliado=  conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA])
- 
+    // Consultando en DB los clientes que pertenecen al vendedor actual
+ let afiliados = await conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [info_vendedor.id_vendedor])
+
+
+
+    // Consultando en DB los clientes que pertenecen al vendedor actual
+let referente = await conexion.query('SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1', [info_vendedor.codigo_afiliado])
+referente = referente[0];
+   console.log(">>>>>xxxxxxxxxx>>>>");
+   console.log(referente);
 
   // * >>> Renderizado <<<<<
-  res.render("./1-admin/perfil-vendedores", { user: req.user,  info_vendedor,afiliado});
+  res.render("./1-admin/perfil-vendedores", { user: req.user, info_vendedor, afiliados,referente});
 };
 // todo ===========>>>  Actualizar estado de vendedores 
 exports.ActualizarNivel = async (req, res) => {
@@ -142,7 +146,7 @@ exports.listarClientes = async (req, res) => {
 
     if (c.estado_agenda == 0) {
       c.estadoAgenda.txt = "Listo para instalar";
-      c.estadoAgenda.color = "badge-soft-success";
+      c.estadoAgenda.color = "badge-soft-warning";
     }
 
     /** Formateando la fecha */

@@ -321,11 +321,11 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
         if (consultaEstado_instalacion.estado_agenda === '0') {
           estado_intalacion.txt= "Listo para instalar";
-          estado_intalacion.background= 'visitado';
+          estado_intalacion.background= 'producto_instalado';
           
         } else if (consultaEstado_instalacion.estado_agenda == 1) {
           estado_intalacion.txt= "Instalado";
-          estado_intalacion.background= 'producto_instalado';
+          estado_intalacion.background= 'visitado';
         
           } 
         }
