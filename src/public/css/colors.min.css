@@ -404,8 +404,8 @@ input:focus ~ .bg-black {
 }
 .btn-primary:active,
 .btn-primary:focus {
-  border-color: #008385 !important;
-  background-color: #006a6c !important;
+  /* border-color: #008385 !important;
+  background-color: #006a6c !important; */
   color: #fff !important;
 }
 .btn-outline-primary {

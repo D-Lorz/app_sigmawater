@@ -285,7 +285,8 @@ tfoot,
 th,
 thead,
 tr {
- 
+  /* border: 0 solid;
+  border-color: inherit; */
 }
 label {
   display: inline-block;
@@ -1886,7 +1887,7 @@ progress {
   border-color: #e9e9ef;
 }
 .table > :not(caption) > * > * {
-  padding: 0.75%;
+  padding: 0.75%; /*rem */
   background-color: var(--bs-table-bg);
   border-bottom-width: 1px;
   -webkit-box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
@@ -3023,7 +3024,7 @@ fieldset:disabled .btn {
 .btn-primary:active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background: linear-gradient(189.55deg, #FED061 -131.52%, #812082 -11.9%, #50368C 129.46%);
+  background-color: #6266b0;
   border-color: #5c5fa5;
 }
 .btn-check:active + .btn-primary:focus,
@@ -4105,7 +4106,7 @@ fieldset:disabled .btn {
 }
 .nav-link:focus,
 .nav-link:hover {
-  color: #86868b;
+  color: #6266b0;
   text-decoration: none;
 }
 .nav-link.disabled {
@@ -4152,7 +4153,7 @@ fieldset:disabled .btn {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #50368c;
+  background-color: #7a7fdc;
 }
 .nav-fill .nav-item,
 .nav-fill > .nav-link {
@@ -5689,7 +5690,7 @@ fieldset:disabled .btn {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #f6f6f6;
-  border-radius: 0.25rem;
+  border-radius: 19px;
   outline: 0;
 }
 .modal-backdrop {
@@ -5737,7 +5738,7 @@ fieldset:disabled .btn {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 5rem;
+  padding: 3%;
 }
 .modal-footer {
   display: -webkit-box;
@@ -6894,7 +6895,7 @@ fieldset:disabled .btn {
   border-left: 0 !important;
 }
 .border-primary {
-  border-color: #7a7fdc !important;
+  border-radius: 22px;
 }
 .border-secondary {
   border-color: #74788d !important;
@@ -7718,7 +7719,6 @@ fieldset:disabled .btn {
   word-break: break-word !important;
 }
 .text-primary {
-  color: #7a7fdc !important;
 }
 .text-secondary {
   color: #74788d !important;
@@ -12314,8 +12314,9 @@ body[data-layout-mode="dark"] .dropdown-divider {
 }
 .nav-pills > a,
 .nav-pills > li > a,
+
 .nav-tabs > li > a {
-  color: #495057;
+  color: #fdfeff;
   font-weight: 500;
 }
 .nav-tabs-custom {

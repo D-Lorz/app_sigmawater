@@ -17,21 +17,14 @@
 
   
 
-    <!-- DataTables -->
-    <link
-        href="./directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
-        rel="stylesheet" type="text/css" />
-
-    <!-- Responsive datatable examples -->
-    <link
-        href="./directorio_dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
-        rel="stylesheet" type="text/css" />
-
-    
-  
-  <!-- preloader css -->
+<!-- DataTables -->
+<link href="./directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+rel="stylesheet" type="text/css" />
+ <!-- Responsive datatable examples -->
+<link href="./directorio_dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+ rel="stylesheet" type="text/css" />
+ <!-- preloader css -->
 <link rel="stylesheet" href="./directorio_dash/css/preloader.min.css" type="text/css" />
-
 <!-- Bootstrap Css -->
 <link rel="stylesheet" type="text/css" href="./directorio_dash/css/bootstrap.min.css" id="bootstrap-style" />
 <!-- Icons Css -->
@@ -40,8 +33,8 @@
 <link rel="stylesheet" type="text/css" href="./directorio_dash/css/app.min.css" id="app-style" />
 <!-- Tipo de letra -->
 <link rel="stylesheet" href="./css/typeFont.css" type="text/css" />
-  <!-- scroll -->
-  <link rel="stylesheet" href="../css/scrolls.css">
+<!-- scroll -->
+<link rel="stylesheet" href="../css/scrolls.css">
 
 </head>
 
@@ -79,41 +72,12 @@
       </div>
       <!-- end page title -->
 
-      
-        
-        
-
-          <div class="row align-items-center">
-              <div class="col-md-6">
-                  <!-- <div class="mb-3">
-                      <h5 class="card-title">Contact List <span
-                              class="text-muted fw-normal ms-2">(834)</span></h5>
-                  </div> -->
-
-
-                  
-              </div>
-
-              <div class="col-md-6">
+         <div class="row align-items-center">
+        <div class="col-md-6">
                   <div class="d-flex flex-wrap align-items-center
                       justify-content-end gap-2 mb-3">
                       <div>
-                          <!-- <ul class="nav nav-pills">
-                              <li class="nav-item">
-                                  <a class="nav-link active"
-                                      href="contacts-list"
-                                      data-bs-toggle="tooltip"
-                                      data-bs-placement="top" title="List"><i
-                                          class="bx bx-list-ul"></i></a>
-                              </li> -->
-                              <!-- <li class="nav-item">
-                                  <a class="nav-link"
-                                      href="contacts-grid"
-                                      data-bs-toggle="tooltip"
-                                      data-bs-placement="top" title="Grid"><i
-                                          class="bx bx-grid-alt"></i></a>
-                              </li> -->
-                          <!-- </ul> -->
+                    
                       </div>
                       <div>
                           <a href="/nuevo-cliente" class="btn btn-light"><i class="bx
@@ -145,8 +109,6 @@
                     border-spacing: 0 8px; width: 100%;">
                     <thead>
                     
-                       
-                       
                         <th scope="col">Nombres</th>
                         <th scope="col">Apellidos</th>
                         <th scope="col">Correo electronico</th>
@@ -161,8 +123,6 @@
                         <% clientes.forEach((user)=>{ %>
                            
                             <tr>
-                          
-                               
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.nombre %></a></td>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.apellido %></a></td>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.correo %></a></td>
@@ -234,24 +194,16 @@
 <!-- pace js -->
 <script src="./directorio_dash/libs/pace-js/pace.min.js"></script>
 
-  
-
-                <!-- Required datatable js -->
-                <script
-                    src="./directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-                <script
-                    src="./directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-                <!-- Responsive examples -->
-                <script
-                    src="./directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-                <script
-                    src="./directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-                <!-- init js -->
-                <script src="./directorio_dash/js/pages/datatable-pages.init.js"></script>
+  <!-- Required datatable js -->
+<script src="./directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="./directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+ <!-- Responsive examples -->
+<script src="./directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="./directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<!-- init js -->
+<script src="./directorio_dash/js/pages/datatable-pages.init.js"></script>
                 
-                
-
-  <script src="./directorio_dash/js/app.js"></script>
+ <script src="./directorio_dash/js/app.js"></script>
 
   
 </body>
