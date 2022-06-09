@@ -4,9 +4,10 @@ const conexion = require('../database/db')
 const { promisify } = require('util')
 
 
+
 // todo: REGISTRAR
 exports.registrar = async (req, res) => {
-
+    
     const nombres = req.body.nombres
     const apellidos = req.body.apellidos
     const fecha_nacimiento = req.body.fecha_nacimiento
@@ -36,16 +37,17 @@ exports.registrar = async (req, res) => {
     });
 
     const id_vendedor = generateRandomString(6)
-    
-
+    const pass = generarPass_vendedor(8)
+  
     const nuevoRegistro = {
         nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
         apt_suite_unidad, codigo_postal, codigo_afiliado, nombre_banco, numero_cuenta, ruta, beneficiario, 
-        licencia_conduccion,id_vendedor
-    }
+        licencia_conduccion,id_vendedor }
 
-    console.log(nuevoRegistro)
+    const usuarios = {correo,pass, id_vendedor,codigo_afiliado }
 
+     console.log(nuevoRegistro)
+     await conexion.query('INSERT INTO usuarios SET ?', [usuarios])
     await conexion.query('INSERT INTO registro_de_vendedores SET ?', [nuevoRegistro], (err, result) => {
         if (err) throw err;
         console.log("1 Registro insertado");
@@ -60,7 +62,7 @@ exports.login = async (req, res) => {
         const correo = req.body.correo
         const pass = req.body.pass
     
-        if (!correo || !pass) {
+        if (!correo || !pass ) {
             res.render('login', {
                 alert: true,
                 alertTitle: "Opss",
@@ -71,8 +73,10 @@ exports.login = async (req, res) => {
                 ruta: 'login'
             })
         } else {
-            await conexion.query('SELECT * FROM usuarios WHERE correo = ?', [correo], async (error, results) => {
+              await conexion.query('SELECT * FROM usuarios WHERE correo = ?', [correo], async (error, results) => {
+
                 if (results.length == 0 || !(await bcryptjs.compare(pass, results[0].pass))) {
+
                     res.render('login', {
                         alert: true,
                         alertTitle: "Error",
@@ -83,16 +87,44 @@ exports.login = async (req, res) => {
                         ruta: 'login'
                     })
                 } else {
+                    if(results[0].estado_de_la_cuenta === "pendiente"){
+
+                        let options =  {
+                            alert: true,
+                            alertTitle: "Opps",
+                            alertMessage: "Su cuenta aun no ha sido aprobada",
+                            alertIcon: 'info',
+                            showConfirmButton: true,
+                            timer: false,
+                            ruta: 'login'
+                        } 
+                        res.render('login', options )
+
+
+                     } else  if(results[0].estado_de_la_cuenta === "bloqueado"){
+                     
+                        let options =  {
+                            alert: true,
+                            alertTitle: "Atencion",
+                            alertMessage: "Su cuenta se encuentra bloqueada",
+                            alertIcon: 'warning',
+                            showConfirmButton: true,
+                            timer: false,
+                            ruta: 'login'
+                        } 
+                        res.render('login', options )
+                    }else {
+
                  //inicio de sesión OK
-                 const id = results[0].id_vendedorAceptado
+                 const id = results[0].id_consecutivo
                  const token = jwt.sign({ id: id }, 'super_secret_AppSigmaWater')
             
                  const cookiesOptions = {
                      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
                      httpOnly: true
                  }
-                
-                    res.cookie('jwt', token, cookiesOptions)
+                  res.cookie('jwt', token, cookiesOptions)
+
                     let options =  {
                         alert: true,
                         alertTitle: "¡Bienvenido!",
@@ -107,9 +139,12 @@ exports.login = async (req, res) => {
 
                     }
                     res.render('login', options )
+                    }
+
                        
                  }
             })
+       
         }
        
     } catch (error) {
@@ -121,7 +156,7 @@ exports.isAuthenticated = async (req, res, next) => {
     if (req.cookies.jwt) {
         try {
             const decodificada = await promisify(jwt.verify)(req.cookies.jwt, 'super_secret_AppSigmaWater');
-            conexion.query('SELECT * FROM usuarios WHERE id_vendedorAceptado = ?', [decodificada.id], (error, results) => {
+            conexion.query('SELECT * FROM usuarios WHERE id_consecutivo = ?', [decodificada.id], (error, results) => {
                 if (!results) {
                     return next()
                 }
@@ -135,20 +170,6 @@ exports.isAuthenticated = async (req, res, next) => {
     } else {
         res.redirect('/login')
     }
-   
-}
-
-exports.isSellers= async (req, res, next) => {
-    try {
-        if(!(req.user.rol ==="vendedor")){
-            res.redirect('./administrador')
-         }
-
-     } catch (error) {
-            console.log(error)
-            return next()
-     }
-    
    
 }
 
@@ -168,6 +189,27 @@ exports.nologueado = async (req, res, next) => {
     }
 }
 
+
+exports.isAdmin = async (req, res, next) => {
+    try {
+      if (!(req.user.rol === "administrador")) {
+        res.redirect("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      return next();
+    }
+  };
+  exports.isSeller = async (req, res, next) => {
+    try {
+      if (!(req.user.rol === "vendedor")) {
+        res.redirect("/login");
+      }
+    } catch (error) {
+      console.log(error);
+      return next();
+    }
+  };
 // todo: MOSTRAR LISTA DE VENDEDORES AFILIADOS
 exports.listarAfiliados= async (req, res) => {
 
@@ -196,3 +238,13 @@ const  generateRandomString = (num) => {
 
 
 }
+// todo ===========>>> Generar codigo numero aleatorio del cliente
+const generarPass_vendedor = (num) => {
+    const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+    let result1 = "";
+    const charactersLength = characters.length;
+    for (let i = 0; i < num; i++) {
+      result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result1;
+  }

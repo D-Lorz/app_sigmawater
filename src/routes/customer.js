@@ -85,7 +85,7 @@ router.get('/nuevo-cliente', isAuthenticated,(req, res) => {
     res.render('nuevo-cliente', { user: req.user })
 });
 
-router.get('/lista-clientes', isAuthenticated, listarClientes,isSellers)
+router.get('/lista-clientes', isAuthenticated, listarClientes)
 
 router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
     if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
@@ -96,7 +96,7 @@ router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes
 
 router.get('/solicitar-credito/:id', isAuthenticated ,getSolicitudCreditos)
 
-router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro,isSellers)
+router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro)
 
 router.get('/test-de-agua/:id', isAuthenticated, getTestAgua) 
     

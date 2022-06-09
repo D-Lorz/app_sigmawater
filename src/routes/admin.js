@@ -2,25 +2,25 @@ const express = require('express')
 const router = express.Router()
 const path = require('path');
 const multer = require('multer');
-const { isAuthenticated } = require('../controllers/authController');
-const { listarVendedores,isAdmin, 
+const { isAuthenticated,isAdmin } = require('../controllers/authController');
+const { listarVendedores, 
        listarVendedores_PerfilVendedores,
        listarClientes_PerfilClientes,
-       generar_usuario_vendedor,
-       listarClientes,
-       ActualizarNivel
+      listarClientes,
+      ActualizarNivel,ActualizarEstado
+       
        } = require('../controllers/adminControllers');
-
 
 
 
  // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
-router.get('/vendedores', isAuthenticated, listarVendedores,isAdmin )
-router.get('/perfil-vendedores/:id', isAuthenticated,listarVendedores_PerfilVendedores,isAdmin,)
+router.get('/vendedores', isAuthenticated,isAdmin, listarVendedores )
+router.get('/perfil-vendedores/:id', isAuthenticated,isAdmin,listarVendedores_PerfilVendedores)
 
-router.get('/listar-clientes', isAuthenticated ,listarClientes)
-router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
+
+router.get('/listar-clientes', isAuthenticated,isAdmin ,listarClientes)
+router.get('/perfil-cliente/:id', isAuthenticated,isAdmin,listarClientes_PerfilClientes)
 
 router.get('/prueba', isAuthenticated,isAdmin ,(req, res) => {
        res.render('./1-admin/clientes', { user: req.user })
@@ -30,9 +30,9 @@ router.get('/prueba', isAuthenticated,isAdmin ,(req, res) => {
            
 // * ROUTER: para los métodos del controller
  /*=============================================================*/  
- router.post('/aprobarVendedor', isAuthenticated,generar_usuario_vendedor);
+  router.post('/aprobarVendedor', isAuthenticated,isAdmin,ActualizarEstado);
  /*=============================================================*/
- router.post('/ActualizarNivel', isAuthenticated,ActualizarNivel);
-
+  router.post('/ActualizarNivel', isAuthenticated,isAdmin,ActualizarNivel);
+/*=============================================================*/
 
 module.exports = router

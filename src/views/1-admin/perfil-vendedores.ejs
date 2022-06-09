@@ -86,7 +86,28 @@
                                                         <div>
                                                             <h5 class="font-size-16 mb-1" style="text-transform: capitalize;"><%= info_vendedor.nombres %> <%= info_vendedor.apellidos %></h5>
                                                             <p class="text-muted font-size-13">Codigo de afiliado: <b style="font-weight:600 ;"><%= info_vendedor.id_vendedor %></b></p>
+                          
 
+                                                            <form action="/aprobarVendedor" method="POST">
+                                                                <div class="btn-group me-1 mt-2">
+                                                             <input type="hidden" name="id_vendedorEnviar" value="<%= info_vendedor.id_vendedor %>">
+                                                             <input type="hidden" name="id_consecutivo" value="<%= info_vendedor.id %>">
+
+                                                                        <select class="form-select" id="selectEstado" name="estadoDe_laCuenta">
+                                                                            <option style="background:gray;color: white;">Estado actual: <%= viewsUser.estado_de_la_cuenta %></option>
+                                                                            <br>
+                                                                            <option value="aprobado">Aprobado</option>
+                                                                            <option value="bloqueado">Bloquear</option>
+                                                                        
+                                                                        </select>
+                                                                    </div>
+                                       
+                                                            <a href="/perfil-vendedores/<%= info_vendedor.id_vendedor %>" >
+                                                                <button class="btn btn-primary"  type="submit" style="float: right;margin-top: -4%;border-radius:13px;">Guadar </button>
+                                                            </a> 
+                                                        </form>
+
+                                                  
                                                             <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
                                                                 <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i><%= info_vendedor.telefono_movil %></div>
                                                                 <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i><%= info_vendedor.correo %></div>
@@ -181,7 +202,7 @@
                                                                         <div class="modal-dialog modal-xl">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h5 class="modal-title" id="myExtraLargeModalLabel">Extra large modal</h5>
+                                                                                    <h5 class="modal-title" id="myExtraLargeModalLabel">Comisiones directas</h5>
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="row">
@@ -195,9 +216,7 @@
                                                                                                   
                                                                                                                 <thead class="table-light">
                                                                                                                       <tr>
-                                                                                                                        <th>ID</th>
-                                                                                                                        <th>Nombre</th>
-                                                                                                                        <th>Apellido</th>
+                                                                                                                        <th>Id cliente</th>
                                                                                                                         <th>Fecha</th>
                                                                                                                         <th>Factura</th>
                                                                                                                         <th>Saldo a pagar</th>
@@ -207,103 +226,34 @@
                                                                                                                 <tbody>
                                                                                                                      <tr>
                                                                                                                         <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>
+                                                                                                                         <td>------</td>
                                                                                                                         <td>------</td>      
                                                                                                                         <td>------</td>  
                                                                                                                         <td>------</td>                 
                                                                                                                       </tr>
                                                                                                                       <tr>
                                                                                                                         <td>------</td>
-                                                                                                                        <td>------</td>      
                                                                                                                         <td>------</td>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td> 
-                                                                                                                        <td>------</td>                  
+                                                                                                                       <td>------</td>      
+                                                                                                                       <td>------</td>  
+                                                                                                                       <td>------</td>                   
                                                                                                                       </tr>
                                                                                                                       <tr>
                                                                                                                         <td>------</td>
-                                                                                                                        <td>------</td>      
                                                                                                                         <td>------</td>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td> 
-                                                                                                                        <td>------</td>                  
+                                                                                                                       <td>------</td>      
+                                                                                                                       <td>------</td>  
+                                                                                                                       <td>------</td>                  
                                                                                                                       </tr>
                                                                                                                       <tr>
                                                                                                                         <td>------</td>
+                                                                                                                         <td>------</td>
                                                                                                                         <td>------</td>      
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td> 
+                                                                                                                        <td>------</td>  
                                                                                                                         <td>------</td>                  
                                                                                                                       </tr>
-                                                                                                                      <tr>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td> 
-                                                                                                                        <td>------</td>                  
-                                                                                                                      </tr>
-                                                                                                                      <tr>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td> 
-                                                                                                                        <td>------</td>                  
-                                                                                                                      </tr>
-                                                                                                                      <tr>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td> 
-                                                                                                                        <td>------</td>                  
-                                                                                                                      </tr>
-                                                                                                                      <tr>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td> 
-                                                                                                                        <td>------</td>                  
-                                                                                                                      </tr>
-                                                                                                                      <tr>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td> 
-                                                                                                                        <td>------</td>                  
-                                                                                                                      </tr>
-                                                                                                                      <tr>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td> 
-                                                                                                                        <td>------</td>                  
-                                                                                                                      </tr>
-                                                                                                                      <tr>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>
-                                                                                                                        <td>------</td>      
-                                                                                                                        <td>------</td> 
-                                                                                                                        <td>------</td>                  
-                                                                                                                      </tr>
+                                                                                                                     
+                                                                                                                     
 
                                                                                                                 </tbody>
                                                                            
@@ -331,14 +281,14 @@
                                                                     </div>
 
                                                                     <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" 
-                                                                    data-bs-target=".bs-example-modal-xl"style="background: #50368c;">Ver todo </button>
+                                                                    data-bs-target=".comisionesReferidos"style="background: #50368c;">Ver todo </button>
                                                                                                              
                                                                   <!--  Extra Large modal example -->
-                                                                  <div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                                                                  <div class="modal fade comisionesReferidos" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                                                                       <div class="modal-dialog modal-xl">
                                                                           <div class="modal-content">
                                                                               <div class="modal-header">
-                                                                                  <h5 class="modal-title" id="myExtraLargeModalLabel">Extra large modal</h5>
+                                                                                  <h5 class="modal-title" id="myExtraLargeModalLabel">Comisiones de referidos</h5>
                                                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                               </div>
                                                                               <div class="row">

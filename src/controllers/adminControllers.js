@@ -1,23 +1,9 @@
+
 const {
   promisify
 } = require("util");
 const conexion = require("../database/db");
 const {} = require('../controllers/adminControllers');
-
-
-
-exports.isAdmin = async (req, res, next) => {
-  try {
-    if (!(req.user.rol === "administrador")) {
-      res.redirect("./");
-    }
-  } catch (error) {
-    console.log(error);
-    return next();
-  }
-};
-
-
 
 
 
@@ -38,7 +24,7 @@ exports.listarVendedores = async (req, res) => {
 
       usuarios.forEach(u => {
         // Comparando tabla de usuarios con vendedores
-        if (v.id == u.id_vendedorAceptado) {
+        if (v.id == u.id_vendedor) {
           v.estadoCuenta = u.estado_de_la_cuenta;
 
           if (u.estado_de_la_cuenta == 0) {
@@ -46,7 +32,7 @@ exports.listarVendedores = async (req, res) => {
             v.estadoVendedor.color = "badge-soft-success";
           }
 
-          if (u.estado_de_la_cuenta == 1) {
+          if (u.estado_de_la_cuenta === "bloqueado") {
             v.estadoVendedor.txt = "Bloqueado";
             v.estadoVendedor.color = "badge-soft-danger";
           }
@@ -74,20 +60,23 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
   const licencia = JSON.parse(info_vendedor.licencia_conduccion);
 
 // todo===========>>>  Mostrar afiliados a tal vendedor
-    // Consultando en DB los clientes que pertenecen al vendedor actual
- let afiliados = await conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [info_vendedor.id_vendedor])
+  let afiliados = await conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [info_vendedor.id_vendedor])
 
 
-
-    // Consultando en DB los clientes que pertenecen al vendedor actual
+// todo===========>>>  Mostrar afiliado a este vendedor
+ // Consultando en DB los clientes que pertenecen al vendedor actual
 let referente = await conexion.query('SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1', [info_vendedor.codigo_afiliado])
 referente = referente[0];
 
+// todo===========>>>  Mostrar estado actual de un vendedor
+ let viewsUser = await conexion.query('SELECT * FROM usuarios WHERE id_vendedor = ? LIMIT 1', [info_vendedor.id_vendedor])
+ viewsUser = viewsUser[0];
+ 
 
   // * >>> Renderizado <<<<<
-  res.render("./1-admin/perfil-vendedores", { user: req.user, info_vendedor, afiliados,referente,licencia});
+  res.render("./1-admin/perfil-vendedores", { user: req.user, info_vendedor, afiliados,referente,licencia,viewsUser});
 };
-// todo ===========>>>  Actualizar estado de vendedores 
+// todo ===========>>>  Actualizar nivel de vendedores 
 exports.ActualizarNivel = async (req, res) => {
   const id_vendedor = req.body.coodigoActualizarxs;
   const nivel = req.body.nivel;
@@ -102,6 +91,24 @@ exports.ActualizarNivel = async (req, res) => {
    
   })
 };
+// todo ===========>>>  Actualizar estado de vendedores 
+exports.ActualizarEstado = async (req, res) => {
+
+  const id_vendedor = req.body.id_vendedorEnviar;
+  const id_consecutivo = req.body.id_consecutivo;
+  const estado_de_la_cuenta = req.body.estadoDe_laCuenta;
+  const datosEstado_vendedor = {estado_de_la_cuenta,id_consecutivo,id_vendedor}
+  
+  await conexion.query("UPDATE usuarios SET ? WHERE id_vendedor = ? ", [datosEstado_vendedor,id_vendedor], (err, result) => {
+    if (err) throw err;
+
+
+    if (result) { res.redirect('/perfil-vendedores/'+id_vendedor  )}
+   
+  })
+};
+
+
 
 // ? ========>>> ZONA DE VENDEDORES <<<========
 
@@ -184,38 +191,9 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 // ? ========>>> ZONA DE CLIENTES <<<========
 
 
-
-
-
-// todo ===========>>> Enviar contraseña y usuario a la tabla USUARIOS
-exports.generar_usuario_vendedor = async (req, res) => {
-  const correo = req.body.correo;
-  const pass = generarPass_vendedor(6);
-
-  const id_vendedorAceptado = req.body.id_consecutivo;
-  const id_vendedor = req.body.id_vendedor;
-  const codigo_afiliado = req.body.codigo_afiliado;
-
-  const Datos_agendarSolicitud = {
-    correo,
-    pass,
-    id_vendedorAceptado,
-    id_vendedor,
-    codigo_afiliado,
-  };
-
-  await conexion.query(
-    "INSERT INTO usuarios SET ? ", [Datos_agendarSolicitud], (err, result) => {
-      if (err) throw err;
-      if (result) {
-        res.redirect("./1-admin/perfil-vendedores/" + id_vendedor);
-      }
-    }
-  );
-};
 // todo ===========>>> Generar codigo numero aleatorio del cliente
 const generarPass_vendedor = (num) => {
-  const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+  const characters = "0123456789";
   let result1 = "";
   const charactersLength = characters.length;
   for (let i = 0; i < num; i++) {

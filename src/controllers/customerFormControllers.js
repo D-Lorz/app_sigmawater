@@ -18,7 +18,7 @@ exports.registrarClientes = async (req, res) => {
     const codigo_postal = req.body.codigo_postal;
 
     const id_cliente = generateRandomNumber(6); // * Se almacena el ID del cliente codigo numerico
-    const id_vendedor = req.user.id_vendedorAceptado //del admin saca el id consecutivo del vendedor aprobado 
+    const id_vendedor = req.user.id_consecutivo //del admin saca el id consecutivo del vendedor aprobado 
     const codigo_id_vendedor = req.user.id_vendedor//del admin saca el id alfanumero del vendedor aprobado
 
 
@@ -219,7 +219,7 @@ exports.solicitarCredito = async (req, res) => {
 // todo -->  Mostrar lista de clientes total por vendedor
 exports.listarClientes = async (req, res) => {
   // Capturando el id del Vendedor actual
-  const id_vendedor = req.user.id_vendedorAceptado;
+  const id_vendedor = req.user.id_consecutivo;
 
   // Consultando en DB los clientes que pertenecen al vendedor actual
   conexion.query('SELECT * FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
@@ -487,8 +487,6 @@ const generateRandomNumber = (num) => {
   }
   return result1;
 }
-
-
 
 // todo --> Formulario servicio instalado
 // exports.servicioInstaladosx = async (req, res) => {
