@@ -112,16 +112,9 @@ rel="stylesheet" type="text/css" />
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.correo %></a></td>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.telefono %></a></td>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.direccion %></a></td>
+                                <td><div class="badge <%=estado.color%> font-size-12" ><%= estado.txt %></div></td>
+                                <td><div class="badge <%= estado_intalacion.background  %> font-size-12 letra" > <%= estado_intalacion.txt %> </div></td>
 
-                              <% if (user.estado_de_la_cuenta == 0 ) {%>
-                                    <% user.estado_de_la_cuenta = "Activo" %>
-                                     <td><a href="/perfil-clientes/<%- user.id_cliente %>"><div class="badge badge-soft-dark font-size-12" >No solicitado</div></a></td>
-                            <% } else {%>
-                                <%  if (user.estado_de_la_cuenta==1) { %>
-                                   <% user.estado_de_la_cuenta = "Eliminado" %>
-                                     <td><a href="/perfil-clientes/<%- user.id_cliente %>"><div class="badge badge-soft-danger font-size-12" ><%= user.estado_de_la_cuenta %></div></a></td>
-                             <%}%>
-                          <%}%>
                           
                           <!-- <td><div class="badge <= estado_intalacion.color %> font-size-12 letra" > <= estado_intalacion.txt %> </div></td> -->
 

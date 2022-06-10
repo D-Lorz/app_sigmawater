@@ -38,16 +38,12 @@ const cargar = multer({
 const multiupload = cargar.fields([{ name: 'licencia' }, { name: 'licencia_trasera' }]);
 
 
-
-
  // * ========== Renderizado de vistas vendedor ==========
 //                           ↓↓
         router.get('/register', nologueado, (req, res) => {
             res.render('register')
         });
 // *   ================ ===== ↑↑ ==============================
-
-
 
 
 //* router para los métodos del controller

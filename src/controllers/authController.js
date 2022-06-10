@@ -189,7 +189,6 @@ exports.nologueado = async (req, res, next) => {
     }
 }
 
-
 exports.isAdmin = async (req, res, next) => {
     try {
       if (!(req.user.rol === "administrador")) {
@@ -200,7 +199,7 @@ exports.isAdmin = async (req, res, next) => {
       return next();
     }
   };
-  exports.isSeller = async (req, res, next) => {
+exports.isSeller = async (req, res, next) => {
     try {
       if (!(req.user.rol === "vendedor")) {
         res.redirect("/login");
@@ -210,6 +209,7 @@ exports.isAdmin = async (req, res, next) => {
       return next();
     }
   };
+
 // todo: MOSTRAR LISTA DE VENDEDORES AFILIADOS
 exports.listarAfiliados= async (req, res) => {
 

@@ -224,7 +224,57 @@ exports.listarClientes = async (req, res) => {
   // Consultando en DB los clientes que pertenecen al vendedor actual
   conexion.query('SELECT * FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
     if (err) throw err;
-    res.render('lista-clientes', { user: req.user,clientes: result})
+
+
+// todo ===============================>>> Estado del solicitar credito
+let credito =  conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [id_vendedor.id])
+let estado = []
+estado.txt = "No solicitado";
+estado.color = 'badge-soft-dark'
+estado.verBtn = true;
+
+if (credito.length > 0) {
+  credito = credito[0]
+  if (credito.estado_del_credito === '0') {
+    estado.txt = "En revisión";
+    estado.color = 'badge-soft-warning'
+    estado.verBtn = false;
+  } else if (credito.estado_del_credito == 1) {
+    estado.txt = "Aprobado";
+    estado.color = 'badge-soft-success'
+    estado.verBtn = false;
+  } else if (credito.estado_del_credito == 2) {
+    estado.txt = "Rechazado";
+    estado.color = 'badge-soft-danger'
+    estado.verBtn = false;
+  } else if (credito.estado_del_credito == 3) {
+    estado.txt = "Pagado";
+    estado.color = 'badge-soft-info'
+    estado.verBtn = false;
+  }
+}
+// todo =========================>> Estados de la agenda para instalar el producto
+let consultaEstado_instalacion =  conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [id_vendedor.id])
+
+let estado_intalacion = []
+estado_intalacion.txt = "No solicitado";
+estado_intalacion.background = 'badge-soft-dark'
+
+if (consultaEstado_instalacion.length > 0) {
+  consultaEstado_instalacion = consultaEstado_instalacion[0]
+
+if (consultaEstado_instalacion.estado_agenda === '0') {
+  estado_intalacion.txt= "Listo para instalar";
+  estado_intalacion.background = 'badge-soft-warning'
+  
+} else if (consultaEstado_instalacion.estado_agenda == 1) {
+  estado_intalacion.txt= "Instalado";
+  estado_intalacion.background= 'visitado';
+
+  } 
+}
+
+    res.render('lista-clientes', { user: req.user,clientes: result,estado,estado_intalacion})
   })
 
 }
@@ -343,7 +393,6 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     estado_intalacion
     
    })
-
  
 }
 

@@ -15,14 +15,14 @@ const { listarVendedores,
 
  // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
-router.get('/vendedores', isAuthenticated,isAdmin, listarVendedores )
-router.get('/perfil-vendedores/:id', isAuthenticated,isAdmin,listarVendedores_PerfilVendedores)
+router.get('/vendedores', isAuthenticated, listarVendedores )
+router.get('/perfil-vendedores/:id', isAuthenticated,listarVendedores_PerfilVendedores)
 
 
-router.get('/listar-clientes', isAuthenticated,isAdmin ,listarClientes)
-router.get('/perfil-cliente/:id', isAuthenticated,isAdmin,listarClientes_PerfilClientes)
+router.get('/listar-clientes', isAuthenticated,listarClientes)
+router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
 
-router.get('/prueba', isAuthenticated,isAdmin ,(req, res) => {
+router.get('/prueba', isAuthenticated,(req, res) => {
        res.render('./1-admin/clientes', { user: req.user })
 });
 // *   ================ ===== ↑↑ ==============================
@@ -30,9 +30,9 @@ router.get('/prueba', isAuthenticated,isAdmin ,(req, res) => {
            
 // * ROUTER: para los métodos del controller
  /*=============================================================*/  
-  router.post('/aprobarVendedor', isAuthenticated,isAdmin,ActualizarEstado);
+  router.post('/aprobarVendedor', isAuthenticated,ActualizarEstado);
  /*=============================================================*/
-  router.post('/ActualizarNivel', isAuthenticated,isAdmin,ActualizarNivel);
+  router.post('/ActualizarNivel', isAuthenticated,ActualizarNivel);
 /*=============================================================*/
 
 module.exports = router
