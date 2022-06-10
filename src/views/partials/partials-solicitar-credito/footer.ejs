@@ -375,19 +375,34 @@ $.datepicker.regional['es'] = {
     });
 
 
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+
     // Pattern (Phone) MASCARA PARA EL CAMPO TELEFONO DE SOLICITANTE
-    var phoneMasktelmovil = IMask(document.getElementById('phone-masktelmovil'), {
+    var phoneMasktelmovilsolicitante = IMask(document.getElementById('phonesolicitante'), {
+      mask: '+{1} (000) 000-0000'
+    });
+        // Pattern (Phone)  MASCARA PARA EL CAMPO TELEFONO SECUNDARIO DE SOLICITANTE
+        var phoneMaskphonetwosolicitante = IMask(document.getElementById('phonetwosolicitante'), {
       mask: '+{1} (000) 000-0000'
     });
 
-    // Pattern (Phone)  MASCARA PARA EL CAMPO TELEFONO SECUNDARIO DE SOLICITANTE
-    var phoneMask = IMask(document.getElementById('phone-masktwo'), {
-      mask: '+{1} (000) 000-0000'
-    });
+
+});
 
 
-    // Pattern (Phone)
-    var currencyMask = IMask(document.getElementById('currency-mask'), {
+
+
+
+
+
+  //  /TODO: FUNCIONES PARA MASCARA  -->
+
+  document.addEventListener("DOMContentLoaded", function () {
+   // Pattern (Phone)
+   var currencyMask = IMask(document.getElementById('currency-mask'), {
       mask: '$num',
       blocks: {
         num: {
@@ -397,12 +412,6 @@ $.datepicker.regional['es'] = {
         }
       }
     });
-
-  });
-
-  //  /TODO: FUNCIONES PARA MASCARA  -->
-
-  document.addEventListener("DOMContentLoaded", function () {
 
     // Pattern (Phone)
     var currencyMask = IMask(document.getElementById('currency-masktwo'), {

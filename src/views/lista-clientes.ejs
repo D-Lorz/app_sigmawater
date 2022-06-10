@@ -72,41 +72,25 @@ rel="stylesheet" type="text/css" />
       </div>
       <!-- end page title -->
 
-         <div class="row align-items-center">
-        <div class="col-md-6">
-                  <div class="d-flex flex-wrap align-items-center
+         <div class="row ">
+        <div class="col-md-12">
+                  <div class="d-flex flex-wrap 
                       justify-content-end gap-2 mb-3">
+                     
                       <div>
-                    
-                      </div>
-                      <div>
-                          <a href="/nuevo-cliente" class="btn btn-light"><i class="bx
-                                  bx-plus me-1"></i> Agregar nuevo cliente</a>
+                          <a href="/nuevo-cliente"  style=" border-radius: 15px;" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar nuevo cliente</a>
                       </div>
 
-                      <div class="dropdown">
-                          <a class="btn btn-link text-muted py-1 font-size-16
-                              shadow-none dropdown-toggle" href="#"
-                              role="button" data-bs-toggle="dropdown"
-                              aria-expanded="false">
-                              <i class="bx bx-dots-horizontal-rounded"></i>
-                          </a>
-
-                          <ul class="dropdown-menu dropdown-menu-end">
-                              <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
-                              <li><a class="dropdown-item" href="#">*Aqui ira una opción*</a></li>
-                              <li><a class="dropdown-item" href="#">Eliminar cliente</a></li>
-                          </ul>
-                      </div>
                   </div>
 
               </div>
           </div>
             <!-- end row -->
 
-            <div class="table-responsive mb-4">
-                <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse;
-                    border-spacing: 0 8px; width: 100%;">
+
+            <div class="table-responsive mb-4 " >
+                <table class="table align-middle datatable dt-responsive table-check nowrap " style="border-collapse: collapse;
+                    border-spacing: 0 8px; width: 100%;" >
                     <thead>
                     
                         <th scope="col">Nombres</th>
@@ -117,7 +101,7 @@ rel="stylesheet" type="text/css" />
                         <th scope="col">Estado de crédito</th>
                         <th scope="col">Estado de instalación</th>
                                                  
-                        </tr>
+                    
                     </thead>
                     <tbody>
                         <% clientes.forEach((user)=>{ %>
