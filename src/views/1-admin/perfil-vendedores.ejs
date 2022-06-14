@@ -29,6 +29,8 @@
 <!-- App Css-->
 <link href="../directorio_dash/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
+<!-- scroll -->
+<link rel="stylesheet" href="../css/scrolls.css">
     </head>
 
     <body>
@@ -611,11 +613,17 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="">
-                                            <div class="table-responsive" >
+                                            <div class="table-responsive" style="overflow-x: hidden;">
                                                                
                                                 <table class="table table-nowrap align-middle" id="idahorro"
-                                             class="dataTables_filter"  id="tech-companies-1" class="dataTables_info" style="margin-top: 2%;" >
-                                                                    <thead class="">
+                                             class="dataTables_filter"  id="tech-companies-1" class="dataTables_info" style="margin-top: 2%; " >
+                                             <style>
+
+                                           .dataTables_filter{
+                                            width: 97%;
+                                           }
+                                             </style>
+                                                                    <thead>
                                                                        <tr>
                                                                             <th >Nombres</th>
                                                                             <th >Apellidos</th>
@@ -636,8 +644,7 @@
                                                                               <%= user.sistema.txt %>
                                                                                  <% }%>
                                                                               </td>
-
-                                                                            <td> <% if(user.estadoCreditoCliente) {%>
+                                                                  <td> <% if(user.estadoCreditoCliente) {%>
                                                                                 <div class="badge <%= user.estadoCreditoCliente.color %> font-size-12" ><%= user.estadoCreditoCliente.txt %></div>
                                                                                  <% }%>
                                                                               </td>
@@ -648,6 +655,7 @@
                                                                               </td>
                                                                       
                                                                          </tr>
+                                                                      
                                                                          <%})%>
                                                                       </tbody>
                                                                </table>
@@ -657,7 +665,7 @@
                                                      </div>
                                                   </div>
                                               
-                     </div>
+                                               </div>
                         
 
                             <div class="col-xl-3 col-lg-4">
@@ -728,7 +736,6 @@
                                         <div class="card-body">
                                             <h5 class="card-title mb-3">Afiliado a</h5>
     
-
                                             <a  href="/perfil-vendedores/<%- referente.id_vendedor%>" >
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar-sm flex-shrink-0 me-3">
@@ -736,11 +743,11 @@
                                                     </div>
                                                     <div class="flex-grow-1" style="text-transform: capitalize;">
                                                         <div>
-                                                            <!-- < info_vendedor2.forEach((user)=>{ %> -->
+                                                       
                                                             <h5 class="font-size-14 mb-1"><%= referente.nombres %> <%= referente.apellidos %></h5>
                                                        <p class="font-size-13 text-muted mb-0"><%- referente.id_vendedor%></p>
 
-                                                            <!-- <)%> -->
+                                                   
                                                         </div>
                                                     </div>
                                                 </div>
@@ -750,25 +757,42 @@
                                     </div>
                                     <!-- end card -->
                                     <% } else { %> 
-                                       
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-3">Afiliado a</h5>
+                                                    <div class="d-flex align-items-center">
+                                                       
+                                                        <div class="flex-grow-1">
+                                                            <div>
+                                                               
+                                                                <h5 class="font-size-14 mb-1"></h5>
+                                                           <p class="font-size-13 text-muted mb-0">Este vendedor no se registró con un código de afiliado</p>
+    
+                                                           
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                               
+                                            </div>
+                                            <!-- end card body -->
+                                        </div>
                                     <% }%> 
 
-                               <!-- < if(afiliados) {%>   -->
+                                    <%if(info_vendedor.afiliados) {%>  
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title mb-3">Afiliados</h5>
-                            <div class="list-group list-group-flush">
+                                           <h5 class="card-title mb-3">Afiliados</h5>
+                                         <div class="list-group list-group-flush">
                               
-
                                 <% afiliados.forEach((a)=>{ %> 
-                                            <a href="/perfil-vendedores/<%- a.id_vendedor%>" class="list-group-item list-group-item-action">
+                                                                             <a href="/perfil-vendedores/<%- a.id_vendedor%>" class="list-group-item list-group-item-action">
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar-sm flex-shrink-0 me-3">
                                                         <img src="../directorio_dash/images/users/avatar-1.jpg" alt="" class="img-thumbnail rounded-circle">
                                                     </div>
                                                     <div class="flex-grow-1" style="text-transform: capitalize;">
                                                         <div>
-                                                            
+                                                          
                                                             <h5 class="font-size-14 mb-1"><%= a.nombres %> <%= a.apellidos%></h5>
                                                             <p class="font-size-13 text-muted mb-0"><%= a.id_vendedor%></p>
                                                            
@@ -776,15 +800,37 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                            <%})%> 
+                                              <%})%> 
+
                                         </div>
                                     </div>
                                     <!-- end card body -->
                                 </div>
-                                <!-- end card -->
-                                <!-- <} else { %> 
-                                       
-                                    < }%>  -->
+                                <% } else { %> 
+                                    <div class="card">
+                                        <div class="card-body">
+                                               <h5 class="card-title mb-3">Afiliados</h5>
+                                             <div class="list-group list-group-flush">
+                                  
+                                                  <div class="d-flex align-items-center">
+                                                      
+                                                        <div class="flex-grow-1" >
+                                                            <div>
+                                                              
+                                                                <h5 class="font-size-14 mb-1"></h5>
+                                                                <p class="font-size-13 text-muted mb-0">Este vendedor no tiene afiliados</p>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                
+    
+                                            </div>
+                                        </div>
+                                        <!-- end card body -->
+                                    </div>
+                                    <% } %> 
                             </div>
                             <!-- end col -->
                         </div>

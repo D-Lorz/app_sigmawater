@@ -32,7 +32,8 @@
  <!-- App Css-->
  <link href="../directorio_perfilClientes/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
  <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
-
+<!-- scroll -->
+<link rel="stylesheet" href="../css/scrolls.css">
 
 </head>
 
@@ -49,7 +50,7 @@
             <div class="main-content">
                 <div class="page-content">
                     <div class="container-fluid">
-          <!-- * =============>> Datos del vendedor  <<========================== -->
+    <!-- * =============>> Datos del vendedor  <<========================== -->
           <div class="row">
             <div class="col-xl-8" >
                 <div class="">
@@ -60,78 +61,368 @@
                                 <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
                                     <div class="card-header bg-transparent border-primary">
                                         <h5 class="my-0 text-primary">
-                                            <i class="fa fa-user-circle"></i>&nbsp; Datos del vendedor</h5>
-
-                                                                                        
-                                                
+                                            <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5>
+                                                  <a href="/solicitar-credito/<= info_clientes.id_cliente %>" >
+                                                      <button class="btn btn-primary" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Datos de credito</button>
+                                                  </a>                           
                                                 <input type="hidden" hidden name="id_consecutivo" value="<%= info_clientes.id %>">
                                                 <input type="hidden" hidden name="id_cliente" value="<%= info_clientes.id_cliente%>">
-                 
+                                     </div>
 
-                                      </div>
                                     <div class="card-body">
-
-                                        <div class="table-responsive">
+                                          <div class="table-responsive">
                                             <table class="table mb-0">
-
-                                                <tbody>
+                                                 <tbody>
                                                     <tr>
-                                                        <td style="width: 23%;">ID</td>
-                                                        <td><b><%= info_clientes.id_cliente%></b></td>  
-                                                        <td>Teléfono</td>
-                                                        <td><b>xxxxx</b></td>
-
+                                                       <td style="width: 23%;">ID</td>
+                                                         <td><b><%= info_clientes.id_cliente %></b></td>
+                                                         <td>Teléfono</td>
+                                                         <td><b><%= info_clientes.telefono %></b></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Nombre</td>
-                                                        <td><b>xxxxx</b></td>
+                                                        <td style="width: 29%;"><b><%= info_clientes.nombre %></b></td>
                                                         <td style="width:20%">Dirección</td>
-                                                        <td><b>xxxxx</b></td>
-                                                                                                             
+                                                        <td><b><%= info_clientes.direccion %> <%= info_clientes.ciudad %> <p><%= info_clientes.estado_ubicacion %> <%= info_clientes.codigo_postal %> </p></b></td>
                                                     </tr>
-
                                                     <tr>
                                                         <td>Segundo nombre</td>
-                                                        <td><b>xxxxx</b></td>
+                                                        <td><b><%= info_clientes.segundo_nombre %></b></td>
                                                         <td>Dirección 2</td>
-                                                        <td><b>xxxxx</b></td>
+                                                        <td><b><%= info_clientes.direccion2%></b></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Apellido</td>
-                                                        <td><b>xxxxx</b></td>
+                                                        <td><b><%= info_clientes.apellido %></b></td>
                                                         <td>Estado de credito</td>
-                                                        <td><b>xxxxx</b></td>
+                                                        <td><div class="badge <%=estado.color%> font-size-12" ><%= estado.txt %></div></td>
                                                     </tr>
-                                           
                                                     <tr>
-                                                        <td>Correo electronico</td>
-                                                        <td>xxxxx</b></td>
+                                                        <td>Correo</td>
+                                                        <td><b><%= info_clientes.correo %></b></td>
                                                         <td style="width: 24%;">Monto aprobado</td>
-                                                        <td><b>xxxxx</b></td>
-                                                         </tr>
-                                                   
-                                                </tbody>
+                                                        <td><div class="badge badge-soft-success font-size-12">$0 <%= info_clientes.monto_aprobado %></div></td>
+                                                    </tr>
+                                                  </tbody>
                                             </table>
-                                            
                                         </div>
-
                                     </div>
-
-                                </div>
-                            </div><!-- end col -->
-
-                             </div>
-                        <!-- end card-body -->
+                                 </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- end card -->
-
-                </div><!-- end col -->
+                </div>
               </div>
-          
+
+
+              <style>
+                .noVisitado{
+                     background: #50515c;
+                     }
+                     .letra{
+                         color:white;
+                     }
+                 .visitado{
+                     background: #89c278;
+                 }
+                 .producto_instalado{
+                    background: #fed061;
+                 }
+               
+            </style>
+
+
+            <div class="col-lg-4">
+                <div class="card border-primary text-white-50 <%= estadoVisita_testAgua.background %>" style="margin-top: 5%;">
+                    <div class="card-body">
+                        <h6 class="mb-3 text-white">Estado de visitas</h6>
+                        <p class="card-text" style="color:white;">
+                            <td><div class="badge <%= estadoVisita_testAgua.color %> font-size-12 letra" > <%= estadoVisita_testAgua.txt  %> <%= consulta_UltimoTestAgua.fecha_test %></div></td>
+                            </p>
+                    </div>
+                </div>
+
+                <div class="card  border-primary text-white-50 <%= estado_intalacion.background %>">
+                    <div class="card-body">
+                        <h6 class="mb-3 text-white">Estado de la instalación del producto</h6>
+                        <p class="card-text" style="color:white;">
+                            <td><div class="badge <%= estado_intalacion.color %> font-size-12 letra" > <%= estado_intalacion.txt %> </div></td>
+
+                        </p>
+                        
+                    </div>
+                </div>
+              
+             </div>
             
 
-              </div>
+         </div>
     <!-- * =============>> FIN Datos del vendedor <<===================== -->
+
+   <!-- * =============>> Test de agua  <<============================== -->
+   <div class="row">
+    <div class="col-xl-14">
+        <div class="">
+        
+            <div class="row">
+                <div class="col-lg-14">
+                    <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7; margin-left: 17px;">
+                       <div class="card-header bg-transparent border-primary">
+                            <h5 class="my-0 text-primary">
+                                <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
+                             
+                        </div> 
+                          <div class="card-body">
+                            <div class="">
+                                <div class="table-responsive" >
+                                   <table class="table table-nowrap align-middle" id="idahorro"
+                                 class="dataTables_filter"  id="tech-companies-1" class="dataTables_info" style="margin-top: 2%;" >
+                                                        <thead class="">
+                                                            <tr>
+                                                                <th>Numero de test</th>
+                                                                <th>Fecha</th>
+                                                                <th>Dureza (gpg)</th>
+                                                                <th>Hierro (ppm)</th>
+                                                                <th>Total dureza compensada</th>
+                                                                <th >TSD (Total de solidos disueltos)</th>
+                                                                <th>Cloro (ppm)</th>
+                                                                <th>pH</th>
+                                                                <th>Azufre (ppm)</th>
+                                                                <th>Tanino (ppm)</th>
+                                                                <th>Nitrato (ppm)</th>
+                                                                <th>Alcalinidad</th>
+                                                                <th>Otro</th>
+                                                                <th>Concentración</th>
+                                                                <th>Otro</th>
+                                                                <th>Concentración</th>
+                                                                <th>Otro</th>
+                                                                <th>Concentración</th>
+                                                                <th>Nota</th>
+                                                               </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                             <%informacionTestAgua.forEach((user)=>{ %> 
+                                                               <tr>
+                                                                  <td><%= user.id %></td>
+                                                                      <td><%= user.fecha_test %></td>
+                                                                      <td><%= user.dureza_gmXgalon %></td>
+                                                                      <td><%= user.hierro %></td>
+                                                                      <td><%= user.totalDureza_compensada %></td>
+                                                                      <td><%= user.tsd %></td>
+                                                                      <td><%= user.cloro %></td>
+                                                                      <td><%= user.ph %></td>
+                                                                      <td><%= user.azufre %></td>
+                                                                      <td><%= user.tanino %></td>
+                                                                      <td><%= user.nitrato %></td>
+                                                                      <td><%= user.alcalinidad %></td>
+                                                                      <td><%= user.otro1 %></td>
+                                                                      <td><%= user.concentracion1 %></td>
+                                                                      <td><%= user.otro2 %></td>
+                                                                      <td><%= user.concentracion2 %></td>
+                                                                      <td><%= user.otro3 %></td>
+                                                                      <td><%= user.concentracion3 %></td>   
+                                                                      <td><%= user.nota %></td>    
+                                                                 </tr>
+                                                             <%})%>
+                                                                   </tbody>
+                                                                </table>
+                                                                <input type="hidden" id="datosJson_PrimerTestagua" value="<%= datosJson_PrimerTestagua %>">
+                                                                <input type="hidden" id="datosJson_UltimoTestagua" value="<%= datosJson_UltimoTestagua %>">
+                                                             </div>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                        <!-- end card -->
+                                    </div> <!-- end col -->
+                    
+
+                            <div class="col-lg-14 ">
+                                <div class="card" style="margin-top: 5%;margin-left: 17px;border-radius: 19px;box-shadow: 0px 0px 10px #e7e7e7;">
+                                    <div class="card-header">
+                                        <h4 class="card-title mb-0">Calidad de agua del hogar</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="column_chart" data-colors='["#a99bcb", "#50368c"]' class="apex-charts" dir="ltr"></div>                                      
+                                    </div>
+                                </div>
+                                
+                                <!--end card-->
+                            </div>
+                    </div>
+<!-- * =============>> FIN Test de agua  <<=============================- -->
+  <!-- * =============>> Ahorro  <<===================================== -->
+  <div class="row">
+    <div class="col-xl-8">
+        <div class="">
+            <div class="card-body">
+              
+                <div class="row">
+                    <div class="col-lg-14">
+                        <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
+                            <div class="card-header bg-transparent border-primary">
+                                <h5 class="my-0 text-primary">
+                                    <i class="fas fa-money-bill"></i>&nbsp; Ahorro</h5>
+
+                              </div>
+                              <div class="card-body">
+                                <div class="table-responsive" style="overflow-x: hidden;" >
+                                   
+                                    <table class="table table-striped mb-0" 
+                                     id="copyahorro" class="dataTables_filter" 
+                                      class="dataTables_paginate "
+                                      class="dataTables_info" style="margin-top: 2%;">
+                                 <style>
+                                   
+                                    .dataTables_filter{
+                                         display: none;
+                                     }
+                                     .dataTables_paginate{
+                                         display: none;
+                                     }
+                                     .dataTables_info{
+                                         display: none;
+                                     } 
+
+                                 </style>
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th ></th>
+                                                <th>Gasto mensual</th>
+                                                <th>Ahorro mensual</th>
+                                                <th>Ahorro anual</th>
+                                             </tr>
+                                        </thead>
+
+                                        <tbody>
+                                           <tr>
+                                                <td>Agua embotellada</td>
+                                                <td>$ <%= ahorroCalculado.agua_embotellada %></td>
+                                                <td>$ <%= ahorroCalculado.ahorroMensual_aguaEmbotellada %></td>  
+                                                <td>$ <%= ahorroCalculado.ahorroAnual_aguaEmbotellada %></td>                                                                      
+                                            </tr>
+                                            <tr>
+                                                <td> Jabones</td>
+                                                <td>$ <%= ahorroCalculado.jabones %></td>   
+                                                <td>$ <%= ahorroCalculado.ahorroMensual_jabon %></td>  
+                                                <td>$ <%= ahorroCalculado.ahorroAnual_jabon %></td>                                                             
+                                            </tr>
+                                            <tr>
+                                                <td> Productos de limpieza</td>
+                                                <td>$ <%= ahorroCalculado.productos_limpieza %></td>    
+                                                <td>$ <%= ahorroCalculado.ahorroMensual_productos_limpieza %></td>      
+                                                <td>$ <%= ahorroCalculado.ahorroAnual_productos_limpieza %></td>                                                  
+                                            </tr>
+                                            <tr>
+                                                <td> Agua caliente</td>
+                                                <td>$ <%= ahorroCalculado.agua_caliente %></td>     
+                                                <td>$ <%= ahorroCalculado.ahorroMensual_agua_caliente %></td>   
+                                                <td>$ <%= ahorroCalculado.ahorroAnual_agua_caliente %></td>                                                            
+                                            </tr>
+                                            <tr>
+                                                <td> Plomería y electrodomésticos</td>
+                                                <td>$ <%= ahorroCalculado.plomeria_electrodomesticos %></td>    
+                                                <td>$ <%= ahorroCalculado.ahorroMensual_plomeria_electrodomesticos %></td>    
+                                                <td>$ <%= ahorroCalculado.ahorroAnual_plomeria_electrodomesticos %></td>                                                             
+                                            </tr>
+                                            <tr>
+                                                <td>Ropa y lencería</td>
+                                                <td>$ <%= ahorroCalculado.ropa_lenceria %></td>         
+                                                <td>$ <%= ahorroCalculado.ahorroMensual_ropa_lenceria %></td>        
+                                                <td>$ <%= ahorroCalculado.ahorroAnual_ropa_lenceria %></td>                                              
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    <input type="hidden" id="datosJson_ahorroCalculado" value="<%= datosJson_ahorroCalculado %>">
+                                  </div>
+                                </div>
+                            </div>
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+        
+        <div class="col-xl-4">
+            <!-- card -->
+            <div class="card" style="margin-top: 5%;border-radius: 19px;box-shadow: 0px 0px 10px #e7e7e7;">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Ahorro total</h4>
+                </div>
+                <!-- card body -->
+                <div class="card-body">
+                <div class="row align-items-center">
+                        <div class="col-xl-13">
+                            <div>
+                                <div id="market-overview" data-colors='["#a99bcb", "#50368c"]' class="apex-charts"></div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row-->
+    </div>
+<!-- * =============>> FIN Ahorro  <<================================ -->
+
+ <!-- * =============>> Agendar instalación  <<================================== -->
+            <div class="row">
+                <div class="col-xl-8">
+                    <div class="">
+                        <div class="card-body">
+                        
+                            <div class="row">
+                                <div class="col-lg-14">
+                                    <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
+                                        <div class="card-header bg-transparent border-primary">
+                                            <h5 class="my-0 text-primary">
+                                                <i class="fas fa-wrench"></i>&nbsp; Instalación</h5>
+
+                                                <a href="/probando/<%= info_clientes.id_cliente %>" >
+                                                    <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Registrar instalación</button>
+                                                </a> 
+
+                                        </div>
+                                        <div class="card-body">
+                                             <div class="table-responsive">
+                                                <table class="table mb-0">
+                                                     <tbody>
+                                                        <tr>
+                                                           <td style="width: 26%;">Fecha de instalación</td>
+                                                            <td><b>----</b></td>
+                                                            <td>Instalador</td>
+                                                            <td><b>----</b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Prodcuto instalado</td>
+                                                            <td>---</td>
+                                                            <td>Nota de instalación</td>
+                                                            <td><b>-----</b></td>
+                                                        <tr>
+                                                        <tr>
+                                                            <td>Serial del producto</td>
+                                                             <td>---</td>
+                                                        <tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                         </div>
+                                     </div>
+                                </div>
+                             </div>
+                           </div>
+                       </div>
+                    </div>
+                 </div>
+    <!-- * =============>> FIN Agendar instalación  <<============================== -->
+
 
 
                   </div>

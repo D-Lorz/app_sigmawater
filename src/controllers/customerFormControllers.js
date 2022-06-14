@@ -336,7 +336,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
         
       }
       
-// todo =========================>> Consulta del PRIMER test de agua para y grafica
+// todo =========================>> Consulta del PRIMER test de agua para la fecha y grafica
   let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id DESC LIMIT 1, 1', [clientes2.id])
    
   if(consulta_PrimerTestAgua.length > 0 ){
@@ -537,28 +537,6 @@ const generateRandomNumber = (num) => {
   return result1;
 }
 
-// todo --> Formulario servicio instalado
-// exports.servicioInstaladosx = async (req, res) => {
-
-//   const fecha_instalacion = req.body.fecha_instalacion;
-//   const producto_instalado = req.body.producto_instalado;
-//   const instalador = req.body.instalador;
-//   const evidencia = '../evidenciaServicio/' + urlLicencias[0]
-//   const evidencia_fotografica = JSON.stringify({'evidencia': evidencia,});
-//   const nota = req.body.nota;
-
-//    const id_cliente = req.body.id_cliente
-//    const codigo_cliente = req.body.codigo_cliente
-
-//  const Datos_servicio = {fecha_instalacion, producto_instalado, instalador,evidencia_fotografica,nota,id_cliente }
-
-// await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], (err, result) => {
-//   if (err) throw err;
-//   if (result) { res.redirect('/perfil-clientes/'+codigo_cliente) }
-    
-//    })
-
-// }
 
 
 

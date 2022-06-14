@@ -2,6 +2,19 @@ const { promisify } = require("util");
 const conexion = require("../database/db");
 const {} = require("../controllers/adminControllers");
 
+
+
+exports.getRegistrarInstalacion = async (req, res) => {
+  const id = req.params.id
+
+  await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
+    if (err) throw err;
+    res.render('./1-admin/probando', { user: req.user, cl_instalacion: result[0] });
+
+  })
+
+}
+
 // ? ========>>> ZONA DE VENDEDORES <<<========
 // todo ===========>>>  Mostrar lista de VENDEDORES
 exports.listarVendedores = async (req, res) => {
@@ -198,7 +211,6 @@ exports.ActualizarEstado = async (req, res) => {
     }
   );
 };
-
 // ? ========>>> ZONA DE VENDEDORES <<<========
 
 
@@ -264,22 +276,146 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?",[id_cliente]);
   info_clientes = info_clientes[0];
 
+// todo ===============================>>> Estado del solicitar credito
+let credito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
+let estado = []
+estado.txt = "No solicitado";
+estado.color = 'badge-soft-dark'
+estado.verBtn = true;
+
+if (credito.length > 0) {
+  credito = credito[0]
+  if (credito.estado_del_credito === '0') {
+    estado.txt = "En revisión";
+    estado.color = 'badge-soft-warning'
+    estado.verBtn = false;
+  } else if (credito.estado_del_credito == 1) {
+    estado.txt = "Aprobado";
+    estado.color = 'badge-soft-success'
+    estado.verBtn = false;
+  } else if (credito.estado_del_credito == 2) {
+    estado.txt = "Rechazado";
+    estado.color = 'badge-soft-danger'
+    estado.verBtn = false;
+  } else if (credito.estado_del_credito == 3) {
+    estado.txt = "Pagado";
+    estado.color = 'badge-soft-info'
+    estado.verBtn = false;
+  }
+}
+
+// todo =========================>> Mostrar información del test de agua del cliente
+let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [info_clientes.id])
+  
+// * >>> Estados del testeo (visita al cliente)
+let consultaEstado_testAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [info_clientes.id])
+ 
+ let estadoVisita_testAgua = []
+  estadoVisita_testAgua.txt = "A la fecha el cliente aun no ha sido visitado";
+  estadoVisita_testAgua.color = '';
+  estadoVisita_testAgua.background = 'noVisitado';
+  
+if (consultaEstado_testAgua.length > 0) {
+  consultaEstado_testAgua = consultaEstado_testAgua[0]
+
+if (consultaEstado_testAgua.estado_visita_test === '0') {
+    estadoVisita_testAgua.txt= "Se realizó un test de agua el";
+    estadoVisita_testAgua.background= 'visitado';
+    
+  } 
+  
+}
+// todo =========================>> Consulta del PRIMER test de agua para la fecha y grafica
+    let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id DESC LIMIT 1, 1', [info_clientes.id])
+      
+    if(consulta_PrimerTestAgua.length > 0 ){
+      consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]
+    }
+    const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
+
+// todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
+ let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [info_clientes.id])
+ 
+    if(consulta_UltimoTestAgua.length > 0 ){
+      consulta_UltimoTestAgua = consulta_UltimoTestAgua[0]
+    }
+    const datosJson_UltimoTestagua = JSON.stringify(consulta_UltimoTestAgua);
+
+// todo =========================>> Mostrar información del ahorro del cliente
+    let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [info_clientes.id])
+    if(ahorroCalculado.length > 0 ){
+      ahorroCalculado = ahorroCalculado[0]
+    }
+    const datosJson_ahorroCalculado = JSON.stringify(ahorroCalculado);
+
+// todo =========================>> Estados de la agenda para instalar el producto
+    let consultaEstado_instalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [info_clientes.id])
+
+    let estado_intalacion = []
+    estado_intalacion.txt = "La instalación del producto no ha sido agendada";
+    estado_intalacion.background = 'noVisitado';
+
+    if (consultaEstado_instalacion.length > 0) {
+      consultaEstado_instalacion = consultaEstado_instalacion[0]
+
+    if (consultaEstado_instalacion.estado_agenda === '0') {
+      estado_intalacion.txt= "Listo para instalar";
+      estado_intalacion.background= 'producto_instalado';
+      
+    } else if (consultaEstado_instalacion.estado_agenda == 1) {
+      estado_intalacion.txt= "Instalado";
+      estado_intalacion.background= 'visitado';
+
+    } 
+}
+
+
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-cliente", {
-    user: req.user,
+    user: req.user, estado,
     info_clientes,
+    informacionTestAgua,
+    estadoVisita_testAgua,
+    consulta_PrimerTestAgua,
+    datosJson_PrimerTestagua,
+    consulta_UltimoTestAgua,
+    datosJson_UltimoTestagua,
+    ahorroCalculado,
+    datosJson_ahorroCalculado,
+    estado_intalacion
   });
 };
 
+
+exports.instalacion = async (req, res) => {
+  const fecha_instalacion = req.body.fechaDeInstalacion;
+  const producto_instalado	 = req.body.productoInstalado;
+  const serial_producto = req.body.serial_producto;
+  const instalador = req.body.instalador;
+
+  const evidencia = '../evidenciaServicio/' + urlLicencias[0]
+  const evidencia_fotografica = JSON.stringify({'evidencia': evidencia,});
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+  console.log(evidencia_fotografica);
+  const nota = req.body.nota;
+
+  const id_cliente = req.body.id_cliente
+  const codigo_cliente = req.body.codigo_cliente
+
+
+ const Datos_servicio = { fecha_instalacion,producto_instalado,serial_producto,instalador,evidencia_fotografica,nota,id_cliente}
+
+await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], (err, result) => {
+  if (err) throw err;
+  if (result) { res.redirect('/perfil-cliente/'+codigo_cliente) }
+    
+   })
+
+}
+
+
+
 // ? ========>>> ZONA DE CLIENTES <<<========
 
-// todo ===========>>> Generar codigo numero aleatorio del cliente
-const generarPass_vendedor = (num) => {
-  const characters = "0123456789";
-  let result1 = "";
-  const charactersLength = characters.length;
-  for (let i = 0; i < num; i++) {
-    result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result1;
-};
+
+

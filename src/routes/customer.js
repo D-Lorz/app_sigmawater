@@ -43,39 +43,6 @@ const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente
 
 
 
-
-// todo ===>> subir evidencia fotografica del servicio instalado
-const rutaCarpeta = multer.diskStorage({
-
-    destination: function (req, file, callback) {
-        const rutaLicencia = path.join(__dirname, '../public/evidenciaServicio')
-        callback(null, rutaLicencia);
-    },
-
-    filename: function (req, file, callback) {
-        const fechaActual = Math.floor(Date.now() / 1000)
-  
-        if (file.fieldname == 'evidencia_fotografica') {
-            urlLicencias[0] = "Evidencia_fotografica" + fechaActual + "_" + file.originalname;
-        
-            callback(null, urlLicencias[0])
-        } 
-        else {
-            urlLicencias[1] = "xxxx" + fechaActual + "_" + file.originalname;
-            callback(null, urlLicencias[1])
-          
-        } 
-      
-    }
-
-});
-
-const cargarEvidencia = multer({
-    storage: rutaCarpeta,
-});
-
-const oneUpload = cargarEvidencia.fields([{ name: 'evidencia_fotografica' }, { name: 'xxx' }]);
-
 // todo =========================================================
 
  // * ========== Renderizado de vistas clientes ==========

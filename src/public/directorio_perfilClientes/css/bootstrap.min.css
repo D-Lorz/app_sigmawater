@@ -5,7 +5,11 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-@import url("https://fonts.cdnfonts.com/css/oblivian-text");
+@import url("oblivian.Grotesque");
+@font-face {
+  font-family:Oblivian ;
+  src: url('../directorio_dash/oblivian.Grotesque/Oblivian.ttf');
+}
 :root {
   --bs-blue: #7a7fdc;
   --bs-indigo: #564ab1;
@@ -50,7 +54,7 @@
 }
 body {
   margin: 0;
-  font-family: var(--bs-font-sans-serif);
+
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
@@ -3045,6 +3049,8 @@ fieldset:disabled .btn {
   color: #fff;
   background-color: #74788d;
   border-color: #74788d;
+  border-radius: 17px;
+  font-size: 12px;
 }
 .btn-check:focus + .btn-secondary,
 .btn-secondary:focus,
@@ -4639,7 +4645,7 @@ fieldset:disabled .btn {
 .card-header {
   padding: 1.25rem;
   margin-bottom: 0;
-  background-color: #fff;
+  /* background-color: #fff; */
   border-bottom: 1px solid #e9e9ef;
 }
 .card-header:first-child {
