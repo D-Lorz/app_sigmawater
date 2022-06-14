@@ -306,23 +306,34 @@ function getChartColorsArray(chartId) {
 
 
 
-// valores = JSON.parse(valores);
-// res.render('perfil-clientes', { user: req.user, clientes2,consultaEstado_testAgua })
- 
+// if(valoresDel_ahorro){
+
+// }
+
+
 let valoresDel_ahorro,graficaAhorroMensual,graficaAhorroAnual
 $( function(){
      valoresDel_ahorro = $('#datosJson_ahorroCalculado').val();
      valoresDel_ahorro = JSON.parse(valoresDel_ahorro);
 
-     graficaAhorroMensual= [valoresDel_ahorro.ahorroMensual_agua_caliente,valoresDel_ahorro.ahorroMensual_aguaEmbotellada,
-                            valoresDel_ahorro.ahorroMensual_jabon,valoresDel_ahorro.ahorroMensual_plomeria_electrodomesticos,
-                            valoresDel_ahorro.ahorroMensual_productos_limpieza,valoresDel_ahorro.ahorroMensual_ropa_lenceria]
+    if(valoresDel_ahorro.ahorroMensual_agua_caliente != null){
 
-     graficaAhorroAnual = [valoresDel_ahorro.ahorroAnual_agua_caliente,valoresDel_ahorro.ahorroAnual_aguaEmbotellada,
+        graficaAhorroMensual= [valoresDel_ahorro.ahorroMensual_agua_caliente,valoresDel_ahorro.ahorroMensual_aguaEmbotellada,
+            valoresDel_ahorro.ahorroMensual_jabon,valoresDel_ahorro.ahorroMensual_plomeria_electrodomesticos,
+            valoresDel_ahorro.ahorroMensual_productos_limpieza,valoresDel_ahorro.ahorroMensual_ropa_lenceria]
+
+    }else {
+        graficaAhorroMensual= [0,0,0,0,0,0]
+
+    } 
+    if(valoresDel_ahorro.ahorroMensual_agua_caliente != null){
+         graficaAhorroAnual = [valoresDel_ahorro.ahorroAnual_agua_caliente,valoresDel_ahorro.ahorroAnual_aguaEmbotellada,
                             valoresDel_ahorro.ahorroAnual_jabon,valoresDel_ahorro.ahorroAnual_plomeria_electrodomesticos,
                             valoresDel_ahorro.ahorroAnual_productos_limpieza,valoresDel_ahorro.ahorroAnual_ropa_lenceria]
     
-    
+     } else {
+        graficaAhorroAnual= [0,0,0,0,0,0]
+     }
     var barchartColors = getChartColorsArray("#market-overview");
     var options = {
         series: [{

@@ -228,7 +228,7 @@ exports.listarClientes = async (req, res) => {
 
 // todo ===============================>>> Estado del solicitar credito
 let credito =  conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [id_vendedor.id])
-let estado = []
+let estado = [] 
 estado.txt = "No solicitado";
 estado.color = 'badge-soft-dark'
 estado.verBtn = true;

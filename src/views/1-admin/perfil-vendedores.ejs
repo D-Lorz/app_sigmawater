@@ -88,26 +88,6 @@
                                                             <p class="text-muted font-size-13">Codigo de afiliado: <b style="font-weight:600 ;"><%= info_vendedor.id_vendedor %></b></p>
                           
 
-                                                            <form action="/aprobarVendedor" method="POST">
-                                                                <div class="btn-group me-1 mt-2">
-                                                             <input type="hidden" name="id_vendedorEnviar" value="<%= info_vendedor.id_vendedor %>">
-                                                             <input type="hidden" name="id_consecutivo" value="<%= info_vendedor.id %>">
-
-                                                                        <select class="form-select" id="selectEstado" name="estadoDe_laCuenta">
-                                                                            <option style="background:gray;color: white;">Estado actual: <%= viewsUser.estado_de_la_cuenta %></option>
-                                                                            <br>
-                                                                            <option value="aprobado">Aprobado</option>
-                                                                            <option value="bloqueado">Bloquear</option>
-                                                                        
-                                                                        </select>
-                                                                    </div>
-                                       
-                                                            <a href="/perfil-vendedores/<%= info_vendedor.id_vendedor %>" >
-                                                                <button class="btn btn-primary"  type="submit" style="float: right;margin-top: -4%;border-radius:13px;">Guadar </button>
-                                                            </a> 
-                                                        </form>
-
-                                                  
                                                             <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
                                                                 <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i><%= info_vendedor.telefono_movil %></div>
                                                                 <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i><%= info_vendedor.correo %></div>
@@ -159,23 +139,25 @@
                                                                
                                                                          <table class="table">
                                                                               <tbody>
-                                                                                   <tr>
+                                                                              
+                                                                                   <tr> 
                                                                                       <td><span >José fernandez torres</span> - <span class="badge badge-soft-info font-size-12">788945</span></td> 
                                                                                       <td><span class="badge badge-soft-success font-size-12">$ 2.000 </span></td>     
                                                                                     </tr>
-                                                                                    <tr>
+                                                                                     <tr>
                                                                                         <td><span class="badge badge-soft-pink font-size-12">4/23/2022 </span>  <span class="badge badge-soft-dark font-size-12">Factura: 456123</span></td>   
                                                                                         <td><span class="badge badge-soft-success font-size-12">Pagado </span></td>
                                                                                     </tr>
-                                                                                   
-                                                                                    <tr>
+                                                                                    <td><hr class="bg-primary" style=" background:#292929!important"></td>
+                                                                                     <tr>
                                                                                         <td><span >Alberto Alejandro</span> - <span class="badge badge-soft-info font-size-12">788945</span></td> 
                                                                                         <td><span class="badge badge-soft-success font-size-12">$ 750 </span></td>     
-                                                                                      </tr>
-                                                                                      <tr>
+                                                                                    </tr>
+                                                                                     <tr>
                                                                                           <td><span class="badge badge-soft-pink font-size-12">4/23/2022 </span>  <span class="badge badge-soft-dark font-size-12">Factura: 456123</span></td>   
                                                                                           <td><span class="badge badge-soft-warning font-size-12">Pendiente </span></td>
-                                                                                      </tr>
+                                                                                    </tr>
+                                                                                     <td><hr class="bg-primary" style=" background:#292929!important"></td>
                                                                                       <tr>
                                                                                         <td><span >José fernandez torres</span> - <span class="badge badge-soft-info font-size-12">788945</span></td> 
                                                                                         <td><span class="badge badge-soft-success font-size-12">$ 2.000 </span></td>     
@@ -184,6 +166,7 @@
                                                                                           <td><span class="badge badge-soft-pink font-size-12">4/23/2022 </span>  <span class="badge badge-soft-dark font-size-12">Factura: 456123</span></td>   
                                                                                           <td><span class="badge badge-soft-success font-size-12">Pagado </span></td>
                                                                                       </tr>
+                                                                                      <td><hr class="bg-primary" style=" background:#292929!important"></td>
                                                                                       
                                                                                    
                                                                               </tbody>
@@ -531,7 +514,7 @@
                                             </div><!-- /.modal -->
    <!-- * =============>> FIN  Información personal  <<===================== -->
 
-    <!-- * =============>> Datos bancarios <<========================== -->
+   <!-- * =============>> Datos bancarios <<========================== -->
                                             <div class="modal fade infoBanco" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                                     <div class="modal-content">
@@ -596,6 +579,7 @@
                                                 </div><!-- /.modal-dialog -->
                                             </div><!-- /.modal -->
   <!-- * =============>> FIN Datos bancarios <<========================== -->
+  <!-- * =============>> BOTONES MODAL <<========================== -->   
                             <div class="card-body" style="margin-top: 1.5%;">
                                 <ul class="nav nav-pills nav-justified" role="tablist" >
                                     <li class="nav-item waves-effect waves-light" style="border-radius: 13px;">
@@ -618,15 +602,93 @@
                                                 
                                 </ul>
                             </div>
-                                 
+    <!-- * =============>> BOTONES MODAL <<========================== -->   
          
                         </div>
-                     </div> 
+                            </div> 
+                        
 
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="">
+                                            <div class="table-responsive" >
+                                                               
+                                                <table class="table table-nowrap align-middle" id="idahorro"
+                                             class="dataTables_filter"  id="tech-companies-1" class="dataTables_info" style="margin-top: 2%;" >
+                                                                    <thead class="">
+                                                                       <tr>
+                                                                            <th >Nombres</th>
+                                                                            <th >Apellidos</th>
+                                                                            <th >Teléfono</th>
+                                                                            <th >Dirección</th>
+                                                                            <th >Estado de crédito</th>
+                                                                            <th >Estado de instalación</th>
+                                                                        </tr>
+                                                                    </thead>
+            
+                                                                    <tbody>
+                                                                        <% infoClientes.forEach((user)=>{ %>
+                                                                         <tr>
+                                                                            <td><%= user.nombre %> <%= user.segundo_nombre %></td>
+                                                                            <td><%= user.apellido %></td>
+                                                                            <td><%= user.telefono %></td>
+                                                                            <td><%= user.direccion %>,<%= user.ciudad %></td>
+                                                                           
+                                                                            <td> <% if(user.estadoCreditoCliente) {%>
+                                                                                <div class="badge <%= user.estadoCreditoCliente.color %> font-size-12" ><%= user.estadoCreditoCliente.txt %></div>
+                                                                                 <% }%>
+                                                                              </td>
+                                                                              <td> <% if(user.estadoAgendar) {%>
+                                                                                   <div class="badge <%= user.estadoAgendar.color %> font-size-12" ><%= user.estadoAgendar.txt %></div>
+                                                                                  <% }%>
+                                                                              </td>
+                                                                      
+                                                                         </tr>
+                                                                         <%})%>
+                                                                      </tbody>
+                                                               </table>
+                                                                            
+                                                            </div>
+                                                          </div>
+                                                     </div>
+                                                  </div>
+                                              
                      </div>
-                            <!-- end col -->
+                        
 
                             <div class="col-xl-3 col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3">Estado del vendedor</h5>
+
+                                 
+                                        <form action="/aprobarVendedor" method="POST">
+                                            <div class="btn-group me-1 mt-2" style="margin-left: 8%;" >
+                                                 <input type="hidden" name="id_vendedorEnviar" value="<%= info_vendedor.id_vendedor %>">
+                                                 <input type="hidden" name="id_consecutivo" value="<%= info_vendedor.id %>">
+
+                                                    <select class="form-select" id="selectEstado" name="estadoDe_laCuenta">
+                                                        <option style="background:gray;color: white;text-transform: capitalize;" class="badge-soft-dark">Estado actual: <%= viewsUser.estado_de_la_cuenta %></option>
+                                                        <br>  
+                                                        <option value="aprobado">Aprobado</option>
+                                                        <option value="bloqueado">Bloquear</option>
+                                                    
+                                                    </select>
+                                               
+                                                </div>
+                                               <a href="/perfil-vendedores/<%= info_vendedor.id_vendedor %>" >
+                                                    <button class="btn btn-primary"  type="submit" 
+                                                    style="
+                                                    border-radius: 13px;
+                                                    margin-left: 24%;
+                                                    margin-top: 4%;
+                                                    width: 47%;">Guadar </button>
+                                                </a> 
+                                            </form>
+                                          </div>
+                                  
+                                    <!-- end card body -->
+                                </div>
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title mb-3">Nivel del vendedor</h5>
@@ -652,6 +714,7 @@
                                               <center>Número de ventas: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.numero_de_ventas %></div></center>  
                                        
                                   </div>
+                                  
                                     <!-- end card body -->
                                 </div>
                                 <!-- end card -->
@@ -722,9 +785,9 @@
                             <!-- end col -->
                         </div>
                         <!-- end row -->
-                        
-                    </div> <!-- container-fluid -->
-                </div>
+             
+                            </div> <!-- container-fluid -->
+                      </div>
                 <!-- End Page-content -->
 
                 

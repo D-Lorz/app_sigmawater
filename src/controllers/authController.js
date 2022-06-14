@@ -65,7 +65,7 @@ exports.login = async (req, res) => {
         if (!correo || !pass ) {
             res.render('login', {
                 alert: true,
-                alertTitle: "Opss",
+                alertTitle: "Oops",
                 alertMessage: "Ingrese un usuario y contraseña",
                 alertIcon: 'error',
                 showConfirmButton: true,
@@ -91,8 +91,8 @@ exports.login = async (req, res) => {
 
                         let options =  {
                             alert: true,
-                            alertTitle: "Opps",
-                            alertMessage: "Su cuenta aun no ha sido aprobada",
+                            alertTitle: "Oops",
+                            alertMessage: "Tu cuenta aun no ha sido aprobada",
                             alertIcon: 'info',
                             showConfirmButton: true,
                             timer: false,
@@ -106,7 +106,7 @@ exports.login = async (req, res) => {
                         let options =  {
                             alert: true,
                             alertTitle: "Atencion",
-                            alertMessage: "Su cuenta se encuentra bloqueada",
+                            alertMessage: "Tu cuenta se encuentra bloqueada",
                             alertIcon: 'warning',
                             showConfirmButton: true,
                             timer: false,
