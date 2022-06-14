@@ -126,9 +126,9 @@
                                             <tbody>
                                                 <% lista_vendedores.forEach((user)=>{ %>
                                                     <tr> 
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.id_vendedor %></a></td>
-                                                        <td><a href="perfil-vendedores/<%- user.id_vendedor %>"><%= user.nombres %></a></td>
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.apellidos %></a></td>
+                                                        <td ><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.id_vendedor %></a></td>
+                                                        <td style="text-transform: capitalize;"><a href="perfil-vendedores/<%- user.id_vendedor %>"><%= user.nombres %></a></td>
+                                                        <td style="text-transform: capitalize;"><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.apellidos %></a></td>
                                                         <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.telefono_movil %></a></td>
                                                         <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.correo %></a></td>
                                                         <td> <% if(user.codigo_afiliado) {%> 

@@ -42,14 +42,10 @@ exports.listarVendedores = async (req, res) => {
     lista_vendedores,
   });
 };
-
 // ! >>>>>>>>> Vista perfil vendedores <<<<<<<<<<<
 exports.listarVendedores_PerfilVendedores = async (req, res) => {
   const id_vendedor = req.params.id;
-  let info_vendedor = await conexion.query(
-    "SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ",
-    [id_vendedor]
-  );
+  let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ",[id_vendedor] );
   info_vendedor = info_vendedor[0];
 
   const licencia = JSON.parse(info_vendedor.licencia_conduccion);
@@ -79,8 +75,10 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
   let infoClientes = await conexion.query("SELECT * FROM nuevos_cliente WHERE codigo_id_vendedor = ?", [id_vendedor]);
   let clCredito = await conexion.query("SELECT * FROM solicitar_credito");
   let clAgenda = await conexion.query("SELECT * FROM agendar_instalacion");
+  let cltestAgua = await conexion.query("SELECT * FROM test_agua");
 
   infoClientes.forEach((info) => {
+
     info.estadoCreditoCliente = {};
     info.estadoCreditoCliente.txt = "No solicitado";
     info.estadoCreditoCliente.color = "badge-soft-dark";
@@ -89,7 +87,9 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
     info.estadoAgendar.txt = "No instalado";
     info.estadoAgendar.color = "badge-soft-dark";
 
-
+    info.sistema = {};
+    info.sistema.txt = "N/A";
+  
     if (clCredito.length > 0) {
       clCredito.forEach((c) => {
         if (info.id == c.id_cliente) {
@@ -106,6 +106,23 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
             info.estadoCreditoCliente.txt = "Bloqueado";
             info.estadoCreditoCliente.color = "badge-soft-danger";
           }
+        }
+      });
+    }
+
+    if (clCredito.length > 0) {
+      clCredito.forEach((x) => {
+        if (info.id == x.id_cliente) {
+
+          if (x.sistema === "Reverse Osmosis System" ) {
+            info.sistema.txt = "Reverse Osmosis System";
+        
+          } 
+          if (x.sistema === "Whole System" ) {
+            info.sistema.txt = "Whole System";
+        
+          } 
+                 
         }
       });
     }
@@ -184,6 +201,8 @@ exports.ActualizarEstado = async (req, res) => {
 
 // ? ========>>> ZONA DE VENDEDORES <<<========
 
+
+
 // ? ========>>> ZONA DE CLIENTES <<<========
 // todo ===========>>>  Mostrar lista de CLIENTES y referencia de su vendedor
 exports.listarClientes = async (req, res) => {
@@ -242,10 +261,7 @@ exports.listarClientes = async (req, res) => {
 // ! >>>> Tarjetas en la vista perfil clientes <<<<<<<<<<<
 exports.listarClientes_PerfilClientes = async (req, res) => {
   const id_cliente = req.params.id;
-  let info_clientes = await conexion.query(
-    "SELECT * FROM nuevos_cliente  WHERE id_cliente = ?",
-    [id_cliente]
-  );
+  let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?",[id_cliente]);
   info_clientes = info_clientes[0];
 
   // * >>> Renderizado <<<<<

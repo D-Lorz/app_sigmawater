@@ -3045,6 +3045,8 @@ fieldset:disabled .btn {
   color: #fff;
   background-color: #74788d;
   border-color: #74788d;
+  border-radius: 17px;
+  font-size: 13px;
 }
 .btn-check:focus + .btn-secondary,
 .btn-secondary:focus,

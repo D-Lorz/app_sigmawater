@@ -620,7 +620,7 @@
                                                                             <th >Nombres</th>
                                                                             <th >Apellidos</th>
                                                                             <th >Teléfono</th>
-                                                                            <th >Dirección</th>
+                                                                            <th >Producto</th>
                                                                             <th >Estado de crédito</th>
                                                                             <th >Estado de instalación</th>
                                                                         </tr>
@@ -632,12 +632,16 @@
                                                                             <td><%= user.nombre %> <%= user.segundo_nombre %></td>
                                                                             <td><%= user.apellido %></td>
                                                                             <td><%= user.telefono %></td>
-                                                                            <td><%= user.direccion %>,<%= user.ciudad %></td>
-                                                                           
+                                                                             <td> <% if(user.sistema) {%>
+                                                                              <%= user.sistema.txt %>
+                                                                                 <% }%>
+                                                                              </td>
+
                                                                             <td> <% if(user.estadoCreditoCliente) {%>
                                                                                 <div class="badge <%= user.estadoCreditoCliente.color %> font-size-12" ><%= user.estadoCreditoCliente.txt %></div>
                                                                                  <% }%>
                                                                               </td>
+                                                                              
                                                                               <td> <% if(user.estadoAgendar) {%>
                                                                                    <div class="badge <%= user.estadoAgendar.color %> font-size-12" ><%= user.estadoAgendar.txt %></div>
                                                                                   <% }%>

@@ -1060,12 +1060,12 @@ input:focus ~ .bg-primary {
   background: rgba(64, 78, 103, 0.8);
 }
 .btn-secondary {
-  background-color: #404e67 !important;
+  background-color: #50368c !important;
   color: #fff;
 }
 .btn-secondary:hover {
   border-color: #364257 !important;
-  background-color: #4a5a77 !important;
+  background-color: #50368c!important;
   color: #fff !important;
 }
 .btn-secondary:active,
