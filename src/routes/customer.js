@@ -5,9 +5,9 @@ const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados,isSellers } = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
-        agendarInstalacionProducto } = require('../controllers/customerFormControllers');
+        agendarInstalacionProducto,getRegistrarInstalacion,servicioInstaladosx } = require('../controllers/customerFormControllers');
 
-  
+
 
 const rutaAlmacen = multer.diskStorage({
 
@@ -42,6 +42,37 @@ const cargar = multer({
 const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente_trasera' }]);
 
 
+// todo ===>> subir evidencia fotografica del servicio instalado
+const rutaCarpeta = multer.diskStorage({
+
+    destination: function (req, file, callback) {
+        const rutaLicencia = path.join(__dirname, '../public/evidenciaServicio')
+        callback(null, rutaLicencia);
+    },
+
+    filename: function (req, file, callback) {
+        const fechaActual = Math.floor(Date.now() / 1000)
+  
+        if (file.fieldname == 'evidencia_fotografica') {
+            urlLicencias[0] = "Evidencia_fotografica" + fechaActual + "_" + file.originalname;
+        
+            callback(null, urlLicencias[0])
+        } 
+        else {
+            urlLicencias[1] = "xxxx" + fechaActual + "_" + file.originalname;
+            callback(null, urlLicencias[1])
+          
+        } 
+      
+    }
+
+});
+
+const cargarEvidencia = multer({
+    storage: rutaCarpeta,
+});
+
+const oneUpload = cargarEvidencia.fields([{ name: 'evidencia_fotografica' }, { name: 'xxx' }]);
 
 // todo =========================================================
 
@@ -68,6 +99,7 @@ router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro)
 router.get('/test-de-agua/:id', isAuthenticated, getTestAgua) 
     
  router.get('/agendar-instalacion/:id', isAuthenticated,getAgendarinstalacion) 
+ router.get('/probando/:id', isAuthenticated,getRegistrarInstalacion)
 
 
 // *   ================ ===== ↑↑ ==============================
@@ -87,5 +119,7 @@ router.post('/registrarClientes', isAuthenticated, registrarClientes);
  /*=============================================================*/
  router.post('/agendarInstalacion', isAuthenticated,agendarInstalacionProducto);
  /*=============================================================*/
+ router.post('/instalacion', isAuthenticated,oneUpload,servicioInstaladosx);
+/*=============================================================*/
 
 module.exports = router

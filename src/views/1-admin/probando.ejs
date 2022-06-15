@@ -64,13 +64,13 @@
                           <div class="col-12">
                               <div class="page-title-box d-sm-flex align-items-center
                                   justify-content-between" style="margin-bottom: 3%;">
-                                  <h4 class="mb-sm-0 font-size-18">Servicio de instalación</h4>
+                                  <h4 class="mb-sm-0 font-size-18">Registro de instalación</h4>
       
                                   <div class="page-title-right">
                                       <ol class="breadcrumb m-0" style="text-transform: initial;">
                                           <li class="breadcrumb-item"><a href="javascript:
                                                   void(0);">Perfil cliente</a></li>
-                                          <li class="breadcrumb-item active" id="reparartexto">Servicio de instalación</li>
+                                          <li class="breadcrumb-item active" id="reparartexto">Registro de instalación</li>
                                       </ol>
                                   </div>
       
@@ -87,7 +87,7 @@
                   <div class="card-content collapse show">
                     
 
-                                    <form action="/instalacion" method="post" id="demo-form2" data-parsley-validate class="form"id="validarForm">
+                                    <form action="/instalacion" enctype="multipart/form-data" method="post" id="demo-form2" data-parsley-validate class="form"id="validarForm">
                           
                                         <input type="hidden"  name="id_cliente" value="<%= cl_instalacion.id %>">
                                         <input type="hidden"  name="codigo_cliente" value="<%= cl_instalacion.id_cliente %>">
@@ -98,13 +98,13 @@
                                            <div class="col-md-4">
                                               <div class="form-group">
                                                   <label for="fechaInstalacion">Fecha de instalación<span class="danger">*</span></label>
-                                                  <input type="text" placeholder="Seleccione la fecha del servicio realizado"
+                                                  <input type="text" placeholder="Selecciona la fecha en que se instaló el producto"
                                                    class="form-control" id="fechaInstalacion" required name="fechaDeInstalacion" readonly> 
                                               </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleDataList" class="form-label">Producto instalado</label> <span class="danger">*</span>
-                                              <input class="form-control " required list="estado_sistema"  name="productoInstalado" placeholder="Eliga el sistema deseado" >
+                                              <input class="form-control " required list="estado_sistema"  name="productoInstalado" placeholder="Selecciona el tipo de sistema" >
                                             <datalist id="estado_sistema">
                                                 <option value="Whole System"></option>
                                                 <option value="Reverse Osmosis System"></option>
@@ -127,15 +127,15 @@
                               </div> 
                                <div class="col-md-4">
                                   <div class="form-group">
-                                      <label for="">Evidencia fotografíca<span class="danger">*</span></label>
-                                      <input type="file" class="form-control " required  accept="image/jpg" name="evidenciaInstalacion" >
+                                      <label for="">Registro fotográfica<span class="danger">*</span></label>
+                                      <input type="file" class="form-control " required  accept="image/jpg" name="evidencia_fotografica" >
                                   </div>
                               </div> 
                               <div class="col-md-4">
                                   <div>
                                       <div class="form-group">
                                           <label for="postalcode">Nota</label>
-                                          <textarea class="form-control"  id="" name="nota" ></textarea>
+                                          <textarea class="form-control" style="height:0px"  id="" name="nota" ></textarea>
                                    </div> 
                              </div> 
                          </div>
@@ -244,7 +244,7 @@
      firstDay: 1,
      isRTL: false,
      showMonthAfterYear: false,
-     yearSuffix: 'Seleccione la fecha del servicio realizado'
+     yearSuffix: ''
      };
      $.datepicker.setDefaults($.datepicker.regional['es']);
   

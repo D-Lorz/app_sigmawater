@@ -387,31 +387,31 @@ if (consultaEstado_testAgua.estado_visita_test === '0') {
 };
 
 
-exports.instalacion = async (req, res) => {
-  const fecha_instalacion = req.body.fechaDeInstalacion;
-  const producto_instalado	 = req.body.productoInstalado;
-  const serial_producto = req.body.serial_producto;
-  const instalador = req.body.instalador;
+// exports.instalacion = async (req, res) => {
+//   const fecha_instalacion = req.body.fechaDeInstalacion;
+//   const producto_instalado	 = req.body.productoInstalado;
+//   const serial_producto = req.body.serial_producto;
+//   const instalador = req.body.instalador;
 
-  const evidencia = '../evidenciaServicio/' + urlLicencias[0]
-  const evidencia_fotografica = JSON.stringify({'evidencia': evidencia,});
-  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-  console.log(evidencia_fotografica);
-  const nota = req.body.nota;
+//   const evidencia = '../evidenciaServicio/' + urlLicencias[0]
+//   const evidencia_fotografica = JSON.stringify({'evidencia': evidencia,});
+//   console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//   console.log(evidencia_fotografica);
+//   const nota = req.body.nota;
 
-  const id_cliente = req.body.id_cliente
-  const codigo_cliente = req.body.codigo_cliente
+//   const id_cliente = req.body.id_cliente
+//   const codigo_cliente = req.body.codigo_cliente
 
 
- const Datos_servicio = { fecha_instalacion,producto_instalado,serial_producto,instalador,evidencia_fotografica,nota,id_cliente}
+//  const Datos_servicio = { fecha_instalacion,producto_instalado,serial_producto,instalador,evidencia_fotografica,nota,id_cliente}
 
-await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], (err, result) => {
-  if (err) throw err;
-  if (result) { res.redirect('/perfil-cliente/'+codigo_cliente) }
+// await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], (err, result) => {
+//   if (err) throw err;
+//   if (result) { res.redirect('/perfil-cliente/'+codigo_cliente) }
     
-   })
+//    })
 
-}
+// }
 
 
 
