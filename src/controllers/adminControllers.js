@@ -309,10 +309,9 @@ if (consultaEstado_testAgua.length > 0) {
 if (consultaEstado_testAgua.estado_visita_test === '0') {
     estadoVisita_testAgua.txt= "Se realizó un test de agua el";
     estadoVisita_testAgua.background= 'visitado';
-    
-  } 
-  
-}
+      } 
+  }
+
 // todo =========================>> Consulta del PRIMER test de agua para la fecha y grafica
     let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id DESC LIMIT 1, 1', [info_clientes.id])
       
@@ -356,7 +355,7 @@ if (consultaEstado_testAgua.estado_visita_test === '0') {
 
     } 
 }
-// todo ===============================>>> Estado del solicitar credito
+// todo ===============================>>> Desactivar boton de registro de instalacion
 let clRegistro_instalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
 let estadu = []
 estadu.txt = "No hecho";
@@ -375,6 +374,13 @@ if (clRegistro_instalacion.length > 0) {
 
   } 
 }
+// todo ===============================>>> Mostrar agenda sobre la instalacion del producto
+
+// let mostrarAgenda = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ?  ', [info_clientes.id])
+// mostrarAgenda = mostrarAgenda[0]
+
+let mostrarAgenda = await conexion.query("SELECT * FROM agendar_instalacion WHERE id_cliente = ?",[info_clientes.id]);
+
 
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-cliente", {
@@ -389,7 +395,8 @@ if (clRegistro_instalacion.length > 0) {
     ahorroCalculado,
     datosJson_ahorroCalculado,
     estado_intalacion,
-    estadu
+    estadu,
+    mostrarAgenda
   });
 };
 

@@ -399,25 +399,23 @@
                                                 <%}%>
                                         </div>
                                         <div class="card-body">
-                                             <div class="table-responsive">
+                                             <div class="table-responsive" style="overflow-x: hidden;" >
                                                 <table class="table mb-0">
                                                      <tbody>
+                                                        <% mostrarAgenda.forEach((ar)=>{ %> 
                                                         <tr>
-                                                           <td style="width: 26%;">Fecha de instalación</td>
-                                                            <td><b>----</b></td>
-                                                            <td>Instalador</td>
-                                                            <td><b>----</b></td>
+                                                          <td style="width: 26%;">Desde:</td>
+                                                           <td><b><%= ar.fechaInicial %></b></td>
+                                                           <td style="width: 26%;">Hasta:</td>
+                                                          <td><b><%= ar.fechaFinal %></b></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Prodcuto instalado</td>
-                                                            <td>---</td>
-                                                            <td>Nota de instalación</td>
-                                                            <td><b>-----</b></td>
-                                                        <tr>
-                                                        <tr>
-                                                            <td>Serial del producto</td>
-                                                             <td>---</td>
-                                                        <tr>
+                                                           <td style="width: 26%;">Dias disponibles:</td>
+                                                            <td><b><%= ar.lunes %><%= ar.martes %> <%= ar.miercoles %> <%= ar.jueves %> <%= ar.viernes %> <%= ar.sabado %> <%= ar.sabado %> <%= ar.domingo %></b></td>
+                                                            <td style="width: 26%;">Nota:</td>    
+                                                            <p> <td><b><%= ar.nota_solicitud %></b></td></p>                                              
+                                                        </tr>
+                                                            <%})%>
                                                     </tbody>
                                                 </table>
                                             </div>
