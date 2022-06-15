@@ -62,7 +62,7 @@
                                     <div class="card-header bg-transparent border-primary">
                                         <h5 class="my-0 text-primary">
                                             <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5>
-                                                  <a href="/solicitar-credito/<= info_clientes.id_cliente %>" >
+                                                 <a href="/solicitar-credito/<= info_clientes.id_cliente %>" >
                                                       <button class="btn btn-primary" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Datos de credito</button>
                                                   </a>                           
                                                 <input type="hidden" hidden name="id_consecutivo" value="<%= info_clientes.id %>">
@@ -385,10 +385,18 @@
                                             <h5 class="my-0 text-primary">
                                                 <i class="fas fa-wrench"></i>&nbsp; Instalación</h5>
 
-                                                <a href="/probando/<%= info_clientes.id_cliente %>" >
-                                                    <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Registrar instalación</button>
+                                                <a href="/registro-instalacion/<%= info_clientes.id_cliente %>" id="verbtnI">
+                                                    <button class="btn btn-primary" id="btn_instalacion" style="float: right;margin-top: -4%;border-radius:13px;">Registrar instalación</button>
                                                 </a> 
 
+                                            <!-- VALIDACIONES BREVES -->
+                                            <% if (!estadu.verbtnI){%>
+                                                <script>
+                                                    const boton = document.getElementById("btn_instalacion")
+                                                    boton.setAttribute("disabled", "")
+                                                    boton.style.filter = "grayscale(1)";
+                                                </script>
+                                                <%}%>
                                         </div>
                                         <div class="card-body">
                                              <div class="table-responsive">

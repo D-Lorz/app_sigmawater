@@ -7,8 +7,8 @@ const { listarVendedores,
        listarVendedores_PerfilVendedores,
        listarClientes_PerfilClientes,
       listarClientes,
-      ActualizarNivel,ActualizarEstado,
-      getRegistrarInstalacion } = require('../controllers/adminControllers');
+      ActualizarNivel,ActualizarEstado
+       } = require('../controllers/adminControllers');
 
 
  // * ========== Renderizado de vistas clientes ==========
@@ -19,9 +19,6 @@ router.get('/perfil-vendedores/:id', isAuthenticated,listarVendedores_PerfilVend
 
 router.get('/listar-clientes', isAuthenticated,listarClientes)
 router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
-
-// router.get('/registrar-instalacion/:id', isAuthenticated, getRegistrarInstalacion)
-
 
 
 // router.get('/prueba', isAuthenticated,(req, res) => {

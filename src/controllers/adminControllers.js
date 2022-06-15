@@ -1,19 +1,7 @@
 const { promisify } = require("util");
 const conexion = require("../database/db");
-const {} = require("../controllers/adminControllers");
 
 
-
-exports.getRegistrarInstalacion = async (req, res) => {
-  const id = req.params.id
-
-  await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
-    if (err) throw err;
-    res.render('./1-admin/probando', { user: req.user, cl_instalacion: result[0] });
-
-  })
-
-}
 
 // ? ========>>> ZONA DE VENDEDORES <<<========
 // todo ===========>>>  Mostrar lista de VENDEDORES
@@ -281,26 +269,26 @@ let credito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cli
 let estado = []
 estado.txt = "No solicitado";
 estado.color = 'badge-soft-dark'
-estado.verBtn = true;
+
 
 if (credito.length > 0) {
   credito = credito[0]
   if (credito.estado_del_credito === '0') {
     estado.txt = "En revisión";
     estado.color = 'badge-soft-warning'
-    estado.verBtn = false;
+ 
   } else if (credito.estado_del_credito == 1) {
     estado.txt = "Aprobado";
     estado.color = 'badge-soft-success'
-    estado.verBtn = false;
+ 
   } else if (credito.estado_del_credito == 2) {
     estado.txt = "Rechazado";
     estado.color = 'badge-soft-danger'
-    estado.verBtn = false;
+  
   } else if (credito.estado_del_credito == 3) {
     estado.txt = "Pagado";
     estado.color = 'badge-soft-info'
-    estado.verBtn = false;
+   
   }
 }
 
@@ -368,7 +356,25 @@ if (consultaEstado_testAgua.estado_visita_test === '0') {
 
     } 
 }
+// todo ===============================>>> Estado del solicitar credito
+let clRegistro_instalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
+let estadu = []
+estadu.txt = "No hecho";
+estadu.color = 'badge-soft-dark'
+estadu.verbtnI = true;
 
+if (clRegistro_instalacion.length > 0) {
+  clRegistro_instalacion = clRegistro_instalacion[0]
+  
+  if (clRegistro_instalacion.estadoRegistro == 0) {
+    estadu.txt = "si hecho";
+       estadu.verbtnI = false;
+      
+  } else if (clRegistro_instalacion.estadoRegistro == 1) {
+        estadu.verbtnI = false;
+
+  } 
+}
 
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-cliente", {
@@ -382,38 +388,35 @@ if (consultaEstado_testAgua.estado_visita_test === '0') {
     datosJson_UltimoTestagua,
     ahorroCalculado,
     datosJson_ahorroCalculado,
-    estado_intalacion
+    estado_intalacion,
+    estadu
   });
 };
 
 
-// exports.instalacion = async (req, res) => {
-//   const fecha_instalacion = req.body.fechaDeInstalacion;
-//   const producto_instalado	 = req.body.productoInstalado;
-//   const serial_producto = req.body.serial_producto;
-//   const instalador = req.body.instalador;
+// todo --> Formulario servicio instalado
+exports.servicioInstaladosx = async (req, res) => {
 
-//   const evidencia = '../evidenciaServicio/' + urlLicencias[0]
-//   const evidencia_fotografica = JSON.stringify({'evidencia': evidencia,});
-//   console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-//   console.log(evidencia_fotografica);
-//   const nota = req.body.nota;
+  const fecha_instalacion = req.body.fechaDeInstalacion;
+  const producto_instalado = req.body.productoInstalado;
+  const serial_producto = req.body.serial_producto;
+  const instalador = req.body.instalador;
+  const evidencia = '../evidenciaServicio/' + urlLicencias[0]
+  const evidencia_fotografica = JSON.stringify({'evidencia': evidencia,});
+  const nota = req.body.nota;
 
-//   const id_cliente = req.body.id_cliente
-//   const codigo_cliente = req.body.codigo_cliente
+   const id_cliente = req.body.id_cliente
+   const codigo_cliente = req.body.codigo_cliente
 
+ const Datos_servicio = {fecha_instalacion, producto_instalado,serial_producto, instalador,evidencia_fotografica,nota,id_cliente }
 
-//  const Datos_servicio = { fecha_instalacion,producto_instalado,serial_producto,instalador,evidencia_fotografica,nota,id_cliente}
-
-// await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], (err, result) => {
-//   if (err) throw err;
-//   if (result) { res.redirect('/perfil-cliente/'+codigo_cliente) }
+await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], (err, result) => {
+  if (err) throw err;
+  if (result) { res.redirect('/perfil-cliente/'+codigo_cliente) }
     
-//    })
+   })
 
-// }
-
-
+}
 
 // ? ========>>> ZONA DE CLIENTES <<<========
 

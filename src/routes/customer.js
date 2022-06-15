@@ -5,8 +5,11 @@ const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados,isSellers } = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
-        agendarInstalacionProducto,getRegistrarInstalacion,servicioInstaladosx } = require('../controllers/customerFormControllers');
+        agendarInstalacionProducto,getRegistrarInstalacion } = require('../controllers/customerFormControllers');
 
+
+const {servicioInstaladosx} = require("../controllers/adminControllers");  
+    
 
 
 const rutaAlmacen = multer.diskStorage({
@@ -99,7 +102,7 @@ router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro)
 router.get('/test-de-agua/:id', isAuthenticated, getTestAgua) 
     
  router.get('/agendar-instalacion/:id', isAuthenticated,getAgendarinstalacion) 
- router.get('/probando/:id', isAuthenticated,getRegistrarInstalacion)
+ router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 
 
 // *   ================ ===== ↑↑ ==============================
