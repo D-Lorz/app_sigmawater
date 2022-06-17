@@ -376,10 +376,34 @@ if (clRegistro_instalacion.length > 0) {
 }
 // todo ===============================>>> Mostrar agenda sobre la instalacion del producto
 
-// let mostrarAgenda = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ?  ', [info_clientes.id])
-// mostrarAgenda = mostrarAgenda[0]
-
 let mostrarAgenda = await conexion.query("SELECT * FROM agendar_instalacion WHERE id_cliente = ?",[info_clientes.id]);
+mostrarAgenda = mostrarAgenda[0]
+
+let mostrarDatoscreditos= await conexion.query("SELECT * FROM solicitar_credito WHERE id_cliente = ?",[info_clientes.id]);
+mostrarDatoscreditos = mostrarDatoscreditos[0]
+
+
+let clbotonCredito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
+
+let estade = []
+estade.txt = "No hecho";
+estade.color = 'badge-soft-dark'
+estade.btncredito = false;
+
+if (clbotonCredito.length > 0) {
+  clbotonCredito = clbotonCredito[0]
+  
+  if (clbotonCredito.estado_del_credito == 0) {
+    estade.txt = "si hecho";
+       estade.btncredito = true;
+      
+  } else if (clbotonCredito.estado_del_credito == 1) {
+        estade.btncredito = true;
+
+  } 
+  var licenciacredito = JSON.parse(clbotonCredito.licencia_cliente);
+
+}
 
 
   // * >>> Renderizado <<<<<
@@ -396,7 +420,10 @@ let mostrarAgenda = await conexion.query("SELECT * FROM agendar_instalacion WHER
     datosJson_ahorroCalculado,
     estado_intalacion,
     estadu,
-    mostrarAgenda
+    mostrarAgenda,
+    mostrarDatoscreditos,
+    estade,
+    licenciacredito
   });
 };
 
