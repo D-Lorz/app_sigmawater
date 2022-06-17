@@ -20,6 +20,9 @@ router.get('/perfil-vendedores/:id', isAuthenticated,listarVendedores_PerfilVend
 router.get('/listar-clientes', isAuthenticated,listarClientes)
 router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
 
+router.get('/documento', isAuthenticated, (req, res) => {
+      res.render('./1-admin/documento', { user: req.user })
+   });
 
 // router.get('/prueba', isAuthenticated,(req, res) => {
 //        res.render('./1-admin/clientes', { user: req.user })

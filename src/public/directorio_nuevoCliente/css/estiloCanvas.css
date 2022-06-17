@@ -33,15 +33,17 @@ body {
     top: 10px;
     left: 10px;
 }
-.centrado{
-    text-align: justify;
-    position: absolute;
-    top: 48%;
-    width: 88%;
-    left: 51%;
-    /* margin-bottom: 9%; */
-    transform: translate(-50%, -50%);
-}
+
+    .centrado {
+        text-align: justify;
+        position: absolute;
+        top: 43%;
+        width: 94%;
+        left: 64%;
+        /* margin-bottom: 9%; */
+        transform: translate(-50%, -50%);
+    }
+
 
 .containers
 {

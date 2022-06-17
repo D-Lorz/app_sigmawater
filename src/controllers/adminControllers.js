@@ -402,7 +402,8 @@ if (clbotonCredito.length > 0) {
 
   } 
   var licenciacredito = JSON.parse(clbotonCredito.licencia_cliente);
-
+  // var firmaxd = JSON.parse(clbotonCredito.acuerdo_firmado);
+ var firmaxd  = clbotonCredito.acuerdo_firmado
 }
 
 
@@ -423,7 +424,8 @@ if (clbotonCredito.length > 0) {
     mostrarAgenda,
     mostrarDatoscreditos,
     estade,
-    licenciacredito
+    licenciacredito,
+    firmaxd
   });
 };
 

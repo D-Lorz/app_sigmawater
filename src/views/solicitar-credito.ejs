@@ -997,14 +997,10 @@
                                            <!--======== //======FIXME:== * TERMINOS Y CONDICIONES* FIXME:=========-->
                                                  <h6><b>TERMINOS Y CONDICIONES</b></h6>
                                                 <fieldset>
-      
-                                                    <div class="row ">
-      
-      
-                                                        <div class="container "
-                                                            style="text-align: center; text-align: justify;margin-bottom: 19px;">
-      
-      
+                                                     <div class="row">
+            
+                                                        <div class="container" style="text-align: center; text-align: justify;margin-bottom: 19px;">
+            
                                                             <h6><b>DIVULGACIÓN DE RESPONSABILIDAD</b></h6>
       
                                                             <p>Al hacer clic en Continuar, promete que toda la información es
@@ -1032,41 +1028,31 @@
       
                                                         </div>
                                                         <div class="col-5">
-                                                           
-                                                            <label type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modalFirmar">
-                                                                <input type="checkbox" id="btnAceptar" name="" class="required" >
-                                                                Aceptar y firmar los términos
+                                                           <label type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modalFirmar">
+                                                                <input type="checkbox" id="btnAceptar" name="" class="required" > Aceptar y firmar los términos
                                                             </label>
                                                         </div>
       
-      
-                                                    </div>
+                                                 </div>
       
                                                     <div class="col-5">
-      
                                                         <div class="input-group" hidden>
                                                             <label class="input-group-btn">
-                                                                <span class="btn btn-primary" style="padding: 10px;">
-                                                                    Cargar pdf firmado
+                                                                <span class="btn btn-primary" style="padding: 10px;"> Cargar pdf firmado
                                                                     <input type="hidden" name="acuerdo_firmado" id="code_base64" value="" required>
-                                                                  
                                                                 </span>
                                                             </label>
-                                                            <input type="text" class="form-control" id="miFirma_png"
-                                                                style="font-size: 15px; height: 42px;"
+                                                            <input type="text" class="form-control" id="miFirma_png" style="font-size: 15px; height: 42px;"
                                                                 placeholder="Cargar archivo firmado" value="" required readonly>
                                                         </div>
                                                     </div>  
       
                                                     <!-- Modal -->
-                                                     <div class="modal fade" id="modalFirmar" tabindex="-1"
-                                                        role="dialog" aria-labelledby="modalFirmarTitle"
-                                                        aria-hidden="true">
+                                                     <div class="modal fade" id="modalFirmar" tabindex="-1" role="dialog" aria-labelledby="modalFirmarTitle" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="modalFirmarLongTitle">Firmar
-                                                                        a continuación</h5>  
+                                                                    <h5 class="modal-title" id="modalFirmarLongTitle">Firmar  a continuación</h5>  
                                                                     <!-- todo No descomentar    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                      <span aria-hidden="true">&times;</span>
                                                                  </button> -->
@@ -1075,17 +1061,13 @@
                                                                     <canvas id="canvas"></canvas>
                                                                     <br>
                                                                     <br>
-                                                                    <button type="button" class="btn btn-danger"
-                                                                        id="btnLimpiar">Limpiar</button>
-                                                                    <button type="button" class="btn btn-warning" hidden
-                                                                        id="btnDescargar">Descargar</button> 
+                                                                    <button type="button" class="btn btn-danger" id="btnLimpiar">Limpiar</button>
+                                                                    <button type="button" class="btn btn-warning" hidden id="btnDescargar">Descargar</button> 
                                                                     <!-- todo no descomentar <button type="button" class="btn btn-info" id="btnGenerarDocumento">Pasar a documento</button>  -->
       
                                                                 </div>
                                                                 <div class="modal-footer" id="ocultar">
-                                                                    <button type="button" class="btn btn-primary"
-                                                                        id="btnSiguienteFirmado"
-                                                                        data-dismiss="modal">Siguiente</button>
+                                                                    <button type="button" class="btn btn-primary" id="btnSiguienteFirmado" data-dismiss="modal">Siguiente</button>
       
                                                                 </div>
                                                             </div>

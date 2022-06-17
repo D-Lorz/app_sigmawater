@@ -110,6 +110,7 @@ router.get('/test-de-agua/:id', isAuthenticated, getTestAgua)
     res.render('hola', { user: req.user })
  });
 
+
 //* router para los métodos del customerFormControllers
 /*=============================================================*/
 router.post('/registrarClientes', isAuthenticated, registrarClientes);

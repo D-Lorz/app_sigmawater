@@ -50,6 +50,7 @@
   <!-- END: Page CSS-->
 
    <!-- ==========FIXME: FIN CSS DEL FORMULARIO ================= -->
+   <link rel="stylesheet" href="../directorio_nuevoCliente/css/estiloCanvas.css">
 
 
 
@@ -944,7 +945,14 @@
                                                 <span class="d-block d-sm-none"><i class="fas fa-credit-card"></i></span>
                                                 <span class="d-none d-sm-block"> <i class="fas fa-credit-card"></i>  Licencia reverso</span>
                                         </button>
-        
+                                        <!-- <a href="../documento/<= info_clientes.id_cliente %>"> -->
+                                            <button type="button" style="border-radius: 14px; background:#50368c;width: 29%" class="btn btn-primary waves-effect waves-light"
+                                            data-bs-toggle="modal" data-bs-target=".acuerdoFirmado"> 
+                                            <span class="d-block d-sm-none"><i class="fas fa-id-card"></i></span>
+                                            <span class="d-none d-sm-block"> <i class="fas fa-id-card"></i> Ir al documento firmado</span>
+                                       </button>
+                                        
+                                           <!-- </a> -->
                                                       
                                     </li>
                                                 
@@ -1006,6 +1014,8 @@
                                                                                    </a> 
                                                                                    <% } else { %> 
                                                                                     <% } %> 
+                            
+                                                                                    
                                                                         </div>
                                                                     </div><!-- end col -->
                                                                      </div>
@@ -1018,182 +1028,68 @@
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div><!-- /.modal -->
+                                      
+                                        <div class="modal fade acuerdoFirmado" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered ">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Acuerdo firmado </h5>
+                                                    </div>
+                                                    <div class="modal-body" style="margin-left: -33%">
+                                                  <div class="row">
+                                                  
+                                                        <div class="contenedor">
+                                                        <img src="../img/imagenTerminos.jpg" alt="">
+                                                     
+                                                       <div class="centrado">
+                                               
+                                                           <b>DIVULGACIÓN DE RESPONSABILIDAD</b>
+                                                   
+                                               
+                                                           <p>Al hacer clic en Continuar, promete que toda la información es verdadera y completa. Tiene la intención de que el
+                                                               vendedor y/o el dealer confíen en esta información para decidir si le otorgan o no crédito. Usted autoriza una
+                                                               investigación completa y la divulgación de su historial crediticio y su historial laboral. También autoriza al
+                                                               vendedor y/o dealer a divulgar información sobre la experiencia crediticia con ellos. Usted acepta recibir
+                                                               llamadas de mensajes pregrabados o marcados automáticamente de nosotros o de aquellos que actúan en nuestro
+                                                               nombre en cualquier número de teléfono móvil que nos proporcione.</p>
+                                                           <p><b>AVISO DE INFORME DE CRÉDITO:</b> Podemos solicitar un informe de crédito para cualquier propósito legítimo asociado
+                                                               con su solicitud de crédito, extensión de crédito, modificación de los términos de su contrato de crédito o
+                                                               cobro en su cuenta. Si lo solicita, le informaremos si se ordenó dicho informe y le daremos el nombre y la
+                                                               dirección de la agencia de informes crediticios que proporcionó el informe.</p>
+                                                       
+                                                               <% if(firmaxd) { %> 
+                                                                <img src="<%= firmaxd%>" alt=""  
+                                                                style="    
+                                                                width: 39%;
+                                                                margin-left: -5%;
+                                                                margin-bottom: -6%;">
+                                                            <% } else { %> 
+                                                                
+                                                                <%}%>
+                                                               
+                                                            <h2>______________</h2>
+                                                               <p>Yo accepto</p>
+                                                           <br>
+                                               
+                                               
+                                               
+                                                       </div>
+                                                         </div>
+                                               
+                                                    
+                                                 
+                                                    </div>
+                             
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
 
-
-
-                            <div class="container">
-                    <div class="row">
-                
-                        <div class="col-6" >
-
-                        <label class="licencia">Por favor carga el documento solicitado para que
-                            podamos realizar el proceso de verificación de identidad
-                            <br>
-                        </label>
-                        <p class="titulolicencia">Licencia de conducir </p>
-                        
-
-                        <div class="input-group">
-                            <label class="input-group-btn">
-                            <span class="btn btn-primary" style="padding: 10px;">
-                                Cargar anverso
-
-                                <input type="file" name="cliente_frontal" id="campoFile" accept="image/jpg"
-                                style="display: none;" id="licencia_cliente_frontal1" required> 
-                        
-                            </span>
-                            </label>
-                            <input type="text" class="form-control" style="font-size: 15px;height: 43px;" 
-                             placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required   readonly>
-                        </div>
-                        <br>
-                        
-                        <div class="input-group">
-                            <label class="input-group-btn">
-                            <span class="btn btn-primary" style="padding: 10px;">
-                                Cargar reverso
-
-                                <input type="file" name="cliente_trasera" id="campoFile" accept="image/jpg"
-                                style="display: none;" id="licencia_cliente_trasera1" required>
-
-                            </span>
-                            </label>
-                            <input type="text" class="form-control" style="font-size: 15px; height: 43px;"
-                            placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required  readonly>
-                        </div>
-
-
-                        </div> 
-
-                        
-                    </div>  
-
-                    </div>   
-                          </fieldset>   
+                               </fieldset>   
 
                           <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
-                          <!--=============================TODO:TODO:=============================================================-->
-
-                     <!--======== //======FIXME:== * TERMINOS Y CONDICIONES* FIXME:=========-->
-                           <h6><b>TERMINOS Y CONDICIONES</b></h6>
-                          <fieldset>
-
-                              <div class="row ">
-
-
-                                  <div class="container "
-                                      style="text-align: center; text-align: justify;margin-bottom: 19px;">
-
-
-                                      <h6><b>DIVULGACIÓN DE RESPONSABILIDAD</b></h6>
-
-                                      <p>Al hacer clic en Continuar, promete que toda la información es
-                                          verdadera y completa Tiene la intención de que el
-                                          vendedor y/o el dealer confíen en esta información para
-                                          decidir si le otorgan o no crédito Usted autoriza una
-                                          investigación completa y la divulgación de su historial
-                                          crediticio y su historial laboral También autoriza al
-                                          vendedor y/o dealer a divulgar información sobre la
-                                          experiencia crediticia con ellos Usted acepta recibir
-                                          llamadas de mensajes pregrabados o marcados automáticamente de
-                                          nosotros o de aquellos que actúan en nuestro
-                                          nombre en cualquier número de teléfono móvil que nos
-                                          proporcione.</p>
-
-                                      <p><b>AVISO DE INFORME DE CRÉDITO:</b> Podemos solicitar un
-                                          informe de crédito para cualquier propósito legítimo asociado
-                                          con su solicitud de crédito, extensión de crédito,
-                                          modificación de los términos de su contrato de crédito o
-                                          cobro en su cuenta. Si lo solicita, le informaremos si se
-                                          ordenó dicho informe y le daremos el nombre y la
-                                          dirección de la agencia de informes crediticios que
-                                          proporcionó el informe.</p>
-
-
-                                  </div>
-                                  <div class="col-5">
-                                     
-                                      <label type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modalFirmar">
-                                          <input type="checkbox" id="btnAceptar" name="" class="required" >
-                                          Aceptar y firmar los términos
-                                      </label>
-                                  </div>
-
-
-                              </div>
-
-                              <div class="col-5">
-
-                                  <div class="input-group" hidden>
-                                      <label class="input-group-btn">
-                                          <span class="btn btn-primary" style="padding: 10px;">
-                                              Cargar pdf firmado
-                                              <input type="hidden" name="acuerdo_firmado" id="code_base64" value="" required>
-                                            
-                                          </span>
-                                      </label>
-                                      <input type="text" class="form-control" id="miFirma_png"
-                                          style="font-size: 15px; height: 42px;"
-                                          placeholder="Cargar archivo firmado" value="" required readonly>
-                                  </div>
-                              </div>  
-
-                              <!-- Modal -->
-                               <div class="modal fade" id="modalFirmar" tabindex="-1"
-                                  role="dialog" aria-labelledby="modalFirmarTitle"
-                                  aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered" role="document">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h5 class="modal-title" id="modalFirmarLongTitle">Firmar
-                                                  a continuación</h5>  
-                                              <!-- todo No descomentar    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                               <span aria-hidden="true">&times;</span>
-                                           </button> -->
-                                            </div>
-                                          <div class="modal-body">
-                                              <canvas id="canvas"></canvas>
-                                              <br>
-                                              <br>
-                                              <button type="button" class="btn btn-danger"
-                                                  id="btnLimpiar">Limpiar</button>
-                                              <button type="button" class="btn btn-warning" hidden
-                                                  id="btnDescargar">Descargar</button> 
-                                              <!-- todo no descomentar <button type="button" class="btn btn-info" id="btnGenerarDocumento">Pasar a documento</button>  -->
-
-                                          </div>
-                                          <div class="modal-footer" id="ocultar">
-                                              <button type="button" class="btn btn-primary"
-                                                  id="btnSiguienteFirmado"
-                                                  data-dismiss="modal">Siguiente</button>
-
-                                          </div>
-                                      </div>
-
-                                  </div>
-
-
-                              </div>
-
-                              <br>
-                              <input class="btn btn-primary" type="submit" value="Enviar"
-                              style="float: left;
-                              position: relative;
-                              top: 40px;
-                              z-index: 3;
-                              left: 43em;
-                              width: 100px;
-                              background: #812082;
-                              color: #fff;
-                              padding: 7px 12px;
-                              border-radius: 2px;
-                              border: 1px solid transparent; height: 39px;">
-
-                          </fieldset> 
-                          <!--============= // FIXME:===== *TERMINOS Y CONDICIONES* FIXME:=========-->
-
-                          <!--=============================TODO:TODO:=============================================================-->
-
+                    
+               
                       </form>
 
 
@@ -1403,6 +1299,7 @@
 <!-- * =============>> FIN Test de agua  <<=============================- -->
   <!-- * =============>> Ahorro  <<===================================== -->
   <div class="row">
+
     <div class="col-xl-8">
         <div class="">
             <div class="card-body">
@@ -1413,7 +1310,7 @@
                             <div class="card-header bg-transparent border-primary">
                                 <h5 class="my-0 text-primary">
                                     <i class="fas fa-money-bill"></i>&nbsp; Ahorro</h5>
-
+                                 
                               </div>
                               <div class="card-body">
                                 <div class="table-responsive" style="overflow-x: hidden;" >
@@ -1445,7 +1342,8 @@
                                         </thead>
 
                                         <tbody>
-                                           <tr>
+                                           <tr>      
+                                           
                                                 <td>Agua embotellada</td>
                                                 <td>$ <%= ahorroCalculado.agua_embotellada %></td>
                                                 <td>$ <%= ahorroCalculado.ahorroMensual_aguaEmbotellada %></td>  
