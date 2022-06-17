@@ -959,6 +959,7 @@
                                 </ul>
                             </div>
 
+                            <!-- todo ====>> MOODAL PARA LICENCIA ANVERSO -->
                                         <div class="modal fade frontal" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered ">
                                                 <div class="modal-content">
@@ -991,7 +992,7 @@
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div><!-- /.modal -->
-
+                            <!-- todo ====>> MOODAL PARA LICENCIA REVERSO -->
                                         <div class="modal fade trasera" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered ">
                                                 <div class="modal-content">
@@ -1028,7 +1029,7 @@
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div><!-- /.modal -->
-                                      
+                            <!-- todo ====>> MOODAL PARA LA FIRMA -->     
                                         <div class="modal fade acuerdoFirmado" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered ">
                                                 <div class="modal-content">
@@ -1089,29 +1090,26 @@
 
                           <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
                     
-               
-                      </form>
+                                
+                                        </form>
 
 
-                  </div>
-            
-          </section>
-          <!-- Form wizard with step validation section end -->
+                                    </div>
+                                
+                            </section>
+                            <!-- Form wizard with step validation section end -->
 
-      </div>
-      <!-- End: Customizer-->
-
-
-
-                                                    </div><!-- /.modal-content -->
-                                                </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
+                        </div>
+                        <!-- End: Customizer-->
 
 
 
-                                                <input type="hidden" hidden name="id_consecutivo" value="<%= info_clientes.id %>">
-                                                <input type="hidden" hidden name="id_cliente" value="<%= info_clientes.id_cliente%>">
-                                     </div>
+                    </div><!-- /.modal-content -->
+               </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+                 <input type="hidden" hidden name="id_consecutivo" value="<%= info_clientes.id %>">
+                 <input type="hidden" hidden name="id_cliente" value="<%= info_clientes.id_cliente%>">
+         </div>
 
                                     <div class="card-body">
                                           <div class="table-responsive">
@@ -1447,8 +1445,10 @@
                                         <div class="card-body">
                                              <div class="table-responsive" style="overflow-x: hidden;" >
                                                 <table class="table mb-0">
+                                                           
+                                                    <% if(!(clRegistro_instalacion.id_cliente) ) { %> 
                                                      <tbody>
-                                                     
+                                              
                                                         <tr>
                                                           <td style="width: 26%;">Desde:</td>
                                                           <% if(mostrarAgenda){ %> 
@@ -1473,8 +1473,54 @@
                                                                <td><b>N/A</b></td>
                                                                 <% }%>                                         
                                                         </tr>
-                                                          
+                                                     
                                                     </tbody>
+                                                    <% } else { %> 
+                                                        <tbody>
+                                              
+                                                            <tr>
+                                                              <td style="width: 26%;">Fecha de instalación</td>
+                                                              <% if(clRegistro_instalacion){ %> 
+                                                               <td><b><%= clRegistro_instalacion.fecha_instalacion %></b></td>
+                                                               <td style="width: 26%;">Instalador:</td>
+                                                              <td><b><%= clRegistro_instalacion.instalador %></b></td>
+                                                              <% } else { %> 
+                                                                <td><b>N/A</b></td>
+                                                                <td style="width: 26%;">Serial_producto:</td>
+                                                               <td><b>N/A</b></td>
+                                                                <% }%>
+                                                            </tr>
+                                                            <tr>
+                                                               <td style="width: 26%;">Producto instalado:</td>
+                                                               <% if(clRegistro_instalacion){ %> 
+                                                                <td><b><%= clRegistro_instalacion.producto_instalado %></b></td>
+                                                                <td style="width: 26%;">Nota:</td>    
+                                                                <p> <td><b><%= clRegistro_instalacion.nota %></b></td></p>     
+                                                                <% } else { %> 
+                                                                    <td><b>N/A</b></td>
+                                                                    <td style="width: 26%;">Hasta:</td>
+                                                                   <td><b>N/A</b></td>
+                                                                    <% }%>                                         
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 26%;">Serial del producto:</td>
+                                                                <% if(clRegistro_instalacion){ %> 
+                                                                 <td><b><%= clRegistro_instalacion.serial_producto %></b></td>
+                                                                 <td style="width: 26%;">Registro fotográfico:</td>    
+                                                                 <p> <td><b><button type="button" style="border:none;" class="waves-effect waves-light"
+                                                                    data-bs-toggle="modal" data-bs-target=".evidencia"> 
+                                                                         <span class="d-block d-sm-none"><i class="fas fa-id-card"></i></span>
+                                                                         <span class="d-none d-sm-block"> <i class="fas fa-id-card"></i> Ver evidencia </span>
+                                                               </button></b></td></p>     
+                                                                 <% } else { %> 
+                                                                     <td><b>N/A</b></td>
+                                                                     <td style="width: 26%;">Registro fotográfico:</td>
+                                                                    <td><b>N/A</b></td>
+                                                                     <% }%>                                         
+                                                             </tr>
+                                                         
+                                                        </tbody>
+                                                            <% } %> 
                                                 </table>
                                             </div>
                                          </div>
@@ -1486,6 +1532,38 @@
                     </div>
                  </div>
     <!-- * =============>> FIN Agendar instalación  <<============================== -->
+
+    <div class="modal fade evidencia" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registro fotográfico</h5>
+                </div>
+                <div class="modal-body">
+              <div class="row">
+                    <div class="" >
+                        <div class="">
+                          <div class="row">
+                                    <div class="col-md-11">
+                                       <div class="card-body" style="margin-top: -3%;text-align: center;">
+                                        <% if(evidenciaF) { %> 
+                                       
+                                            <img src="<%= evidenciaF.evidencia%>" alt="" style="width: 85%; margin-left: 10%;">
+                                            
+                                           <% } else { %> 
+                                            <% } %> 
+                                     </div>
+                                    </div><!-- end col -->
+                                 </div>
+                                <!-- end card-body -->
+                          </div><!-- end col -->
+                    </div>
+                </div>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 
 

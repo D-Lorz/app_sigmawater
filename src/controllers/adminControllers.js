@@ -373,6 +373,9 @@ if (clRegistro_instalacion.length > 0) {
         estadu.verbtnI = false;
 
   } 
+
+  var evidenciaF= JSON.parse(clRegistro_instalacion.evidencia_fotografica);
+
 }
 // todo ===============================>>> Mostrar agenda sobre la instalacion del producto
 
@@ -425,7 +428,9 @@ if (clbotonCredito.length > 0) {
     mostrarDatoscreditos,
     estade,
     licenciacredito,
-    firmaxd
+    firmaxd,
+    clRegistro_instalacion,
+    evidenciaF
   });
 };
 
