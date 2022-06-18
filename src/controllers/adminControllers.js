@@ -385,7 +385,6 @@ mostrarAgenda = mostrarAgenda[0]
 let mostrarDatoscreditos= await conexion.query("SELECT * FROM solicitar_credito WHERE id_cliente = ?",[info_clientes.id]);
 mostrarDatoscreditos = mostrarDatoscreditos[0]
 
-
 let clbotonCredito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
 
 let estade = []
@@ -405,8 +404,8 @@ if (clbotonCredito.length > 0) {
 
   } 
   var licenciacredito = JSON.parse(clbotonCredito.licencia_cliente);
-  // var firmaxd = JSON.parse(clbotonCredito.acuerdo_firmado);
- var firmaxd  = clbotonCredito.acuerdo_firmado
+  // var clfirmaAcuerdo  = clbotonCredito.acuerdo_firmado
+
 }
 
 
@@ -427,12 +426,39 @@ if (clbotonCredito.length > 0) {
     mostrarAgenda,
     mostrarDatoscreditos,
     estade,
-    licenciacredito,
-    firmaxd,
+    licenciacredito,    
     clRegistro_instalacion,
     evidenciaF
-  });
+    });
+
+
 };
+
+exports.clfirmas = async (req, res) => {
+
+  const id_cliente = req.params.id;
+  let info_clientes2 = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?",[id_cliente]);
+  info_clientes2 = info_clientes2[0];
+
+
+  let clfirmasAcuerdo = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes2.id])
+  let estade = []
+  estade.txt = "No hecho";
+  estade.color = 'badge-soft-dark'
+  estade.btncredito = false;
+  
+  if (clfirmasAcuerdo.length > 0) {
+    clfirmasAcuerdo = clfirmasAcuerdo[0]
+      
+      var firmas  = clfirmasAcuerdo.acuerdo_firmado
+    }
+
+  // * >>> Renderizado <<<<<
+  res.render("./1-admin/acuerdo", { user: req.user,info_clientes2, firmas  });
+
+}
+
+
 
 
 // todo --> Formulario servicio instalado

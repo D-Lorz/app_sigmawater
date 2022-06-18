@@ -51,7 +51,7 @@
 
    <!-- ==========FIXME: FIN CSS DEL FORMULARIO ================= -->
    <link rel="stylesheet" href="../directorio_nuevoCliente/css/estiloCanvas.css">
-
+   <link rel="stylesheet" type="text/css" href="../directorio_nuevoCliente/css/estilosPropios.css">
 
 
 </head>
@@ -95,7 +95,6 @@
                                                         <div class="modal-header">
                                                        
                                                             <h5 class="modal-title" id="myExtraLargeModalLabel">Datos de crédito  </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         
                                                         </div>
          
@@ -104,9 +103,8 @@
                                                         <script>
                                                             const boton = document.getElementById("btnmodal")
                                                             boton.setAttribute("disabled", "")
-                                                            boton.style.background = "white";
-                                                            boton.style.border = "white";
-                                                        </script>
+                                                            boton.style.filter = "grayscale(1)";
+                                                           </script>
                                                         <%}%>
 
 
@@ -119,11 +117,10 @@
 
                             <form class="steps-validation wizard-circle" id="validarForm"  >
                                  
-                          <!--============= /FIXME:===== *SOLICITANTE* =======FIXME:=========-->
+                     <!--============= /FIXME:===== *SOLICITANTE* =======FIXME:=========-->
                           <!-- Step 1 -->
                            <h6><b>SOLICITANTE</b></h6>
-                          
-                       <fieldset>
+                        <fieldset>
                         <% if(mostrarDatoscreditos){ %> 
                          <div class="row text-align: center">
                            
@@ -132,8 +129,7 @@
                                     <label for="monto_financiarf"> Monto a financiar</label>
                                 
                                     <input type="text" class="form-control" id="currency-mask" value="<%=mostrarDatoscreditos.monto_financiar_cliente%>" readonly>
-                                  
-                                </div>
+                                  </div>
                             </div>
                     
                             <div class="col-md-4">
@@ -142,28 +138,21 @@
                           </div> 
                         <div class="col-md-4">
                                 <div class="form-group">
-                                  <label for="num_licencia_solicitantef"> Numero de licencia</label>
-                          
+                                  <label for="num_licencia_solicitantef"> Número de licencia</label>
                                     <input type="number"class="form-control" value="<%= mostrarDatoscreditos.numero_licencia_cliente%>" readonly>
-                                 
-                                </div>
+                                  </div>
                             </div>
-
-                    
-                          </div>
+                    </div>
                       
                      <div class="row text-align: center;">
                         <div class="col-md-4">
                             <label for="exampleDataList" class="form-label">Estado de licencia</label>
-                         
-                   
-                            <input class="form-control" value="<%= mostrarDatoscreditos.estado_licencia_cliente%>" readonly >
+                          <input class="form-control" value="<%= mostrarDatoscreditos.estado_licencia_cliente%>" readonly >
                          </div>
 
                          <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="f_expediccion">Fecha de expedición de licencia</label>
-                              
                                     <input type="text" class="form-control" value="<%= mostrarDatoscreditos.fecha_expedicion_licencia_cliente%>" readonly >
                                  </div>
                             </div>
@@ -171,9 +160,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="fecha_vencimientof">Fecha de vencimiento de licencia</label>
-                             
-                                    <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.fecha_vencimiento_licencia_cliente%>"  readonly >
-                               
+                                     <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.fecha_vencimiento_licencia_cliente%>"  readonly >
                                 </div>
                             </div>
                          
@@ -184,55 +171,43 @@
                      
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="segurof"> Numero de seguro Social / ITIN</label>
-                          
-                            <input type="number" class="form-control" value="<%= mostrarDatoscreditos.seguro_social_licencia%>" readonly>
-                          
-                        </div>
+                            <label for="segurof"> Número de seguro Social / ITIN</label>
+                          <input type="number" class="form-control" value="<%= mostrarDatoscreditos.seguro_social_licencia%>" readonly>
+                          </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="segurof"> Tipo de seguro</label>
-                          
-                            <input type="number" class="form-control" value="<%= mostrarDatoscreditos.tipo_de_seguro %>" readonly>
-                        
+                            <label for="segurof"> Tipo de documento</label>
+                          <input type="text" class="form-control" value="<%= mostrarDatoscreditos.tipo_de_seguro %>" readonly>
                         </div>
                     </div>
 
-                         <div class="col-md-2">
+                      <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="fecha_nacimientof">Fecha de nacimiento</label>
-                             
-                                    <input type="text" class="form-control " value="<%= mostrarDatoscreditos.fecha_nacimiento_cliente%>" readonly>
-                                
-                                </div>
+                                   <input type="text" class="form-control " value="<%= mostrarDatoscreditos.fecha_nacimiento_cliente%>" readonly>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="phone-masktwo">Teléfono secundario</label>
-                             
-                                <input type="text" class="form-control " value="<%= mostrarDatoscreditos.telefono_secundario_cliente%>"  readonly>
-                                                                         
+                              <input type="text" class="form-control " value="<%= mostrarDatoscreditos.telefono_secundario_cliente%>"  readonly>
                             </div>
                         </div>
                      
                 </div> 
                          
                 <% } else { %> 
-                            
-                    
+                          
                    <% } %> 
 
-             </fieldset> 
+                      </fieldset> 
+                    <!--============= //FIXME:===== *SOLICITANTE* =======FIXME:=========-->
 
-
-
-                          <!--============= //FIXME:===== *SOLICITANTE* =======FIXME:=========-->
-
-                          <!--============= /FIXME:===== *CASA* ==============FIXME:=========-->
+                    <!--============= /FIXME:===== *CASA* ==============FIXME:=========-->
                           <!-- Step 2 -->
                        <h6><b>CASA</b></h6>
-                     <fieldset style="text-align: center">
+                     <fieldset style="text-align: center; margin-top: -6%;">
  
                      <div class="row justify-content-center" >
 
@@ -246,37 +221,30 @@
                                 <input type="hidden" class="form-control" id="postalcode" readonly value="<= cliente.codigo_postal %>" name="codigo_postal" > 
                             </div>
                                 
+                                            
 
-                        <p  style="
-                        margin-left: -101%;
-                        margin-left: -101%;
-                        margin-top: -15%;
-                        font-size: 19px;
-                        font-weight: 600;" >Indica la condición de tu vivienda</p>
-                            <div id="prod " style="margin-left: -94%;" >
-                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condicion_vivienda" id="hipotecada" value="Hipotecada">
-                                    <label class="form-check-label" for="hipotecada">Hipotecada</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condicion_vivienda" id="pagada" value="Pagada">
-                                    <label class="form-check-label" for="pagada">Pagada</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condicion_vivienda" id="rentada" value="Rentada">
-                                    <label class="form-check-label" for="rentada">Rentada</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condicion_vivienda" id="padres" value="vive con sus padres">
-                                    <label class="form-check-label" for="padres">Vive con sus padres</label>
-                                  </div>
-
+                        
                              </div>
                          </div>
-                        </div> 
+                   
                             <br>
                             <br>
-                            
+                        
+
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <div class="form-group"  >
+                                            <label for="">Codición de la vivienda </label>
+                                            <% if(mostrarDatoscreditos) { %> 
+                                                <input type="text" class="form-control "value="<%= mostrarDatoscreditos.condicion_vivienda%>"  readonly >
+                                          
+                                            <% } else { %> 
+                                              
+                                            <% } %> 
+                                        </div>
+                                    </div>
+    
+                                </div>
                           <div class="row justify-content-center">
                             <% if(mostrarDatoscreditos) { %> 
                                 <div class="col-md-4">
@@ -323,9 +291,9 @@
              
 
                           </fieldset> 
-                          <!--============= //FIXME:===== *CASA* ======= ===== FIXME:=========-->
+                    <!--============= //FIXME:===== *CASA* ======= ===== FIXME:=========-->
                         
-                          <!--============= /FIXME:===== *INGRESOS* ========  FIXME:=========-->
+                    <!--============= /FIXME:===== *INGRESOS* ========  FIXME:=========-->
                           <!-- Step 3 -->
                          <h6><b>INGRESOS</b></h6>
                           <fieldset>
@@ -348,7 +316,7 @@
                                 <div class="form-group">
                                     <label for="anios_trabajandof">Años trabajando <span class="danger">*</span> </label>
                                     <% if(mostrarDatoscreditos) { %> 
-                                    <input type="number"  class="form-control " value="<%= mostrarDatoscreditos.anios_trabajando_ingresos%>" readonly  >
+                                    <input type="text"  class="form-control " value="<%= mostrarDatoscreditos.anios_trabajando_ingresos%>" readonly  >
                                     <% } else { %> 
                                       
                                     <% } %> 
@@ -359,7 +327,7 @@
                                 <div class="form-group">
                                     <label for="meses_trabajandof"> Meses trabajando <span class="danger">*</span></label>
                                     <% if(mostrarDatoscreditos) { %> 
-                                    <input type="number"  class="form-control" value="<%= mostrarDatoscreditos.meses_trabajando_ingresos%>" readonly>
+                                    <input type="text"  class="form-control" value="<%= mostrarDatoscreditos.meses_trabajando_ingresos%>" readonly>
                                     <% } else { %> 
                                        
                                     <% } %> 
@@ -378,39 +346,8 @@
                                     
                                     <% } %> 
                                 </div>
-
-                                <label>¿Ha estado en bancarrota?</label>
-
-                                <br>
-                           
-                                <div class="form-check form-check-inline ">
-                                    <label class="form-check-label" for="si_bancarrota">Si</label>
-                                    <input class="form-check-input " type="radio" name="bancarrota" id="si_bancarrota" value="Si" checked>
-                                    
-                                </div>
-                                <div class="form-check form-check-inline">
-                                        <label class="form-check-label"   for="no_bancarrota">No</label>
-                                    <input class="form-check-input"  type="radio" name="bancarrota" id="no_bancarrota" value="No" >
-                                
-                                </div>
-                                  
-                                <div id="acc_pendiente">
-                                    <br>
-                                  <label>¿Tiene acción pendiente?</label>
-                                    <br>
-                               
-                                    <div class="form-check form-check-inline" id="acc_pendiente">
-                                        <input class="form-check-input " type="radio" name="sacc_pendiente" id="si_pendiente" value="Si">
-                                        <label class="form-check-label" for="i">Si</label>
-                                    </div>
-                                    <div class="form-check form-check-inline" id="acc_pendiente">
-                                        <input class="form-check-input"  type="radio" name="sacc_pendiente" id="no_pendiente" value="No" checked>
-                                        <label class="form-check-label"  for="no">No</label>
-                                    </div>
-                                 </div> 
-
-                          </div>
-
+                             </div>
+                       
                          <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="ocupacionf"> Ocupación</label>
@@ -420,18 +357,7 @@
                                      
                                     <% } %> 
                                 </div>
-
-                                <div class="col-md-15" id="anio_bancarrotaid">
-                                    <div class="form-group" id="anio_bancarrotaid">
-                                        <label for="anio_bancarrotaf">Año de bancarrota</label>
-                                        <% if(mostrarDatoscreditos) { %> 
-                                        <input type="text" class="form-control" value="<%= mostrarDatoscreditos.anio_bancarrota_ingresos%>" readonly >
-                                        <% } else { %> 
-                                        <% } %> 
-                                    </div>
-                                </div>
-                                
-                         </div>
+                          </div>
                     
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -441,19 +367,48 @@
                                     <% } else { %> 
                                     <% } %> 
                                 </div>
+                             </div> 
 
-                                <div id="tipo_bancarrota">
-                                <label for="exampleDataList" class="form-label">Tipo de bancarrota</label>
-                                <% if(mostrarDatoscreditos) { %> 
-                                <input class="form-control " value="<%= mostrarDatoscreditos.tipo_bancarrota_ingresos%>" readonly >
-                                <% } else { %> 
-                                <% } %> 
+                             <% if(mostrarDatoscreditos) { %>  
+                                
+                                <% if(mostrarDatoscreditos.bancarrota == "Si" ) { %> 
+                          <div class="col-md-4">
+                          <label>¿Ha estado en bancarrota?</label>
+                                <input type="text" class="form-control " value="<%= mostrarDatoscreditos.bancarrota%>" readonly >
+                                          <br>                       
+                                <div id="acc_pendiente">
+                                 <label>¿Tiene acción pendiente?</label>
+                                  <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.sacc_pendiente%>" readonly >
+
+                                </div> 
                              </div>
-                          </div> 
-                    </div> 
+                       
+                        <div class="col-md-4" id="anio_bancarrotaid">
+                            <div class="form-group" id="anio_bancarrotaid">
+                                <label for="anio_bancarrotaf">Año de bancarrota</label>
+                            
+                                <input type="text" class="form-control" value="<%= mostrarDatoscreditos.anio_bancarrota_ingresos%>" readonly >
+                               
+                            </div>
+                         </div>
+
+                        <div class="col-md-4" id="anio_bancarrotaid">
+                             <div id="tipo_bancarrota">
+                                <label for="exampleDataList" class="form-label">Tipo de bancarrota</label>
+                                <input class="form-control " value="<%= mostrarDatoscreditos.tipo_bancarrota_ingresos%>" readonly >
+                                
+                             </div>
+                        </div>
+
+                        <% } else { %> 
+                            <% } %> 
+                        <% }%> 
+                           
+                  </div> 
 
                          <br>
-                             
+                         <% if(mostrarDatoscreditos) { %>  
+                            <% if(mostrarDatoscreditos.empleador_anterior_ingresos ) { %> 
                                 
                         <h4 style="text-align: center;" >Otros ingresos </h4>
 
@@ -461,38 +416,31 @@
                              <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="empleador_anteriorf"> Empleador anterior  </label>
-                                    <% if(mostrarDatoscreditos) { %> 
-                                    <input type="text" class="form-control " value="<%= mostrarDatoscreditos.empleador_anterior_ingresos%>" readonly>
-                                    <% } else { %> 
-                                    <% } %> 
-                                </div>
+                                   <input type="text" class="form-control " value="<%= mostrarDatoscreditos.empleador_anterior_ingresos%>" readonly>
+                                  </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="otros_ingresosf">Fuente de otros ingresos</label>
-                                    <% if(mostrarDatoscreditos) { %> 
                                     <input type="text" class="form-control " value="<%= mostrarDatoscreditos.otros_ingresos_ingresos%>" readonly >
-                                    <% } else { %> 
-                                    <% } %> 
-                                </div>
+                                  </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="currency-maskthree">  Ingresos adicionales</label>
-                                    <% if(mostrarDatoscreditos) { %> 
-                                    <input type="text" class="form-control" value="<%= mostrarDatoscreditos.ingresos_adicionales_ingresos%>" readonly>
-                                    <% } else { %> 
-                                    <% } %> 
-                                </div>
+                                   <input type="text" class="form-control" value="<%= mostrarDatoscreditos.ingresos_adicionales_ingresos%>" readonly>
+                                 </div>
                             </div>
                          </div>           
-
+                         <% } else { %> 
+                            <% } %> 
+                         <% }%> 
                           </fieldset>   
+                    <!--============= / FIXME:===== *INGRESOS* ==========FIXME:=========-->
 
-                          <!--============= / FIXME:===== *INGRESOS* ==========FIXME:=========-->
-                          <!--============= //FIXME:===== *INFORMACION BANCARIA* ======= FIXME:=========-->
+                    <!--============= //FIXME:===== *INFORMACION BANCARIA* ======= FIXME:=========-->
                            <h6><b>INFORMACIÓN BANCARIA</b></h6>
                           <fieldset>
                               
@@ -507,7 +455,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="numero_rutaf"> Numero de ruta</label> <span class="danger">*</span>
+                                        <label for="numero_rutaf"> Número de ruta</label> <span class="danger">*</span>
                                         <% if(mostrarDatoscreditos) { %> 
                                         <input type="number" class="form-control"  value="<%= mostrarDatoscreditos.numero_ruta_bancaria%>" readonly>
                                         <% } else { %> 
@@ -517,7 +465,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="numero_cuentaf"> Numero de cuenta </label> <span class="danger">*</span>
+                                        <label for="numero_cuentaf"> Número de cuenta </label> <span class="danger">*</span>
                                         <% if(mostrarDatoscreditos) { %> 
                                         <input type="number" class="form-control " value="<%= mostrarDatoscreditos.numero_cuenta_bancaria%>" readonly>
                                         <% } else { %> 
@@ -529,44 +477,35 @@
 
 
                           </fieldset>   
- 
-                          <!--============= //FIXME: ===== *CONFIGURACION BANCARIA* ===== FIXME:=========-->
-                          <!--============= / FIXME:===== *CO-SOLICITANTE* === FIXME:=========-->
+                    <!--============= //FIXME: ===== *CONFIGURACION BANCARIA* ===== FIXME:=========-->
+
+                    <!--============= / FIXME:===== *CO-SOLICITANTE* === FIXME:=========-->
                           <!-- Step 4 -->
+                          <% if(mostrarDatoscreditos) { %> 
+                            <% if(mostrarDatoscreditos.licencia_co_solicitante) { %> 
                             <h6><b>CO-SOLICITANTE</b></h6>
-
+                     
                           <fieldset>
-
+                          
                                   <div class="row text-align: center;">
                                       <div class="col-md-4">
                                           <div class="form-group">
-                                           
-                                              <label for="licenciaf"> Identificación / licencia deconducción </label>
-                                              <% if(mostrarDatoscreditos) { %> 
+                                           <label for="licenciaf"> Identificación / licencia deconducción </label>
                                               <input type="number" class="form-control " value="<%= mostrarDatoscreditos.licencia_co_solicitante%>" readonly>
-                                              <% } else { %> 
-                                            <% } %> 
-                                            
-                                          </div>
-                                      </div>
+                                           </div>
+                                    </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="expedicion_licenciaf"> Fecha de expedición de licencia</label>
-                                              <% if(mostrarDatoscreditos) { %> 
-                                              <input type="text" class="form-control" value="<%= mostrarDatoscreditos.expedicion_licencia_co_solicitante%>" readonly>
-                                              <% } else { %> 
-                                            <% } %> 
-                                            </div>
+                                                <input type="text" class="form-control" value="<%= mostrarDatoscreditos.expedicion_licencia_co_solicitante%>" readonly>
+                                           </div>
                                       </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="vencimiento_licenciaf">Fecha de vencimiento de licencia</label>
-                                              <% if(mostrarDatoscreditos) { %> 
                                               <input type="text" class="form-control" value="<%= mostrarDatoscreditos.vencimiento_licencia_co_solicitante%>"  readonly>
-                                              <% } else { %> 
-                                            <% } %> 
                                             </div>
                                       </div>
 
@@ -575,128 +514,88 @@
                                   <div class="row text-align: center;">
                                       <div class="col-md-4">
                                           <div class="form-group">
-                                              <label for="numero_se_socialf"> Numero de seguro social/ITIN </label>
-                                              <% if(mostrarDatoscreditos) { %> 
-                                              <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.numero_se_social_co_solicitante%>" readonly>
-                                              <% } else { %> 
-                                            <% } %> 
-                                          </div>
+                                              <label for="numero_se_socialf"> Número de seguro social/ITIN </label>
+                                            <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.numero_se_social_co_solicitante%>" readonly>
+                                        </div>
 
-                                          <div class="form-check form-check-inline">
-                                              <input class="form-check-input " type="radio"
-                                                  name="tipo_seguro_co_solicitante" id="SSNco"
-                                                  value="SSN" checked>
-                                              <label class="form-check-label" for="SSNco">SSN</label>
-                                          </div>
-                                          <div class="form-check form-check-inline">
-                                              <input class="form-check-input" type="radio"
-                                                  name="tipo_seguro_co_solicitante" id="ITINco"
-                                                  value="ITIN">
-                                              <label class="form-check-label" for="ITINco">ITIN</label>
-                                          </div>
                                       </div>
+
+                                      <div class="col-md-4">
+                                        <div class="form-group">
+                                        <label for="numero_se_socialf"> Tipo de documento </label>
+                                      <input type="text" class="form-control" value="<%= mostrarDatoscreditos.tipo_seguro_co_solicitante%>" readonly>
+                                    </div>
+                                    </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="fecha_nacif"> Fecha de nacimiento</label>
-                                                      <% if(mostrarDatoscreditos) { %> 
-                                                        <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.fecha_nacimiento_co_solicitante%>" readonly>
-                                                        <% } else { %> 
-                                                      <% } %> 
-                                          </div>
-                                      </div>
-
-                                      <div class="col-md-4">
-                                          <div class="form-group">
-                                              <label for="nombre_cof"> Nombre </label>
-                                                  <% if(mostrarDatoscreditos) { %> 
-                                                      <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.nombre_co_solicitante%>" readonly>
-                                                      <% } else { %> 
-                                                 <% } %> 
-                                          </div>
-                                      </div>
-                                  </div>
+                                                <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.fecha_nacimiento_co_solicitante%>" readonly>
+                                                  </div>
+                                            </div>
+                                  
+                                     </div>
 
                                   <div class="row text-align: center;">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="nombre_cof"> Nombre </label>
+                                                <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.nombre_co_solicitante%>" readonly>
+                                                </div>
+                                         </div>
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="segundo_nombre_cof"> Segundo nombre</label>
-                                              <% if(mostrarDatoscreditos) { %> 
-                                                <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.segundo_nombre_co_solicitante%>" readonly>
-                                                <% } else { %> 
-                                              <% } %> 
-                                          </div>
+                                              <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.segundo_nombre_co_solicitante%>" readonly>
+                                             </div>
                                       </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="apelli_cof">Apellidos</label>
-                                                      <% if(mostrarDatoscreditos) { %> 
-                                                        <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.apellido_co_solicitante%>" readonly>
-                                                        <% } else { %> 
-                                                      <% } %> 
+                                                    <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.apellido_co_solicitante%>" readonly>
+                                                 </div>
                                           </div>
-                                      </div>
-
-                                      <div class="col-md-4">
-                                          <div class="form-group">
-                                              <label for="phone-masktel">Teléfono móvil</label>
-                                              <% if(mostrarDatoscreditos) { %> 
-                                                <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.telefono_movil_co_solicitante%>" readonly>
-                                                <% } else { %> 
-                                              <% } %> 
-                                          </div>
-                                      </div>
-                                  </div>
+                                     </div>
 
                                   <div class="row text-align: center;">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="phone-masktel">Teléfono móvil</label>
+                                             <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.telefono_movil_co_solicitante%>" readonly>
+                                            </div>
+                                    </div>
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="phone-maskteltwo">Teléfono secundario  </label>
-                                              <% if(mostrarDatoscreditos) { %> 
+                                          
                                                 <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.tel_secundario_co_solicitante%>" readonly>
-                                                <% } else { %> 
-                                              <% } %> 
-                                          </div>
+                                               </div>
                                       </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="direc_co_solicitantef"> Dirección del co-solicitante</label>
-                                                  <% if(mostrarDatoscreditos) { %> 
-                                                    <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.direccion_co_solicitante%>" readonly>
-                                                    <% } else { %> 
-                                                  <% } %> 
-                                          </div>
-                                      </div>
-
-                                      <div class="col-md-4">
-                                          <div class="form-group">
-                                              <label for="relacionf"> Relación/parentesco</label>
-                                                      <% if(mostrarDatoscreditos) { %> 
-                                                        <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.relacion_parentesco_co_solicitante%>" readonly>
-                                                        <% } else { %> 
-                                                      <% } %> 
-                                          </div>
-                                      </div>
+                                                <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.direccion_co_solicitante%>" readonly>
+                                                 </div>
+                                         </div>
+                                     </div>
+                                 <div class="row text-align: center;">
+                                    <div class="col-md-4">
+                                       <div class="form-group">
+                                           <label for="relacionf"> Relación/parentesco</label>
+                                            <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.relacion_parentesco_co_solicitante%>" readonly>
+                                       </div>
+                                 </div>
+                             <br>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>¿Es militar activo?</label>
+                                    <input type="text" class="form-control" value="<%= mostrarDatoscreditos.militar_active%>" readonly>
                                   </div>
+                               </div>
 
-
-                                  <label>¿Es militar activo?</label>
-                                  <br>
-                                  <div class="form-check form-check-inline">
-                                      <input class="form-check-input inline required" type="radio"
-                                          name="militar_active" id="si_activo" value="si">
-                                      <label class="form-check-label" for="si_activo">Si</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                      <input class="form-check-input inline" type="radio"
-                                          name="militar_active" id="no_activo" value="no" checked>
-                                      <label class="form-check-label" for="no_activo">No</label>
-                                      <br>
-                                  </div>
-
-
+                            </div>
                             <h4 style="text-align: center;">Empleo del co-solicitante</h4>
 
                                   <br>
@@ -706,32 +605,23 @@
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="empleador_cof"> Empleador del co-solicitante</label>
-                                                  <% if(mostrarDatoscreditos) { %> 
-                                                    <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.empleador_co_solicitante%>" readonly>
-                                                    <% } else { %> 
-                                                  <% } %> 
-                                          </div>
-                                      </div>
+                                                 <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.empleador_co_solicitante%>" readonly>
+                                                </div>
+                                        </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="anios_trabajando_cof"> Años trabajando</label>
-                                              <% if(mostrarDatoscreditos) { %> 
-                                                <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.anios_trabajando_co_solicitante%>" readonly>
-                                                <% } else { %> 
-                                              <% } %> 
-                                          </div>
+                                               <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.anios_trabajando_co_solicitante%>" readonly>
+                                              </div>
                                       </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="meses_trabajando_cof"> Meses trabajando </label>
-                                                      <% if(mostrarDatoscreditos) { %> 
-                                                        <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.meses_trabajando_co_solicitante%>" readonly>
-                                                        <% } else { %> 
-                                                      <% } %> 
-                                          </div>
-                                      </div>
+                                                  <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.meses_trabajando_co_solicitante%>" readonly>
+                                               </div>
+                                       </div>
 
                                   </div>
 
@@ -739,31 +629,22 @@
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="currency-masksalario"> Salario mensual</label>
-                                                      <% if(mostrarDatoscreditos) { %> 
-                                                        <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.salario_mensual_co_solicitante%>" readonly>
-                                                        <% } else { %> 
-                                                      <% } %> 
+                                                <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.salario_mensual_co_solicitante%>" readonly>
+                                               </div>
                                           </div>
-                                      </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="ocupacion_cof">Ocupación </label>
-                                                      <% if(mostrarDatoscreditos) { %> 
-                                                        <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.ocupacion_co_solicitante%>" readonly>
-                                                        <% } else { %> 
-                                                      <% } %> 
-                                          </div>
-                                      </div>
+                                                   <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.ocupacion_co_solicitante%>" readonly>
+                                                   </div>
+                                              </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="phone-maskteltrabajo">Teléfono de trabajo</label>
-                                                  <% if(mostrarDatoscreditos) { %> 
-                                                    <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.telefono_trabajo_co_solicitante%>" readonly>
-                                                    <% } else { %> 
-                                                  <% } %> 
-                                          </div>
+                                                <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.telefono_trabajo_co_solicitante%>" readonly>
+                                             </div>
                                       </div>
 
                                   </div>
@@ -771,44 +652,37 @@
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="empleador_anterior_cof">Empleador anterior </label>
-                                              <% if(mostrarDatoscreditos) { %> 
                                                 <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.empleador_anterior_co_solicitante%>" readonly>
-                                                <% } else { %> 
-                                              <% } %> 
-                                          </div>
+                                             </div>
                                       </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="ingresos_cof"> Fuente de otros ingresos</label>
-                                                  <% if(mostrarDatoscreditos) { %> 
-                                                    <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.ingresos_co_solicitante%>" readonly>
-                                                    <% } else { %> 
-                                                  <% } %> 
+                                                 <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.ingresos_co_solicitante%>" readonly>
+                                                  </div>
                                           </div>
-                                      </div>
 
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="currency-maskingresoadi"> Ingresos adicionales </label>
-                                              <% if(mostrarDatoscreditos) { %> 
-                                                <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.ingresos_adicionales_co_solicitante%>" readonly>
-                                                <% } else { %> 
-                                              <% } %> 
-                                          </div>
+                                              <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.ingresos_adicionales_co_solicitante%>" readonly>
+                                              </div>
                                       </div>
 
                                   </div>
-                           
+                              
 
                           </fieldset>  
+                          <% } else { %>
+                              <% } %> 
+                          <% } %> 
+                    <!--============= //FIXME:===== *CO-SOLICITANTE* ==== FIXME:=========-->
 
-                          <!--============= //FIXME:===== *CO-SOLICITANTE* ==== FIXME:=========-->
+                    <!--============= //FIXME:===== *REFERENCIAS* ======= FIXME:=========-->
 
-                          <!--=============================TODO:TODO:=============================================================-->
-
-                          <!--============= //FIXME:===== *REFERENCIAS* ======= FIXME:=========-->
-
+                     <% if(mostrarDatoscreditos) { %> 
+                        <% if(mostrarDatoscreditos.licencia_co_solicitante) { %>  
                          <h6><b>REFERENCIAS</b></h6>
                           <fieldset>
 
@@ -816,143 +690,114 @@
                                   <div class="col-md-4">
                                       <div class="form-group">
                                           <label for="nom_referencia1_cof">Nombre de referencia</label>
-                                          <% if(mostrarDatoscreditos) { %> 
-                                            <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.nom_referencia1_co_solicitante%>" readonly>
-                                            <% } else { %> 
-                                          <% } %> 
-                                      </div>
+                                          <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.nom_referencia1_co_solicitante%>" readonly>
+                                        </div>
                                   </div>
 
                                   <div class="col-md-4">
                                       <div class="form-group">
                                           <label for="parentesco1_cof"> Relación/parentesco </label>
-                                          <% if(mostrarDatoscreditos) { %> 
-                                            <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.parentesco1_co_solicitante%>" readonly>
-                                            <% } else { %> 
-                                          <% } %> 
+                                          <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.parentesco1_co_solicitante%>" readonly>
                                       </div>
                                   </div>
 
                                   <div class="col-md-4">
                                       <div class="form-group">
                                           <label for="phone-masktelreferenciasone">Teléfono</label>
-                                             <% if(mostrarDatoscreditos) { %> 
-                                            <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.tel_movil1_co_solicitante%>" readonly>
-
-                                                <% } else { %> 
-                                               
-                                              <% } %> 
-                                      </div>
+                                           <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.tel_movil1_co_solicitante%>" readonly>
+                                     </div>
                                   </div>
 
                               </div>
+
                               <hr class="bg-primary" style="padding:2px; background:#812082!important">
 
                               <div class="row text-align: center;">
                                   <div class="col-md-4">
                                       <div class="form-group">
                                           <label for="nom_referencia2_cof">Nombre de referencia </label>
-                                          <% if(mostrarDatoscreditos) { %> 
-                                            <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.nom_referencia2_co_solicitante%>" readonly>
-                                            <% } else { %> 
-                                          <% } %> 
-                                      </div>
+                                           <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.nom_referencia2_co_solicitante%>" readonly>
+                                        </div>
                                   </div>
 
                                   <div class="col-md-4">
                                       <div class="form-group">
                                           <label for="parentesco2_cof"> Relación/parentesco </label>
-                                          <% if(mostrarDatoscreditos) { %> 
-                                            <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.parentesco2_co_solicitante%>" readonly>
-                                            <% } else { %> 
-                                          <% } %> 
-                                      </div>
+                                           <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.parentesco2_co_solicitante%>" readonly>
+                                        </div>
                                   </div>
 
                                   <div class="col-md-4">
                                       <div class="form-group">
                                           <label for="phone-masktelreferenciastwo">Teléfono móvil</label>
-                                              <% if(mostrarDatoscreditos) { %> 
-                                                <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.tel_movil2_co_solicitante%>" readonly>
-                                                <% } else { %> 
-                                              <% } %> 
-                                      </div>
-                                  </div>
-
-                              </div>
-
+                                             <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.tel_movil2_co_solicitante%>" readonly>
+                                           </div>
+                                     </div>
+                                 </div>
 
                               <hr class="bg-primary" style="padding:2px; background:#812082!important">
-
 
                               <div class="row text-align: center;">
                                   <div class="col-md-4">
                                       <div class="form-group">
-                                          <label for="nom_referencia2_cof"> Nombre de referencia
-                                          </label>
-                                          <% if(mostrarDatoscreditos) { %> 
-                                            <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.nom_referencia3_co_solicitante%>" readonly>
-                                            <% } else { %> 
-                                          <% } %> 
-                                      </div>
+                                          <label for="nom_referencia2_cof"> Nombre de referencia  </label>
+                                        <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.nom_referencia3_co_solicitante%>" readonly>
+                                       </div>
                                   </div>
 
                                   <div class="col-md-4">
                                       <div class="form-group">
                                           <label for="parentesco2_cof"> Relación/parentesco </label>
-                                          <% if(mostrarDatoscreditos) { %> 
                                           <input type="text" class="form-control " value="<%= mostrarDatoscreditos.parentesco3_co_solicitante%>" readonly>
-                                          <% } else { %> 
-                                            <% } %> 
                                         </div>
                                   </div>
 
                                   <div class="col-md-4">
                                       <div class="form-group">
                                           <label for="phone-masktelreferenciasthree">Teléfono móvil </label>
-                                          <% if(mostrarDatoscreditos) { %> 
                                             <input type="text" class="form-control " value="<%= mostrarDatoscreditos.tel_movil3_co_solicitante%>" readonly>
-                                            <% } else { %> 
-                                              <% } %> 
-                                      </div>
-                                  </div>
+                                         </div>
+                                   </div>
+                             </div>
 
-                              </div>
                           </fieldset>  
+
+                          <% } else { %>
+                            <% } %> 
+                        <% } %> 
                           <!--============= //FIXME: ===== *REFERENCIAS* ===== FIXME:=========-->
 
-                          <!--=============================TODO:TODO:=============================================================-->
+                       
+                          <!--============= //FIXME: ===== *ARCHIVOS* ===== FIXME:=========-->
 
-
-                          <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
-
-                        <h6><b>CARGAR ARCHIVOS</b></h6>
+                        <h6><b>ARCHIVOS</b></h6>
                           <fieldset>
 
                             <div class="card-body" style="margin-top: -5.5%;">
                                 <ul class="nav nav-pills nav-justified" role="tablist" >
                                     <li class="nav-item waves-effect waves-light" style="border-radius: 13px;">
         
-                                        <button type="button" style="border-radius: 14px; background:#50368c;width: 30%" class="btn btn-primary waves-effect waves-light"
+                                        <button type="button" style="border-radius: 14px; width: 30%" class="btn btn-primary waves-effect waves-light"
                                              data-bs-toggle="modal" data-bs-target=".frontal"> 
                                                   <span class="d-block d-sm-none"><i class="fas fa-id-card"></i></span>
                                                   <span class="d-none d-sm-block"> <i class="fas fa-id-card"></i> Licencia anverso </span>
                                         </button>
                                              &nbsp;&nbsp;&nbsp;&nbsp;
 
-                                        <button type="button" style="border-radius: 14px; background:#50368c;width: 29%" class="btn btn-primary waves-effect waves-light"
+                                        <button type="button" style="border-radius: 14px; width: 29%" class="btn btn-primary waves-effect waves-light"
                                              data-bs-toggle="modal" data-bs-target=".trasera"> 
                                                 <span class="d-block d-sm-none"><i class="fas fa-credit-card"></i></span>
                                                 <span class="d-none d-sm-block"> <i class="fas fa-credit-card"></i>  Licencia reverso</span>
                                         </button>
-                                        <!-- <a href="../documento/<= info_clientes.id_cliente %>"> -->
-                                            <button type="button" style="border-radius: 14px; background:#50368c;width: 29%" class="btn btn-primary waves-effect waves-light"
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                         <a href="/acuerdo/<%= info_clientes.id_cliente %>" target="_blank"> 
+                                            <button type="button" style="border-radius: 14px; width: 32%" class="btn btn-primary waves-effect waves-light"
                                             data-bs-toggle="modal" data-bs-target=".acuerdoFirmado"> 
                                             <span class="d-block d-sm-none"><i class="fas fa-id-card"></i></span>
                                             <span class="d-none d-sm-block"> <i class="fas fa-id-card"></i> Ir al documento firmado</span>
                                        </button>
                                         
-                                           <!-- </a> -->
+                                          </a> 
                                                       
                                     </li>
                                                 
@@ -974,9 +819,10 @@
                                                                         <div class="col-md-11">
                                                                            <div class="card-body" style="margin-top: -3%;text-align: center;">
                                                                             <% if(licenciacredito) { %> 
+                                                                              
                                                                             <a href="<%= licenciacredito.frontal%>" target="_blank">
 
-                                                                                <img src="<%= licenciacredito.frontal%>" alt="" style="width: 85%; margin-left: 10%;">>
+                                                                                <img src="<%= licenciacredito.frontal%>" alt="" style="width: 85%; margin-left: 10%;">
                                                                                </a> 
                                                                                <% } else { %> 
                                                                                 <% } %> 
@@ -1015,82 +861,38 @@
                                                                                    </a> 
                                                                                    <% } else { %> 
                                                                                     <% } %> 
-                            
-                                                                                    
-                                                                        </div>
-                                                                    </div><!-- end col -->
-                                                                     </div>
-                                                                    <!-- end card-body -->
-                                                              </div><!-- end col -->
-                                                        </div>
-                                                    </div>
-                             
-                                                    </div>
-                                                </div><!-- /.modal-content -->
-                                            </div><!-- /.modal-dialog -->
-                                        </div><!-- /.modal -->
-                            <!-- todo ====>> MOODAL PARA LA FIRMA -->     
-                                        <div class="modal fade acuerdoFirmado" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered ">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Acuerdo firmado </h5>
-                                                    </div>
-                                                    <div class="modal-body" style="margin-left: -33%">
-                                                  <div class="row">
-                                                  
-                                                        <div class="contenedor">
-                                                        <img src="../img/imagenTerminos.jpg" alt="">
-                                                     
-                                                       <div class="centrado">
-                                               
-                                                           <b>DIVULGACIÓN DE RESPONSABILIDAD</b>
-                                                   
-                                               
-                                                           <p>Al hacer clic en Continuar, promete que toda la información es verdadera y completa. Tiene la intención de que el
-                                                               vendedor y/o el dealer confíen en esta información para decidir si le otorgan o no crédito. Usted autoriza una
-                                                               investigación completa y la divulgación de su historial crediticio y su historial laboral. También autoriza al
-                                                               vendedor y/o dealer a divulgar información sobre la experiencia crediticia con ellos. Usted acepta recibir
-                                                               llamadas de mensajes pregrabados o marcados automáticamente de nosotros o de aquellos que actúan en nuestro
-                                                               nombre en cualquier número de teléfono móvil que nos proporcione.</p>
-                                                           <p><b>AVISO DE INFORME DE CRÉDITO:</b> Podemos solicitar un informe de crédito para cualquier propósito legítimo asociado
-                                                               con su solicitud de crédito, extensión de crédito, modificación de los términos de su contrato de crédito o
-                                                               cobro en su cuenta. Si lo solicita, le informaremos si se ordenó dicho informe y le daremos el nombre y la
-                                                               dirección de la agencia de informes crediticios que proporcionó el informe.</p>
-                                                       
-                                                               <% if(firmaxd) { %> 
-                                                                <img src="<%= firmaxd%>" alt=""  
-                                                                style="    
-                                                                width: 39%;
-                                                                margin-left: -5%;
-                                                                margin-bottom: -6%;">
-                                                            <% } else { %> 
-                                                                
-                                                                <%}%>
-                                                               
-                                                            <h2>______________</h2>
-                                                               <p>Yo accepto</p>
-                                                           <br>
-                                               
-                                               
-                                               
-                                                       </div>
+                                                                            </div>
+                                                                       </div><!-- end col -->
+                                                                    </div>
+                                                               </div><!-- end col -->
+                                                            </div>
                                                          </div>
-                                               
-                                                    
-                                                 
-                                                    </div>
-                             
                                                     </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div><!-- /.modal -->
+                      
 
+                                 <button type="button" class="btn-close" style="float: left;
+                                     position: relative;
+                                        top: 35px;
+                                        z-index: 3;
+                                        left: 46em;
+                                        width: 68px;
+                                        background: black;
+                                        color: #fff;
+                                        padding: 8px 12px;
+                                        border-radius: 2px;
+                                        border: 1px solid transparent;
+                                        height: 18px;"
+                                  data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                                      
+                            
                                </fieldset>   
-
+  
                           <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
                     
-                                
+                       
                                         </form>
 
 
@@ -1110,7 +912,7 @@
                  <input type="hidden" hidden name="id_consecutivo" value="<%= info_clientes.id %>">
                  <input type="hidden" hidden name="id_cliente" value="<%= info_clientes.id_cliente%>">
          </div>
-
+    
                                     <div class="card-body">
                                           <div class="table-responsive">
                                             <table class="table mb-0">
@@ -1221,7 +1023,7 @@
                                  class="dataTables_filter"  id="tech-companies-1" class="dataTables_info" style="margin-top: 2%;" >
                                                         <thead class="">
                                                             <tr>
-                                                                <th>Numero de test</th>
+                                                                <th>Número de test</th>
                                                                 <th>Fecha</th>
                                                                 <th>Dureza (gpg)</th>
                                                                 <th>Hierro (ppm)</th>
@@ -1432,7 +1234,7 @@
                                                 <a href="/registro-instalacion/<%= info_clientes.id_cliente %>" id="verbtnI">
                                                     <button class="btn btn-primary" id="btn_instalacion" style="float: right;margin-top: -4%;border-radius:13px;">Registrar instalación</button>
                                                 </a> 
-
+                                          
                                             <!-- VALIDACIONES BREVES -->
                                             <% if (!estadu.verbtnI){%>
                                                 <script>
@@ -1509,8 +1311,8 @@
                                                                  <td style="width: 26%;">Registro fotográfico:</td>    
                                                                  <p> <td><b><button type="button" style="border:none;" class="waves-effect waves-light"
                                                                     data-bs-toggle="modal" data-bs-target=".evidencia"> 
-                                                                         <span class="d-block d-sm-none"><i class="fas fa-id-card"></i></span>
-                                                                         <span class="d-none d-sm-block"> <i class="fas fa-id-card"></i> Ver evidencia </span>
+                                                                         <span class="d-block d-sm-none"><i class="far fa-image"></i></span>
+                                                                         <span class="d-none d-sm-block"> <i class="far fa-image"></i> Ver evidencia </span>
                                                                </button></b></td></p>     
                                                                  <% } else { %> 
                                                                      <td><b>N/A</b></td>

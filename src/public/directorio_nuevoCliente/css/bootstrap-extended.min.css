@@ -4,14 +4,14 @@
   border-bottom: inherit;
 }
 form label {
-  color: #2e405c;
+  color: #333;
 }
 form .form-group {
   margin-bottom: 1.5rem;
 }
 form .form-control {
   border: 1px solid #ccd6e6;
-  color: #3f587e;
+  color: #333;
 }
 form .form-control::-webkit-input-placeholder {
   color: #b1c1d8;

@@ -7,7 +7,7 @@ const { listarVendedores,
        listarVendedores_PerfilVendedores,
        listarClientes_PerfilClientes,
       listarClientes,
-      ActualizarNivel,ActualizarEstado
+      ActualizarNivel,ActualizarEstado,clfirmas
        } = require('../controllers/adminControllers');
 
 
@@ -20,10 +20,8 @@ router.get('/perfil-vendedores/:id', isAuthenticated,listarVendedores_PerfilVend
 router.get('/listar-clientes', isAuthenticated,listarClientes)
 router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
 
-router.get('/documento', isAuthenticated, (req, res) => {
-      res.render('./1-admin/documento', { user: req.user })
-   });
-
+ router.get('/acuerdo/:id', isAuthenticated,clfirmas )
+//  router.get('/documento/:id', isAuthenticated,)
 // router.get('/prueba', isAuthenticated,(req, res) => {
 //        res.render('./1-admin/clientes', { user: req.user })
 // });

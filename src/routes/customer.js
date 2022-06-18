@@ -104,7 +104,6 @@ router.get('/test-de-agua/:id', isAuthenticated, getTestAgua)
  router.get('/agendar-instalacion/:id', isAuthenticated,getAgendarinstalacion) 
  router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 
-
 // *   ================ ===== ↑↑ ==============================
  router.get('/hola', isAuthenticated, (req, res) => {
     res.render('hola', { user: req.user })
