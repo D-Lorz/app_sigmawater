@@ -80,6 +80,16 @@ exports.getAgendarinstalacion = async (req, res) => {
   })
 
 }
+// exports.getUpdate = async (req, res) => {
+//   const id = req.params.id
+
+//   await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
+//     if (err) throw err;
+//     res.render('solicitar-credito', { user: req.user, cliente: result[0] });
+
+//   })
+
+// }
 //------------------------------------------------
 // todo -->  Formulario para solicitar credito
 exports.solicitarCredito = async (req, res) => {
@@ -228,6 +238,7 @@ exports.listarClientes = async (req, res) => {
 
 // todo ===============================>>> Estado del solicitar credito
 let credito =  conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [id_vendedor.id])
+credito = credito[0]
 let estado = [] 
 estado.txt = "No solicitado";
 estado.color = 'badge-soft-dark'
@@ -252,7 +263,10 @@ if (credito.length > 0) {
     estado.color = 'badge-soft-info'
     estado.verBtn = false;
   }
+
 }
+
+
 // todo =========================>> Estados de la agenda para instalar el producto
 let consultaEstado_instalacion =  conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [id_vendedor.id])
 
@@ -313,7 +327,9 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
           estado.verBtn = false;
         }
       }
-    
+
+  let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
+  mostrarProducto = mostrarProducto[0]
 // todo =========================>> Mostrar información del test de agua del cliente
     let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
   
@@ -389,7 +405,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     consulta_UltimoTestAgua,
     datosJson_UltimoTestagua,
     ahorroCalculado,
-    datosJson_ahorroCalculado,
+    datosJson_ahorroCalculado,mostrarProducto,
     estado_intalacion
     
    })
@@ -525,6 +541,25 @@ await conexion.query('INSERT INTO agendar_instalacion SET ?', [Datos_agendarSoli
    })
 
 }
+
+// todo ===========>>>  Actualizar Sistema
+exports.ActualizarSistema = async (req, res) => {
+
+ const id_clienteEnviarr = req.body.id_clienteEnviarr; 
+ const id_cliente = req.body.id_consecutivo; 
+ const sistema = req.body.productoElegido;
+
+  const datosSistema = {sistema, id_cliente};
+
+  await conexion.query("UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosSistema, id_cliente], (err, result) => {
+      if (err) throw err;
+
+      if (result) {
+        res.redirect("/perfil-clientes/" + id_clienteEnviarr);
+      }
+    }
+  );
+};
 
 // todo --> Generar codigo numero aleatorio del cliente
 const generateRandomNumber = (num) => {

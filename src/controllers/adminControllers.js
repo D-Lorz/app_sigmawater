@@ -49,6 +49,8 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
   let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ",[id_vendedor] );
   info_vendedor = info_vendedor[0];
 
+
+  
   const licencia = JSON.parse(info_vendedor.licencia_conduccion);
 
   // todo===========>>>  Mostrar afiliados a tal vendedor
@@ -156,18 +158,13 @@ console.log(infoClientes);
 };
 // todo ===========>>>  Actualizar nivel de vendedores
 exports.ActualizarNivel = async (req, res) => {
+
   const id_vendedor = req.body.coodigoActualizarxs;
   const nivel = req.body.nivel;
 
-  const datosNivel = {
-    nivel,
-    id_vendedor,
-  };
+  const datosNivel = { nivel,id_vendedor};
 
-  await conexion.query(
-    "UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ? ",
-    [datosNivel, id_vendedor],
-    (err, result) => {
+  await conexion.query( "UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ? ", [datosNivel, id_vendedor], (err, result) => {
       if (err) throw err;
 
       if (result) {
@@ -181,20 +178,13 @@ exports.ActualizarEstado = async (req, res) => {
   const id_vendedor = req.body.id_vendedorEnviar;
   const id_consecutivo = req.body.id_consecutivo;
   const estado_de_la_cuenta = req.body.estadoDe_laCuenta;
-  const datosEstado_vendedor = {
-    estado_de_la_cuenta,
-    id_consecutivo,
-    id_vendedor,
-  };
+  const datosEstado_vendedor = {estado_de_la_cuenta, id_consecutivo, id_vendedor, };
 
-  await conexion.query(
-    "UPDATE usuarios SET ? WHERE id_vendedor = ? ",
-    [datosEstado_vendedor, id_vendedor],
-    (err, result) => {
+  await conexion.query( "UPDATE usuarios SET ? WHERE id_vendedor = ? ", [datosEstado_vendedor, id_vendedor], (err, result) => {
       if (err) throw err;
 
       if (result) {
-        res.redirect("/perfil-vendedores/" + id_vendedor);
+        res.redirect("/perfil-clientes/" + id_vendedor);
       }
     }
   );
@@ -257,6 +247,14 @@ exports.listarClientes = async (req, res) => {
     lista_clientes,
   });
 };
+
+//* Formateando precios a una moneda 
+const formatear = new Intl.NumberFormat('en-US', {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+});
+
 
 // ! >>>> Tarjetas en la vista perfil clientes <<<<<<<<<<<
 exports.listarClientes_PerfilClientes = async (req, res) => {
@@ -384,6 +382,8 @@ mostrarAgenda = mostrarAgenda[0]
 
 let mostrarDatoscreditos= await conexion.query("SELECT * FROM solicitar_credito WHERE id_cliente = ?",[info_clientes.id]);
 mostrarDatoscreditos = mostrarDatoscreditos[0]
+
+mostrarDatoscreditos.monto_financiar_cliente = formatear.format(mostrarDatoscreditos.monto_financiar_cliente)
 
 let clbotonCredito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
 

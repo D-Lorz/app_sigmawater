@@ -146,10 +146,44 @@
 
                                 <div class="col-lg-4">
                                    
-                              <div class="alert alert-primary alert-dismissible alert-outline fade show" style=" border-radius: 13px;  width: 100%; " role="alert">
-                                        <strong>Comisión</strong> - En esta venta has recibido: $ 0
-                                        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3">Producto de interés</h5>
+    
+                                     
+                                                <form action="/ActualizarSistema" method="POST" style="text-align: center">
+                                                    <div class="btn-group me-1 mt-2">
+
+                                                        <input type="hidden" name="id_clienteEnviarr" value="<%= clientes2.id_cliente %>">
+                                                        <input type="hidden" name="id_consecutivo" value="<%= clientes2.id %>">
+                                                       
+                                                      <select class="form-select" id="productoElegido" name="productoElegido">
+
+                                                        <option style="background:gray;color: white;">Sistema solicitado: <%=mostrarProducto.sistema %>  </option>
+                                                            <br>
+                                                            <option  value="Whole System">Whole System</option>
+                                                            <option value="R.O.S." title="R.O.S.">Reverse Osmosis System</option>
+                                                        
+                                                        </select>
+                                                    </div>
+                                                    <br>
+                                                    <center> <input type="submit" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;" value="Guardar"></center>  
+                                                </form>
+    
+                                                <br>
+                                                  <center>Valor del producto: <div class="badge badge-soft-info font-size-12" >0</div></center>  
+                                           
+                                      </div>
+                                      
+                                        <!-- end card body -->
                                     </div>
+
+
+
+                              <!-- <div class="alert alert-primary alert-dismissible alert-outline fade show" style=" border-radius: 13px;  width: 100%; " role="alert"> -->
+                                        <!-- <strong>Comisión</strong> - En esta venta has recibido: $ 0 -->
+                                        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                                    <!-- </div> -->
                                    
 
                                     <div class="card border-primary text-white-50 <%= estadoVisita_testAgua.background %>" style="margin-top: 5%;">
@@ -192,7 +226,7 @@
                                             <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
 
                                             <a href="/test-de-agua/<%= clientes2.id_cliente %>" >
-                                                <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Realizar test</button>
+                                                <button class="btn btn-primary"  type="button" style="float: right;margin-top: -2%;border-radius:13px;">Realizar test</button>
                                             </a> 
                                     </div> 
                   

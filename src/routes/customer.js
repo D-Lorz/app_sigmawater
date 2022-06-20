@@ -5,7 +5,7 @@ const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados,isSellers } = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
-        agendarInstalacionProducto,getRegistrarInstalacion } = require('../controllers/customerFormControllers');
+        agendarInstalacionProducto,getRegistrarInstalacion,ActualizarSistema } = require('../controllers/customerFormControllers');
 
 
 const {servicioInstaladosx} = require("../controllers/adminControllers");  
@@ -123,6 +123,8 @@ router.post('/registrarClientes', isAuthenticated, registrarClientes);
  router.post('/agendarInstalacion', isAuthenticated,agendarInstalacionProducto);
  /*=============================================================*/
  router.post('/instalacion', isAuthenticated,oneUpload,servicioInstaladosx);
+/*=============================================================*/
+router.post('/ActualizarSistema', isAuthenticated,ActualizarSistema);
 /*=============================================================*/
 
 module.exports = router
