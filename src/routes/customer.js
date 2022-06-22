@@ -5,13 +5,11 @@ const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados,isSellers } = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
-        agendarInstalacionProducto,getRegistrarInstalacion,ActualizarSistema } = require('../controllers/customerFormControllers');
+        agendarInstalacionProducto,getRegistrarInstalacion,elegirSistema } = require('../controllers/customerFormControllers');
 
 
 const {servicioInstaladosx} = require("../controllers/adminControllers");  
-    
-
-
+  
 const rutaAlmacen = multer.diskStorage({
 
     destination: function (req, file, callback) {
@@ -40,10 +38,8 @@ const cargar = multer({
     storage: rutaAlmacen,
 });
 
-
 // * SIRVE PARA UNIFICAR LOS 2 CAMPOS UPLOAD DEL FORMULARIO CLIENTE
 const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente_trasera' }]);
-
 
 // todo ===>> subir evidencia fotografica del servicio instalado
 const rutaCarpeta = multer.diskStorage({
@@ -124,7 +120,7 @@ router.post('/registrarClientes', isAuthenticated, registrarClientes);
  /*=============================================================*/
  router.post('/instalacion', isAuthenticated,oneUpload,servicioInstaladosx);
 /*=============================================================*/
-router.post('/ActualizarSistema', isAuthenticated,ActualizarSistema);
+router.post('/elegirSistema', isAuthenticated,elegirSistema);
 /*=============================================================*/
 
 module.exports = router

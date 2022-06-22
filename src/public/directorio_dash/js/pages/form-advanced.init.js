@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	  var element = genericExamples[i];
 	  new Choices(element, {
 		placeholderValue: 'This is a placeholder set in the config',
-		searchPlaceholderValue: 'This is a search placeholder',
+		searchPlaceholderValue: 'Buscar...',
 	  });
 	}
   

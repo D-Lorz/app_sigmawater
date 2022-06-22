@@ -44,7 +44,7 @@ exports.registrar = async (req, res) => {
         apt_suite_unidad, codigo_postal, codigo_afiliado, nombre_banco, numero_cuenta, ruta, beneficiario, 
         licencia_conduccion,id_vendedor }
 
-    const usuarios = {correo,pass, id_vendedor,codigo_afiliado }
+    const usuarios = {correo, pass, id_vendedor, codigo_afiliado }
 
      console.log(nuevoRegistro)
      await conexion.query('INSERT INTO usuarios SET ?', [usuarios])

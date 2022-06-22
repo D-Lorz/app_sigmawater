@@ -314,7 +314,7 @@
 
                       <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="anios_trabajandof">Años trabajando <span class="danger">*</span> </label>
+                                    <label for="anios_trabajandof">Años trabajando</label>
                                     <% if(mostrarDatoscreditos) { %> 
                                     <input type="text"  class="form-control " value="<%= mostrarDatoscreditos.anios_trabajando_ingresos%>" readonly  >
                                     <% } else { %> 
@@ -325,7 +325,7 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="meses_trabajandof"> Meses trabajando <span class="danger">*</span></label>
+                                    <label for="meses_trabajandof"> Meses trabajando</label>
                                     <% if(mostrarDatoscreditos) { %> 
                                     <input type="text"  class="form-control" value="<%= mostrarDatoscreditos.meses_trabajando_ingresos%>" readonly>
                                     <% } else { %> 
@@ -339,7 +339,7 @@
                       <div class="row text-align: center;">
                              <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="currency-masktwo"> Salario mensual <span class="danger">*</span> </label>
+                                    <label for="currency-masktwo"> Salario mensual</label>
                                     <% if(mostrarDatoscreditos) { %> 
                                     <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.salario_mensual_ingresos%>" readonly >
                                     <% } else { %> 
@@ -446,7 +446,7 @@
                               
                    <div class="row text-align: center;">
                                    <div class="col-md-4">
-                                     <label for="exampleDataList" class="form-label">Tipo de cuenta</label> <span class="danger">*</span>
+                                     <label for="exampleDataList" class="form-label">Tipo de cuenta</label> 
                                      <% if(mostrarDatoscreditos) { %> 
                                      <input class="form-control"  value="<%= mostrarDatoscreditos.tipo_cuenta_bancaria%>" readonly>
                                      <% } else { %> 
@@ -455,7 +455,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="numero_rutaf"> Número de ruta</label> <span class="danger">*</span>
+                                        <label for="numero_rutaf"> Número de ruta</label>
                                         <% if(mostrarDatoscreditos) { %> 
                                         <input type="number" class="form-control"  value="<%= mostrarDatoscreditos.numero_ruta_bancaria%>" readonly>
                                         <% } else { %> 
@@ -465,7 +465,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="numero_cuentaf"> Número de cuenta </label> <span class="danger">*</span>
+                                        <label for="numero_cuentaf"> Número de cuenta </label>
                                         <% if(mostrarDatoscreditos) { %> 
                                         <input type="number" class="form-control " value="<%= mostrarDatoscreditos.numero_cuenta_bancaria%>" readonly>
                                         <% } else { %> 
@@ -938,14 +938,65 @@
                                                     <tr>
                                                         <td>Apellido</td>
                                                         <td><b><%= info_clientes.apellido %></b></td>
-                                                        <td>Estado de credito</td>
-                                                        <td><div class="badge <%=estado.color%> font-size-12" ><%= estado.txt %></div></td>
-                                                    </tr>
+                                                        <td>Estado de crédito</td>
+                                                        <td>
+
+                                                            <form action="/ActualizarCredito" method="POST" >
+                                                                           
+                                                                    <input type="hidden" name="id_clienteEnviarrr" value="<%= info_clientes.id_cliente %>">
+                                                                    <input type="hidden" name="id_consecutivo" value="<%= info_clientes.id %>">
+                                                                    
+                                                                    <select style="border:none;background:#ebebeb;border-radius: 9px;" id="estadosCredito" name="estadosCredito">
+                                                                        <option id="estadosCredito" style="background:gray;color: white;"><%= estado.txt %></option>
+                                                                            <br>
+                                                                            <option value="1">Aprobado</option>
+                                                                            <option value="2">Rechazado</option>
+                                                                            <option value="3">Pagado</option>
+                                                                            <option value="0">En revisión</option>
+                                                                        
+                                                                     </select>
+                                                               
+                                                              
+                                                               <button type="submit" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                                <i class="bx bx-check-double font-size-13 align-middle"></i></button> 
+                                                            </form>
+                                                    
+                                                            
+                                                            <!-- <div class="badge <=estado.color%> font-size-12" ><= estado.txt %></div> -->
+                                                            </td>
+                                                    </tr>   
+                                                                                                       
                                                     <tr>
                                                         <td>Correo</td>
                                                         <td><b><%= info_clientes.correo %></b></td>
                                                         <td style="width: 24%;">Monto aprobado</td>
-                                                        <td><div class="badge badge-soft-success font-size-12">$0 <%= info_clientes.monto_aprobado %></div></td>
+                                                        <td>   
+                                                           <% if(info_clientes) { %>
+                                                            <% if(info_clientes.sistema != "R.O.S.") { %>
+                                                             <form action="/ActualizarCredito" method="POST" >
+                                                            <input type="hidden" name="id_clienteEnviarrr" value="<%= info_clientes.id_cliente %>">
+                                                            <input type="hidden" name="id_consecutivo" value="<%= info_clientes.id %>">
+                                                            
+                                                            <select style="border:none;background:#ebebeb;border-radius: 9px;" id="estadosCredito" name="estadosCredito">
+                                                                <option id="estadosCredito" style="background:gray;color: white;">$ 0</option>
+                                                                    <br>
+                                                                    <option value="8500">$ 8,500</option>
+                                                                    <option value="8075">$ 8,075</option>
+                                                                    <option value="7650">$ 7,650</option>
+                                                                    <option value="6800">$ 6,800</option>
+                                                                    <option value="6375">$ 6,375</option>
+                                                                    <option value="5525">$ 5,525</option>
+                                                           </select>
+                                                       <button type="submit" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                        <i class="bx bx-check-double font-size-13 align-middle"></i></button> 
+                                                    </form>
+                                               <%} else { %> 
+                                                aqui no hay nada 1
+                                                <% } %>
+                                            <%} else {%>
+                                                aqui no hay nada 2
+                                                <% } %>
+                                            <!-- <div class="badge badge-soft-success font-size-12">$0 <= info_clientes.monto_aprobado %></div></td> -->
                                                     </tr>
                                                   </tbody>
                                             </table>
@@ -1266,7 +1317,7 @@
                                                         <tr>
                                                            <td style="width: 26%;">Dias disponibles:</td>
                                                            <% if(mostrarAgenda){ %> 
-                                                            <td><b><%= mostrarAgenda.lunes %><%= mostrarAgenda.martes %> <%= mostrarAgenda.miercoles %> <%= mostrarAgenda.jueves %> <%= mostrarAgenda.viernes %> <%= mostrarAgenda.sabado %> <%= mostrarAgenda.sabado %> <%= mostrarAgenda.domingo %></b></td>
+                                                            <td><b><%= mostrarAgenda.lunes %><%= mostrarAgenda.martes %> <%= mostrarAgenda.miercoles %> <%= mostrarAgenda.jueves %> <%= mostrarAgenda.viernes %> <%= mostrarAgenda.sabado %> <%= mostrarAgenda.domingo %></b></td>
                                                             <td style="width: 26%;">Nota:</td>    
                                                             <p> <td><b><%= mostrarAgenda.nota_solicitud %></b></td></p>     
                                                             <% } else { %> 
@@ -1313,7 +1364,8 @@
                                                                     data-bs-toggle="modal" data-bs-target=".evidencia"> 
                                                                          <span class="d-block d-sm-none"><i class="far fa-image"></i></span>
                                                                          <span class="d-none d-sm-block"> <i class="far fa-image"></i> Ver evidencia </span>
-                                                               </button></b></td></p>     
+                                                               </button></b></td></p>   
+                                                                 
                                                                  <% } else { %> 
                                                                      <td><b>N/A</b></td>
                                                                      <td style="width: 26%;">Registro fotográfico:</td>

@@ -61,14 +61,14 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="nombreP">Hierro (ppm)<span class="danger">*</span></label>
+                                                                    <label for="nombreP">Hierro (ppm)</label>
                                                                     <input type="text" class="form-control campoDecimal" id="" name="hierro">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="correoP">TSD (total de solidos disueltos)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control campoDecimal" required id="" name="tsd" >
+                                                                    <input type="text" class="form-control campoDecimal required" required id="" name="tsd" >
                                                                 </div>
                                                             </div> 
                                                             
@@ -77,12 +77,16 @@
                                                          </div>
                                               <!-- * ========== Segunda fila =======  -->
 
-                                                         <div class="row "  style="text-align: center">
+                                                         <div class="row" style="text-align: center">
                                                             <div class="col-md-4">
-                                                                <div class="form-group">
-                                                                    <label for="">Cloro (ppm)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control campoDecimal"  required id="" name="cloro" >
-                                                                </div>
+                                                               <label for="" class="form-label">Cloro</label>
+                                                               <input class="form-control" autocomplete="none" list="ddd"  name="cloros" placeholder="Escoge el resultado" >
+                                                                <datalist id="ddd">
+                                                                  <option value="Presente"></option>
+                                                                  <option value="No presente"></option>
+                                                                  
+                                                                </datalist>
+                                                        
                                                             </div>
                                                           
                                                             <div class="col-md-4">
@@ -93,8 +97,8 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="">Azufre (ppm)<span class="danger">*</span></label>
-                                                                    <input type="text" class="form-control campoDecimal" required id="" name="azufre" >
+                                                                    <label for="">Azufre (ppm)</label>
+                                                                    <input type="text" class="form-control campoDecimal" id="" name="azufre" >
                                                                 </div>
                                                              </div>
                                                          
@@ -105,15 +109,15 @@
                                          <div class="row justify-content-center"style="text-align: center">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">tanino (ppm)<span class="danger">*</span></label>
-                                                    <input type="text" class="form-control campoDecimal" required id="" name="tanino" >
+                                                    <label for="">tanino (ppm)</label>
+                                                    <input type="text" class="form-control campoDecimal" id="" name="tanino" >
                                                 </div>
                                             </div>
                                             
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="">Nitrato (ppm)<span class="danger">*</span></label>
-                                                  <input type="text" class="form-control campoDecimal" required id="" name="nitrato" >
+                                                    <label for="">Nitrato (ppm)</label>
+                                                  <input type="text" class="form-control campoDecimal" id="" name="nitrato" >
                                                 </div>
                                                
                                               <center> <a href="javascript:void(0);" class="btn btn-primary add_button " style="border-radius: 15px;width: 23%;"><i class="fa fa-plus"></i> Otro</a> </center>  
@@ -121,15 +125,16 @@
                                             
                                                </div>
                                              
-
                                             <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="">Alcalinidad<span class="danger">*</span></label>
-                                                  <input type="text" class="form-control campoDecimal" required id="" name="alcalinidad" >
-                                                 </div>
-
-                                             </div>
-
+                                            <label for="" class="form-label">Alcalinidad</label>
+                                                    <input class="form-control" autocomplete="none" list="ddd"  name="alcalinidads" placeholder="Escoge el resultado " >
+                                                     <datalist id="ddd">
+                                                       <option value="Alcalina"></option>
+                                                       <option value="Ácida"></option>
+                                                       <option value="Neutra"></option>
+                                                       
+                                                     </datalist>
+                                              </div>
                                           
                                          <div class="col-md-3"> 
                                             <div class="form-group "> 

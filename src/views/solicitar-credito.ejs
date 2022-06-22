@@ -94,14 +94,16 @@
                                                       </div>
                                                   </div>
                                                   <div class="col-md-4">
+                                                  
                                                       <label for="exampleDataList" class="form-label">Sistema</label>
                                                       <span class="danger">*</span>
-                                                      <input class="form-control required" list="estado_sistema"  name="sistema" placeholder="Eliga el sistema deseado" >
+                                                      <input class="form-control required" autocomplete="none" list="estado_sistema"  name="sistema" placeholder="Eliga el sistema deseado" >
                                                       <datalist id="estado_sistema">
                                                         <option value="Whole System"></option>
                                                         <option value="Reverse Osmosis System"></option>
                                                         
                                                       </datalist>
+                                              
                                                   </div> 
                                              
                                            
@@ -119,7 +121,7 @@
                                               <div class="col-md-4">
                                                   <label for="exampleDataList" class="form-label">Estado de licencia</label>
                                                   <span class="danger">*</span>
-                                                  <input class="form-control required" list="estado_licencia" id="exampleDataList" name="estado_licencia_cliente" placeholder="Escribe para buscar...">
+                                                  <input class="form-control required" autocomplete="none" list="estado_licencia" id="exampleDataList" name="estado_licencia_cliente" placeholder="Escribe para buscar...">
                                                   <datalist id="estado_licencia">
                                                         <option value="Alaska"></option>
                                                       <option value="Alabama"></option>
@@ -516,8 +518,8 @@
                                                     
                                          <div class="row text-align: center;">
                                                          <div class="col-md-4">
-                                                           <label for="exampleDataList" class="form-label">Tipo de cuenta</label> <span class="danger">*</span>
-                                                                  <input class="form-control required" list="datalistOptions" name="tipo_cuenta_bancaria" id="exampleDataList" placeholder="Seleccione" >
+                                                           <label for="exampleDataList" class="form-label">Tipo de cuenta</label>
+                                                                  <input class="form-control" autocomplete="none" list="datalistOptions" name="tipo_cuenta_bancaria" id="exampleDataList" placeholder="Seleccione" >
                                                                       <datalist id="datalistOptions">
                                                                           <option>Cuenta corriente</option>
                                                                           <option>Cuenta de ahorros</option>
@@ -526,15 +528,15 @@
       
                                                       <div class="col-md-4">
                                                           <div class="form-group">
-                                                              <label for="numero_rutaf"> Número de ruta</label> <span class="danger">*</span>
-                                                              <input type="number" class="form-control required " id="numero_rutaf" name="numero_ruta_bancaria">
+                                                              <label for="numero_rutaf"> Número de ruta</label>
+                                                              <input type="number" class="form-control" id="numero_rutaf" name="numero_ruta_bancaria">
                                                           </div>
                                                       </div>
       
                                                       <div class="col-md-4">
                                                           <div class="form-group">
-                                                              <label for="numero_cuentaf"> Número de cuenta </label> <span class="danger">*</span>
-                                                              <input type="number" class="form-control required"  id="numero_cuentaf" name="numero_cuenta_bancaria">
+                                                              <label for="numero_cuentaf"> Número de cuenta </label>
+                                                              <input type="number" class="form-control"  id="numero_cuentaf" name="numero_cuenta_bancaria">
                                                           </div>
                                                       </div>
       

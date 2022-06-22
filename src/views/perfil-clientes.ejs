@@ -14,8 +14,6 @@
 
     <base href="#">
 
-
-
  <!-- App favicon -->
  <link rel="shortcut icon" href="./directorio_perfilClientes/images/favicon.ico">
 
@@ -32,7 +30,7 @@
  <!-- App Css-->
  <link href="../directorio_perfilClientes/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
  <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
-
+ 
 
 </head>
 
@@ -65,7 +63,7 @@
                                                             <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5>
 
                                                             <a href="/solicitar-credito/<%= clientes2.id_cliente %>" id="verBtn">
-                                                                <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Solicitar credito</button>
+                                                                <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Formulario de crédito</button>
                                                             </a> 
 
                                                       </div>
@@ -99,7 +97,7 @@
                                                                     <tr>
                                                                         <td>Apellido</td>
                                                                         <td><b><%= clientes2.apellido %></b></td>
-                                                                        <td>Estado de credito</td>
+                                                                        <td>Estado de crédito</td>
                                                                         <td><div class="badge <%=estado.color%> font-size-12" ><%= estado.txt %></div></td>
                                                                     </tr>
                                                            
@@ -146,18 +144,19 @@
 
                                 <div class="col-lg-4">
                                    
-                                    <div class="card">
+                                    <div class="card" style="border-radius: 21px; margin-top: 20px;box-shadow: 0px 0px 10px #e7e7e7;">
                                         <div class="card-body">
-                                            <h5 class="card-title mb-3">Producto de interés</h5>
+                                            <h5 class="card-title mb-3" style="text-align: center">Solicitar crédito</h5>
     
-                                     
-                                                <form action="/ActualizarSistema" method="POST" style="text-align: center">
+                                            <% if(mostrarProducto) { %>
+                                             
+                                                <form action="/elegirSistema" method="POST" style="text-align: center">
                                                     <div class="btn-group me-1 mt-2">
 
-                                                        <input type="hidden" name="id_clienteEnviarr" value="<%= clientes2.id_cliente %>">
+                                                        <input type="hidden" name="id_clienteCodigo" value="<%= clientes2.id_cliente %>">
                                                         <input type="hidden" name="id_consecutivo" value="<%= clientes2.id %>">
-                                                       
-                                                      <select class="form-select" id="productoElegido" name="productoElegido">
+                                                  
+                                                      <select class="form-select" id="sistemaElegido" name="sistemaElegido">
 
                                                         <option style="background:gray;color: white;">Sistema solicitado: <%=mostrarProducto.sistema %>  </option>
                                                             <br>
@@ -169,10 +168,34 @@
                                                     <br>
                                                     <center> <input type="submit" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;" value="Guardar"></center>  
                                                 </form>
-    
+                                             
+                                                
+                                         <% } else { %>
+                                            <% if(!(mostrarProducto)) { %>
+                                            <form action="/elegirSistema" method="POST" style="text-align: center">
+                                                <div class="btn-group me-1 mt-2">
+
+                                                    <input type="hidden" name="id_clienteCodigo" value="<%= clientes2.id_cliente %>">
+                                                    <input type="hidden" name="id_consecutivo" value="<%= clientes2.id %>">
+                                              
+                                                  <select class="form-select" id="sistemaElegido" name="sistemaElegido">
+
+                                                    <option style="background:gray;color: white;">Sistema solicitado: <%=mostrarProducto %>  </option>
+                                                        <br>
+                                                        <option  value="Whole System">Whole System</option>
+                                                        <option value="R.O.S." title="R.O.S.">Reverse Osmosis System</option>
+                                                    
+                                                    </select>
+                                                </div>
                                                 <br>
-                                                  <center>Valor del producto: <div class="badge badge-soft-info font-size-12" >0</div></center>  
-                                           
+                                                <center> <input type="submit" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;" value="Guardar"></center>  
+                                            </form>
+                                            <br>
+                                            <center>Valor del producto: <div class="badge badge-soft-info font-size-12" >0</div></center>  
+                                               
+                                            <%  } %>
+                                        <%  } %>
+                                              
                                       </div>
                                       
                                         <!-- end card body -->
@@ -214,11 +237,11 @@
 
             <!-- * =============>> Test de agua  <<============================== -->
             <div class="row">
-                <div class="col-xl-14">
+                <div class="col-xl-8">
                     <div class="">
                     
                         <div class="row">
-                            <div class="col-lg-14">
+                            <div class="col-lg-12">
                                 <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
 
                                    <div class="card-header bg-transparent border-primary">
@@ -234,21 +257,21 @@
                                         <div class="">
                                             <div class="table-responsive" >
                                                                
-                                                <table class="table table-nowrap align-middle" id="idahorro"
+                                                <table class="table table" id="idahorro"
                                              class="dataTables_filter"  id="tech-companies-1" class="dataTables_info" style="margin-top: 2%;" >
                                                                     <thead class="">
                                                                         <tr>
-                                                                            <th>Numero de test</th>
+                                                                            <th>Numero <br>de test</th>
                                                                             <th>Fecha</th>
-                                                                            <th>Dureza (gpg)</th>
-                                                                            <th>Hierro (ppm)</th>
-                                                                            <th>Total dureza compensada</th>
-                                                                            <th >TSD (Total de solidos disueltos)</th>
-                                                                            <th>Cloro (ppm)</th>
+                                                                            <th>Dureza <br>(gpg)</th>
+                                                                            <th>Hierro <br>(ppm)</th>
+                                                                            <th>Total dureza <br>compensada</th>
+                                                                            <th >TSD <br> (Total de solidos disueltos)</th>
+                                                                            <th>Cloro<br> (ppm)</th>
                                                                             <th>pH</th>
-                                                                            <th>Azufre (ppm)</th>
-                                                                            <th>Tanino (ppm)</th>
-                                                                            <th>Nitrato (ppm)</th>
+                                                                            <th>Azufre <br>(ppm)</th>
+                                                                            <th>Tanino<br> (ppm)</th>
+                                                                            <th>Nitrato <br>(ppm)</th>
                                                                             <th>Alcalinidad</th>
                                                                             <th>Otro</th>
                                                                             <th>Concentración</th>
@@ -257,16 +280,11 @@
                                                                             <th>Otro</th>
                                                                             <th>Concentración</th>
                                                                             <th>Nota</th>
-                                                                           
-                                                                           
-                                                                           
                                                                         </tr>
                                                                     </thead>
 
                                                                     <tbody>
-                                                                      
                                                                         <% informacionTestAgua.forEach((user)=>{ %>
-                                                                                                                                                    
                                                                             <tr>
                                                                                 <td><%= user.id %></td>
                                                                                   <td><%= user.fecha_test %></td>
@@ -287,13 +305,11 @@
                                                                                   <td><%= user.otro3 %></td>
                                                                                   <td><%= user.concentracion3 %></td>   
                                                                                   <td><%= user.nota %></td>    
-                                                                     
-                                                                            </tr>
-                                                                   
-                                                                                  <%})%>
+                                                                             </tr>
+                                                                            <%})%>
 
-                                                                                </tbody>
-                                                                            </table>
+                                                                          </tbody>
+                                                                       </table>
                                                                             
                                                                             
                                                                             <input type="hidden" id="datosJson_PrimerTestagua" value="<%= datosJson_PrimerTestagua %>">
@@ -314,8 +330,8 @@
                                                 </div> <!-- end col -->
                                 
 
-                                        <div class="col-lg-14 ">
-                                            <div class="card" style="margin-top: 5%;">
+                                        <div class="col-lg-4 ">
+                                            <div class="card" style="margin-top: 0%; box-shadow: 0px 0px 10px #e7e7e7;border-radius: 21px;">
                                                 <div class="card-header">
                                                     <h4 class="card-title mb-0">Calidad de agua del hogar</h4>
                                                 </div>
@@ -373,7 +389,7 @@
                                                                             <th>Gasto mensual</th>
                                                                             <th>Ahorro mensual</th>
                                                                             <th>Ahorro anual</th>
-                                                                           
+                                                                            
                                                                            
                                                                         </tr>
                                                                     </thead>
@@ -416,7 +432,12 @@
                                                                             <td>$ <%= ahorroCalculado.ahorroMensual_ropa_lenceria %></td>        
                                                                             <td>$ <%= ahorroCalculado.ahorroAnual_ropa_lenceria %></td>                                              
                                                                         </tr>
-
+                                                                        <tr>
+                                                                            <th>Total</td>
+                                                                            <th>$ <%= ahorroCalculado.sumaGastoMensual %></td>         
+                                                                            <th>$ <%= ahorroCalculado.sumaAhorroMensual %></td>        
+                                                                            <th>$ <%= ahorroCalculado.sumaAhorroAnual %></td>                                              
+                                                                        </tr>
                                                                     </tbody>
                                                                 </table>
                                                                 
@@ -443,7 +464,7 @@
                                   
                                  <div class="col-xl-4">
                                     <!-- card -->
-                                    <div class="card" style="margin-top: 5%;">
+                                    <div class="card" style="margin-top: 5%;box-shadow: 0px 0px 10px #e7e7e7;border-radius: 21px;">
                                         <div class="card-header">
                                             <h4 class="card-title mb-0">Ahorro total</h4>
                                         </div>
@@ -485,43 +506,106 @@
                                                     <h5 class="my-0 text-primary">
                                                         <i class="fas fa-wrench"></i>&nbsp; Agendar instalación</h5>
 
-                                                        <a href="/agendar-instalacion/<%= clientes2.id_cliente %>" >
-                                                            <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Solicitar instalación</button>
+                                                        <a href="/agendar-instalacion/<%= clientes2.id_cliente %>" id="btnAgenda">
+                                                            <button class="btn btn-primary" id="btn_Agendar"  type="button" style="float: right;margin-top: -4%;border-radius:13px;"> <%= estadoBtn.txt%></button>
                                                         </a> 
-
+                                                        <% if (!estadoBtn.btnAgenda){%>
+                                                            <script>
+                                                                const botonn = document.getElementById("btn_Agendar")
+                                                                botonn.setAttribute("disabled", "")
+                                                                botonn.style.filter = "grayscale(1)";
+                                                            </script>
+                                                            <%}%>
+                                                       
                                                 </div>
+                                                <div class="modal fade evidencia" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered ">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Registro fotográfico</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                          <div class="row">
+                                                                <div class="" >
+                                                                    <div class="">
+                                                                      <div class="row">
+                                                                                <div class="col-md-11">
+                                                                                   <div class="card-body" style="margin-top: -3%;text-align: center;">
+                                                                                    <% if(evidenciaF) { %> 
+                                                                                   
+                                                                                        <img src="<%= evidenciaF.evidencia%>" alt="" style="width: 85%; margin-left: 10%;">
+                                                                                        
+                                                                                       <% } else { %> 
+                                                                                        <% } %> 
+                                                                                 </div>
+                                                                                </div><!-- end col -->
+                                                                             </div>
+                                                                            <!-- end card-body -->
+                                                                      </div><!-- end col -->
+                                                                </div>
+                                                            </div>
+                                            
+                                                            </div>
+                                                        </div><!-- /.modal-content -->
+                                                    </div><!-- /.modal-dialog -->
+                                                </div><!-- /.modal -->
+                                            
                                                 <div class="card-body">
-
                                                     <div class="table-responsive">
                                                         <table class="table mb-0">
-
-                                                            <tbody>
-                                                                <tr>
-                                                                  
-                                                                    <td style="width: 26%;">Fecha de instalación</td>
-                                                                    <td><b>----</b></td>
-                                                                    <td>Instalador</td>
-                                                                    <td><b>----</b></td>
-                                                                   
+                                                            <% if(!(clRegistro_instalacion.id_cliente)) { %> 
+                                                                <tbody>
+                                                         
+                                                                <!-- <h1 style="text-align: center">Aun no se ha registrado la instalación</h1> -->
+                                                             <h1 style="text-align: center"><%=  estado_intalacion.txtt %></h1>
+                                                               </tbody>
+                                                               <% } else { %> 
+                                                                   <tbody>
+                                                         
+                                                                       <tr>
+                                                                         <td style="width: 26%;">Fecha de instalación</td>
+                                                                         <% if(clRegistro_instalacion){ %> 
+                                                                          <td><b><%= clRegistro_instalacion.fecha_instalacion %></b></td>
+                                                                          <td style="width: 26%;">Instalador:</td>
+                                                                         <td><b><%= clRegistro_instalacion.instalador %></b></td>
+                                                                         <% } else { %> 
+                                                                           <td><b>N/A</b></td>
+                                                                           <td style="width: 26%;">Serial_producto:</td>
+                                                                          <td><b>N/A</b></td>
+                                                                           <% }%>
+                                                                       </tr>
+                                                                       <tr>
+                                                                          <td style="width: 26%;">Producto instalado:</td>
+                                                                          <% if(clRegistro_instalacion){ %> 
+                                                                           <td><b><%= clRegistro_instalacion.producto_instalado %></b></td>
+                                                                           <td style="width: 26%;">Nota:</td>    
+                                                                           <p> <td><b><%= clRegistro_instalacion.nota %></b></td></p>     
+                                                                           <% } else { %> 
+                                                                               <td><b>N/A</b></td>
+                                                                               <td style="width: 26%;">Hasta:</td>
+                                                                              <td><b>N/A</b></td>
+                                                                               <% }%>                                         
+                                                                       </tr>
+                                                                       <tr>
+                                                                           <td style="width: 26%;">Serial del producto:</td>
+                                                                           <% if(clRegistro_instalacion){ %> 
+                                                                            <td><b><%= clRegistro_instalacion.serial_producto %></b></td>
+                                                                            <td style="width: 26%;">Registro fotográfico:</td>    
+                                                                            <p> <td><b><button type="button" style="border:none;" class="waves-effect waves-light"
+                                                                               data-bs-toggle="modal" data-bs-target=".evidencia"> 
+                                                                                    <span class="d-block d-sm-none"><i class="far fa-image"></i></span>
+                                                                                    <span class="d-none d-sm-block"> <i class="far fa-image"></i> Ver evidencia </span>
+                                                                          </button></b></td></p>   
+                                                                            
+                                                                            <% } else { %> 
+                                                                                <td><b>N/A</b></td>
+                                                                                <td style="width: 26%;">Registro fotográfico:</td>
+                                                                               <td><b>N/A</b></td>
+                                                                                <% }%>                                         
+                                                                        </tr>
                                                                     
-                                                                </tr>
-                                                                <tr>
-                                                                
-                                                                    <td>Prodcuto instalado</td>
-                                                                    <td>---</td>
-                                                                    <td>Nota de instalación</td>
-                                                                    <td><b>-----</b></td>
-                                                                                                                                    </tr>
-                                                                <tr>
-                                                                    <tr>
-                                                                
-                                                                        <td>Serial del producto</td>
-                                                                        <td>---</td>
-                                                                       
-                                                                                                                                        </tr>
-                                                                    <tr>
-                                                    
-                                                            </tbody>
+                                                                   </tbody>
+                                                                       <% } %> 
                                                         </table>
                                                     </div>
 
@@ -585,54 +669,56 @@
 
            
     
-            <!-- JAVASCRIPT -->
-            <script src="../directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
-            <!-- pace js -->
-            <script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
-            <!-- * ====== Scripts de las graficas ======= -->
-                    <!-- apexcharts js -->
-                    <script src="../directorio_perfilClientes/libs/apexcharts/apexcharts.min.js"></script>
-                    <!-- apexcharts init -->
-                    <script src="../directorio_perfilClientes/js/pages/apexcharts.init.js"></script>
-                    <!-- dashboard init -->
-                    <script src="../directorio_perfilClientes/js/pages/dashboard.init.js"></script>
-            <!-- * ====== Scripts de las graficas ======= -->
+ <!-- JAVASCRIPT -->
+ <script src="../directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
+ <script src="../directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <script src="../directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
+ <script src="../directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
+ <script src="../directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
+<script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
+<!-- pace js -->
+<script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
+
+ <!-- * ====== Scripts de las graficas ======= -->
+ <!-- apexcharts js -->
+ <script src="../directorio_perfilClientes/libs/apexcharts/apexcharts.min.js"></script>
+ <!-- apexcharts init -->
+<script src="../directorio_perfilClientes/js/pages/apexcharts.init.js"></script>
+<!-- dashboard init -->
+<script src="../directorio_perfilClientes/js/pages/dashboard.init.js"></script>
+<!-- * ====== Scripts de las graficas ======= -->
  
-        <!-- Required datatable js -->
-        <script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <!-- Responsive Table js -->
-        <script src="../directorio_dash/libs/admin-resources/rwd-table/rwd-table.min.js"></script>
-        <!-- Responsive examples -->
-        <script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+ <!-- Required datatable js -->
+ <script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+ <!-- Responsive Table js -->
+ <script src="../directorio_dash/libs/admin-resources/rwd-table/rwd-table.min.js"></script>
+ <!-- Responsive examples -->
+ <script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
   
+ <!-- Buttons examples -->
+ <script src="../directorio_dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+ <script src="../directorio_dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+ <script src="../directorio_dash/libs/jszip/jszip.min.js"></script>
+ <script src="../directorio_dash/libs/pdfmake/build/pdfmake.min.js"></script>
+ <script src="../directorio_dash/libs/pdfmake/build/vfs_fonts.js"></script>
+ <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+ <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+ <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 
-        <!-- Buttons examples -->
-        <script src="../directorio_dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-        <script src="../directorio_dash/libs/jszip/jszip.min.js"></script>
-        <script src="../directorio_dash/libs/pdfmake/build/pdfmake.min.js"></script>
-        <script src="../directorio_dash/libs/pdfmake/build/vfs_fonts.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+ <!-- Init js -->
+ <script src="../directorio_dash/js/pages/table-responsive.init.js"></script>
+ <script src="../directorio_perfilClientes/js/app.js"></script>
+            <!-- Table Editable plugin -->
+ <script src="../directorio_dash/libs/table-edits/build/table-edits.min.js"></script>
 
-         <!-- Init js -->
-         <script src="../directorio_dash/js/pages/table-responsive.init.js"></script>
-         <script src="../directorio_perfilClientes/js/app.js"></script>
-                    <!-- Table Editable plugin -->
-         <script src="../directorio_dash/libs/table-edits/build/table-edits.min.js"></script>
-
-         <script src="../directorio_dash/js/pages/table-editable.int.js"></script> 
+ <script src="../directorio_dash/js/pages/table-editable.int.js"></script> 
  
-         <!-- Datatable init js -->
-         <script src="../directorio_dash/js/pages/datatables.init.js"></script>    
- 
+ <!-- Datatable init js -->
+ <script src="../directorio_dash/js/pages/datatables.init.js"></script>    
+
+
+
     </body>
     </html>

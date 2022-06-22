@@ -258,21 +258,19 @@ $( function(){
 
      if(valores_PrimerTest.totalDureza_compensada != null){
 
-        graficaPrimer_test = [valores_PrimerTest.totalDureza_compensada,valores_PrimerTest.tsd,valores_PrimerTest.cloro, 
-            valores_PrimerTest.ph, valores_PrimerTest.azufre,valores_PrimerTest.tanino,
-            valores_PrimerTest.nitrato,valores_PrimerTest.alcalinidad]
+        graficaPrimer_test = [valores_PrimerTest.dureza_gmXgalon,valores_PrimerTest.totalDureza_compensada,
+                            valores_PrimerTest.tsd,valores_PrimerTest.ph]
 
-
+            
     }else {
-        graficaPrimer_test= [0,0,0,0,0,0]
+        graficaPrimer_test= [0,0,0,0]
 
     } 
     if(valores_UltimoTest.totalDureza_compensada != null){
-        graficaUltimo_test= [valores_UltimoTest.totalDureza_compensada,valores_UltimoTest.tsd,valores_UltimoTest.cloro, 
-            valores_UltimoTest.ph, valores_UltimoTest.azufre,valores_UltimoTest.tanino,
-            valores_UltimoTest.nitrato,valores_UltimoTest.alcalinidad]
+        graficaUltimo_test= [valores_UltimoTest.dureza_gmXgalon,valores_UltimoTest.totalDureza_compensada,
+                              valores_UltimoTest.tsd,valores_UltimoTest.ph]
      } else {
-        graficaUltimo_test= [0,0,0,0,0,0]
+        graficaUltimo_test= [0,0,0,0]
      }
      
     
@@ -311,7 +309,7 @@ var options = {
     }],
     colors: columnColors,
     xaxis: {
-        categories: ['TDC', 'TSD', 'Cloro', 'pH', 'Azufre', 'Tanino ', 'Nitrato ', 'Alcalinidad'],
+        categories: ['Dureza(GPG)', 'TDC', 'TSD', 'pH']
     },
     yaxis: {
         title: {

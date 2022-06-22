@@ -2,13 +2,16 @@ const express = require('express')
 const router = express.Router()
 const path = require('path');
 const multer = require('multer');
-const { isAuthenticated,isAdmin } = require('../controllers/authController');
+const { isAuthenticated, } = require('../controllers/authController');
 const { listarVendedores,
-       listarVendedores_PerfilVendedores,
-       listarClientes_PerfilClientes,
-      listarClientes,
-      ActualizarNivel,ActualizarEstado,clfirmas
-       } = require('../controllers/adminControllers');
+        listarVendedores_PerfilVendedores,
+        listarClientes_PerfilClientes,
+        listarClientes,
+        ActualizarNivel,
+        ActualizarEstado,
+        ActualizarCredito,
+        clfirmas
+         } = require('../controllers/adminControllers');
 
 
  // * ========== Renderizado de vistas clientes ==========
@@ -33,6 +36,9 @@ router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
 router.post('/aprobarVendedor', isAuthenticated,ActualizarEstado);
  /*=============================================================*/
 router.post('/ActualizarNivel', isAuthenticated,ActualizarNivel);
-/*=============================================================*/
+ /*=============================================================*/
+router.post('/ActualizarCredito', isAuthenticated,ActualizarCredito);
+ /*=============================================================*/
+
 
 module.exports = router

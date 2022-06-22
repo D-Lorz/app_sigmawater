@@ -80,16 +80,6 @@ exports.getAgendarinstalacion = async (req, res) => {
   })
 
 }
-// exports.getUpdate = async (req, res) => {
-//   const id = req.params.id
-
-//   await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
-//     if (err) throw err;
-//     res.render('solicitar-credito', { user: req.user, cliente: result[0] });
-
-//   })
-
-// }
 //------------------------------------------------
 // todo -->  Formulario para solicitar credito
 exports.solicitarCredito = async (req, res) => {
@@ -238,7 +228,6 @@ exports.listarClientes = async (req, res) => {
 
 // todo ===============================>>> Estado del solicitar credito
 let credito =  conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [id_vendedor.id])
-credito = credito[0]
 let estado = [] 
 estado.txt = "No solicitado";
 estado.color = 'badge-soft-dark'
@@ -263,10 +252,7 @@ if (credito.length > 0) {
     estado.color = 'badge-soft-info'
     estado.verBtn = false;
   }
-
 }
-
-
 // todo =========================>> Estados de la agenda para instalar el producto
 let consultaEstado_instalacion =  conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [id_vendedor.id])
 
@@ -301,35 +287,62 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     clientes2 = clientes2[0]
 
 // todo ===============================>>> Estado del solicitar credito
-  let credito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
+  let creditoVista_interna = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
       let estado = []
       estado.txt = "No solicitado";
       estado.color = 'badge-soft-dark'
       estado.verBtn = true;
-
-      if (credito.length > 0) {
-        credito = credito[0]
-        if (credito.estado_del_credito === '0') {
+    
+      if (creditoVista_interna.length > 0) {
+        creditoVista_interna = creditoVista_interna[0]
+        if (creditoVista_interna.estado_del_credito === '0') {
           estado.txt = "En revisión";
           estado.color = 'badge-soft-warning'
           estado.verBtn = false;
-        } else if (credito.estado_del_credito == 1) {
+        } else if (creditoVista_interna.estado_del_credito == 1) {
           estado.txt = "Aprobado";
           estado.color = 'badge-soft-success'
           estado.verBtn = false;
-        } else if (credito.estado_del_credito == 2) {
+        } else if (creditoVista_interna.estado_del_credito == 2) {
           estado.txt = "Rechazado";
           estado.color = 'badge-soft-danger'
           estado.verBtn = false;
-        } else if (credito.estado_del_credito == 3) {
+        } else if (creditoVista_interna.estado_del_credito == 3) {
           estado.txt = "Pagado";
           estado.color = 'badge-soft-info'
           estado.verBtn = false;
         }
       }
+  let validarBtnInstalacion = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
+  let estadoBtn = []
+  estadoBtn.txt = "Solicitar instalación";
+  estadoBtn.btnAgenda = false;
 
-  let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
-  mostrarProducto = mostrarProducto[0]
+      if (validarBtnInstalacion.length > 0) {
+        validarBtnInstalacion = validarBtnInstalacion[0]
+
+       if (validarBtnInstalacion.estado_del_credito == 0) {
+          estadoBtn.btnAgenda = false;
+
+        } else if (validarBtnInstalacion.estado_del_credito == 1) {
+          estadoBtn.btnAgenda = true;
+          estadoBtn.txt = "Solicitar instalación";
+
+        } else if (validarBtnInstalacion.estado_del_credito == 2) {
+          estadoBtn.btnAgenda = false;
+
+        } else if (validarBtnInstalacion.estado_del_credito == 3) {
+           estadoBtn.btnAgenda = true;
+           estadoBtn.txt = "Solicitar instalación";
+        }
+      } else if(!validarBtnInstalacion) {
+      
+        estadoBtn.btnAgenda = false;
+      }
+    
+      let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
+      mostrarProducto = mostrarProducto[0]
+
 // todo =========================>> Mostrar información del test de agua del cliente
     let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
   
@@ -347,7 +360,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       if (consultaEstado_testAgua.estado_visita_test === '0') {
           estadoVisita_testAgua.txt= "Se realizó un test de agua el";
           estadoVisita_testAgua.background= 'visitado';
-          
+         
         } 
         
       }
@@ -380,7 +393,9 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
         let estado_intalacion = []
         estado_intalacion.txt = "La instalación del producto no ha sido agendada";
+        estado_intalacion.txtt  = "Aun no se ha solicitado la instalación";
         estado_intalacion.background = 'noVisitado';
+   
         
         if (consultaEstado_instalacion.length > 0) {
           consultaEstado_instalacion = consultaEstado_instalacion[0]
@@ -388,7 +403,9 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
         if (consultaEstado_instalacion.estado_agenda === '0') {
           estado_intalacion.txt= "Listo para instalar";
           estado_intalacion.background= 'producto_instalado';
-          
+          estado_intalacion.txtt  = "Instalación solicitada";
+          estadoBtn.btnAgenda = false;
+
         } else if (consultaEstado_instalacion.estado_agenda == 1) {
           estado_intalacion.txt= "Instalado";
           estado_intalacion.background= 'visitado';
@@ -396,8 +413,17 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
           } 
         }
 
+// todo ===============================>>> Desactivar boton de registro de instalacion
+let clRegistro_instalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [clientes2.id])
+
+if (clRegistro_instalacion.length > 0) {
+  clRegistro_instalacion = clRegistro_instalacion[0]
+  
+  var evidenciaF= JSON.parse(clRegistro_instalacion.evidencia_fotografica);
+}
+
 // * >>> Renderizado <<<<<
-  res.render('perfil-clientes', { user: req.user, clientes2, estado,
+  res.render('perfil-clientes', { user: req.user, clientes2, estado,estadoBtn,
     informacionTestAgua,
     estadoVisita_testAgua,
     consulta_PrimerTestAgua,
@@ -405,8 +431,11 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     consulta_UltimoTestAgua,
     datosJson_UltimoTestagua,
     ahorroCalculado,
-    datosJson_ahorroCalculado,mostrarProducto,
-    estado_intalacion
+    datosJson_ahorroCalculado,
+    estado_intalacion,
+    mostrarProducto,
+    evidenciaF,
+    clRegistro_instalacion
     
    })
  
@@ -426,12 +455,12 @@ exports.testAgua = async (req, res) => {
   console.log("SUMA >>>>>>>>>>");
   console.log(totalDureza_compensada);
   const tsd = req.body.tsd;
-  const cloro = req.body.cloro;
+  const cloro = req.body.cloros;
   const ph = req.body.ph;
   const azufre = req.body.azufre;
   const tanino = req.body.tanino;
   const nitrato = req.body.nitrato;
-  const alcalinidad = req.body.alcalinidad;
+  const alcalinidad = req.body.alcalinidads;
   const otro1 = req.body.otro1[0];
   const concentracion1 = req.body.concentracion1[0]
   const otro2 = req.body.otro1[1];
@@ -446,12 +475,7 @@ exports.testAgua = async (req, res) => {
 
  const Datos_testAgua = {
   fecha_test, dureza_gmXgalon, hierro,totalDureza_compensada, tsd,cloro,ph,azufre, tanino, nitrato,alcalinidad,
-   otro1,concentracion1,
-   otro2,concentracion2,
-   otro3,concentracion3,
-   nota,
-   id_cliente
-  }
+   otro1,concentracion1,otro2,concentracion2,otro3,concentracion3,nota,id_cliente}
 
 await conexion.query('INSERT INTO test_agua SET ?', [Datos_testAgua], (err, result) => {
   if (err) throw err;
@@ -489,8 +513,23 @@ exports.ahorro = async (req, res) => {
   const ahorroMensual_ropa_lenceria =  ropa_lenceria * 0.3
   const ahorroAnual_ropa_lenceria = ahorroMensual_ropa_lenceria * 12 
  
+  const sumaGastoMensual = parseFloat(agua_embotellada) + parseFloat(jabones) + parseFloat(productos_limpieza) +
+  parseFloat(agua_caliente)+parseFloat(plomeria_electrodomesticos) + parseFloat(ropa_lenceria)
+// console.log(">>>>*SUMATORIA DE GASTO MENSUAL*<<<<");
+// console.log(sumaGastoMensual);
+// console.log(">>>>*------------------------*<<<<");
+const sumaAhorroMensual = parseFloat(ahorroMensual_aguaEmbotellada) + parseFloat(ahorroMensual_jabon) + parseFloat(ahorroMensual_productos_limpieza) +
+parseFloat(ahorroMensual_agua_caliente)+parseFloat(ahorroMensual_plomeria_electrodomesticos) + parseFloat(ahorroMensual_ropa_lenceria)
+// console.log(">>>>*SUMATORIA AHORRO MENSUAL *<<<<");
+// console.log(sumaAhorroMensual);
+// console.log(">>>>*------------------------*<<<<");
+const sumaAhorroAnual = parseFloat(ahorroAnual_aguaEmbotellada) + parseFloat(ahorroAnual_jabon) + parseFloat(ahorroAnual_productos_limpieza) +
+parseFloat(ahorroAnual_agua_caliente)+parseFloat(ahorroAnual_plomeria_electrodomesticos) + parseFloat(ahorroAnual_ropa_lenceria)
+// console.log(">>>>*SUMATORIA AHORRO ANUAL *<<<<");
+// console.log(sumaAhorroAnual);
+// console.log(">>>>*------------------------*<<<<");
 
-   const id_cliente = req.body.id_cliente
+   const id_cliente = req.body.id_cliente 
    const codigo_cliente = req.body.codigo_cliente
 
   const datos_calcular_ahorros = {
@@ -501,7 +540,7 @@ exports.ahorro = async (req, res) => {
       ahorroMensual_productos_limpieza, ahorroAnual_productos_limpieza,
       ahorroMensual_agua_caliente, ahorroAnual_agua_caliente,
       ahorroMensual_plomeria_electrodomesticos, ahorroAnual_plomeria_electrodomesticos,
-      ahorroMensual_ropa_lenceria, ahorroAnual_ropa_lenceria, id_cliente  
+      ahorroMensual_ropa_lenceria, ahorroAnual_ropa_lenceria,sumaGastoMensual,sumaAhorroMensual,sumaAhorroAnual, id_cliente  
     
     }
 
@@ -542,36 +581,24 @@ await conexion.query('INSERT INTO agendar_instalacion SET ?', [Datos_agendarSoli
 
 }
 
-// todo ===========>>>  Actualizar Sistema
-exports.ActualizarSistema = async (req, res) => {
+// todo ===========>>>  Elegir Sistema
+exports.elegirSistema= async (req, res) => {
 
- const id_clienteEnviarr = req.body.id_clienteEnviarr; 
- const id_cliente = req.body.id_consecutivo; 
- const sistema = req.body.productoElegido;
+  const id_clienteCodigo = req.body.id_clienteCodigo;
+  const id_cliente = req.body.id_consecutivo;
+  const sistema	 = req.body.sistemaElegido;
 
-  const datosSistema = {sistema, id_cliente};
+  const datosElegirSistema= {sistema, id_cliente };
 
-  await conexion.query("UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosSistema, id_cliente], (err, result) => {
-      if (err) throw err;
+  await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ",  [datosElegirSistema, id_cliente], (err, result) => {
+     if (err) throw err;
 
       if (result) {
-        res.redirect("/perfil-clientes/" + id_clienteEnviarr);
+        res.redirect("/perfil-clientes/" + id_clienteCodigo);
       }
     }
   );
 };
-
-// todo --> Generar codigo numero aleatorio del cliente
-const generateRandomNumber = (num) => {
-  const characters = '0123456789';
-  let result1 = '';
-  const charactersLength = characters.length;
-  for (let i = 0; i < num; i++) {
-    result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result1;
-}
-
 
 
 exports.getRegistrarInstalacion = async (req, res) => {
@@ -585,6 +612,16 @@ exports.getRegistrarInstalacion = async (req, res) => {
 
 }
 
+// todo --> Generar codigo numero aleatorio del cliente
+const generateRandomNumber = (num) => {
+  const characters = '0123456789';
+  let result1 = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < num; i++) {
+    result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result1;
+}
 
 
 
