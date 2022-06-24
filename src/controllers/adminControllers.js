@@ -422,13 +422,13 @@ if (clbotonCredito.length > 0) {
        estade.btncredito = true;
       
   } else if (clbotonCredito.estado_del_credito == 1) {
-        estade.btncredito = true;
+        estade.btncredito = false;
 
   }  else if (clbotonCredito.estado_del_credito == 2) {
-    estade.btncredito = true;
+    estade.btncredito = false;
 
 } else if (clbotonCredito.estado_del_credito == 3) {
-  estade.btncredito = true;
+  estade.btncredito = false;
 
 }
 if (clbotonCredito.licencia_cliente){
