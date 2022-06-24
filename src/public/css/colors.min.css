@@ -1300,17 +1300,17 @@ input:focus ~ .bg-secondary {
   border-color: #11a578 !important;
 }
 .btn-success.btn-lighten-5:hover {
-  border-color: #11a578 !important;
-  background-color: #0f8e67 !important;
+  /* border-color: #11a578 !important;
+  background-color: #0f8e67 !important; */
 }
 .btn-success.btn-lighten-5:active,
 .btn-success.btn-lighten-5:focus {
-  border-color: #0f8e67 !important;
-  background-color: #0c7757 !important;
+  /* border-color: #0f8e67 !important;
+  background-color: #0c7757 !important; */
 }
 .btn-outline-success.btn-outline-lighten-5 {
-  border-color: #78f1cc !important;
-  color: #78f1cc !important;
+  /* border-color: #78f1cc !important;
+  color: #78f1cc !important; */
 }
 .btn-outline-success.btn-outline-lighten-5:hover {
   background-color: #78f1cc !important;
@@ -1350,15 +1350,15 @@ input:focus ~ .bg-secondary {
 }
 .btn-success.btn-lighten-4:active,
 .btn-success.btn-lighten-4:focus {
-  border-color: #0f8e67 !important;
-  background-color: #0c7757 !important;
+  /* border-color: #0f8e67 !important;
+  background-color: #0c7757 !important; */
 }
 .btn-outline-success.btn-outline-lighten-4 {
   border-color: #61eec4 !important;
   color: #61eec4 !important;
 }
 .btn-outline-success.btn-outline-lighten-4:hover {
-  background-color: #61eec4 !important;
+  /* background-color: #61eec4 !important; */
 }
 .border-success.border-lighten-4 {
   border: 1px solid #61eec4 !important;
@@ -1551,14 +1551,14 @@ input:focus ~ .bg-secondary {
   color: #fff;
 }
 .btn-success:hover {
-  border-color: #14bc89 !important;
-  background-color: #89c278 !important;
+  /* border-color: #14bc89 !important; */
+  /* background-color: #89c278 !important; */
   color: #fff !important;
 }
 .btn-success:active,
 .btn-success:focus {
-  border-color: #11a578 !important;
-  background-color: #89c278 !important;
+  /* border-color: #11a578 !important; */
+  /* background-color: #89c278 !important; */
   color: #fff !important;
 }
 .btn-outline-success {
@@ -1567,7 +1567,7 @@ input:focus ~ .bg-secondary {
   color: #16d39a;
 }
 .btn-outline-success:hover {
-  background-color: #16d39a;
+  /* background-color: #16d39a; */
   color: #fff !important;
 }
 .widget-timeline .timeline-items.timeline-icon-success:before {

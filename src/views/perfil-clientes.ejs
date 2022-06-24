@@ -63,9 +63,8 @@
                                                     <div class="card-header bg-transparent border-primary">
                                                         <h5 class="my-0 text-primary">
                                                             <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5>
-
                                                             <a href="/solicitar-credito/<%= clientes2.id_cliente %>" id="verBtn">
-                                                                <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -4%;border-radius:13px;">Formulario de crédito</button>
+                                                                <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -2%;border-radius:13px;">Formulario de crédito</button>
                                                             </a> 
 
                                                       </div>
@@ -76,7 +75,6 @@
 
                                                                 <tbody>
                                                                     <tr>
-                                                                        
                                                                          <td style="width: 23%;">ID</td>
                                                                          <td><b><%= clientes2.id_cliente %></b></td>
                                                                          <td>Teléfono</td>
@@ -87,7 +85,6 @@
                                                                         <td style="width: 29%;"><b><%= clientes2.nombre %></b></td>
                                                                         <td style="width:20%">Dirección</td>
                                                                         <td><b><%= clientes2.direccion %> <%= clientes2.ciudad %> <p><%= clientes2.estado_ubicacion %> <%= clientes2.codigo_postal %> </p></b></td>
-                                                                     
                                                                     </tr>
 
                                                                     <tr>
@@ -102,7 +99,6 @@
                                                                         <td>Estado de crédito</td>
                                                                         <td><div class="badge <%=estado.color%> font-size-12" ><%= estado.txt %></div></td>
                                                                     </tr>
-                                                           
                                                                     <tr>
                                                                         <td>Correo electronico</td>
                                                                         <td><b><%= clientes2.correo %></b></td>
@@ -113,22 +109,15 @@
                                                                         <td><div class="badge badge-soft-success font-size-12">$ 0</div></td>
                                                                            <%}%>
                                                                     </tr>
-                                                                   
                                                                 </tbody>
                                                             </table>
                                                         </div>
-   
                                                     </div>
-
-                                                </div>
+                                                 </div>
                                             </div><!-- end col -->
-
-                                             </div>
-                                        <!-- end card-body -->
-                                    </div>
-                                    <!-- end card -->
-
-                                </div><!-- end col -->
+                                         </div> <!-- end card-body -->
+                                    </div> <!-- end card -->
+                                 </div><!-- end col -->
                               </div>
                           
                               <style>
@@ -164,24 +153,19 @@
                                                     <br>
                                                    
                                                 </form>
-                                              
-                                                
                                          <% } else {%>
                                             <h5 class="card-title mb-3" style="text-align: center">Producto de interés</h5>
                                             <form action="/elegirSistema" method="POST" style="text-align: center">
                                                 <div class="btn-group me-1 mt-2">
-
                                                     <input type="hidden" name="id_clienteCodigo" value="<%= clientes2.id_cliente %>">
                                                     <input type="hidden" name="id_consecutivo" value="<%= clientes2.id %>">
                                               
-                                                  <select class="form-select" id="sistemaElegido" name="sistemaElegido">
-
-                                                    <option style="background:gray;color: white;">Elige un sistema</option>
+                                                  <select class="form-select required" required id="reco" name="sistemaElegido">
+                                                        <option style="background:gray;color: white;" value=''>Elige un sistema</option>
                                                         <br>
                                                         <option  value="Whole System">Whole System</option>
                                                         <option value="Reverse Osmosis System" title="R.O.S.">Reverse Osmosis System</option>
-                                                    
-                                                    </select>
+                                                   </select>
                                                 </div>
                                                 <br>
                                                 <!-- <center> <input type="submit" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;" value="Guardar"></center>   -->
@@ -190,90 +174,65 @@
                                                 <div class="card-body" style="margin-top: -5.5%;">
                                                     <ul class="nav nav-pills nav-justified" role="tablist" >
                                                         <li class="nav-item waves-effect waves-light" style="border-radius: 13px;">
-                            
-                                                            <button type="button" style="border-radius: 14px;" class="btn btn-success waves-effect waves-light"
-                                                                 data-bs-toggle="modal" data-bs-target=".monto"> 
+                                                            <button type="button" style="border-radius: 14px;" class="btn btn-success waves-effect waves-light holajean"
+                                                                 data-bs-toggle="modal" data-bs-target=".monto" id="submit" disabled="disabled" > 
                                                                       <span class="d-block d-sm-none"><i class="fas fa-id-card"></i></span>
                                                                       <span class="d-none d-sm-block">Crédito aprobado</span>
                                                             </button>
-                                                                   
                                                               </a> 
-                                                                          
                                                         </li>
-                                                                    
                                                     </ul>
                                                 </div>
 
-                                                <div class="modal fade monto" tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered ">
+                                                <div class="modal fade monto" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Ingresa monto aprobado</h5>
+                                                            <br>
+                                                           <div class="header">
+                                                         <div>
+                                                                  <?xml version="1.0" ?><svg viewBox="0 0 32 32" width="17%"
+                                                                   xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:#FFBF53;}
+                                                                    </style></defs><title/><g data-name="Layer 57" id="Layer_57">
+                                                                        <path class="cls-1" d="M16,31A15,15,0,1,1,31,16,15,15,0,0,1,16,31ZM16,3A13,13,0,1,0,29,16,13,13,0,0,0,16,3Z"/>
+                                                                        <path class="cls-1" d="M16,24a2,2,0,1,1,2-2A2,2,0,0,1,16,24Zm0-2Z"/>
+                                                                        <path class="cls-1" d="M16,18a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v9A1,1,0,0,1,16,18Z"/>
+                                                                    </g></svg>  
+                                                                </div>
+                                                                <br>
+                                                            <h5 style="font-size: 160%; color: #595959;letter-spacing: -1px;">Valor del sistema</h5>
+                                                            <h2 style="color: #595959;font-weight: 300;">Introduce el valor del producto aprobado por la financista</h2>
+                                                                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                                                             </div>
                                                             <div class="modal-body">
-                                                         <div class="row">
-                                                     
-                                                          <input type="text" class="form-control required" id="montoAprobado"  name="montoAprobadoPorFuera" 
-                                                          style="width:46%; margin-left: 23%;" >
-                                                           
-                                                            <div class="col-md-4">
-                                                                <br>
-                                                                <div class="card-body" >
-                                                                    <ul class="nav nav-pills nav-justified" role="tablist" >
-                                                                        <li class="nav-item waves-effect waves-light" style="border-radius: 13px;">
-                                            
-                                                    <input type="submit" class="btn btn-success" value="Confirmar" style="margin-left: 85%; margin-top: -31%;" >
-                                                                        
-                                                    <button type="button" class="btn-close" style="
-                                                    width: 68px;
-                                                    background: black;
-                                                    color: #fff;
-                                                    padding: 8px 12px;
-                                                    border-radius: 2px;
-                                                    height: 20px;
-                                                    margin-left: 138%;
-                                                    margin-top: -39%;
-                                                    position: absolute;"
+                                                                <div class="row justify-content-center">
+                                                                   <div class="col-md-6">
+                                                                   
+                                                                    <input type="text" class="form-control required" required id="montoAprobado"  name="montoAprobadoPorFuera" style="margin-left: 2%;">
+                                                                    <div class="modal-footer">
+                                                                        <input type="submit" class="btn btn-success" value="Confirmar" style="border-radius:17px" >
+                                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="border-radius:17px">Cerrar</button>
+                                                                
+                                                              
 
-                                              data-bs-dismiss="modal" aria-label="Close">Cerrar</button>              
-                                                                        </li>
-                                                                                    
-                                                                    </ul>
+                                                                     </div>
+                                                                  </div>
                                                                 </div>
-                                                </div>
-                                                </div>
-                                         
                                                             </div>
-                                                       
-                                                        </div><!-- /.modal-content -->
-                                                    </div><!-- /.modal-dialog -->
-                                                </div><!-- /.modal -->
-
-                                            </form>
-               
-                                        <% }%>
-                                              
-                                      </div>
-                                      
-                                        <!-- end card body -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                             </form>
+                                         <% }%>
+                                      </div><!-- end card body -->
                                     </div>
 
-
-
-                              <!-- <div class="alert alert-primary alert-dismissible alert-outline fade show" style=" border-radius: 13px;  width: 100%; " role="alert"> -->
-                                        <!-- <strong>Comisión</strong> - En esta venta has recibido: $ 0 -->
-                                        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
-                                    <!-- </div> -->
-                                   
-
-                                    <div class="card border-primary text-white-50 <%= estadoVisita_testAgua.background %>" style="margin-top: 5%;">
+                                 <div class="card border-primary text-white-50 <%= estadoVisita_testAgua.background %>" style="margin-top: 5%;">
                                         <div class="card-body">
                                             <h6 class="mb-3 text-white">Estado de visitas</h6>
                                             <p class="card-text" style="color:white;">
                                                 <td><div class="badge <%= estadoVisita_testAgua.color %> font-size-12 letra" > <%= estadoVisita_testAgua.txt  %>
-                                                     <%= consulta_UltimoTestAgua.fecha_test %></div></td>
-                                                    </p>
-                                            
+                                                 <%= consulta_UltimoTestAgua.fecha_test %></div></td>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="card  border-primary text-white-50 <%= estado_intalacion.background %>">
@@ -281,15 +240,11 @@
                                             <h6 class="mb-3 text-white">Estado de la instalación del producto</h6>
                                             <p class="card-text" style="color:white;">
                                                 <td><div class="badge <%= estado_intalacion.color %> font-size-12 letra" > <%= estado_intalacion.txt %> </div></td>
-
-                                            </p>
-                                            
+                                             </p>
                                         </div>
                                     </div>
-                                  
                                  </div>
                                 
-                              
                     </div>
             <!-- * =============>> FIN Datos del cliente  <<===================== -->
 
@@ -305,7 +260,6 @@
                                    <div class="card-header bg-transparent border-primary">
                                         <h5 class="my-0 text-primary">
                                             <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
-
                                             <a href="/test-de-agua/<%= clientes2.id_cliente %>" >
                                                 <button class="btn btn-primary"  type="button" style="float: right;margin-top: -2%;border-radius:13px;">Realizar test</button>
                                             </a> 
@@ -314,9 +268,8 @@
                                     <div class="card-body">
                                         <div class="">
                                             <div class="table-responsive" >
-                                                               
-                                                <table class="table table" id="idahorro"
-                                             class="dataTables_filter"  id="tech-companies-1" class="dataTables_info" style="margin-top: 2%;" >
+                                             <table class="table table" id="idahorro" class="dataTables_filter" id="tech-companies-1" 
+                                             class="dataTables_info" style="margin-top: 2%;" >
                                                                     <thead class="">
                                                                         <tr>
                                                                             <th>Numero <br>de test</th>
@@ -368,23 +321,15 @@
 
                                                                           </tbody>
                                                                        </table>
-                                                                            
-                                                                            
-                                                                            <input type="hidden" id="datosJson_PrimerTestagua" value="<%= datosJson_PrimerTestagua %>">
+                                                                           <input type="hidden" id="datosJson_PrimerTestagua" value="<%= datosJson_PrimerTestagua %>">
                                                                             <input type="hidden" id="datosJson_UltimoTestagua" value="<%= datosJson_UltimoTestagua %>">
-                                                                           
                                                                         </div>
-                                                                            
-                                        
-                                                                        </div>
-
                                                                     </div>
-                                                        <!-- end card -->
+                                                                </div> <!-- end card -->
                                                             </div>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- end card -->
+                                                         </div>
+                                                       </div>
+                                                    </div> <!-- end card -->
                                                 </div> <!-- end col -->
                                 
 
@@ -396,11 +341,9 @@
                                                 <div class="card-body">
                                                     <div id="column_chart" data-colors='["#a99bcb", "#50368c"]' class="apex-charts" dir="ltr"></div>                                      
                                                 </div>
-                                            </div>
-                                            
-                                            <!--end card-->
+                                            </div> <!--end card-->
                                         </div>
-                                </div>
+                                 </div>
             <!-- * =============>> FIN Test de agua  <<=============================->
 
             <!-- * =============>> Ahorro  <<===================================== -->
@@ -415,12 +358,10 @@
                                                         <div class="card-header bg-transparent border-primary">
                                                             <h5 class="my-0 text-primary">
                                                                 <i class="fas fa-money-bill"></i>&nbsp; Ahorro</h5>
-    
                                                                 <a href="/calcular-ahorro/<%= clientes2.id_cliente %>" >
-                                                                    <button class="btn btn-primary"  type="button" style="float: right;margin-top: -4%;border-radius:13px;">Calcular</button>
+                                                                    <button class="btn btn-primary"  type="button" style="float: right;margin-top: -2%;border-radius:13px;">Calcular</button>
                                                                 </a> 
-    
-                                                          </div>
+                                                            </div>
                                                           <div class="card-body">
                                                             <div class="table-responsive" style="overflow-x: hidden;" >
                                                                
@@ -565,7 +506,7 @@
                                                         <i class="fas fa-wrench"></i>&nbsp; Agendar instalación</h5>
 
                                                         <a href="/agendar-instalacion/<%= clientes2.id_cliente %>" id="btnAgenda">
-                                                            <button class="btn btn-primary" id="btn_Agendar"  type="button" style="float: right;margin-top: -4%;border-radius:13px;"> <%= estadoBtn.txt%></button>
+                                                            <button class="btn btn-primary" id="btn_Agendar"  type="button" style="float: right;margin-top: -2%;border-radius:13px;"> <%= estadoBtn.txt%></button>
                                                         </a> 
                                                         <% if (!estadoBtn.btnAgenda){%>
                                                             <script>
@@ -576,6 +517,8 @@
                                                             <%}%>
                                                        
                                                 </div>
+                                             
+
                                                 <div class="modal fade evidencia" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered ">
                                                         <div class="modal-content">
@@ -806,6 +749,19 @@
     });
 });
 
+
+    $(document).ready(function () {
+        $('#reco').on('input change', function () {
+            if ($(this).val() != '') {
+                $('#submit').prop('disabled', false)
+                }
+               else {
+                   $('#submit').prop('disabled', true);
+                    
+               }
+           });
+       });
+                                                                
 
 </script>
 
