@@ -431,59 +431,23 @@ if (clbotonCredito.length > 0) {
   estade.btncredito = true;
 
 }
+if (clbotonCredito.licencia_cliente){
   var licenciacredito = JSON.parse(clbotonCredito.licencia_cliente);
   // var clfirmaAcuerdo  = clbotonCredito.acuerdo_firmado
+} else  {
 
 }
-// let validarBtnInstalacion = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-// let estadoBtn = []
-// estadoBtn.btnAgenda = false;
-
-//     if (validarBtnInstalacion.length > 0) {
-//       validarBtnInstalacion = validarBtnInstalacion[0]
-
-//      if (validarBtnInstalacion.estado_del_credito == 0) {
-//         estadoBtn.btnAgenda = false;
-
-//       } else if (validarBtnInstalacion.estado_del_credito == 1) {
-//         estadoBtn.btnAgenda = true;
-        
-//       } else if (validarBtnInstalacion.estado_del_credito == 2) {
-//         estadoBtn.btnAgenda = false;
-
-//       } else if (validarBtnInstalacion.estado_del_credito == 3) {
-//          estadoBtn.btnAgenda = true;
-//      }
-//     }
-
-
-
+}
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-cliente", {
     user: req.user, estado,
-    info_clientes,
-    informacionTestAgua,
-    estadoVisita_testAgua,
-    consulta_PrimerTestAgua,
-    datosJson_PrimerTestagua,
-    consulta_UltimoTestAgua,
-    datosJson_UltimoTestagua,
-    ahorroCalculado,
-    datosJson_ahorroCalculado,
-    estado_intalacion,
-    estadu,
-    mostrarAgenda,
-    mostrarDatoscreditos,
-    estade,
-    licenciacredito,    
-    clRegistro_instalacion,
-    evidenciaF
-    
-    });
-
-
+    info_clientes, informacionTestAgua, estadoVisita_testAgua,
+    consulta_PrimerTestAgua, datosJson_PrimerTestagua,
+    consulta_UltimoTestAgua, datosJson_UltimoTestagua,
+    ahorroCalculado, datosJson_ahorroCalculado, estado_intalacion,
+    estadu, mostrarAgenda, mostrarDatoscreditos, estade,
+    licenciacredito,clRegistro_instalacion, evidenciaF });
 };
-
 
 exports.ActualizarCredito = async (req, res) => {
 

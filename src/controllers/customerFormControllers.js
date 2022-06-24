@@ -377,8 +377,9 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   if(consulta_PrimerTestAgua.length > 0 ){
     consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]
   }
-  const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
 
+  const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
+  
 // todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
    let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [clientes2.id])
  
