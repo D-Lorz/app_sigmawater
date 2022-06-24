@@ -408,7 +408,6 @@ if(mostrarDatoscreditos ) {
 mostrarDatoscreditos.monto_financiar_cliente = formatear.format(mostrarDatoscreditos.monto_financiar_cliente)
 }
 let clbotonCredito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-
 let estade = []
 estade.txt = "No hecho";
 estade.color = 'badge-soft-dark'
@@ -431,13 +430,18 @@ if (clbotonCredito.length > 0) {
   estade.btncredito = false;
 
 }
-if (clbotonCredito.licencia_cliente){
+if (clbotonCredito.licencia_cliente >0){
   var licenciacredito = JSON.parse(clbotonCredito.licencia_cliente);
   // var clfirmaAcuerdo  = clbotonCredito.acuerdo_firmado
 } else  {
 
 }
 }
+// todo ========>>> Mostrar producto 
+let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
+mostrarProducto = mostrarProducto[0]
+  
+
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-cliente", {
     user: req.user, estado,
@@ -446,12 +450,12 @@ if (clbotonCredito.licencia_cliente){
     consulta_UltimoTestAgua, datosJson_UltimoTestagua,
     ahorroCalculado, datosJson_ahorroCalculado, estado_intalacion,
     estadu, mostrarAgenda, mostrarDatoscreditos, estade,
-    licenciacredito,clRegistro_instalacion, evidenciaF });
+    licenciacredito,clRegistro_instalacion, evidenciaF,mostrarProducto });
 };
 
 exports.ActualizarCredito = async (req, res) => {
 
-  const id_clienteEnviarrr = req.body.id_clienteEnviarrr; 
+ const id_clienteEnviarrr = req.body.id_clienteEnviarrr; 
  const id_cliente = req.body.id_consecutivo; 
  const estado_del_credito = req.body.estadosCredito;
 
@@ -459,6 +463,24 @@ exports.ActualizarCredito = async (req, res) => {
   const datosEstadoCredito = { estado_del_credito,id_cliente};
 
   await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosEstadoCredito, id_cliente], (err, result) => {
+      if (err) throw err;
+
+      if (result) {
+        res.redirect("/perfil-cliente/" + id_clienteEnviarrr);
+      }
+    }
+  );
+
+};
+exports.ActualizarMontoAprobado = async (req, res) => {
+
+const id_clienteEnviarrr = req.body.id_clienteEnviarrr; 
+const id_cliente = req.body.id_consecutivo; 
+const monto_aprobado = req.body.updateMontoAprobado.replace(/[$ ,]/g, '');
+
+  const datosUpdateMontoAprobado = { monto_aprobado,id_cliente};
+
+  await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosUpdateMontoAprobado, id_cliente], (err, result) => {
       if (err) throw err;
 
       if (result) {

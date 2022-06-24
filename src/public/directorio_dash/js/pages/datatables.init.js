@@ -24,6 +24,20 @@ $(document).ready(function() {
     $(".dataTables_length select").addClass('form-select form-select-sm');
 });
 
+$(document).ready(function() {
+    $('').DataTable();
+
+    //Buttons examples
+    var table = $('#idTTesagua').DataTable({
+        lengthChange: false,
+        buttons: ['copy', 'excel']
+    });
+
+    table.buttons().container()
+        .appendTo('#idTTesagua_wrapper .col-md-6:eq(0)');
+
+    $(".dataTables_length select").addClass('form-select form-select-sm');
+});
 
 
 $(document).ready(function() {
@@ -40,6 +54,7 @@ $(document).ready(function() {
 
     $(".dataTables_length select").addClass('form-select form-select-sm');
 });
+
 
 $(document).ready(function() {
    

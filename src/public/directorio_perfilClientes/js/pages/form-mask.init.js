@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //     mask: Number,
     //     min: -10000,
     //     max: 10000,
-    //     thousandsSeparator: ' '
+    //     thousandsSeparator: ','
     // });
 
     // date mask
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         num: {
                 // nested masks are available!
                 mask: Number,
-                thousandsSeparator: ' '
+                thousandsSeparator: ','
             }
         }
     });

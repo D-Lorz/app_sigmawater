@@ -10,6 +10,7 @@ const { listarVendedores,
         ActualizarNivel,
         ActualizarEstado,
         ActualizarCredito,
+        ActualizarMontoAprobado,
         clfirmas
          } = require('../controllers/adminControllers');
 
@@ -39,6 +40,6 @@ router.post('/ActualizarNivel', isAuthenticated,ActualizarNivel);
  /*=============================================================*/
 router.post('/ActualizarCredito', isAuthenticated,ActualizarCredito);
  /*=============================================================*/
-
+ router.post('/ActualizarMontoAprobado', isAuthenticated,ActualizarMontoAprobado);
 
 module.exports = router
