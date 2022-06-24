@@ -218,7 +218,7 @@ exports.listarClientes = async (req, res) => {
       c.estadoCredito.color = "badge-soft-danger";
     }
     if (c.estado_del_credito == 3) {
-      c.estadoCredito.txt = "Pagado";
+      c.estadoCredito.txt = "Pagado (cash)";
       c.estadoCredito.color = "badge-soft-info";
     }
     /** Estado de la instalación */

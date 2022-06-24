@@ -308,7 +308,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
           estado.color = 'badge-soft-danger'
           estado.verBtn = false;
         } else if (creditoVista_interna.estado_del_credito == 3) {
-          estado.txt = "Pagado";
+          estado.txt = "Pagado (cash)";
           estado.color = 'badge-soft-info'
           estado.verBtn = false;
         }
@@ -343,6 +343,12 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
       mostrarProducto = mostrarProducto[0]
 
+      if(mostrarProducto ) {
+ 
+        mostrarProducto.monto_aprobado = formatear.format(mostrarProducto.monto_aprobado )
+        }
+        
+
 // todo =========================>> Mostrar información del test de agua del cliente
     let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
   
@@ -375,18 +381,19 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
 // todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
    let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [clientes2.id])
-   
+ 
       if(consulta_UltimoTestAgua.length > 0 ){
-        consulta_UltimoTestAgua = consulta_UltimoTestAgua[0]
-      }
+         consulta_UltimoTestAgua = consulta_UltimoTestAgua[0]
+       }
       const datosJson_UltimoTestagua = JSON.stringify(consulta_UltimoTestAgua);
 
 // todo =========================>> Mostrar información del ahorro del cliente
   let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [clientes2.id])
         if(ahorroCalculado.length > 0 ){
           ahorroCalculado = ahorroCalculado[0]
+
         }
-      const datosJson_ahorroCalculado = JSON.stringify(ahorroCalculado);
+      var datosJson_ahorroCalculado = JSON.stringify(ahorroCalculado);
 
 // todo =========================>> Estados de la agenda para instalar el producto
     let consultaEstado_instalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [clientes2.id])
@@ -587,19 +594,30 @@ exports.elegirSistema= async (req, res) => {
   const id_clienteCodigo = req.body.id_clienteCodigo;
   const id_cliente = req.body.id_consecutivo;
   const sistema	 = req.body.sistemaElegido;
+  const estado_del_credito = 1
+  const monto_aprobado = req.body.montoAprobadoPorFuera.replace(/[$ ]/g, '');
 
-  const datosElegirSistema= {sistema, id_cliente };
+  const datosElegirSistema= {sistema, estado_del_credito,monto_aprobado,id_cliente };
 
-  await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ",  [datosElegirSistema, id_cliente], (err, result) => {
-     if (err) throw err;
+  await conexion.query("INSERT INTO solicitar_credito SET ?", [datosElegirSistema], (err, result) => {
+    if (err) throw err;
+    if (result) { res.redirect('/perfil-clientes/'+id_clienteCodigo) }
+  })
 
-      if (result) {
-        res.redirect("/perfil-clientes/" + id_clienteCodigo);
-      }
-    }
-  );
+// todo ===============================>>> Estado del solicitar credito
+let creditoVista_interna = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
+let estadoPorfuera = []
+estadoPorfuera.verBtn = true;
+
+if (creditoVista_interna.length > 0) {
+  creditoVista_interna = creditoVista_interna[0]
+
+  if (creditoVista_interna.estado_del_credito == 1) {
+     estadoPorfuera.verBtn = false;
+  } 
+}
+
 };
-
 
 exports.getRegistrarInstalacion = async (req, res) => {
   const id = req.params.id
@@ -622,7 +640,12 @@ const generateRandomNumber = (num) => {
   }
   return result1;
 }
-
+//* Formateando precios a una moneda 
+const formatear = new Intl.NumberFormat('en-US', {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+});
 
 
 // todo --> actualizar datos del cliente
