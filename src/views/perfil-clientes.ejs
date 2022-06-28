@@ -33,7 +33,7 @@
  <!-- Sweet Alert-->
  <link href="../directorio_dash/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
-
+ <link rel="stylesheet" href="../css/scrolls.css">
 </head>
 
 <body>
@@ -104,7 +104,7 @@
                                                                         <td><b><%= clientes2.correo %></b></td>
                                                                         <td style="width: 24%;">Monto aprobado</td>
                                                                         <% if((mostrarProducto)) { %>
-                                                                        <td><div class="badge badge-soft-success font-size-12"><%= mostrarProducto.monto_aprobado %></div></td>
+                                                                        <td><div class="badge badge-soft-success font-size-12"> <%= mostrarProducto.monto_aprobado %></div></td>
                                                                         <% } else {%>
                                                                         <td><div class="badge badge-soft-success font-size-12">$ 0</div></td>
                                                                            <%}%>

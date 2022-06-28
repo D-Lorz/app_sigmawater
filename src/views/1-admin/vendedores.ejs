@@ -116,7 +116,7 @@
                                                 <th>Correo</th>
                                                 <th>Afiliado a</th>
                                                 <th>Nivel</th>
-                                                <th>Deuda</th>
+                                                <!-- <th>Deuda</th> -->
                                                 <th>Ventas</th>
                                                 <th>Estado</th>
                                             </tr>
@@ -139,7 +139,7 @@
                                                             </td>
                                                         <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.nivel %></a></td>
                                                         
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>">$ <%= user.deuda_inicial %></a></td>
+                                                        <!-- <td><a href="/perfil-vendedores/<- user.id_vendedor %>">$ <%= user.deuda_inicial %></a></td> -->
                                                         <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><div class="badge badge-soft-success font-size-12" >$ <%= user.total_ventas %></div></a></td>
                                                         <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><div class="badge <%= user.estadoVendedor.color%> font-size-12"><%= user.estadoVendedor.txt %></div></a></td>
                                                         

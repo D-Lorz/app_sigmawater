@@ -674,7 +674,7 @@
                                         <h5 class="card-title mb-3">Estado del vendedor</h5>
 
                                  
-                                        <form action="/aprobarVendedor" method="POST">
+                                        <!-- <form action="/aprobarVendedor" method="POST"> -->
                                             <div class="btn-group me-1 mt-2" style="margin-left: 8%;" >
                                                  <input type="hidden" name="id_vendedorEnviar" value="<%= info_vendedor.id_vendedor %>">
                                                  <input type="hidden" name="id_consecutivo" value="<%= info_vendedor.id %>">
@@ -684,19 +684,18 @@
                                                         <br>  
                                                         <option value="aprobado">Aprobado</option>
                                                         <option value="bloqueado">Bloquear</option>
-                                                    
                                                     </select>
                                                
                                                 </div>
-                                               <a href="/perfil-vendedores/<%= info_vendedor.id_vendedor %>" >
+                                               <a href="/perfil-vendedores/<%= info_vendedor.id_vendedor %>">
                                                     <button class="btn btn-primary"  type="submit" 
                                                     style="
                                                     border-radius: 13px;
                                                     margin-left: 24%;
                                                     margin-top: 4%;
-                                                    width: 47%;">Guadar </button>
+                                                    width: 47%;">Guadar</button>
                                                 </a> 
-                                            </form>
+                                            <!-- </form> -->
                                           </div>
                                   
                                     <!-- end card body -->

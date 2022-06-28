@@ -941,7 +941,7 @@
 
                                                             <form action="/ActualizarCredito" method="POST" >
                                                                            
-                                                                    <input type="hidden" name="id_clienteEnviarrr" value="<%= info_clientes.id_cliente %>">
+                                                                    <input type="hidden" name="id_clienteEnviar" value="<%= info_clientes.id_cliente %>">
                                                                     <input type="hidden" name="id_consecutivo" value="<%= info_clientes.id %>">
                                                                     
                                                                     <select style="border:none;background:#ebebeb;border-radius: 9px;" id="estadosCredito" name="estadosCredito">
@@ -968,8 +968,9 @@
                                                         <td style="width: 24%;">Monto aprobado</td>
                                                         <td><form action="/ActualizarMontoAprobado" method="POST" >
                                                                            
-                                                            <input type="hidden" name="id_clienteEnviarrr" value="<%= info_clientes.id_cliente %>">
+                                                            <input type="hidden" name="id_clienteEnviarMonto" value="<%= info_clientes.id_cliente %>">
                                                             <input type="hidden" name="id_consecutivo" value="<%= info_clientes.id %>">
+                                                            
                                                             <% if((mostrarProducto)) { %>
                                                             <input type="text" id="updateMontoAprobadO"
                                                             style="border:none; border-radius:9px; background: #ebebeb; width:68%;" value="<%=mostrarProducto.monto_aprobado %>"

@@ -6,9 +6,9 @@ const conexion = require("../database/db");
 // ? ========>>> ZONA DE VENDEDORES <<<========
 // todo ===========>>>  Mostrar lista de VENDEDORES
 exports.listarVendedores = async (req, res) => {
-  const lista_vendedores = await conexion.query(
-    "SELECT * FROM registro_de_vendedores"
-  );
+  const lista_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores");
+
+
   const usuarios = await conexion.query("SELECT * FROM usuarios");
 
   lista_vendedores.forEach((v) => {
@@ -49,28 +49,20 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
   let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ",[id_vendedor] );
   info_vendedor = info_vendedor[0];
 
- 
-  const licencia = JSON.parse(info_vendedor.licencia_conduccion);
+   const licencia = JSON.parse(info_vendedor.licencia_conduccion);
 
   // todo===========>>>  Mostrar afiliados a tal vendedor
-  let afiliados = await conexion.query(
-    "SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?",
-    [info_vendedor.id_vendedor]
-  );
+  let afiliados = await conexion.query("SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?",[info_vendedor.id_vendedor]);
 
   // todo===========>>>  Mostrar afiliado a este vendedor
   // Consultando en DB los clientes que pertenecen al vendedor actual
-  let referente = await conexion.query(
-    "SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1",
-    [info_vendedor.codigo_afiliado]
+  let referente = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1",
+  [info_vendedor.codigo_afiliado]
   );
   referente = referente[0];
 
   // todo===========>>>  Mostrar estado actual de un vendedor
-  let viewsUser = await conexion.query(
-    "SELECT * FROM usuarios WHERE id_vendedor = ? LIMIT 1",
-    [info_vendedor.id_vendedor]
-  );
+  let viewsUser = await conexion.query("SELECT * FROM usuarios WHERE id_vendedor = ? LIMIT 1", [info_vendedor.id_vendedor]);
   viewsUser = viewsUser[0];
 
   // todo ===============================>>> Estado del solicitar credito y estado de instalacion + cliente por vendedor
@@ -173,6 +165,9 @@ exports.ActualizarNivel = async (req, res) => {
   );
 };
 // todo ===========>>>  Actualizar estado de vendedores
+
+
+
 exports.ActualizarEstado = async (req, res) => {
   const id_vendedor = req.body.id_vendedorEnviar;
   const id_consecutivo = req.body.id_consecutivo;
@@ -180,10 +175,11 @@ exports.ActualizarEstado = async (req, res) => {
   const datosEstado_vendedor = {estado_de_la_cuenta, id_consecutivo, id_vendedor, };
 
   await conexion.query( "UPDATE usuarios SET ? WHERE id_vendedor = ? ", [datosEstado_vendedor, id_vendedor], (err, result) => {
-      if (err) throw err;
+      if (err) { res.send(false)}
 
-      if (result) {
+      if (result.affectedRows > 0) {
         res.redirect("/perfil-clientes/" + id_vendedor);
+        // res.send(true)
       }
     }
   );
@@ -441,7 +437,6 @@ if (clbotonCredito.licencia_cliente >0){
 let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
 mostrarProducto = mostrarProducto[0]
   
-
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-cliente", {
     user: req.user, estado,
@@ -455,7 +450,7 @@ mostrarProducto = mostrarProducto[0]
 
 exports.ActualizarCredito = async (req, res) => {
 
- const id_clienteEnviarrr = req.body.id_clienteEnviarrr; 
+ const id_clienteEnviar = req.body.id_clienteEnviar; 
  const id_cliente = req.body.id_consecutivo; 
  const estado_del_credito = req.body.estadosCredito;
 
@@ -466,7 +461,7 @@ exports.ActualizarCredito = async (req, res) => {
       if (err) throw err;
 
       if (result) {
-        res.redirect("/perfil-cliente/" + id_clienteEnviarrr);
+        res.redirect("/perfil-cliente/" + id_clienteEnviar);
       }
     }
   );
@@ -474,7 +469,7 @@ exports.ActualizarCredito = async (req, res) => {
 };
 exports.ActualizarMontoAprobado = async (req, res) => {
 
-const id_clienteEnviarrr = req.body.id_clienteEnviarrr; 
+const id_clienteEnviarMonto = req.body.id_clienteEnviarMonto; 
 const id_cliente = req.body.id_consecutivo; 
 const monto_aprobado = req.body.updateMontoAprobado.replace(/[$ ,]/g, '');
 
@@ -484,7 +479,7 @@ const monto_aprobado = req.body.updateMontoAprobado.replace(/[$ ,]/g, '');
       if (err) throw err;
 
       if (result) {
-        res.redirect("/perfil-cliente/" + id_clienteEnviarrr);
+        res.redirect("/perfil-cliente/" + id_clienteEnviarMonto);
       }
     }
   );
@@ -524,6 +519,7 @@ exports.servicioInstaladosx = async (req, res) => {
   const evidencia = '../evidenciaServicio/' + urlLicencias[0]
   const evidencia_fotografica = JSON.stringify({'evidencia': evidencia,});
   const nota = req.body.nota;
+
 
    const id_cliente = req.body.id_cliente
    const codigo_cliente = req.body.codigo_cliente

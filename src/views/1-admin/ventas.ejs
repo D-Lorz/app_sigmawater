@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8" />
+  <title>Ventas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+  <meta content="Themesbrand" name="author">
+  <!-- App favicon -->
+  <link rel="shortcut icon" href="../directorio_dash/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="../css/colors.min.css">
+
+  <base href="#">
+
+  
+
+<!-- DataTables -->
+<link href="../directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+rel="stylesheet" type="text/css" />
+ <!-- Responsive datatable examples -->
+<link href="../directorio_dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+ rel="stylesheet" type="text/css" />
+ <!-- preloader css -->
+<link rel="stylesheet" href="../directorio_dash/css/preloader.min.css" type="text/css" />
+<!-- Bootstrap Css -->
+<link rel="stylesheet" type="text/css" href="../directorio_dash/css/bootstrap.min.css" id="bootstrap-style" />
+<!-- Icons Css -->
+<link rel="stylesheet" type="text/css" href="../directorio_dash/css/icons.min.css" />
+<!-- App Css-->
+<link rel="stylesheet" type="text/css" href="../directorio_dash/css/app.min.css" id="app-style" />
+<!-- Tipo de letra -->
+<link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
+<!-- scroll -->
+<link rel="stylesheet" href="../css/scrolls.css">
+
+</head>
+
+<body>
+
+  <!-- Begin page -->
+  <div id="layout-wrapper">
+
+   <!-- =======FIXME: MENU ========================== -->
+   <%- include ('../partials/menu.ejs')%>
+   <!-- =======FIXME: MENU ========================== -->
+
+   <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+        
+
+      <!-- start page title -->
+      <div class="row">
+          <div class="col-12">
+              <div class="page-title-box d-sm-flex align-items-center
+                  justify-content-between">
+                  <h4 class="mb-sm-0 font-size-18"> Ventas - Facturas </h4>
+
+                  <div class="page-title-right">
+                      <ol class="breadcrumb m-0">
+                          <li class="breadcrumb-item"><a href="javascript:
+                                  void(0);">Ventas</a></li>
+                          <li class="breadcrumb-item active">Facturas</li>
+                      </ol>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+      <!-- end page title -->
+
+      <!-- TOP DE VENDEDORES -->
+      <!-- <div class="row">
+        <div class="page-title-box d-sm-flex align-items-center
+        justify-content-center">
+      <h3 class="mb-sm-0 font-size-14">Top 4 vendedores</h3>
+     </div>
+        <div class="col-xl-3 col-sm-6">
+              <div class="card text-center">
+                  <div class="card-body">
+                      <div class="dropdown text-end">
+                          <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                            <i class="bx bx-dots-horizontal-rounded"></i>
+                          </a>
+                        
+                          <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item" href="#">Edit</a>
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Remove</a>
+                          </div>
+                      </div>
+                      
+                      <div class="avatar-xl mx-auto mb-4">
+                          <div class="avatar-title bg-soft-light text-light display-4 m-0 rounded-circle">
+                              <i class="bx bxs-user-circle"></i>
+                          </div>
+                      </div>
+                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Kevin West</a></h5>
+                      <p class="text-muted mb-2">Full Stack Developer</p>
+                      
+                  </div>
+
+                  <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
+                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
+
+                  </div>
+              </div>
+            
+          </div>
+       
+          <div class="col-xl-3 col-sm-6">
+              <div class="card text-center">
+                  <div class="card-body">
+                      <div class="dropdown text-end">
+                          <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                            <i class="bx bx-dots-horizontal-rounded"></i>
+                          </a>
+                        
+                          <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item" href="#">Edit</a>
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Remove</a>
+                          </div>
+                      </div>
+                      
+                      <div class="mx-auto mb-4">
+                          <img src="../directorio_dash/images/users/avatar-6.jpg" alt="" class="avatar-xl rounded-circle img-thumbnail">
+                      </div>
+                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Tommy Hayes</a></h5>
+                      <p class="text-muted mb-2">Backend Developer</p>
+                      
+                  </div>
+
+                  <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
+                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
+
+                  </div>
+              </div>
+            
+          </div>
+       
+          <div class="col-xl-3 col-sm-6">
+              <div class="card text-center">
+                  <div class="card-body">
+                      <div class="dropdown text-end">
+                          <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                            <i class="bx bx-dots-horizontal-rounded"></i>
+                          </a>
+                        
+                          <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item" href="#">Edit</a>
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Remove</a>
+                          </div>
+                      </div>
+                      
+                      <div class="mx-auto mb-4">
+                          <img src="../directorio_dash/images/users/avatar-8.jpg" alt="" class="avatar-xl rounded-circle img-thumbnail">
+                      </div>
+                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Diana Owens</a></h5>
+                      <p class="text-muted mb-2">UI/UX Designer</p>
+                      
+                  </div>
+
+                  <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
+                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
+                  </div>
+              </div>
+             
+          </div>
+        
+          <div class="col-xl-3 col-sm-6">
+              <div class="card text-center">
+                  <div class="card-body">
+                      <div class="dropdown text-end">
+                          <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                            <i class="bx bx-dots-horizontal-rounded"></i>
+                          </a>
+                        
+                          <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item" href="#">Edit</a>
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Remove</a>
+                          </div>
+                      </div>
+                      
+                      <div class="mx-auto mb-4">
+                          <img src="../directorio_dash/images/users/avatar-9.jpg" alt="" class="avatar-xl rounded-circle img-thumbnail">
+                      </div>
+                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Paul Sanchez</a></h5>
+                      <p class="text-muted mb-2">Full Stack Developer</p>
+                      
+                  </div>
+
+                  <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
+                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
+
+                  </div>
+              </div>
+         
+          </div>
+      
+          
+      </div> -->
+  <!-- TOP DE VENDEDORES -->
+
+            <div class="table-responsive mb-4 " >
+                <table class="table align-middle datatable dt-responsive table-check nowrap " style="border-collapse: collapse;
+                    border-spacing: 0 8px; width: 100%;" >
+                    <thead>
+                    
+                        <th scope="col" title="Id de factura">Factura</th>
+                        <th scope="col" title="Fecha de factura">Fecha</th>
+                        <th scope="col">Cliente</th> <!--Primer nombre y primer apellido-->
+                        <th scope="col">Producto</th>
+                        <th scope="col">Valor venta</th>
+                        <th scope="col">Vendedor</th> <!--Primer nombre y primer apellido-->
+                        <th scope="col">Valor comisión</th>
+                        <th scope="col">Estado</th> <!-- Estado de la factura Pendiente y Pagado-->
+                                                 
+                    
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td><button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" 
+                                    aria-controls="offcanvasRight" style="background: none;border: none;margin: 0;">000001</button></td>
+                                <td>06/27/2022</td>
+                                <td>Alexander </td>
+                                <td>Whole System</td>
+                                <td>$ 2,500</td>
+                                <td>----</td>
+                                <td>----</td>
+                                <td>----</td>
+                            </tr>
+                   </tbody>
+                   
+                </table>
+                   <!-- right offcanvas -->
+                   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" >
+                   <div class="offcanvas-header"> <h1 id="offcanvasRightLabel" style=" font-size: 111%; "></h1> 
+                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                   </div>
+                <div class="offcanvas-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="">
+                                <div class="">
+                                    <div class="invoice-title">
+                                        <div class="d-flex align-items-start">
+                                            <div class="flex-grow-1">
+                                                <div class="mb-4">
+                                                    <img src="../directorio_dash/images/logo.svg" alt="" height="40"><span class="logo-txt"></span>
+                                                </div>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <div class="mb-4">
+                                                    <h4 class="float-end font-size-16">Factura: 12345</h4> <!-- 000001 -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+<!-- 
+                                        <p class="mb-1">1874 County Line Road City, FL 33566</p>
+                                        <p class="mb-1"><i class="mdi mdi-email align-middle me-1"></i> abc@123.com</p>
+                                        <p><i class="mdi mdi-phone align-middle me-1"></i> 012-345-6789</p>  -->
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div>
+                                                <h5 class="font-size-15 mb-2">Producto</h5> 
+                                                <p class="mb-1">Whole System</p> 
+                                                <p class="mb-1 badge badge-soft-success font-size-12">$6.800</p><!--Color verde--> 
+                                               
+                                                <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                <p class="mb-1 badge badge-soft-dark font-size-12">46134</p> 
+                                                <p class="mb-1">(+3)234345</p>
+                                                <p>Estados unidos, miami, 0121</p>
+                                             </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div>
+                                                <div>
+                                                    <h5 class="font-size-15">Fecha de instalación</h5>
+                                                    <p>February 16, 2020</p>
+                                                   
+                                                </div>
+                                                
+                                                <div class="mt-4">
+                                                    <h5 class="font-size-15">Vendedor</h5>
+                                                    <p class="mb-1 badge badge-soft-dark font-size-12">46134</p> 
+                                                    <p class="mb-1">Nivel: 2</p>
+                                                    <p class="mb-1">(+3)234345</p>
+                                                  </div>
+                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="py-2 mt-3">
+                                        <h5 class="badge badge-soft-success font-size-12">Comisión vendedor: $234 </h5>
+                                  </div>
+                                    <div class="py-2 mt-3">
+                                        <h5 class="font-size-15">Deducciones </h5>
+                                        <!-- Colocar boton al frende de Deducciones  signo mas para agregar otro campo -->
+                                    </div>
+                                    <div class="">
+                                        <div class="table-responsive">
+                                            <table class="table table-nowrap align-middle mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 70px;">No.</th> <!--Numero de deducciones-->
+                                                        <th>Descripción</th>
+                                                        <th class="text-end" style="width: 120px;">Monto</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">01</th>
+                                                        <td>
+                                                            <h5 class="font-size-15 mb-1">Minia</h5>
+                                                            <p class="font-size-13 text-muted mb-0">Bootstrap 5 Admin  </p>
+                                                        </td>
+                                                        <td class="text-end ">$499.00</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <th scope="row">02</th>
+                                                        <td>
+                                                            <h5 class="font-size-15 mb-1">Skote</h5>
+                                                            <p class="font-size-13 text-muted mb-0">Bootstrap 5 Admin  </p>
+                                                        </td>
+                                                        <td class="text-end">$499.00</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th scope="row" colspan="2" class="text-end">Sub Total</th>
+                                                        <td class="text-end">$998.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row" colspan="2" class="border-0 text-end">
+                                                            Tax</th>
+                                                        <td class="border-0 text-end">$12.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row" colspan="2" class="border-0 text-end">Total</th>
+                                                        <td class="border-0 text-end"><h4 class="m-0">$1010.00</h4></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="d-print-none mt-3">
+                                        <!-- <div class="float-end">
+                                            <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light me-1" style="
+                                            border-radius: 17px;
+                                            font-size: 12px;
+                                            width: 21%;
+                                            margin-left: -12%;"><i class="fa fa-print"></i></a> -->
+                                            <!-- <a href="#" class="btn btn-primary w-md waves-effect waves-light" style="border-radius: 17px;">Guardar</a> -->
+                                         <center><a href="#" class="btn btn-primary w-md waves-effect waves-light" style="border-radius: 17px;">Reportar como pagada</a></center>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+       
+      
+                   </div>
+               </div>
+                <!-- end table -->
+            </div>
+         </div>
+        
+      </div>
+      
+    <!-- =======FIXME: copyright ========================== -->
+    <%- include ('../partials/copyright.ejs')%>
+    <!-- =======FIXME: copyright ========================== -->
+  
+    </div>
+  </div>
+
+  
+<!-- Right Sidebar -->
+<div class="right-bar">
+    <div data-simplebar class="h-100">
+        <div class="rightbar-title d-flex align-items-center bg-dark p-3">
+
+            <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
+
+            <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                <i class="mdi mdi-close noti-icon"></i>
+            </a>
+        </div>
+
+        <!-- Settings -->
+    
+    
+    </div> <!-- end slimscroll-menu-->
+</div>
+<!-- /Right-bar -->
+
+<!-- Right bar overlay-->
+<!-- <div class="rightbar-overlay"></div> -->
+  <!-- JAVASCRIPT -->
+  <script src="../directorio_dash/js/scripts_personalizadosdash.js"></script>
+<script src="../directorio_dash/libs/jquery/jquery.min.js"></script>
+<script src="../directorio_dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../directorio_dash/libs/metismenu/metisMenu.min.js"></script>
+<script src="../directorio_dash/libs/simplebar/simplebar.min.js"></script>
+<script src="../directorio_dash/libs/node-waves/waves.min.js"></script>
+<script src="../directorio_dash/libs/feather-icons/feather.min.js"></script>
+<!-- pace js -->
+<script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
+
+  <!-- Required datatable js -->
+<script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+ <!-- Responsive examples -->
+<script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<!-- init js -->
+<script src="../directorio_dash/js/pages/datatable-pages.init.js"></script>
+                
+ <script src="../directorio_dash/js/app.js"></script>
+
+  
+</body>
+
+</html>

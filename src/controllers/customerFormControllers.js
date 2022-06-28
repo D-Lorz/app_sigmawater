@@ -284,10 +284,12 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
    const id_cliente = req.params.id
    let clientes2 = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id_cliente])
-    clientes2 = clientes2[0]
+   clientes2 = clientes2[0]
+
 
 // todo ===============================>>> Estado del solicitar credito
   let creditoVista_interna = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
+
       let estado = []
       estado.txt = "No solicitado";
       estado.color = 'badge-soft-dark'
@@ -343,10 +345,10 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
       mostrarProducto = mostrarProducto[0]
 
-      if(mostrarProducto ) {
+       if(mostrarProducto ) {
  
-        mostrarProducto.monto_aprobado = formatear.format(mostrarProducto.monto_aprobado )
-        }
+         mostrarProducto.monto_aprobado = formatear.format(mostrarProducto.monto_aprobado )
+         }
         
 
 // todo =========================>> Mostrar información del test de agua del cliente
@@ -377,9 +379,8 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   if(consulta_PrimerTestAgua.length > 0 ){
     consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]
   }
-
   const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
-  
+
 // todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
    let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [clientes2.id])
  
@@ -432,21 +433,11 @@ if (clRegistro_instalacion.length > 0) {
 
 // * >>> Renderizado <<<<<
   res.render('perfil-clientes', { user: req.user, clientes2, estado,estadoBtn,
-    informacionTestAgua,
-    estadoVisita_testAgua,
-    consulta_PrimerTestAgua,
-    datosJson_PrimerTestagua,
-    consulta_UltimoTestAgua,
-    datosJson_UltimoTestagua,
-    ahorroCalculado,
-    datosJson_ahorroCalculado,
-    estado_intalacion,
-    mostrarProducto,
-    evidenciaF,
-    clRegistro_instalacion
-    
+    informacionTestAgua, estadoVisita_testAgua, consulta_PrimerTestAgua,
+    datosJson_PrimerTestagua, consulta_UltimoTestAgua, datosJson_UltimoTestagua,
+    ahorroCalculado, datosJson_ahorroCalculado, estado_intalacion, mostrarProducto,
+    evidenciaF, clRegistro_instalacion
    })
- 
 }
 
 // todo --> Formulario Test de agua
@@ -557,8 +548,6 @@ parseFloat(ahorroAnual_agua_caliente)+parseFloat(ahorroAnual_plomeria_electrodom
       if (result) { res.redirect('/perfil-clientes/'+codigo_cliente) }
      
     })
-
-
 }
 // todo --> Formulario agendar instalacion
 exports.agendarInstalacionProducto = async (req, res) => {
@@ -584,7 +573,6 @@ const codigo_cliente = req.body.codigo_cliente
 await conexion.query('INSERT INTO agendar_instalacion SET ?', [Datos_agendarSolicitud], (err, result) => {
   if (err) throw err;
   if (result) { res.redirect('/perfil-clientes/'+codigo_cliente) }
-    
    })
 
 }
@@ -596,7 +584,7 @@ exports.elegirSistema= async (req, res) => {
   const id_cliente = req.body.id_consecutivo;
   const sistema	 = req.body.sistemaElegido;
   const estado_del_credito = 1
-  const monto_aprobado = req.body.montoAprobadoPorFuera.replace(/[$ ]/g, '');
+  const monto_aprobado = req.body.montoAprobadoPorFuera.replace(/[$ ,]/g, '');
 
   const datosElegirSistema= {sistema, estado_del_credito,monto_aprobado,id_cliente };
 
@@ -648,42 +636,3 @@ const formatear = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 0,
 });
 
-
-// todo --> actualizar datos del cliente
-// exports.ActualizarDatos = async (req, res) => {
-
-//   const apellido = req.body.apellido;
-
-//   console.log(actualiazarDatos)
-
-//   await conexion.query('UPDATE nuevos_cliente SET apellido WHERE id_clientes = ?', [{apellido:apellido}], (err, result) => {
-//     if (err) throw err;
-//     console.log(" ========>> 1 Registro Cliente ");
-//     console.log(result)
-//     console.log(" ========>> 1 Registro Cliente ");
-//     res.redirect('/lista-clientes')
-// })
-
-
-//   }
-
-// // todo: MOSTRAR CANTIDAD DE CLIENTES
-// exports.listarCantidadClientes = async (req, res) => {
-// Capturando el id del Vendedor actual
-// const id_vendedor = req.user.id_vendedor;
-// Consultando en DB los clientes que pertenecen al vendedor actual
-// conexion.query('SELECT COUNT(*) AS total_afiliados FROM solicitar_credito  WHERE codigo_afiliado = ? ', [id_vendedor], (err, result) => {
-// if (err) throw err;
-
-//   console.log("// ------------------------------");
-//   console.log(result);
-//   console.log("// ------------------------------");
-
-//   res.render('dashboard', {user: req.user,  result: result})
-
-
-// })
-
-// }
-
-// todo GENERAR CODIGO NUMERICO PARA CLIENTE
