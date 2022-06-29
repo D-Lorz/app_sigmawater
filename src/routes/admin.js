@@ -11,7 +11,7 @@ const { listarVendedores,
         ActualizarEstado,
         ActualizarCredito,
         ActualizarMontoAprobado,
-        clfirmas
+        clfirmas, factura
          } = require('../controllers/adminControllers');
 
 
@@ -26,14 +26,12 @@ router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
 
  router.get('/acuerdo/:id', isAuthenticated,clfirmas )
 
-  router.get('/ventas', isAuthenticated,(req, res) => {
-        // if(!(req.user.rol ==="vendedor")){res.render('./1-admin/ventas') }
-       res.render('./1-admin/ventas', { user: req.user })
-});
+  router.get('/ventas', isAuthenticated,factura)
+
 //  router.get('/documento/:id', isAuthenticated,)
-// router.get('/prueba', isAuthenticated,(req, res) => {
-//        res.render('./1-admin/clientes', { user: req.user })
-// });
+ router.get('/pruebaa', isAuthenticated,(req, res) => {
+        res.render('./1-admin/pruebaa', { user: req.user })
+ });
 // *   ================ ===== ↑↑ ==============================
 
            

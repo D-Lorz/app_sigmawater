@@ -44,7 +44,7 @@ rel="stylesheet" type="text/css" />
   <div id="layout-wrapper">
 
    <!-- =======FIXME: MENU ========================== -->
-   <%- include ('../partials/menu.ejs')%>
+   <%- include ('../1-admin/menu.ejs')%>
    <!-- =======FIXME: MENU ========================== -->
 
    <div class="main-content">
@@ -215,33 +215,47 @@ rel="stylesheet" type="text/css" />
                 <table class="table align-middle datatable dt-responsive table-check nowrap " style="border-collapse: collapse;
                     border-spacing: 0 8px; width: 100%;" >
                     <thead>
-                    
-                        <th scope="col" title="Id de factura">Factura</th>
-                        <th scope="col" title="Fecha de factura">Fecha</th>
+                      <th scope="col" title="Id de factura">Factura</th>
+                        <th scope="col" title="Fecha de factura">Fecha de instalación</th>
                         <th scope="col">Cliente</th> <!--Primer nombre y primer apellido-->
                         <th scope="col">Producto</th>
                         <th scope="col">Valor venta</th>
                         <th scope="col">Vendedor</th> <!--Primer nombre y primer apellido-->
                         <th scope="col">Valor comisión</th>
                         <th scope="col">Estado</th> <!-- Estado de la factura Pendiente y Pagado-->
-                                                 
-                    
                     </thead>
+                    <% if(mostrarFactura) {%>
+                        <% mostrarFactura.forEach((user)=>{ %>
                     <tbody>
                             <tr>
-                                <td><button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" 
-                                    aria-controls="offcanvasRight" style="background: none;border: none;margin: 0;">000001</button></td>
-                                <td>06/27/2022</td>
-                                <td>Alexander </td>
-                                <td>Whole System</td>
-                                <td>$ 2,500</td>
-                                <td>----</td>
-                                <td>----</td>
-                                <td>----</td>
+                                <td><%= user.id_factura %></td>
+                                <td><%= user.fecha_instalacion %></td>
+                                <td><%= user.nombre %> <%= user.apellido %></td>
+                                <td><%= user.producto_instalado %></td>
+                                <td><%= user.monto_aprobado %></td>
+                                <td><%= user.nombres %> <%= user.apellidos %></td>
+                                <td>xxxxx</td>
+                                <td><div class="badge <%= user.estadoFactura.color %> font-size-12"><%= user.estadoFactura.txt %></div></td>
+                              
+                               <!-- <div class="badge <= estadoFactura.color %> font-size-12"><= user.estadoFactura.txt %></div> -->
                             </tr>
                    </tbody>
-                   
+                   <%})%>
+                   <% } else {%>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <% } %>
                 </table>
+       
                    <!-- right offcanvas -->
                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" >
                    <div class="offcanvas-header"> <h1 id="offcanvasRightLabel" style=" font-size: 111%; "></h1> 
@@ -310,48 +324,52 @@ rel="stylesheet" type="text/css" />
                                         <h5 class="font-size-15">Deducciones </h5>
                                         <!-- Colocar boton al frende de Deducciones  signo mas para agregar otro campo -->
                                     </div>
+                                    
                                     <div class="">
                                         <div class="table-responsive">
-                                            <table class="table table-nowrap align-middle mb-0">
+                                            <table class="table table-editable table-nowrap align-middle table-edits">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width: 70px;">No.</th> <!--Numero de deducciones-->
+                                                        <th >No.</th> <!--Numero de deducciones-->
                                                         <th>Descripción</th>
-                                                        <th class="text-end" style="width: 120px;">Monto</th>
+                                                        <th >Monto</th>
+                                                        <th >Editar</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <th scope="row">01</th>
-                                                        <td>
-                                                            <h5 class="font-size-15 mb-1">Minia</h5>
-                                                            <p class="font-size-13 text-muted mb-0">Bootstrap 5 Admin  </p>
+                                                        <td data-field="id" >01</td>
+                                                        <td data-field="name">David McHenry</td>
+                                                        <td data-field="age"><div class="badge badge-soft-success font-size-12">$499.00</div></td>
+                                                        <td style="width: 100px">
+                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
                                                         </td>
-                                                        <td class="text-end ">$499.00</td>
                                                     </tr>
-                                                    
                                                     <tr>
-                                                        <th scope="row">02</th>
-                                                        <td>
-                                                            <h5 class="font-size-15 mb-1">Skote</h5>
-                                                            <p class="font-size-13 text-muted mb-0">Bootstrap 5 Admin  </p>
+                                                        <td data-field="id" >01</td>
+                                                        <td data-field="name">David McHenry</td>
+                                                        <td data-field="age"><div class="badge badge-soft-success font-size-12">$499.00</div></td>
+                                                        <td style="width: 100px">
+                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                            </a>
                                                         </td>
-                                                        <td class="text-end">$499.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-end"></td>
+                                                        <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Sub total</b></td>
+                                                        <td class="text-end">$998.00</td>
+                                                        <td class="text-end"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-end"></td>
+                                                        <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Total</b></td>
+                                                        <td class="text-end">$998.00</td>
+                                                        <td class="text-end"></td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <th scope="row" colspan="2" class="text-end">Sub Total</th>
-                                                        <td class="text-end">$998.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row" colspan="2" class="border-0 text-end">
-                                                            Tax</th>
-                                                        <td class="border-0 text-end">$12.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row" colspan="2" class="border-0 text-end">Total</th>
-                                                        <td class="border-0 text-end"><h4 class="m-0">$1010.00</h4></td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -382,6 +400,7 @@ rel="stylesheet" type="text/css" />
         
       </div>
       
+      
     <!-- =======FIXME: copyright ========================== -->
     <%- include ('../partials/copyright.ejs')%>
     <!-- =======FIXME: copyright ========================== -->
@@ -409,10 +428,8 @@ rel="stylesheet" type="text/css" />
 </div>
 <!-- /Right-bar -->
 
-<!-- Right bar overlay-->
-<!-- <div class="rightbar-overlay"></div> -->
-  <!-- JAVASCRIPT -->
-  <script src="../directorio_dash/js/scripts_personalizadosdash.js"></script>
+   <!-- JAVASCRIPT -->
+<script src="../directorio_dash/js/scripts_personalizadosdash.js"></script>
 <script src="../directorio_dash/libs/jquery/jquery.min.js"></script>
 <script src="../directorio_dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../directorio_dash/libs/metismenu/metisMenu.min.js"></script>
@@ -422,16 +439,70 @@ rel="stylesheet" type="text/css" />
 <!-- pace js -->
 <script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
 
-  <!-- Required datatable js -->
+<!-- Required datatable js -->
 <script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
- <!-- Responsive examples -->
+<!-- Responsive examples -->
 <script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <!-- init js -->
 <script src="../directorio_dash/js/pages/datatable-pages.init.js"></script>
-                
+<!-- Table Editable plugin -->
+<script src="../directorio_dash/libs/table-edits/build/table-edits.min.js"></script>
+<script src="../directorio_dash/js/pages/table-editable.int.js"></script> 
+
+               
  <script src="../directorio_dash/js/app.js"></script>
+
+ 
+<script type="text/javascript">
+
+  
+$(document).ready(function () {
+        var maxField = 3; //Input fields increment limitation
+        var addButton = $('.add_button'); //Add button selector
+        var wrapper = $('.form'); //Input field wrapper
+        var fieldHTML = 
+        // '<center>'+
+          '<div class="row justify-content-center">' +
+
+                   '<div class="col-md-3">' +
+                       '<div class="form-group ">' +
+                        '<label for="">Contaminante</label>'+
+                            '<input type="text" name="pruebahola[]" id="otro1" class="form-control " placeholder=""/>' +
+                        '</div>'+
+                    '</div>'+
+                        
+                        
+                   '<div class="col-md-3">' +
+                     '<div class="form-group">' +
+                        '<label for="">Concentración del contaminante</label>'+
+                          '<input type="text" id="otraCocentracionContaminante1" name="concentracion1[]" class="form-control campoDecimal" placeholder="">' +
+                          
+                      '</div>'+
+                    '</div>'+
+
+               // '&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" class="btn btn-sm btn-danger remove_button col-xl-1" title="Remove field">Elimar</a>' +
+                   
+                  '</div>'+
+              '<br>';
+            // '</center>';
+    
+        var x = 1; //El contador de campo inicial es 1
+        $(addButton).click(function () { //Una vez que se hace clic en el botón Agregar
+            if (x < maxField) { //Comprobar el número máximo de campos de entrada
+                x++; //Increment field counter
+                $(wrapper).append(fieldHTML); // Agregar campo html
+            }
+        });
+    
+        $(wrapper).on('click', '.remove_button', function (e) { //Once remove button is clicked
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remove field html
+            x--; //Decrement field counter
+        });
+    });
+      </script>
 
   
 </body>

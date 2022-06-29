@@ -1,198 +1,171 @@
-
 <!doctype html>
 <html lang="en">
 
-    <head>
-        
-        <meta charset="utf-8" />
-        <title>Invoice Detail | Minia - Minimal Admin & Dashboard Template</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesbrand" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="../directorio_dash/images/favicon.ico">
+<head>
 
-        <!-- preloader css -->
-        <link rel="stylesheet" href="../directorio_dash/css/preloader.min.css" type="text/css" />
+    <meta charset="utf-8" />
+    <title>Editable | Minia - Minimal Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../directorio_dash/images/favicon.ico">
 
-        <!-- Bootstrap Css -->
-        <link href="../directorio_dash/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-        <!-- Icons Css -->
-        <link href="../directorio_dash/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <!-- App Css-->
-        <link href="../directorio_dash/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <!-- preloader css -->
+    <link rel="stylesheet" href="../directorio_dash/css/preloader.min.css" type="text/css" />
 
-    </head>
+    <!-- Bootstrap Css -->
+    <link href="../directorio_dash/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="../directorio_dash/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="../directorio_dash/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
-    <body>
+</head>
 
-    <!-- <body data-layout="horizontal"> -->
+<body>
 
-        <!-- Begin page -->
-        <div id="layout-wrapper">
 
-            <div class="main-content">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-                <div class="page-content">
-                    <div class="container-fluid">
+    <div id="demo-form2" class="form"></div>
 
-                
-                        
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="invoice-title">
-                                            <div class="d-flex align-items-start">
-                                                <div class="flex-grow-1">
-                                                    <div class="mb-4">
-                                                        <img src="../directorio_dash/images/logo-sm.svg" alt="" height="24"><span class="logo-txt">Minia</span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-shrink-0">
-                                                    <div class="mb-4">
-                                                        <h4 class="float-end font-size-16">Invoice # 12345</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
+    <div class="col-md-3">
+        <div class="form-group ">
+            <label for="">Contaminante</label>
+            <input type="text" name="otro1[]" id="otro1" class="form-control " placeholder="" />
+        </div>
+    </div>
 
-                                            <p class="mb-1">1874 County Line Road City, FL 33566</p>
-                                            <p class="mb-1"><i class="mdi mdi-email align-middle me-1"></i> abc@123.com</p>
-                                            <p><i class="mdi mdi-phone align-middle me-1"></i> 012-345-6789</p>
-                                        </div>
-                                        <hr class="my-4">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div>
-                                                    <h5 class="font-size-15 mb-3">Billed To:</h5>
-                                                    <h5 class="font-size-14 mb-2">Richard Saul</h5>
-                                                    <p class="mb-1">1208 Sherwood Circle
-                                                        Lafayette, LA 70506</p>
-                                                    <p class="mb-1">RichardSaul@rhyta.com</p>
-                                                    <p>337-256-9134</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div>
-                                                    <div>
-                                                        <h5 class="font-size-15">Order Date:</h5>
-                                                        <p>February 16, 2020</p>
-                                                    </div>
-                                                    
-                                                    <div class="mt-4">
-                                                        <h5 class="font-size-15">Payment Method:</h5>
-                                                        <p class="mb-1">Visa ending **** 4242</p>
-                                                        <p>richards@email.com</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="py-2 mt-3">
-                                            <h5 class="font-size-15">Order summary</h5>
-                                        </div>
-                                        <div class="p-4 border rounded">
-                                            <div class="table-responsive">
-                                                <table class="table table-nowrap align-middle mb-0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 70px;">No.</th>
-                                                            <th>Item</th>
-                                                            <th class="text-end" style="width: 120px;">Price</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">01</th>
-                                                            <td>
-                                                                <h5 class="font-size-15 mb-1">Minia</h5>
-                                                                <p class="font-size-13 text-muted mb-0">Bootstrap 5 Admin Dashboard </p>
-                                                            </td>
-                                                            <td class="text-end">$499.00</td>
-                                                        </tr>
-                                                        
-                                                        <tr>
-                                                            <th scope="row">02</th>
-                                                            <td>
-                                                                <h5 class="font-size-15 mb-1">Skote</h5>
-                                                                <p class="font-size-13 text-muted mb-0">Bootstrap 5 Admin Dashboard </p>
-                                                            </td>
-                                                            <td class="text-end">$499.00</td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <th scope="row" colspan="2" class="text-end">Sub Total</th>
-                                                            <td class="text-end">$998.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" colspan="2" class="border-0 text-end">
-                                                                Tax</th>
-                                                            <td class="border-0 text-end">$12.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" colspan="2" class="border-0 text-end">Total</th>
-                                                            <td class="border-0 text-end"><h4 class="m-0">$1010.00</h4></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="d-print-none mt-3">
-                                            <div class="float-end">
-                                                <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light me-1"><i class="fa fa-print"></i></a>
-                                                <a href="#" class="btn btn-primary w-md waves-effect waves-light">Send</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-                    </div> <!-- container-fluid -->
-                </div>
-                <!-- End Page-content -->
-
-                
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <script>document.write(new Date().getFullYear())</script> © Minia.
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="text-sm-end d-none d-sm-block">
-                                    Design & Develop by <a href="#!" class="text-decoration-underline">Themesbrand</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
-            <!-- end main content-->
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="">Concentración del contaminante</label>
+            '<input type="text" id="concentracion1" name="concentracion1[]" class="form-control campoDecimal"
+                placeholder="">
 
         </div>
-        <!-- END layout-wrapper -->
+    </div>
 
-        
 
-        </div>
-        <!-- /Right-bar -->
+    <center> <a href="javascript:void(0);" class="btn btn-primary add_button"
+            style="border-radius: 15px;width: 23%;"><i class="fa fa-plus"></i> Otro</a> </center>
 
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
 
-        <!-- JAVASCRIPT -->
-        <script src="../directorio_dash/libs/jquery/jquery.min.js"></script>
-        <script src="../directorio_dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="../directorio_dash/libs/metismenu/metisMenu.min.js"></script>
-        <script src="../directorio_dash/libs/simplebar/simplebar.min.js"></script>
-        <script src="../directorio_dash/libs/node-waves/waves.min.js"></script>
-        <script src="../directorio_dash/libs/feather-icons/feather.min.js"></script>
-        <!-- pace js -->
-        <script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
 
-        <script src="../directorio_dash/js/app.js"></script>
 
-    </body>
+    <script>
+
+        $(document).ready(function () {
+            var maxField = 3; //Input fields increment limitation
+            var addButton = $('.add_button'); //Add button selector
+            var wrapper = $('.form'); //Input field wrapper
+            var fieldHTML =
+                // '<center>'+
+                '<div class="table-responsive">' +
+
+                '<table class="table table-editable table-nowrap align-middle table-edits">' +
+                '<thead>' +
+                '<tr>' +
+                '<th >No.</th>' +
+                '<th>Descripción</th>' +
+                '<th >Monto</th>' +
+                '<th >Editar</th>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>'+
+                    '<tr>'+
+                        '<td data-field="id" >01</td>'+
+                        '<td data-field="name"></td>'+
+                        '<td data-field="age"><div class="badge badge-soft-success font-size-12"></div></td>'+
+                        '<td style="width: 100px">'+
+                            '<a class="btn btn-outline-secondary btn-sm edit" title="Edit">'+
+                                '<i class="fas fa-pencil-alt"></i>'+
+                            '</a>'+
+                        '</td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td data-field="id" >01</td>'+
+                        '<td data-field="name">David McHenry</td>'+
+                        '<td data-field="age"><div class="badge badge-soft-success font-size-12">$499.00</div></td>'+
+                        '<td style="width: 100px">'+
+                            '<a class="btn btn-outline-secondary btn-sm edit" title="Edit">'+
+                                '<i class="fas fa-pencil-alt"></i>'+
+                            '</a>'+
+                        '</td>'+
+                   '</tr>'+
+                    '<tr>'+
+                        '<td class="text-end"></td>'+
+                        '<td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Sub total</b></td>'+
+                        '<td class="text-end">$998.00</td>'+
+                        '<td class="text-end"></td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td class="text-end"></td>'+
+                        '<td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Total</b></td>'+
+                        '<td class="text-end">$998.00</td>'+
+                        '<td class="text-end"></td>'+
+                   '</tr>'+
+
+                '</tbody>'+
+
+            '&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" class="btn btn-sm btn-danger remove_button col-xl-1" title="Remove field">Elimar</a>' +
+                '</table>' +
+                '</div>' +
+                '<br>';
+            // '</center>';
+            var x = 1; //Initial field counter is 1
+            $(addButton).click(function () { //Once add button is clicked
+                if (x < maxField) { //Check maximum number of input fields
+                    x++; //Increment field counter
+                    $(wrapper).append(fieldHTML); // Add field html
+                }
+            });
+
+            $(wrapper).on('click', '.remove_button', function (e) { //Once remove button is clicked
+                e.preventDefault();
+                $(this).parent('div').remove(); //Remove field html
+                x--; //Decrement field counter
+            });
+
+            $(document).on('keyup', ".form-group", function () {
+                var cantidad = $(this).find("input[title=cantidad]").val();
+                var pu = $(this).find("input[title=pu]").val();
+
+                $(this).find("[title=subtotal]").html(parseInt(cantidad) * parseInt(pu));
+
+                //subtotal = cantidad * pu;
+                //document.formulario_01.subtotal.value = subtotal;
+            });
+        });
+
+    </script>
+
+
+
+
+
+    <!-- JAVASCRIPT -->
+    <script src="../directorio_dash/libs/jquery/jquery.min.js"></script>
+    <script src="../directorio_dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../directorio_dash/libs/metismenu/metisMenu.min.js"></script>
+    <script src="../directorio_dash/libs/simplebar/simplebar.min.js"></script>
+    <script src="../directorio_dash/libs/node-waves/waves.min.js"></script>
+    <script src="../directorio_dash/libs/feather-icons/feather.min.js"></script>
+    <!-- pace js -->
+    <script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
+
+    <!-- Table Editable plugin -->
+    <script src="../directorio_dash/libs/table-edits/build/table-edits.min.js"></script>
+
+    <script src="../directorio_dash/js/pages/table-editable.int.js"></script>
+
+    <script src="../directorio_dash/js/app.js"></script>
+
+
+
+
+
+</body>
+
 </html>

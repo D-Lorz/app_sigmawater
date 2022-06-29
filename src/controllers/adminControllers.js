@@ -7,8 +7,6 @@ const conexion = require("../database/db");
 // todo ===========>>>  Mostrar lista de VENDEDORES
 exports.listarVendedores = async (req, res) => {
   const lista_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores");
-
-
   const usuarios = await conexion.query("SELECT * FROM usuarios");
 
   lista_vendedores.forEach((v) => {
@@ -138,14 +136,8 @@ console.log(infoClientes);
 
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-vendedores", {
-    user: req.user,
-    info_vendedor,
-    afiliados,
-    referente,
-    licencia,
-    viewsUser,
-    infoClientes,
-  });
+    user: req.user, info_vendedor,afiliados,
+    referente, licencia, viewsUser, infoClientes });
 };
 // todo ===========>>>  Actualizar nivel de vendedores
 exports.ActualizarNivel = async (req, res) => {
@@ -165,8 +157,6 @@ exports.ActualizarNivel = async (req, res) => {
   );
 };
 // todo ===========>>>  Actualizar estado de vendedores
-
-
 
 exports.ActualizarEstado = async (req, res) => {
   const id_vendedor = req.body.id_vendedorEnviar;
@@ -227,16 +217,18 @@ exports.listarClientes = async (req, res) => {
       c.estadoAgenda.color = "badge-soft-warning";
     }
 
+    if (c.estado_agenda == 1) {
+      c.estadoAgenda.txt = "Instalado";
+      c.estadoAgenda.color = "badge-soft-success";
+    }
+
     /** Formateando la fecha */
     // const f = new Date(c.fecha_test)
     // c.fecha_test = f.toLocaleDateString("en-US")
   });
 
   // * >>> Renderizado <<<<<
-  res.render("./1-admin/listar-clientes", {
-    user: req.user,
-    lista_clientes,
-  });
+  res.render("./1-admin/listar-clientes", {user: req.user, lista_clientes });
 };
 
 //* Formateando precios a una moneda 
@@ -391,7 +383,6 @@ if (clInstalacion.length > 0) {
 
 }
 
-
 // todo ===============================>>> Mostrar agenda sobre la instalacion del producto
 
 let mostrarAgenda = await conexion.query("SELECT * FROM agendar_instalacion WHERE id_cliente = ?",[info_clientes.id]);
@@ -528,8 +519,12 @@ exports.servicioInstaladosx = async (req, res) => {
 
  const Datos_servicio = {fecha_instalacion, producto_instalado,serial_producto, instalador,evidencia_fotografica,nota,id_cliente }
  const Datos_estado = { estado_agenda}
+ const Datos_factura = { producto_instalado,fecha_instalacion,id_cliente}
 
 await conexion.query('UPDATE agendar_instalacion SET ? WHERE id_cliente = ?', [Datos_estado, id_cliente])
+
+await conexion.query('INSERT INTO factura SET ?', [Datos_factura])
+
 await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], (err, result) => {
   if (err) throw err;
   if (result) { res.redirect('/perfil-cliente/'+codigo_cliente) }
@@ -538,7 +533,52 @@ await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servic
 
 }
 
+exports.factura = async (req, res) => {
+
+// todo ========>>> Mostrar producto 
+ let mostrarFactura =  await conexion.query('SELECT F.*, F.estadoFacturas, C.nombre, C.apellido, S.monto_aprobado, V.nombres, V.apellidos FROM factura F INNER JOIN nuevos_cliente C ON F.id_factura = C.id LEFT JOIN solicitar_credito S ON F.id_factura = S.id LEFT JOIN registro_de_vendedores V ON C.id_vendedor = V.id;');
+  
+ mostrarFactura.forEach((c) => {
+  /** Estado de la factura */
+  c.estadoFactura = {};
+  c.estadoFactura.txt = "N/A";
+  c.estadoFactura.color = "badge-soft-dark";
+
+  if (c.estadoFacturas == 0) {
+    c.estadoFactura.txt = "Pendiente";
+    c.estadoFactura.color = "badge-soft-warning";
+  }
+  if (c.estadoFacturas == 1) {
+    c.estadoFactura.txt = "Pagado";
+    c.estadoFactura.color = "badge-soft-success";
+  }
+  
+ 
+ });
+ 
+   if(mostrarFactura) {
+    mostrarFactura.forEach((user)=>{ 
+    user.monto_aprobado = formatear.format(user.monto_aprobado)
+    })
+
+    }
+
+  // let mostrarFacturaEstado = await conexion.query('SELECT * FROM factura ;', [consultaTemporal.id])
+
+ 
+  // * >>> Renderizado <<<<<
+  res.render("./1-admin/ventas", { user: req.user, mostrarFactura });
+  
+}
 // ? ========>>> ZONA DE CLIENTES <<<========
 
 
+// if(mostrarFactura.length > 0 ) {
+//    mostrarFactura.forEach((user)=>{ 
+//   user.monto_aprobado = formatear.format(user.monto_aprobado)
+//   })
+
+//   }
+
+  // let mostrarFacturaEstado = await conexion.query('SELECT * FROM factura ;', [consultaTemporal.id])
 
