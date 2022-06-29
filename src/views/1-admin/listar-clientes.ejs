@@ -96,8 +96,8 @@
                                             <tbody>
                                                 <% lista_clientes.forEach((user)=>{ %>
                                                     <tr> 
-                                                        <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.nombre %></a></td>
-                                                        <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.apellido %></a></td>
+                                                        <td style="text-transform: capitalize;"><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.nombre %></a></td>
+                                                        <td style="text-transform: capitalize;"><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.apellido %></a></td>
                                                         <td><a href="/perfil-cliente/<%- user.id_cliente%>"><%- user.telefono %></a></td>
                                                         <td><a href="/perfil-vendedores/<%- user.codigo_id_vendedor %>"><%- user.codigo_id_vendedor %></a></td>
                                                         <td> <% if(user.sistema) {%>

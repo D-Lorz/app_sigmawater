@@ -57,7 +57,7 @@ rel="stylesheet" type="text/css" />
           <div class="col-12">
               <div class="page-title-box d-sm-flex align-items-center
                   justify-content-between">
-                  <h4 class="mb-sm-0 font-size-18"> Ventas - Facturas </h4>
+                  <h4 class="mb-sm-0 font-size-18">Ventas </h4>
 
                   <div class="page-title-right">
                       <ol class="breadcrumb m-0">
@@ -230,10 +230,10 @@ rel="stylesheet" type="text/css" />
                             <tr>
                                 <td><%= user.id_factura %></td>
                                 <td><%= user.fecha_instalacion %></td>
-                                <td><%= user.nombre %> <%= user.apellido %></td>
+                                <td style="width: 29%; text-transform: capitalize;"><%= user.nombre %> <%= user.apellido %></td>
                                 <td><%= user.producto_instalado %></td>
                                 <td><%= user.monto_aprobado %></td>
-                                <td><%= user.nombres %> <%= user.apellidos %></td>
+                                <td style="width: 29%; text-transform: capitalize;"><%= user.nombres %> <%= user.apellidos %></td>
                                 <td>xxxxx</td>
                                 <td><div class="badge <%= user.estadoFactura.color %> font-size-12"><%= user.estadoFactura.txt %></div></td>
                               

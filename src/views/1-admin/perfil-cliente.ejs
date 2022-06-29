@@ -538,7 +538,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="nombre_cof"> Nombre </label>
-                                                <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.nombre_co_solicitante%>" readonly>
+                                                <input type="text" class="form-control" value="<%= mostrarDatoscreditos.nombre_co_solicitante%>" readonly>
                                                 </div>
                                          </div>
                                       <div class="col-md-4">
@@ -869,48 +869,26 @@
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div><!-- /.modal -->
-                      
-
+                                        
                                  <button type="button" class="btn-close" style="float: left;
-                                     position: relative;
-                                        top: 35px;
-                                        z-index: 3;
-                                        left: 46em;
-                                        width: 68px;
-                                        background: black;
-                                        color: #fff;
-                                        padding: 8px 12px;
-                                        border-radius: 2px;
-                                        border: 1px solid transparent;
-                                        height: 18px;"
+                                     position: relative;top: 35px; z-index: 3;  left: 46em;
+                                        width: 68px;background: black;  color: #fff;
+                                        padding: 8px 12px;border-radius: 2px;
+                                        border: 1px solid transparent; height: 18px;"
                                   data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-                                      
-                            
                                </fieldset>   
   
                           <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
-                    
-                       
-                                        </form>
-
-
-                                    </div>
-                                
-                            </section>
-                            <!-- Form wizard with step validation section end -->
-
-                        </div>
-                        <!-- End: Customizer-->
-
-
-
-                    </div><!-- /.modal-content -->
+                      </form>
+                  </div>
+                 </section>
+                 </div>
+                 </div><!-- /.modal-content -->
                </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
                  <input type="hidden" hidden name="id_consecutivo" value="<%= info_clientes.id %>">
                  <input type="hidden" hidden name="id_cliente" value="<%= info_clientes.id_cliente%>">
          </div>
-    
                                     <div class="card-body">
                                           <div class="table-responsive">
                                             <table class="table mb-0">
@@ -923,25 +901,23 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Nombre</td>
-                                                        <td style="width: 29%;"><b><%= info_clientes.nombre %></b></td>
+                                                        <td style="width: 29%; text-transform: capitalize;"><b><%= info_clientes.nombre %></b></td>
                                                         <td style="width:20%">Dirección</td>
                                                         <td><b><%= info_clientes.direccion %> <%= info_clientes.ciudad %> <p><%= info_clientes.estado_ubicacion %> <%= info_clientes.codigo_postal %> </p></b></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Segundo nombre</td>
-                                                        <td><b><%= info_clientes.segundo_nombre %></b></td>
+                                                        <td style="text-transform: capitalize;"><b><%= info_clientes.segundo_nombre %></b></td>
                                                         <td>Dirección 2</td>
                                                         <td><b><%= info_clientes.direccion2%></b></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Apellido</td>
-                                                        <td><b><%= info_clientes.apellido %></b></td>
+                                                        <td style="text-transform: capitalize;"><b><%= info_clientes.apellido %></b></td>
                                                         <td>Estado de crédito</td>
                                                         <td>
-
-                                                            <form action="/ActualizarCredito" method="POST" >
-                                                                           
-                                                                    <input type="hidden" name="id_clienteEnviar" value="<%= info_clientes.id_cliente %>">
+                                                       <form action="/ActualizarCredito" method="POST" >
+                                                                   <input type="hidden" name="id_clienteEnviar" value="<%= info_clientes.id_cliente %>">
                                                                     <input type="hidden" name="id_consecutivo" value="<%= info_clientes.id %>">
                                                                     
                                                                     <select style="border:none;background:#ebebeb;border-radius: 9px;" id="estadosCredito" name="estadosCredito">
@@ -953,16 +929,12 @@
                                                                             <option value="0">En revisión</option>
                                                                         
                                                                      </select>
-                                                               
-                                                              
                                                                <button type="submit" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
                                                                 <i class="bx bx-check-double font-size-13 align-middle"></i></button> 
                                                             </form>
-                                                          
-                                                            </td>
+                                                          </td>
                                                     </tr>   
-                                                                                                       
-                                                    <tr>
+                                                   <tr>
                                                         <td>Correo</td>
                                                         <td><b><%= info_clientes.correo %></b></td>
                                                         <td style="width: 24%;">Monto aprobado</td>
@@ -996,8 +968,7 @@
                 </div>
               </div>
 
-
-              <style>
+             <style>
                 .noVisitado{
                      background: #50515c;
                      }
@@ -1012,22 +983,20 @@
                  }
                
             </style>
+
             <div class="col-lg-4">
                 <% if((mostrarProducto)) { %>
                 <div class="card" style="border-radius: 21px; margin-top: 20px;box-shadow: 0px 0px 10px #e7e7e7;">
                     <div class="card-body">
-                       
-                          <h5 class="card-title mb-3" style="text-align: center">3C Sigma Water System</h5>
+                       <h5 class="card-title mb-3" style="text-align: center">3C Sigma Water System</h5>
                                 <div class="btn-group me-1 mt-2" style="margin-left: 21%;">
                                     <div class="badge badge-soft-success font-size-12">Sistema solicitado: <%=mostrarProducto.sistema %> </div> <br>
                                 </div>
-                             
-                              <br>
-                    </div><!-- end card body -->
+                             <br>
+                     </div>
                   </div>
                   <% } else {%>
-                 
-                    <% }%>
+                  <% }%>
            
                 <div class="card border-primary text-white-50 <%= estadoVisita_testAgua.background %>" style="margin-top: 5%;">
                     <div class="card-body">
@@ -1059,15 +1028,14 @@
    <div class="row">
     <div class="col-xl-8">
         <div class="">
-        
-            <div class="row">
+         <div class="row">
                 <div class="col-lg-12">
                     <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7; margin-left: 17px;">
                        <div class="card-header bg-transparent border-primary">
                             <h5 class="my-0 text-primary">
                                 <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
-                             
-                        </div> 
+                         </div> 
+
                           <div class="card-body">
                             <div class="">
                                 <div class="table-responsive" >
@@ -1119,7 +1087,7 @@
                                                                       <td><%= user.nota %></td>    
                                                                  </tr>
                                                              <%})%>
-                                                                   </tbody>
+                                                            </tbody>
                                                                 </table>
                                                                 <input type="hidden" id="datosJson_PrimerTestagua" value="<%= datosJson_PrimerTestagua %>">
                                                                 <input type="hidden" id="datosJson_UltimoTestagua" value="<%= datosJson_UltimoTestagua %>">
@@ -1143,8 +1111,6 @@
                                         <div id="column_chart" data-colors='["#a99bcb", "#50368c"]' class="apex-charts" dir="ltr"></div>                                      
                                     </div>
                                 </div>
-                                
-                                <!--end card-->
                             </div>
                     </div>
 <!-- * =============>> FIN Test de agua  <<=============================- -->
@@ -1161,18 +1127,15 @@
                             <div class="card-header bg-transparent border-primary">
                                 <h5 class="my-0 text-primary">
                                     <i class="fas fa-money-bill"></i>&nbsp; Ahorro</h5>
-                                 
-                              </div>
+                             </div>
+
                               <div class="card-body">
                                 <div class="table-responsive" style="overflow-x: hidden;" >
                                    
-                                    <table class="table table-striped mb-0" 
-                                     id="copyahorro" class="dataTables_filter" 
-                                      class="dataTables_paginate "
-                                      class="dataTables_info" style="margin-top: 2%;">
+                                    <table class="table table-striped mb-0" id="copyahorro" class="dataTables_filter" 
+                                      class="dataTables_paginate" class="dataTables_info" style="margin-top: 2%;">
                                  <style>
-                                   
-                                    .dataTables_filter{
+                                   .dataTables_filter{
                                          display: none;
                                      }
                                      .dataTables_paginate{
@@ -1181,8 +1144,7 @@
                                      .dataTables_info{
                                          display: none;
                                      } 
-
-                                 </style>
+                                </style>
                                         <thead class="table-light">
                                             <tr>
                                                 <th ></th>
@@ -1191,10 +1153,8 @@
                                                 <th>Ahorro anual</th>
                                              </tr>
                                         </thead>
-
                                         <tbody>
                                            <tr>      
-                                           
                                                 <td>Agua embotellada</td>
                                                 <td>$ <%= ahorroCalculado.agua_embotellada %></td>
                                                 <td>$ <%= ahorroCalculado.ahorroMensual_aguaEmbotellada %></td>  
@@ -1298,83 +1258,64 @@
                                         <div class="card-body">
                                              <div class="table-responsive" style="overflow-x: hidden;" >
                                                 <table class="table mb-0">
-                                                           
                                                     <% if(!(clRegistro_instalacion.id_cliente) ) { %> 
                                                      <tbody>
-                                              
-                                                        <tr>
-                                                          <td style="width: 26%;">Desde:</td>
-                                                          <% if(mostrarAgenda){ %> 
+                                                       <tr>
+                                                           <td style="width: 26%;">Desde:</td>
+                                                         <% if(mostrarAgenda){ %> 
+
                                                            <td><b><%= mostrarAgenda.fechaInicial %></b></td>
                                                            <td style="width: 26%;">Hasta:</td>
-                                                          <td><b><%= mostrarAgenda.fechaFinal %></b></td>
-                                                          <% } else { %> 
+                                                           <td><b><%= mostrarAgenda.fechaFinal %></b></td>
+
+                                                         <% } else { %> 
                                                             <td><b>N/A</b></td>
                                                             <td style="width: 26%;">Hasta:</td>
-                                                           <td><b>N/A</b></td>
-                                                            <% }%>
+                                                            <td><b>N/A</b></td>
+                                                         <% }%>
+
                                                         </tr>
                                                         <tr>
-                                                           <td style="width: 26%;">Dias disponibles:</td>
-                                                           <% if(mostrarAgenda){ %> 
+                                                            <td style="width: 26%;">Dias disponibles:</td>
+                                                          <% if(mostrarAgenda){ %> 
+
                                                             <td><b><%= mostrarAgenda.lunes %><%= mostrarAgenda.martes %> <%= mostrarAgenda.miercoles %> <%= mostrarAgenda.jueves %> <%= mostrarAgenda.viernes %> <%= mostrarAgenda.sabado %> <%= mostrarAgenda.domingo %></b></td>
                                                             <td style="width: 26%;">Nota:</td>    
                                                             <p> <td><b><%= mostrarAgenda.nota_solicitud %></b></td></p>     
-                                                            <% } else { %> 
-                                                                <td><b>N/A</b></td>
-                                                                <td style="width: 26%;">Hasta:</td>
-                                                               <td><b>N/A</b></td>
-                                                                <% }%>                                         
+
+                                                          <% } else { %> 
+                                                             <td><b>N/A</b></td>
+                                                             <td style="width: 26%;">Hasta:</td>
+                                                             <td><b>N/A</b></td>
+                                                          <% }%>                                         
                                                         </tr>
-                                                     
-                                                    </tbody>
+                                                   </tbody>
                                                     <% } else { %> 
                                                         <tbody>
-                                              
+                                                          <tr>
+                                                             <td style="width: 26%;">Fecha de instalación</td>
+                                                             <td><b><%= clRegistro_instalacion.fecha_instalacion %></b></td>
+                                                             <td style="width: 26%;">Instalador:</td>
+                                                             <td style="text-transform: capitalize;"><b><%= clRegistro_instalacion.instalador %></b></td>
+                                                          </tr>
+                                                          <tr>
+                                                             <td style="width: 26%;">Producto instalado:</td>
+                                                             <td><b><%= clRegistro_instalacion.producto_instalado %></b></td>
+                                                             <td style="width: 26%;">Nota:</td>    
+                                                             <p> <td><b><%= clRegistro_instalacion.nota %></b></td></p>     
+                                                          </tr>
                                                             <tr>
-                                                              <td style="width: 26%;">Fecha de instalación</td>
-                                                              <% if(clRegistro_instalacion){ %> 
-                                                               <td><b><%= clRegistro_instalacion.fecha_instalacion %></b></td>
-                                                               <td style="width: 26%;">Instalador:</td>
-                                                              <td><b><%= clRegistro_instalacion.instalador %></b></td>
-                                                              <% } else { %> 
-                                                                <td><b>N/A</b></td>
-                                                                <td style="width: 26%;">Serial_producto:</td>
-                                                               <td><b>N/A</b></td>
-                                                                <% }%>
-                                                            </tr>
-                                                            <tr>
-                                                               <td style="width: 26%;">Producto instalado:</td>
-                                                               <% if(clRegistro_instalacion){ %> 
-                                                                <td><b><%= clRegistro_instalacion.producto_instalado %></b></td>
-                                                                <td style="width: 26%;">Nota:</td>    
-                                                                <p> <td><b><%= clRegistro_instalacion.nota %></b></td></p>     
-                                                                <% } else { %> 
-                                                                    <td><b>N/A</b></td>
-                                                                    <td style="width: 26%;">Hasta:</td>
-                                                                   <td><b>N/A</b></td>
-                                                                    <% }%>                                         
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width: 26%;">Serial del producto:</td>
-                                                                <% if(clRegistro_instalacion){ %> 
-                                                                 <td><b><%= clRegistro_instalacion.serial_producto %></b></td>
-                                                                 <td style="width: 26%;">Registro fotográfico:</td>    
-                                                                 <p> <td><b><button type="button" style="border:none;" class="waves-effect waves-light"
+                                                             <td style="width: 26%;">Serial del producto:</td>
+                                                             <td><b><%= clRegistro_instalacion.serial_producto %></b></td>
+                                                             <td style="width: 26%;">Registro fotográfico:</td>    
+                                                             <p><td><b><button type="button" style="border:none;" class="waves-effect waves-light"
                                                                     data-bs-toggle="modal" data-bs-target=".evidencia"> 
-                                                                         <span class="d-block d-sm-none"><i class="far fa-image"></i></span>
-                                                                         <span class="d-none d-sm-block"> <i class="far fa-image"></i> Ver evidencia </span>
+                                                                  <span class="d-block d-sm-none"><i class="far fa-image"></i></span>
+                                                                  <span class="d-none d-sm-block"> <i class="far fa-image"></i> Ver evidencia </span>
                                                                </button></b></td></p>   
-                                                                 
-                                                                 <% } else { %> 
-                                                                     <td><b>N/A</b></td>
-                                                                     <td style="width: 26%;">Registro fotográfico:</td>
-                                                                    <td><b>N/A</b></td>
-                                                                     <% }%>                                         
-                                                             </tr>
-                                                         
-                                                        </tbody>
-                                                            <% } %> 
+                                                           </tr>
+                                                       </tbody>
+                                                    <% } %> 
                                                 </table>
                                             </div>
                                          </div>
