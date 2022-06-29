@@ -333,55 +333,59 @@ if (consultaEstado_testAgua.estado_visita_test === '0') {
 
     } 
 }
-// todo ===============================>>> Desactivar boton de registro de instalacion
+// todo ===============================>>> Mostrar evidencia de la instalacion
 let clRegistro_instalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
+
+if (clRegistro_instalacion.length > 0) {
+    clRegistro_instalacion = clRegistro_instalacion[0]
+  var evidenciaF= JSON.parse(clRegistro_instalacion.evidencia_fotografica);
+}
+// todo ===============================>>> Desactivar boton de registro de instalacion ubicado en Perfil-cliente
+let clInstalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
 let estadu = []
 estadu.txt = "No hecho";
 estadu.color = 'badge-soft-dark'
-estadu.verbtnI = true;
-
-if (clRegistro_instalacion.length > 0) {
-  clRegistro_instalacion = clRegistro_instalacion[0]
-  
-  if (clRegistro_instalacion.estadoRegistro == 0) {
-    estadu.txt = "si hecho";
-       estadu.verbtnI = false;
-      
-  } else if (clRegistro_instalacion.estadoRegistro == 1) {
-        estadu.verbtnI = false;
-
-  } 
-
-  var evidenciaF= JSON.parse(clRegistro_instalacion.evidencia_fotografica);
-
-}
-
-let clInstalacion = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-
-estadu.txt = "No hecho";
 estadu.verbtnI = false;
 
 if (clInstalacion.length > 0) {
   clInstalacion = clInstalacion[0]
   
-  if (clInstalacion.estado_del_credito == 0) {
-    estadu.txt = "si hecho";
-       estadu.verbtnI = false;
+  if (clInstalacion.estado_agenda == 0) {
+     estadu.verbtnI = true;
       
-  } else if (clInstalacion.estado_del_credito == 1) {
-        estadu.verbtnI = true;
-
-  } else if (clInstalacion.estado_del_credito == 2) {
-    estadu.verbtnI = false;
-
-  } else if (clInstalacion.estado_del_credito == 3) {
-   estadu.verbtnI = true;
-} 
+  } else if (clInstalacion.estado_agenda == 1) {
+        estadu.verbtnI = false;
+  }
 
 }
 
-// todo ===============================>>> Mostrar agenda sobre la instalacion del producto
+// let clServicioInstalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
+// estadu.txt = "No hecho";
+// estadu.color = 'badge-soft-dark'
+// estadu.verbtnI = false;
 
+// if (clServicioInstalacion.length > 0) {
+//   clServicioInstalacion = clServicioInstalacion[0]
+  
+//   if (clServicioInstalacion.estado_agenda == 0) {
+//     estadu.txt = "si hecho";
+//        estadu.verbtnI = true;
+      
+//   } else if (clServicioInstalacion.estado_agenda == 1) {
+//         estadu.verbtnI = true;
+
+//   } else if (clServicioInstalacion.estado_agenda == 2) {
+//     estadu.verbtnI = false;
+
+//   } else if (clServicioInstalacion.estado_agenda == 3) {
+//    estadu.verbtnI = true;
+// } 
+
+// }
+
+
+
+// todo ===============================>>> Mostrar agenda sobre la instalacion del producto
 let mostrarAgenda = await conexion.query("SELECT * FROM agendar_instalacion WHERE id_cliente = ?",[info_clientes.id]);
 mostrarAgenda = mostrarAgenda[0]
 

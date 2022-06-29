@@ -315,6 +315,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
           estado.verBtn = false;
         }
       }
+// todo =========>>>>> Activar o Desactivar btn: Agendar Instalación - ubicado en Perfil-clientes
   let validarBtnInstalacion = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
   let estadoBtn = []
   estadoBtn.txt = "Solicitar instalación";
@@ -341,15 +342,28 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       
         estadoBtn.btnAgenda = false;
       }
+    // todo ===========>>> Desactivar btn: Solicitar instalación cuando el admin ya subío la evidencia 
+      let validarBtnAgenda= await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1', [clientes2.id])
+      estadoBtn.txt = "Solicitar instalación";
+      
     
+          if (validarBtnAgenda.length > 0) {
+            validarBtnAgenda = validarBtnAgenda[0]
+    
+           if (validarBtnAgenda.estado_agenda == 1) {
+              estadoBtn.btnAgenda = false;
+              estadoBtn.txt = "Solicitar instalación";
+    
+            } 
+          }
+  // todo ===========>>> Formatear mascara de campos /pendientes los demas campos numericos el formulario credito/
       let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
       mostrarProducto = mostrarProducto[0]
 
        if(mostrarProducto ) {
- 
-         mostrarProducto.monto_aprobado = formatear.format(mostrarProducto.monto_aprobado )
+          mostrarProducto.monto_aprobado = formatear.format(mostrarProducto.monto_aprobado )
          }
-        
+       
 
 // todo =========================>> Mostrar información del test de agua del cliente
     let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
