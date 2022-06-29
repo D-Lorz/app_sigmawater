@@ -613,50 +613,56 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="">
-                                            <div class="table-responsive" style="overflow-x: hidden;">
-                                                               
-                                                <table class="table table-nowrap align-middle" id="idahorro"
-                                             class="dataTables_filter"  id="tech-companies-1" class="dataTables_info" style="margin-top: 2%; " >
-                                             <style>
+                                           
+  <div class="table-responsive" style="padding: 0px 10px;">
+                                                                                                                   
+    <table class="table table-striped mb-0 dataTables_info" id="listCustomer" style="margin-top: 2%;">
+                    
+        <style>
+            .dataTables_info{
+                margin-top: 3%;
+            }
+            .dataTables_paginate{
+                margin-top: 3%;
+                }
+        </style>
+        <thead class="table-light">
+            <tr>
+                 <th >Nombres</th>
+                 <th >Apellidos</th>
+                 <th >Teléfono</th>
+                 <th >Producto</th>
+                 <th >crédito</th>
+                 <th >instalación</th>
+             </tr>
+         </thead>
+       
+         <tbody>
+           <center><h4 style="font-size: 17px;">Lista de clientes</h4></center>
+            <% infoClientes.forEach((user)=>{ %>
+           <tr>
+                <td><%= user.nombre %> <%= user.segundo_nombre %></td>
+                 <td><%= user.apellido %></td>
+                 <td><%= user.telefono %></td>
+                 <td> <% if(user.sistema) {%>
+                    <%= user.sistema.txt %>
+                     <% }%>
+                 </td>
+                 <td> <% if(user.estadoCreditoCliente) {%>
+                    <div class="badge <%= user.estadoCreditoCliente.color %> font-size-12" ><%= user.estadoCreditoCliente.txt %></div>
+                     <% }%>
+                 </td>
+                 <td> <% if(user.estadoAgendar) {%>
+                       <div class="badge <%= user.estadoAgendar.color %> font-size-12" ><%= user.estadoAgendar.txt %></div>
+                      <% }%>
+                 </td>
+          </tr>
+           <%})%>
+       </tbody>
 
-                                           .dataTables_filter{
-                                            width: 97%;
-                                           }
-                                             </style>
-                                                                    <thead>
-                                                                       <tr>
-                                                                            <th >Nombres</th>
-                                                                            <th >Apellidos</th>
-                                                                            <th >Teléfono</th>
-                                                                            <th >Producto</th>
-                                                                            <th >Estado de crédito</th>
-                                                                            <th >Estado de instalación</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <% infoClientes.forEach((user)=>{ %>
-                                                                          <tr>
-                                                                             <td><%= user.nombre %> <%= user.segundo_nombre %></td>
-                                                                             <td><%= user.apellido %></td>
-                                                                             <td><%= user.telefono %></td>
-                                                                             <td> <% if(user.sistema) {%>
-                                                                                <%= user.sistema.txt %>
-                                                                                 <% }%>
-                                                                             </td>
-                                                                             <td> <% if(user.estadoCreditoCliente) {%>
-                                                                                <div class="badge <%= user.estadoCreditoCliente.color %> font-size-12" ><%= user.estadoCreditoCliente.txt %></div>
-                                                                                 <% }%>
-                                                                             </td>
-                                                                             <td> <% if(user.estadoAgendar) {%>
-                                                                                   <div class="badge <%= user.estadoAgendar.color %> font-size-12" ><%= user.estadoAgendar.txt %></div>
-                                                                                  <% }%>
-                                                                             </td>
-                                                                      </tr>
-                                                                       <%})%>
-                                                                   </tbody>
-                                                               </table>
-                                                                            
-                                                            </div>
+
+          </table>
+    </div>
                                                           </div>
                                                      </div>
                                                   </div>

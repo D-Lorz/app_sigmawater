@@ -115,7 +115,7 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
 
     if (clAgenda.length > 0) {
       clAgenda.forEach((a) => {
-        if (info.id == a.id) {
+        if (info.id == a.id_cliente) {
           if (a.estado_agenda == 0) {
             info.estadoAgendar.txt = "Listo para instalar";
             info.estadoAgendar.color = "badge-soft-warning";
@@ -128,8 +128,7 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
       });
     }
   });
-console.log();
-console.log(infoClientes);
+
 
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-vendedores", {
@@ -269,7 +268,6 @@ if (credito.length > 0) {
   }
 }
 
-
 // todo =========================>> Mostrar información del test de agua del cliente
 let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [info_clientes.id])
   
@@ -358,31 +356,6 @@ if (clInstalacion.length > 0) {
   }
 
 }
-
-// let clServicioInstalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-// estadu.txt = "No hecho";
-// estadu.color = 'badge-soft-dark'
-// estadu.verbtnI = false;
-
-// if (clServicioInstalacion.length > 0) {
-//   clServicioInstalacion = clServicioInstalacion[0]
-  
-//   if (clServicioInstalacion.estado_agenda == 0) {
-//     estadu.txt = "si hecho";
-//        estadu.verbtnI = true;
-      
-//   } else if (clServicioInstalacion.estado_agenda == 1) {
-//         estadu.verbtnI = true;
-
-//   } else if (clServicioInstalacion.estado_agenda == 2) {
-//     estadu.verbtnI = false;
-
-//   } else if (clServicioInstalacion.estado_agenda == 3) {
-//    estadu.verbtnI = true;
-// } 
-
-// }
-
 
 
 // todo ===============================>>> Mostrar agenda sobre la instalacion del producto
@@ -520,7 +493,7 @@ exports.servicioInstaladosx = async (req, res) => {
 
  const Datos_servicio = {fecha_instalacion, producto_instalado,serial_producto, instalador,evidencia_fotografica,nota,id_cliente }
  const Datos_estado = { estado_agenda}
- const Datos_factura = { producto_instalado,fecha_instalacion,id_cliente}
+ const Datos_factura = { producto_instalado,fecha_instalacion,id_cliente,codigo_cliente}
 
 await conexion.query('UPDATE agendar_instalacion SET ? WHERE id_cliente = ?', [Datos_estado, id_cliente])
 
@@ -536,25 +509,30 @@ await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servic
 
 exports.factura = async (req, res) => {
 
-// todo ========>>> Mostrar producto 
- let mostrarFactura =  await conexion.query('SELECT F.*, F.estadoFacturas, C.nombre, C.apellido, S.monto_aprobado, V.nombres, V.apellidos FROM factura F INNER JOIN nuevos_cliente C ON F.id_factura = C.id LEFT JOIN solicitar_credito S ON F.id_factura = S.id LEFT JOIN registro_de_vendedores V ON C.id_vendedor = V.id;');
-  
- mostrarFactura.forEach((c) => {
-  /** Estado de la factura */
-  c.estadoFactura = {};
-  c.estadoFactura.txt = "N/A";
-  c.estadoFactura.color = "badge-soft-dark";
+  const id_cliente = req.params.id;
+  let info_clientes2 = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?",[id_cliente]);
+  info_clientes2 = info_clientes2[0];
 
-  if (c.estadoFacturas == 0) {
-    c.estadoFactura.txt = "Pendiente";
-    c.estadoFactura.color = "badge-soft-warning";
-  }
-  if (c.estadoFacturas == 1) {
-    c.estadoFactura.txt = "Pagado";
-    c.estadoFactura.color = "badge-soft-success";
-  }
-  
+// todo ========>>> Mostrar producto 
+ let mostrarFactura =  await conexion.query('SELECT F.*, F.estadoFacturas, C.*, S.monto_aprobado, V.nombres, V.apellidos FROM factura F INNER JOIN nuevos_cliente C ON F.id_factura = C.id LEFT JOIN solicitar_credito S ON F.id_factura = S.id LEFT JOIN registro_de_vendedores V ON C.id_vendedor = V.id;');
+
+
+ mostrarFactura.forEach((f) => {
  
+  /** Estado de la factura */
+  f.estadoFactura = {};
+  f.estadoFactura.txt = "N/A";
+  f.estadoFactura.color = "badge-soft-dark";
+
+  if (f.estadoFacturas == 0) {
+    f.estadoFactura.txt = "Pendiente";
+    f.estadoFactura.color = "badge-soft-warning";
+  }
+  if (f.estadoFacturas == 1) {
+    f.estadoFactura.txt = "Pagado";
+    f.estadoFactura.color = "badge-soft-success";
+  }
+   
  });
  
    if(mostrarFactura) {
@@ -564,22 +542,10 @@ exports.factura = async (req, res) => {
 
     }
 
-  // let mostrarFacturaEstado = await conexion.query('SELECT * FROM factura ;', [consultaTemporal.id])
-
- 
   // * >>> Renderizado <<<<<
   res.render("./1-admin/ventas", { user: req.user, mostrarFactura });
   
 }
 // ? ========>>> ZONA DE CLIENTES <<<========
 
-
-// if(mostrarFactura.length > 0 ) {
-//    mostrarFactura.forEach((user)=>{ 
-//   user.monto_aprobado = formatear.format(user.monto_aprobado)
-//   })
-
-//   }
-
-  // let mostrarFacturaEstado = await conexion.query('SELECT * FROM factura ;', [consultaTemporal.id])
 
