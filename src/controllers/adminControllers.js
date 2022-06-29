@@ -89,7 +89,6 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
             info.estadoCreditoCliente.txt = "Pendiente";
             info.estadoCreditoCliente.color = "badge-soft-warning";
           }
-
           if (c.estado_del_credito == 1) {
             info.estadoCreditoCliente.txt = "Aprobado";
             info.estadoCreditoCliente.color = "badge-soft-success";
@@ -101,31 +100,29 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
         }
       });
     }
-
-    if (clCredito.length > 0) {
+  if (clCredito.length > 0) {
       clCredito.forEach((x) => {
         if (info.id == x.id_cliente) {
-
-          if (x.sistema === "Reverse Osmosis System" ) {
+           if (x.sistema === "Reverse Osmosis System" ) {
             info.sistema.txt = "Reverse Osmosis System";
-        
-          } 
+        } 
           if (x.sistema === "Whole System" ) {
             info.sistema.txt = "Whole System";
-        
-          } 
-                 
+           } 
         }
       });
     }
 
     if (clAgenda.length > 0) {
       clAgenda.forEach((a) => {
-        if (info.id == a.id_cliente) {
+        if (info.id == a.id) {
           if (a.estado_agenda == 0) {
             info.estadoAgendar.txt = "Listo para instalar";
             info.estadoAgendar.color = "badge-soft-warning";
-           
+          }
+          if (a.estado_agenda == 1) {
+            info.estadoAgendar.txt = "Instalado";
+            info.estadoAgendar.color = "badge-soft-success";
           }
         }
       });

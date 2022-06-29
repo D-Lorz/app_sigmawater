@@ -633,31 +633,27 @@
                                                                             <th >Estado de instalación</th>
                                                                         </tr>
                                                                     </thead>
-            
                                                                     <tbody>
                                                                         <% infoClientes.forEach((user)=>{ %>
-                                                                         <tr>
-                                                                            <td><%= user.nombre %> <%= user.segundo_nombre %></td>
-                                                                            <td><%= user.apellido %></td>
-                                                                            <td><%= user.telefono %></td>
+                                                                          <tr>
+                                                                             <td><%= user.nombre %> <%= user.segundo_nombre %></td>
+                                                                             <td><%= user.apellido %></td>
+                                                                             <td><%= user.telefono %></td>
                                                                              <td> <% if(user.sistema) {%>
-                                                                              <%= user.sistema.txt %>
+                                                                                <%= user.sistema.txt %>
                                                                                  <% }%>
-                                                                              </td>
-                                                                  <td> <% if(user.estadoCreditoCliente) {%>
+                                                                             </td>
+                                                                             <td> <% if(user.estadoCreditoCliente) {%>
                                                                                 <div class="badge <%= user.estadoCreditoCliente.color %> font-size-12" ><%= user.estadoCreditoCliente.txt %></div>
                                                                                  <% }%>
-                                                                              </td>
-                                                                              
-                                                                              <td> <% if(user.estadoAgendar) {%>
+                                                                             </td>
+                                                                             <td> <% if(user.estadoAgendar) {%>
                                                                                    <div class="badge <%= user.estadoAgendar.color %> font-size-12" ><%= user.estadoAgendar.txt %></div>
                                                                                   <% }%>
-                                                                              </td>
-                                                                      
-                                                                         </tr>
-                                                                      
-                                                                         <%})%>
-                                                                      </tbody>
+                                                                             </td>
+                                                                      </tr>
+                                                                       <%})%>
+                                                                   </tbody>
                                                                </table>
                                                                             
                                                             </div>
