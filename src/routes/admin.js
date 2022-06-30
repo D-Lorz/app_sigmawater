@@ -8,7 +8,7 @@ const { listarVendedores,
         listarClientes_PerfilClientes,
         listarClientes,
         ActualizarNivel,
-        ActualizarEstado,
+        actualizarEstadoVendedor,
         ActualizarCredito,
         ActualizarMontoAprobado,
         clfirmas, factura
@@ -37,7 +37,7 @@ router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
            
 // * ROUTER: para los métodos del controller
 /*=============================================================*/  
-router.post('/aprobarVendedor', isAuthenticated,ActualizarEstado);
+router.post('/estadoDelVendedor', isAuthenticated,actualizarEstadoVendedor);
 /*=============================================================*/
 router.post('/ActualizarNivel', isAuthenticated,ActualizarNivel);
 /*=============================================================*/

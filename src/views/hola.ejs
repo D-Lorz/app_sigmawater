@@ -25,125 +25,20 @@
 
 <body>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <div id="demo-form2" class="form"></div>
-
-    <div class="col-md-3">
-        <div class="form-group ">
-            <label for="">Contaminante</label>
-            <input type="text" name="otro1[]" id="otro1" class="form-control " placeholder="" />
-        </div>
-    </div>
+    <select id="producto" name="producto" onchange="ShowSelected();">
+        <option value="Whole System">Whole System</option>
+        <option value="Reverse Osmosis System">Reverse Osmosis System</option>
+        </select>
+ 
 
 
-    <div class="col-md-3">
-        <div class="form-group">
-            <label for="">Concentración del contaminante</label>
-            '<input type="text" id="concentracion1" name="concentracion1[]" class="form-control campoDecimal"
-                placeholder="">
-
-        </div>
-    </div>
-
-
-    <center> <a href="javascript:void(0);" class="btn btn-primary add_button"
-            style="border-radius: 15px;width: 23%;"><i class="fa fa-plus"></i> Otro</a> </center>
-
-
-
-
-    <script>
-
-        $(document).ready(function () {
-            var maxField = 3; //Input fields increment limitation
-            var addButton = $('.add_button'); //Add button selector
-            var wrapper = $('.form'); //Input field wrapper
-            var fieldHTML =
-                // '<center>'+
-                '<div class="table-responsive">' +
-
-                '<table class="table table-editable table-nowrap align-middle table-edits">' +
-                '<thead>' +
-                '<tr>' +
-                '<th >No.</th>' +
-                '<th>Descripción</th>' +
-                '<th >Monto</th>' +
-                '<th >Editar</th>' +
-                '</tr>' +
-                '</thead>' +
-                '<tbody>'+
-                    '<tr>'+
-                        '<td data-field="id" >01</td>'+
-                        '<td data-field="name"></td>'+
-                        '<td data-field="age"><div class="badge badge-soft-success font-size-12"></div></td>'+
-                        '<td style="width: 100px">'+
-                            '<a class="btn btn-outline-secondary btn-sm edit" title="Edit">'+
-                                '<i class="fas fa-pencil-alt"></i>'+
-                            '</a>'+
-                        '</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td data-field="id" >01</td>'+
-                        '<td data-field="name">David McHenry</td>'+
-                        '<td data-field="age"><div class="badge badge-soft-success font-size-12">$499.00</div></td>'+
-                        '<td style="width: 100px">'+
-                            '<a class="btn btn-outline-secondary btn-sm edit" title="Edit">'+
-                                '<i class="fas fa-pencil-alt"></i>'+
-                            '</a>'+
-                        '</td>'+
-                   '</tr>'+
-                    '<tr>'+
-                        '<td class="text-end"></td>'+
-                        '<td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Sub total</b></td>'+
-                        '<td class="text-end">$998.00</td>'+
-                        '<td class="text-end"></td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td class="text-end"></td>'+
-                        '<td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Total</b></td>'+
-                        '<td class="text-end">$998.00</td>'+
-                        '<td class="text-end"></td>'+
-                   '</tr>'+
-
-                '</tbody>'+
-
-            '&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" class="btn btn-sm btn-danger remove_button col-xl-1" title="Remove field">Elimar</a>' +
-                '</table>' +
-                '</div>' +
-                '<br>';
-            // '</center>';
-            var x = 1; //Initial field counter is 1
-            $(addButton).click(function () { //Once add button is clicked
-                if (x < maxField) { //Check maximum number of input fields
-                    x++; //Increment field counter
-                    $(wrapper).append(fieldHTML); // Add field html
-                }
-            });
-
-            $(wrapper).on('click', '.remove_button', function (e) { //Once remove button is clicked
-                e.preventDefault();
-                $(this).parent('div').remove(); //Remove field html
-                x--; //Decrement field counter
-            });
-
-            $(document).on('keyup', ".form-group", function () {
-                var cantidad = $(this).find("input[title=cantidad]").val();
-                var pu = $(this).find("input[title=pu]").val();
-
-                $(this).find("[title=subtotal]").html(parseInt(cantidad) * parseInt(pu));
-
-                //subtotal = cantidad * pu;
-                //document.formulario_01.subtotal.value = subtotal;
-            });
-        });
-
-    </script>
-
-
-
-
+        <script type="text/javascript">
+            function ShowSelected()  {
+            /* Para obtener el valor */
+            var cod = document.getElementById("producto").value;
+            alert(cod);
+          }
+        </script>
 
     <!-- JAVASCRIPT -->
     <script src="../directorio_dash/libs/jquery/jquery.min.js"></script>

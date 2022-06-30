@@ -623,7 +623,7 @@
                 margin-top: 3%;
             }
             .dataTables_paginate{
-                margin-top: 3%;
+                margin-top: 3%;;
                 }
         </style>
         <thead class="table-light">
@@ -676,12 +676,14 @@
                                         <h5 class="card-title mb-3">Estado del vendedor</h5>
 
                                  
-                                        <!-- <form action="/aprobarVendedor" method="POST"> -->
-                                            <div class="btn-group me-1 mt-2" style="margin-left: 8%;" >
-                                                 <input type="hidden" name="id_vendedorEnviar" value="<%= info_vendedor.id_vendedor %>">
-                                                 <input type="hidden" name="id_consecutivo" value="<%= info_vendedor.id %>">
+                                        <form action="/estadoDelVendedor" method="POST"> 
 
-                                                    <select class="form-select" id="selectEstado" name="estadoDe_laCuenta">
+                                            <div class="btn-group me-1 mt-2" style="margin-left: 8%;" >
+
+                                                 <input type="hidden" name="idGenerado" value="<%= info_vendedor.id_vendedor %>">
+                                                 <input type="hidden" name="id_consecutivoVendedor" value="<%= info_vendedor.id %>">
+
+                                                    <select class="form-select" id="selectEstado" name="estadoElegido">
                                                         <option style="background:gray;color: white;text-transform: capitalize;" class="badge-soft-dark">Estado actual: <%= viewsUser.estado_de_la_cuenta %></option>
                                                         <br>  
                                                         <option value="aprobado">Aprobado</option>
@@ -690,14 +692,11 @@
                                                
                                                 </div>
                                                <a href="/perfil-vendedores/<%= info_vendedor.id_vendedor %>">
-                                                    <button class="btn btn-primary"  type="submit" 
-                                                    style="
-                                                    border-radius: 13px;
-                                                    margin-left: 24%;
-                                                    margin-top: 4%;
+                                                    <button class="btn btn-primary" type="submit" 
+                                                    style="border-radius: 13px;margin-left: 24%; margin-top: 4%;
                                                     width: 47%;">Guadar</button>
                                                 </a> 
-                                            <!-- </form> -->
+                                            </form>
                                           </div>
                                   
                                     <!-- end card body -->

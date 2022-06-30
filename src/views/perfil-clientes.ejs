@@ -159,17 +159,17 @@
                                                     <input type="hidden" name="id_clienteCodigo" value="<%= clientes2.id_cliente %>">
                                                     <input type="hidden" name="id_consecutivo" value="<%= clientes2.id %>">
                                               
-                                                  <select class="form-select required" required id="reco" name="sistemaElegido">
+                                                  <select class="form-select required" required id="reco" onchange="ShowSelected()" name="sistemaElegido">
                                                         <option style="background:gray;color: white;" value=''>Elige un sistema</option>
                                                         <br>
                                                         <option  value="Whole System">Whole System</option>
                                                         <option value="Reverse Osmosis System" title="R.O.S.">Reverse Osmosis System</option>
                                                    </select>
                                                 </div>
+
                                                 <br>
-                                                <!-- <center> <input type="submit" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;" value="Guardar"></center>   -->
-                                                <!-- <input type="submit" class="btn btn-success" style="border-radius: 13px;margin-top: 3%;" value="Crédito aprobado"> -->
                                                 <br>
+
                                                 <div class="card-body" style="margin-top: -5.5%;">
                                                     <ul class="nav nav-pills nav-justified" role="tablist" >
                                                         <li class="nav-item waves-effect waves-light" style="border-radius: 13px;">
@@ -205,15 +205,14 @@
                                                             <div class="modal-body">
                                                                 <div class="row justify-content-center">
                                                                    <div class="col-md-6">
-                                                                   
-                                                                    <input type="text" class="form-control required" required id="montoAprobado"  name="montoAprobadoPorFuera" style="margin-left: 2%;">
-                                                                    <div class="modal-footer">
-                                                                        <input type="submit" class="btn btn-success" value="Confirmar" style="border-radius:17px" >
+                                                                  
+                                                                   <input type="text" class="form-control required" maxlength="6" placeholder="Dentro de WS" required id="montoAprobado" name="montoAprobadoPorFuera" style="margin-left: 2%;">
+                                                                    <!-- <input type="text" class="form-control required" placeholder="Dentro de de RO" id="montoAprobado" required name="montoAprobadoPorFuera" style="margin-left: 2%;"> 
+                                                                    -->
+                                                                   <div class="modal-footer">
+                                                                        <input type="submit" class="btn btn-success" value="Confirmar" id="botonesOMG" style="border-radius:17px" >
                                                                         <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="border-radius:17px">Cerrar</button>
-                                                                
-                                                              
-
-                                                                     </div>
+                                                                    </div>
                                                                   </div>
                                                                 </div>
                                                             </div>
@@ -221,9 +220,71 @@
                                                     </div>
                                                 </div>
                                              </form>
+
+                                            <script type="text/javascript">
+                                                function ShowSelected()  {
+                                                /* Para obtener el valor */
+                                                var cod = document.getElementById("reco").value;
+                                                //  alert(cod);
+                                                var inputWS = document.getElementById("montoAprobado").hidden = true;
+                                                 var inputRO = document.getElementById("montoAprobado2").hidden = true;
+
+                                                     if(cod == "Whole System"){
+                                                      var inputWS = document.getElementById("montoAprobado").hidden = false;
+                                                    //   const botonesOMG = document.getElementById("botonesOMG").hidden = false;
+                                                     } 
+                                                      if (cod == "Reverse Osmosis System") {
+                                                         var inputRO = document.getElementById("montoAprobado2").hidden = false;
+                                                      }
+                                                 }
+
+                                                 var variable = prompt("Por favor ingresa un número entre 1 - 100: ");
+                                                if (variable >=1 && variable <=8500) {
+                                                 alert("Aquí generamos los números, ya que está en el rango correcto");
+                                                }else{
+                                                 alert("El número no está en el rango correcto");
+                                                }
+
+
+                                            </script> 
+
                                          <% }%>
                                       </div><!-- end card body -->
                                     </div>
+
+<!-- 
+                           <script>
+
+                            // Actualizar Estado del Consultor
+                            $("#btnActualizarConsultor").click(function () {
+                                const estado = $("#estado_consul option:selected").val()
+                                const codigo = $("#codigo_consultor").val()
+                                const usuario_calendly = $("#urlCalendly").val()
+                                
+                                fetch('/actualizarConsultor', {
+                                    method: 'POST',
+                                    body: JSON.stringify({ codigo, estado, usuario_calendly }),
+                                    headers: { 'Content-Type': 'application/json' }
+                                }).then(res => res.json())
+                                    .catch(error => console.error('Error:', error))
+                                    .then(response => {
+                                        if (response) {
+                                            window.location.href = "/consultores";
+                                        } else {
+                                            Swal.fire(
+                                                'Error!',
+                                                'Ocurrió un problema al guardar los cambios, comunicate con soporte',
+                                                'error'
+                                            )
+                                        }
+                                    });
+                            })
+                
+                             </script> -->
+
+
+
+
 
                                  <div class="card border-primary text-white-50 <%= estadoVisita_testAgua.background %>" style="margin-top: 5%;">
                                         <div class="card-body">
@@ -517,8 +578,7 @@
                                                        
                                                 </div>
                                              
-
-                                                <div class="modal fade evidencia" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal fade evidencia" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered ">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -747,7 +807,19 @@
       }
     });
 });
-
+document.addEventListener("DOMContentLoaded", function () {
+   // Pattern (Phone)
+   var currencyMask = IMask(document.getElementById('montoAprobado2'), {
+      mask: '$num',
+      blocks: {
+        num: {
+          // nested masks are available!
+          mask: Number,
+          thousandsSeparator: ','
+        }
+      }
+    });
+});
 
     $(document).ready(function () {
         $('#reco').on('input change', function () {

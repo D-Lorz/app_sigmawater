@@ -2,7 +2,7 @@
 
 function EstadoVendor() { 
 
-const estado = $("#selectEstado option:selected").val()
+
 fetch('/perfil-vendedores', { 
 
     method:'POST',

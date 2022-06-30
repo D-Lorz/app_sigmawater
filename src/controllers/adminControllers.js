@@ -154,19 +154,24 @@ exports.ActualizarNivel = async (req, res) => {
 };
 // todo ===========>>>  Actualizar estado de vendedores
 
-exports.ActualizarEstado = async (req, res) => {
-  const id_vendedor = req.body.id_vendedorEnviar;
-  const id_consecutivo = req.body.id_consecutivo;
-  const estado_de_la_cuenta = req.body.estadoDe_laCuenta;
-  const datosEstado_vendedor = {estado_de_la_cuenta, id_consecutivo, id_vendedor, };
+exports.actualizarEstadoVendedor = async (req, res) => {
+
+  const id_vendedor = req.body.idGenerado;
+
+   const id_consecutivo = req.body.id_consecutivoVendedor;
+
+  const estado_de_la_cuenta = req.body.estadoElegido;
+
+  const datosEstado_vendedor = {estado_de_la_cuenta, id_consecutivo };
+
 
   await conexion.query( "UPDATE usuarios SET ? WHERE id_vendedor = ? ", [datosEstado_vendedor, id_vendedor], (err, result) => {
-      if (err) { res.send(false)}
+    if (err) throw err;
 
-      if (result.affectedRows > 0) {
-        res.redirect("/perfil-clientes/" + id_vendedor);
-        // res.send(true)
+    if (result) {
+      res.redirect("/perfil-vendedores/" + id_vendedor);
       }
+      
     }
   );
 };
@@ -515,7 +520,6 @@ exports.factura = async (req, res) => {
 
 // todo ========>>> Mostrar producto 
  let mostrarFactura =  await conexion.query('SELECT F.*, F.estadoFacturas, C.*, S.monto_aprobado, V.nombres, V.apellidos FROM factura F INNER JOIN nuevos_cliente C ON F.id_factura = C.id LEFT JOIN solicitar_credito S ON F.id_factura = S.id LEFT JOIN registro_de_vendedores V ON C.id_vendedor = V.id;');
-
 
  mostrarFactura.forEach((f) => {
  
