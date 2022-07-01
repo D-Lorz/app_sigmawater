@@ -439,18 +439,21 @@ exports.ActualizarCredito = async (req, res) => {
 };
 exports.ActualizarMontoAprobado = async (req, res) => {
 
-const id_clienteEnviarMonto = req.body.id_clienteEnviarMonto; 
-const id_cliente = req.body.id_consecutivo; 
-const monto_aprobado = req.body.updateMontoAprobado.replace(/[$ ,]/g, '');
+
+const id_cliente = req.body.id_cliente; 
+const monto_aprobado = req.body.monto_aprobado.replace(/[$ ,]/g, '');
 
   const datosUpdateMontoAprobado = { monto_aprobado,id_cliente};
 
   await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosUpdateMontoAprobado, id_cliente], (err, result) => {
-      if (err) throw err;
+      // if (err) throw err;
+      if(err){res.send(false)}
 
-      if (result) {
-        res.redirect("/perfil-cliente/" + id_clienteEnviarMonto);
-      }
+      // if (result) {
+      //   res.redirect("/perfil-cliente/" + id_clienteEnviarMonto);
+      // }
+    res.send(true)
+
     }
   );
 
