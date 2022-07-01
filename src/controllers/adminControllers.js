@@ -417,44 +417,29 @@ mostrarProducto = mostrarProducto[0]
     estadu, mostrarAgenda, mostrarDatoscreditos, estade,
     licenciacredito,clRegistro_instalacion, evidenciaF,mostrarProducto });
 };
-
+// todo =======>>> Actualizar Estado del credito desde el panel de administrador - perfil-cliente
 exports.ActualizarCredito = async (req, res) => {
 
- const id_clienteEnviar = req.body.id_clienteEnviar; 
- const id_cliente = req.body.id_consecutivo; 
- const estado_del_credito = req.body.estadosCredito;
+const id_cliente = req.body.id_cliente; 
+const estado_del_credito = req.body.estado_del_credito;
 
-
-  const datosEstadoCredito = { estado_del_credito,id_cliente};
-
-  await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosEstadoCredito, id_cliente], (err, result) => {
-      if (err) throw err;
-
-      if (result) {
-        res.redirect("/perfil-cliente/" + id_clienteEnviar);
+const datosEstadoCredito = { estado_del_credito,id_cliente};
+await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosEstadoCredito, id_cliente], (err, result) => {
+        if(err){res.send(false)}
+                res.send(true)
       }
-    }
   );
-
 };
+// todo =======>>> Actualizar monto aprobado desde el panel de administrador - perfil-cliente
 exports.ActualizarMontoAprobado = async (req, res) => {
-
-
 const id_cliente = req.body.id_cliente; 
 const monto_aprobado = req.body.monto_aprobado.replace(/[$ ,]/g, '');
 
-  const datosUpdateMontoAprobado = { monto_aprobado,id_cliente};
-
-  await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosUpdateMontoAprobado, id_cliente], (err, result) => {
-      // if (err) throw err;
-      if(err){res.send(false)}
-
-      // if (result) {
-      //   res.redirect("/perfil-cliente/" + id_clienteEnviarMonto);
-      // }
-    res.send(true)
-
-    }
+const datosUpdateMontoAprobado = { monto_aprobado,id_cliente};
+await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosUpdateMontoAprobado, id_cliente], (err, result) => {
+     if(err){res.send(false)}
+             res.send(true)
+     }
   );
 
 };

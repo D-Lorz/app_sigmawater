@@ -919,11 +919,11 @@
                                                         <td style="text-transform: capitalize;"><b><%= info_clientes.apellido %></b></td>
                                                         <td>Estado de crédito</td>
                                                         <td>
-                                                       <form action="/ActualizarCredito" method="POST" >
+                                                    
                                                                    <input type="hidden" name="id_clienteEnviar" value="<%= info_clientes.id_cliente %>">
                                                                     <input type="hidden" name="id_consecutivo" value="<%= info_clientes.id %>">
                                                                     
-                                                                    <select style="border:none;background:#ebebeb;border-radius: 9px;" id="estadosCredito" name="estadosCredito">
+                                                                    <select style="border:none;background:#ebebeb;border-radius: 9px;" id="estadosCreditoId" name="estadosCredito">
                                                                         <option id="estadosCredito" style="background:gray;color: white;"><%= estado.txt %></option>
                                                                             <br>
                                                                             <option value="1">Aprobado</option>
@@ -932,9 +932,9 @@
                                                                             <option value="0">En revisión</option>
                                                                         
                                                                      </select>
-                                                               <button type="submit" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                               <button type="button" onclick="presionarBtnEstadoCredito()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
                                                                 <i class="bx bx-check-double font-size-13 align-middle"></i></button> 
-                                                            </form>
+                                                          
                                                           </td>
                                                     </tr>   
                                                    <tr>
@@ -942,7 +942,7 @@
                                                         <td><b><%= info_clientes.correo %></b></td>
                                                         <td style="width: 24%;">Monto aprobado</td>
                                                         <td>
-                                                            <!-- <form method="POST" > -->
+                                                           
                                                                            
                                                             <input type="hidden" id="clienteEnviarMonto" name="id_clienteEnviarMonto" value="<%= info_clientes.id_cliente %>">
                                                             <input type="hidden" id="consecutivo" name="id_consecutivo" value="<%= info_clientes.id %>">
@@ -968,7 +968,6 @@
                                                             <i class="bx bx-check-double font-size-13 align-middle"></i>
                                                        </button> 
 
-                                                    <!-- </form> -->
                                                     </td>  
                                                            
                                                   </tr>
@@ -1496,7 +1495,7 @@
 <!--FIXME: ================================================================== -->
 
 <script>
-
+// Mascara  para monto aprobado
 document.addEventListener("DOMContentLoaded", function () {
     // Pattern (Phone)
     var currencyMask = IMask(document.getElementById('montoAprobadoUpdate'), {
@@ -1511,10 +1510,7 @@ document.addEventListener("DOMContentLoaded", function () {
      });
  });
 
-
-
- 
-  // Actualizar Monto aprobado
+ // Actualizar Monto aprobado
   function presionar(){
      const monto_aprobado = $("#montoAprobadoUpdate").val();
      //  const monto_aprobado = $("#clienteEnviarMonto").val();
@@ -1547,10 +1543,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
              }
-                                        
-                            
 
-</script>
+     // =====>>>> Actualizar Estado del credito
+  function presionarBtnEstadoCredito(){
+     
+     const estado_del_credito = $("#estadosCreditoId option:selected").val()
+      const id_cliente = $("#idConsecutivo").val()
+
+          fetch('/ActualizarCredito', {
+              
+              method: 'POST',
+              body: JSON.stringify({estado_del_credito,id_cliente}),
+              headers: { 'Content-Type': 'application/json' }
+
+           }).then(res => res.json())
+             .catch(error => console.error('Error', error))
+          .then(response => {
+                   if(response)   {
+                       Swal.fire(
+                         'Enviado!',
+                         'Estado actualizado',
+                         'success'
+                       )
+                        }else {
+                            Swal.fire(
+                                'Error!',
+                                'Ocurrió un problema al guardar los cambios, comunicate con soporte',
+                                'error'
+                             )
+                        }
+                    })
+
+
+             }
+                                        
+ </script>
 
 
 
