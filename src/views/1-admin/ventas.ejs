@@ -228,7 +228,10 @@ rel="stylesheet" type="text/css" />
                         <% mostrarFactura.forEach((user)=>{ %>
                     <tbody>
                             <tr>
-                                <td><%= user.id_factura %></td>
+                                <td><button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" 
+                                    aria-controls="offcanvasRight" style="background: none;border: none;margin: 0;"><%= user.id_factura %>
+                                   </button>
+                                </td>
                                 <td><%= user.fecha_instalacion %></td>
                                 <td style="width: 29%; text-transform: capitalize;"><%= user.nombre %> <%= user.apellido %></td>
                                 <td><%= user.producto_instalado %></td>
@@ -346,8 +349,8 @@ rel="stylesheet" type="text/css" />
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td data-field="id" >01</td>
-                                                        <td data-field="name">David McHenry</td>
+                                                        <td data-field="id" >02</td>
+                                                        <td data-field="name">Frank Jery</td>
                                                         <td data-field="age"><div class="badge badge-soft-success font-size-12">$499.00</div></td>
                                                         <td style="width: 100px">
                                                             <a class="btn btn-outline-secondary btn-sm edit" title="Edit">

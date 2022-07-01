@@ -202,13 +202,15 @@
                                                             <h2 style="color: #595959;font-weight: 300;">Introduce el valor del producto aprobado por la financista</h2>
                                                                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                                                             </div>
+                                                       
                                                             <div class="modal-body">
                                                                 <div class="row justify-content-center">
                                                                    <div class="col-md-6">
-                                                                  
-                                                                   <input type="text" class="form-control required" maxlength="6" placeholder="Dentro de WS" required id="montoAprobado" name="montoAprobadoPorFuera" style="margin-left: 2%;">
+                                                              
+                                                                   <input type="text" class="form-control required" placeholder="Dentro de WS" required id="montoAprobado" name="montoAprobadoPorFuera" style="margin-left: 2%;">
                                                                     <!-- <input type="text" class="form-control required" placeholder="Dentro de de RO" id="montoAprobado" required name="montoAprobadoPorFuera" style="margin-left: 2%;"> 
                                                                     -->
+                                                                 
                                                                    <div class="modal-footer">
                                                                         <input type="submit" class="btn btn-success" value="Confirmar" id="botonesOMG" style="border-radius:17px" >
                                                                         <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="border-radius:17px">Cerrar</button>
@@ -220,46 +222,33 @@
                                                     </div>
                                                 </div>
                                              </form>
-
-                                            <script type="text/javascript">
+                                             <!-- <script type="text/javascript">
                                                 function ShowSelected()  {
                                                 /* Para obtener el valor */
                                                 var cod = document.getElementById("reco").value;
                                                 //  alert(cod);
                                                 var inputWS = document.getElementById("montoAprobado").hidden = true;
-                                                 var inputRO = document.getElementById("montoAprobado2").hidden = true;
-
-                                                     if(cod == "Whole System"){
+                                                //   var inputRO = document.getElementById("montoAprobado2").hidden = true;
+                                                      if(cod == "Whole System"){
                                                       var inputWS = document.getElementById("montoAprobado").hidden = false;
-                                                    //   const botonesOMG = document.getElementById("botonesOMG").hidden = false;
-                                                     } 
-                                                      if (cod == "Reverse Osmosis System") {
-                                                         var inputRO = document.getElementById("montoAprobado2").hidden = false;
-                                                      }
-                                                 }
-
-                                                 var variable = prompt("Por favor ingresa un número entre 1 - 100: ");
-                                                if (variable >=1 && variable <=8500) {
-                                                 alert("Aquí generamos los números, ya que está en el rango correcto");
-                                                }else{
-                                                 alert("El número no está en el rango correcto");
+                                                      
                                                 }
+                                                    //  const botonesOMG = document.getElementById("botonesOMG").hidden = false;
+                                                    //    if (cod == "Reverse Osmosis System") {
+                                                    //      var inputRO = document.getElementById("montoAprobado2").hidden = false;
+                                                    //   }
+                                                 }
+                                             </script> -->
 
-
-                                            </script> 
-
-                                         <% }%>
+                                         <% } %>
                                       </div><!-- end card body -->
                                     </div>
 
-<!-- 
-                           <script>
+                        <!-- <script>
 
                             // Actualizar Estado del Consultor
                             $("#btnActualizarConsultor").click(function () {
-                                const estado = $("#estado_consul option:selected").val()
-                                const codigo = $("#codigo_consultor").val()
-                                const usuario_calendly = $("#urlCalendly").val()
+                               const usuario_calendly = $("#urlCalendly").val()
                                 
                                 fetch('/actualizarConsultor', {
                                     method: 'POST',
@@ -280,7 +269,7 @@
                                     });
                             })
                 
-                             </script> -->
+                             </script>  -->
 
 
 
