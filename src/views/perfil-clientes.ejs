@@ -161,9 +161,8 @@
                                               
                                                   <select class="form-select required" required id="reco" onchange="ShowSelected()" name="sistemaElegido">
                                                         <option style="background:gray;color: white;" value=''>Elige un sistema</option>
-                                                        <br>
-                                                        <option  value="Whole System">Whole System</option>
-                                                        <option value="Reverse Osmosis System" title="R.O.S.">Reverse Osmosis System</option>
+                                                        <option value="Whole System">Whole System</option>
+                                                        <option value="Reverse Osmosis System">Reverse Osmosis System</option>
                                                    </select>
                                                 </div>
 
@@ -172,9 +171,9 @@
 
                                                 <div class="card-body" style="margin-top: -5.5%;">
                                                     <ul class="nav nav-pills nav-justified" role="tablist" >
-                                                        <li class="nav-item waves-effect waves-light" style="border-radius: 13px;">
-                                                            <button type="button" style="border-radius: 14px;" class="btn btn-success waves-effect waves-light holajean"
-                                                                 data-bs-toggle="modal" data-bs-target=".monto" id="submit" disabled="disabled" > 
+                                                        <li id="cursorBtn" class="nav-item waves-effect waves-light" style="border-radius: 13px; cursor: default;">
+                                                            <button type="button" style="border-radius: 14px; " class="btn btn-success waves-effect waves-light"
+                                                                 data-bs-toggle="modal" data-bs-target=".monto" id="btnCreditoAprobado" disabled="disabled" > 
                                                                       <span class="d-block d-sm-none"><i class="fas fa-id-card"></i></span>
                                                                       <span class="d-none d-sm-block">Crédito aprobado</span>
                                                             </button>
@@ -206,15 +205,16 @@
                                                             <div class="modal-body">
                                                                 <div class="row justify-content-center">
                                                                    <div class="col-md-6">
-                                                              
-                                                                   <input type="text" class="form-control required" placeholder="Dentro de WS" required id="montoAprobado" name="montoAprobadoPorFuera" style="margin-left: 2%;">
-                                                                    <!-- <input type="text" class="form-control required" placeholder="Dentro de de RO" id="montoAprobado" required name="montoAprobadoPorFuera" style="margin-left: 2%;"> 
-                                                                    -->
-                                                                 
-                                                                   <div class="modal-footer">
-                                                                        <input type="submit" class="btn btn-success" value="Confirmar" id="botonesOMG" style="border-radius:17px" >
-                                                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="border-radius:17px">Cerrar</button>
-                                                                    </div>
+                                                                    
+                                                                    <div id="inputsMonto"></div>
+                                                                    <!-- <input type="text" class="form-control required" required id="montoAprobadoWS" style="margin-left: 2%; display: none" placeholder="Máximo: $8,500">
+
+                                                                    <input type="text" class="form-control required" required id="montoAprobadoROS" style="margin-left: 2%; display: none" placeholder="Máximo: $4,250"> -->
+
+                                                                        <div class="modal-footer">
+                                                                            <input type="submit" class="btn btn-success" value="Confirmar" id="botonesOMG" style="border-radius:17px" >
+                                                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="border-radius:17px">Cerrar</button>
+                                                                        </div>
                                                                   </div>
                                                                 </div>
                                                             </div>
@@ -222,58 +222,11 @@
                                                     </div>
                                                 </div>
                                              </form>
-                                             <!-- <script type="text/javascript">
-                                                function ShowSelected()  {
-                                                /* Para obtener el valor */
-                                                var cod = document.getElementById("reco").value;
-                                                //  alert(cod);
-                                                var inputWS = document.getElementById("montoAprobado").hidden = true;
-                                                //   var inputRO = document.getElementById("montoAprobado2").hidden = true;
-                                                      if(cod == "Whole System"){
-                                                      var inputWS = document.getElementById("montoAprobado").hidden = false;
-                                                      
-                                                }
-                                                    //  const botonesOMG = document.getElementById("botonesOMG").hidden = false;
-                                                    //    if (cod == "Reverse Osmosis System") {
-                                                    //      var inputRO = document.getElementById("montoAprobado2").hidden = false;
-                                                    //   }
-                                                 }
-                                             </script> -->
+                                             
 
                                          <% } %>
                                       </div><!-- end card body -->
                                     </div>
-
-                        <!-- <script>
-
-                            // Actualizar Estado del Consultor
-                            $("#btnActualizarConsultor").click(function () {
-                               const usuario_calendly = $("#urlCalendly").val()
-                                
-                                fetch('/actualizarConsultor', {
-                                    method: 'POST',
-                                    body: JSON.stringify({ codigo, estado, usuario_calendly }),
-                                    headers: { 'Content-Type': 'application/json' }
-                                }).then(res => res.json())
-                                    .catch(error => console.error('Error:', error))
-                                    .then(response => {
-                                        if (response) {
-                                            window.location.href = "/consultores";
-                                        } else {
-                                            Swal.fire(
-                                                'Error!',
-                                                'Ocurrió un problema al guardar los cambios, comunicate con soporte',
-                                                'error'
-                                            )
-                                        }
-                                    });
-                            })
-                
-                             </script>  -->
-
-
-
-
 
                                  <div class="card border-primary text-white-50 <%= estadoVisita_testAgua.background %>" style="margin-top: 5%;">
                                         <div class="card-body">
@@ -727,7 +680,6 @@
 <script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
 <!-- pace js -->
 <script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
-
  <!-- * ====== Scripts de las graficas ======= -->
  <!-- apexcharts js -->
  <script src="../directorio_perfilClientes/libs/apexcharts/apexcharts.min.js"></script>
@@ -736,7 +688,6 @@
 <!-- dashboard init -->
 <script src="../directorio_perfilClientes/js/pages/dashboard.init.js"></script>
 <!-- * ====== Scripts de las graficas ======= -->
- 
  <!-- Required datatable js -->
  <script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -745,7 +696,6 @@
  <!-- Responsive examples -->
  <script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-  
  <!-- Buttons examples -->
  <script src="../directorio_dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
  <script src="../directorio_dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
@@ -755,24 +705,19 @@
  <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
  <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
  <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-
  <!-- Init js -->
  <script src="../directorio_dash/js/pages/table-responsive.init.js"></script>
  <script src="../directorio_perfilClientes/js/app.js"></script>
-            <!-- Table Editable plugin -->
+<!-- Table Editable plugin -->
  <script src="../directorio_dash/libs/table-edits/build/table-edits.min.js"></script>
-
  <script src="../directorio_dash/js/pages/table-editable.int.js"></script> 
- 
  <!-- Datatable init js -->
  <script src="../directorio_dash/js/pages/datatables.init.js"></script>    
  <!-- Sweet Alerts js -->
  <script src="../directorio_dash/libs/sweetalert2/sweetalert2.min.js"></script>
-
  <!-- Sweet alert init js-->
  <script src="../directorio_dash/js/pages/sweetalert.init.js"></script>
 <!-- FIXME: ================================================================== -->
-
 <!-- form mask -->
 <script src="../libs/imask/imask.min.js"></script>
 <!-- form mask init -->
@@ -782,45 +727,97 @@
 <script>
 
   //  /TODO: FUNCIONES PARA MASCARA  -->
+//     document.addEventListener("DOMContentLoaded", function () {
+//         IMask(document.getElementById('montoAprobadoWS'), {
+//             mask: '$num',
+//             blocks: {
+//                 num: {
+//                 mask: Number,
+//                 thousandsSeparator: ',',
+//                 max: 8500
+//                 }
+//             }
+//         });
+//     }); 
 
-  document.addEventListener("DOMContentLoaded", function () {
-   // Pattern (Phone)
-   var currencyMask = IMask(document.getElementById('montoAprobado'), {
-      mask: '$num',
-      blocks: {
-        num: {
-          // nested masks are available!
-          mask: Number,
-          thousandsSeparator: ','
-        }
-      }
-    });
-});
-document.addEventListener("DOMContentLoaded", function () {
-   // Pattern (Phone)
-   var currencyMask = IMask(document.getElementById('montoAprobado2'), {
-      mask: '$num',
-      blocks: {
-        num: {
-          // nested masks are available!
-          mask: Number,
-          thousandsSeparator: ','
-        }
-      }
-    });
-});
+// // Mascara para Monto Aprobado para el producto Reverse Osmosis System
+// document.addEventListener("DOMContentLoaded", function () {
+//    var currencyMask = IMask(document.getElementById('montoAprobadoROS'), {
+//       mask: '$num',
+//       blocks: {
+//         num: {
+//           mask: Number,
+//           thousandsSeparator: ','
+//         }
+//       }
+//     });
+// });
 
-    $(document).ready(function () {
-        $('#reco').on('input change', function () {
-            if ($(this).val() != '') {
-                $('#submit').prop('disabled', false)
+/* FUNCIÓN PARA LA TARJETA/SECCIÓN CREDITO APROBADO */
+
+function ShowSelected()  {
+    const cod = $("#reco option:selected").val()
+    const cursorBtn = $("#cursorBtn")
+    const btnCredito = $("#btnCreditoAprobado")
+    let inputsMonto = document.getElementById('inputsMonto')
+    let inputWS = document.createElement("input");
+    let inputROS = document.createElement("input");
+
+    // <input type="text" class="form-control required" required id="montoAprobadoWS" style="margin-left: 2%; display: none" placeholder="Máximo: $8,500">
+
+    if (cod == "Whole System") {
+        btnCredito.prop('disabled', false);
+        cursorBtn.prop('style', 'cursor:auto')
+        $('#inputROS').remove()
+        inputWS.type= "text",
+        inputWS.className= "form-control required",
+        inputWS.style= "margin-left: 2%;",
+        inputWS.placeholder= "Máximo: $8,500",
+        inputWS.name= 'montoAprobadoPorFuera',
+        inputWS.id = 'inputWS'
+        inputsMonto.appendChild(inputWS);
+
+        mascaraMonto(inputWS, 8500)
+
+    } else if (cod == "Reverse Osmosis System"){
+        btnCredito.prop('disabled', false);
+        cursorBtn.prop('style', 'cursor:auto')
+        $('#inputWS').remove()
+        inputROS.type= "text",
+        inputROS.className= "form-control required",
+        inputROS.style= "margin-left: 2%;",
+        inputROS.placeholder= "Máximo: $4,250",
+        inputROS.name= 'montoAprobadoPorFuera'
+        inputROS.id = 'inputROS'
+        inputsMonto.appendChild(inputROS);
+
+        mascaraMonto(inputROS, 4250)
+
+    } else {
+        inputWS.value = ''
+        inputROS.value = ''
+        inputWS.remove()
+        inputROS.remove()
+        btnCredito.prop('disabled', true);
+        cursorBtn.prop('style', 'cursor:default')
+        console.log("NINGÚN PRODUCTO SELECCIONADO")
+    }
+}
+
+        // // Mascara para el input Monto Aprobado 
+        function mascaraMonto (input, maximo) {
+            IMask(input, {
+                mask: '$num',
+                blocks: {
+                    num: {
+                        mask: Number,
+                        thousandsSeparator: ',',
+                        min: 500,
+                        max: maximo
+                    }
                 }
-               else {
-                   $('#submit').prop('disabled', true);
-                    
-               }
-           });
-       });
+            });
+        }
                                                                 
 
 </script>
