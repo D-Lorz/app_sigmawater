@@ -10,7 +10,10 @@ File: datatable for pages Js File
 // datatable
 $(document).ready(function() {
     $('.datatable').DataTable({
-        responsive: false
+        responsive: false,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
     });
     $(".dataTables_length select").addClass('form-select form-select-sm');
 });

@@ -120,7 +120,7 @@ router.post('/registrarClientes', isAuthenticated, registrarClientes);
  /*=============================================================*/
  router.post('/instalacion', isAuthenticated,oneUpload,servicioInstaladosx);
 /*=============================================================*/
-router.post('/elegirSistema', isAuthenticated,elegirSistema);
+router.post('/elegirSistema', isAuthenticated, elegirSistema);
 /*=============================================================*/
 
 module.exports = router

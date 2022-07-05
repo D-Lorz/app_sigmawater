@@ -432,16 +432,14 @@ await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [d
 };
 // todo =======>>> Actualizar monto aprobado desde el panel de administrador - perfil-cliente
 exports.ActualizarMontoAprobado = async (req, res) => {
-const id_cliente = req.body.id_cliente; 
-const monto_aprobado = req.body.monto_aprobado.replace(/[$ ,]/g, '');
+  const id_cliente = req.body.id_cliente; 
+  const monto_aprobado = req.body.monto_aprobado.replace(/[$ ,]/g, '');
 
-const datosUpdateMontoAprobado = { monto_aprobado,id_cliente};
-await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosUpdateMontoAprobado, id_cliente], (err, result) => {
-     if(err){res.send(false)}
-             res.send(true)
-     }
-  );
-
+  const datosUpdateMontoAprobado = { monto_aprobado, id_cliente };
+  await conexion.query( "UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosUpdateMontoAprobado, id_cliente], (err, result) => {
+      if(err) res.send(false)
+      res.send(true)
+  });
 };
 
 exports.clfirmas = async (req, res) => {
@@ -501,43 +499,145 @@ await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servic
 }
 
 exports.factura = async (req, res) => {
+  let comisionMax = {nivel1: 1400, nivel2: 1900, nivel3: 2600}
 
-  const id_cliente = req.params.id;
-  let info_clientes2 = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?",[id_cliente]);
-  info_clientes2 = info_clientes2[0];
+  const clientes = await conexion.query("SELECT * FROM nuevos_cliente")
+  const credito = await conexion.query("SELECT id_cliente, monto_aprobado, porcentaje_aprobado, monto_maximo, sistema FROM solicitar_credito")
+  const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores")
 
-// todo ========>>> Mostrar producto 
- let mostrarFactura =  await conexion.query('SELECT F.*, F.estadoFacturas, C.*, S.monto_aprobado, V.nombres, V.apellidos FROM factura F INNER JOIN nuevos_cliente C ON F.id_factura = C.id LEFT JOIN solicitar_credito S ON F.id_factura = S.id LEFT JOIN registro_de_vendedores V ON C.id_vendedor = V.id;');
+  clientes.forEach(async cl => {
+    credito.forEach(async cre => {
+      if (cl.id == cre.id_cliente) {
+        cl.credito = {}
+        cl.credito.monto_aprobado = parseInt(cre.monto_aprobado)
+        cl.credito.monto_maximo = parseInt(cre.monto_maximo)
+        cl.credito.porcentaje_aprobado = parseInt(cre.porcentaje_aprobado)
 
- mostrarFactura.forEach((f) => {
+        if (cre.sistema == "Reverse Osmosis System") {
+          comisionMax.nivel1 = 700
+          comisionMax.nivel2 = 950
+          comisionMax.nivel3 = 1300
+        }
+
+        vendedores.forEach(async v => {
+          if (cl.id_vendedor == v.id) {
+            cl.vendedor = {}, cl.vendedor2 = {}, cl.vendedor3 = {};
+            cl.vendedor.nombre = v.nombres + " " + v.apellidos
+            cl.vendedor.nivel = v.nivel
+            cl.vendedor.afiliado = v.codigo_afiliado
+    
+            // Comisión Directa al Vendedor que realizó la venta
+            if(cl.credito) {
+              if (cl.credito.porcentaje_aprobado >= 80) {
+                if (cl.vendedor.nivel == 1) {
+                  cl.vendedor.comision = comisionMax.nivel1;
+                } else if (cl.vendedor.nivel == 2) {
+                  cl.vendedor.comision = comisionMax.nivel2;
+                } else {
+                  cl.vendedor.comision = comisionMax.nivel3;
+                }
+      
+              } else {
+      
+                const porcentaje = parseFloat(cl.credito.porcentaje_aprobado/100)
+      
+                if (cl.vendedor.nivel == '1') {
+                  cl.vendedor.comision = parseFloat(porcentaje*comisionMax.nivel1);
+    
+                  if (cl.vendedor.afiliado){
+                    const vendedorA = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1", [cl.vendedor.afiliado], async (err, result) => {
+                        
+                      cl.vendedor2.nivel = result.nivel
+                        cl.vendedor2.codigo = result.id_vendedor
+                        
+                        if (result.nivel == '2') {
+                          console.log("\n*********** HOLA DESDE VENDEDOR 2 *****************\n")
+                          console.log("********** "+parseFloat(porcentaje*comisionMax.nivel2)+" *****************\n")
+                          cl.vendedor2.comision = parseFloat(porcentaje*comisionMax.nivel2);
+                          
+                          const vendedorB = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1", [result.codigo_afiliado])
+                          
+                          if (vendedorB.length > 0 && vendedorB.nivel == '3') {
+                            cl.vendedor3.nivel = vendedorB.nivel
+                            cl.vendedor3.codigo = vendedorB.id_vendedor
+                            cl.vendedo3.comision = parseFloat(porcentaje*comisionMax.nivel3)
+                          }
+                        }
+          
+                        if (result.nivel == '3') {
+                          cl.vendedor2.comision = parseFloat(porcentaje*comisionMax.nivel3)
+                        }
+                    })
+
+                    // if(vendedorA.length > 0){
+                    //   cl.vendedor2.nivel = vendedorA.nivel
+                    //   cl.vendedor2.codigo = vendedorA.id_vendedor
+                      
+                    //   if (vendedorA[0].nivel == '2') {
+                    //     console.log("\n*********** HOLA DESDE VENDEDOR 2 *****************\n")
+                    //     console.log("********** "+parseFloat(porcentaje*comisionMax.nivel2)+" *****************\n")
+                    //     cl.vendedor2.comision = parseFloat(porcentaje*comisionMax.nivel2);
+                        
+                    //     const vendedorB = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1", [vendedorA.codigo_afiliado])
+                        
+                    //     if (vendedorB.length > 0 && vendedorB[0].nivel == '3') {
+                    //       cl.vendedor3.nivel = vendedorB.nivel
+                    //       cl.vendedor3.codigo = vendedorB.id_vendedor
+                    //       cl.vendedo3.comision = parseFloat(porcentaje*comisionMax.nivel3)
+                    //     }
+                    //   }
+        
+                    //   if (vendedorA[0].nivel == '3') {
+                    //     cl.vendedor2.comision = parseFloat(porcentaje*comisionMax.nivel3)
+                    //   }
+                    // }
+                  }
+      
+                } else if (cl.vendedor.nivel == '2') {
+                  cl.vendedor.comision = parseFloat(porcentaje*comisionMax.nivel2)
+                } else {
+                  cl.vendedor.comision = parseFloat(porcentaje*comisionMax.nivel3)
+                }
+              }
+            }
+    
+          }
+        });
+
+      }
+      
+    });
+
+    
+
+  });
+
+  // let mostrarFactura =  await conexion.query('SELECT F.*, F.estadoFacturas, C.*, S.monto_aprobado, V.nombres, V.apellidos FROM factura F INNER JOIN nuevos_cliente C ON F.id_factura = C.id LEFT JOIN solicitar_credito S ON F.id_factura = S.id LEFT JOIN registro_de_vendedores V ON C.id_vendedor = V.id;');
+
+  console.log("\n----------------------")
+  console.log("\n<<< INFO >>>> ", clientes)
+  console.log("----------------------\n")
+
+  // mostrarFactura.forEach((f) => {
  
-  /** Estado de la factura */
-  f.estadoFactura = {};
-  f.estadoFactura.txt = "N/A";
-  f.estadoFactura.color = "badge-soft-dark";
+  //   f.estadoFactura = {};
+  //   f.estadoFactura.txt = "N/A";
+  //   f.estadoFactura.color = "badge-soft-dark";
 
-  if (f.estadoFacturas == 0) {
-    f.estadoFactura.txt = "Pendiente";
-    f.estadoFactura.color = "badge-soft-warning";
-  }
-  if (f.estadoFacturas == 1) {
-    f.estadoFactura.txt = "Pagado";
-    f.estadoFactura.color = "badge-soft-success";
-  }
-   
- });
- 
-   if(mostrarFactura) {
-    mostrarFactura.forEach((user)=>{ 
-    user.monto_aprobado = formatear.format(user.monto_aprobado)
-    })
+  //   if (f.estadoFacturas == 0) {
+  //     f.estadoFactura.txt = "Pendiente";
+  //     f.estadoFactura.color = "badge-soft-warning";
+  //   }
+  //   if (f.estadoFacturas == 1) {
+  //     f.estadoFactura.txt = "Pagado";
+  //     f.estadoFactura.color = "badge-soft-success";
+  //   }
 
-    }
+  //   f.monto_aprobado = formatear.format(f.monto_aprobado)
 
-  // * >>> Renderizado <<<<<
-  res.render("./1-admin/ventas", { user: req.user, mostrarFactura });
-  
+  // });
+
+  // f.monto_aprobado = formatear.format(f.monto_aprobado)
+
+  res.render("./1-admin/ventas", { user: req.user, facturaVenta: false });
 }
-// ? ========>>> ZONA DE CLIENTES <<<========
-
-

@@ -599,8 +599,16 @@ exports.elegirSistema= async (req, res) => {
   const sistema	 = req.body.sistemaElegido;
   const estado_del_credito = 1
   const monto_aprobado = req.body.montoAprobadoPorFuera.replace(/[$ ,]/g, '');
+  let monto_maximo = 8500
 
-  const datosElegirSistema= {sistema, estado_del_credito,monto_aprobado,id_cliente };
+  porcentaje_aprobado = (monto_aprobado*100)/8500
+
+  if (sistema == "Reverse Osmosis System") {
+    monto_maximo = 4250
+    porcentaje_aprobado = Math.round((monto_aprobado*100)/4250)
+  } 
+
+  const datosElegirSistema= { id_cliente, sistema, estado_del_credito, monto_aprobado, porcentaje_aprobado, monto_maximo };
 
   await conexion.query("INSERT INTO solicitar_credito SET ?", [datosElegirSistema], (err, result) => {
     if (err) throw err;

@@ -3,4 +3,5 @@ env/.env
 keys.js 
 keys.js
 public/licences
-public/licences_customers 
+public/licences_customers
+info.txt

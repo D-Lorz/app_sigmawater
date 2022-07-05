@@ -217,44 +217,32 @@ rel="stylesheet" type="text/css" />
                     <thead>
                       <th scope="col" title="Id de factura">Factura</th>
                         <th scope="col" title="Fecha de factura">Fecha de instalación</th>
-                        <th scope="col">Cliente</th> <!--Primer nombre y primer apellido-->
+                        <th scope="col">Nombre del cliente</th> <!--Primer nombre y primer apellido-->
                         <th scope="col">Producto</th>
-                        <th scope="col">Valor venta</th>
+                        <th scope="col">Valor</th>
                         <th scope="col">Vendedor</th> <!--Primer nombre y primer apellido-->
-                        <th scope="col">Valor comisión</th>
+                        <th scope="col">Comisión total</th>
                         <th scope="col">Estado</th> <!-- Estado de la factura Pendiente y Pagado-->
                     </thead>
-                    <% if(mostrarFactura) {%>
-                        <% mostrarFactura.forEach((user)=>{ %>
+                    <% if(facturaVenta) {%>
+                        <% facturaVenta.forEach((venta)=>{ %>
                     <tbody>
                             <tr>
                                 <td><button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" 
-                                    aria-controls="offcanvasRight" style="background: none;border: none;margin: 0;"><%= user.id_factura %>
+                                    aria-controls="offcanvasRight" style="background: none;border: none;margin: 0;"><%= venta.id_factura %>
                                    </button>
                                 </td>
-                                <td><%= user.fecha_instalacion %></td>
-                                <td style="width: 29%; text-transform: capitalize;"><%= user.nombre %> <%= user.apellido %></td>
-                                <td><%= user.producto_instalado %></td>
-                                <td><%= user.monto_aprobado %></td>
-                                <td style="width: 29%; text-transform: capitalize;"><%= user.nombres %> <%= user.apellidos %></td>
-                                <td>xxxxx</td>
-                                <td><div class="badge <%= user.estadoFactura.color %> font-size-12"><%= user.estadoFactura.txt %></div></td>
+                                <td><%= venta.fecha_instalacion %></td>
+                                <td style="text-transform: capitalize;"><%= venta.nombre %> <%= venta.apellido %></td>
+                                <td><%= venta.producto_instalado %></td>
+                                <td><%= venta.monto_aprobado %></td>
+                                <td style="text-transform: capitalize;"><%= venta.nombres %> <%= venta.apellidos %></td>
+                                <td><%= venta.comisionTotal %></td>
+                                <td><div class="badge <%= venta.estadoFactura.color %> font-size-12"><%= venta.estadoFactura.txt %></div></td>
                             </tr>
                    </tbody>
                    <%})%>
-                   <% } else {%>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    <% } %>
+                   <% } %>
                 </table>
        
                    <!-- right offcanvas -->
