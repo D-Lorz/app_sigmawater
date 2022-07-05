@@ -505,14 +505,15 @@ exports.factura = async (req, res) => {
   const credito = await conexion.query("SELECT id_cliente, monto_aprobado, porcentaje_aprobado, monto_maximo, sistema FROM solicitar_credito")
   const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores")
 
-  clientes.forEach(async cl => {
-    credito.forEach(async cre => {
+  clientes.forEach(cl => {
+    credito.forEach(cre => {
       if (cl.id == cre.id_cliente) {
         cl.credito = {}
         cl.credito.monto_aprobado = parseInt(cre.monto_aprobado)
         cl.credito.monto_maximo = parseInt(cre.monto_maximo)
         cl.credito.porcentaje_aprobado = parseInt(cre.porcentaje_aprobado)
 
+        // Comisiones máximas para el producto pequeño
         if (cre.sistema == "Reverse Osmosis System") {
           comisionMax.nivel1 = 700
           comisionMax.nivel2 = 950
@@ -525,77 +526,87 @@ exports.factura = async (req, res) => {
             cl.vendedor.nombre = v.nombres + " " + v.apellidos
             cl.vendedor.nivel = v.nivel
             cl.vendedor.afiliado = v.codigo_afiliado
+            const cod = v.codigo_afiliado
     
-            // Comisión Directa al Vendedor que realizó la venta
+            // Comisión Directa al Vendedor con base a su nivel
             if(cl.credito) {
               if (cl.credito.porcentaje_aprobado >= 80) {
-                if (cl.vendedor.nivel == 1) {
+                // Vendedor nivel 1
+                if (cl.vendedor.nivel == '1') {
                   cl.vendedor.comision = comisionMax.nivel1;
-                } else if (cl.vendedor.nivel == 2) {
+
+                  if (cod != '' || cod != null) {
+                    const vendedor2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
+
+                    console.log("\n*********** HOLA DESDE VENDEDOR 2 *****************\n")
+                    cl.vendedor2.nombre = vendedor2[0].nombres
+                    cl.vendedor2.nivel = vendedor2[0].nivel
+                    cl.vendedor2.afiliado = vendedor2[0].codigo_afiliado
+                    cl.vendedor.comision = comisionMax.nivel1;
+                    
+                    console.log(cl)
+                    console.log("\n*********** HOLA DESDE VENDEDOR 2 *****************\n")
+
+                  }
+
+                // Vendedor nivel 2
+                } else if (cl.vendedor.nivel == '2') {
                   cl.vendedor.comision = comisionMax.nivel2;
+                // Vendedor nivel 3
                 } else {
                   cl.vendedor.comision = comisionMax.nivel3;
                 }
       
-              } else {
+              } 
+              else {
       
                 const porcentaje = parseFloat(cl.credito.porcentaje_aprobado/100)
-      
+                
+                // Vendedor nivel 1 - venta directa
                 if (cl.vendedor.nivel == '1') {
-                  cl.vendedor.comision = parseFloat(porcentaje*comisionMax.nivel1);
-    
-                  if (cl.vendedor.afiliado){
-                    const vendedorA = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1", [cl.vendedor.afiliado], async (err, result) => {
-                        
-                      cl.vendedor2.nivel = result.nivel
-                        cl.vendedor2.codigo = result.id_vendedor
-                        
-                        if (result.nivel == '2') {
-                          console.log("\n*********** HOLA DESDE VENDEDOR 2 *****************\n")
-                          console.log("********** "+parseFloat(porcentaje*comisionMax.nivel2)+" *****************\n")
-                          cl.vendedor2.comision = parseFloat(porcentaje*comisionMax.nivel2);
-                          
-                          const vendedorB = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1", [result.codigo_afiliado])
-                          
-                          if (vendedorB.length > 0 && vendedorB.nivel == '3') {
-                            cl.vendedor3.nivel = vendedorB.nivel
-                            cl.vendedor3.codigo = vendedorB.id_vendedor
-                            cl.vendedo3.comision = parseFloat(porcentaje*comisionMax.nivel3)
-                          }
-                        }
-          
-                        if (result.nivel == '3') {
-                          cl.vendedor2.comision = parseFloat(porcentaje*comisionMax.nivel3)
-                        }
-                    })
 
-                    // if(vendedorA.length > 0){
-                    //   cl.vendedor2.nivel = vendedorA.nivel
-                    //   cl.vendedor2.codigo = vendedorA.id_vendedor
+                  cl.vendedor.comision = parseFloat(porcentaje*comisionMax.nivel1);
+                  
+                  // Si el vendedor nivel 1 está afiliado a otro
+                  // if (cl.vendedor.afiliado) {
+
+                  //   const vendedorA = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
+
+                  //   // console.log("\n*********** HOLA DESDE VENDEDOR 2 *****************\n")
+                  //   //   console.log(vendedorA)
+                  //   //   console.log("\n*********** HOLA DESDE VENDEDOR 2 *****************\n")
+
+                  //   // if(vendedorA.length > 0) {
+
+                  //   //   cl.vendedor2.nivel = vendedorA.nivel
+                  //   //   cl.vendedor2.codigo = vendedorA.id_vendedor
                       
-                    //   if (vendedorA[0].nivel == '2') {
-                    //     console.log("\n*********** HOLA DESDE VENDEDOR 2 *****************\n")
-                    //     console.log("********** "+parseFloat(porcentaje*comisionMax.nivel2)+" *****************\n")
-                    //     cl.vendedor2.comision = parseFloat(porcentaje*comisionMax.nivel2);
+                  //   //   // Si el vendedor nivel 2 está afiliado a otro
+                  //   //   if (vendedorA.nivel == '2') {
+                  //   //     console.log("********** "+parseFloat(porcentaje*comisionMax.nivel2)+" *****************\n")
+                  //   //     cl.vendedor2.comision = parseFloat(porcentaje*comisionMax.nivel2);
                         
-                    //     const vendedorB = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1", [vendedorA.codigo_afiliado])
+                  //   //     const vendedorB = conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1", [vendedorA.codigo_afiliado])
                         
-                    //     if (vendedorB.length > 0 && vendedorB[0].nivel == '3') {
-                    //       cl.vendedor3.nivel = vendedorB.nivel
-                    //       cl.vendedor3.codigo = vendedorB.id_vendedor
-                    //       cl.vendedo3.comision = parseFloat(porcentaje*comisionMax.nivel3)
-                    //     }
-                    //   }
+                  //   //     if (vendedorB.nivel == '3') {
+                  //   //       cl.vendedor3.nivel = vendedorB.nivel
+                  //   //       cl.vendedor3.codigo = vendedorB.id_vendedor
+                  //   //       cl.vendedor3.comision = parseFloat(porcentaje*comisionMax.nivel3)
+                  //   //     }
+                  //   //   }
         
-                    //   if (vendedorA[0].nivel == '3') {
-                    //     cl.vendedor2.comision = parseFloat(porcentaje*comisionMax.nivel3)
-                    //   }
-                    // }
-                  }
-      
+                  //   //   if (vendedorA[0].nivel == '3') {
+                  //   //     cl.vendedor2.comision = parseFloat(porcentaje*comisionMax.nivel3)
+                  //   //   }
+
+                  //   // }
+                  // }
+                  
                 } else if (cl.vendedor.nivel == '2') {
+                  // Vendedor nivel 2 - venta directa
                   cl.vendedor.comision = parseFloat(porcentaje*comisionMax.nivel2)
                 } else {
+                // Vendedor nivel 3 - venta directa
                   cl.vendedor.comision = parseFloat(porcentaje*comisionMax.nivel3)
                 }
               }
@@ -614,9 +625,7 @@ exports.factura = async (req, res) => {
 
   // let mostrarFactura =  await conexion.query('SELECT F.*, F.estadoFacturas, C.*, S.monto_aprobado, V.nombres, V.apellidos FROM factura F INNER JOIN nuevos_cliente C ON F.id_factura = C.id LEFT JOIN solicitar_credito S ON F.id_factura = S.id LEFT JOIN registro_de_vendedores V ON C.id_vendedor = V.id;');
 
-  console.log("\n----------------------")
-  console.log("\n<<< INFO >>>> ", clientes)
-  console.log("----------------------\n")
+  
 
   // mostrarFactura.forEach((f) => {
  
