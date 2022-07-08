@@ -49,7 +49,7 @@ app.use('/', require('./routes/router'));
 app.use('/', require('./routes/sellers'));
 app.use('/', require('./routes/customer'));
 app.use('/', require('./routes/admin'));
-
+app.use('/', require('./routes/emailer'));
 
 
 /*========= ESCUCHANDO AL SERVIDOR EN EL PUERTO 3000 O EL QUE TENGA LA VARIABLE DE ENTORNO ===========*/

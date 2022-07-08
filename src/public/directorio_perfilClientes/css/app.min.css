@@ -3922,8 +3922,8 @@ body[data-layout-mode="dark"] .jvectormap-label {
   z-index: 1;
 }
 .auth-bg {
-  background-image: url(../images/auth-bg.jpg);
-  background-position: 50%;
+  background-image: url("/img/banner_login.jpg");
+  background-position: 100%;
   background-size: cover;
   background-repeat: no-repeat;
 }
