@@ -30,7 +30,7 @@ router.post('/send-email', async (req, res) => {
         <ul> 
            <li>Este es su correo: ${correo}</li>
         </ul>
-      `;
+      ` ;
 
     const transporte = nodemailer.createTransport({
         host: 'mail.3csigmawater.com',
