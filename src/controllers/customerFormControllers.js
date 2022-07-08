@@ -223,6 +223,7 @@ exports.listarClientes = async (req, res) => {
 
   // Consultando en DB los clientes que pertenecen al vendedor actual
   conexion.query('SELECT * FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
+
     if (err) throw err;
 
 
@@ -658,3 +659,8 @@ const formatear = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 0,
 });
 
+
+            
+
+  
+  

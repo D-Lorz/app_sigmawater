@@ -7,6 +7,8 @@ const conexion = require("../database/db");
 // todo ===========>>>  Mostrar lista de VENDEDORES
 exports.listarVendedores = async (req, res) => {
   const lista_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores");
+ 
+
   const usuarios = await conexion.query("SELECT * FROM usuarios");
 
   lista_vendedores.forEach((v) => {
@@ -186,7 +188,7 @@ exports.listarClientes = async (req, res) => {
     "SELECT N.*, S.sistema,S.estado_del_credito, A.estado_agenda FROM nuevos_cliente N LEFT JOIN solicitar_credito S ON N.id = S.id_cliente LEFT JOIN agendar_instalacion A ON N.id = A.id_cliente LEFT JOIN test_agua T ON A.id_cliente = T.id;"
   );
 
-  lista_clientes.forEach((c) => {
+    lista_clientes.forEach((c) => {
     /** Estado del Crédito */
     c.estadoCredito = {};
     c.estadoCredito.txt = "No solicitado";
