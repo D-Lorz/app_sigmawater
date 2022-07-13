@@ -15,11 +15,11 @@ pool.getConnection((err, connection) => {
             console.error('LA BASE DE DATOS TIENE MUCHAS CONEXIONES')
         }
         if (err.code === 'ECONNREFUSED'){
-            console.error('LA BASE DE DATOS FUE RECHAZADA')
+            console.error(' 👎 LA BASE DE DATOS FUE RECHAZADA')
         }
     } else {
         if (connection) connection.release();
-        console.log('===>  CONEXIÓN EXITOSA A LA BASE DE DATOS ');
+        console.log('===> 👍 CONEXIÓN EXITOSA A LA BASE DE DATOS ');
         console.log('***********************************************************\n')
         return;
     }

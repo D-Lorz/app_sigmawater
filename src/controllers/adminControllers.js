@@ -869,3 +869,5 @@ mostrarProducto = mostrarProducto[0]
     estadu, mostrarAgenda, mostrarDatoscreditos, estade,
     licenciacredito,clRegistro_instalacion, evidenciaF,mostrarProducto });
 };
+
+

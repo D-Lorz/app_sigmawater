@@ -39,30 +39,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- /Fonts -->
     <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700"
         rel="stylesheet">
-        <!-- css menu -->
+    <!-- css menu -->
     <link href="./directorio_login/menuLogin.css" rel="stylesheet">
     <link href="./directorio_login/animate.min.css" rel="stylesheet">
 
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
-  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" 
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer" />
-  
-<link href="./directorio_login/icon_fonts/css/all_icons_min.css" rel="stylesheet">
-   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="./directorio_login/icon_fonts/css/all_icons_min.css" rel="stylesheet">
+
 
 
 </head>
 
 <body>
 
-    
+
     <!-- main -->
     <div class="main-top-intro">
         <div class="bg-layer">
             <!-- header -->
             <div class="wrapper">
-                 <header>
+                <header>
 
 
                     <nav>
@@ -79,26 +78,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="cd-overlay-nav">
                         <span></span>
-                      </div>
-                      <!-- cd-overlay-nav -->
-                    
-                      <div class="cd-overlay-content">
+                    </div>
+                    <!-- cd-overlay-nav -->
+
+                    <div class="cd-overlay-content">
                         <span></span>
-                      </div>
-                      <!-- cd-overlay-content -->
-                    
-                      <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
-                      
-   
-                    
+                    </div>
+                    <!-- cd-overlay-content -->
+
+                    <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
+
+
+
                     <div class="header-w3layouts">
-                         <img src="/img/logoLogin.png" alt="" srcset="">
+                        <img src="/img/logoLogin.png" alt="" srcset="">
                     </div>
 
                 </header>
-               <!-- header -->
+                <!-- header -->
 
-    
+
                 <div class="content-inner-info">
                     <p class="bienvenida">Bienvenido a 3C Sigma Water System</p>
                     <h2>Ingresa con tus datos</h2>
@@ -108,33 +107,47 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 
-                            
+
                     <div class="content-w3layouts-main">
                         <!-- <p > -->
                         <div class="form-w3ls-left-info">
 
-                       <!-- TODO FORMULARIO LOGIN ==============-->
+                            <!-- TODO FORMULARIO LOGIN ==============-->
                             <form action="/login" method="post" id="idLogin">
 
                                 <label style="margin-left: 8px; font-size: 10px; padding: 5px 9px;">Email</label>
-                                <input type="email" class="email" name="correo" id="correo_login" placeholder="Ejemplo@tudominio.com" />
+                                <input type="email" class="email" name="correo" id="correo"
+                                    placeholder="Ejemplo@tudominio.com" />
 
                                 <br>
                                 <br>
 
-                           
+
                                 <label style="margin-left: 8px; font-size: 10px; padding: 5px 9px;">Contraseña</label>
-                                <input type="password" class="password" id="pass" name="pass" placeholder="**********"/> 
-                              
+                                <input type="password" class="password" id="pass" name="pass"
+                                    placeholder="**********" />
+
+                                    <!-- <div class="input-group auth-pass-inputgroup">
+                                        <input type="password" class="password" id="pass" name="pass"
+                                            aria-describedby="emailHelp" placeholder="*********"
+                                            aria-label="Password" aria-describedby="password-addon" onfocus="">
+
+                                        <button class="btn btn-light shadow-none ms-0" type="button"
+                                            id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                    </div> -->
                                 <br>
                                 <br>
 
-                              <div class="recuerdame">
-                                  <div class="form-check">
-                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                      <label class="form-check-label" style="margin-left: -3%;" for="flexCheckDefault"> Recúerdame</label>
+                                <div class="recuerdame">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="rememberme" 
+                                        id="rememberme" onclick="setcoockie()">
+                                        <label class="form-check-label" style="margin-left: -3%;"
+                                            for="rememberme"> Recúerdame</label>
                                     </div>
-                              </div>
+                                </div>
+
+                                <!-- <input type="checkbox" name="rememberme"  id="rememberme"> -->
 
                                 <div class="links">
                                     <p> <a href="/restablecer-clave">Olvidé mi contraseña</a></p>
@@ -143,53 +156,71 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <div class="bottom">
                                     <button class="btn btn-primary" type="submit"> Ingresar</button>
                                 </div>
- 
+
 
                             </form>
-                       <!-- TODO FORMULARIO LOGIN ==============-->
+                            <!-- TODO FORMULARIO LOGIN ==============-->
                         </div>
 
                     </div>
 
 
-                <!-- !REDES SOCIALES================  -->
-                  <ul class="redesSociales">
-                     <li ><a href="https://www.facebook.com/3csigmawater" target="_blank"><i class="icon-facebook"></i></a></li>
-                       <!-- <li><a href="#0"><i class="icon-twitter"></i></a></li> -->
-                     <li><a href="https://instagram.com/3csigmawater" target="_blank"><i class="icon-instagram"></i></a></li>
-                       <!-- <li><a href="#0"><i class="icon-linkedin"></i></a></li> -->
-                  </ul>
-                <!-- !REDES SOCIALES================  -->
+                    <!-- !REDES SOCIALES================  -->
+                    <ul class="redesSociales">
+                        <li><a href="https://www.facebook.com/3csigmawater" target="_blank"><i
+                                    class="icon-facebook"></i></a></li>
+                        <!-- <li><a href="#0"><i class="icon-twitter"></i></a></li> -->
+                        <li><a href="https://instagram.com/3csigmawater" target="_blank"><i
+                                    class="icon-instagram"></i></a></li>
+                        <!-- <li><a href="#0"><i class="icon-linkedin"></i></a></li> -->
+                    </ul>
+                    <!-- !REDES SOCIALES================  -->
 
-                                </div>
+                </div>
 
 
                 <!-- copyright -->
                 <div class="copy-w3layouts-inf" id="copycopy">
-                    <a href="/login"><p>3C Sigma Water System ® 2022.</a> 
+                    <a href="/login">
+                        <p>3C Sigma Water System ® 2022.
+                    </a>
                     </p>
                     <div class="clear"></div>
                 </div>
-             <!-- copyright  -->
+                <!-- copyright  -->
 
             </div>
         </div>
     </div>
     <!-- main -->
 
-         
     <script>
 
+function setcoockie(){
+    var u = document.getElementById('correo').value;
+    var p = document.getElementById('pass').value;
 
-        const iconEye=document.querySelector (".icon-eyes");
+    document.cookie="myusrname"+u+";patch=http://localhost:3000/login";
+    document.cookie="mypswd"+p+";patch=http://localhost:3000/login";
+
+}
+
+    </script>
+
+
+
+
+    <script>
+
+        const iconEye = document.querySelector(".icon-eyes");
         // console.log(iconEye);
 
-        iconEye.addEventListener('click', function(){
+        iconEye.addEventListener('click', function () {
 
             const icon = this.querySelector("i")
             const aplicar = document.querySelector("#pass")
 
-            if(aplicar.type === "password"){
+            if (aplicar.type === "password") {
 
                 aplicar.type = "text"
                 icon.classList.remove("fa-eye-slash");
@@ -207,7 +238,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </script>
 
 
- 
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <% if(alert) { %>
         <script>
@@ -223,11 +254,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </script>
         <% } %>
 
-   <!-- Jquery-->
-  <script src="./js/jquery-3.6.0.min.js"></script>
-  <!-- Menu script -->
-  <script src="./js/velocity.min.js"></script>
-  <script src="./js/main.js"></script>
+            <!-- Jquery-->
+            <script src="./js/jquery-3.6.0.min.js"></script>
+            <!-- Menu script -->
+            <script src="./js/velocity.min.js"></script>
+            <script src="./js/main.js"></script>
 
 
 </body>
