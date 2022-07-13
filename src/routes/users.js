@@ -4,24 +4,24 @@ var connection = require('../database/db.js');
 var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
 var randtoken = require('rand-token');
-//send email
-function sendEmail(email, token) {
-    var email = email;
+//send correo
+function sendEmail(correo, token) {
+    var correo = correo;
     var token = token;
     console.log("Este es el token");
     console.log(token);
     var mail = nodemailer.createTransport({
         host: 'mail.3csigmawater.com',
-        port: 465, //cambiar el puerto a 465 cuando antes de subir al server el proyecto
+        port: 465, 
         auth: {
-            user: 'noreplys@3csigmawater.com', // Your email id
-            pass: 'hola123321123.' // Your password
+            user: 'noreplys@3csigmawater.com', // Your correo id
+            pass: 'hola123321123.' // Your pass
         }
     });
-    let link = "http://localhost:4000/reset-password?token=' + token + '"
+    let link = "http://localhost:3000/reset-password?token=' + token + '"
     var mailOptions = {
         from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
-        to: email,
+        to: correo,
         subject: 'Restablece tu cuenta en 3C Sigma Water',
         html: '<body style="background-color: transparent; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">' +
             '<table border="0" cellpadding="0" cellspacing="0" class="nl-container" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: transparent;" width="100%">' +
@@ -70,7 +70,7 @@ function sendEmail(email, token) {
             '<div align="center">' +
             '<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:42px;width:480px;v-text-anchor:middle;" arcsize="15%" stroke="false" fillcolor="#fed061"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#000000; font-family:Arial, sans-serif; font-size:16px"><![endif]-->' +
 
-            '<a href="http://localhost:4000/reset-password?token=' + token + '">'+
+            '<a href="http://localhost:3000/reset-password?token=' + token + '">'+
             '<div style="text-decoration:none;display:block;color:#000000;background-color:#fed061;border-radius:6px;width:80%; width:calc(80% - 2px);border-top:1px solid #fed061;font-weight:400;border-right:1px solid #fed061;border-bottom:1px solid #fed061;border-left:1px solid #fed061;padding-top:5px;padding-bottom:5px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">Restablecer</span></span></div>' +
             '</a>' +
 
@@ -259,26 +259,26 @@ function sendEmail(email, token) {
 /* home page */
 router.get('/restablecer-clave', function (req, res, next) {
     res.render('restablecer-clave', {
-        title: 'Forget Password Page'
+        title: 'Forget pass Page'
     });
 });
-/* send reset password link in email */
-router.post('/reset-password-email', function (req, res, next) {
-    var email = req.body.email;
-    //console.log(sendEmail(email, fullUrl));
-    connection.query('SELECT * FROM users WHERE email ="' + email + '"', function (err, result) {
+/* send reset pass link in correo */
+router.post('/reset-password-correo', function (req, res, next) {
+    var correo = req.body.correo;
+    //console.log(sendEmail(correo, fullUrl));
+    connection.query('SELECT * FROM usuarios WHERE correo ="' + correo + '"', function (err, result) {
         if (err) throw err;
         var type = ''
         var msg = ''
         console.log(result[0]);
         if (result.length > 0) {
             var token = randtoken.generate(20);
-            var sent = sendEmail(email, token);
+            var sent = sendEmail(correo, token);
             if (sent != '0') {
                 var data = {
                     token: token
                 }
-                connection.query('UPDATE users SET ? WHERE email ="' + email + '"', data, function (err, result) {
+                connection.query('UPDATE usuarios SET ? WHERE correo ="' + correo + '"', data, function (err, result) {
                     if (err) throw err
                 })
                 type = 'success';
@@ -303,23 +303,23 @@ router.get('/reset-password', function (req, res, next) {
         token: req.query.token
     });
 });
-/* update password to database */
+/* update pass to database */
 router.post('/update-password', function (req, res, next) {
     var token = req.body.token;
-    var password = req.body.password;
-    connection.query('SELECT * FROM users WHERE token ="' + token + '"', function (err, result) {
+    var pass = req.body.pass;
+    connection.query('SELECT * FROM usuarios WHERE token ="' + token + '"', function (err, result) {
         if (err) throw err;
         var type
         var msg
         if (result.length > 0) {
             var saltRounds = 10;
-            // var hash = bcrypt.hash(password, saltRounds);
+            // var hash = bcrypt.hash(pass, saltRounds);
             bcrypt.genSalt(saltRounds, function (err, salt) {
-                bcrypt.hash(password, salt, function (err, hash) {
+                bcrypt.hash(pass, salt, function (err, hash) {
                     var data = {
-                        password: hash
+                        pass: hash
                     }
-                    connection.query('UPDATE users SET ? WHERE email ="' + result[0].email + '"', data, function (err, result) {
+                    connection.query('UPDATE usuarios SET ? WHERE correo ="' + result[0].correo + '"', data, function (err, result) {
                         if (err) throw err
                     });
                 });

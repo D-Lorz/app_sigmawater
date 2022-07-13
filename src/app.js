@@ -41,7 +41,7 @@ var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.set('trust proxy', 1) // Proxy de confianza
+app.set('trust proxy', 1) // Proxy de confianzaf
 
 /** Middlewares */
 app.use(morgan('dev'));
@@ -86,7 +86,7 @@ app.use('/', usersRouter);
  
 
  // Configuraciones
- app.set('port', process.env.PORT || 4000);
+ app.set('port', process.env.PORT || 3000);
 
  app.listen(app.get('port'), () => {
   console.log("***********************************************************")

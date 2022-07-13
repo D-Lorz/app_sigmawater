@@ -1,26 +1,26 @@
-//send email
+//send correo
 const express = require('express')
 const router = express.Router()
 
-function sendEmail(email, token) {
+function sendEmail(correo, token) {
  
-    var email = email;
+    var correo = correo;
     var token = token;
  
     var mail = nodemailer.createTransport({
         host: 'mail.3csigmawater.com',
         port: 465, //cambiar el puerto a 465 cuando antes de subir al server el proyecto
         auth: {
-            user: 'noreplys@3csigmawater.com', // Your email id
-            pass: 'hola123321123.' // Your password
+            user: 'noreplys@3csigmawater.com', // Your correo id
+            pass: 'hola123321123.' // Your pass
         }
     });
  
     var mailOptions = {
         from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
-        to: email,
-        subject: 'Reset Password Link - Tutsmake.com',
-        html: '<p>You requested for reset password, kindly use this <a href="http://localhost:4000/reset-password?token=' + token + '">link</a> to reset your password</p>'
+        to: correo,
+        subject: 'Reset pass Link - Tutsmake.com',
+        html: '<p>You requested for reset pass, kindly use this <a href="http://localhost:3000/reset-password?token=' + token + '">link</a> to reset your pass</p>'
  
     };
  
@@ -33,14 +33,14 @@ function sendEmail(email, token) {
     });
 }
 
-/* send reset password link in email */
-router.post('/reset-password-email', function(req, res, next) {
+/* send reset pass link in correo */
+router.post('/reset-password-correo', function(req, res, next) {
  
-    var email = req.body.email;
+    var correo = req.body.correo;
  
-    //console.log(sendEmail(email, fullUrl));
+    //console.log(sendEmail(correo, fullUrl));
  
-    connection.query('SELECT * FROM users WHERE email ="' + email + '"', function(err, result) {
+    connection.query('SELECT * FROM usuarios WHERE correo ="' + correo + '"', function(err, result) {
         if (err) throw err;
          
         var type = ''
@@ -48,11 +48,11 @@ router.post('/reset-password-email', function(req, res, next) {
    
         console.log(result[0]);
      
-        if (result[0].email.length > 0) {
+        if (result[0].correo.length > 0) {
  
            var token = randtoken.generate(20);
  
-           var sent = sendEmail(email, token);
+           var sent = sendEmail(correo, token);
  
              if (sent != '0') {
  
@@ -60,13 +60,13 @@ router.post('/reset-password-email', function(req, res, next) {
                     token: token
                 }
  
-                connection.query('UPDATE users SET ? WHERE email ="' + email + '"', data, function(err, result) {
+                connection.query('UPDATE usuarios SET ? WHERE correo ="' + correo + '"', data, function(err, result) {
                     if(err) throw err
          
                 })
  
                 type = 'success';
-                msg = 'The reset password link has been sent to your email address';
+                msg = 'The reset pass link has been sent to your correo address';
  
             } else {
                 type = 'error';
@@ -76,7 +76,7 @@ router.post('/reset-password-email', function(req, res, next) {
         } else {
             console.log('2');
             type = 'error';
-            msg = 'The Email is not registered with us';
+            msg = 'The correo is not registered with us';
  
         }
     
@@ -84,13 +84,13 @@ router.post('/reset-password-email', function(req, res, next) {
         res.redirect('/restablecer-clave');
     });
 })
-/* update password to database */
+/* update pass to database */
 router.post('/update-password', function(req, res, next) {
  
     var token = req.body.token;
-    var password = req.body.password;
+    var pass = req.body.pass;
  
-   connection.query('SELECT * FROM users WHERE token ="' + token + '"', function(err, result) {
+   connection.query('SELECT * FROM usuarios WHERE token ="' + token + '"', function(err, result) {
         if (err) throw err;
  
         var type
@@ -100,16 +100,16 @@ router.post('/update-password', function(req, res, next) {
                 
               var saltRounds = 10;
  
-             // var hash = bcrypt.hash(password, saltRounds);
+             // var hash = bcrypt.hash(pass, saltRounds);
  
             bcrypt.genSalt(saltRounds, function(err, salt) {
-                  bcrypt.hash(password, salt, function(err, hash) {
+                  bcrypt.hash(pass, salt, function(err, hash) {
  
                    var data = {
-                        password: hash
+                        pass: hash
                     }
  
-                    connection.query('UPDATE users SET ? WHERE email ="' + result[0].email + '"', data, function(err, result) {
+                    connection.query('UPDATE usuarios SET ? WHERE correo ="' + result[0].correo + '"', data, function(err, result) {
                         if(err) throw err
                    
                     });
@@ -118,7 +118,7 @@ router.post('/update-password', function(req, res, next) {
               });
  
             type = 'success';
-            msg = 'Your password has been updated successfully';
+            msg = 'Your pass has been updated successfully';
               
         } else {
  
