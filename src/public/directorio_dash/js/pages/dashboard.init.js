@@ -111,7 +111,7 @@ var options = {
     series: [{
         data: [47, 15, 2, 67, 22, 20, 36, 60, 60, 30, 50, 11, 12, 3, 8, ]
     }],
-    chart: {
+     chart: {
         type: 'line',
         height: 50,
         sparkline: {

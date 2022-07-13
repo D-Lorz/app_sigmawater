@@ -103,14 +103,7 @@
                                         <div class="col-6">
                                             <span class="text-muted mb-3 lh-1 d-block
                                     text-truncate">Clientes añadidos</span>
-                                            <h4 class="mb-3">
-                                                <span>    
-                                              
-                                                 12
-                                                      </span>
-                                           
-                                                </span>
-                                            </h4>
+                                            <h4 class="mb-3"> <%= totalCliente%></h4>
                                         </div>
                                         <div class="col-6">
                                             <div id="mini-chart3" data-colors='["#5156be"]'
@@ -136,9 +129,7 @@
                                         <div class="col-6">
                                             <span class="text-muted mb-3 lh-1 d-block
                                     text-truncate">Afiliados añadidos</span>
-                                            <h4 class="mb-3">
-                                                <span class="counter-value" data-target="12">0</span>
-                                            </h4>
+                                            <h4 class="mb-3"><span ><%= totalAfiliado %></span></h4>
                                         </div>
                                         <div class="col-6">
                                             <div id="mini-chart4" data-colors='["#5156be" ]'
@@ -264,7 +255,7 @@
                                                             <div class="col-6">
                                                                 <div>
                                                                     <p class="mb-2 text-muted text-uppercase font-size-11">Restante</p>
-                                                                    <!-- <h5 class="fw-medium">$  <= user.deuda_inicial %></h5> -->
+                                                                   <!-- <h5 class="fw-medium">$  <%= user.deuda_inicial %></h5>  -->
                                                                 </div>
                                                             </div>
                                                         </div>
