@@ -510,7 +510,7 @@ exports.factura = async (req, res) => {
 
   clientes.forEach(cl => {
     credito.forEach(cre => {
-      
+
       // Comisiones máximas para el producto pequeño ($4.250 USD)
       if (cre.sistema == "Reverse Osmosis System") {
         comisionMax.nivel1 = 700
@@ -523,352 +523,396 @@ exports.factura = async (req, res) => {
         comisionMax.nivel3 = 2400
       }
 
-      
+
       vendedores.forEach(async v => {
-        
+
         if (cl.id == cre.id_cliente && cl.id_vendedor == v.id) {
           cl.credito = {}
           cl.credito.monto_aprobado = parseInt(cre.monto_aprobado)
           cl.credito.monto_maximo = parseInt(cre.monto_maximo)
           cl.credito.porcentaje_aprobado = parseInt(cre.porcentaje_aprobado)
 
+          cl.vendedor = {}
+          cl.vendedor.codigo = v.id_vendedor
+          cl.vendedor.nombre = v.nombres + " " + v.apellidos
+          cl.vendedor.nivel = v.nivel
+          cl.vendedor.afiliado = v.codigo_afiliado
+          const cod = v.codigo_afiliado
 
-          const porcentaje = parseFloat(cl.credito.porcentaje_aprobado/100)
+          if (cl.credito) {
 
-        // vendedores.forEach(async v => {
-          // if (cl.id_vendedor == v.id ) {
-            cl.vendedor = {}
-            cl.vendedor.codigo = v.id_vendedor
-            cl.vendedor.nombre = v.nombres + v.apellidos
-            cl.vendedor.nivel = v.nivel
-            cl.vendedor.afiliado = v.codigo_afiliado
-            const cod = v.codigo_afiliado
-    
-            if(cl.credito) {
+            /********  Comisión Directa al Vendedor cuando el porcentaje aprobado es mayor al 80% ********/
+            if (cl.credito.porcentaje_aprobado >= 80) {
 
-              /********  Comisión Directa al Vendedor cuando el porcentaje aprobado es mayor al 80% ********/
-              if (cl.credito.porcentaje_aprobado >= 80) {
-                
-                switch (cl.vendedor.nivel) {
-                  // VENDEDOR NIVEL 1
-                  case '1':
-                    // COMISIÓN NIVEL 1
-                    cl.vendedor.comision_base = comisionMax.nivel1;
+              switch (cl.vendedor.nivel) {
+                // VENDEDOR NIVEL 1
+                case '1':
+                  // COMISIÓN NIVEL 1
+                  cl.vendedor.comision_base = comisionMax.nivel1;
 
-                    // Validar si tiene un vendedor afiliado arriba
-                    if (cod) {
-                      let cod2 = '0', cod3 = '0';
+                  // Validar si tiene un vendedor afiliado arriba
+                  if (cod) {
+                    let cod2 = '0', cod3 = '0';
 
-                      let v2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
+                    let v2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
 
-                      v2.length > 0 ? cod2 = v2[0].codigo_afiliado : cod2 = cod2;
+                    v2.length > 0 ? cod2 = v2[0].codigo_afiliado : cod2 = cod2;
 
-                      let v3 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod2])
+                    let v3 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod2])
 
-                      v3.length > 0 ? cod3 = v3[0].codigo_afiliado : cod3 = cod3;
+                    v3.length > 0 ? cod3 = v3[0].codigo_afiliado : cod3 = cod3;
 
-                      let v4 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod3])
+                    let v4 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod3])
 
-                      console.log("\n---------- VENDEDORES TEST ---------- \n")
-                      let count = 2;
-                      if (v2[0] != undefined) {
-                        console.log("\n ------- INFO DB ------- \n")
-                        console.log("Vendedor "+count, v2[0]);
-                        console.log("\n ------- INFO DB ------- \n")
-                        count++
+                    console.log("\n---------- INICIO ** VENDEDORES NIVEL 1 PA'ARRIBA ---------- \n")
+                    let count = 2;
+                    if (v2[0] != undefined) {
+                      console.log("\n ------- INFO DB ------- \n")
+                      console.log("Vendedor " + count, v2[0]);
+                      console.log("\n ------- INFO DB ------- \n")
+                      count++
 
-                        cl.vendedor2 = {}
-                        cl.vendedor2.codigo = v2[0].id_vendedor
-                        cl.vendedor2.nombre = v2[0].nombres + v2[0].apellidos
-                        cl.vendedor2.nivel = v2[0].nivel
-                        cl.vendedor2.afiliado = v2[0].codigo_afiliado
+                      cl.vendedor2 = {}
+                      cl.vendedor2.codigo = v2[0].id_vendedor
+                      cl.vendedor2.nombre = v2[0].nombres + " " + v2[0].apellidos
+                      cl.vendedor2.nivel = v2[0].nivel
+                      cl.vendedor2.afiliado = v2[0].codigo_afiliado
 
-                        // Asignando comisión base vendedor arriba -> (Comisión máxima del vendedor arriba con base a su nivel menos la comisión base del vendedor principal)
-                        if (v2[0].nivel == '2') {
-                          cl.vendedor2.comision_base = (comisionMax.nivel2-cl.vendedor.comision_base);
-                        } else if (v2[0].nivel == '3') {
-                          cl.vendedor2.comision_base = (comisionMax.nivel3-cl.vendedor.comision_base);
-                        } else {
-                          cl.vendedor2.comision_base = (cl.credito.monto_aprobado-3000-cl.vendedor.comision_base);
-                        }
-
-                      } 
-
-                      if (v3[0] != undefined) {
-                        console.log("\n ------- INFO DB ------- \n")
-                        console.log("Vendedor "+count, v3[0])
-                        console.log("\n ------- INFO DB ------- \n")
-                        count++
-
-                        cl.vendedor3 = {}
-                        cl.vendedor3.codigo = v3[0].id_vendedor
-                        cl.vendedor3.nombre = v3[0].nombres + v3[0].apellidos
-                        cl.vendedor3.nivel = v3[0].nivel
-                        cl.vendedor3.afiliado = v3[0].codigo_afiliado
-
-                        if (v3[0].nivel == '3') {
-                          cl.vendedor3.comision_base = (comisionMax.nivel3-cl.vendedor.comision_base);
-                        } else {
-                          cl.vendedor3.comision_base = (cl.credito.monto_aprobado-3000-cl.vendedor.comision_base-cl.vendedor2.comision_base);
-                        }
-                      } 
-
-                      if (v4[0] != undefined) {
-                        console.log("\n ------- INFO DB ------- \n")
-                        console.log("Vendedor "+count, v4[0])
-                        console.log("\n ------- INFO DB ------- \n")
-
-                        cl.vendedor4 = {}
-                        cl.vendedor4.codigo = v4[0].id_vendedor
-                        cl.vendedor4.nombre = v4[0].nombres + v3[0].apellidos
-                        cl.vendedor4.nivel = v4[0].nivel
-                        cl.vendedor4.afiliado = v4[0].codigo_afiliado
-
-                        cl.vendedor4.comision_base = (cl.credito.monto_aprobado-3000-cl.vendedor.comision_base-cl.vendedor2.comision_base-cl.vendedor3.comision_base);
-                        
+                      // Asignando comisión base vendedor arriba -> (Comisión máxima del vendedor arriba con base a su nivel menos la comisión base del vendedor principal)
+                      if (v2[0].nivel == '2') {
+                        cl.vendedor2.comision_base = (comisionMax.nivel2 - cl.vendedor.comision_base);
+                      } else if (v2[0].nivel == '3') {
+                        cl.vendedor2.comision_base = (comisionMax.nivel3 - cl.vendedor.comision_base);
+                      } else {
+                        cl.vendedor2.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base);
                       }
-                      console.log("\n ------- COMISIONES VENDEDORES ** INICIO ------- \n")
-                      console.log(cl)
-                      console.log("\n ------- COMISIONES VENDEDORES ** FIN ------- \n")
-                      console.log("\n ************** \n")
-                      console.log("\n---------- VENDEDORES TEST ---------- \n")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                      // // VENDEDOR ARRIBA DEl NIVEL 1 >= 80%
-                      // if (vendedor2.length > 0) {
-                      //   cl.vendedor2 = {}
-                      //   cl.vendedor2.codigo = vendedor2[0].id_vendedor
-                      //   cl.vendedor2.nombre = vendedor2[0].nombres + vendedor2[0].apellidos
-                      //   cl.vendedor2.nivel = vendedor2[0].nivel
-                      //   cl.vendedor2.afiliado = vendedor2[0].codigo_afiliado
-                        
-                      //   // let comision_vendedorSuperior = vendedorSuperior(vendedor2, comisionMax)
-                      //   let comision_vendedorSuperior = 2222;
-
-                      //   // Asignando comisión base vendedor arriba -> (Comisión máxima del vendedor arriba con base a su nivel menos la comisión base del vendedor principal)
-                      //   cl.vendedor2.comision_base = (comision_vendedorSuperior-cl.vendedor.comision_base);
-
-
-                      //   // if (cl.vendedor2.afiliado != '' || cl.vendedor2.afiliado != null) {
-                          
-                      //   //   // VENDEDOR NIVEL 3 DESDE EL 1 >= 80%
-                      //   //   const vendedor3 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cl.vendedor2.afiliado])
-  
-                      //   //   if(vendedor3.length > 0) {
-                      //   //     cl.vendedor3 = {}
-                      //   //     cl.vendedor3.codigo = vendedor3[0].id_vendedor
-                      //   //     cl.vendedor3.nombre = vendedor3[0].nombres + vendedor3[0].apellidos
-                      //   //     cl.vendedor3.nivel = vendedor3[0].nivel
-                      //   //     cl.vendedor3.afiliado = vendedor3[0].codigo_afiliado
-                      //   //     cl.vendedor3.comision_base = (comisionMax.nivel2-cl.vendedor.comision_base);
-
-
-                      //   //     // VENDEDOR NIVEL 4 DESDE EL 1 >= 80%
-                      //   //     const vendedor4 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cl.vendedor3.afiliado])
-
-                      //   //     if(vendedor4.length > 0) {
-                      //   //       cl.vendedor3 = {}
-                      //   //       cl.vendedor4.codigo = vendedor4[0].id_vendedor
-                      //   //       cl.vendedor4.nombre = vendedor4[0].nombres + vendedor4[0].apellidos
-                      //   //       cl.vendedor4.nivel = vendedor4[0].nivel
-                      //   //       cl.vendedor4.afiliado = vendedor4[0].codigo_afiliado
-                      //   //       cl.vendedor4.comision_base = (cl.credito.monto_aprobado-3000-cl.vendedor3.comision_base-cl.vendedor2.comision_base-cl.vendedor.comision_base);
-                      //   //     }
-
-                      //   //   }
-  
-                      //   // }
-
-                      // }
-                      
 
                     }
-                    break;
 
-                  // Vendedor nivel 2
-                  case '2':
-                    cl.vendedor.comision_base = comisionMax.nivel2;
-                    if (cod != '' || cod != null) {
-                      
-                      // VENDEDOR NIVEL 3 DESDE EL 2 >= 80%
-                      const vendedor2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
+                    if (v3[0] != undefined) {
+                      console.log("\n ------- INFO DB ------- \n")
+                      console.log("Vendedor " + count, v3[0])
+                      console.log("\n ------- INFO DB ------- \n")
+                      count++
 
-                      if (vendedor2.length > 0) {
-                        cl.vendedor2 = {}
-                        cl.vendedor2.codigo = vendedor2[0].id_vendedor
-                        cl.vendedor2.nombre = vendedor2[0].nombres + vendedor2[0].apellidos
-                        cl.vendedor2.nivel = vendedor2[0].nivel
-                        cl.vendedor2.afiliado = vendedor2[0].codigo_afiliado
-                        cl.vendedor2.comision_base = (comisionMax.nivel2-cl.vendedor.comision_base);
+                      cl.vendedor3 = {}
+                      cl.vendedor3.codigo = v3[0].id_vendedor
+                      cl.vendedor3.nombre = v3[0].nombres + " " + v3[0].apellidos
+                      cl.vendedor3.nivel = v3[0].nivel
+                      cl.vendedor3.afiliado = v3[0].codigo_afiliado
 
-                        // VENDEDOR NIVEL 4 DESDE EL 2 >= 80%
-                        const vendedor3 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cl.vendedor2.afiliado])
-
-                        if(vendedor3.length > 0) {
-                          cl.vendedor3 = {}
-                          cl.vendedor3.codigo = vendedor3[0].id_vendedor
-                          cl.vendedor3.nombre = vendedor3[0].nombres + vendedor3[0].apellidos
-                          cl.vendedor3.nivel = vendedor3[0].nivel
-                          cl.vendedor3.afiliado = vendedor3[0].codigo_afiliado
-                          cl.vendedor3.comision_base = (cl.credito.monto_aprobado-3000-cl.vendedor2.comision_base-cl.vendedor.comision_base);
-                        }
-
+                      if (v3[0].nivel == '3') {
+                        cl.vendedor3.comision_base = (comisionMax.nivel3 - cl.vendedor.comision_base - cl.vendedor2.comision_base);
+                      } else {
+                        cl.vendedor3.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base - cl.vendedor2.comision_base);
                       }
                     }
 
-                    break;
+                    if (v4[0] != undefined) {
+                      console.log("\n ------- INFO DB ------- \n")
+                      console.log("Vendedor " + count, v4[0])
+                      console.log("\n ------- INFO DB ------- \n")
 
-                  // Vendedor nivel 3
-                  case '3':
-                    cl.vendedor.comision_base = comisionMax.nivel3;
-                    if (cod != '' || cod != null) {
-                      // VENDEDOR NIVEL 4 DESDE EL 3 >= 80%
-                      const vendedor2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
+                      cl.vendedor4 = {}
+                      cl.vendedor4.codigo = v4[0].id_vendedor
+                      cl.vendedor4.nombre = v4[0].nombres + " " + v3[0].apellidos
+                      cl.vendedor4.nivel = v4[0].nivel
+                      cl.vendedor4.afiliado = v4[0].codigo_afiliado
 
-                      if(vendedor2.length > 0) {
-                        cl.vendedor2 = {}
-                        cl.vendedor2.codigo = vendedor2[0].id_vendedor
-                        cl.vendedor2.nombre = vendedor2[0].nombres + vendedor2[0].apellidos
-                        cl.vendedor2.nivel = vendedor2[0].nivel
-                        cl.vendedor2.afiliado = vendedor2[0].codigo_afiliado
-                        cl.vendedor2.comision_base = (cl.credito.monto_aprobado-3000-cl.vendedor.comision_base);
-                      }
+                      // Asignando comisión base vendedor nivel 4 -> (Comisión máxima del vendedor nivel 4 menos las comisiones niveles anteriores)
+                      cl.vendedor4.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base - cl.vendedor2.comision_base - cl.vendedor3.comision_base);
+
                     }
-                    break;
-                  
-                  // Vendedor nivel 4
-                  default:
-                    cl.vendedor.comision_base = (cl.credito.monto_aprobado-3000);
-                    break;
-                }
+                  }
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 1 PA'ARRIBA ** INICIO ------- \n")
+                  console.log(cl)
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 1 PA'ARRIBA ** FIN ------- \n")
+                  console.log("\n ************** \n")
+                  console.log("\n---------- FIN ** VENDEDORES NIVEL 1 PA'ARRIBA ---------- \n")
+                  break;
+
+                // Vendedor nivel 2
+                case '2':
+                  cl.vendedor.comision_base = comisionMax.nivel2;
+                  // Validar si tiene un vendedor afiliado arriba
+                  if (cod) {
+                    let cod2 = '0'
+
+                    let v2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
+
+                    v2.length > 0 ? cod2 = v2[0].codigo_afiliado : cod2 = cod2;
+
+                    let v3 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod2])
+
+                    console.log("\n---------- INICIO ** VENDEDORES NIVEL 2 PA'ARRIBA ---------- \n")
+                    let count = 2;
+                    if (v2[0] != undefined) {
+                      console.log("\n ------- INFO DB ------- \n")
+                      console.log("Vendedor " + count, v2[0]);
+                      console.log("\n ------- INFO DB ------- \n")
+                      count++
+
+                      cl.vendedor2 = {}
+                      cl.vendedor2.codigo = v2[0].id_vendedor
+                      cl.vendedor2.nombre = v2[0].nombres + " " + v2[0].apellidos
+                      cl.vendedor2.nivel = v2[0].nivel
+                      cl.vendedor2.afiliado = v2[0].codigo_afiliado
+
+                      // Asignando comisión base vendedor arriba -> (Comisión máxima del vendedor arriba con base a su nivel menos la comisión base del vendedor principal)
+                      if (v2[0].nivel == '3') {
+                        cl.vendedor2.comision_base = (comisionMax.nivel3 - cl.vendedor.comision_base);
+                      } else {
+                        cl.vendedor2.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base);
+                      }
+
+                    }
+
+                    if (v3[0] != undefined) {
+                      console.log("\n ------- INFO DB ------- \n")
+                      console.log("Vendedor " + count, v3[0])
+                      console.log("\n ------- INFO DB ------- \n")
+                      count++
+
+                      cl.vendedor3 = {}
+                      cl.vendedor3.codigo = v3[0].id_vendedor
+                      cl.vendedor3.nombre = v3[0].nombres + " " + v3[0].apellidos
+                      cl.vendedor3.nivel = v3[0].nivel
+                      cl.vendedor3.afiliado = v3[0].codigo_afiliado
+
+                      // Asignando comisión base vendedor nivel 4 -> (Comisión máxima del vendedor nivel 4 menos las comisiones niveles anteriores)
+                      cl.vendedor3.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base - cl.vendedor2.comision_base);
+
+                    }
+
+                  }
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 2 PA'ARRIBA ** INICIO ------- \n")
+                  console.log(cl)
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 2 PA'ARRIBA ** FIN ------- \n")
+                  console.log("\n ************** \n")
+                  console.log("\n---------- FIN ** VENDEDORES NIVEL 2 PA'ARRIBA ---------- \n")
+                  break;
+
+                // Vendedor nivel 3
+                case '3':
+                  cl.vendedor.comision_base = comisionMax.nivel3;
+                  // Validar si tiene un vendedor afiliado arriba
+                  if (cod) {
+                    let v2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
+
+                    console.log("\n---------- INICIO ** VENDEDORES NIVEL 3 PA'ARRIBA ---------- \n")
+                    let count = 2;
+                    if (v2[0] != undefined) {
+                      console.log("\n ------- INFO DB ------- \n")
+                      console.log("Vendedor " + count, v2[0]);
+                      console.log("\n ------- INFO DB ------- \n")
+                      count++
+
+                      cl.vendedor2 = {}
+                      cl.vendedor2.codigo = v2[0].id_vendedor
+                      cl.vendedor2.nombre = v2[0].nombres + " " + v2[0].apellidos
+                      cl.vendedor2.nivel = v2[0].nivel
+                      cl.vendedor2.afiliado = v2[0].codigo_afiliado
+
+                      // Asignando comisión base vendedor arriba -> (Comisión máxima del vendedor arriba con base a su nivel menos la comisión base del vendedor principal)
+                      cl.vendedor2.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base);
+
+                    }
+                  }
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 3 PA'ARRIBA ** INICIO ------- \n")
+                  console.log(cl)
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 3 PA'ARRIBA ** FIN ------- \n")
+                  console.log("\n ************** \n")
+                  console.log("\n---------- FIN ** VENDEDORES NIVEL 3 PA'ARRIBA ---------- \n")
+                  break;
+
+                // Vendedor nivel 4
+                default:
+                  cl.vendedor.comision_base = (cl.credito.monto_aprobado - 3000);
+                  console.log("\n---------- INICIO ** VENDEDOR NIVEL 4 (COMISIÓN MÁXIMA) ---------- \n")
+                  console.log(cl)
+                  console.log("\n---------- FIN ** VENDEDOR NIVEL 4 (COMISIÓN MÁXIMA) ---------- \n")
+                  break;
+              }
+
+            } else {
+
+              const porcentaje = parseFloat(cl.credito.porcentaje_aprobado / 100) //Convirtiendo porcentaje entero a decimal
 
 
-              } else {
+              /******** Comisión Directa al Vendedor cuando el porcentaje aprobado es MENOR al 80% ------------------------------ ---********/
+              switch (cl.vendedor.nivel) {
+                // VENDEDOR NIVEL 1
+                case '1':
+                  cl.vendedor.comision_base = porcentaje * comisionMax.nivel1;
 
-                /******** Comisión Directa al Vendedor cuando el porcentaje aprobado es menor al 80% ********/
-                switch (cl.vendedor.nivel) {
-                  // VENDEDOR NIVEL 1
-                  case '1':
-                    cl.vendedor.comision_base = porcentaje*comisionMax.nivel1;
-                    if (cod != '' || cod != null) {
+                  // Validar si tiene un vendedor afiliado arriba
+                  if (cod) {
+                    let cod2 = '0', cod3 = '0';
 
-                      // VENDEDOR NIVEL 2
-                      const vendedor2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
-                      
-                      if (vendedor2.length > 0) {
-                        cl.vendedor2 = {}
-                        cl.vendedor2.codigo = vendedor2[0].id_vendedor
-                        cl.vendedor2.nombre = vendedor2[0].nombres + " " + vendedor2[0].apellidos
-                        cl.vendedor2.nivel = vendedor2[0].nivel
-                        cl.vendedor2.afiliado = vendedor2[0].codigo_afiliado
+                    let v2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
+
+                    v2.length > 0 ? cod2 = v2[0].codigo_afiliado : cod2 = cod2;
+
+                    let v3 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod2])
+
+                    v3.length > 0 ? cod3 = v3[0].codigo_afiliado : cod3 = cod3;
+
+                    let v4 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod3])
+
+                    console.log("\n---------- INICIO ** VENDEDORES NIVEL 1 PA'ARRIBA ---------- \n")
+                    if (v2[0] != undefined) {
+
+                      cl.vendedor2 = {}
+                      cl.vendedor2.codigo = v2[0].id_vendedor
+                      cl.vendedor2.nombre = v2[0].nombres + " " + v2[0].apellidos
+                      cl.vendedor2.nivel = v2[0].nivel
+                      cl.vendedor2.afiliado = v2[0].codigo_afiliado
+
+                      // Asignando comisión base vendedor arriba -> (Comisión máxima del vendedor arriba con base a su nivel menos la comisión base del vendedor principal)
+                      if (v2[0].nivel == '2') {
                         cl.vendedor2.comision_base = (parseFloat(porcentaje*comisionMax.nivel2))-cl.vendedor.comision_base;
-                        
-                        console.log("\n---------- VENDEDOR 2 desde nivel 1 ---------- \n")
-                        console.log(cl)
-                        console.log("\n---------- VENDEDOR 2 desde nivel 1 ---------- \n")
 
-                        if (cl.vendedor2.afiliado != '' || cl.vendedor2.afiliado != null) {
-  
-                          // VENDEDOR NIVEL 3
-                          const vendedor3 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cl.vendedor2.afiliado])
-  
-                          if(vendedor3.length > 0) {
-                            cl.vendedor3 = {}
-                            cl.vendedor3.codigo = vendedor3[0].id_vendedor
-                            cl.vendedor3.nombre = vendedor3[0].nombres + vendedor3[0].apellidos
-                            cl.vendedor3.nivel = vendedor3[0].nivel
-                            cl.vendedor3.afiliado = vendedor3[0].codigo_afiliado
-                            cl.vendedor3.comision_base = parseFloat((porcentaje*comisionMax.nivel3)-(porcentaje*comisionMax.nivel2));
-
-                            console.log("\n---------- VENDEDOR 3 desde nivel 2, 1 ---------- \n")
-                            console.log(cl)
-                            console.log("\n---------- VENDEDOR 3 desde nivel 2, 1 ---------- \n")
-
-                            // VENDEDOR NIVEL 4
-                            const vendedor4 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cl.vendedor3.afiliado])
-
-                            if(vendedor3.length > 0) {
-                              cl.vendedor4 = {}
-                              cl.vendedor4.codigo = vendedor4[0].id_vendedor
-                              cl.vendedor4.nombre = vendedor4[0].nombres + vendedor4[0].apellidos
-                              cl.vendedor4.nivel = vendedor4[0].nivel
-                              cl.vendedor4.afiliado = vendedor4[0].codigo_afiliado
-                              cl.vendedor4.comision_base = parseFloat((porcentaje*comisionMax.nivel3)-(porcentaje*comisionMax.nivel2));
-                            }
-
-                          }
-  
-                        }
-
+                      } else if (v2[0].nivel == '3') {
+                        cl.vendedor2.comision_base = (parseFloat(porcentaje*comisionMax.nivel3))-cl.vendedor.comision_base;
+                      } else {
+                        cl.vendedor2.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base);
                       }
-                      
 
                     }
-                    break;
-                    
-                  //Vendedor Nivel 2
-                  case '2':
-                    cl.vendedor.comision_base = porcentaje*comisionMax.nivel2;
-                    if (cod != '' || cod != null) {
-                      const vendedor2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
 
-                      if (vendedor2.length > 0) {
-                        // Vendedor Nivel 3
-                        cl.vendedor2 = {}
-                        cl.vendedor2.codigo = vendedor2[0].id_vendedor
-                        cl.vendedor2.nombre = vendedor2[0].nombres + vendedor2[0].apellidos
-                        cl.vendedor2.nivel = vendedor2[0].nivel
-                        cl.vendedor2.afiliado = vendedor2[0].codigo_afiliado
-                        cl.vendedor2.comision_base = (parseInt(porcentaje*comisionMax.nivel3))-cl.vendedor.comision_base;
+                    if (v3[0] != undefined) {
+
+                      cl.vendedor3 = {}
+                      cl.vendedor3.codigo = v3[0].id_vendedor
+                      cl.vendedor3.nombre = v3[0].nombres + " " + v3[0].apellidos
+                      cl.vendedor3.nivel = v3[0].nivel
+                      cl.vendedor3.afiliado = v3[0].codigo_afiliado
+
+                      if (v3[0].nivel == '3') {
+                        cl.vendedor3.comision_base = (parseFloat(porcentaje*comisionMax.nivel3))-parseFloat(porcentaje*comisionMax.nivel2);
+                      } else {
+                        cl.vendedor3.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor2.comision_base - cl.vendedor.comision_base);
                       }
-                      
                     }
-                    break;
+
+                    if (v4[0] != undefined) {
+                      cl.vendedor4 = {}
+                      cl.vendedor4.codigo = v4[0].id_vendedor
+                      cl.vendedor4.nombre = v4[0].nombres + " " + v3[0].apellidos
+                      cl.vendedor4.nivel = v4[0].nivel
+                      cl.vendedor4.afiliado = v4[0].codigo_afiliado
+
+                      // Asignando comisión base vendedor nivel 4 -> (Comisión máxima del vendedor nivel 4 menos las comisiones niveles anteriores)
+                      cl.vendedor4.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base - cl.vendedor2.comision_base - cl.vendedor3.comision_base);
+
+                    }
+                  }
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 1 PA'ARRIBA ** INICIO ------- \n")
+                  console.log(cl)
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 1 PA'ARRIBA ** FIN ------- \n")
+                  console.log("\n ************** \n")
+                  console.log("\n---------- FIN ** VENDEDORES NIVEL 1 PA'ARRIBA ---------- \n")
+                  break;
+
+                //Vendedor Nivel 2
+                case '2':
+                  cl.vendedor.comision_base = porcentaje * comisionMax.nivel2;
+                  // Validar si tiene un vendedor afiliado arriba
+                  if (cod) {
+                    let cod2 = '0'
+
+                    let v2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
+
+                    v2.length > 0 ? cod2 = v2[0].codigo_afiliado : cod2 = cod2;
+
+                    let v3 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod2])
+
+                    console.log("\n---------- INICIO ** VENDEDORES NIVEL 2 PA'ARRIBA ---------- \n")
+                    if (v2[0] != undefined) {
+                      cl.vendedor2 = {}
+                      cl.vendedor2.codigo = v2[0].id_vendedor
+                      cl.vendedor2.nombre = v2[0].nombres + " " + v2[0].apellidos
+                      cl.vendedor2.nivel = v2[0].nivel
+                      cl.vendedor2.afiliado = v2[0].codigo_afiliado
+
+                      // Asignando comisión base vendedor arriba -> (Comisión máxima del vendedor arriba con base a su nivel menos la comisión base del vendedor principal)
+                      if (v2[0].nivel == '3') {
+                        cl.vendedor2.comision_base = (parseFloat(porcentaje*comisionMax.nivel3))-cl.vendedor.comision_base;
+                      } else {
+                        cl.vendedor2.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base);
+                      }
+
+                    }
+
+                    if (v3[0] != undefined) {
+
+                      cl.vendedor3 = {}
+                      cl.vendedor3.codigo = v3[0].id_vendedor
+                      cl.vendedor3.nombre = v3[0].nombres + " " + v3[0].apellidos
+                      cl.vendedor3.nivel = v3[0].nivel
+                      cl.vendedor3.afiliado = v3[0].codigo_afiliado
+
+                      // Asignando comisión base vendedor nivel 4 -> (Comisión máxima del vendedor nivel 4 menos las comisiones niveles anteriores)
+                      cl.vendedor3.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base - cl.vendedor2.comision_base);
+
+                    }
+
+                  }
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 2 PA'ARRIBA ** INICIO ------- \n")
+                  console.log(cl)
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 2 PA'ARRIBA ** FIN ------- \n")
+                  console.log("\n ************** \n")
+                  console.log("\n---------- FIN ** VENDEDORES NIVEL 2 PA'ARRIBA ---------- \n")
+                  break;
+                
                   //Vendedor Nivel 3
-                  default:
-                    cl.vendedor.comision_base = porcentaje*comisionMax.nivel3;
-                    break;
-                }
-      
+                case '3':
+                  cl.vendedor.comision_base = porcentaje * comisionMax.nivel3;
+                  // Validar si tiene un vendedor afiliado arriba
+                  if (cod) {
+                    let v2 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [cod])
+
+                    console.log("\n---------- INICIO ** VENDEDORES NIVEL 3 PA'ARRIBA ---------- \n")
+                    let count = 2;
+                    if (v2[0] != undefined) {
+                      console.log("\n ------- INFO DB ------- \n")
+                      console.log("Vendedor " + count, v2[0]);
+                      console.log("\n ------- INFO DB ------- \n")
+                      count++
+
+                      cl.vendedor2 = {}
+                      cl.vendedor2.codigo = v2[0].id_vendedor
+                      cl.vendedor2.nombre = v2[0].nombres + " " + v2[0].apellidos
+                      cl.vendedor2.nivel = v2[0].nivel
+                      cl.vendedor2.afiliado = v2[0].codigo_afiliado
+
+                      // Asignando comisión base vendedor arriba -> (Comisión máxima del vendedor arriba con base a su nivel menos la comisión base del vendedor principal)
+                      cl.vendedor2.comision_base = (cl.credito.monto_aprobado - 3000 - cl.vendedor.comision_base);
+
+                    }
+                  }
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 3 PA'ARRIBA ** INICIO ------- \n")
+                  console.log(cl)
+                  console.log("\n ------- COMISIONES VENDEDORES NIVEL 3 PA'ARRIBA ** FIN ------- \n")
+                  console.log("\n ************** \n")
+                  console.log("\n---------- FIN ** VENDEDORES NIVEL 3 PA'ARRIBA ---------- \n")
+                  break;
+                default:
+                  cl.vendedor.comision_base = (cl.credito.monto_aprobado - 3000);
+                  console.log("\n---------- INICIO ** VENDEDOR NIVEL 4 (COMISIÓN MÁXIMA) ---------- \n")
+                  console.log(cl)
+                  console.log("\n---------- FIN ** VENDEDOR NIVEL 4 (COMISIÓN MÁXIMA) ---------- \n")
+                  break;
               }
 
             }
-    
-          // }
-        // });
 
-      }
-    
-    });
-      
+          }
+
+        }
+
+      });
+
     });
 
     // console.log(cl)
