@@ -1079,10 +1079,13 @@ input:focus ~ .bg-primary {
   background-color: transparent;
   color: #404e67;
 }
+
 .btn-outline-secondary:hover {
-  background-color: #404e67;
-  color: #fff !important;
+  background-color: #ffffff !important;
+  color: #080808 !important;
 }
+
+
 .widget-timeline .timeline-items.timeline-icon-secondary:before {
   background-color: #404e67;
 }

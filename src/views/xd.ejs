@@ -1,0 +1,328 @@
+
+const express = require('express')
+const router = express.Router()
+const path = require('path');
+const multer = require('multer');
+const nodemailer = require('nodemailer');
+const conexion = require("../database/db");
+
+const { } = require('../controllers/customerFormControllers');
+const { log } = require('console');
+
+router.get('/restablecer-clave', (req, res) => {
+    res.render('restablecer-clave', { user: req.user })
+});
+router.get('/mensaje', (req, res) => {
+    res.render('mensaje', { user: req.user })
+});
+
+
+
+// * ROUTER: para los métodos del controller
+/*=============================================================*/
+
+router.post('/send-email', async (req, res) => {
+
+    let capturarCorreo = await conexion.query("SELECT * FROM `usuarios`")
+
+    let { correo } = req.body;
+ 
+    console.log("-----------");
+    console.log(" ↓↓ ↓↓ ↓↓ ↓↓");
+    capturarCorreo.forEach((cc) => {
+
+        console.log(cc.correo);
+      
+        if (cc.correo == correo) {
+            console.log("Siiiii");
+
+    //         contentHTML = `
+        
+    // <h1 styles="color:red">ESTE CORREO ES PARA RESTABLECER LA CLAVE DE ACCESO A 3C Sigma Water System </h1>
+    //    <ul> 
+
+       
+    //    <img src="../directorio_dash/images/logo.svg" alt="" height="55"> 
+    //       <li>Este es su correo: ${correo}</li>
+    //    </ul>
+    //  ` ;
+
+            let transporte = nodemailer.createTransport({
+                host: 'mail.3csigmawater.com',
+                post: 2079, //cambiar el puerto a 465 cuando antes de subir al server el proyecto
+                secure: false,
+                auth: {
+                    user: 'noreply@3csigmawater.com',
+                    pass: 'testdecorreo'
+                },
+                //Quitar el tls antes de subir al server
+                tls: {
+                    rejectUnauthorized: false
+                }
+            });
+
+            let informacion = transporte.sendMail({
+                from: "'3C Sigma Water System <noreply@3csigmawater.com>'",
+                to: correo,
+                subject: 'Restablecer contraseña',
+                html: `
+                <body style="background-color: transparent; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
+                <table border="0" cellpadding="0" cellspacing="0" class="nl-container" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: transparent;" width="100%">
+                <tbody>
+                <tr>
+                <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody>
+                <tr>
+                <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f6f6f6; color: #000000; width: 600px;" width="600">
+                <tbody>
+                <tr>
+                <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 30px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+                <table border="0" cellpadding="0" cellspacing="0" class="image_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="width:100%;padding-right:0px;padding-left:0px;">
+                <div align="center" style="line-height:10px"><img src="https://app.3csigmawater.com/imgcorreo/logo1.png" style="display: block; height: auto; border: 0; width: 180px; max-width: 100%;" width="180"></div>
+                </td>
+                </tr>
+                </tbody></table>
+                <table border="0" cellpadding="0" cellspacing="0" class="heading_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="width:100%;text-align:center;padding-top:60px;">
+                <h3 style="margin: 0; color: #000000; font-size: 18px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">¿Olvidaste tu contraseña?</span></h3>
+                </td>
+                </tr>
+                </tbody></table>
+                <table border="0" cellpadding="0" cellspacing="0" class="heading_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="width:100%;text-align:center;padding-top:10px;padding-right:25px;padding-bottom:10px;padding-left:25px;">
+                <h1 style="margin: 0; color: #000000; font-size: 24px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Haz clic en el botón de abajo para reestablecer tu contraseña</span></h1>
+                </td>
+                </tr>
+                </tbody></table>
+                <table border="0" cellpadding="0" cellspacing="0" class="image_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="width:100%;padding-right:0px;padding-left:0px;">
+                <div align="center" style="line-height:10px"><img src="https://app.3csigmawater.com/imgcorreo/candado.png" style="display: block; height: auto; border: 0; width: 106px; max-width: 100%;" width="106"></div>
+                </td>
+                </tr>
+                </tbody></table>
+                <table border="0" cellpadding="0" cellspacing="0" class="button_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="text-align:center;padding-top:45px;">
+                <div align="center">
+                <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:42px;width:480px;v-text-anchor:middle;" arcsize="15%" stroke="false" fillcolor="#fed061"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#000000; font-family:Arial, sans-serif; font-size:16px"><![endif]-->
+                <div style="text-decoration:none;display:block;color:#000000;background-color:#fed061;border-radius:6px;width:80%; width:calc(80% - 2px);border-top:1px solid #fed061;font-weight:400;border-right:1px solid #fed061;border-bottom:1px solid #fed061;border-left:1px solid #fed061;padding-top:5px;padding-bottom:5px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span style="font-size: 16px; line-height: 2; word-break: break-word; mso-line-height-alt: 32px;">Reestablecer</span></span></div>
+                <!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
+                </div>
+                </td>
+                </tr>
+                </tbody></table>
+                <table border="0" cellpadding="0" cellspacing="0" class="paragraph_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+                <tbody><tr>
+                <td style="padding-bottom:35px;">
+                <div style="color:#101112;font-size:12px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-weight:400;line-height:200%;text-align:center;direction:ltr;letter-spacing:0px;mso-line-height-alt:24px;">
+                <p style="margin: 0;">Serás redirigido para crear una nueva contraseña</p>
+                </div>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody>
+                <tr>
+                <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 600px;" width="600">
+                <tbody>
+                <tr>
+                <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 25px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+                <table border="0" cellpadding="0" cellspacing="0" class="image_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="width:100%;padding-right:10px;padding-left:0px;">
+                <div align="center" style="line-height:10px"><img src="https://app.3csigmawater.com/imgcorreo/logo1.png" style="display: block; height: auto; border: 0; width: 120px; max-width: 100%;" width="120"></div>
+                </td>
+                </tr>
+                </tbody></table>
+                <div class="spacer_block mobile_hide" style="height:25px;line-height:25px;font-size:1px;">&hairsp;</div>
+                <div class="spacer_block" style="height:5px;line-height:5px;font-size:1px;">&hairsp;</div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody>
+                <tr>
+                <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 600px;" width="600">
+                <tbody>
+                <tr>
+                <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+                <table border="0" cellpadding="0" cellspacing="0" class="heading_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="width:100%;text-align:center;padding-top:30px;">
+                <h3 style="margin: 0; color: #000000; font-size: 17px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">¿Tienes dudas?</span></h3>
+                </td>
+                </tr>
+                </tbody></table>
+                <table border="0" cellpadding="0" cellspacing="0" class="icons_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="vertical-align: middle; color: #000000; text-align: center; padding-right: 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px;">
+                <table cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="vertical-align: middle; text-align: center;">
+                <!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
+                <!--[if !vml]><!-->
+                <table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">
+                <!--<![endif]-->
+                <tbody><tr>
+                <td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="tel:7862387004" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://app.3csigmawater.com/imgcorreo/phone.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"></a></td>
+                <td style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; color: #000000; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="tel:7862387004" style="color: #000000; text-decoration: none;" target="_self">Llámanos</a></td>
+                </tr>
+                </tbody></table>
+                <!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
+                <!--[if !vml]><!-->
+                <table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">
+                <!--<![endif]-->
+                <tbody><tr>
+                <td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="mailto:sales@3csigmawater.com" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://app.3csigmawater.com/imgcorreo/email.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"></a></td>
+                <td style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; color: #000000; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="mailto:sales@3csigmawater.com" style="color: #000000; text-decoration: none;" target="_self">Escríbenos</a></td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody></table>
+                <table border="0" cellpadding="0" cellspacing="0" class="social_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="text-align:center;padding-left:10px;padding-right:0px;">
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="social-table" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="72px">
+                <tbody><tr>
+                <td style="padding:0 2px 0 2px;"><a href="https://www.facebook.com/3csigmawater" target="_blank"><img alt="Facebook" height="32" src="https://app.3csigmawater.com/imgcorreo/facebook2x.png" style="display: block; height: auto; border: 0;" title="facebook" width="32"></a></td>
+                <td style="padding:0 2px 0 2px;"><a href="https://www.instagram.com/3csigmawater/" target="_blank"><img alt="Instagram" height="32" src="https://app.3csigmawater.com/imgcorreo/instagram2x.png" style="display: block; height: auto; border: 0;" title="instagram" width="32"></a></td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody>
+                <tr>
+                <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 600px;" width="600">
+                <tbody>
+                <tr>
+                <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+                <div class="spacer_block" style="height:30px;line-height:30px;font-size:1px;">&hairsp;</div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-5" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody>
+                <tr>
+                <td>
+                <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;" width="600">
+                <tbody>
+                <tr>
+                <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
+                <table border="0" cellpadding="0" cellspacing="0" class="icons_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="vertical-align: middle; color: #9d9d9d; font-family: inherit; font-size: 15px; padding-bottom: 5px; padding-top: 5px; text-align: center;">
+                <table cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
+                <tbody><tr>
+                <td style="vertical-align: middle; text-align: center;">
+                <!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
+                <!--[if !vml]><!-->
+                <table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">
+                <!--<![endif]-->
+                <tbody><tr>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody></table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </td>
+                </tr>
+                </tbody>
+                </table><!-- End -->
+                
+                </body>
+            
+            `
+            });
+
+            // console.log('Mensaje enviado', informacion.messageId);
+            // res.redirect('/mensaje');
+
+            res.render('login', {
+                alert: true,
+                alertTitle: "Informacion",
+                alertMessage: "Revise su correo",
+                alertIcon: 'info',
+                showConfirmButton: true,
+                timer: false,
+                ruta: 'login'
+            });
+        } else {
+            console.log("nooo");
+            
+        }
+
+    });
+    // console.log("-----------");
+
+
+    //     console.log("-----------");
+    //   console.log("Correo del input ===>>>", correo);
+    //     console.log("-----------");
+
+
+
+
+
+});
+
+
+
+
+/*=============================================================*/
+
+
+
+module.exports = router

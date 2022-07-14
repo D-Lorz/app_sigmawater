@@ -1,3 +1,4 @@
+const { log, count } = require("console");
 const { promisify} = require("util");
 const conexion = require("../database/db");
 
@@ -34,7 +35,6 @@ exports.registrarClientes = async (req, res) => {
       console.log(" ========>> 1 Registro Cliente ");
       res.redirect('/lista-clientes')
     })
-
 
 }
 
@@ -641,7 +641,7 @@ exports.getRegistrarInstalacion = async (req, res) => {
 
 }
 
-// todo --> Generar codigo numero aleatorio del cliente
+// todo ====>>>>  Generar codigo numero aleatorio del cliente
 const generateRandomNumber = (num) => {
   const characters = '0123456789';
   let result1 = '';
@@ -651,10 +651,30 @@ const generateRandomNumber = (num) => {
   }
   return result1;
 }
-//* Formateando precios a una moneda 
+// todo ====>>> Formateando precios a una moneda 
 const formatear = new Intl.NumberFormat('en-US', {
   style: "currency",
   currency: "USD",
   minimumFractionDigits: 0,
 });
+
+// todo ====>>>> Numero de clientes añadidos
+exports.numeroClientes = async (req, res) => {
+  const id_vendedor = req.user.id_consecutivo;
+  const id_vendedores = req.user.id_vendedor;
+
+  let countCliente = await conexion.query('SELECT count(correo) as totalClientes FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor]) 
+    console.log("Numero de clientes ===>>>");
+        console.log(countCliente[0].totalClientes);
+        
+  let countAfiliados = await conexion.query('SELECT count(codigo_afiliado) as totalAfiliados FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedores]) 
+    console.log("Numero de vendedores afilaidos ===>>>");
+       console.log(countAfiliados[0].totalAfiliados);
+
+ res.render('dashboard', { user: req.user, totalCliente : countCliente[0].totalClientes,totalAfiliado : countAfiliados[0].totalAfiliados });
+     
+ 
+}
+
+
 

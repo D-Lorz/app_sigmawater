@@ -3,7 +3,7 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados ,isSeller,isAdmin} = require('../controllers/authController');
-const {} = require('../controllers/adminControllers');
+const {numeroClientes} = require('../controllers/customerFormControllers');
 
 
 
@@ -15,7 +15,7 @@ const {} = require('../controllers/adminControllers');
         res.render('login', { alert: false })
      });
 
-      router.get('/', isAuthenticated, (req, res) => {
+      router.get('/', isAuthenticated,numeroClientes, (req, res) => {
          if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
             res.render('dashboard', { user: req.user })
             

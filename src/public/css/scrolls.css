@@ -47,7 +47,7 @@ scroll-container::-webkit-scrollbar-thumb {
   overflow: auto;
   /* border: 1px solid #666; */
   /* background-color: #ccc; */
-  padding: 8px;
+  /* padding: 8px; */
 }
 .scroll_vertical::-webkit-scrollbar {
  width:10px;

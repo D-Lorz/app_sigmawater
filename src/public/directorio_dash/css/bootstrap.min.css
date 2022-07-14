@@ -3212,7 +3212,7 @@ fieldset:disabled .btn {
 .btn-danger:hover {
   color: #fff;
   background-color: #d75350;
-  border-color: #ca4e4b;
+  border-color: #fd625e;
 }
 .btn-check:focus + .btn-danger,
 .btn-danger:focus {
@@ -3324,15 +3324,15 @@ fieldset:disabled .btn {
 }
 .btn-dark {
   color: #fff;
-  background-color: #343a40;
-  border-color: #343a40;
+  background-color: #495057;
+  border-color: #495057;
 }
 .btn-check:focus + .btn-dark,
 .btn-dark:focus,
 .btn-dark:hover {
-  color: #fff;
-  background-color: #2c3136;
-  border-color: #2a2e33;
+  color: #ffffff;
+  background-color: #74788d;
+  border-color: #74788d;
 }
 .btn-check:focus + .btn-dark,
 .btn-dark:focus {
@@ -3655,8 +3655,8 @@ fieldset:disabled .btn {
   border-color: #343a40;
 }
 .btn-outline-dark:hover {
-  color: #fff;
-  background-color: #343a40;
+  color: rgb(0, 0, 0);
+  background-color: #ffffff;
   border-color: #343a40;
 }
 .btn-check:focus + .btn-outline-dark,

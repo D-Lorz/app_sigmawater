@@ -3008,7 +3008,7 @@ fieldset:disabled .btn {
 }
 .btn-primary {
   color: #fff;
-  background-color: #812082;
+  background: linear-gradient( 189.55deg, #fed061 -131.52%, #812082 -11.9%, #50368c 129.46% );
   border-color: #edeef7;
 }
 .btn-check:focus + .btn-primary,

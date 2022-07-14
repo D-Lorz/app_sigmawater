@@ -3,16 +3,9 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const { isAuthenticated } = require('../controllers/authController');
-const { listarVendedores,
-        listarVendedores_PerfilVendedores,
-        listarClientes_PerfilClientes,
-        listarClientes,
-        ActualizarNivel,
-        actualizarEstadoVendedor,
-        ActualizarCredito,
-        ActualizarMontoAprobado,
-        clfirmas, factura
-         } = require('../controllers/adminControllers');
+const { listarVendedores, listarVendedores_PerfilVendedores, listarClientes_PerfilClientes, listarClientes_PerfilClientess,listarClientes,
+        ActualizarNivel, actualizarEstadoVendedor, ActualizarCredito, ActualizarMontoAprobado,
+        clfirmas, factura, crear,listarVendedoresss } = require('../controllers/adminControllers');
 
 
  // * ========== Renderizado de vistas clientes ==========
@@ -27,11 +20,15 @@ router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
  router.get('/acuerdo/:id', isAuthenticated,clfirmas )
 
   router.get('/ventas', isAuthenticated,factura)
+  router.get('/create/:id', isAuthenticated,listarClientes_PerfilClientess)
 
 //  router.get('/documento/:id', isAuthenticated,)
  router.get('/pruebaa', isAuthenticated,(req, res) => {
-        res.render('./1-admin/pruebaa', { user: req.user })
+        res.render('./1-admin/prueba', { user: req.user })
  });
+
+ router.get('/hola', isAuthenticated,listarVendedoresss)
+   
 // *   ================ ===== ↑↑ ==============================
 
            

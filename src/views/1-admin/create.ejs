@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Ventas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesbrand" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../directorio_dash/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="../css/colors.min.css">
+
+    <base href="#">
+
+
+
+    <link rel="shortcut icon" href="./directorio_perfilClientes/images/favicon.ico">
+
+    <!-- preloader css -->
+    <link rel="stylesheet" href="../directorio_perfilClientes/css/preloader.min.css" type="text/css" />
+
+    <!-- Bootstrap Css -->
+    <link href="../directorio_perfilClientes/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet"
+        type="text/css" />
+    <!-- Icons Css -->
+    <link href="../directorio_perfilClientes/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="../directorio_perfilClientes/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
+
+    <link rel="stylesheet" href="../css/scrolls.css">
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <!-- =======FIXME: MENU ========================== -->
+        <%- include ('../1-admin/menu.ejs')%>
+            <!-- =======FIXME: MENU ========================== -->
+
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="card-body">
+                            <div class="modal" data-bs-backdrop="static" data-bs-keyboard="false" id="modalPreloadxd"
+                                tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <br>
+                                        <!-- <div class="header">
+                                         
+                                            <br>
+                                           <center> <h5 style="font-size: 160%; color: #595959;letter-spacing: -1px;">Valor del
+                                                sistema</h5>
+                                            <h2 style="color: #595959;font-weight: 300;">Introduce el valor del producto
+                                                aprobado por la financista</h2></center>
+                                           
+                                        </div> -->
+
+                                        <div class="modal-body">
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-6">
+                                                
+                                                    <input type="text" class="form-control" name="" id="" placeholder="Concepto">
+                                                    <br>
+                                                    <input type="text" class="form-control" name="" id="" placeholder="Monto">
+                                                    <div class="modal-footer"><input type="submit" class="btn btn-success" value="Confirmar" id="botonesOMG" style="border-radius:17px">
+                                                        <a href="/hola/">
+                                                          <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="border-radius:17px">Regresar</button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="card-body">
+                                <div class="modal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Modal title</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Modal body text goes here.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- end card body -->
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- =======FIXME: copyright ========================== -->
+            <%- include ('../partials/copyright.ejs')%>
+                <!-- =======FIXME: copyright ========================== -->
+
+    </div>
+    </div>
+
+    <!-- /Right-bar -->
+
+    <!-- JAVASCRIPT -->
+    <script src="../directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
+    <script src="../directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
+    <script src="../directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
+    <script src="../directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
+    <script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
+    <!-- pace js -->
+    <script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
+
+    <script>
+
+
+        $(document).ready(function () {
+
+            $('#modalPreloadxd').modal('show')
+        });
+    </script>
+
+
+</body>
+
+</html>

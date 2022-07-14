@@ -101,9 +101,6 @@ router.get('/test-de-agua/:id', isAuthenticated, getTestAgua)
  router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 
 // *   ================ ===== ↑↑ ==============================
- router.get('/hola', isAuthenticated, (req, res) => {
-    res.render('hola', { user: req.user })
- });
 
 
 //* router para los métodos del customerFormControllers
