@@ -601,11 +601,11 @@ exports.elegirSistema= async (req, res) => {
   const monto_aprobado = req.body.montoAprobadoPorFuera.replace(/[$ ,]/g, '');
   let monto_maximo = 8500
 
-  porcentaje_aprobado = (monto_aprobado*100)/8500
+  let porcentaje_aprobado = ((monto_aprobado*100)/monto_maximo).toFixed(1)
 
   if (sistema == "Reverse Osmosis System") {
     monto_maximo = 4250
-    porcentaje_aprobado = Math.round((monto_aprobado*100)/4250)
+    porcentaje_aprobado = ((monto_aprobado*100)/monto_maximo).toFixed(1)
   } 
 
   const datosElegirSistema= { id_cliente, sistema, estado_del_credito, monto_aprobado, porcentaje_aprobado, monto_maximo };
