@@ -683,7 +683,7 @@ mostrarProducto = mostrarProducto[0]
     licenciacredito,clRegistro_instalacion, evidenciaF,mostrarProducto });
 };
 
-/* FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES + DEDUCCIONES */
+/* ******************************** --INICIO-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
 exports.factura = async (req, res) => {
 
   const clientes = await conexion.query("SELECT cl.*, cr.id_cliente AS idCliente, cr.monto_aprobado, cr.porcentaje_aprobado, cr.monto_maximo, cr.sistema FROM nuevos_cliente AS cl JOIN solicitar_credito AS cr ON cl.id = cr.id_cliente")
@@ -962,3 +962,4 @@ exports.factura = async (req, res) => {
 
   res.render("./1-admin/ventas", { user: req.user, arrayVentas });
 }
+/* ******************************** --FIN-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
