@@ -465,7 +465,7 @@ exports.clfirmas = async (req, res) => {
 
 }
 
-// todo --> Formulario servicio instalado
+// todo --> Formulario servicio instalado y registro de ventas 
 exports.servicioInstaladosx = async (req, res) => {
 
   const fecha_instalacion = req.body.fechaDeInstalacion;
@@ -476,20 +476,126 @@ exports.servicioInstaladosx = async (req, res) => {
   const evidencia_fotografica = JSON.stringify({ 'evidencia': evidencia, });
   const nota = req.body.nota;
 
-
   const id_cliente = req.body.id_cliente
   const codigo_cliente = req.body.codigo_cliente
 
+  console.log("******************");
+  console.log("↓↓ ↓↓"); 
+  console.log("Cliente actual ==>>", codigo_cliente);
+ 
   const estado_agenda = 1
 
   const Datos_servicio = { fecha_instalacion, producto_instalado, serial_producto, instalador, evidencia_fotografica, nota, id_cliente }
   const Datos_estado = { estado_agenda }
   const Datos_factura = { producto_instalado, fecha_instalacion, id_cliente, codigo_cliente }
-
+ 
   await conexion.query('UPDATE agendar_instalacion SET ? WHERE id_cliente = ?', [Datos_estado, id_cliente])
-
   await conexion.query('INSERT INTO factura SET ?', [Datos_factura])
 
+//* ==>> Consulto el id del vendedor del cliente actual 
+   let cliente = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ?', [codigo_cliente])
+
+     console.log("↓↓ ↓↓"); 
+     console.log("Este es el id del vendedor de ese cliente ==>>", cliente[0].codigo_id_vendedor);
+
+// //* ==>> Consulto el numero actual de ventas de ese vendedor 
+   let vdNumeroVentas = await conexion.query('SELECT * FROM registro_de_vendedores WHERE id_vendedor = ?', [cliente[0].codigo_id_vendedor])
+
+      console.log("↓↓ ↓↓");  
+      console.log("Este es el numero de ventas actual de ese vendedor ==>>", vdNumeroVentas[0].numero_de_ventas);
+
+      console.log("↓↓ ↓↓");  
+      console.log("llamando el nivel actual de vendedor ==>>", vdNumeroVentas[0].nivel );  
+ 
+
+
+      // const clientes = await conexion.query("SELECT * FROM nuevos_cliente")
+      const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores ")
+
+      console.log("------------");
+      console.log("Apellidos de los vendedores generales");
+      console.log("------------");
+
+  vendedores.forEach((vd) => {
+     
+      console.log(vd.nombres);
+     
+      
+   });
+      console.log("------------");
+
+
+let cod2 = '0', cod3 = '0';
+
+let v2 = await conexion.query('SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ?', [vdNumeroVentas[0].codigo_afiliado])
+
+if (v2.length > 0) {
+cod2 = v2[0].codigo_afiliado
+console.log("----- 1");
+console.log(cod2);
+console.log("-----");
+} else {
+cod2 = cod2
+console.log("----- 2");
+console.log(cod2);
+console.log("-----");
+}
+
+let v3 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [v2[0].codigo_afiliado])
+
+if (v3.length > 0) {
+  cod3 = v3[0].codigo_afiliado
+  console.log("----- 1");
+  console.log(cod3);
+  console.log("-----");
+  } else {
+  cod3 = cod3
+  console.log("----- 2");
+  console.log(cod3);
+  console.log("-----");
+  }
+
+// //* ==>> Validando el producto que se escoga y luego sumar la venta que gane el vendedor
+//     if (producto_instalado == "Reverse Osmosis System 3C Sigma") {
+//             var numero_de_ventas = vdNumeroVentas[0].numero_de_ventas + 0.5 ;
+
+//     } else if(producto_instalado == "Reverse Osmosis System") {
+//             var numero_de_ventas = vdNumeroVentas[0].numero_de_ventas + 0.5 ;
+
+//     } else if (producto_instalado == "Whole System") {
+//             var numero_de_ventas = vdNumeroVentas[0].numero_de_ventas + 1 ;
+//     }
+
+// // * ==>> Condición  para subir de nivel al llegar a determinada cantidad de ventas
+//      if(numero_de_ventas == 20.5 || numero_de_ventas == 21){
+//             var nivel =  (parseFloat(vdNumeroVentas[0].nivel)+1) //Para nivel 2
+
+//      }else if(numero_de_ventas == 40.5 || numero_de_ventas == 41) {
+//             var nivel =  (parseFloat(vdNumeroVentas[0].nivel)+1)  //Para nivel 3 
+
+//      } else if (numero_de_ventas == 60.5 || numero_de_ventas == 61){  
+//                var nivel =  (parseFloat(vdNumeroVentas[0].nivel)+1) //Para nivel 4
+//      }else {
+//                nivel = vdNumeroVentas[0].nivel
+//      }
+    
+    
+    //   console.log("---------"); 
+    //   console.log("Este es el numero de ventas total de ese vendedor ==>>" , numero_de_ventas);
+   
+    //   console.log("↓↓ ↓↓"); 
+    //   console.log("Este es el nuevo nivel del vendedor ==>>" ,nivel);
+    //   console.log("---------"); 
+    //   console.log("↑↑ ↑↑");  
+    //   console.log("******************");
+
+    //  const Datos_numeroVentas = { nivel, numero_de_ventas }
+    //  const Dts_VentasAfiliado = { numero_de_ventas }
+//* ==>> Hago envio de la variable con la venta nueva y la anterior sumada 
+//* ==>> Tambien el nuevo nivel del vendedor 
+//  await conexion.query('UPDATE registro_de_vendedores SET ? WHERE codigo_afiliado = ?', [Datos_numeroVentas,vdNumeroVentas[0].id_vendedor])
+  // await conexion.query('UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?', [Datos_numeroVentas, cliente[0].codigo_id_vendedor])
+  // await conexion.query('UPDATE registro_de_vendedores SET ? WHERE codigo_afiliado = ?', [Dts_VentasAfiliado,vdNumeroVentas[0].id_vendedor])
   await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], (err, result) => {
     if (err) throw err;
     if (result) { res.redirect('/perfil-cliente/' + codigo_cliente) }
@@ -497,7 +603,6 @@ exports.servicioInstaladosx = async (req, res) => {
   })
 
 }
-
 exports.listarVendedoresss = async (req, res) => {
   const id_cliente = req.params.id;
   let epa = await conexion.query("SELECT * FROM nuevos_cliente LIMIT 1");

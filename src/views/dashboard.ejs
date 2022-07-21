@@ -658,134 +658,106 @@
                     <!-- end row-->
 
                     <div class="row">
-                        <div class="col-xl-4">
+                        <div class="col-xl-6">
                             <div class="card">
                                 <div class="card-header align-items-center d-flex">
-                                    <h4 class="card-title mb-0 flex-grow-1">Trading</h4>
-                                    <div class="flex-shrink-0">
+                                    <h4 class="card-title mb-0 flex-grow-1" style="text-align: center;">Agregar nuevo cliente</h4>
+                                    <!-- <div class="flex-shrink-0">
                                         <ul class="nav nav-tabs-custom card-header-tabs" role="tablist">
                                             <li class="nav-item">
                                                 <a class="nav-link active" data-bs-toggle="tab" href="#buy-tab"
-                                                    role="tab">Buy</a>
+                                                 role="tab">Buy</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-bs-toggle="tab" href="#sell-tab"
-                                                    role="tab">Sell</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                       </ul>
+                                    </div> -->
                                 </div><!-- end card header -->
 
                                 <div class="card-body">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="buy-tab" role="tabpanel">
-                                            <div class="float-end ms-2">
+                                            <!-- <div class="float-end ms-2">
                                                 <h5 class="font-size-14"><i class="bx
                                             bx-wallet text-primary
                                             font-size-16 align-middle me-1"></i>
                                                     <a href="#!" class="text-reset
                                             text-decoration-underline">$4335.23</a>
                                                 </h5>
+                                            </div> -->
+                                            <!-- <h5 class="font-size-14 mb-4">Buy Coins</h5> -->
+
+                               <div class="app-content content" style="margin-top:-7px">
+                     
+                                <form action="/registrarClientes" method="POST" id="validarForm" >
+                                    <div class="row" style="margin-bottom: 2%;">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="nombreP">Nombre<span class="danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="nombreP" name="nombre">
+                                                    <input type="hidden" class="form-control" required id="nombreP" value="" name="segundo_nombre">
+                                                </div>
                                             </div>
-                                            <h5 class="font-size-14 mb-4">Buy Coins</h5>
-                                            <div>
-                                                <div class="form-group mb-3">
-                                                    <label>Payment method :</label>
-                                                    <select class="form-select">
-                                                        <option>Direct Bank Payment</option>
-                                                        <option>Credit / Debit Card</option>
-                                                        <option>Paypal</option>
-                                                        <option>Payoneer</option>
-                                                        <option>Stripe</option>
-                                                    </select>
+                                          
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="apellidoP"> Apellidos<span class="danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="apellidoP" name="apellido" >
                                                 </div>
-
-                                                <div>
-                                                    <label>Add Amount :</label>
-                                                    <div class="input-group mb-3">
-                                                        <label class="input-group-text">Amount</label>
-                                                        <select class="form-select" style="max-width: 90px;">
-                                                            <option value="BT" selected>BTC</option>
-                                                            <option value="ET">ETH</option>
-                                                            <option value="LT">LTC</option>
-                                                        </select>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="0.00121255">
-                                                    </div>
-
-                                                    <div class="input-group mb-3">
-                                                        <label class="input-group-text">Price</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="$58,245">
-                                                        <label class="input-group-text">$</label>
-                                                    </div>
-
-                                                    <div class="input-group mb-3">
-                                                        <label class="input-group-text">Total</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="$36,854.25">
-                                                    </div>
+                                            </div> 
+                                        </div>
+                                         
+                                         
+                                          <div class="row" style="margin-bottom: 2%;">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="correoP"> Correo<span class="danger">*</span></label>
+                                                    <input type="email" class="form-control" required id="correoP" name="correo" >
                                                 </div>
-
-                                                <div class="text-center">
-                                                    <button type="button" class="btn
-                                            btn-success w-md">Buy Coin</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="telefonoP">Teléfono<span class="danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="telefonoP" name="telefono">
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- end tab pane -->
-                                        <div class="tab-pane" id="sell-tab" role="tabpanel">
-                                            <div class="float-end ms-2">
-                                                <h5 class="font-size-14"><i class="bx
-                                            bx-wallet text-primary
-                                            font-size-16 align-middle me-1"></i>
-                                                    <a href="#!" class="text-reset
-                                            text-decoration-underline">$4235.23</a>
-                                                </h5>
-                                            </div>
-                                            <h5 class="font-size-14 mb-4">Sell Coins</h5>
-                                            <div>
-
-                                                <div class="form-group mb-3">
-                                                    <label>Wallet ID :</label>
-                                                    <input type="email" class="form-control"
-                                                        placeholder="1cvb254ugxvfcd280ki">
-                                                </div>
-
-                                                <div>
-                                                    <label>Add Amount :</label>
-                                                    <div class="input-group mb-3">
-                                                        <label class="input-group-text">Amount</label>
-                                                        <select class="form-select" style="max-width: 90px;">
-                                                            <option value="BT" selected>BTC</option>
-                                                            <option value="ET">ETH</option>
-                                                            <option value="LT">LTC</option>
-                                                        </select>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="0.00121255">
-                                                    </div>
-
-                                                    <div class="input-group mb-3">
-                                                        <label class="input-group-text">Price</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="$23,754.25">
-                                                        <label class="input-group-text">$</label>
-                                                    </div>
-
-                                                    <div class="input-group mb-3">
-                                                        <label class="input-group-text">Total</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="$6,852.41">
-                                                    </div>
-                                                </div>
-
-                                                <div class="text-center">
-                                                    <button type="button" class="btn
-                                            btn-danger w-md">Sell Coin</button>
+                                     
+                                          <div class="row" style="margin-bottom: 2%;">
+                                           <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="direccionP">Dirección<span class="danger">*</span></label>
+                                                    <input type="text" class="form-control"  required placeholder="Escriba su direccion..." id="cldireccion" name="direccion" >
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- end tab pane -->
+                                             <input type="hidden" class="form-control" value="" name="direccion2">
+                                             <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="ciudadP">Ciudad<span class="danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="clciudad" name="ciudad" >
+                                                </div>
+                                            </div>
+                                           </div>
+                                        
+                                        <div class="row" style="margin-bottom: 2%;">
+                                          
+                                              <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="">Estado<span class="danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="clestado" name="estado_ubicacion" >
+                                                </div>
+                                            </div>
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="postalcode">Codigo postal<span class="danger">*</span></label>
+                                                    <input type="text" class="form-control" required id="clpostalcode" name="codigo_postal" >
+                                             </div>
+                                         </div>
+                                     </div>
+
+                                        <center><button type="submit" class="btn btn-primary" style="border-radius:17px;">Guardar</button></center>
+                                    </form>
+                         </div>
+                                          </div>
+                                      
                                     </div>
                                     <!-- end tab content -->
                                 </div>
@@ -795,7 +767,7 @@
                         </div>
                         <!-- end col -->
 
-                        <div class="col-xl-4">
+                        <!-- <div class="col-xl-4">
                             <div class="card">
                                 <div class="card-header align-items-center d-flex">
                                     <h4 class="card-title mb-0 flex-grow-1">Transactions</h4>
@@ -820,12 +792,13 @@
                                                     Sell
                                                 </a>
                                             </li>
-                                        </ul>
+                                        </ul> -->
                                         <!-- end nav tabs -->
-                                    </div>
-                                </div><!-- end card header -->
+                                    <!-- </div> -->
+                                <!-- </div> -->
+                                <!-- end card header -->
 
-                                <div class="card-body px-0">
+                                <!-- <div class="card-body px-0">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="transactions-all-tab" role="tabpanel">
                                             <div class="table-responsive px-3" data-simplebar style="max-height:
@@ -1143,9 +1116,9 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!-- end tab pane -->
-                               <div class="tab-pane" id="transactions-buy-tab" role="tabpanel">
+                               <!-- <div class="tab-pane" id="transactions-buy-tab" role="tabpanel">
                                     <div class="table-responsive px-3" data-simplebar style="max-height:352px;">
                                                 <table class="table align-middle
                                         table-nowrap table-borderless">
@@ -1443,9 +1416,9 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!-- end tab pane -->
-                                        <div class="tab-pane" id="transactions-sell-tab" role="tabpanel">
+                                        <!-- <div class="tab-pane" id="transactions-sell-tab" role="tabpanel">
                                             <div class="table-responsive px-3" data-simplebar style="max-height:352px;">
                                                 <table class="table align-middle table-nowrap table-borderless">
                                                     <tbody>
@@ -1744,17 +1717,17 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <!-- end tab pane -->
+                                      
                                     </div>
-                                    <!-- end tab content -->
+                                  
                                 </div>
-                                <!-- end card body -->
+                              
                             </div>
-                            <!-- end card -->
-                        </div>
+                         
+                        </div> -->
                         <!-- end col -->
 
-                        <div class="col-xl-4">
+                        <div class="col-xl-6">
                             <div class="card">
                                 <div class="card-header align-items-center d-flex">
                                     <h4 class="card-title mb-0 flex-grow-1">Recent Activity</h4>
@@ -2158,8 +2131,6 @@
         <!-- pace js -->
         <script src="./directorio_dash/libs/pace-js/pace.min.js"></script>
 
-
-
         <!-- apexcharts -->
         <script src="./directorio_dash/libs/apexcharts/apexcharts.min.js"></script>
         <!-- Plugins js-->
@@ -2177,6 +2148,92 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
             integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
             crossorigin="anonymous"></script>
+
+            <!-- Google Maps JavaScript library -->
+<script
+src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDnXrGToxsOSdtK01dW0yynlYxRsv8D6ro"></script>
+
+<script>
+
+// ======================================================= ==============-->
+  // ==   ==TODO: PARA LA API DE GOOGLE MAPS ======================================= -->
+
+  let autocomplete;
+  let postalField = document.getElementById('clpostalcode')
+  let address1Field = document.getElementById('address1')
+  let direccion = document.getElementById('cldireccion')
+
+  function initAutocomplete() {
+ 
+    autocomplete = new google.maps.places.Autocomplete(
+      direccion, {
+        types: ['address'],
+        componentrestrictions: {
+          'country': ['US']
+        },
+        fields: ['address_components']
+      }
+    );
+
+    autocomplete.addListener('place_changed', fillInAddress)
+
+  }
+
+  function fillInAddress() {
+    const place = autocomplete.getPlace();
+    let address1 = "";
+    let postcode = "";
+
+    for (const component of place.address_components) {
+      const componentType = component.types[0];
+
+      switch (componentType) {
+
+        case "street_number": {
+          address1 = `${component.long_name} ${address1}`;
+          break;
+        }
+
+        case "route": {
+          address1 += component.short_name;
+          break;
+        }
+
+        case "postal_code": {
+          postcode = `${component.long_name}${postcode}`;
+          break;
+        }
+
+        case "postal_code_suffix": {
+          postcode = `${postcode}-${component.long_name}`;
+          break;
+        }
+        case "locality":
+          document.querySelector("#clciudad").value = component.long_name;
+          break;
+        case "administrative_area_level_1": {
+          document.querySelector("#clestado").value = component.long_name;
+          break;
+        }
+        /*
+        case "country":
+            document.querySelector("#pais").value = component.long_name;
+            break;
+        */
+      }
+    }
+    direccion.value = address1;
+    postalField.value = postcode;
+
+  }
+
+  window.initAutocomplete = initAutocomplete;
+  // Cargar función initAutocomplete al acceder a la página
+  google.maps.event.addDomListener(window, 'load', initAutocomplete);
+
+ 
+
+</script>
 
     </body>
 

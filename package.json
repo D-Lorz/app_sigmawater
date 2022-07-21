@@ -36,6 +36,6 @@
     "signature_pad": "^4.0.4"
   },
   "devDependencies": {
-    "nodemon": "2.0.18"
+    "nodemon": "^2.0.19"
   }
 }
