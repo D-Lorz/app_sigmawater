@@ -660,8 +660,8 @@ const formatear = new Intl.NumberFormat('en-US', {
 
 // todo ====>>>> Numero de clientes añadidos
 exports.numeroClientes = async (req, res) => {
-  const id_vendedor = req.user.id_consecutivo;
-  const id_vendedores = req.user.id_vendedor;
+ const id_vendedor = req.user.id_consecutivo;
+   const id_vendedores = req.user.id_vendedor;
 
   let countCliente = await conexion.query('SELECT count(correo) as totalClientes FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor]) 
     console.log("Numero de clientes ===>>>");
@@ -673,8 +673,7 @@ exports.numeroClientes = async (req, res) => {
 
  res.render('dashboard', { user: req.user, totalCliente : countCliente[0].totalClientes,totalAfiliado : countAfiliados[0].totalAfiliados });
      
- 
-}
+ }
 
 
 

@@ -8,7 +8,7 @@ const formatear = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 0,
 });
 
-// ? ========>>> ZONA DE VENDEDORES <<<========
+// ? ========>>> ***********  ZONA DE VENDEDORES ************************  <<<========
 // todo ===========>>>  Mostrar lista de VENDEDORES
 exports.listarVendedores = async (req, res) => {
   const lista_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores");
@@ -150,7 +150,9 @@ exports.ActualizarNivel = async (req, res) => {
   const nivel = req.body.nivel;
 
   const datosNivel = { nivel, id_vendedor };
+  const datosNivelUser ={nivel, id_vendedor}
 
+  await conexion.query("UPDATE usuarios SET ? WHERE id_vendedor = ? ", [datosNivelUser, id_vendedor])
   await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ? ", [datosNivel, id_vendedor], (err, result) => {
     if (err) throw err;
 
@@ -183,9 +185,10 @@ exports.actualizarEstadoVendedor = async (req, res) => {
   }
   );
 };
-// ? ========>>> ZONA DE VENDEDORES <<<========
+// ? ========>>> ***********  ZONA DE VENDEDORES ****************************  <<<========
 
-// ? ========>>> ZONA DE CLIENTES <<<========
+
+// ? ========>>> ***********  ZONA DE CLIENTES **************************** <<<========
 // todo ===========>>>  Mostrar lista de CLIENTES y referencia de su vendedor
 exports.listarClientes = async (req, res) => {
   let lista_clientes = await conexion.query(
@@ -405,6 +408,183 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
   mostrarProducto = mostrarProducto[0]
 
+
+//   const clientes = await conexion.query("SELECT cl.*, cr.id_cliente AS idCliente, cr.monto_aprobado, cr.porcentaje_aprobado, cr.monto_maximo, cr.sistema, svi.producto_instalado, rv.numero_de_ventas FROM nuevos_cliente AS cl JOIN solicitar_credito AS cr ON cl.id = cr.id_cliente JOIN servicios_de_instalacion AS svi ON cl.id = svi.id_cliente JOIN registro_de_vendedores As rv ON cl.id = rv.id")
+
+//   const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel, telefono_movil, numero_de_ventas FROM registro_de_vendedores")
+  
+//   const arrayVentas = []
+
+//   clientes.forEach(cl => {
+//   cl.vendedores = []
+
+// let v = vendedores.find(item => item.id == cl.id_vendedor)
+
+//     if (v) {
+
+//      const vendedor = {}, vendedor2 = {}, vendedor3 = {}, vendedor4 = {};
+//       let v2 = false, v3 = false, v4 = false;
+
+//       vendedor.codigo = v.id_vendedor
+//       vendedor.nombre = v.nombres + " " + v.apellidos
+//       vendedor.nivel = parseInt(v.nivel)
+//       vendedor.afiliado = v.codigo_afiliado
+//       vendedor.telefono = v.telefono_movil
+
+
+//       console.log("//--- HOLA SOY EL NUMERO DE VENTAS---///  V1 ");
+
+//       if (cl.producto_instalado == "Reverse Osmosis System 3C Sigma") {
+//          console.log("Numero de ventas actual: ==>> ", v.numero_de_ventas);
+//         var ventasActual = v.numero_de_ventas + 0.5 ;
+//         console.log("Numero de ventas Actualizado: ==>> ", ventasActual );
+    
+//     } else if(cl.producto_instalado == "Reverse Osmosis System") {
+    
+//         console.log("Numero de ventas actual: ==>> ", v.numero_de_ventas);
+//         ventasActual = v.numero_de_ventas + 0.5 ;
+//         console.log("Numero de ventas Actualizado: ==>> ", ventasActual );
+    
+//      } else if (cl.producto_instalado == "Whole System"){
+//        console.log("Numero de ventas actual: ==>> ", v.numero_de_ventas);
+//        ventasActual = v.numero_de_ventas + 1 ;
+//         console.log("Numero de ventas Actualizado: ==>> ", ventasActual );
+//     }
+
+
+//       vendedor.numero_de_ventas = ventasActual
+//      const numero_de_ventas = vendedor.numero_de_ventas
+
+//       conexion.query('UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?', [numero_de_ventas, v.codigo_afiliado])
+      
+
+//       v.codigo_afiliado != '' ? v2 = vendedores.find(item => item.id_vendedor == v.codigo_afiliado) : v2;
+
+//       // VALIDAR SI TIENE UN VENDEDOR 2
+//       if (v2) {
+
+//         vendedor2.codigo = v2.id_vendedor
+//         vendedor2.nombre = v2.nombres + " " + v2.apellidos
+//         vendedor2.nivel = parseInt(v2.nivel)
+//         vendedor2.afiliado = v2.codigo_afiliado
+//         vendedor2.telefono = v2.telefono_movil
+
+//         console.log("//--- HOLA SOY EL NUMERO DE VENTAS---///  V2 ");
+
+//         if (cl.producto_instalado == "Reverse Osmosis System 3C Sigma") {
+//            console.log("Numero de ventas actual: ==>> ", v2.numero_de_ventas);
+//           var ventasActual2 = v2.numero_de_ventas + 0.5 ;
+//           console.log("Numero de ventas Actualizado: ==>> ", ventasActual2 );
+      
+//       } else if(cl.producto_instalado == "Reverse Osmosis System") {
+      
+//           console.log("Numero de ventas actual: ==>> ", v2.numero_de_ventas);
+//           ventasActual2 = v2.numero_de_ventas + 0.5 ;
+//           console.log("Numero de ventas Actualizado: ==>> ", ventasActual2 );
+      
+//        } else if (cl.producto_instalado == "Whole System"){
+//          console.log("Numero de ventas actual: ==>> ", v2.numero_de_ventas);
+//          ventasActual2 = v2.numero_de_ventas + 1 ;
+//           console.log("Numero de ventas Actualizado: ==>> ", ventasActual2 );
+//       }
+
+
+//         vendedor2.numero_de_ventas = ventasActual2
+//         v2.codigo_afiliado != '' ? v3 = vendedores.find(item => item.id_vendedor == v2.codigo_afiliado) : v3;
+//       }
+//      // VALIDAR SI TIENE UN VENDEDOR 3
+//       if (v3) {
+//         vendedor3.codigo = v3.id_vendedor
+//         vendedor3.nombre = v3.nombres + " " + v3.apellidos
+//         vendedor3.nivel = parseInt(v3.nivel)
+//         vendedor3.afiliado = v3.codigo_afiliado
+//         vendedor3.telefono = v3.telefono_movil
+
+//        console.log("//--- HOLA SOY EL NUMERO DE VENTAS---///  V3 ");
+
+//         if (cl.producto_instalado == "Reverse Osmosis System 3C Sigma") {
+//            console.log("Numero de ventas actual: ==>> ", v3.numero_de_ventas);
+//           var ventasActual3 = v3.numero_de_ventas + 0.5 ;
+//           console.log("Numero de ventas Actualizado: ==>> ", ventasActual3 );
+      
+//       } else if(cl.producto_instalado == "Reverse Osmosis System") {
+      
+//           console.log("Numero de ventas actual: ==>> ", v3.numero_de_ventas);
+//           ventasActual3 = v3.numero_de_ventas + 0.5 ;
+//           console.log("Numero de ventas Actualizado: ==>> ", ventasActual3 );
+      
+//        } else if (cl.producto_instalado == "Whole System"){
+//          console.log("Numero de ventas actual: ==>> ", v3.numero_de_ventas);
+//          ventasActual3 = v3.numero_de_ventas + 1 ;
+//           console.log("Numero de ventas Actualizado: ==>> ", ventasActual3 );
+//       }
+//         vendedor3.numero_de_ventas = ventasActual3
+//         v3.codigo_afiliado != '' ? v4 = vendedores.find(item => item.id_vendedor == v3.codigo_afiliado) : v4;
+//       }
+//       // VALIDAR SI TIENE UN VENDEDOR 4
+//       if (v4) {
+//         vendedor4.codigo = v4.id_vendedor
+//         vendedor4.nombre = v4.nombres + " " + v4.apellidos
+//         vendedor4.nivel = parseInt(v4.nivel)
+//         vendedor4.afiliado = v4.codigo_afiliado
+//         vendedor4.telefono = v4.telefono_movil
+
+//         console.log("//--- HOLA SOY EL NUMERO DE VENTAS---///  V4 ");
+
+//         if (cl.producto_instalado == "Reverse Osmosis System 3C Sigma") {
+//            console.log("Numero de ventas actual: ==>> ", v4.numero_de_ventas);
+//           var ventasActual4 = v4.numero_de_ventas + 0.5 ;
+//           console.log("Numero de ventas Actualizado: ==>> ", ventasActual4 );
+      
+//       } else if(cl.producto_instalado == "Reverse Osmosis System") {
+      
+//           console.log("Numero de ventas actual: ==>> ", v4.numero_de_ventas);
+//           ventasActual4 = v4.numero_de_ventas + 0.5 ;
+//           console.log("Numero de ventas Actualizado: ==>> ", ventasActual4 );
+      
+//        } else if (cl.producto_instalado == "Whole System"){
+//          console.log("Numero de ventas actual: ==>> ", v4.numero_de_ventas);
+//           ventasActual4 = v4.numero_de_ventas + 1 ;
+//           console.log("Numero de ventas Actualizado: ==>> ", ventasActual4 );
+//       }
+//         vendedor4.numero_de_ventas = ventasActual4
+
+//      }
+//          switch (vendedor.nivel) {
+//           case 1:
+//            cl.vendedores.push(vendedor)
+          
+//             if (v2) {
+//               cl.vendedores.push(vendedor2)
+//             }
+
+//             if (v3) {
+//               cl.vendedores.push(vendedor3)
+//             }
+
+//             if (v4) {
+//                cl.vendedores.push(vendedor4)
+//             }
+
+//             break;
+//         }
+
+//     } else {
+//       console.log("\n <<<<<<<<<<<<<<<< No hay coincidencias de vendedor >>>>>>>>>>>>>>>>>>>\n")
+//     }
+  
+//     arrayVentas.push(cl)
+//     console.log("\n######################## >> CADENA + NUMERO DE VENTAS ACTUALES + VENTAS NUEVA << ########################")
+//     console.log(cl)
+//     console.log("\n######################## >> CADENA + NUMERO DE VENTAS ACTUALES + VENTAS NUEVA << ########################")
+
+
+//   });
+
+
+
+
+
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-cliente", {
     user: req.user, estado,
@@ -441,7 +621,7 @@ exports.ActualizarMontoAprobado = async (req, res) => {
     res.send(true)
   });
 };
-
+//todo =======>>> Adjuntar firma en el documento del contrato - form credito interno
 exports.clfirmas = async (req, res) => {
 
   const id_cliente = req.params.id;
@@ -479,10 +659,6 @@ exports.servicioInstaladosx = async (req, res) => {
   const id_cliente = req.body.id_cliente
   const codigo_cliente = req.body.codigo_cliente
 
-  console.log("******************");
-  console.log("↓↓ ↓↓"); 
-  console.log("Cliente actual ==>>", codigo_cliente);
- 
   const estado_agenda = 1
 
   const Datos_servicio = { fecha_instalacion, producto_instalado, serial_producto, instalador, evidencia_fotografica, nota, id_cliente }
@@ -492,110 +668,7 @@ exports.servicioInstaladosx = async (req, res) => {
   await conexion.query('UPDATE agendar_instalacion SET ? WHERE id_cliente = ?', [Datos_estado, id_cliente])
   await conexion.query('INSERT INTO factura SET ?', [Datos_factura])
 
-//* ==>> Consulto el id del vendedor del cliente actual 
-   let cliente = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ?', [codigo_cliente])
 
-     console.log("↓↓ ↓↓"); 
-     console.log("Este es el id del vendedor de ese cliente ==>>", cliente[0].codigo_id_vendedor);
-
-// //* ==>> Consulto el numero actual de ventas de ese vendedor 
-   let vdNumeroVentas = await conexion.query('SELECT * FROM registro_de_vendedores WHERE id_vendedor = ?', [cliente[0].codigo_id_vendedor])
-
-      console.log("↓↓ ↓↓");  
-      console.log("Este es el numero de ventas actual de ese vendedor ==>>", vdNumeroVentas[0].numero_de_ventas);
-
-      console.log("↓↓ ↓↓");  
-      console.log("llamando el nivel actual de vendedor ==>>", vdNumeroVentas[0].nivel );  
- 
-
-
-      // const clientes = await conexion.query("SELECT * FROM nuevos_cliente")
-      const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores ")
-
-      console.log("------------");
-      console.log("Apellidos de los vendedores generales");
-      console.log("------------");
-
-  vendedores.forEach((vd) => {
-     
-      console.log(vd.nombres);
-     
-      
-   });
-      console.log("------------");
-
-
-let cod2 = '0', cod3 = '0';
-
-let v2 = await conexion.query('SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ?', [vdNumeroVentas[0].codigo_afiliado])
-
-if (v2.length > 0) {
-cod2 = v2[0].codigo_afiliado
-console.log("----- 1");
-console.log(cod2);
-console.log("-----");
-} else {
-cod2 = cod2
-console.log("----- 2");
-console.log(cod2);
-console.log("-----");
-}
-
-let v3 = await conexion.query("SELECT nombres, apellidos, codigo_afiliado, id_vendedor, nivel FROM registro_de_vendedores WHERE id_vendedor = ? ", [v2[0].codigo_afiliado])
-
-if (v3.length > 0) {
-  cod3 = v3[0].codigo_afiliado
-  console.log("----- 1");
-  console.log(cod3);
-  console.log("-----");
-  } else {
-  cod3 = cod3
-  console.log("----- 2");
-  console.log(cod3);
-  console.log("-----");
-  }
-
-// //* ==>> Validando el producto que se escoga y luego sumar la venta que gane el vendedor
-//     if (producto_instalado == "Reverse Osmosis System 3C Sigma") {
-//             var numero_de_ventas = vdNumeroVentas[0].numero_de_ventas + 0.5 ;
-
-//     } else if(producto_instalado == "Reverse Osmosis System") {
-//             var numero_de_ventas = vdNumeroVentas[0].numero_de_ventas + 0.5 ;
-
-//     } else if (producto_instalado == "Whole System") {
-//             var numero_de_ventas = vdNumeroVentas[0].numero_de_ventas + 1 ;
-//     }
-
-// // * ==>> Condición  para subir de nivel al llegar a determinada cantidad de ventas
-//      if(numero_de_ventas == 20.5 || numero_de_ventas == 21){
-//             var nivel =  (parseFloat(vdNumeroVentas[0].nivel)+1) //Para nivel 2
-
-//      }else if(numero_de_ventas == 40.5 || numero_de_ventas == 41) {
-//             var nivel =  (parseFloat(vdNumeroVentas[0].nivel)+1)  //Para nivel 3 
-
-//      } else if (numero_de_ventas == 60.5 || numero_de_ventas == 61){  
-//                var nivel =  (parseFloat(vdNumeroVentas[0].nivel)+1) //Para nivel 4
-//      }else {
-//                nivel = vdNumeroVentas[0].nivel
-//      }
-    
-    
-    //   console.log("---------"); 
-    //   console.log("Este es el numero de ventas total de ese vendedor ==>>" , numero_de_ventas);
-   
-    //   console.log("↓↓ ↓↓"); 
-    //   console.log("Este es el nuevo nivel del vendedor ==>>" ,nivel);
-    //   console.log("---------"); 
-    //   console.log("↑↑ ↑↑");  
-    //   console.log("******************");
-
-    //  const Datos_numeroVentas = { nivel, numero_de_ventas }
-    //  const Dts_VentasAfiliado = { numero_de_ventas }
-//* ==>> Hago envio de la variable con la venta nueva y la anterior sumada 
-//* ==>> Tambien el nuevo nivel del vendedor 
-//  await conexion.query('UPDATE registro_de_vendedores SET ? WHERE codigo_afiliado = ?', [Datos_numeroVentas,vdNumeroVentas[0].id_vendedor])
-  // await conexion.query('UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?', [Datos_numeroVentas, cliente[0].codigo_id_vendedor])
-  // await conexion.query('UPDATE registro_de_vendedores SET ? WHERE codigo_afiliado = ?', [Dts_VentasAfiliado,vdNumeroVentas[0].id_vendedor])
   await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], (err, result) => {
     if (err) throw err;
     if (result) { res.redirect('/perfil-cliente/' + codigo_cliente) }
@@ -603,6 +676,280 @@ if (v3.length > 0) {
   })
 
 }
+exports.probar = async (req, res) => {
+
+  const clientes = await conexion.query("SELECT cl.*, cr.id_cliente AS idCliente, cr.monto_aprobado, cr.porcentaje_aprobado, cr.monto_maximo, cr.sistema, svi.producto_instalado, rv.numero_de_ventas FROM nuevos_cliente AS cl JOIN solicitar_credito AS cr ON cl.id = cr.id_cliente JOIN servicios_de_instalacion AS svi ON cl.id = svi.id_cliente JOIN registro_de_vendedores As rv ON cl.id = rv.id")
+
+  const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel, telefono_movil, numero_de_ventas FROM registro_de_vendedores")
+  
+  const arrayVentas = []
+
+  clientes.forEach(cl => {
+  cl.vendedores = []
+
+let v = vendedores.find(item => item.id == cl.id_vendedor)
+
+    if (v) {
+
+     const vendedor = {}, vendedor2 = {}, vendedor3 = {}, vendedor4 = {};
+      let v2 = false, v3 = false, v4 = false;
+
+      vendedor.codigo = v.id_vendedor
+      vendedor.nombre = v.nombres + " " + v.apellidos
+      vendedor.afiliado = v.codigo_afiliado
+      vendedor.nivel = parseInt(v.nivel)
+      vendedor.telefono = v.telefono_movil
+      vendedor.numero_de_ventas = parseInt(v.numero_de_ventas)
+      
+
+       console.log("//--- HOLA SOY EL NUMERO DE VENTAS---///  V1 ");
+
+      if (cl.producto_instalado == "Reverse Osmosis System 3C Sigma") {
+         console.log("Numero de ventas actual: ==>> ", v.numero_de_ventas);
+        var ventasActual = v.numero_de_ventas + 0.5 ;
+        console.log("Numero de ventas Actualizado: ==>> ", ventasActual );
+    
+    }
+     else if(cl.producto_instalado == "Reverse Osmosis System") {
+    
+        console.log("Numero de ventas actual: ==>> ", v.numero_de_ventas);
+        ventasActual = v.numero_de_ventas + 0.5 ;
+        console.log("Numero de ventas Actualizado: ==>> ", ventasActual );
+     
+      } 
+    else if (cl.producto_instalado == "Whole System"){
+       console.log("Numero de ventas actual: ==>> ", v.numero_de_ventas);
+       ventasActual = v.numero_de_ventas + 1 ;
+        console.log("Numero de ventas Actualizado: ==>> ", ventasActual );
+    }
+
+
+    vendedor.nivel = parseInt(v.nivel)
+
+
+     if(v.numero_de_ventas == 20 || v.numero_de_ventas == 21){
+
+      console.log("Nivel actual: ==>> ", parseInt(v.nivel));
+        var nivel =  (parseInt(v.nivel)+1) //Para nivel 2
+        console.log("Nuevo nivel: ==>> ", nivel );
+
+    }
+     if(vendedor.nivel == 40.5 || vendedor.nivel == 41) {
+
+        console.log("Nivel actual: ==>> ", parseInt(v.nivel));
+        nivel =  parseInt(v.nivel+1) //Para nivel 3 
+        console.log("Nuevo nivel: ==>> ", nivel );
+      
+    }
+           
+    else if (v.numero_de_ventas  == 60.5 || v.numero_de_ventas  == 61){  
+      console.log("Nivel actual: ==>> ", parseInt(v.nivel));
+      nivel =  (parseInt(v.nivel)+1)  //Para nivel 4 
+      console.log("Nuevo nivel: ==>> ", nivel );
+   }else {
+          nivel = v.nivel
+    }
+
+  
+        // // * ==>> Condición  para subir de nivel al llegar a determinada cantidad de ventas
+    
+      
+      v.codigo_afiliado != '' ? v2 = vendedores.find(item => item.id_vendedor == v.codigo_afiliado) : v2;
+
+      // VALIDAR SI TIENE UN VENDEDOR 2
+      if (v2) {
+
+        vendedor2.codigo = v2.id_vendedor
+        vendedor2.nombre = v2.nombres + " " + v2.apellidos
+        vendedor2.afiliado = v2.codigo_afiliado
+        vendedor2.telefono = v2.telefono_movil
+
+        console.log("\n");
+        console.log("//--- HOLA SOY EL NUMERO DE VENTAS---///  V2 ");
+
+        if (cl.producto_instalado == "Reverse Osmosis System 3C Sigma") {
+           console.log("Numero de ventas actual: ==>> ", v2.numero_de_ventas);
+          var ventasActual2 = v2.numero_de_ventas + 0.5 ;
+          console.log("Numero de ventas Actualizado: ==>> ", ventasActual2 );
+      
+      } else if(cl.producto_instalado == "Reverse Osmosis System") {
+      
+          console.log("Numero de ventas actual: ==>> ", v2.numero_de_ventas);
+          ventasActual2 = v2.numero_de_ventas + 0.5 ;
+          console.log("Numero de ventas Actualizado: ==>> ", ventasActual2 );
+      
+       } else if (cl.producto_instalado == "Whole System"){
+         console.log("Numero de ventas actual: ==>> ", v2.numero_de_ventas);
+         ventasActual2 = v2.numero_de_ventas + 1 ;
+          console.log("Numero de ventas Actualizado: ==>> ", ventasActual2 );
+      }
+
+ vendedor2.numero_de_ventas = ventasActual2
+
+
+  // * ==>> Condición  para subir de nivel al llegar a determinada cantidad de ventas
+        if(ventasActual2 == 20.5 || ventasActual2 == 21){
+
+          console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
+            var nivel =  (parseInt(v2.nivel)+1) //Para nivel 2
+            console.log("Nuevo nivel: ==>> ", nivel );
+
+        }else if(ventasActual2 == 40.5 || ventasActual2 == 41) {
+          console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
+          nivel =  (parseInt(v2.nivel)+1)  //Para nivel 3 
+          console.log("Nuevo nivel: ==>> ", nivel );
+
+          } else if (ventasActual2 == 60.5 || ventasActual2 == 61){  
+            console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
+            nivel =  (parseInt(v2.nivel)+1)  //Para nivel 4 
+            console.log("Nuevo nivel: ==>> ", nivel );
+        }else {
+              nivel = v2.nivel
+        }
+   
+   vendedor2.nivel = parseInt(nivel)
+   
+   
+        v2.codigo_afiliado != '' ? v3 = vendedores.find(item => item.id_vendedor == v2.codigo_afiliado) : v3;
+      }
+     // VALIDAR SI TIENE UN VENDEDOR 3
+      if (v3) {
+        vendedor3.codigo = v3.id_vendedor
+        vendedor3.nombre = v3.nombres + " " + v3.apellidos
+        vendedor3.afiliado = v3.codigo_afiliado
+        vendedor3.telefono = v3.telefono_movil
+
+        console.log("\n");
+       console.log("//--- HOLA SOY EL NUMERO DE VENTAS---///  V3 ");
+
+        if (cl.producto_instalado == "Reverse Osmosis System 3C Sigma") {
+           console.log("Numero de ventas actual: ==>> ", v3.numero_de_ventas);
+          var ventasActual3 = v3.numero_de_ventas + 0.5 ;
+          console.log("Numero de ventas Actualizado: ==>> ", ventasActual3 );
+      
+      } else if(cl.producto_instalado == "Reverse Osmosis System") {
+      
+          console.log("Numero de ventas actual: ==>> ", v3.numero_de_ventas);
+          ventasActual3 = v3.numero_de_ventas + 0.5 ;
+          console.log("Numero de ventas Actualizado: ==>> ", ventasActual3 );
+      
+       } else if (cl.producto_instalado == "Whole System"){
+         console.log("Numero de ventas actual: ==>> ", v3.numero_de_ventas);
+         ventasActual3 = v3.numero_de_ventas + 1 ;
+          console.log("Numero de ventas Actualizado: ==>> ", ventasActual3 );
+      }
+        vendedor3.numero_de_ventas = ventasActual3
+       
+        // * ==>> Condición  para subir de nivel al llegar a determinada cantidad de ventas
+     if(ventasActual3 == 20.5 || ventasActual3 == 21){
+
+      console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
+        var nivel =  (parseInt(v3.nivel)+1) //Para nivel 2
+        console.log("Nuevo nivel: ==>> ", nivel );
+
+     }else if(ventasActual3 == 40.5 || ventasActual3 == 41) {
+      console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
+       nivel =  (parseInt(v3.nivel)+1)  //Para nivel 3 
+      console.log("Nuevo nivel: ==>> ", nivel );
+
+       } else if (ventasActual3 == 60.5 || ventasActual3 == 61){  
+        console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
+         nivel =  (parseInt(v3.nivel)+1)  //Para nivel 4 
+        console.log("Nuevo nivel: ==>> ", nivel );
+     }else {
+          nivel = v3.nivel
+     }
+     
+     vendedor3.nivel = parseInt(nivel)
+
+        v3.codigo_afiliado != '' ? v4 = vendedores.find(item => item.id_vendedor == v3.codigo_afiliado) : v4;
+      }
+      // VALIDAR SI TIENE UN VENDEDOR 4
+      if (v4) {
+        vendedor4.codigo = v4.id_vendedor
+        vendedor4.nombre = v4.nombres + " " + v4.apellidos
+        vendedor4.afiliado = v4.codigo_afiliado
+        vendedor4.telefono = v4.telefono_movil
+
+        console.log("\n");
+        console.log("//--- HOLA SOY EL NUMERO DE VENTAS---///  V4 ");
+
+        if (cl.producto_instalado == "Reverse Osmosis System 3C Sigma") {
+           console.log("Numero de ventas actual: ==>> ", v4.numero_de_ventas);
+          var ventasActual4 = v4.numero_de_ventas + 0.5 ;
+          console.log("Numero de ventas Actualizado: ==>> ", ventasActual4 );
+      
+      } else if(cl.producto_instalado == "Reverse Osmosis System") {
+      
+          console.log("Numero de ventas actual: ==>> ", v4.numero_de_ventas);
+          ventasActual4 = v4.numero_de_ventas + 0.5 ;
+          console.log("Numero de ventas Actualizado: ==>> ", ventasActual4 );
+      
+       } else if (cl.producto_instalado == "Whole System"){
+         console.log("Numero de ventas actual: ==>> ", v4.numero_de_ventas);
+          ventasActual4 = v4.numero_de_ventas + 1 ;
+          console.log("Numero de ventas Actualizado: ==>> ", ventasActual4 );
+      }
+        vendedor4.numero_de_ventas = ventasActual4
+
+// * ==>> Condición  para subir de nivel al llegar a determinada cantidad de ventas
+     if(ventasActual4 == 20.5 || ventasActual4 == 21){
+
+      console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
+        var nivel =  (parseInt(v4.nivel)+1) //Para nivel 2
+        console.log("Nuevo nivel: ==>> ", nivel );
+
+     }else if(ventasActual4 == 40.5 || ventasActual4 == 41) {
+      console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
+       nivel =  (parseInt(v4.nivel)+1)  //Para nivel 3 
+      console.log("Nuevo nivel: ==>> ", nivel );
+
+       } else if (ventasActual4 == 60.5 || ventasActual4 == 61){  
+        console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
+         nivel =  (parseInt(v4.nivel)+1)  //Para nivel 4 
+        console.log("Nuevo nivel: ==>> ", nivel );
+     }else {
+          nivel = v4.nivel
+     }
+
+    vendedor4.nivel = parseInt(nivel)
+
+     }
+         switch (vendedor.nivel) {
+          case 1:
+           cl.vendedores.push(vendedor)
+          
+            if (v2) {
+              cl.vendedores.push(vendedor2)
+            }
+
+            if (v3) {
+              cl.vendedores.push(vendedor3)
+            }
+
+            if (v4) {
+               cl.vendedores.push(vendedor4)
+            }
+
+            break;
+        }
+
+    } else {
+      console.log("\n <<<<<<<<<<<<<<<< No hay coincidencias de vendedor >>>>>>>>>>>>>>>>>>>\n")
+    }
+  
+    arrayVentas.push(cl)
+    console.log("\n######################## >> CADENA + NUMERO DE VENTAS ACTUALES + VENTAS NUEVA << ########################")
+    console.log(cl)
+    console.log("\n######################## >> CADENA + NUMERO DE VENTAS ACTUALES + VENTAS NUEVA << ########################")
+
+
+  });
+
+
+  res.render("./1-admin/temporal", { user: req.user, arrayVentas });
+};
+
 exports.listarVendedoresss = async (req, res) => {
   const id_cliente = req.params.id;
   let epa = await conexion.query("SELECT * FROM nuevos_cliente LIMIT 1");
@@ -787,8 +1134,10 @@ mostrarProducto = mostrarProducto[0]
     estadu, mostrarAgenda, mostrarDatoscreditos, estade,
     licenciacredito,clRegistro_instalacion, evidenciaF,mostrarProducto });
 };
+// ? ========>>> ***********  ZONA DE CLIENTES **************************** <<<========
 
-/* ******************************** --INICIO-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
+
+//todo ******************************** --INICIO-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
 exports.factura = async (req, res) => {
 
   const clientes = await conexion.query("SELECT cl.*, cr.id_cliente AS idCliente, cr.monto_aprobado, cr.porcentaje_aprobado, cr.monto_maximo, cr.sistema FROM nuevos_cliente AS cl JOIN solicitar_credito AS cr ON cl.id = cr.id_cliente")
@@ -1067,4 +1416,4 @@ exports.factura = async (req, res) => {
 
   res.render("./1-admin/ventas", { user: req.user, arrayVentas });
 }
-/* ******************************** --FIN-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
+//todo ******************************** --FIN-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
