@@ -100,24 +100,26 @@ router.get('/test-de-agua/:id', isAuthenticated, getTestAgua)
  router.get('/agendar-instalacion/:id', isAuthenticated,getAgendarinstalacion) 
  router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 
+//   router.get('/temporal', isAuthenticated)
+
 // *   ================ ===== ↑↑ ==============================
 
 
 //* router para los métodos del customerFormControllers
 /*=============================================================*/
-router.post('/registrarClientes', isAuthenticated, registrarClientes);
+  router.post('/registrarClientes', isAuthenticated, registrarClientes);
 /*=============================================================*/
   router.post('/solicitarCredito', isAuthenticated, multiupload, solicitarCredito);
 /*=============================================================*/
- router.post('/calcularAhorro', isAuthenticated, ahorro);
+  router.post('/calcularAhorro', isAuthenticated, ahorro);
  /*=============================================================*/
- router.post('/testAgua', isAuthenticated, testAgua);
+  router.post('/testAgua', isAuthenticated, testAgua);
  /*=============================================================*/
- router.post('/agendarInstalacion', isAuthenticated,agendarInstalacionProducto);
+  router.post('/agendarInstalacion', isAuthenticated,agendarInstalacionProducto);
  /*=============================================================*/
- router.post('/instalacion', isAuthenticated,oneUpload,servicioInstaladosx);
+  router.post('/instalacion', isAuthenticated,oneUpload,servicioInstaladosx);
 /*=============================================================*/
-router.post('/elegirSistema', isAuthenticated, elegirSistema);
+  router.post('/elegirSistema', isAuthenticated, elegirSistema);
 /*=============================================================*/
 
 module.exports = router

@@ -5,7 +5,7 @@ const multer = require('multer');
 const { isAuthenticated } = require('../controllers/authController');
 const { listarVendedores, listarVendedores_PerfilVendedores, listarClientes_PerfilClientes, listarClientes_PerfilClientess,listarClientes,
         ActualizarNivel, actualizarEstadoVendedor, ActualizarCredito, ActualizarMontoAprobado,
-        clfirmas, factura, crear,listarVendedoresss,probar } = require('../controllers/adminControllers');
+        clfirmas, factura, crear,listarVendedoresss, probar } = require('../controllers/adminControllers');
 
 
  // * ========== Renderizado de vistas clientes ==========
@@ -24,7 +24,10 @@ router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
 
 
 //  router.get('/documento/:id', isAuthenticated,)
-  router.get('/temporal', isAuthenticated,probar)
+
+router.get('/temporal', isAuthenticated,probar,(req, res) => {
+  res.render('./1-admin/temporal', { user: req.user })
+});
 
  router.get('/hola', isAuthenticated,listarVendedoresss)
    
