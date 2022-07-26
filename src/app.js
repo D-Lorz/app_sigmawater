@@ -90,7 +90,7 @@ app.use('/', usersRouter);
 
  app.listen(app.get('port'), () => {
   console.log("***********************************************************")
-  console.log('===> 🚀 SERVIDOR CORRIENDO en http://localhost:' + app.get('port'))
+  console.log('===> 🚀 SERVIDOR CORRIENDO en http://localhost:' + app.get('port')) 
 });
  
 module.exports = app;
