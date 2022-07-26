@@ -45,4 +45,8 @@ router.post('/ActualizarCredito', isAuthenticated,ActualizarCredito);
  router.post('/ActualizarMontoAprobado', isAuthenticated,ActualizarMontoAprobado);
 /*=============================================================*/
 
+// * RUTAS PARA DEDUCCIONES EN LAS DISPERSIONES DE VENTAS
+/*=============================================================*/ 
+router.post('/deducciones/', isAuthenticated, deducciones)
+
 module.exports = router
