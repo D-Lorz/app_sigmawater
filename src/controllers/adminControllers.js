@@ -149,6 +149,7 @@ exports.ActualizarNivel = async (req, res) => {
   const id_vendedor = req.body.coodigoActualizarxs;
   const nivel = req.body.nivel;
   let numero_de_ventas 
+
    if(nivel == 2){
      numero_de_ventas = 20.5
    }else if(nivel == 3) {
@@ -157,8 +158,7 @@ exports.ActualizarNivel = async (req, res) => {
     numero_de_ventas = 60.5
    }
 
-   console.log("NIVEL ELEGIDO ======>>>>XXXXXXXX",numero_de_ventas);
-
+ console.log("NIVEL ELEGIDO ======>>>>XXXXXXXX",numero_de_ventas);
   const datosNivel = { nivel, numero_de_ventas,id_vendedor };
   const datosNivelUser ={nivel, id_vendedor}
 
