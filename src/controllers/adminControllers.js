@@ -996,11 +996,13 @@ mostrarProducto = mostrarProducto[0]
 
 
 //todo ******************************** --INICIO-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
+let ventasTotales;
 exports.factura = async (req, res) => {
 
   const clientes = await conexion.query("SELECT cl.*, cr.id_cliente AS idCliente, cr.monto_aprobado, cr.porcentaje_aprobado, cr.monto_maximo, cr.sistema FROM nuevos_cliente AS cl JOIN solicitar_credito AS cr ON cl.id = cr.id_cliente")
   const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel, telefono_movil FROM registro_de_vendedores")
   const factura = await conexion.query("SELECT * FROM factura")
+  const deducciones = await conexion.query("SELECT * FROM deducciones")
 
   const arrayVentas = []
 
@@ -1013,7 +1015,7 @@ exports.factura = async (req, res) => {
     cl.vendedores = []
 
     /******* ASIGNANDO FACTURA AL CLIENTE *******/
-    // if (factura.length > 0) {
+    if (factura.length > 0) {
       factura.forEach(f => {
         if (f.id_cliente == cl.id) {
           cl.factura.id = f.id_factura
@@ -1029,8 +1031,7 @@ exports.factura = async (req, res) => {
           }
         }
       });
-    // }
-
+    }
     /** FIN DATOS DE LA FACTURA **/
 
     // Comisiones máximas para el producto grande ($8.500 USD)
@@ -1055,6 +1056,25 @@ exports.factura = async (req, res) => {
       vendedor.nivel = parseInt(v.nivel)
       vendedor.afiliado = v.codigo_afiliado
       vendedor.telefono = v.telefono_movil
+      vendedor.deducciones = []
+
+      /******* DEDUCCIONES VENDEDOR 1  *******/
+      if (deducciones.length > 0) {
+        deducciones.forEach(d => {
+          if (d.id_vendedor == v.id) {
+            if (cl.id == d.factura_cliente) {
+              vendedor.deducciones.push({
+                id: d.id,
+                vendedor: d.id_vendedor,
+                descripcion: d.descripcion,
+                monto: d.monto
+              })
+            }
+          }
+        });
+      }
+      console.log("DEDUCCIONES v1: " + JSON.stringify(vendedor.deducciones))
+      /** FIN DEDUCCIONES 1 **/
 
       v.codigo_afiliado != '' ? v2 = vendedores.find(item => item.id_vendedor == v.codigo_afiliado) : v2;
 
@@ -1065,6 +1085,23 @@ exports.factura = async (req, res) => {
         vendedor2.nivel = parseInt(v2.nivel)
         vendedor2.afiliado = v2.codigo_afiliado
         vendedor2.telefono = v2.telefono_movil
+        vendedor2.deducciones = []
+
+        /******* DEDUCCIONES VENDEDOR 2 *******/
+        if (deducciones.length > 0) {
+          deducciones.forEach(d => {
+            if (d.id_vendedor == v2.id) {
+              vendedor2.deducciones.push({
+                id: d.id,
+                vendedor: d.id_vendedor,
+                descripcion: d.descripcion,
+                monto: d.monto
+              })
+            }
+          });
+        }
+        console.log("DEDUCCIONES v2: " + JSON.stringify(vendedor2.deducciones))
+        /** FIN DEDUCCIONES 2 **/
 
         v2.codigo_afiliado != '' ? v3 = vendedores.find(item => item.id_vendedor == v2.codigo_afiliado) : v3;
       }
@@ -1076,6 +1113,23 @@ exports.factura = async (req, res) => {
         vendedor3.nivel = parseInt(v3.nivel)
         vendedor3.afiliado = v3.codigo_afiliado
         vendedor3.telefono = v3.telefono_movil
+        vendedor3.deducciones = []
+
+        /******* DEDUCCIONES VENDEDOR 3 *******/
+        if (deducciones.length > 0) {
+          deducciones.forEach(d => {
+            if (d.id_vendedor == v3.id) {
+              vendedor3.deducciones.push({
+                id: d.id,
+                vendedor: d.id_vendedor,
+                descripcion: d.descripcion,
+                monto: d.monto
+              })
+            }
+          });
+        }
+        console.log("DEDUCCIONES v3: " + JSON.stringify(vendedor3.deducciones))
+        /** FIN DEDUCCIONES 3 **/
 
         v3.codigo_afiliado != '' ? v4 = vendedores.find(item => item.id_vendedor == v3.codigo_afiliado) : v4;
       }
@@ -1087,6 +1141,23 @@ exports.factura = async (req, res) => {
         vendedor4.nivel = parseInt(v4.nivel)
         vendedor4.afiliado = v4.codigo_afiliado
         vendedor4.telefono = v4.telefono_movil
+        vendedor4.deducciones = []
+
+        /******* DEDUCCIONES VENDEDOR 4 *******/
+        if (deducciones.length > 0) {
+          deducciones.forEach(d => {
+            if (d.id_vendedor == v4.id) {
+              vendedor4.deducciones.push({
+                id: d.id,
+                vendedor: d.id_vendedor,
+                descripcion: d.descripcion,
+                monto: d.monto
+              })
+            }
+          });
+        }
+        console.log("DEDUCCIONES v4: " + JSON.stringify(vendedor4.deducciones))
+        /** FIN DEDUCCIONES 4 **/
       }
 
       /********  Comisión Directa al Vendedor cuando el porcentaje aprobado es mayor al 80% ********/
@@ -1272,6 +1343,16 @@ exports.factura = async (req, res) => {
 
   });
 
+  ventasTotales = arrayVentas;
+
   res.render("./1-admin/ventas", { user: req.user, arrayVentas });
 }
 //todo ******************************** --FIN-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
+
+//todo ************* -- INICIO DEDUCCIONES ************* */
+exports.deducciones = async (req, res) => {
+  const {idFactura} = req.body;
+  let f = ventasTotales.find(item => item.factura.id == idFactura)
+  res.send(f);
+}
+//todo ************* -- FIN  DEDUCCIONES ************* */

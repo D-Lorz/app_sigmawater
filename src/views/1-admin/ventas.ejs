@@ -1,306 +1,512 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   
-  <meta charset="utf-8" />
-  <title>Ventas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
-  <meta content="Themesbrand" name="author">
-  <!-- App favicon -->
-  <link rel="shortcut icon" href="../directorio_dash/images/favicon.png">
+    <meta charset="utf-8" />
+    <title>Ventas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesbrand" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../directorio_dash/images/favicon.png">
     <link rel="stylesheet" type="text/css" href="../css/colors.min.css">
 
-  <base href="#">
+    <!-- DataTables -->
+    <link href="../directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+    rel="stylesheet" type="text/css" />
+    <!-- Responsive datatable examples -->
+    <link href="../directorio_dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+    rel="stylesheet" type="text/css" />
+    <!-- preloader css -->
+    <link rel="stylesheet" href="../directorio_dash/css/preloader.min.css" type="text/css" />
+    <!-- Bootstrap Css -->
+    <link rel="stylesheet" type="text/css" href="../directorio_dash/css/bootstrap.min.css" id="bootstrap-style" />
+    <!-- Icons Css -->
+    <link rel="stylesheet" type="text/css" href="../directorio_dash/css/icons.min.css" />
+    <!-- App Css-->
+    <link rel="stylesheet" type="text/css" href="../directorio_dash/css/app.min.css" id="app-style" />
+    <!-- Tipo de letra -->
+    <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
+    <!-- scroll -->
+    <link rel="stylesheet" href="../css/scrolls.css">
 
-  
+    <style>
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+        }
 
-<!-- DataTables -->
-<link href="../directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
-rel="stylesheet" type="text/css" />
- <!-- Responsive datatable examples -->
-<link href="../directorio_dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
- rel="stylesheet" type="text/css" />
- <!-- preloader css -->
-<link rel="stylesheet" href="../directorio_dash/css/preloader.min.css" type="text/css" />
-<!-- Bootstrap Css -->
-<link rel="stylesheet" type="text/css" href="../directorio_dash/css/bootstrap.min.css" id="bootstrap-style" />
-<!-- Icons Css -->
-<link rel="stylesheet" type="text/css" href="../directorio_dash/css/icons.min.css" />
-<!-- App Css-->
-<link rel="stylesheet" type="text/css" href="../directorio_dash/css/app.min.css" id="app-style" />
-<!-- Tipo de letra -->
-<link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
-<!-- scroll -->
-<link rel="stylesheet" href="../css/scrolls.css">
+        input[type=number] { -moz-appearance:textfield; }
+    </style>
 
 </head>
 
 <body>
 
-  <!-- Begin page -->
-  <div id="layout-wrapper">
+    <!-- Begin page -->
+    <div id="layout-wrapper">
 
-   <!-- =======FIXME: MENU ========================== -->
-   <%- include ('../1-admin/menu.ejs')%>
-   <!-- =======FIXME: MENU ========================== -->
+    <!-- =======FIXME: MENU ========================== -->
+    <%- include ('../1-admin/menu.ejs')%>
+    <!-- =======FIXME: MENU ========================== -->
 
-   <div class="main-content">
-    <div class="page-content">
-      <div class="container-fluid">
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
         
-
-      <!-- start page title -->
-      <div class="row">
-          <div class="col-12">
-              <div class="page-title-box d-sm-flex align-items-center
-                  justify-content-between">
-                  <h4 class="mb-sm-0 font-size-18">Ventas </h4>
-
-                  <div class="page-title-right">
-                      <ol class="breadcrumb m-0">
-                          <li class="breadcrumb-item"><a href="javascript:
-                                  void(0);">Ventas</a></li>
-                          <li class="breadcrumb-item active">Facturas</li>
-                      </ol>
-                  </div>
-
-              </div>
-          </div>
-      </div>
-      <!-- end page title -->
-
-      <!-- TOP DE VENDEDORES -->
-      <!-- <div class="row">
-        <div class="page-title-box d-sm-flex align-items-center
-        justify-content-center">
-      <h3 class="mb-sm-0 font-size-14">Top 4 vendedores</h3>
-     </div>
-        <div class="col-xl-3 col-sm-6">
-              <div class="card text-center">
-                  <div class="card-body">
-                      <div class="dropdown text-end">
-                          <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                            <i class="bx bx-dots-horizontal-rounded"></i>
-                          </a>
-                        
-                          <div class="dropdown-menu dropdown-menu-end">
-                              <a class="dropdown-item" href="#">Edit</a>
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Remove</a>
-                          </div>
-                      </div>
-                      
-                      <div class="avatar-xl mx-auto mb-4">
-                          <div class="avatar-title bg-soft-light text-light display-4 m-0 rounded-circle">
-                              <i class="bx bxs-user-circle"></i>
-                          </div>
-                      </div>
-                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Kevin West</a></h5>
-                      <p class="text-muted mb-2">Full Stack Developer</p>
-                      
-                  </div>
-
-                  <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
-                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
-
-                  </div>
-              </div>
-            
-          </div>
-       
-          <div class="col-xl-3 col-sm-6">
-              <div class="card text-center">
-                  <div class="card-body">
-                      <div class="dropdown text-end">
-                          <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                            <i class="bx bx-dots-horizontal-rounded"></i>
-                          </a>
-                        
-                          <div class="dropdown-menu dropdown-menu-end">
-                              <a class="dropdown-item" href="#">Edit</a>
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Remove</a>
-                          </div>
-                      </div>
-                      
-                      <div class="mx-auto mb-4">
-                          <img src="../directorio_dash/images/users/avatar-6.jpg" alt="" class="avatar-xl rounded-circle img-thumbnail">
-                      </div>
-                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Tommy Hayes</a></h5>
-                      <p class="text-muted mb-2">Backend Developer</p>
-                      
-                  </div>
-
-                  <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
-                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
-
-                  </div>
-              </div>
-            
-          </div>
-       
-          <div class="col-xl-3 col-sm-6">
-              <div class="card text-center">
-                  <div class="card-body">
-                      <div class="dropdown text-end">
-                          <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                            <i class="bx bx-dots-horizontal-rounded"></i>
-                          </a>
-                        
-                          <div class="dropdown-menu dropdown-menu-end">
-                              <a class="dropdown-item" href="#">Edit</a>
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Remove</a>
-                          </div>
-                      </div>
-                      
-                      <div class="mx-auto mb-4">
-                          <img src="../directorio_dash/images/users/avatar-8.jpg" alt="" class="avatar-xl rounded-circle img-thumbnail">
-                      </div>
-                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Diana Owens</a></h5>
-                      <p class="text-muted mb-2">UI/UX Designer</p>
-                      
-                  </div>
-
-                  <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
-                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
-                  </div>
-              </div>
-             
-          </div>
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center
+                                        justify-content-between">
+                                <h4 class="mb-sm-0 font-size-18">Ventas </h4>
         
-          <div class="col-xl-3 col-sm-6">
-              <div class="card text-center">
-                  <div class="card-body">
-                      <div class="dropdown text-end">
-                          <a class="text-muted dropdown-toggle font-size-16" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
-                            <i class="bx bx-dots-horizontal-rounded"></i>
-                          </a>
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript:
+                                                        void(0);">Ventas</a></li>
+                                        <li class="breadcrumb-item active">Facturas</li>
+                                    </ol>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+        
+                    <div class="table-responsive mb-4 ">
+                        <table class="table align-middle datatable dt-responsive table-check nowrap "
+                            style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                            <thead>
+                                <th scope="col" title="Id de factura">Factura</th>
+                                <th scope="col" title="Fecha de factura">Fecha de instalación</th>
+                                <th scope="col">Nombre del cliente</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Vendedor</th>
+                                <th scope="col">Comisión total</th>
+                                <!-- Estado de la factura Pendiente y Pagado-->
+                                <th scope="col">Estado</th>
+                            </thead>
+        
+                            <tbody>
+                                <% if(arrayVentas) {%>
+                                    <% arrayVentas.forEach((venta)=>{ %>
+                                        <tr>
+                                            <td>
+                                                <!-- <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="background: none;border: none;margin: 0;"> -->
+                                                <button style="background: none;border: none;margin: 0;"
+                                                    onclick="editarFactura('<%=venta.factura.id%>')">
+                                                    <%= venta.factura.id %>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <%= venta.factura.fecha %>
+                                            </td>
+                                            <td style="text-transform: capitalize;">
+                                                <%= venta.nombre %>
+                                                    <%= venta.apellido %>
+                                            </td>
+                                            <td>
+                                                <%= venta.sistema %>
+                                            </td>
+                                            <td>
+                                                $<%= venta.monto_aprobado %>
+                                            </td>
+                                            <td style="text-transform: capitalize;">
+                                                <%= venta.vendedores[0].nombre %>
+                                            </td>
+                                            <td>$<%= venta.comision_total %>
+                                            </td>
+                                            <td>
+                                                <div class="badge <%= venta.factura.estadoColor %> font-size-12">
+                                                    <%= venta.factura.estadoTxt %>
+                                                </div>
+                                            </td>
+                                        </tr>
+        
+                                        <%})%>
+                                            <% } %>
+                            </tbody>
+        
+                        </table>
                         
-                          <div class="dropdown-menu dropdown-menu-end">
-                              <a class="dropdown-item" href="#">Edit</a>
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Remove</a>
-                          </div>
-                      </div>
-                      
-                      <div class="mx-auto mb-4">
-                          <img src="../directorio_dash/images/users/avatar-9.jpg" alt="" class="avatar-xl rounded-circle img-thumbnail">
-                      </div>
-                      <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">Paul Sanchez</a></h5>
-                      <p class="text-muted mb-2">Full Stack Developer</p>
-                      
-                  </div>
-
-                  <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-user me-1"></i> Profile</button>
-                      <button type="button" class="btn btn-outline-light text-truncate"><i class="uil uil-envelope-alt me-1"></i> Message</button>
-
-                  </div>
-              </div>
-         
-          </div>
-      
-          
-      </div> -->
-  <!-- TOP DE VENDEDORES -->
-
-            <div class="table-responsive mb-4 " >
-                <table class="table align-middle datatable dt-responsive table-check nowrap " style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
-                    <thead>
-                        <th scope="col" title="Id de factura">Factura</th>
-                        <th scope="col" title="Fecha de factura">Fecha de instalación</th>
-                        <th scope="col">Nombre del cliente</th>
-                        <!--Primer nombre y primer apellido-->
-                        <th scope="col">Producto</th>
-                        <th scope="col">Valor</th>
-                        <th scope="col">Vendedor</th>
-                        <!--Primer nombre y primer apellido-->
-                        <th scope="col">Comisión total</th>
-                        <th scope="col">Estado</th> <!-- Estado de la factura Pendiente y Pagado-->
-                    </thead>
-                
-                    <tbody>
-                        <% if(arrayVentas) {%>
-                            <% arrayVentas.forEach((venta)=>{ %>
-                                <tr>
-                                    <td><button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="background: none;border: none;margin: 0;">
-                                            <%= venta.factura.id %>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <%= venta.factura.fecha %>
-                                    </td>
-                                    <td style="text-transform: capitalize;">
-                                        <%= venta.nombre %> <%= venta.apellido %>
-                                    </td>
-                                    <td>
-                                        <%= venta.sistema %>
-                                    </td>
-                                    <td>
-                                        $<%= venta.monto_maximo %>
-                                    </td>
-                                    <td style="text-transform: capitalize;">
-                                        <%= venta.vendedores[0].nombre %>
-                                    </td>
-                                    <td>$<%= venta.comision_total %>
-                                    </td>
-                                    <td>
-                                        <div class="badge <%= venta.factura.estadoColor %> font-size-12">
-                                            <%= venta.factura.estadoTxt %>
+                        <button id="btnSidebar" data-bs-toggle="offcanvas" data-bs-target="#sidebarRight" aria-controls="sidebarRight" style="background: none;border: none;margin: 0;"></button>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarRight"
+                            style="width: 50%; padding: 0px 0px 0px 37px; visibility: hidden;" aria-labelledby="sidebarRightLabel"
+                            aria-hidden="true">
+                            <div class="offcanvas-header">
+                                <h1 id="offcanvasRightLabel" style=" font-size: 111%; "></h1>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body scroll_vertical">
+                                <div class="row">
+                                    <div class="col-lg-12" style="margin-left: -1%;">
+                                        <div class="invoice-title">
+                                            <div class="d-flex align-items-start">
+                                                <div class="flex-grow-1">
+                                                    <div class="mb-4">
+                                                        <img src="../directorio_dash/images/logo.svg" alt="" height="40"><span
+                                                            class="logo-txt"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-shrink-0">
+                                                    <div class="mb-4">
+                                                        <h4 class="float-end font-size-16">Factura: <span id="idFactura"></span>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                            
                                         </div>
-                                    </td>
-                                </tr>
-                
-                            <%})%>
-                        <% } %>
-                    </tbody>
-                
-                </table>
+                            
+                                        <hr class="mb-4">
+                            
+                                        <!-- **INICIO** Pestañas para gestionar vendedores -->
+                                        <ul class="nav justify-content-start nav-pills card-header-pills mb-3" role="tablist">
+                                            <li class="nav-item waves-effect waves-light">
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#v1" role="tab" aria-selected="true">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor Principal</span>
+                                                </a>
+                                            </li>
+                            
+                                            <li id="tabFactura2" class="nav-item waves-effect waves-light" style="display: none;">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#v2" role="tab" aria-selected="false">
+                                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor 2</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item waves-effect waves-light" id="tabFactura3" style="display: none;">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#v3" role="tab" aria-selected="false">
+                                                    <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor 3</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item waves-effect waves-light" id="tabFactura4" style="display: none;">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#v4" role="tab" aria-selected="false">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor 4</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!-- **FIN** Pestañas para gestionar vendedores -->
+                            
+                                        <!-- **INICIO** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
+                                        <div class="tab-content p-3 text-muted">
+                                        
+                                            <!-- Vendedor 1 -->
+                                            <div class="tab-pane active" id="v1" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de instalación</h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+                                                    
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor1"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor1"></span></p>
+                                                            <p class="mb-1" id="telVendedor"></p>
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">Comisión base:
+                                                        $<span id="comisionBase1"></span></h5>
+                                                </div>
+                                        
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15" id="tituloDeduccion">Deducciones
+                                                        <!-- <button type="button" onclick="agregarDeduccion('v1')" class="btn btn-primary btn-xs"><i class="mdi mdi-plus"></i></button> -->
+                                                    </h5>
+                                                </div>
+                                        
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR PRINCIPAL -->
+                                                <div class="table-responsive" style="padding: 12px;" id="divDeducciones">
+                                                    <!-- Cargando la tabla desde un Script -->
+                                                </div>
+                                        
+                                            </div>
+                                        
+                                            <!-- Vendedor 2 -->
+                                            <div class="tab-pane" id="v2" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    </div>
+                                        
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de instalación</h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+                                                    
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor2"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor2"></span></p>
+                                                            <p class="mb-1" id="telVendedor2"></p>
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">Comisión base:
+                                                        $<span id="comisionBase2"></span> </h5>
+                                                </div>
+                                        
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15">Deducciones
+                                                        <button type="button" id="deducciones2" class="btn btn-primary btn-xs"><i class="mdi mdi-plus"></i></button>
+                                                    </h5>
+                                                </div>
+                                        
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR 2 -->
+                                                <div class="table-responsive" style="padding: 12px;">
+                                                    <table class="table table-editable table-nowrap align-middle table-edits" id="tablaDeducciones2">
+                                                        <thead>
+                                                            <tr style="cursor: pointer;">
+                                                                <th>Descripción</th>
+                                                                <th>Monto</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                        
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr style="cursor: pointer;">
+                                                                <td class="text-end" style="font-weight: 700;font-size: 15px;">
+                                                                    <b>Subtotal</b>
+                                                                </td>
+                                                                <td>$<span id="subtotal2">0</span></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr style="cursor: pointer;">
+                                                                <td class="text-end" style="font-weight: 700;font-size: 15px;">
+                                                                    <b>Comisión Total</b>
+                                                                </td>
+                                                                <td>$<span id="total2"></span></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                        
+                                            </div>
+                                        
+                                            <!-- Vendedor 3 -->
+                                            <div class="tab-pane" id="v3" role="tabpanel">
+                                                <div class="row">
+                                        
+                                                    <div class="col-sm-6">
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    </div>
+                                        
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de instalación</h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+                                                    
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor3"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor3"></span></p>
+                                                            <p class="mb-1" id="telVendedor3"></p>
+                                                        </div>
+                                                    
+                                                    </div>
+                                        
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">Comisión base:
+                                                        $<span id="comisionBase3"></span> </h5>
+                                                </div>
+                                        
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15">Deducciones
+                                                        <button type="button" id="deducciones3" class="btn btn-primary btn-xs"><i
+                                                                class="mdi mdi-plus"></i></button>
+                                                    </h5>
+                                                </div>
+                                        
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR 3 -->
+                                                <div class="table-responsive" style="padding: 12px;">
+                                                    <table class="table table-editable table-nowrap align-middle table-edits" id="tablaDeducciones3">
+                                                        <thead>
+                                                            <tr style="cursor: pointer;">
+                                                                <th>Descripción</th>
+                                                                <th>Monto</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                        
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr style="cursor: pointer;">
+                                                                <td class="text-end" style="font-weight: 700;font-size: 15px;">
+                                                                    <b>Subtotal</b>
+                                                                </td>
+                                                                <td>$<span id="subtotal3">0</span></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr style="cursor: pointer;">
+                                                                <td class="text-end" style="font-weight: 700;font-size: 15px;">
+                                                                    <b>Comisión Total</b>
+                                                                </td>
+                                                                <td>$<span id="total3"></span></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
 
-                
+                                            </div>
+                                        
+                                            <!-- Vendedor 4 -->
+                                            <div class="tab-pane" id="v4" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                    
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de instalación</h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+                                                    
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor4"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor4"></span></p>
+                                                            <p class="mb-1" id="telVendedor4"></p>
+                                                        </div>
+                                                    
+                                                    
+                                                    </div>
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">Comisión base:
+                                                        $<span id="comisionBase4"></span> </h5>
+                                                </div>
+                                        
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15">Deducciones
+                                                        <button type="button" id="deducciones4" class="btn btn-primary btn-xs"><i class="mdi mdi-plus"></i></button>
+                                                    </h5>
+                                                </div>
+                                        
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR 4 -->
+                                                <div class="table-responsive" style="padding: 12px;">
+                                                    <table class="table table-editable table-nowrap align-middle table-edits" id="tablaDeducciones4">
+                                                        <thead>
+                                                            <tr style="cursor: pointer;">
+                                                                <th>Descripción</th>
+                                                                <th>Monto</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                        
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr style="cursor: pointer;">
+                                                                <td class="text-end" style="font-weight: 700;font-size: 15px;">
+                                                                    <b>Subtotal</b>
+                                                                </td>
+                                                                <td>$<span id="subtotal4">0</span></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr style="cursor: pointer;">
+                                                                <td class="text-end" style="font-weight: 700;font-size: 15px;">
+                                                                    <b>Comisión Total</b>
+                                                                </td>
+                                                                <td>$<span id="total4"></span></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
 
-               </div>
-                <!-- end table -->
-            </div>
-         </div>
+                                            <!-- BOTÓN GUARDAR FACTURA - ENVIAR A DB -->
+                                            <div class="d-print-none mt-3">
+                                                <center><a href="#" class="btn btn-primary w-md waves-effect waves-light"
+                                                        style="border-radius: 17px;">Reportar como pagada</a>
+                                                </center>
+                                            </div>
+
+                                        </div>
+                                        <!-- **FIN** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
+                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
         
-      </div>
-      
-      
-    <!-- =======FIXME: copyright ========================== -->
-    <%- include ('../partials/copyright.ejs')%>
-    <!-- =======FIXME: copyright ========================== -->
+                    </div>
+                    <!-- end table -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- =======FIXME: copyright ========================== -->
+        <%- include ('../partials/copyright.ejs')%>
+        <!-- =======FIXME: copyright ========================== -->
   
     </div>
-  </div>
-
   
 <!-- Right Sidebar -->
 <div class="right-bar">
     <div data-simplebar class="h-100">
         <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-
-            <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
-
             <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
                 <i class="mdi mdi-close noti-icon"></i>
             </a>
         </div>
-
-        <!-- Settings -->
-    
-    
     </div> <!-- end slimscroll-menu-->
 </div>
 <!-- /Right-bar -->
-
    <!-- JAVASCRIPT -->
 <script src="../directorio_dash/js/scripts_personalizadosdash.js"></script>
 <script src="../directorio_dash/libs/jquery/jquery.min.js"></script>
@@ -311,7 +517,6 @@ rel="stylesheet" type="text/css" />
 <script src="../directorio_dash/libs/feather-icons/feather.min.js"></script>
 <!-- pace js -->
 <script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
-
 <!-- Required datatable js -->
 <script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -323,54 +528,261 @@ rel="stylesheet" type="text/css" />
 <!-- Table Editable plugin -->
 <script src="../directorio_dash/libs/table-edits/build/table-edits.min.js"></script>
 <script src="../directorio_dash/js/pages/table-editable.int.js"></script> 
-
  <script src="../directorio_dash/js/app.js"></script>
- 
+
 <script type="text/javascript">
-$(document).ready(function () {
-        var maxField = 3; //Input fields increment limitation
-        var addButton = $('.add_button'); //Add button selector
-        var wrapper = $('.form'); //Input field wrapper
-        var fieldHTML = 
-        // '<center>'+
-          '<div class="row justify-content-center">' +
+    let v1 = 1, v2 = 1, v3 = 1, v4 = 1, suma = 0, sumaTotal = [];
 
-                   '<div class="col-md-3">' +
-                       '<div class="form-group ">' +
-                        '<label for="">Contaminante</label>'+
-                            '<input type="text" name="pruebahola[]" id="otro1" class="form-control " placeholder=""/>' +
-                        '</div>'+
-                    '</div>'+
-                        
-                        
-                   '<div class="col-md-3">' +
-                     '<div class="form-group">' +
-                        '<label for="">Concentración del contaminante</label>'+
-                          '<input type="text" id="otraCocentracionContaminante1" name="concentracion1[]" class="form-control campoDecimal" placeholder="">' +
-                          
-                      '</div>'+
-                    '</div>'+
+    function editarFactura(idFactura) {
+        $('#btnAddDeduccion').remove()
+        $('#tablaDeducciones1').remove()
+        $('#tablaDeducciones2').remove()
+        $('#tablaDeducciones3').remove()
+        $('#tablaDeducciones4').remove()
 
-               // '&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" class="btn btn-sm btn-danger remove_button col-xl-1" title="Remove field">Elimar</a>' +
-                   
-                  '</div>'+
-              '<br>';
-            // '</center>';
-    
-        var x = 1; //El contador de campo inicial es 1
-        $(addButton).click(function () { //Una vez que se hace clic en el botón Agregar
-            if (x < maxField) { //Comprobar el número máximo de campos de entrada
-                x++; //Increment field counter
-                $(wrapper).append(fieldHTML); // Agregar campo html
+        fetch('/deducciones', {
+          method: 'POST',
+          body: JSON.stringify({idFactura}),
+          headers: {'Content-Type': 'application/json'}
+        }).then(res => res.json())
+          .catch(error => console.error('Error:', error))
+          .then(datos => {
+            if (datos) {
+                $("#idFactura").text(idFactura)
+                $(".producto").text(datos.sistema)
+                $(".valor").text(datos.monto_aprobado)
+                $(".idCliente").text(datos.id_cliente)
+                $(".telCliente").text(datos.telefono)
+                $(".direccionCliente").text(datos.direccion)
+                $(".fecha").text(datos.factura.fecha)
+
+                $("#idVendedor1").text(datos.vendedores[0].codigo)
+                $("#nivelVendedor1"). text(datos.vendedores[0].nivel)
+                $("#telVendedor").text(datos.vendedores[0].telefono)
+                $("#comisionBase1").text(datos.vendedores[0].comision_base)
+
+                if(datos.vendedores[0].deducciones.length > 0) {
+                    
+                    const tablaDeducciones1 = `
+                        <table class="table table-nowrap align-middle" id="tablaDeducciones1">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Monto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Subtotal</b></td>
+                                    <td>$<span id="subtotal1">0</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Comisión Total</b></td>
+                                    <td>$<span id="total1"></span></td>
+                                    <input type="hidden" id="deduccionTotal1" value="">
+                                </tr>
+                            </tfoot>
+                        </table>
+                    `
+
+                    $('#divDeducciones').append(tablaDeducciones1);
+                    
+                    $("#total1").text(datos.vendedores[0].comision_base)
+                    $("#deduccionTotal1").val(datos.vendedores[0].comision_base)
+
+                    let deducciones =  ``, xd  = 1;
+                    datos.vendedores[0].deducciones.forEach(de => {
+                        deducciones += 
+                            `<tr id="${xd}_datos.vendedores[0].codigo">
+                                <td>${de.descripcion}</td>
+                                <td>${de.monto}</td>
+                            </tr>`
+                            xd = xd+1;
+                    });
+
+                    $('#tablaDeducciones1').append(deducciones);
+                } else {
+                    $('#tituloDeduccion').append(`<button type="button" id="btnAddDeduccion" onclick="agregarDeduccion('v1')" class="btn btn-primary btn-xs"><i class="mdi mdi-plus"></i></button>`)
+                    const tablaDeducciones1 = `
+                        <table class="table table-nowrap align-middle" id="tablaDeducciones1">
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Monto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Subtotal</b></td>
+                                    <td>$<span id="subtotal1">0</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Comisión Total</b></td>
+                                    <td>$<span id="total1"></span></td>
+                                    <td></td>
+                                    <input type="hidden" id="deduccionTotal1" value="">
+                                </tr>
+                            </tfoot>
+                        </table>
+                    `
+
+                    $('#divDeducciones').append(tablaDeducciones1);
+                    $("#total1").text(datos.vendedores[0].comision_base)
+                    $("#deduccionTotal1").val(datos.vendedores[0].comision_base)
+                }
+
+                if (datos.vendedores[1]) {
+                    $("#tabFactura2").css('display', 'block')
+                    $("#idVendedor2").text(datos.vendedores[1].codigo)
+                    $("#nivelVendedor2").text(datos.vendedores[1].nivel)
+                    $("#telVendedor2").text(datos.vendedores[1].telefono)
+                    $("#comisionBase2").text(datos.vendedores[1].comision_base)
+                    $("#total2").text(datos.vendedores[1].comision_base)
+
+                    
+                }
+
+                if (datos.vendedores[2]) {
+                    $("#tabFactura3").css('display', 'block')
+                    $("#idVendedor3").text(datos.vendedores[2].codigo)
+                    $("#nivelVendedor3").text(datos.vendedores[2].nivel)
+                    $("#telVendedor3").text(datos.vendedores[2].telefono)
+                    $("#comisionBase3").text(datos.vendedores[2].comision_base)
+                    $("#total3").text(datos.vendedores[2].comision_base)
+
+                }
+
+                if (datos.vendedores[3]) {
+                    $("#tabFactura4").css('display', 'block')
+                    $("#idVendedor4").text(datos.vendedores[3].codigo)
+                    $("#nivelVendedor4").text(datos.vendedores[3].nivel)
+                    $("#telVendedor4").text(datos.vendedores[3].telefono)
+                    $("#comisionBase4").text(datos.vendedores[3].comision_base)
+                    $("#total4").text(datos.vendedores[3].comision_base)
+                }
+
+                $("#btnSidebar").trigger("click");
+            } else {
+                console.log("Ocurrió un error en él controlador")
             }
-        });
-    
-        $(wrapper).on('click', '.remove_button', function (e) { //Once remove button is clicked
-            e.preventDefault();
-            $(this).parent('div').remove(); //Remove field html
-            x--; //Decrement field counter
-        });
-    });
+          })
+    }
+
+    function sumarDeduccion(fila, num) {
+        console.log("NUM>>> ", num)
+        if (fila == 'v1') {
+            for (let i = 1; i <= num; i++) {
+                const monto = $('#monto'+i+'_'+fila).val()
+                suma = parseFloat(monto)
+            }
+            console.log("La suma es: ", suma);
+            sumaTotal.push({valor: suma})
+            /* SUMAR DEDUCCIONES */
+            console.log("Array suma es >>>> ", sumaTotal);
+            let subTotal1 = sumaTotal.map(item => item.valor).reduce((prev, curr) => prev + curr, 0);
+            console.log("El subtotal Deducciones #1 es >>>> ", subTotal1);
+            subTotal1 = parseFloat(subTotal1)
+            $('#subtotal1').text(subTotal1)
+            let total1 = $('#deduccionTotal1').val()
+            total1 = parseFloat(total1)-subTotal1
+            console.log("Total 1 >>> ", total1)
+            $('#total1').text(total1)
+        }
+
+        
+    }
+
+    function agregarDeduccion(item) {
+        /* VENDEDOR 1 */
+        if (item == 'v1') {
+            $('#tablaDeducciones1').append(`<tr id="${v1}_${item}">
+                <td><input type="text" id="descri${v1}_${item}"></td>
+                <td><input type="number" id="monto${v1}_${item}"></td>
+                <td>
+                    <a class="btn btn-primary btn-rounded btn-sm" onclick="sumarDeduccion('${item}', '${v1}')" title="Editar">
+                        <i class="fas fa-save"></i>
+                    </a>
+                    <a class="btn btn-danger btn-rounded btn-sm" title="Borrar">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>`);
+            v1 = v1+1;
+        }
+
+        /* VENDEDOR 2 */
+        if (item == 'v2'){
+            $('#tablaDeducciones2').append(`<tr id="${v2}_${item}">
+                <td><input type="text" id="descri${v2}_${item}"></td>
+                <td><input type="number" id="monto${v2}_${item}"></td>
+                <td>
+                    <a class="btn btn-dark btn-rounded btn-sm" title="Editar">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a class="btn btn-danger btn-rounded btn-sm" title="Borrar">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>`);
+            v2 = v2+1;
+        }
+
+        /* VENDEDOR 3 */
+        if (item == 'v3'){
+            $('#tablaDeducciones3').append(`<tr id="${v3}_${item}">
+                <td><input type="text" id="descri${v3}_${item}"></td>
+                <td><input type="number" id="monto${v3}_${item}"></td>
+                <td>
+                    <a class="btn btn-dark btn-rounded btn-sm" title="Editar">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a class="btn btn-danger btn-rounded btn-sm" title="Borrar">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>`);
+            v3 = v3+1;
+        }
+
+        /* VENDEDOR 4 */
+        if (item == 'v4'){
+            $('#tablaDeducciones4').append(`<tr id="${v4}_${item}">
+                <td><input type="text" id="descri${v4}_${item}"></td>
+                <td><input type="number" id="monto${v4}_${item}"></td>
+                <td>
+                    <a class="btn btn-dark btn-rounded btn-sm" title="Editar">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a class="btn btn-danger btn-rounded btn-sm" title="Borrar">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>`);
+            v4 = v4+1;
+        }
+
+    }
+
+    function guardarDeduccion(factura, tab) {
+        fetch('/guardarDeduccion', {
+          method: 'POST',
+          body: JSON.stringify({factura, tab}),
+          headers: {'Content-Type': 'application/json'}
+        }).then(res => res.json())
+          .catch(error => console.error('Error:', error))
+          .then(datos => {
+            if (datos) {
+                console.log("Deducción guardada satisfatoriamente")
+            }
+          })
+    }
+
 </script>
 
 </body>
