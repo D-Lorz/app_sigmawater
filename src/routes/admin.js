@@ -5,7 +5,7 @@ const multer = require('multer');
 const { isAuthenticated } = require('../controllers/authController');
 const { listarVendedores, listarVendedores_PerfilVendedores, listarClientes_PerfilClientes, listarClientes_PerfilClientess,listarClientes,
         ActualizarNivel, actualizarEstadoVendedor, ActualizarCredito, ActualizarMontoAprobado,
-        clfirmas, factura, crear,listarVendedoresss, probar } = require('../controllers/adminControllers');
+        clfirmas, factura, crear,listarVendedoresss, probar,deducciones } = require('../controllers/adminControllers');
 
 
  // * ========== Renderizado de vistas clientes ==========
