@@ -527,19 +527,19 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
             vendedor.telefono_movil = v.telefono_movil
                  
            console.log("//--- HOLA SOY EL NUMERO DE VENTAS---///  V1 ");
-             if (producto_instalado == "Reverse Osmosis System 3C Sigma") {
+              if (producto_instalado == "Reverse Osmosis System 3C Sigma") {
 
                     console.log("Numero de ventas actual: ==>> ", v.numero_de_ventas);
                     var ventasActual = (parseFloat(v.numero_de_ventas) + 0.5 )
                     console.log("Numero de ventas Actualizado: ==>> ", ventasActual );
           
-                  }else if(producto_instalado == "Reverse Osmosis System") {
+              }else if(producto_instalado == "Reverse Osmosis System") {
           
                     console.log("Numero de ventas actual: ==>> ", v.numero_de_ventas);
                     ventasActual = (parseFloat(v.numero_de_ventas) + 0.5 )
                     console.log("Numero de ventas Actualizado: ==>> ", ventasActual );
            
-                  }else if (producto_instalado == "Whole System"){
+              }else if (producto_instalado == "Whole System"){
       
                     console.log("Numero de ventas actual: ==>> ", v.numero_de_ventas);
                     ventasActual = v.numero_de_ventas + 1 ;
@@ -548,58 +548,34 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
               }
                     vendedor.numero_de_ventas = ventasActual
                     var ventasActualv11 = ventasActual
-                    var ventasActualv12 = ventasActual
-                  
- // * ==>> Condición para subir de nivel al llegar a determinada cantidad de ventas
-             if(ventasActualv11 == 20.5 || ventasActualv12 == 21){
-                if(ventasActualv11 == 20.5){
+                    // ventasActualv11: siginifica ventas actual vendedor 1, variable 1
 
-                   console.log("Nivel actual: ==>> ", parseInt(v.nivel));
-                   var nivel = (parseInt(v.nivel)+1) //Para nivel 2
-                   console.log("Nuevo nivel: ==>> ", nivel );
-                               v.nivel = nivel
-                  
-               }else if (ventasActualv12 == 21){
-                     if(v.nivel < 2){
-                        console.log("Nivel actual: ==>> ", parseInt(v.nivel));
-                        var nivel =  (parseInt(v.nivel)+1) //Para nivel 2
-                        console.log("Nuevo nivel: ==>> ", nivel );
-                                v.nivel = nivel
-                     }
-               }
-              }else if(ventasActualv11 == 40.5 || ventasActualv12 == 41) {
-                     if(ventasActualv11 == 40.5){
-                        console.log("Nivel actual: ==>> ", parseInt(v.nivel));
-                        var nivel = (parseInt(v.nivel)+1) //Para nivel 3
-                        console.log("Nuevo nivel: ==>> ", nivel );
+   // * ==>> Condición para subir de nivel al llegar a determinada cantidad de ventas
+             if(ventasActualv11 >= 20.5 && ventasActualv11 <= 40){
+                 if(v.nivel < 2){
+                     console.log("Nivel actual: ==>> ", parseInt(v.nivel));
+                     var nivel = parseInt(2) //Para nivel 2
+                     console.log("Nuevo nivel: ==>> ", nivel );
                               v.nivel = nivel
-                 
-                     }else if(ventasActualv12 == 41){
-                           if(v.nivel < 3){
-                              console.log("Nivel actual: ==>> ", parseInt(v.nivel));
-                              var nivel = (parseInt(v.nivel)+1) //Para nivel 3
-                              console.log("Nuevo nivel: ==>> ", nivel );
-                                 v.nivel = nivel
-                          }
-                   }
-              }else if(ventasActualv11 == 60.5 || ventasActualv12 == 61){  
-                    if(ventasActualv11 == 60.5){
-                       console.log("Nivel actual: ==>> ", parseInt(v.nivel));
-                       var nivel = (parseInt(v.nivel)+1) //Para nivel 4
-                       console.log("Nuevo nivel: ==>> ", nivel );
-                                 v.nivel = nivel
-           
-                    }else if(ventasActualv12 == 61){
-                         if(v.nivel < 4){
-                            console.log("Nivel actual: ==>> ", parseInt(v.nivel));
-                            var nivel = (parseInt(v.nivel)+1) //Para nivel 4
-                            console.log("Nuevo nivel: ==>> ", nivel );
-                         }
+                  }
+             }else if(ventasActualv11 >= 40.5 && ventasActualv11 <= 60) {
+                     if(v.nivel < 3){
+                          console.log("Nivel actual: ==>> ", parseInt(v.nivel));
+                          var nivel = parseInt(3) //Para nivel 3
+                          console.log("Nuevo nivel: ==>> ", nivel );
+                                v.nivel = nivel
+                      }
+             }else if(ventasActualv11 >= 60.5){  
+                    if(v.nivel < 4){
+                         console.log("Nivel actual: ==>> ", parseInt(v.nivel));
+                         var nivel = parseInt(4) //Para nivel 4
+                         console.log("Nuevo nivel: ==>> ", nivel );
+                                  v.nivel = nivel
                     }
-              }else{
+             }else{
                               nivel = v.nivel
                               v.nivel = nivel
-              }
+             }
                   vendedor.nivel = parseInt(v.nivel )
     
        conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?", [vendedor, vendedor.id_vendedor])
@@ -633,65 +609,36 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
                 console.log("Numero de ventas Actualizado: ==>> ", ventasActual2 );
              }
               vendedor2.numero_de_ventas = ventasActual2
-
               var ventasActualv21 = ventasActual2
-              var ventasActualv22 = ventasActual2
-
+              
       // * ==>> Condición  para subir de nivel al llegar a determinada cantidad de ventas
-              if(ventasActualv21 == 20.5 || ventasActualv22 == 21){
-
-                if(ventasActualv21 == 20.5){
-
+              if(ventasActualv21 >= 20.5 && ventasActualv21 <= 40){
+                if(v2.nivel < 2){
                   console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
-                  var nivel = (parseInt(v2.nivel)+1) //Para nivel 2
+                  var nivel = parseInt(2) //Para nivel 2
                   console.log("Nuevo nivel: ==>> ", nivel );
-                              v2.nivel = nivel
-                 
-              }else if (ventasActualv22 == 21){
-                    if(v2.nivel < 2){
-                       console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
-                       var nivel =  (parseInt(v2.nivel)+1) //Para nivel 2
-                       console.log("Nuevo nivel: ==>> ", nivel );
-                             v2.nivel = nivel
-                    }
-              }
-              }else if(ventasActualv21 == 40.5 || ventasActualv22 == 41) {
-                    if(ventasActualv21 == 40.5){
-                       console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
-                       var nivel = (parseInt(v2.nivel)+1) //Para nivel 3
-                       console.log("Nuevo nivel: ==>> ", nivel );
-                              v2.nivel = nivel
-           
-              }else if(ventasActualv22 == 41){
-                     if(v2.nivel <= 3){
-                        console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
-                        var nivel = (parseInt(v2.nivel)+1) //Para nivel 3
-                        console.log("Nuevo nivel: ==>> ", nivel );
-                              v2.nivel = nivel
-                    }
-              }
-              }else if(ventasActualv21 == 60.5 || ventasActualv22 == 61){  
-                
-                    if(ventasActualv21 == 60.5){
-                       console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
-                       var nivel = (parseInt(v2.nivel)+1) //Para nivel 4
-                       console.log("Nuevo nivel: ==>> ", nivel );
-                                v2.nivel = nivel
-
-               }else if(ventasActualv22 == 61){
-                     if(v2.nivel < 4){
-                        console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
-                        var nivel = (parseInt(v2.nivel)+1) //Para nivel 4
-                        console.log("Nuevo nivel: ==>> ", nivel );
-                                v2.nivel = nivel
-                    }
+                            v2.nivel = nivel
                }
+              }else if(ventasActualv21 >= 40.5 && ventasActualv21 <= 60) {
+                    if(v2.nivel < 3){
+                       console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
+                       var nivel = parseInt(3)//Para nivel 3
+                       console.log("Nuevo nivel: ==>> ", nivel );
+                              v2.nivel = nivel
+                  }
+              }else if(ventasActualv21 >= 60.5 ){  
+                   if(v2.nivel < 4){
+                      console.log("Nivel actual: ==>> ", parseInt(v2.nivel));
+                      var nivel = parseInt(4) //Para nivel 4
+                      console.log("Nuevo nivel: ==>> ", nivel );
+                             v2.nivel = nivel
+                 }
               }else {
                 nivel = v2.nivel
                 v2.nivel = nivel
               }
-         
-             vendedor2.nivel = parseInt(v2.nivel)
+                vendedor2.nivel = parseInt(v2.nivel)
+
              v2.codigo_afiliado != '' ? v3 = vendedores.find(item => item.id_vendedor == v2.codigo_afiliado) : v3;
              conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?", [vendedor2, vendedor2.id_vendedor])
             }
@@ -706,7 +653,7 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
               console.log("\n");
               console.log("//--- HOLA SOY EL NUMERO DE VENTAS---///  V3 ");
       
-           if (producto_instalado == "Reverse Osmosis System 3C Sigma") {
+           if(producto_instalado == "Reverse Osmosis System 3C Sigma") {
       
                  console.log("Numero de ventas actual: ==>> ", v3.numero_de_ventas);
                  var ventasActual3 = (parseFloat(v3.numero_de_ventas) + 0.5 )
@@ -726,55 +673,29 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
            }
                vendedor3.numero_de_ventas = ventasActual3
                var ventasActualv31 = ventasActual3
-               var ventasActualv32 = ventasActual3
-
+               
       // * ==>> Condición  para subir de nivel al llegar a determinada cantidad de ventas
-           if(ventasActualv31 == 20.5 || ventasActualv32 == 21){
-              if(ventasActualv31 == 20.5){
-
-                  console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
-                  var nivel = (parseInt(v3.nivel)+1) //Para nivel 2
-                  console.log("Nuevo nivel: ==>> ", nivel );
+           if(ventasActualv31 >= 20.5 && ventasActualv31 <= 40){
+                  if(v3.nivel < 2){
+                    console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
+                    var nivel = parseInt(2) //Para nivel 2
+                    console.log("Nuevo nivel: ==>> ", nivel );
+                                v3.nivel = nivel
+                }
+           }else if(ventasActualv31 >= 40.5 && ventasActualv31 <= 60) {
+                 if(v3.nivel < 3){
+                     console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
+                     var nivel = parseInt(3) //Para nivel 3
+                     console.log("Nuevo nivel: ==>> ", nivel );
                               v3.nivel = nivel
-                 
-              }else if (ventasActualv32 == 21){
-                    if(v3.nivel < 2){
-                       console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
-                       var nivel =  (parseInt(v3.nivel)+1) //Para nivel 2
-                       console.log("Nuevo nivel: ==>> ", nivel );
-                             v3.nivel = nivel
-                    }
-              }
-           }else if(ventasActualv31 == 40.5 || ventasActual3 == 41) {
-                 if(ventasActualv31 == 40.5){
+                }
+           }else if(ventasActualv31 >= 60.5 ){  
+                 if(v3.nivel < 4){
                     console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
-                    var nivel = (parseInt(v3.nivel)+1) //Para nivel 3
+                    var nivel = parseInt(4) //Para nivel 4
                     console.log("Nuevo nivel: ==>> ", nivel );
-                         v3.nivel = nivel
-  
-         }else if(ventasActual3 == 41){
-               if(v3.nivel < 3){
-                 console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
-                 var nivel = (parseInt(v3.nivel)+1) //Para nivel 3
-                 console.log("Nuevo nivel: ==>> ", nivel );
-                       v3.nivel = nivel
-              }
-          }
-           }else if(ventasActualv31 == 60.5 || ventasActualv32 == 61){  
-                 if(ventasActualv31 == 60.5){
-                    console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
-                    var nivel = (parseInt(v3.nivel)+1) //Para nivel 4
-                    console.log("Nuevo nivel: ==>> ", nivel );
-                           v3.nivel = nivel
-
-          }else if(ventasActualv32 == 61){
-                if(v3.nivel < 4){
-                   console.log("Nivel actual: ==>> ", parseInt(v3.nivel));
-                   var nivel = (parseInt(v3.nivel)+1) //Para nivel 4
-                   console.log("Nuevo nivel: ==>> ", nivel );
-                            v3.nivel = nivel
+                          v3.nivel = nivel
            }
-        }
            }else {
               nivel = v3.nivel
               v3.nivel = nivel
@@ -813,56 +734,29 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
               }
               vendedor4.numero_de_ventas = ventasActual4
               var ventasActualv41 = ventasActual4
-              var ventasActualv42 = ventasActual4
-      
+                    
       // * ==>> Condición  para subir de nivel al llegar a determinada cantidad de ventas
-           if(ventasActualv41 == 20.5 || ventasActualv42 == 21){
-            if(ventasActualv41 == 20.5){
-               console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
-               var nivel = (parseInt(v4.nivel)+1) //Para nivel 2
-               console.log("Nuevo nivel: ==>> ", nivel );
-                          v4.nivel = nivel
-             
-          }else if (ventasActualv42 == 21){
-                if(v4.nivel < 2){
-                   console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
-                   var nivel =  (parseInt(v4.nivel)+1) //Para nivel 2
-                   console.log("Nuevo nivel: ==>> ", nivel );
-                         v4.nivel = nivel
-                }
-          }
-           }else if(ventasActualv41 == 40.5 || ventasActualv42 == 41) {
-                if(ventasActualv41 == 40.5){
-                   console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
-                   var nivel = (parseInt(v4.nivel)+1) //Para nivel 3
-                   console.log("Nuevo nivel: ==>> ", nivel );
-                         v4.nivel = nivel
-
-        }else if(ventasActualv42 == 41){
-             if(v4.nivel < 3){
-               console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
-               var nivel = (parseInt(v4.nivel)+1) //Para nivel 3
-               console.log("Nuevo nivel: ==>> ", nivel );
-                     v4.nivel = nivel
-            }
-         }
-      
-           }else if (ventasActualv41 == 60.5 || ventasActualv42 == 61){  
-                  if(ventasActualv41 == 60.5){
-                     console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
-                     var nivel = (parseInt(v4.nivel)+1) //Para nivel 4
-                     console.log("Nuevo nivel: ==>> ", nivel );
-                         v4.nivel = nivel
-
-         }else if(ventasActualv42 == 61){
-              if(v4.nivel < 4){
-                 console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
-                 var nivel = (parseInt(v4.nivel)+1) //Para nivel 4
-                 console.log("Nuevo nivel: ==>> ", nivel );
-                       v4.nivel = nivel
+           if(ventasActualv41 >= 20.5 && ventasActualv41 <= 40){
+                 if(v4.nivel < 2){
+                    console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
+                    var nivel = parseInt(2) //Para nivel 2
+                    console.log("Nuevo nivel: ==>> ", nivel );
+                              v4.nivel = nivel
               }
-         }
-      
+           }else if(ventasActualv41 >= 40.5 && ventasActualv41 <= 60) {
+                      if(v4.nivel < 3){
+                         console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
+                         var nivel = parseInt(3) //Para nivel 3
+                         console.log("Nuevo nivel: ==>> ", nivel );
+                                  v4.nivel = nivel
+                    }
+           }else if (ventasActualv41 >= 60.5){  
+                        if(v4.nivel < 4){
+                            console.log("Nivel actual: ==>> ", parseInt(v4.nivel));
+                            var nivel = parseInt(4) //Para nivel 4
+                            console.log("Nuevo nivel: ==>> ", nivel );
+                                 v4.nivel = nivel
+                    }
            }else {
                 nivel = v4.nivel
                 v4.nivel = nivel
@@ -899,9 +793,7 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
 console.log("No se encontró el cliente");
     }
 
-
-
-    if (result) { res.redirect('/perfil-cliente/' + codigo_cliente)}
+ if (result) { res.redirect('/perfil-cliente/' + codigo_cliente)}
 
   })
 }
