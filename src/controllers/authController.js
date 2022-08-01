@@ -73,8 +73,7 @@ exports.login = async (req, res) => {
                 ruta: 'login'
             })
         } else {
-              await conexion.query('SELECT * FROM usuarios WHERE correo = ?', [correo], async (error, results) => {
-
+          await conexion.query('SELECT * FROM usuarios WHERE correo = ?', [correo], async (error, results) => {
                 if (results.length == 0 || !(await bcryptjs.compare(pass, results[0].pass))) {
 
                     res.render('login', {
@@ -156,7 +155,7 @@ exports.isAuthenticated = async (req, res, next) => {
     if (req.cookies.jwt) {
         try {
             const decodificada = await promisify(jwt.verify)(req.cookies.jwt, 'super_secret_AppSigmaWater');
-            conexion.query('SELECT * FROM usuarios WHERE id_consecutivo = ?', [decodificada.id], (error, results) => {
+            conexion.query('SELECT u.*, r.numero_de_ventas, r.nombres, r.apellidos FROM usuarios u LEFT JOIN registro_de_vendedores r ON r.id = u.id_consecutivo WHERE u.id_consecutivo = ?', [decodificada.id], (error, results) => {
                 if (!results) {
                     return next()
                 }

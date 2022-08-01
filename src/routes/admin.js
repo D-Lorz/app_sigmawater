@@ -7,7 +7,6 @@ const { listarVendedores, listarVendedores_PerfilVendedores, listarClientes_Perf
         ActualizarNivel, actualizarEstadoVendedor, ActualizarCredito, ActualizarMontoAprobado,
         clfirmas, factura, crear,listarVendedoresss, probar, deducciones } = require('../controllers/adminControllers');
 
-
  // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
 router.get('/vendedores', isAuthenticated, listarVendedores )
