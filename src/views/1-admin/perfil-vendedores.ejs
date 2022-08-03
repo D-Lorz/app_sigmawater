@@ -31,6 +31,8 @@
 <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
 <!-- scroll -->
 <link rel="stylesheet" href="../css/scrolls.css">
+<link href="../directorio_dash/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
     </head>
 
     <body>
@@ -698,8 +700,8 @@
                                     <div class="card-body">
                                         <h5 class="card-title mb-3" style="text-align: center;">Nivel del vendedor</h5>
                                  
-                                            <form action="/ActualizarNivel" method="POST">
-                                                <input type="hidden" name="coodigoActualizarxs" value="<%= info_vendedor.id_vendedor %>">
+                                            <!-- <form action="/ActualizarNivel" method="POST"> -->
+                                         <input type="hidden" id="coodigoActualizarId" name="coodigoActualizarxs" value="<%= info_vendedor.id_vendedor %>">
 
                                              <% if(info_vendedor.nivel >= 1 && info_vendedor.nivel <= 3 ) { %> 
                                                  <% if(info_vendedor.nivel == 1) { %> 
@@ -733,8 +735,8 @@
                                                         </div>
                                                     </div>
                                                     <% } %>
-                                               <center><input type="submit" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;/* font-size: 13px; */" value="Guardar"></center>
-                                              <% }else if(info_vendedor.nivel == 4) {%> 
+                                               <center><button type="button" class="btn btn-primary" onclick="confirmarNuevoNivel()" style="border-radius: 13px;margin-top: 4%; width: 47%;">Guadar</button></center>
+                                         <% }else if(info_vendedor.nivel == 4) {%> 
                                                   <div class="row justify-content-center" style="margin-left: -9%;">
                                                      <div class="col-md-6">
                                                          <div class="form-group ">
@@ -744,10 +746,14 @@
                                                   </div>
                                                <input type="hidden" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;/* font-size: 13px; */" value="Guardar">
                                             <%}%> 
-                                            </form>
+                                            <!-- </form> -->
                                             <br>
-                                            <center>Número de ventas totales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.numero_de_ventas %></div></center>  
-                                         </div>
+                                            <h2 class="card-title mb-3" style="text-align: center;font-size: 13px;">Número de ventas</h2>
+                                            <center>Ventas individuales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.ventas_individuales %></div></center>  
+                                            <center>Ventas de afiliados: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.ventas_afiliados %></div></center>  
+                                            <center>Ventas totales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.total_ventas %></div></center>  
+                                       
+                                        </div>
                                    <!-- end card body -->
                                 </div>
                                 <!-- end card -->
@@ -914,9 +920,54 @@
    
   <!-- Datatable init js -->
   <script src="../directorio_dash/js/pages/datatables.init.js"></script>    
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+
+<script>
+
+function confirmarNuevoNivel() {
+    let text ="<b>Esta acción no se puede deshacer.</b>"
+    Swal.fire({
+        title: '<div style="font-weight: 700;"> Subir de nivel a este vendedor</div>',
+        html: '<div style="font-size: 16px;font-weight: 200;">Al aumentar el nivel manualmente, el vendedor quedará desvinculado de su afiliado.</div>',
+        icon: 'warning',
+        footer:'<b style="color:#d33;font-size: 16px;">Esta acción no se puede deshacer.</b>',
+        showCancelButton: true,
+        confirmButtonColor: '#50368C',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: '¡Sí, subir de nivel!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        const id_vendedor = $("#coodigoActualizarId").val()
+        const nivel = $("#niveles option:selected").val()
+        
+    fetch('/ActualizarNivel', {
+        
+          method: 'POST',
+          body: JSON.stringify({id_vendedor,nivel}),
+          headers: { 'Content-Type': 'application/json' }
+
+        }).then(res => res.json())
+          .catch(error => console.error('Error:', error))
+          .then(response => {
+            if (response) {
+                location.reload();
+            } else {
+              Swal.fire(
+                'Error!',
+                'El nivel no se actualizó correctamente.',
+                'error'
+              )
+            }
+          });
+      }
+    })
+  }
 
 
 
+</script>
 
 
 
