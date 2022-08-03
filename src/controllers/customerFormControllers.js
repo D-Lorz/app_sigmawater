@@ -663,10 +663,10 @@ exports.numeroClientes = async (req, res) => {
  const id_vendedor = req.user.id_consecutivo;
    const id_vendedores = req.user.id_vendedor;
 
-  let countCliente = await conexion.query('SELECT count(correo) as totalClientes FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor]) 
-    console.log("Numero de clientes ===>>>");
-        console.log(countCliente[0].totalClientes);
-        
+   let countCliente = await conexion.query('SELECT count(correo) as totalClientes FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor]) 
+   console.log("Numero de clientes ===>>>");
+       console.log(countCliente[0].totalClientes);
+                     
   let countAfiliados = await conexion.query('SELECT count(codigo_afiliado) as totalAfiliados FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedores]) 
     console.log("Numero de vendedores afilaidos ===>>>");
        console.log(countAfiliados[0].totalAfiliados);

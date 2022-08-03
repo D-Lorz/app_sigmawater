@@ -7,7 +7,7 @@
             <h5 class="alertcard-title font-size-16">Comparte tu código</h5>
             <p class="font-size-13">Invita a nuevos vendedores a 3C Sigma Water System y aumenta tus ingresos.</p>
   
-                <% if(user.nivel >= 2) { %>
+                <% if(user.numero_de_ventas >= 1) { %>
                 <span class="d-none d-xl-inline-block ms-1 fw-medium"id="contenido-texto" >
                    <%= user.id_vendedor %>
               <button class="btn btn-primary mt-2" id="botonCopy" style="border-radius: 17px;">Copiar código </button>
@@ -16,8 +16,7 @@
                   <center><p><i class=" fas fa-lock"></i></p><center> 
                     <% } %> 
                 </span>
-
-         </div>
+        </div>
         <!-- <div class="mensaje-copy" > <p>¡Copiado al portapapeles!</p></div> -->
     </div>
 </div>

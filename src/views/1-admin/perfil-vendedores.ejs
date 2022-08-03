@@ -671,15 +671,13 @@
                             <div class="col-xl-3 col-lg-4">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title mb-3">Estado del vendedor</h5>
+                                        <h5 class="card-title mb-3" style="text-align: center;">Estado del vendedor</h5>
 
                                  
                                         <form action="/estadoDelVendedor" method="POST"> 
-
-                                            <div class="btn-group me-1 mt-2" style="margin-left: 8%;" >
-
-                                                 <input type="hidden" name="idGenerado" value="<%= info_vendedor.id_vendedor %>">
-                                                 <input type="hidden" name="id_consecutivoVendedor" value="<%= info_vendedor.id %>">
+                                             <div class="btn-group me-1 mt-2" style="margin-left: 8%;" >
+                                                  <input type="hidden" name="idGenerado" value="<%= info_vendedor.id_vendedor %>">
+                                                  <input type="hidden" name="id_consecutivoVendedor" value="<%= info_vendedor.id %>">
 
                                                     <select class="form-select" id="selectEstado" name="estadoElegido">
                                                         <option style="background:gray;color: white;text-transform: capitalize;" class="badge-soft-dark">Estado actual: <%= viewsUser.estado_de_la_cuenta %></option>
@@ -687,46 +685,70 @@
                                                         <option value="aprobado">Aprobado</option>
                                                         <option value="bloqueado">Bloquear</option>
                                                     </select>
-                                               
                                                 </div>
                                                <a href="/perfil-vendedores/<%= info_vendedor.id_vendedor %>">
                                                     <button class="btn btn-primary" type="submit" 
                                                     style="border-radius: 13px;margin-left: 24%; margin-top: 4%;
                                                     width: 47%;">Guadar</button>
                                                 </a> 
-                                            </form>
-                                          </div>
-                                  
-                                    <!-- end card body -->
+                                         </form>
+                                       </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title mb-3">Nivel del vendedor</h5>
-
+                                        <h5 class="card-title mb-3" style="text-align: center;">Nivel del vendedor</h5>
                                  
                                             <form action="/ActualizarNivel" method="POST">
-                                                <div class="btn-group me-1 mt-2">
-
                                                 <input type="hidden" name="coodigoActualizarxs" value="<%= info_vendedor.id_vendedor %>">
-                                                
-                                                <select class="form-select" id="niveles" name="nivel">
-                                                        <option style="background:gray;color: white;">Nivel actual: <%= info_vendedor.nivel %></option>
-                                                        <br>
-                                                        <option value="1">Nivel 1</option>
-                                                        <option value="2">Nivel 2</option>
-                                                        <option value="3">Nivel 3</option>
-                                                        <option value="4">Nivel 4</option>
-                                                    </select>
-                                                </div>
-                                                <input type="submit" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;/* font-size: 13px; */" value="Guardar">
-                                            </form>
 
+                                             <% if(info_vendedor.nivel >= 1 && info_vendedor.nivel <= 3 ) { %> 
+                                                 <% if(info_vendedor.nivel == 1) { %> 
+                                                    <div class="row justify-content-center">
+                                                       <div class="col-md-8">
+                                                          <select class="form-select" id="niveles" name="nivel">
+                                                             <option style="background:gray;color: white;">Nivel actual: <%= info_vendedor.nivel %></option>
+                                                             <br>
+                                                             <option value="2">Subir a nivel 2</option>
+                                                          </select>
+                                                      </div>
+                                                    </div>
+                                                  <% } else if(info_vendedor.nivel == 2) {%> 
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-md-8">
+                                                            <select class="form-select" id="niveles" name="nivel">
+                                                              <option style="background:gray;color: white;">Nivel actual: <%= info_vendedor.nivel %></option>
+                                                              <br>
+                                                              <option value="3">Subir a nivel 3</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                  <% } else if(info_vendedor.nivel == 3) {%> 
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-md-8">
+                                                           <select class="form-select" id="niveles" name="nivel">
+                                                             <option style="background:gray;color: white;">Nivel actual: <%= info_vendedor.nivel %></option>
+                                                             <br>
+                                                            <option value="4">Subir a nivel 4</option>
+                                                          </select> 
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                               <center><input type="submit" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;/* font-size: 13px; */" value="Guardar"></center>
+                                              <% }else if(info_vendedor.nivel == 4) {%> 
+                                                  <div class="row justify-content-center" style="margin-left: -9%;">
+                                                     <div class="col-md-6">
+                                                         <div class="form-group ">
+                                                            <input type="text" class="form-control" style="background: white;" readonly value="Nivel actual: <%= info_vendedor.nivel %>">
+                                                         </div>
+                                                     </div>
+                                                  </div>
+                                               <input type="hidden" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;/* font-size: 13px; */" value="Guardar">
+                                            <%}%> 
+                                            </form>
                                             <br>
-                                              <center>Número de ventas: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.numero_de_ventas %></div></center>  
-                                       
-                                  </div>
-                                  
-                                    <!-- end card body -->
+                                            <center>Número de ventas totales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.numero_de_ventas %></div></center>  
+                                         </div>
+                                   <!-- end card body -->
                                 </div>
                                 <!-- end card -->
 
