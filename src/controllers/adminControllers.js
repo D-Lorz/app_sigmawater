@@ -77,7 +77,7 @@ if(info_vendedor){
   let infoClientes = await conexion.query("SELECT * FROM nuevos_cliente WHERE codigo_id_vendedor = ?", [id_vendedor]);
   let clCredito = await conexion.query("SELECT * FROM solicitar_credito");
   let clAgenda = await conexion.query("SELECT * FROM agendar_instalacion");
-  let cltestAgua = await conexion.query("SELECT * FROM test_agua");
+  // let cltestAgua = await conexion.query("SELECT * FROM test_agua");
 
   infoClientes.forEach((info) => {
 
@@ -150,23 +150,35 @@ if(info_vendedor){
 exports.ActualizarNivel = async (req, res) => {
 
   const id_vendedor = req.body.id_vendedor;
+
   const nivel = req.body.nivel;
-  let total_ventas 
+
+  let ventas_individuales = parseFloat(req.body.ventas_individuales)
+  let total_ventas = parseFloat(req.body.total_ventas)
+  let ventas_afiliados = parseFloat(req.body.ventas_afiliados)
   let codigo_afiliado
   
+  console.log("VENTAS INDIVIDUALES ACTUAL==>> (",ventas_individuales,")");
+  console.log("TOTAL VENTAS ACTUAL ==>> (",total_ventas,")");
+
    if(nivel == 2){
-     total_ventas = 20.5
+     ventas_individuales = ventas_individuales + (20.5 - total_ventas)
+     total_ventas = ventas_individuales + ventas_afiliados
      codigo_afiliado =" "
    }else if(nivel == 3) {
-     total_ventas = 40.5
+     ventas_individuales = ventas_individuales + (40.5 - total_ventas)
+     total_ventas = ventas_individuales + ventas_afiliados
      codigo_afiliado =" "
    }else if(nivel == 4){
-    total_ventas = 60.5
-    codigo_afiliado =" "
+     ventas_individuales = ventas_individuales + (60.5 - total_ventas)
+     total_ventas = ventas_individuales + ventas_afiliados
+     codigo_afiliado =" "
    }
 
- console.log("NIVEL ELEGIDO ======>>>>XXXXXXXX",total_ventas);
-  const datosNivel = { nivel,total_ventas,codigo_afiliado, id_vendedor };
+  console.log("VENTAS INDIVIDUALES ACTUALIZADO ==>> (",ventas_individuales,")");
+  console.log("TOTAL VENTAS ACTUALIZADO ==>> (",total_ventas,")");
+  const datosNivel = { nivel, ventas_individuales, total_ventas, codigo_afiliado, id_vendedor };
+     
 
   await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ? ", [datosNivel, id_vendedor], (err, result) => {
     if (err) res.send(false)
@@ -568,29 +580,31 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
               console.log("\n");
               console.log("//--- VENTAS---///  V1 ");
               if (producto_instalado == "Reverse Osmosis System 3C Sigma") {
-
+                if(v2){
                     vIv2 = parseFloat(v2.ventas_individuales)
                     console.log("HOLA SOY VENTAS INDIVIDUALES V2", vIv2);
                     console.log("# de ventas Actual de afiliados del V2: ==>> ", v2.ventas_afiliados);
                     vAv2 = (parseFloat(v2.ventas_afiliados) + 0.5) ;
                     console.log("# de ventas Actualizado de afiliados del V2: ==>> ", vAv2 );
-                  
+                }
               }else if(producto_instalado == "Reverse Osmosis System") {
-          
+                if(v2){
                     vIv2 = parseFloat(v2.ventas_individuales)
                     console.log("HOLA SOY VENTAS INDIVIDUALES V2", vIv2);
                     console.log("# de ventas Actual de afiliados del V2: ==>> ", v2.ventas_afiliados);
                     vAv2 = (parseFloat(v2.ventas_afiliados) + 0.5) ;
                     console.log("# de ventas Actualizado de afiliados del V2: ==>> ", vAv2 );
-                            
+                }        
               }else if (producto_instalado == "Whole System"){
-      
+                if(v2){
                     vIv2 = parseFloat(v2.ventas_individuales)
                     console.log("HOLA SOY VENTAS INDIVIDUALES V2", vIv2);
                     console.log("# de ventas Actual de afiliados del V2: ==>> ", v2.ventas_afiliados);
                     vAv2 = (parseFloat(v2.ventas_afiliados) + 1) ;
                     console.log("# de ventas Actualizado de afiliados del V2: ==>> ", vAv2 );
+               
             }
+          }
               if(v2){
                      vendedor1.ventas_afiliados = vAv2
                      const suma = vAv2 + vIv2
@@ -610,6 +624,7 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
                       nivel = parseInt(2) //Para nivel 2
                       console.log("Nuevo nivel: ==>> ", nivel );
                                v.nivel = nivel
+
                    }
               }else if(ventasActualv11 >= 40.5 && ventasActualv11 <= 60) {
                       if(v.nivel < 3){

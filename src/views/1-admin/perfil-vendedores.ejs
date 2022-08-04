@@ -642,18 +642,26 @@
                         <center><h4 style="font-size: 17px;">Lista de clientes</h4></center>
                             <% infoClientes.forEach((user)=>{ %>
                         <tr>
-                                <td><%= user.nombre %> <%= user.apellido %></td>
-                                <td><%= user.telefono %></td>
-                                <td> <% if(user.sistema) {%>
-                                    <%= user.sistema.txt %>
+                            <td><a href="/perfil-cliente/<%- user.id_cliente %>"><%= user.nombre %></a></td>
+                                <td><a href="/perfil-cliente/<%- user.id_cliente %>"><%= user.telefono %></a></td>
+                                <td><% if(user.sistema) {%>
+                                    <a href="/perfil-cliente/<%- user.id_cliente %>"><%= user.sistema.txt %></a>
                                     <% }%>
                                 </td>
-                                <td> <% if(user.estadoCreditoCliente) {%>
-                                    <div class="badge <%= user.estadoCreditoCliente.color %> font-size-12" ><%= user.estadoCreditoCliente.txt %></div>
+                                <td><% if(user.estadoCreditoCliente) {%>
+                                    <a href="/perfil-cliente/<%- user.id_cliente %>">
+                                        <div class="badge <%= user.estadoCreditoCliente.color %> font-size-12" >
+                                             <%= user.estadoCreditoCliente.txt %>
+                                       </div>
+                                    </a>
                                     <% }%>
                                 </td>
                                 <td> <% if(user.estadoAgendar) {%>
-                                    <div class="badge <%= user.estadoAgendar.color %> font-size-12" ><%= user.estadoAgendar.txt %></div>
+                                    <a href="/perfil-cliente/<%- user.id_cliente %>">
+                                        <div class="badge <%= user.estadoAgendar.color %> font-size-12" >
+                                           <%= user.estadoAgendar.txt %>
+                                        </div>
+                                    </a>
                                     <% }%>
                                 </td>
                         </tr>
@@ -702,6 +710,9 @@
                                  
                                             <!-- <form action="/ActualizarNivel" method="POST"> -->
                                          <input type="hidden" id="coodigoActualizarId" name="coodigoActualizarxs" value="<%= info_vendedor.id_vendedor %>">
+                                         <input type="hidden" id="v_individualesId" name="v_individuales" value="<%= info_vendedor.ventas_individuales%>">
+                                         <input type="hidden" id="total_ventasId" name="t_ventas" value="<%= info_vendedor.total_ventas%>">
+                                         <input type="hidden" id="ventas_afiliadosId" name="v_afiliados" value="<%= info_vendedor.ventas_afiliados%>">
 
                                              <% if(info_vendedor.nivel >= 1 && info_vendedor.nivel <= 3 ) { %> 
                                                  <% if(info_vendedor.nivel == 1) { %> 
@@ -938,29 +949,29 @@ function confirmarNuevoNivel() {
         confirmButtonText: '¡Sí, subir de nivel!'
     }).then((result) => {
       if (result.isConfirmed) {
+            const id_vendedor = $("#coodigoActualizarId").val()
+            const nivel = $("#niveles option:selected").val()
+            const ventas_individuales = $("#v_individualesId").val()
+            const total_ventas = $("#total_ventasId").val()
+            const ventas_afiliados = $("#ventas_afiliadosId").val()
 
-        const id_vendedor = $("#coodigoActualizarId").val()
-        const nivel = $("#niveles option:selected").val()
-        
-    fetch('/ActualizarNivel', {
-        
-          method: 'POST',
-          body: JSON.stringify({id_vendedor,nivel}),
-          headers: { 'Content-Type': 'application/json' }
-
-        }).then(res => res.json())
-          .catch(error => console.error('Error:', error))
-          .then(response => {
-            if (response) {
-                location.reload();
-            } else {
-              Swal.fire(
-                'Error!',
-                'El nivel no se actualizó correctamente.',
-                'error'
-              )
-            }
-          });
+            fetch('/ActualizarNivel', {
+                method: 'POST',
+                body: JSON.stringify({id_vendedor,nivel, ventas_individuales, total_ventas, ventas_afiliados}),
+                headers: { 'Content-Type': 'application/json' }
+            }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                if (response) {
+                    location.reload();
+                } else {
+                    Swal.fire(
+                        'Error!',
+                        'El nivel no se actualizó correctamente.',
+                        'error'
+                    )
+                }
+            });
       }
     })
   }
