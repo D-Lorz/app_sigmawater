@@ -18,7 +18,6 @@ const {numeroClientes} = require('../controllers/customerFormControllers');
       router.get('/', isAuthenticated,numeroClientes, (req, res) => {
          if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
             res.render('dashboard', { user: req.user })
-            
      });
     router.get('/administrador', isAuthenticated, (req, res) => {
       if(!(req.user.rol ==="administrador")){res.redirect('./') }

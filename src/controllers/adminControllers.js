@@ -12,8 +12,6 @@ const formatear = new Intl.NumberFormat('en-US', {
 // todo ===========>>>  Mostrar lista de VENDEDORES
 exports.listarVendedores = async (req, res) => {
   const lista_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores");
-
-
   const usuarios = await conexion.query("SELECT * FROM usuarios");
 
   lista_vendedores.forEach((v) => {
@@ -494,7 +492,7 @@ exports.clfirmas = async (req, res) => {
 exports.servicioInstaladosx = async (req, res) => {
 
   const fecha_instalacion = req.body.fechaDeInstalacion;
-  const producto_instalado = req.body.productoInstalado;
+  const producto_instalado = req.body.productoinstaladO;
   const serial_producto = req.body.serial_producto;
   const instalador = req.body.instalador;
   const evidencia = '../evidenciaServicio/' + urlLicencias[0]
@@ -518,14 +516,14 @@ exports.servicioInstaladosx = async (req, res) => {
  
   if(cl1){
     console.log(" ");
-    console.log("↓↓ Codigo del vendedor que realiz´0 la ventas ↓↓")
+    console.log("↓↓ Codigo del vendedor que realizó la ventas ↓↓")
     console.log(cl1.codigo_id_vendedor);
 
      let v1 = vendedorI.find(item => item.id_vendedor == cl1.codigo_id_vendedor)
      if (v1) {
               const vendedorIndividual = {}
               vendedorIndividual.id_vendedor = v1.id_vendedor
-              let ventaIndividual
+              var ventaIndividual
     
       if (producto_instalado == "Reverse Osmosis System 3C Sigma") {
 

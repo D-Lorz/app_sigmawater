@@ -105,12 +105,45 @@ var options = {
 var chart = new ApexCharts(document.querySelector("#mini-chart2"), options);
 chart.render();
 
-// mini-3
+
+// function exp(){
+//  let url = '/viewAhorro'
+
+//     fetch(url,{method:'GET'} )
+//     .then( response => response.json() )
+//     .then(data => console.log(+data) )
+//     .catch( error => console.log(error) ) 
+    
+// }
+
+
+// function tick() {
+
+//     var Xmas95 = new Date('August 8, 2022 23:15:30');
+//     var weekday = Xmas95.getDay();
+    
+//     console.log(weekday); // 1
+  
+//  if(weekday == 1){
+//         var nuevoArray = [38,25,42,29,19,14,31,50,25];
+//         console.log(nuevoArray);
+
+    // mini-3
 var minichart3Colors = getChartColorsArray("#mini-chart3");
 var options = {
     series: [{
-        data: [47, 15, 2, 67, 22, 20, 36, 60, 60, 30, 50, 11, 12, 3, 8, ]
-    }],
+        data: [{
+            x: "Semana anterior - 2018-09-10",
+            y: 120
+          }, {
+            x: "2018-09-11",
+            y: 480
+          }, {
+            x: "2018-09-12",
+            y: 330
+          }]
+        }],
+   
      chart: {
         type: 'line',
         height: 50,
@@ -123,13 +156,14 @@ var options = {
         curve: 'smooth',
         width: 2,
     },
-    tooltip: {
+   tooltip: {
         fixed: {
             enabled: false
         },
         x: {
-            show: false
-        },
+             show: false,
+       },
+   
         y: {
             title: {
                 formatter: function (seriesName) {
@@ -145,6 +179,11 @@ var options = {
 
 var chart = new ApexCharts(document.querySelector("#mini-chart3"), options);
 chart.render();
+//  }
+// }
+//     setInterval(tick, 5000)
+
+
 
 // mini-4
 var minichart4Colors = getChartColorsArray("#mini-chart4");

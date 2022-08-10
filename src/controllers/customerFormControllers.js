@@ -2,10 +2,25 @@ const { log, count } = require("console");
 const { promisify} = require("util");
 const conexion = require("../database/db");
 
-
-
 // todo --> formulario para crear un nuevo cliente
 exports.registrarClientes = async (req, res) => {
+
+//  ? NOTA: ==>> Esta es la forma para obtener la fecha actual en formato canadiense <<<<<
+    const fecha = new Date().toLocaleDateString('en-CA')
+    console.log("FECHA DE REGISTRO CLIENTE ↓↓↓");
+    console.log(fecha);
+
+//  ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
+    const year = new Date().getFullYear();
+    console.log("AÑO DE REGISTRO CLIENTE ↓↓↓");
+    console.log(year);
+
+//  ? NOTA: ==>> Esta es la forma para obtener el numero de la semana actual del año entero <<<<<
+    currentdate = new Date();
+    const oneJan = new Date(currentdate.getFullYear(),0,1);
+    const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+    const semana = Math.ceil(( currentdate.getDay() + 1 + numberOfDays) / 7);
+    console.log(`Numero de la semana es ${semana}.`);
 
     const nombre = req.body.nombre;
     const segundo_nombre = req.body.segundo_nombre;
@@ -23,10 +38,9 @@ exports.registrarClientes = async (req, res) => {
     const codigo_id_vendedor = req.user.id_vendedor//del admin saca el id alfanumero del vendedor aprobado
 
 
-    const nuevoRegistroClientes = {
-      nombre,segundo_nombre,apellido,correo, telefono,direccion, direccion2,
+    const nuevoRegistroClientes = {fecha,year,semana,nombre,segundo_nombre,apellido,correo, telefono,direccion, direccion2,
        ciudad,estado_ubicacion,codigo_postal, id_cliente,id_vendedor,codigo_id_vendedor }
-    console.log(nuevoRegistroClientes)
+       console.log(nuevoRegistroClientes)
 
     await conexion.query('INSERT INTO nuevos_cliente SET ?', [nuevoRegistroClientes], (err, result) => {
       if (err) throw err;
@@ -345,8 +359,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     // todo ===========>>> Desactivar btn: Solicitar instalación cuando el admin ya subío la evidencia 
       let validarBtnAgenda= await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1', [clientes2.id])
       estadoBtn.txt = "Solicitar instalación";
-      
-    
+          
           if (validarBtnAgenda.length > 0) {
             validarBtnAgenda = validarBtnAgenda[0]
     
@@ -632,8 +645,10 @@ if (creditoVista_interna.length > 0) {
 
 exports.getRegistrarInstalacion = async (req, res) => {
   const id = req.params.id
+  console.log("IMPIMIENDO ID: ==>>  ", id)
 
-  await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
+   await conexion.query('SELECT n.id, n.id_cliente, c.sistema FROM nuevos_cliente n JOIN solicitar_credito c ON n.id = c.id_cliente WHERE n.id_cliente = ? LIMIT 1', [id], (err, result) => {
+  
     if (err) throw err;
     res.render('./1-admin/registro-instalacion', { user: req.user, cl_instalacion: result[0] });
 
@@ -660,8 +675,9 @@ const formatear = new Intl.NumberFormat('en-US', {
 
 // todo ====>>>> Numero de clientes añadidos
 exports.numeroClientes = async (req, res) => {
- const id_vendedor = req.user.id_consecutivo;
-   const id_vendedores = req.user.id_vendedor;
+const id_vendedor = req.user.id_consecutivo;
+const id_vendedores = req.user.id_vendedor;
+
 
    let countCliente = await conexion.query('SELECT count(correo) as totalClientes FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor]) 
    console.log("Numero de clientes ===>>>");
@@ -675,5 +691,42 @@ exports.numeroClientes = async (req, res) => {
      
  }
 
+exports.historialClientes = async (req, res) => {
+  const id_vendedor = req.user.id_consecutivo
+  let cl = await conexion.query("SELECT * FROM nuevos_cliente WHERE id_vendedor = ?", [id_vendedor])
+  let num = 0
+
+  cl.forEach(cl => {
+    if(cl) {
+        let fechaActual = new Date().toLocaleDateString('en-CA')
+        let yearActual = new Date(fechaActual).getFullYear();
+       
+        currentdate = new Date(fechaActual);
+        const oneJan = new Date(currentdate.getFullYear(),0,1);
+        const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+        const semanaActual = Math.ceil(( currentdate.getDay() + 1 + numberOfDays) / 7);
+
+      if (cl.year == yearActual && cl.semana == semanaActual) {
+          num = num +1
+          console.log(cl.nombre);
+      }
+    }
+}) 
+  let fechaActual = new Date().toLocaleDateString('en-CA')
+  console.log("# de clientes ==>> ",num);
+  console.log("Fecha actual ==>> ",fechaActual);
+  console.log("Id vendedor ==>> ",id_vendedor);
+  
+  let fecha = fechaActual
+  let numClientes = num
+  let idVendedor = id_vendedor
+  const customerObj = {fecha, numClientes, idVendedor}
+conexion.query("INSERT INTO historialnuevosclientes SET ?", [customerObj], (err, result) => {
+    if (err) throw err;
+        if(result.length > 0){res.json(result);
+        } else { res.send("Insertado")}
+   });
+
+}
 
 

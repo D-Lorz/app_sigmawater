@@ -5,7 +5,7 @@ const multer = require('multer');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados,isSellers } = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
-        agendarInstalacionProducto,getRegistrarInstalacion,elegirSistema } = require('../controllers/customerFormControllers');
+        agendarInstalacionProducto,getRegistrarInstalacion,elegirSistema,historialClientes } = require('../controllers/customerFormControllers');
 
 
 const {servicioInstaladosx} = require("../controllers/adminControllers");  
@@ -97,13 +97,12 @@ router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro)
 
 router.get('/test-de-agua/:id', isAuthenticated, getTestAgua) 
     
- router.get('/agendar-instalacion/:id', isAuthenticated,getAgendarinstalacion) 
- router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
+router.get('/agendar-instalacion/:id', isAuthenticated,getAgendarinstalacion) 
+router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 
 //   router.get('/temporal', isAuthenticated)
 
 // *   ================ ===== ↑↑ ==============================
-
 
 //* router para los métodos del customerFormControllers
 /*=============================================================*/
@@ -121,5 +120,6 @@ router.get('/test-de-agua/:id', isAuthenticated, getTestAgua)
 /*=============================================================*/
   router.post('/elegirSistema', isAuthenticated, elegirSistema);
 /*=============================================================*/
+  router.post('/historialDeClientes',isAuthenticated,historialClientes)
 
 module.exports = router

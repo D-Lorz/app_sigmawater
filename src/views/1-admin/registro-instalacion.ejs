@@ -103,13 +103,19 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="exampleDataList" class="form-label">Producto instalado</label> <span class="danger">*</span>
-                                              <input class="form-control " required list="estado_sistema"  name="productoInstalado" placeholder="Selecciona el tipo de sistema" >
-                                            <datalist id="estado_sistema">
-                                              <option value="Reverse Osmosis System 3C Sigma"></option>
-                                              <option value="Reverse Osmosis System"></option>
-                                              <option value="Whole System"></option>
-                                              
-                                            </datalist>
+                                         <% if(cl_instalacion.sistema) {%>
+                                            <% if(cl_instalacion.sistema =="Reverse Osmosis System") {%>
+                                              <input class="form-control" required list="estado_sistema" name="productoinstaladO" placeholder="Selecciona el tipo de sistema" >
+                                                 <datalist id="estado_sistema">
+                                                   <option value="Reverse Osmosis System 3C Sigma"></option>
+                                                   <option value="Reverse Osmosis System"></option>
+                                                 </datalist>
+                                              <% } else if(cl_instalacion.sistema =="Whole System") {%> 
+                                                  <div class="form-group">
+                                                      <input type="tex" class="form-control" value="<%=cl_instalacion.sistema%>" name="productoinstaladO" readonly> 
+                                                  </div>
+                                                <% } %> 
+                                            <% } %> 
                                         </div> 
                                         <div class="col-md-4">
                                             <div class="form-group">
