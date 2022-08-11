@@ -10,11 +10,11 @@ File: Dashboard Init Js File
 function getChartColorsArray(chartId) {
     var colors = $(chartId).attr('data-colors');
     var colors = JSON.parse(colors);
-    return colors.map(function(value){
+    return colors.map(function (value) {
         var newValue = value.replace(' ', '');
-        if(newValue.indexOf('--') != -1) {
+        if (newValue.indexOf('--') != -1) {
             var color = getComputedStyle(document.documentElement).getPropertyValue(newValue);
-            if(color) return color;
+            if (color) return color;
         } else {
             return newValue;
         }
@@ -27,7 +27,7 @@ function getChartColorsArray(chartId) {
 var minichart1Colors = getChartColorsArray("#mini-chart1");
 var options = {
     series: [{
-        data: [2, 10, 18, 22, 36, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15, ]
+        data: [2, 10, 18, 22, 36, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15,]
     }],
     chart: {
         type: 'line',
@@ -68,7 +68,7 @@ chart.render();
 var minichart2Colors = getChartColorsArray("#mini-chart2");
 var options = {
     series: [{
-        data: [15, 42, 47, 2, 14, 19, 65, 75, 47, 15, 42, 47, 2, 14, 12, ]
+        data: [15, 42, 47, 2, 14, 19, 65, 75, 47, 15, 42, 47, 2, 14, 12,]
     }],
     chart: {
         type: 'line',
@@ -105,91 +105,77 @@ var options = {
 var chart = new ApexCharts(document.querySelector("#mini-chart2"), options);
 chart.render();
 
+let valores = [], graficaCl
+const datos = []
 
-// function exp(){
-//  let url = '/viewAhorro'
-
-//     fetch(url,{method:'GET'} )
-//     .then( response => response.json() )
-//     .then(data => console.log(+data) )
-//     .catch( error => console.log(error) ) 
+    valores = $('#datosJson_clAgregados').val();
+    if (!valores || valores == null || valores == '' || valores == undefined){
+        const year = new Date().getFullYear()
+        datos.unshift({x:year, y:0},{x:year, y:0})
+        console.log("\nHOLA DESDE ACÁ >>>>\n", year)
+        console.log("<<<<<DATOS>>>>\n", datos)
+    } else {
+        valores = JSON.parse(valores);
+        valores.forEach(vl => {
+            const temp = vl.numClientes
+            datos.push({ x:"Hasta: "+vl.fecha, y:temp})
+        })
+    }
     
-// }
-
-
-// function tick() {
-
-//     var Xmas95 = new Date('August 8, 2022 23:15:30');
-//     var weekday = Xmas95.getDay();
     
-//     console.log(weekday); // 1
-  
-//  if(weekday == 1){
-//         var nuevoArray = [38,25,42,29,19,14,31,50,25];
-//         console.log(nuevoArray);
-
     // mini-3
-var minichart3Colors = getChartColorsArray("#mini-chart3");
-var options = {
-    series: [{
-        data: [{
-            x: "Semana anterior - 2018-09-10",
-            y: 120
-          }, {
-            x: "2018-09-11",
-            y: 480
-          }, {
-            x: "2018-09-12",
-            y: 330
-          }]
+    let minichart3Colors = getChartColorsArray("#mini-chart3");
+    var options = {
+        series: [{
+            data: datos
         }],
-   
-     chart: {
-        type: 'line',
-        height: 50,
-        sparkline: {
-            enabled: true
-        }
-    },
-    colors: minichart3Colors,
-    stroke: {
-        curve: 'smooth',
-        width: 2,
-    },
-   tooltip: {
-        fixed: {
-            enabled: false
-        },
-        x: {
-             show: false,
-       },
-   
-        y: {
-            title: {
-                formatter: function (seriesName) {
-                    return ''
+        "yaxis": [{
+            "labels": {
+                "formatter": function (val) {
+                    return val.toFixed(0)
                 }
             }
+        }],
+        chart: {
+            type: 'line',
+            height: 50,
+            sparkline: {
+                enabled: true
+            }
         },
-        marker: {
-            show: false
+        colors: minichart3Colors,
+        stroke: {
+            curve: 'smooth',
+            width: 2,
+        },
+        tooltip: {
+            fixed: {
+                enabled: false
+            },
+            x: {
+                show: true,
+            },
+
+            y: {
+                title: {
+                    formatter: function (seriesName) {
+                        return ''
+                    }
+                },
+            },
+            marker: {
+                show: false
+            }
         }
-    }
-};
-
-var chart = new ApexCharts(document.querySelector("#mini-chart3"), options);
-chart.render();
-//  }
-// }
-//     setInterval(tick, 5000)
-
-
+    };
+    var chart = new ApexCharts(document.querySelector("#mini-chart3"), options);
+    chart.render();
 
 // mini-4
 var minichart4Colors = getChartColorsArray("#mini-chart4");
 var options = {
     series: [{
-        data: [12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15, ]
+        data: [0,20]
     }],
     chart: {
         type: 'line',
@@ -208,7 +194,7 @@ var options = {
             enabled: false
         },
         x: {
-            show: false
+            show: true
         },
         y: {
             title: {
@@ -363,8 +349,8 @@ var options = {
     },
     xaxis: {
         categories:
-         ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-         ,
+            ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        ,
         labels: {
             rotate: -90
         }

@@ -6,9 +6,6 @@ const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados ,i
 const {numeroClientes} = require('../controllers/customerFormControllers');
 
 
-
-
-
  // * ========== Renderizado de vistas generales ==========
 //                           ↓↓
      router.get('/login', nologueado, (req, res) => {

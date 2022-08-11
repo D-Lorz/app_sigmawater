@@ -2,11 +2,11 @@ const express = require('express')
 const router = express.Router()
 const path = require('path');
 const multer = require('multer');
+const cron = require('node-cron');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados,isSellers } = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
         agendarInstalacionProducto,getRegistrarInstalacion,elegirSistema,historialClientes } = require('../controllers/customerFormControllers');
-
 
 const {servicioInstaladosx} = require("../controllers/adminControllers");  
   
@@ -89,14 +89,15 @@ router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
        res.render('afiliados', { user: req.user })
 });
 
+cron.schedule('* * 12 * * *',() => {
+    console.log("Hola desde cron job")
+    historialClientes();
+});
+
 router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes)
-
 router.get('/solicitar-credito/:id', isAuthenticated ,getSolicitudCreditos)
-
 router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro)
-
 router.get('/test-de-agua/:id', isAuthenticated, getTestAgua) 
-    
 router.get('/agendar-instalacion/:id', isAuthenticated,getAgendarinstalacion) 
 router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 
@@ -120,6 +121,6 @@ router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 /*=============================================================*/
   router.post('/elegirSistema', isAuthenticated, elegirSistema);
 /*=============================================================*/
-  router.post('/historialDeClientes',isAuthenticated,historialClientes)
+ 
 
 module.exports = router

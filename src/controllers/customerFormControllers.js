@@ -19,9 +19,9 @@ exports.registrarClientes = async (req, res) => {
     currentdate = new Date();
     const oneJan = new Date(currentdate.getFullYear(),0,1);
     const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-    const semana = Math.ceil(( currentdate.getDay() + 1 + numberOfDays) / 7);
-    console.log(`Numero de la semana es ${semana}.`);
-
+    const semana = Math.ceil(( currentdate.getDay() + numberOfDays) / 7);
+    console.log("Semana actual ==>> ",semana);
+  
     const nombre = req.body.nombre;
     const segundo_nombre = req.body.segundo_nombre;
     const apellido = req.body.apellido;
@@ -175,7 +175,6 @@ exports.solicitarCredito = async (req, res) => {
   const licencia_cliente = JSON.stringify({
     'frontal': frontal,
     'trasera': trasera
-
   });
 
   const acuerdo_firmado = req.body.acuerdo_firmado
@@ -204,7 +203,6 @@ exports.solicitarCredito = async (req, res) => {
     parentesco3_co_solicitante, tel_movil3_co_solicitante, licencia_cliente, acuerdo_firmado, id_cliente
 
   }
-  
   // * --> Actualizar datos personales del cliente
   const nombre = req.body.nombre;
   const segundo_nombre = req.body.segundo_nombre;
@@ -215,7 +213,6 @@ exports.solicitarCredito = async (req, res) => {
   const ciudad = req.body.ciudad;
   const estado_ubicacion = req.body.estado_ubicacion;
   const codigo_postal = req.body.codigo_postal;
-
   // --> Número aleatorio de cliente
   const numCliente = req.body.numCliente
 
@@ -237,8 +234,7 @@ exports.listarClientes = async (req, res) => {
 
   // Consultando en DB los clientes que pertenecen al vendedor actual
   conexion.query('SELECT * FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor], (err, result) => {
-    if (err) throw err;
-
+      if (err) throw err;
 
 // todo ===============================>>> Estado del solicitar credito
 let credito =  conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [id_vendedor.id])
@@ -275,31 +271,27 @@ estado_intalacion.txt = "No solicitado";
 estado_intalacion.background = 'badge-soft-dark'
 
 if (consultaEstado_instalacion.length > 0) {
-  consultaEstado_instalacion = consultaEstado_instalacion[0]
+    consultaEstado_instalacion = consultaEstado_instalacion[0]
 
 if (consultaEstado_instalacion.estado_agenda === '0') {
-  estado_intalacion.txt= "Listo para instalar";
-  estado_intalacion.background = 'badge-soft-warning'
+    estado_intalacion.txt= "Listo para instalar";
+    estado_intalacion.background = 'badge-soft-warning'
   
 } else if (consultaEstado_instalacion.estado_agenda == 1) {
-  estado_intalacion.txt= "Instalado";
-  estado_intalacion.background= 'visitado';
+           estado_intalacion.txt= "Instalado";
+           estado_intalacion.background= 'visitado';
 
   } 
 }
-
     res.render('lista-clientes', { user: req.user,clientes: result,estado,estado_intalacion})
   })
 
 }
-
 // ! >>>>>>>>>  Tarjetas en la vista perfil clientes <<<<<<<<<<<
 exports.listarClientes_PerfilClientes = async (req, res) => {
-
    const id_cliente = req.params.id
    let clientes2 = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id_cliente])
    clientes2 = clientes2[0]
-
 
 // todo ===============================>>> Estado del solicitar credito
   let creditoVista_interna = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
@@ -334,26 +326,24 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   let estadoBtn = []
   estadoBtn.txt = "Solicitar instalación";
   estadoBtn.btnAgenda = false;
-
       if (validarBtnInstalacion.length > 0) {
-        validarBtnInstalacion = validarBtnInstalacion[0]
+          validarBtnInstalacion = validarBtnInstalacion[0]
 
        if (validarBtnInstalacion.estado_del_credito == 0) {
-          estadoBtn.btnAgenda = false;
+           estadoBtn.btnAgenda = false;
 
         } else if (validarBtnInstalacion.estado_del_credito == 1) {
-          estadoBtn.btnAgenda = true;
-          estadoBtn.txt = "Solicitar instalación";
+           estadoBtn.btnAgenda = true;
+           estadoBtn.txt = "Solicitar instalación";
 
         } else if (validarBtnInstalacion.estado_del_credito == 2) {
-          estadoBtn.btnAgenda = false;
+           estadoBtn.btnAgenda = false;
 
         } else if (validarBtnInstalacion.estado_del_credito == 3) {
            estadoBtn.btnAgenda = true;
            estadoBtn.txt = "Solicitar instalación";
         }
       } else if(!validarBtnInstalacion) {
-      
         estadoBtn.btnAgenda = false;
       }
     // todo ===========>>> Desactivar btn: Solicitar instalación cuando el admin ya subío la evidencia 
@@ -361,12 +351,11 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       estadoBtn.txt = "Solicitar instalación";
           
           if (validarBtnAgenda.length > 0) {
-            validarBtnAgenda = validarBtnAgenda[0]
+              validarBtnAgenda = validarBtnAgenda[0]
     
            if (validarBtnAgenda.estado_agenda == 1) {
               estadoBtn.btnAgenda = false;
               estadoBtn.txt = "Solicitar instalación";
-    
             } 
           }
   // todo ===========>>> Formatear mascara de campos /pendientes los demas campos numericos el formulario credito/
@@ -377,20 +366,19 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
           mostrarProducto.monto_aprobado = formatear.format(mostrarProducto.monto_aprobado )
          }
        
-
 // todo =========================>> Mostrar información del test de agua del cliente
     let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
   
       // * >>> Estados del testeo (visita al cliente)
       let consultaEstado_testAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [clientes2.id])
        
-       let estadoVisita_testAgua = []
+        let estadoVisita_testAgua = []
         estadoVisita_testAgua.txt = "A la fecha el cliente aun no ha sido visitado";
         estadoVisita_testAgua.color = '';
         estadoVisita_testAgua.background = 'noVisitado';
         
       if (consultaEstado_testAgua.length > 0) {
-        consultaEstado_testAgua = consultaEstado_testAgua[0]
+          consultaEstado_testAgua = consultaEstado_testAgua[0]
 
       if (consultaEstado_testAgua.estado_visita_test === '0') {
           estadoVisita_testAgua.txt= "Se realizó un test de agua el";
@@ -401,7 +389,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       }
       
 // todo =========================>> Consulta del PRIMER test de agua para la fecha y grafica
-  let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id DESC LIMIT 1, 1', [clientes2.id])
+  let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ? ORDER BY id DESC LIMIT 1, 1', [clientes2.id])
    
   if(consulta_PrimerTestAgua.length > 0 ){
     consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]
@@ -409,20 +397,18 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
 
 // todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
-   let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [clientes2.id])
- 
+   let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ? ORDER BY id DESC LIMIT 1; ', [clientes2.id])
       if(consulta_UltimoTestAgua.length > 0 ){
          consulta_UltimoTestAgua = consulta_UltimoTestAgua[0]
        }
       const datosJson_UltimoTestagua = JSON.stringify(consulta_UltimoTestAgua);
 
 // todo =========================>> Mostrar información del ahorro del cliente
-  let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [clientes2.id])
+  let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ? ORDER BY id DESC LIMIT 1', [clientes2.id])
         if(ahorroCalculado.length > 0 ){
           ahorroCalculado = ahorroCalculado[0]
-
         }
-      var datosJson_ahorroCalculado = JSON.stringify(ahorroCalculado);
+   var datosJson_ahorroCalculado = JSON.stringify(ahorroCalculado);
 
 // todo =========================>> Estados de la agenda para instalar el producto
     let consultaEstado_instalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [clientes2.id])
@@ -431,7 +417,6 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
         estado_intalacion.txt = "La instalación del producto no ha sido agendada";
         estado_intalacion.txtt  = "Aun no se ha solicitado la instalación";
         estado_intalacion.background = 'noVisitado';
-   
         
         if (consultaEstado_instalacion.length > 0) {
           consultaEstado_instalacion = consultaEstado_instalacion[0]
@@ -453,9 +438,8 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 let clRegistro_instalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [clientes2.id])
 
 if (clRegistro_instalacion.length > 0) {
-  clRegistro_instalacion = clRegistro_instalacion[0]
-  
-  var evidenciaF= JSON.parse(clRegistro_instalacion.evidencia_fotografica);
+    clRegistro_instalacion = clRegistro_instalacion[0]
+    var evidenciaF= JSON.parse(clRegistro_instalacion.evidencia_fotografica);
 }
 
 // * >>> Renderizado <<<<<
@@ -494,12 +478,11 @@ exports.testAgua = async (req, res) => {
   const otro3 = req.body.otro1[2];
   const concentracion3 = req.body.concentracion1[2]
   const nota = req.body.nota;
-  
    
   const id_cliente = req.body.id_cliente
   const codigo_cliente = req.body.codigo_cliente
 
- const Datos_testAgua = {
+  const Datos_testAgua = {
   fecha_test, dureza_gmXgalon, hierro,totalDureza_compensada, tsd,cloro,ph,azufre, tanino, nitrato,alcalinidad,
    otro1,concentracion1,otro2,concentracion2,otro3,concentracion3,nota,id_cliente}
 
@@ -526,7 +509,6 @@ exports.ahorro = async (req, res) => {
   const ahorroMensual_productos_limpieza =  productos_limpieza * 0.75
   const ahorroAnual_productos_limpieza = ahorroMensual_productos_limpieza * 12 
  
-
   const agua_caliente = req.body.agua_caliente.replace(/[$ ]/g, '');
   const ahorroMensual_agua_caliente =  agua_caliente * 0.2
   const ahorroAnual_agua_caliente = ahorroMensual_agua_caliente * 12 
@@ -567,13 +549,10 @@ parseFloat(ahorroAnual_agua_caliente)+parseFloat(ahorroAnual_plomeria_electrodom
       ahorroMensual_agua_caliente, ahorroAnual_agua_caliente,
       ahorroMensual_plomeria_electrodomesticos, ahorroAnual_plomeria_electrodomesticos,
       ahorroMensual_ropa_lenceria, ahorroAnual_ropa_lenceria,sumaGastoMensual,sumaAhorroMensual,sumaAhorroAnual, id_cliente  
-    
     }
-
  await conexion.query('INSERT INTO ahorro SET ?', [datos_calcular_ahorros], (err, result) => {
       if (err) throw err;
       if (result) { res.redirect('/perfil-clientes/'+codigo_cliente) }
-     
     })
 }
 // todo --> Formulario agendar instalacion
@@ -675,58 +654,71 @@ const formatear = new Intl.NumberFormat('en-US', {
 
 // todo ====>>>> Numero de clientes añadidos
 exports.numeroClientes = async (req, res) => {
-const id_vendedor = req.user.id_consecutivo;
-const id_vendedores = req.user.id_vendedor;
+  const id_vendedor = req.user.id_consecutivo;
+  const id_vendedores = req.user.id_vendedor;
 
+  let countCliente = await conexion.query("SELECT count(correo) as totalClientes FROM nuevos_cliente WHERE id_vendedor = ?", [id_vendedor]);
+  console.log(countCliente[0].totalClientes);
+  let countAfiliados = await conexion.query("SELECT count(codigo_afiliado) as totalAfiliados FROM registro_de_vendedores WHERE codigo_afiliado = ?", [id_vendedores]);
+  console.log(countAfiliados[0].totalAfiliados);
 
-   let countCliente = await conexion.query('SELECT count(correo) as totalClientes FROM nuevos_cliente WHERE id_vendedor = ?', [id_vendedor]) 
-   console.log("Numero de clientes ===>>>");
-       console.log(countCliente[0].totalClientes);
-                     
-  let countAfiliados = await conexion.query('SELECT count(codigo_afiliado) as totalAfiliados FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedores]) 
-    console.log("Numero de vendedores afilaidos ===>>>");
-       console.log(countAfiliados[0].totalAfiliados);
+  let clAgregados = await conexion.query("SELECT * FROM (SELECT * FROM historialnuevosclientes WHERE idVendedor = ? ORDER BY id DESC LIMIT 7) sub ORDER BY id ASC;", [id_vendedor]);
+  let datosJson_clAgregados, rendimientoCl = 0;
 
- res.render('dashboard', { user: req.user, totalCliente : countCliente[0].totalClientes,totalAfiliado : countAfiliados[0].totalAfiliados });
-     
- }
+  if (clAgregados.length > 0) {
+    console.log("CLIENTES AGREGADOS", clAgregados);
+    datosJson_clAgregados = JSON.stringify(clAgregados);
+    let ultimo, penultimo = 0;
+    ultimo = clAgregados[clAgregados.length - 1].numClientes;
+    if (clAgregados.length >= 2) {
+      penultimo = clAgregados[clAgregados.length - 2].numClientes;
+      rendimientoCl = (parseFloat(ultimo - penultimo) / penultimo) * 100;
+      rendimientoCl = rendimientoCl.toFixed(1);
+    }
+    if (ultimo == 0 && penultimo == 0){
+      rendimientoCl = 0
+    }
+    if (penultimo == 0 && ultimo >= 1) {
+      rendimientoCl = 100
+    }
+    console.log("Rendimiento ==>> ", rendimientoCl);
+  }
+
+  res.render("dashboard", {
+    user: req.user,
+    totalCliente: countCliente[0].totalClientes,
+    totalAfiliado: countAfiliados[0].totalAfiliados,
+    datosJson_clAgregados,
+    rendimientoCl,
+  });
+};
 
 exports.historialClientes = async (req, res) => {
-  const id_vendedor = req.user.id_consecutivo
-  let cl = await conexion.query("SELECT * FROM nuevos_cliente WHERE id_vendedor = ?", [id_vendedor])
-  let num = 0
+  let clientes = await conexion.query("SELECT * FROM nuevos_cliente");
+  let vendedores = await conexion.query("SELECT * FROM registro_de_vendedores");
+  let fecha = new Date().toLocaleDateString("en-CA");
+  let yearActual = new Date(fecha).getFullYear();
 
-  cl.forEach(cl => {
-    if(cl) {
-        let fechaActual = new Date().toLocaleDateString('en-CA')
-        let yearActual = new Date(fechaActual).getFullYear();
-       
-        currentdate = new Date(fechaActual);
-        const oneJan = new Date(currentdate.getFullYear(),0,1);
-        const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-        const semanaActual = Math.ceil(( currentdate.getDay() + 1 + numberOfDays) / 7);
-
-      if (cl.year == yearActual && cl.semana == semanaActual) {
-          num = num +1
-          console.log(cl.nombre);
-      }
-    }
-}) 
-  let fechaActual = new Date().toLocaleDateString('en-CA')
-  console.log("# de clientes ==>> ",num);
-  console.log("Fecha actual ==>> ",fechaActual);
-  console.log("Id vendedor ==>> ",id_vendedor);
+  currentdate = new Date(fecha);
+  const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+  const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7);
+  console.log("Semana actual ==>> ", semanaActual);
   
-  let fecha = fechaActual
-  let numClientes = num
-  let idVendedor = id_vendedor
-  const customerObj = {fecha, numClientes, idVendedor}
-conexion.query("INSERT INTO historialnuevosclientes SET ?", [customerObj], (err, result) => {
-    if (err) throw err;
-        if(result.length > 0){res.json(result);
-        } else { res.send("Insertado")}
-   });
+  let numClientes = 0, bandera = undefined;
 
-}
+  vendedores.forEach(async (v) => {
+    const resultado = clientes.filter((item) => item.id_vendedor == v.id && item.semana == semanaActual && item.year == yearActual);
 
+    if (resultado.length > 0){
+      numClientes = resultado.length;
+    }
 
+    idVendedor = v.id;
+    const customerObj = {fecha, numClientes, idVendedor};
+    await conexion.query("INSERT INTO historialnuevosclientes SET ?", [customerObj]);
+    console.log("Realizando registro en DB....")
+  });
+
+  return "EJECUCIÓN FINALIZADA..!";
+};

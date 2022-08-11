@@ -309,8 +309,6 @@ function getChartColorsArray(chartId) {
 // if(valoresDel_ahorro){
 
 // }
-
-
 let valoresDel_ahorro,graficaAhorroMensual,graficaAhorroAnual
 $( function(){
      valoresDel_ahorro = $('#datosJson_ahorroCalculado').val();
