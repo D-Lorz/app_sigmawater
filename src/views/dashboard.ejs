@@ -110,11 +110,10 @@
                                             <h4 class="mb-3"> <%= totalCliente%></h4>
                                         </div>
                                         <div class="col-6">
-                                            <div id="mini-chart3" data-colors='["#5156be"]'
-                                                class="apex-charts mb-2"></div>
-                                                <input type="hidden" id="datosJson_clAgregados" value="<%= datosJson_clAgregados %>">
-                                        </div>
-                                    </div>
+                                            <div id="mini-chart3" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                              <input type="hidden" id="datosJson_clAgregados" value="<%= datosJson_clAgregados %>">
+                                          </div>
+                                     </div>
                                     <div class="text-nowrap">
                                         <% if(rendimientoCl > 0 ){ %> 
                                         <span class="badge bg-soft-success text-success">+<%=rendimientoCl%>%</span>
@@ -134,20 +133,21 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block
-                                    text-truncate">Afiliados añadidos</span>
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Afiliados añadidos</span>
                                             <h4 class="mb-3"><span ><%= totalAfiliado %></span></h4>
                                         </div>
                                         <div class="col-6">
-                                            <div id="mini-chart4" data-colors='["#5156be" ]'
-                                                class="apex-charts mb-2"></div>
+                                            <div id="mini-chart4" data-colors='["#5156be" ]'class="apex-charts mb-2"></div>
+                                            <input type="hidden" id="datosJson_aflAgregados" value="<%= datosJson_aflAgregados %>">
                                         </div>
                                     </div>
                                     <div class="text-nowrap">
-                                        <span class="badge bg-soft-success
-                                text-success">+2.95%</span>
-                                        <span class="ms-1 text-muted font-size-13">Since
-                                            last week</span>
+                                        <% if(rendimientoCl > 0 ){ %> 
+                                        <span class="badge bg-soft-success text-success">+<%=rendimientoAfl%>%</span>
+                                        <% } else {%> 
+                                        <span class="badge bg-soft-danger text-danger"><%=rendimientoAfl%>%</span>
+                                        <% } %>
+                                        <span class="ms-1 text-muted font-size-13">Desde semana anterior</span>
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->

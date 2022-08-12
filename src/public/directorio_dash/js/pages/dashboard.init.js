@@ -105,9 +105,8 @@ var options = {
 var chart = new ApexCharts(document.querySelector("#mini-chart2"), options);
 chart.render();
 
-let valores = [], graficaCl
+let valores = []
 const datos = []
-
     valores = $('#datosJson_clAgregados').val();
     if (!valores || valores == null || valores == '' || valores == undefined){
         const year = new Date().getFullYear()
@@ -121,8 +120,6 @@ const datos = []
             datos.push({ x:"Hasta: "+vl.fecha, y:temp})
         })
     }
-    
-    
     // mini-3
     let minichart3Colors = getChartColorsArray("#mini-chart3");
     var options = {
@@ -171,11 +168,33 @@ const datos = []
     var chart = new ApexCharts(document.querySelector("#mini-chart3"), options);
     chart.render();
 
+    let valoresAfl = []
+    const datosAfl = []
+        valoresAfl = $('#datosJson_aflAgregados').val();
+        if (!valoresAfl || valoresAfl == null || valoresAfl == '' || valoresAfl == undefined){
+            const year = new Date().getFullYear()
+            datosAfl.unshift({x:year, y:0},{x:year, y:0})
+            console.log("\nHOLA DESDE ACÁ >>>>\n", year)
+            console.log("<<<<<DATOS>>>>\n", datosAfl)
+        } else {
+            valoresAfl = JSON.parse(valoresAfl);
+            valoresAfl.forEach(afl => {
+                const tempafl = afl.numAfiliados
+                datosAfl.push({ x:"Hasta: "+afl.fecha, y:tempafl})
+            })
+        }
 // mini-4
 var minichart4Colors = getChartColorsArray("#mini-chart4");
 var options = {
     series: [{
-        data: [0,20]
+        data: datosAfl
+    }],
+    "yaxis": [{
+        "labels": {
+            "formatter": function (val) {
+                return val.toFixed(0)
+            }
+        }
     }],
     chart: {
         type: 'line',

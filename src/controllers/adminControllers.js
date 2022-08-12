@@ -498,16 +498,14 @@ exports.servicioInstaladosx = async (req, res) => {
   const evidencia = '../evidenciaServicio/' + urlLicencias[0]
   const evidencia_fotografica = JSON.stringify({ 'evidencia': evidencia, });
   const nota = req.body.nota;
-
   const id_cliente = req.body.id_cliente
   const codigo_cliente = req.body.codigo_cliente
-
   const estado_agenda = 1
 
   const Datos_servicio = { fecha_instalacion, producto_instalado, serial_producto, instalador, evidencia_fotografica, nota, id_cliente }
   const Datos_estado = { estado_agenda }
   const Datos_factura = { producto_instalado, fecha_instalacion, id_cliente, codigo_cliente }
- 
+
   //* ==>> Apartado para sumar ventas individuales
   let clienteI = await conexion.query('SELECT * FROM nuevos_cliente')
   let vendedorI = await conexion.query('SELECT ventas_individuales, id_vendedor FROM registro_de_vendedores')

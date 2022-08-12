@@ -104,17 +104,15 @@ rel="stylesheet" type="text/css" />
                     
                     </thead>
                     <tbody>
-                        <% clientes.forEach((user)=>{ %>
-                           
+                        <% listaCl.forEach((user)=>{ %>
                             <tr>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.nombre %></a></td>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.apellido %></a></td>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.correo %></a></td>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.telefono %></a></td>
                                 <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.direccion %></a></td>
-                                <td><div class="badge <%= estado.color%> font-size-12" ><%= estado.txt %></div></td>
-                                <td><div class="badge <%= estado_intalacion.background  %> font-size-12 letra" > <%= estado_intalacion.txt %> </div></td>
-
+                                <td><div class="badge <%= user.estadopro.color%> font-size-12" ><%= user.estadopro.txt %></div></td>
+                                <td><div class="badge <%= user.estadoAgenda.color%> font-size-12 letra" > <%= user.estadoAgenda.txt %> </div></td>
                             </tr>
                         <%})%> 
                     </tbody>

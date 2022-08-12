@@ -7,7 +7,20 @@ const { promisify } = require('util')
 
 // todo: REGISTRAR
 exports.registrar = async (req, res) => {
-    
+    let mes = new Date().getMonth()
+    mes == 0 ? mes = 12 : mes = mes+1
+//  ? NOTA: ==>> Esta es la forma para obtener la fecha actual <<<<<
+   const dia = new Date().getDate();
+//  ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
+   const year = new Date().getFullYear();
+
+//  ? NOTA: ==>> Esta es la forma para obtener el numero de la semana actual del año entero <<<<<
+   currentdate = new Date();
+   const oneJan = new Date(currentdate.getFullYear(),0,1);
+   const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+   const semana = Math.ceil(( currentdate.getDay() + numberOfDays ) / 7) - 1;
+   console.log("ESTA ES LA SEMANA ACTUAL ==>> " ,semana);
+
     const nombres = req.body.nombres
     const apellidos = req.body.apellidos
     const fecha_nacimiento = req.body.fecha_nacimiento
@@ -29,26 +42,23 @@ exports.registrar = async (req, res) => {
 
     const frontal = '../licences/' + urlLicencias[0]
     const trasera = '../licences/' + urlLicencias[1]
-   
     const licencia_conduccion = JSON.stringify({
         'frontal': frontal,
         'trasera': trasera
-
     });
 
     const id_vendedor = generateRandomString(6)
     const pass = generarPass_vendedor(8)
   
-    const nuevoRegistro = {
-        nombres, apellidos, fecha_nacimiento, telefono_movil, correo, seguro_social, ciudad, direccion,
-        apt_suite_unidad, codigo_postal, codigo_afiliado, nombre_banco, numero_cuenta, ruta, beneficiario, 
-        licencia_conduccion,id_vendedor }
+    const nuevoRegistro = {mes, dia, year, semana, nombres, apellidos, fecha_nacimiento, telefono_movil, 
+         correo, seguro_social, ciudad, direccion, apt_suite_unidad, codigo_postal, codigo_afiliado,
+         nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion,id_vendedor }
 
     const usuarios = {correo, pass, id_vendedor, codigo_afiliado }
 
      console.log(nuevoRegistro)
      await conexion.query('INSERT INTO usuarios SET ?', [usuarios])
-    await conexion.query('INSERT INTO registro_de_vendedores SET ?', [nuevoRegistro], (err, result) => {
+     await conexion.query('INSERT INTO registro_de_vendedores SET ?', [nuevoRegistro], (err, result) => {
         if (err) throw err;
         console.log("1 Registro insertado");
         console.log(result)

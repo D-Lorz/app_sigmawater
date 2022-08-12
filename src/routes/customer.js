@@ -6,7 +6,7 @@ const cron = require('node-cron');
 const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados,isSellers } = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
-        agendarInstalacionProducto,getRegistrarInstalacion,elegirSistema,historialClientes } = require('../controllers/customerFormControllers');
+        agendarInstalacionProducto,getRegistrarInstalacion,elegirSistema,historialClientes, historialVendedores } = require('../controllers/customerFormControllers');
 
 const {servicioInstaladosx} = require("../controllers/adminControllers");  
   
@@ -89,10 +89,15 @@ router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
        res.render('afiliados', { user: req.user })
 });
 
-cron.schedule('* * 12 * * *',() => {
+cron.schedule('0 22 * * Sun',() => {
     console.log("Hola desde cron job")
     historialClientes();
 });
+// cron.schedule('5 * * * * *',() => {
+//     console.log("Hola desde cron job")
+//     historialVendedores();
+// });
+
 
 router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes)
 router.get('/solicitar-credito/:id', isAuthenticated ,getSolicitudCreditos)
@@ -121,6 +126,6 @@ router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 /*=============================================================*/
   router.post('/elegirSistema', isAuthenticated, elegirSistema);
 /*=============================================================*/
- 
+router.post('/historialVendedores',historialVendedores);
 
 module.exports = router
