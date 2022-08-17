@@ -872,9 +872,10 @@
         // const filtroTab = arrayDeducciones.filter((i) => i.tab == 'tab'+numTab)
         // console.log("\nEDIT >>>", filtroTab)
         // const arrayResultado = filtroTab.filter((i) => i.row !== row)
+        arrayDeducciones = arrayResultado
         const rowTab = 'row'+row+'_tab'+numTab
-        console.log("Datos sin la fila Eliminada >>>", arrayResultado)
-        actualizarDeduccion(idCliente, numTab, rowTab, nivelVendedor, arrayResultado)
+        console.log("Datos sin la fila Eliminada >>>", arrayDeducciones)
+        actualizarDeduccion(idCliente, numTab, rowTab, nivelVendedor, arrayDeducciones)
     }
 
     /* REPORTAR FACTURA COMO PAGADA */
