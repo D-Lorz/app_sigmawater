@@ -497,7 +497,8 @@ exports.servicioInstaladosx = async (req, res) => {
 
   const Datos_servicio = { fecha_instalacion, producto_instalado, serial_producto, instalador, evidencia_fotografica, nota, id_cliente }
   const Datos_estado = { estado_agenda }
-  const Datos_factura = { producto_instalado, fecha_instalacion, id_cliente, codigo_cliente }
+  // const Datos_factura = { producto_instalado, fecha_instalacion, id_cliente, codigo_cliente }
+  const Datos_factura = { producto_instalado, fecha_instalacion, id_cliente }
  
   await conexion.query('UPDATE agendar_instalacion SET ? WHERE id_cliente = ?', [Datos_estado, id_cliente])
   await conexion.query('INSERT INTO factura SET ?', [Datos_factura])
@@ -997,7 +998,7 @@ exports.factura = async (req, res) => {
   const clientes = await conexion.query("SELECT cl.*, cr.id_cliente AS idCliente, cr.monto_aprobado, cr.porcentaje_aprobado, cr.monto_maximo, cr.sistema FROM nuevos_cliente AS cl JOIN solicitar_credito AS cr ON cl.id = cr.id_cliente")
   const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel, telefono_movil FROM registro_de_vendedores")
   const factura = await conexion.query("SELECT * FROM factura")
-  const deducciones = await conexion.query("SELECT * FROM deducciones")
+  // const deducciones = await conexion.query("SELECT * FROM deducciones")
 
   const arrayVentas = []
 
@@ -1008,26 +1009,6 @@ exports.factura = async (req, res) => {
     cl.monto_maximo = parseFloat(cl.monto_maximo)
     cl.factura = {}
     cl.vendedores = []
-
-    /******* ASIGNANDO FACTURA AL CLIENTE *******/
-    if (factura.length > 0) {
-      factura.forEach(f => {
-        if (f.id_cliente == cl.id) {
-          cl.factura.id = f.id_factura
-          cl.factura.fecha  = f.fecha_instalacion
-
-          if (f.estadoFacturas == 0) {
-            cl.factura.estadoTxt = "Pendiente";
-            cl.factura.estadoColor = "badge-soft-warning";
-          }
-          if (f.estadoFacturas == 1) {
-            cl.factura.estadoTxt = "Pagado";
-            cl.factura.estadoColor = "badge-soft-success";
-          }
-        }
-      });
-    }
-    /** FIN DATOS DE LA FACTURA **/
 
     // Comisiones máximas para el producto grande ($8.500 USD)
     let comisionMax_nivel1 = 1400.0, comisionMax_nivel2 = 1900.0, comisionMax_nivel3 = 2400.0, gastos_empresa = 3000.0
@@ -1046,6 +1027,7 @@ exports.factura = async (req, res) => {
 
       const vendedor = {}, vendedor2 = {}, vendedor3 = {}, vendedor4 = {};
       let v2 = false, v3 = false, v4 = false;
+      vendedor.id = v.id
       vendedor.codigo = v.id_vendedor
       vendedor.nombre = v.nombres + " " + v.apellidos
       vendedor.nivel = parseInt(v.nivel)
@@ -1053,21 +1035,11 @@ exports.factura = async (req, res) => {
       vendedor.telefono = v.telefono_movil
       vendedor.deducciones = []
 
+      // ---------------------------------------------- INICIO ** SECCIÓN DEDUCCIONES ---------------------------------------------- 
       /******* DEDUCCIONES VENDEDOR 1  *******/
-      if (deducciones.length > 0) {
-        deducciones.forEach(d => {
-          if (d.id_vendedor == v.id) {
-            if (cl.id == d.factura_cliente) {
-              vendedor.deducciones.push({
-                id: d.id,
-                vendedor: d.id_vendedor,
-                descripcion: d.descripcion,
-                monto: d.monto
-              })
-            }
-          }
-        });
-      }
+      const ded = factura.find(i => i.id_cliente == cl.id)
+      console.log("\n------ DEDUCCIONES --------: ", ded)
+      if (ded) { vendedor.deducciones = JSON.parse(ded.deducciones) }
       console.log("DEDUCCIONES v1: " + JSON.stringify(vendedor.deducciones))
       /** FIN DEDUCCIONES 1 **/
 
@@ -1075,6 +1047,7 @@ exports.factura = async (req, res) => {
 
       // VALIDAR SI TIENE UN VENDEDOR 2
       if (v2) {
+        vendedor2.id = v2.id
         vendedor2.codigo = v2.id_vendedor
         vendedor2.nombre = v2.nombres + " " + v2.apellidos
         vendedor2.nivel = parseInt(v2.nivel)
@@ -1083,18 +1056,8 @@ exports.factura = async (req, res) => {
         vendedor2.deducciones = []
 
         /******* DEDUCCIONES VENDEDOR 2 *******/
-        if (deducciones.length > 0) {
-          deducciones.forEach(d => {
-            if (d.id_vendedor == v2.id) {
-              vendedor2.deducciones.push({
-                id: d.id,
-                vendedor: d.id_vendedor,
-                descripcion: d.descripcion,
-                monto: d.monto
-              })
-            }
-          });
-        }
+        const ded = factura.find(i => i.factura_cliente == cl.id)
+        if (ded) { vendedor2.deducciones = JSON.parse(ded.deducciones) }
         console.log("DEDUCCIONES v2: " + JSON.stringify(vendedor2.deducciones))
         /** FIN DEDUCCIONES 2 **/
 
@@ -1103,6 +1066,7 @@ exports.factura = async (req, res) => {
       
       // VALIDAR SI TIENE UN VENDEDOR 3
       if (v3) {
+        vendedor3.id = v3.id
         vendedor3.codigo = v3.id_vendedor
         vendedor3.nombre = v3.nombres + " " + v3.apellidos
         vendedor3.nivel = parseInt(v3.nivel)
@@ -1131,6 +1095,7 @@ exports.factura = async (req, res) => {
 
       // VALIDAR SI TIENE UN VENDEDOR 4
       if (v4) {
+        vendedor4.id = v4.id
         vendedor4.codigo = v4.id_vendedor
         vendedor4.nombre = v4.nombres + " " + v4.apellidos
         vendedor4.nivel = parseInt(v4.nivel)
@@ -1154,6 +1119,7 @@ exports.factura = async (req, res) => {
         console.log("DEDUCCIONES v4: " + JSON.stringify(vendedor4.deducciones))
         /** FIN DEDUCCIONES 4 **/
       }
+      // ---------------------------------------------- FIN ** SECCIÓN DEDUCCIONES ---------------------------------------------- 
 
       /********  Comisión Directa al Vendedor cuando el porcentaje aprobado es mayor al 80% ********/
       if (cl.porcentaje_aprobado >= 80) {
@@ -1162,6 +1128,8 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 1
           case 1:
             vendedor.comision_base = comisionMax_nivel1;
+            vendedor.comision_final = vendedor.comision_base;
+
             cl.vendedores.push(vendedor)
             //COMISIÓN VENDEDOR 2 (NIVEL 2, 3 o 4)
             if (v2) {
@@ -1170,8 +1138,9 @@ exports.factura = async (req, res) => {
               } else if (vendedor2.nivel == 3) {
                 vendedor2.comision_base = (comisionMax_nivel3 - comisionMax_nivel1)
               } else {
-                vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel1)
+                vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel1);
               }
+              vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
 
@@ -1182,6 +1151,7 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
               }
+              vendedor3.comision_final = vendedor3.comision_base;
               cl.vendedores.push(vendedor3)
             }
 
@@ -1189,6 +1159,7 @@ exports.factura = async (req, res) => {
             if (v4) {
               // Asignando comisión base vendedor nivel 4 -> (Comisión máxima del vendedor nivel 4 menos las comisiones niveles anteriores)
               vendedor4.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor3.comision_base - vendedor2.comision_base - vendedor.comision_base);
+              vendedor4.comision_final = vendedor4.comision_base;
               cl.vendedores.push(vendedor4)
             }
 
@@ -1197,6 +1168,7 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 2
           case 2:
             vendedor.comision_base = comisionMax_nivel2;
+            vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
 
             //COMISIÓN VENDEDOR 2 (NIVEL 3 o 4)
@@ -1206,12 +1178,14 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel3 - comisionMax_nivel2)
               }
+              vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
 
             //COMISIÓN VENDEDOR 3 (NIVEL 4)
             if (v3) {
               vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
+              vendedor3.comision_final = vendedor3.comision_base;
               cl.vendedores.push(vendedor3)
             }
 
@@ -1220,11 +1194,13 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 3
           case 3:
             vendedor.comision_base = comisionMax_nivel3;
+            vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
 
             //COMISIÓN VENDEDOR 2 (NIVEL 4)
             if (v2.nivel == 4) {
               vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel3 - comisionMax_nivel2 - comisionMax_nivel1)
+              vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor)
             }
 
@@ -1233,6 +1209,7 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 4
           default:
             vendedor.comision_base = (cl.monto_aprobado - gastos_empresa);
+            vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
             break;
         }
@@ -1247,6 +1224,7 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 1
           case 1:
             vendedor.comision_base = parseFloat(porcentaje * comisionMax_nivel1)
+            vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
 
             //COMISIÓN VENDEDOR 2 (NIVEL 2, 3 o 4)
@@ -1258,6 +1236,7 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor.comision_base);
               }
+              vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
             
@@ -1268,12 +1247,14 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
               }
+              vendedor3.comision_final = vendedor3.comision_base;
               cl.vendedores.push(vendedor3)
             }
 
             //COMISIÓN VENDEDOR 4 (NIVEL 4)
             if (v4) {
               vendedor4.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor3.comision_base - vendedor2.comision_base - vendedor.comision_base);
+              vendedor4.comision_final = vendedor4.comision_base;
               cl.vendedores.push(vendedor4)
             }
 
@@ -1282,6 +1263,7 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 2
           case 2:
             vendedor.comision_base = parseFloat(porcentaje * comisionMax_nivel2)
+            vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
 
             //COMISIÓN VENDEDOR 2 (NIVEL 3 o 4)
@@ -1291,12 +1273,14 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor.comision_base);
               }
+              vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
 
             //COMISIÓN VENDEDOR 3 (NIVEL 4)
             if (v3) {
               vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
+              vendedor3.comision_final = vendedor3.comision_base;
               cl.vendedores.push(vendedor3)
             }
 
@@ -1305,11 +1289,13 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 3
           case 3:
             vendedor.comision_base = parseFloat(porcentaje * comisionMax_nivel3)
+            vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
 
             //COMISIÓN VENDEDOR 2 (NIVEL 4)
             if (v2) {
               vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor.comision_base);
+              vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
 
@@ -1318,8 +1304,8 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 4
           default:
             vendedor.comision_base = (cl.monto_aprobado - gastos_empresa);
+            vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
-
             break;
         }
 
@@ -1331,11 +1317,33 @@ exports.factura = async (req, res) => {
 
     //Sumar comisiónes base de todos los vendedores
     cl.comision_total = cl.vendedores.map(item => item.comision_base).reduce((prev, curr) => prev + curr, 0);
-    arrayVentas.push(cl)
-    console.log("\n######################## ** INICIO ** DATOS VENTA CLIENTE + VENDEDORES ########################")
-    console.log(cl)
-    console.log("######################## ** FIN ** DATOS VENTA CLIENTE + VENDEDORES ########################\n")
 
+    /******* ASIGNANDO FACTURA AL CLIENTE *******/
+    if (factura.length > 0) {
+      factura.forEach(f => {
+        if (f.id_cliente == cl.id) {
+          cl.factura.id = f.id_factura
+          cl.factura.fecha  = f.fecha_instalacion
+
+          if (f.estadoFactura == 0) {
+            cl.factura.estadoTxt = "Pendiente";
+            cl.factura.estadoColor = "badge-soft-warning";
+          }
+          if (f.estadoFactura == 1) {
+            cl.factura.estadoTxt = "Pagado";
+            cl.factura.estadoColor = "badge-soft-success";
+            cl.comision_total = f.comision_total;
+          }
+        }
+      });
+    }
+    /** FIN DATOS DE LA FACTURA **/
+
+    arrayVentas.push(cl)
+    // console.log("\n######################## ** INICIO ** DATOS VENTA CLIENTE + VENDEDORES ########################")
+    // console.log(cl)
+    // console.log("######################## ** FIN ** DATOS VENTA CLIENTE + VENDEDORES ########################\n")
+    
   });
 
   ventasTotales = arrayVentas;
@@ -1348,6 +1356,37 @@ exports.factura = async (req, res) => {
 exports.deducciones = async (req, res) => {
   const {idFactura} = req.body;
   let f = ventasTotales.find(item => item.factura.id == idFactura)
+  console.log("\n<<<<< RESULTADO FACTURA SELECCIONADA >>>> ", JSON.stringify(f)+"\n")
   res.send(f);
 }
 //todo ************* -- FIN  DEDUCCIONES ************* */
+
+//todo ************* -- INICIO GUARDAR COMISIONES + DEDUCCIONES EN DB ************* */
+exports.efectuarVenta = async (req, res) => {
+  const {factura, dataVendedores} = req.body;
+  let comisiones = [], comision_total = 0, deducciones = [];
+  
+  dataVendedores.forEach(dv => {
+    comisiones.push(dv.comision_final);
+    comision_total += dv.comision_final;
+    deducciones.push(dv.deducciones)
+  });
+
+  const datos = {
+    mes: new Date().getMonth()+1,
+    dia: new Date().getDate(),
+    year: new Date().getFullYear(),
+    comisiones: JSON.stringify(comisiones),
+    comision_total,
+    deducciones: JSON.stringify(deducciones),
+    estadoFactura: 1
+  }
+  
+  console.log("DATA CAPTURADA", JSON.stringify(datos))
+  let respuesta = undefined;
+  const actualizarFactura = await conexion.query("UPDATE factura SET ? WHERE id_factura = ?", [datos, factura])
+  actualizarFactura ? respuesta = true : respuesta = false;
+  
+  res.send(respuesta);
+}
+//todo ************* -- FIN  GUARDAR COMISIONES + DEDUCCIONES EN DB ************* */

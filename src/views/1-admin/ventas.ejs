@@ -152,41 +152,43 @@
                                                             class="logo-txt"></span>
                                                     </div>
                                                 </div>
+                                                <!-- BOTÓN GUARDAR FACTURA - ENVIAR A DB -->
+                                                <div class="flex-grow-1" >
+                                                    <a id="btnReportarFactura" class="btn btn-primary w-md waves-effect waves-light" style="border-radius: 17px;">Reportar como pagada</a>
+                                                </div>
                                                 <div class="flex-shrink-0">
                                                     <div class="mb-4">
-                                                        <h4 class="float-end font-size-16">Factura: <span id="idFactura"></span>
+                                                        <h4 class="float-end font-size-16" style="padding-top: 10px;">Factura: <span id="idFactura"></span>
                                                         </h4>
                                                     </div>
                                                 </div>
                                             </div>
                             
-                                        </div>
-                            
                                         <hr class="mb-4">
                             
                                         <!-- **INICIO** Pestañas para gestionar vendedores -->
                                         <ul class="nav justify-content-start nav-pills card-header-pills mb-3" role="tablist">
-                                            <li class="nav-item waves-effect waves-light">
-                                                <a class="nav-link active" data-bs-toggle="tab" href="#v1" role="tab" aria-selected="true">
+                                            <li  class="nav-item waves-effect waves-light">
+                                                <a id="tabFactura1" class="nav-link active" data-bs-toggle="tab" href="#v1" role="tab" aria-selected="true">
                                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
                                                     <span class="d-none d-sm-block">Vendedor Principal</span>
                                                 </a>
                                             </li>
                             
-                                            <li id="tabFactura2" class="nav-item waves-effect waves-light" style="display: none;">
-                                                <a class="nav-link" data-bs-toggle="tab" href="#v2" role="tab" aria-selected="false">
+                                            <li id="tabFactura2" class="nav-item waves-effect waves-light">
+                                                <a class="nav-link otrosTab" data-bs-toggle="tab" href="#v2" role="tab" aria-selected="false">
                                                     <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
                                                     <span class="d-none d-sm-block">Vendedor 2</span>
                                                 </a>
                                             </li>
-                                            <li class="nav-item waves-effect waves-light" id="tabFactura3" style="display: none;">
-                                                <a class="nav-link" data-bs-toggle="tab" href="#v3" role="tab" aria-selected="false">
+                                            <li class="nav-item waves-effect waves-light" id="tabFactura3">
+                                                <a class="nav-link otrosTab" data-bs-toggle="tab" href="#v3" role="tab" aria-selected="false">
                                                     <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
                                                     <span class="d-none d-sm-block">Vendedor 3</span>
                                                 </a>
                                             </li>
-                                            <li class="nav-item waves-effect waves-light" id="tabFactura4" style="display: none;">
-                                                <a class="nav-link" data-bs-toggle="tab" href="#v4" role="tab" aria-selected="false">
+                                            <li class="nav-item waves-effect waves-light" id="tabFactura4">
+                                                <a class="nav-link otrosTab" data-bs-toggle="tab" href="#v4" role="tab" aria-selected="false">
                                                     <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                                     <span class="d-none d-sm-block">Vendedor 4</span>
                                                 </a>
@@ -195,6 +197,7 @@
                                         <!-- **FIN** Pestañas para gestionar vendedores -->
                             
                                         <!-- **INICIO** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
+                                        <input type="hidden" id="idFacturaActual">
                                         <div class="tab-content p-3 text-muted">
                                         
                                             <!-- Vendedor 1 -->
@@ -231,7 +234,7 @@
                                                 </div>
                                         
                                                 <div class="py-2 mt-3">
-                                                    <h5 class="font-size-15" id="tituloDeduccion_v1">Deducciones</h5>
+                                                    <h5 class="font-size-15" id="tituloDeduccion_1">Deducciones</h5>
                                                 </div>
                                         
                                                 <!-- TABLA PARA DEDUCCIONES VENDEDOR PRINCIPAL -->
@@ -276,7 +279,7 @@
                                                 </div>
                                         
                                                 <div class="py-2 mt-3">
-                                                    <h5 class="font-size-15" id="tituloDeduccion_v2">Deducciones</h5>
+                                                    <h5 class="font-size-15" id="tituloDeduccion_2">Deducciones</h5>
                                                 </div>
                                         
                                                 <!-- TABLA PARA DEDUCCIONES VENDEDOR 2 -->
@@ -323,7 +326,7 @@
                                                 </div>
                                         
                                                 <div class="py-2 mt-3">
-                                                    <h5 class="font-size-15" id="tituloDeduccion_v3">Deducciones</h5>
+                                                    <h5 class="font-size-15" id="tituloDeduccion_3">Deducciones</h5>
                                                 </div>
                                         
                                                 <!-- TABLA PARA DEDUCCIONES VENDEDOR 3 -->
@@ -370,7 +373,7 @@
                                                 </div>
                                         
                                                 <div class="py-2 mt-3">
-                                                    <h5 class="font-size-15" id="tituloDeduccion_v4">Deducciones</h5>
+                                                    <h5 class="font-size-15" id="tituloDeduccion_4">Deducciones</h5>
                                                 </div>
                                         
                                                 <!-- TABLA PARA DEDUCCIONES VENDEDOR 4 -->
@@ -380,11 +383,11 @@
                                             </div>
 
                                             <!-- BOTÓN GUARDAR FACTURA - ENVIAR A DB -->
-                                            <div class="d-print-none mt-3">
+                                            <!-- <div class="d-print-none mt-3">
                                                 <center><a href="#" class="btn btn-primary w-md waves-effect waves-light"
                                                         style="border-radius: 17px;">Reportar como pagada</a>
                                                 </center>
-                                            </div>
+                                            </div> -->
 
                                         </div>
                                         <!-- **FIN** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
@@ -439,9 +442,10 @@
 <script src="../directorio_dash/libs/table-edits/build/table-edits.min.js"></script>
 <script src="../directorio_dash/js/pages/table-editable.int.js"></script> 
  <script src="../directorio_dash/js/app.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
 <script type="text/javascript">
-    let v1 = 1, v2 = 1, v3 = 1, v4 = 1, suma = 0, sumaDeducciones = [];
+    let v1 = 1, v2 = 1, v3 = 1, v4 = 1, arrayDeducciones = [], storage = {};
 
     function _crearTablaDeducciones(num, datos) {
         let tabla = `<table class="table table-nowrap align-middle" id="tablaDeducciones${num}">`
@@ -467,6 +471,10 @@
                                     <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Subtotal</b></td>
                                     <td colspan="2">$<span id="subtotal${num}">0</span></td>
                                 </tr>
+                                <tr id="porcentaje-ganar${num}">
+                                    <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Porcentaje ganancia</b></td>
+                                    <td colspan="2">50%</td>
+                                </tr>
                                 <tr>
                                     <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Comisión Total</b></td>
                                     <td colspan="2">$<span id="total${num}"></span></td>
@@ -478,14 +486,26 @@
         return tabla
     }
 
+    // Parametros (idCliente, Pestaña, Nivel del Vendedor)
+    function _btnAddDeduccion(idCliente, numTab, nivel) {
+        return $('#tituloDeduccion_'+numTab).append(`<button type="button" onclick="agregarDeduccion(${idCliente}, 'tab${numTab}', ${nivel})" class="btn btn-primary btn-xs btnAddDeduccion"><i class="mdi mdi-plus"></i></button>`);
+    }
+
     function editarFactura(idFactura) {
+        $("#tabFactura2").css('display', 'none')
+        $("#tabFactura3").css('display', 'none')
+        $("#tabFactura4").css('display', 'none')
         $('.btnAddDeduccion').remove()
         $('#tablaDeducciones1').remove()
         $('#tablaDeducciones2').remove()
         $('#tablaDeducciones3').remove()
         $('#tablaDeducciones4').remove()
         v1 = v2 = v3 = v4 = 1;
-        sumaDeducciones = []
+        arrayDeducciones = []
+
+        $("#idFacturaActual").val(idFactura);
+
+        $("#btnReportarFactura").attr('onclick', `reportarFactura('${idFactura}')`)
 
         fetch('/deducciones', {
           method: 'POST',
@@ -495,6 +515,10 @@
           .catch(error => console.error('Error:', error))
           .then(datos => {
             if (datos) {
+
+                storage = datos // Variable Global..
+
+                const idCliente = datos.id
                 $("#idFactura").text(idFactura)
                 $(".producto").text(datos.sistema)
                 $(".valor").text(datos.monto_aprobado)
@@ -509,30 +533,62 @@
                 $("#telVendedor").text(vendedor_principal.telefono)
                 $("#comisionBase1").text(vendedor_principal.comision_base)
 
-                if(vendedor_principal.deducciones.length > 0) {
+                if(vendedor_principal.deducciones) {
                     const tablaDeducciones_v1 = _crearTablaDeducciones(1, true)
                     $('#divDeducciones').append(tablaDeducciones_v1);
-                    $("#total1").text(vendedor_principal.comision_base)
-                    $("#deduccionTotal1").val(vendedor_principal.comision_base)
+                    
+                    if (vendedor_principal.nivel == 4) {
+                        $("#porcentaje-ganar1").css('display', 'table-row')
+                        $("#total1").text(vendedor_principal.comision_base/2)
+                        $("#deduccionTotal1").val(parseFloat($("#total1").text()))
+                    } else {
+                        $("#porcentaje-ganar1").css('display', 'none')
+                        $("#total1").text(vendedor_principal.comision_base)
+                        $("#deduccionTotal1").val(parseFloat($("#total1").text()))
+                    }
 
+                    // $("#total1").text(vendedor_principal.comision_base)
+                    // $("#deduccionTotal1").val(vendedor_principal.comision_base)
+                    console.log("DEDUCCIONES Vendedor PRINCIPAL >>>> ", vendedor_principal)
                     let deducciones =  ``, i = 1;
-                    vendedor_principal.deducciones.forEach(de => {
-                        deducciones += 
-                            `<tr id="tab1_row${i}_${vendedor_principal.codigo}">
-                                <td>${de.descripcion}</td>
-                                <td>${de.monto}</td>
+                    // console.log("<<< DEDUCCIONES TAB 1 >>>> ", vendedor_principal)
+                    /* dt = deducciones totales; d = deducciones */
+                    vendedor_principal.deducciones.forEach(dt => {
+                        const filtro = dt.filter(i => i.tab == "tab1")
+                        filtro.forEach(x => {
+                            deducciones += `<tr id="tab1_row${i}_${vendedor_principal.codigo}">
+                                <td>${x.descripcion}</td>
+                                <td>${x.monto}</td>
                             </tr>`
-                            i++;
-                    });
-
+                        })
+                    })
                     $('#tablaDeducciones1').append(deducciones);
 
-                } else {
-                    $('#tituloDeduccion_v1').append(`<button type="button" onclick="agregarDeduccion('tab_v1')" class="btn btn-primary btn-xs btnAddDeduccion"><i class="mdi mdi-plus"></i></button>`);
+                    // vendedor_principal.deducciones.forEach(de => {
+                    //     deducciones += 
+                    //         `<tr id="row${i}_tab1_${vendedor_principal.codigo}">
+                    //             <td>${de.descripcion}</td>
+                    //             <td>${de.monto}</td>
+                    //         </tr>`
+                    //         i++;
+                    // });
 
+                } else {
+                    // Parametros (idCliente, Pestaña, Nivel del Vendedor)
+                    _btnAddDeduccion(idCliente, '1', vendedor_principal.nivel)
                     const tablaDeducciones_v1 = _crearTablaDeducciones(1, false)
- 
                     $('#divDeducciones').append(tablaDeducciones_v1);
+
+                    if (vendedor_principal.nivel == 4) {
+                        $("#porcentaje-ganar1").css('display', 'table-row')
+                        $("#total1").text(vendedor_principal.comision_base/2)
+                        $("#deduccionTotal1").val(parseFloat($("#total1").text()))
+                    } else {
+                        $("#porcentaje-ganar1").css('display', 'none')
+                        $("#total1").text(vendedor_principal.comision_base)
+                        $("#deduccionTotal1").val(parseFloat($("#total1").text()))
+                    }
+
                     $("#total1").text(vendedor_principal.comision_base)
                     $("#deduccionTotal1").val(vendedor_principal.comision_base)
                 }
@@ -547,32 +603,63 @@
                     $("#comisionBase2").text(vendedor2.comision_base)
                     $("#total2").text(vendedor2.comision_base)
 
+                    // Si ya existen datos en DB
                     if(vendedor2.deducciones.length > 0) {
                         const tablaDeducciones_v2 = _crearTablaDeducciones(2, true)
                         $('#divDeducciones2').append(tablaDeducciones_v2);
-                        $("#total2").text(vendedor2.comision_base)
-                        $("#deduccionTotal2").val(vendedor2.comision_base)
+
+                        if (vendedor2.nivel == 4) {
+                            $("#porcentaje-ganar2").css('display', 'table-row')
+                            $("#total2").text(parseFloat(vendedor2.comision_base/2))
+                            $("#deduccionTotal2").val(parseFloat(vendedor2.comision_base))
+                        } else {
+                            $("#porcentaje-ganar2").css('display', 'none')
+                            $("#total2").text(vendedor2.comision_base)
+                            $("#deduccionTotal2").val(parseFloat($("#total2").text()))
+                        }
+                        
+                        // $("#total2").text(vendedor2.comision_base)
+                        // $("#deduccionTotal2").val(vendedor2.comision_base)
 
                         let deducciones =  ``, i = 1;
-                        vendedor2.deducciones.forEach(de => {
-                            deducciones += 
-                                `<tr id="tab2_row${i}_${vendedor2.codigo}">
-                                    <td>${de.descripcion}</td>
-                                    <td>${de.monto}</td>
-                                </tr>`
-                                i++;
-                        });
-
+                        // vendedor2.deducciones.forEach(de => {
+                        //     deducciones += 
+                        //         `<tr id="tab2_row${i}_${vendedor2.codigo}">
+                        //             <td>${de.descripcion}</td>
+                        //             <td>${de.monto}</td>
+                        //         </tr>`
+                        //         i++;
+                        // });
+                        vendedor_principal.deducciones.forEach(dt => {
+                        const filtro = dt.filter(i => i.tab == "tab2")
+                        filtro.forEach(x => {
+                            deducciones += `<tr id="tab2_row${i}_${vendedor2.codigo}">
+                                <td>${x.descripcion}</td>
+                                <td>${x.monto}</td>
+                            </tr>`
+                        })
+                    })
                         $('#tablaDeducciones2').append(deducciones);
-
+                    
+                    // Si no hay nada en DB
                     } else {
-                        $('#tituloDeduccion_v2').append(`<button type="button" onclick="agregarDeduccion('tab_v2')" class="btn btn-primary btn-xs btnAddDeduccion"><i class="mdi mdi-plus"></i></button>`);
-
+                        // Parametros (idCliente, Pestaña, Nivel del Vendedor)
+                        _btnAddDeduccion(idCliente, '2', vendedor2.nivel)
                         const tablaDeducciones_v2 = _crearTablaDeducciones(2, false)
-    
                         $('#divDeducciones2').append(tablaDeducciones_v2);
-                        $("#total2").text(vendedor2.comision_base)
-                        $("#deduccionTotal2").val(vendedor2.comision_base)
+                        
+                        if (vendedor2.nivel == 4) {
+                            $("#porcentaje-ganar2").css('display', 'table-row')
+                            $("#total2").text(parseFloat(vendedor2.comision_base/2))
+                            $("#deduccionTotal2").val(parseFloat($("#total2").text()))
+                        } else {
+                            $("#porcentaje-ganar2").css('display', 'none')
+                            $("#total2").text(vendedor2.comision_base)
+                            $("#deduccionTotal2").val(parseFloat($("#total2").text()))
+                        }
+
+                        // $("#total2").text(vendedor2.comision_base)
+                        // $("#deduccionTotal2").val(vendedor2.comision_base)
                     }
                     
                 }
@@ -586,6 +673,46 @@
                     $("#comisionBase3").text(vendedor3.comision_base)
                     $("#total3").text(vendedor3.comision_base)
 
+                    if(vendedor3.deducciones.length > 0) {
+                        const tablaDeducciones_v3 = _crearTablaDeducciones(3, true)
+                        $('#divDeducciones3').append(tablaDeducciones_v3);
+
+                        if (vendedor3.nivel == 4){
+                            $("#porcentaje-ganar3").css('display', 'table-row')
+                        } else {
+                            $("#porcentaje-ganar3").css('display', 'none')
+                        }
+
+                        $("#total3").text(vendedor3.comision_base)
+                        $("#deduccionTotal3").val(vendedor3.comision_base)
+
+                        let deducciones =  ``, i = 1;
+                        vendedor3.deducciones.forEach(de => {
+                            deducciones += 
+                                `<tr id="tab2_row${i}_${vendedor3.codigo}">
+                                    <td>${de.descripcion}</td>
+                                    <td>${de.monto}</td>
+                                </tr>`
+                                i++;
+                        });
+                        $('#tablaDeducciones3').append(deducciones);
+
+                    } else {
+                        // Parametros (idCliente, Pestaña, Nivel del Vendedor)
+                        _btnAddDeduccion(idCliente, '3', vendedor3.nivel)
+                        const tablaDeducciones_v3 = _crearTablaDeducciones(3, false)
+                        $('#divDeducciones3').append(tablaDeducciones_v3);
+                        
+                        if (vendedor3.nivel == 4){
+                            $("#porcentaje-ganar3").css('display', 'table-row')
+                        } else {
+                            $("#porcentaje-ganar3").css('display', 'none')
+                        }
+
+                        $("#total3").text(vendedor3.comision_base)
+                        $("#deduccionTotal3").val(vendedor3.comision_base)
+                    }
+
                 }
 
                 if (datos.vendedores[3]) {
@@ -596,6 +723,47 @@
                     $("#telVendedor4").text(vendedor4.telefono)
                     $("#comisionBase4").text(vendedor4.comision_base)
                     $("#total4").text(vendedor4.comision_base)
+
+                    if(vendedor4.deducciones.length > 0) {
+                        const tablaDeducciones_v4 = _crearTablaDeducciones(4, true)
+                        $('#divDeducciones4').append(tablaDeducciones_v4);
+                        
+                        if (vendedor4.nivel == 4) {
+                            $("#porcentaje-ganar4").css('display', 'table-row')
+                        } else {
+                            $("#porcentaje-ganar4").css('display', 'none')
+                        }
+
+                        $("#total4").text(vendedor4.comision_base)
+                        $("#deduccionTotal4").val(vendedor4.comision_base)
+
+                        let deducciones =  ``, i = 1;
+                        vendedor4.deducciones.forEach(de => {
+                            deducciones += 
+                                `<tr id="tab2_row${i}_${vendedor4.codigo}">
+                                    <td>${de.descripcion}</td>
+                                    <td>${de.monto}</td>
+                                </tr>`
+                                i++;
+                        });
+                        $('#tablaDeducciones4').append(deducciones);
+
+                    } else {
+                        // Parametros (idCliente, Pestaña, Nivel del Vendedor)
+                        _btnAddDeduccion(idCliente, '4', vendedor4.nivel)
+                        const tablaDeducciones_v4 = _crearTablaDeducciones(4, false)
+                        $('#divDeducciones4').append(tablaDeducciones_v4);
+                        
+                        if (vendedor4.nivel == 4) {
+                            $("#porcentaje-ganar4").css('display', 'table-row')
+                        } else {
+                            $("#porcentaje-ganar4").css('display', 'none')
+                        }
+
+                        $("#total4").text(vendedor4.comision_base)
+                        $("#deduccionTotal4").val(vendedor4.comision_base)
+                    }
+
                 }
 
                 /* -INICIO- Activar Clic para mostrar Sidebar */
@@ -607,84 +775,153 @@
           })
     }
 
-    function _agregarFila(i, row, tab) {
-        $('#tablaDeducciones'+i).append(`<tr id="row${row}_${tab}">
-            <td><input type="text" id="descripcion${row}_${tab}"></td>
-            <td><input type="number" id="monto${row}_${tab}"></td>
+    // Parameros (idCliente, número de la pestaña, Contador para la fila, nivel del vendedor)
+    function _agregarFila(idCliente, numTab, row, nivel) {
+        $('#tablaDeducciones'+numTab).append(`<tr id="row${row}_tab${numTab}">
+            <td><input type="text" id="descripcion${row}_tab${numTab}"></td>
+            <td><input type="number" id="monto${row}_tab${numTab}"></td>
             <td style="display: flex;justify-content: center;">
-                <a class="btn btn-primary btn-rounded btn-sm" id="btn${row}_${tab}" onclick="sumarDeduccion('${i}', '${row}', '${tab}')" title="Guardar">
+                <a class="btn btn-primary btn-rounded btn-sm" id="btn${row}_tab${numTab}" onclick="sumarDeduccion('${idCliente}', '${numTab}', '${row}', '${nivel}')" title="Guardar">
                     <i class="fas fa-save"></i>
                 </a>
-                <a class="btn btn-danger btn-rounded btn-sm" title="Eliminar">
+                <a class="btn btn-danger btn-rounded btn-sm" onclick="eliminarFila('${idCliente}', '${numTab}', '${row}', '${nivel}')" title="Eliminar">
                     <i class="fas fa-trash-alt"></i>
                 </a>
             </td>
         </tr>`);
     }
 
-    function agregarDeduccion(item) {
+    // Parameros (idCliente, número de la pestaña, nivel del vendedor)
+    function agregarDeduccion(idCliente, numTab, nivel) {
         /* VENDEDOR 1 */
-        if (item == 'tab_v1') {
-            _agregarFila(1, v1, item)
+        if (numTab == 'tab1') {
+            _agregarFila(idCliente, 1, v1, nivel)
             v1 = v1+1;
         }
 
         /* VENDEDOR 2 */
-        if (item == 'tab_v2'){
-            _agregarFila(2, v2, item)
+        if (numTab == 'tab2'){
+            _agregarFila(idCliente, 2, v2, nivel)
             v2 = v2+1;
         }
 
         /* VENDEDOR 3 */
-        if (item == 'tab_v3'){
-            _agregarFila(3, v3, item)
+        if (numTab == 'tab3'){
+            _agregarFila(idCliente, 3, v3, nivel)
             v3 = v3+1;
         }
 
         /* VENDEDOR 4 */
-        if (item == 'tab_v4'){
-            _agregarFila(4, v4, item)
+        if (numTab == 'tab4'){
+            _agregarFila(idCliente, 4, v4, nivel)
             v4 = v4+1;
         }
 
     }
 
-    /* REPORTAR FACTURA COMO PAGADA */
-    function reportarFactura(factura, tab) {
-        fetch('/guardarDeduccion', {
-          method: 'POST',
-          body: JSON.stringify({factura, tab}),
-          headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
-          .catch(error => console.error('Error:', error))
-          .then(datos => {
-            if (datos) {
-                console.log("Deducción guardada satisfatoriamente")
+    // Parameros (idCliente, número de la pestaña, número de la fila, nivel del vendedor, arrayDeducciones)
+    function actualizarDeduccion(idCliente, numTab, rowTab, nivelVendedor, deducciones) {
+        // console.log("\nDATOS RECIBIDOS POR ACTUALIZAR DEDUCCIONES >>>> ", deducciones)
+        const tab = 'tab'+numTab
+        const filtroDeducciones = deducciones.filter((i) => i.tab == tab) //Filtrar por pestañas o vendedor
+        const subTotal = filtroDeducciones.map(i => i.monto).reduce((prev, curr) => prev + curr, 0);
+        const comisionTotal = $('#deduccionTotal'+numTab)
+        $('#subtotal'+numTab).text('')
+        $('#subtotal'+numTab).text(subTotal)
+
+        let total = $("#comisionBase"+numTab).text()
+        total = parseFloat(total-subTotal).toFixed(1)
+        comisionTotal.val(total)
+
+        if (nivelVendedor == '4' || nivelVendedor == 4) {
+            const valor = $("#comisionBase"+numTab).text()
+            total = parseFloat((valor-subTotal)/2).toFixed(1)
+            comisionTotal.val(total)
+        }
+
+        $('#total'+numTab).text(total)
+        const idFactura = $("#idFacturaActual").val();
+        storage.vendedores.forEach(data => {
+            if (data.nivel == nivelVendedor) {
+                data.comision_final = parseFloat(total);
+                data.deducciones = filtroDeducciones
             }
-          })
+        });
     }
 
-    function sumarDeduccion(num, row, tab) {
-        
-        $('#descripcion'+row+'_'+tab).attr('disabled', 'disabled');
-        $('#monto'+row+'_'+tab).attr('disabled', 'disabled');
-        $('#btn'+row+'_'+tab).css('display', 'none');
-        let monto = $('#monto'+row+'_'+tab).val()
+    // Parameros (idCliente, número de la pestaña, Contador para la fila, nivel del vendedor)
+    function sumarDeduccion(idCliente, numTab, row, nivelVendedor) {
+        $('#descripcion'+row+'_tab'+numTab).attr('disabled', 'disabled');
+        $('#monto'+row+'_tab'+numTab).attr('disabled', 'disabled');
+        $('#btn'+row+'_tab'+numTab).css('display', 'none');
+        let monto = $('#monto'+row+'_tab'+numTab).val()
         monto = parseFloat(monto)
-        sumaDeducciones.push({id: row+'_'+tab, valor: monto})
-        const subTotal = sumaDeducciones.map(item => item.valor).reduce((prev, curr) => prev + curr, 0);
-        console.log("El subtotal Deducciones es >>>> ", subTotal);
-        $('#subtotal'+num).text('')
-        $('#subtotal'+num).text(subTotal)
-        let total = $('#deduccionTotal'+num).val()
-        total = (parseFloat(total)-subTotal).toFixed(1)
-        console.log("\nTotal Deducciones >> ", total);
-        $('#total'+num).text(total)
-        
+        const descripcion = $('#descripcion'+row+'_tab'+numTab).val()
+        let sumatoriaDeduccion = 0;
+        const tab = 'tab'+numTab
+        const rowTab = 'row'+row+'_tab'+numTab
+        arrayDeducciones.push({idCliente, tab, row, rowTab, descripcion, monto, nivelVendedor})
+
+        // Aplicar cambios (subtotal y total)
+        actualizarDeduccion(idCliente, numTab, rowTab, nivelVendedor, arrayDeducciones)
     }
 
-    function eliminarFila() {
+    function eliminarFila(idCliente, numTab, row, nivelVendedor) {
+        $('#row'+row+'_tab'+numTab).remove()
+        const arrayResultado = arrayDeducciones.filter((i) => i.rowTab !== 'row'+row+'_tab'+numTab)
+        // const filtroTab = arrayDeducciones.filter((i) => i.tab == 'tab'+numTab)
+        // console.log("\nEDIT >>>", filtroTab)
+        // const arrayResultado = filtroTab.filter((i) => i.row !== row)
+        const rowTab = 'row'+row+'_tab'+numTab
+        console.log("Datos sin la fila Eliminada >>>", arrayResultado)
+        actualizarDeduccion(idCliente, numTab, rowTab, nivelVendedor, arrayResultado)
+    }
 
+    /* REPORTAR FACTURA COMO PAGADA */
+    function reportarFactura(factura) {
+        // console.log("DATA >>>> ---", JSON.parse(storage)) 
+        Swal.fire({
+            title: '¿Seguro que desea reportar esta factura?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: `Cancelar`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("\n\nDatos a comparar para enviar >>>",storage)
+                if (storage.factura.id == factura) {
+
+                    const dataVendedores = storage.vendedores;
+
+                    fetch('/efectuarVenta', {
+                        method: 'POST',
+                        body: JSON.stringify({factura, dataVendedores}),
+                        headers: {'Content-Type': 'application/json'}
+                    }).then(res => res.json())
+                        .catch(error => console.error('Error:', error))
+                        .then(datos => {
+                            if (datos) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Reporte exitoso!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then((respu) => {
+                                    setTimeout('document.location.reload()', 1550);
+                                })
+                            }
+                    })
+
+                } else {
+                    Swal.fire('Incosistencia con los datos!', 'Por favor conctactar con soporte', 'error')
+                }
+                
+            } 
+            
+        })
+
+        
     }
 
 </script>

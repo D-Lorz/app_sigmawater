@@ -109,8 +109,23 @@ chart.render();
 var minichart3Colors = getChartColorsArray("#mini-chart3");
 var options = {
     series: [{
-        data: [47, 15, 2, 67, 22, 20, 36, 60, 60, 30, 50, 11, 12, 3, 8, ]
-    }],
+        data: [{
+            x: "2018-09-10",
+            y: 15
+          }, {
+            x: "2018-09-11",
+            y: 178
+          }, {
+            x: "2018-09-12",
+            y: 95
+          }, {
+            x: "2018-09-12",
+            y: 33
+          }, {
+            x: "2018-09-12",
+            y: 67
+          }]
+        }],
      chart: {
         type: 'line',
         height: 50,
@@ -125,10 +140,10 @@ var options = {
     },
     tooltip: {
         fixed: {
-            enabled: false
+            enabled: true
         },
         x: {
-            show: false
+            show: true,
         },
         y: {
             title: {
@@ -138,9 +153,9 @@ var options = {
             }
         },
         marker: {
-            show: false
+            show: true
         }
-    }
+    },
 };
 
 var chart = new ApexCharts(document.querySelector("#mini-chart3"), options);
