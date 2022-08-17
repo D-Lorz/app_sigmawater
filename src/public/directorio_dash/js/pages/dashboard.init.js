@@ -111,8 +111,6 @@ const datos = []
     if (!valores || valores == null || valores == '' || valores == undefined){
         const year = new Date().getFullYear()
         datos.unshift({x:year, y:0},{x:year, y:0})
-        console.log("\nHOLA DESDE ACÁ >>>>\n", year)
-        console.log("<<<<<DATOS>>>>\n", datos)
     } else {
         valores = JSON.parse(valores);
         valores.forEach(vl => {
@@ -172,10 +170,8 @@ const datos = []
     const datosAfl = []
         valoresAfl = $('#datosJson_aflAgregados').val();
         if (!valoresAfl || valoresAfl == null || valoresAfl == '' || valoresAfl == undefined){
-            const year = new Date().getFullYear()
-            datosAfl.unshift({x:year, y:0},{x:year, y:0})
-            console.log("\nHOLA DESDE ACÁ >>>>\n", year)
-            console.log("<<<<<DATOS>>>>\n", datosAfl)
+            const years = new Date().getFullYear()
+            datosAfl.unshift({x:years, y:0},{x:years, y:0})
         } else {
             valoresAfl = JSON.parse(valoresAfl);
             valoresAfl.forEach(afl => {
@@ -234,95 +230,95 @@ chart.render();
 // 
 // Wallet Balance
 //
-var piechartColors = getChartColorsArray("#wallet-balance");
-var options = {
-    series: [35, 70, 15],
-    chart: {
-        width: 227,
-        height: 227,
-        type: 'pie',
-    },
-    labels: ['Ethereum', 'Bitcoin', 'Litecoin'],
-    colors: piechartColors,
-    stroke: {
-        width: 0,
-    },
-    legend: {
-        show: false
-    },
-    responsive: [{
-        breakpoint: 480,
-        options: {
-            chart: {
-                width: 200
-            },
-        }
-    }]
-};
+// var piechartColors = getChartColorsArray("#wallet-balance");
+// var options = {
+//     series: [35, 70, 15],
+//     chart: {
+//         width: 227,
+//         height: 227,
+//         type: 'pie',
+//     },
+//     labels: ['Ethereum', 'Bitcoin', 'Litecoin'],
+//     colors: piechartColors,
+//     stroke: {
+//         width: 0,
+//     },
+//     legend: {
+//         show: false
+//     },
+//     responsive: [{
+//         breakpoint: 480,
+//         options: {
+//             chart: {
+//                 width: 200
+//             },
+//         }
+//     }]
+// };
 
-var chart = new ApexCharts(document.querySelector("#wallet-balance"), options);
-chart.render();
+// var chart = new ApexCharts(document.querySelector("#wallet-balance"), options);
+// chart.render();
 
 
 // Invested Overview
 
 
-var radialchartColors = getChartColorsArray("#invested-overview");
-var options = {
-    chart: {
-        height: 270,
-        type: 'radialBar',
-        offsetY: -10
-    },
-    plotOptions: {
-        radialBar: {
-            startAngle: -130,
-            endAngle: 130,
-            dataLabels: {
-                name: {
-                    show: true
-                },
-                value: {
-                    offsetY: 10,
-                    fontSize: '18px',
-                    color: undefined,
-                    formatter: function (val) {
-                        return val + "%";
-                    }
-                }
-            }
-        }
-    },
-    colors: [radialchartColors[0]],
-    fill: {
-        type: 'gradient',
-        gradient: {
-            shade: 'dark',
-            type: 'horizontal',
-            gradientToColors: [radialchartColors[1]],
-            shadeIntensity: 0.15,
-            inverseColors: false,
-            opacityFrom: 1,
-            opacityTo: 1,
-            stops: [20, 60]
-        },
-    },
-    stroke: {
-        dashArray: 4,
-    },
-    legend: {
-        show: false
-    },
-    series: [2],
-    labels: ['Pagado'],
-}
+// var radialchartColors = getChartColorsArray("#invested-overview");
+// var options = {
+//     chart: {
+//         height: 270,
+//         type: 'radialBar',
+//         offsetY: -10
+//     },
+//     plotOptions: {
+//         radialBar: {
+//             startAngle: -130,
+//             endAngle: 130,
+//             dataLabels: {
+//                 name: {
+//                     show: true
+//                 },
+//                 value: {
+//                     offsetY: 10,
+//                     fontSize: '18px',
+//                     color: undefined,
+//                     formatter: function (val) {
+//                         return val + "%";
+//                     }
+//                 }
+//             }
+//         }
+//     },
+//     colors: [radialchartColors[0]],
+//     fill: {
+//         type: 'gradient',
+//         gradient: {
+//             shade: 'dark',
+//             type: 'horizontal',
+//             gradientToColors: [radialchartColors[1]],
+//             shadeIntensity: 0.15,
+//             inverseColors: false,
+//             opacityFrom: 1,
+//             opacityTo: 1,
+//             stops: [20, 60]
+//         },
+//     },
+//     stroke: {
+//         dashArray: 4,
+//     },
+//     legend: {
+//         show: false
+//     },
+//     series: [2],
+//     labels: ['Pagado'],
+// }
 
-var chart = new ApexCharts(
-    document.querySelector("#invested-overview"),
-    options
-);
+// var chart = new ApexCharts(
+//     document.querySelector("#invested-overview"),
+//     options
+// );
 
-chart.render();
+// chart.render();
 
 //
 // Market Overview

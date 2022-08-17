@@ -81,13 +81,13 @@ File: Vector Maps init Js File
 				latLng : [13.16, -59.55],
 				name : 'Barbados'
 			}, {
-				latLng : [17.11, -61.85],
+				latLng : [67.11, -91.85],
 				name : 'Antigua and Barbuda'
 			}, {
 				latLng : [-4.61, 55.45],
 				name : 'Seychelles'
 			}, {
-				latLng : [7.35, 134.46],
+				latLng : [-25.35, 134.46],
 				name : 'Palau'
 			}, {
 				latLng : [42.5, 1.51],
@@ -107,14 +107,35 @@ File: Vector Maps init Js File
 			}]
     });
     
+
+
     $('#usa-vectormap').vectorMap({
 			map : 'us_merc_en',
 			backgroundColor : 'transparent',
 			regionStyle : {
 				initial : {
-					fill : '#5156be'
+					fill : '#50368c '
 				}
-			}
+			},
+			markerStyle: {
+                initial: {
+                    r: 7,
+                    'fill': '#F89C0E',
+                    'fill-opacity': 0.9,
+                    'stroke': '#fff',
+                    'stroke-width' : 7,
+                    'stroke-opacity': 0.4,
+					'position-absolute' : true
+                },
+
+                hover: {
+                    'stroke': '#fff',
+                    'fill-opacity': 1,
+                    'stroke-width': 1.5
+                }
+            },
+				backgroundColor : 'transparent',
+				markers : hola
     });
     
     $('#india-vectormap').vectorMap({
@@ -122,7 +143,7 @@ File: Vector Maps init Js File
 			backgroundColor : 'transparent',
 			regionStyle : {
 				initial : {
-					fill : '#5156be'
+					fill : '#50368c '
 				}
 			}
     });

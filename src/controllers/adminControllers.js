@@ -18,24 +18,13 @@ exports.listarVendedores = async (req, res) => {
     v.estadoVendedor = {};
     v.estadoVendedor.txt = "Pendiente";
     v.estadoVendedor.color = "badge-soft-warning";
-
     if (usuarios.length > 0) {
       // Validando si la tabla de usuarios tiene registros
-
-      usuarios.forEach((u) => {
+         usuarios.forEach((u) => {
         // Comparando tabla de usuarios con vendedores
-        if (v.id_vendedor == u.id_vendedor) {
-          v.estadoDe_laCuenta = u.estado_de_la_cuenta;
-
-          if (u.estado_de_la_cuenta === "aprobado") {
-            v.estadoVendedor.txt = "Aprobado";
-            v.estadoVendedor.color = "badge-soft-success";
-          }
-
-          if (u.estado_de_la_cuenta === "bloqueado") {
-            v.estadoVendedor.txt = "Bloqueado";
-            v.estadoVendedor.color = "badge-soft-danger";
-          }
+        if (v.id_vendedor == u.id_vendedor) { v.estadoDe_laCuenta = u.estado_de_la_cuenta;
+          if (u.estado_de_la_cuenta === "aprobado") { v.estadoVendedor.txt = "Aprobado"; v.estadoVendedor.color = "badge-soft-success";}
+          if (u.estado_de_la_cuenta === "bloqueado") {v.estadoVendedor.txt = "Bloqueado"; v.estadoVendedor.color = "badge-soft-danger"; }
         }
       });
     }
@@ -51,11 +40,8 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
   const id_vendedor = req.params.id;
   let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ", [id_vendedor]);
   info_vendedor = info_vendedor[0];
-if(info_vendedor){
-  var licencia = JSON.parse(info_vendedor.licencia_conduccion);
-}else {
-
-}
+  if(info_vendedor){ var licencia = JSON.parse(info_vendedor.licencia_conduccion);
+  }else {}
 
   // todo===========>>>  Mostrar afiliados a tal vendedor
   let afiliados = await conexion.query("SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?", [info_vendedor.id_vendedor]);
@@ -78,7 +64,6 @@ if(info_vendedor){
   // let cltestAgua = await conexion.query("SELECT * FROM test_agua");
 
   infoClientes.forEach((info) => {
-
     info.estadoCreditoCliente = {};
     info.estadoCreditoCliente.txt = "No solicitado";
     info.estadoCreditoCliente.color = "badge-soft-dark";
@@ -93,30 +78,17 @@ if(info_vendedor){
     if (clCredito.length > 0) {
       clCredito.forEach((c) => {
         if (info.id == c.id_cliente) {
-          if (c.estado_del_credito == 0) {
-            info.estadoCreditoCliente.txt = "Pendiente";
-            info.estadoCreditoCliente.color = "badge-soft-warning";
-          }
-          if (c.estado_del_credito == 1) {
-            info.estadoCreditoCliente.txt = "Aprobado";
-            info.estadoCreditoCliente.color = "badge-soft-success";
-          }
-          if (c.estado_del_credito == 2) {
-            info.estadoCreditoCliente.txt = "Bloqueado";
-            info.estadoCreditoCliente.color = "badge-soft-danger";
-          }
+          if (c.estado_del_credito == 0) { info.estadoCreditoCliente.txt = "Pendiente"; info.estadoCreditoCliente.color = "badge-soft-warning"; }
+          if (c.estado_del_credito == 1) {info.estadoCreditoCliente.txt = "Aprobado"; info.estadoCreditoCliente.color = "badge-soft-success"; }
+          if (c.estado_del_credito == 2) { info.estadoCreditoCliente.txt = "Bloqueado"; info.estadoCreditoCliente.color = "badge-soft-danger";}
         }
       });
     }
     if (clCredito.length > 0) {
       clCredito.forEach((x) => {
         if (info.id == x.id_cliente) {
-          if (x.sistema === "Reverse Osmosis System") {
-            info.sistema.txt = "Reverse Osmosis System";
-          }
-          if (x.sistema === "Whole System") {
-            info.sistema.txt = "Whole System";
-          }
+          if (x.sistema === "Reverse Osmosis System") { info.sistema.txt = "Reverse Osmosis System"; }
+          if (x.sistema === "Whole System") { info.sistema.txt = "Whole System"; }
         }
       });
     }
@@ -124,14 +96,8 @@ if(info_vendedor){
     if (clAgenda.length > 0) {
       clAgenda.forEach((a) => {
         if (info.id == a.id_cliente) {
-          if (a.estado_agenda == 0) {
-            info.estadoAgendar.txt = "Listo para instalar";
-            info.estadoAgendar.color = "badge-soft-warning";
-          }
-          if (a.estado_agenda == 1) {
-            info.estadoAgendar.txt = "Instalado";
-            info.estadoAgendar.color = "badge-soft-success";
-          }
+          if (a.estado_agenda == 0) { info.estadoAgendar.txt = "Listo para instalar"; info.estadoAgendar.color = "badge-soft-warning";}
+          if (a.estado_agenda == 1) { info.estadoAgendar.txt = "Instalado";  info.estadoAgendar.color = "badge-soft-success"; }
         }
       });
     }
@@ -155,10 +121,6 @@ exports.ActualizarNivel = async (req, res) => {
   let total_ventas = parseFloat(req.body.total_ventas)
   let ventas_afiliados = parseFloat(req.body.ventas_afiliados)
   let codigo_afiliado
-  
-  console.log("VENTAS INDIVIDUALES ACTUAL==>> (",ventas_individuales,")");
-  console.log("TOTAL VENTAS ACTUAL ==>> (",total_ventas,")");
-
    if(nivel == 2){
      ventas_individuales = ventas_individuales + (20.5 - total_ventas)
      total_ventas = ventas_individuales + ventas_afiliados
@@ -176,8 +138,6 @@ exports.ActualizarNivel = async (req, res) => {
   console.log("VENTAS INDIVIDUALES ACTUALIZADO ==>> (",ventas_individuales,")");
   console.log("TOTAL VENTAS ACTUALIZADO ==>> (",total_ventas,")");
   const datosNivel = { nivel, ventas_individuales, total_ventas, codigo_afiliado, id_vendedor };
-     
-
   await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ? ", [datosNivel, id_vendedor], (err, result) => {
     if (err) res.send(false)
     res.send(true)
@@ -186,23 +146,13 @@ exports.ActualizarNivel = async (req, res) => {
 // todo ===========>>>  Actualizar estado de vendedores
 
 exports.actualizarEstadoVendedor = async (req, res) => {
-
   const id_vendedor = req.body.idGenerado;
-
   const id_consecutivo = req.body.id_consecutivoVendedor;
-
   const estado_de_la_cuenta = req.body.estadoElegido;
-
   const datosEstado_vendedor = { estado_de_la_cuenta, id_consecutivo };
-
-
   await conexion.query("UPDATE usuarios SET ? WHERE id_vendedor = ? ", [datosEstado_vendedor, id_vendedor], (err, result) => {
     if (err) throw err;
-
-    if (result) {
-      res.redirect("/perfil-vendedores/" + id_vendedor);
-    }
-
+    if (result) { res.redirect("/perfil-vendedores/" + id_vendedor); }
   }
   );
 };
@@ -213,7 +163,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
 // todo ===========>>>  Mostrar lista de CLIENTES y referencia de su vendedor
 exports.listarClientes = async (req, res) => {
   let lista_clientes = await conexion.query(
-    "SELECT N.*, S.sistema,S.estado_del_credito, A.estado_agenda FROM nuevos_cliente N LEFT JOIN solicitar_credito S ON N.id = S.id_cliente LEFT JOIN agendar_instalacion A ON N.id = A.id_cliente LEFT JOIN test_agua T ON A.id_cliente = T.id;"
+    "SELECT N.*, S.sistema,S.estado_del_credito, A.estado_agenda, T.fecha_test FROM nuevos_cliente N LEFT JOIN solicitar_credito S ON N.id = S.id_cliente LEFT JOIN agendar_instalacion A ON N.id = A.id_cliente LEFT JOIN test_agua T ON N.id = T.id_cliente;"
   );
 
     lista_clientes.forEach((c) => {
@@ -222,40 +172,17 @@ exports.listarClientes = async (req, res) => {
     c.estadoCredito.txt = "No solicitado";
     c.estadoCredito.color = "badge-soft-dark";
 
-    if (c.estado_del_credito == 0) {
-      c.estadoCredito.txt = "En revisión";
-      c.estadoCredito.color = "badge-soft-warning";
-    }
-    if (c.estado_del_credito == 1) {
-      c.estadoCredito.txt = "Aprobado";
-      c.estadoCredito.color = "badge-soft-success";
-    }
-    if (c.estado_del_credito == 2) {
-      c.estadoCredito.txt = "Rechazado";
-      c.estadoCredito.color = "badge-soft-danger";
-    }
-    if (c.estado_del_credito == 3) {
-      c.estadoCredito.txt = "Pagado (cash)";
-      c.estadoCredito.color = "badge-soft-info";
-    }
+    if (c.estado_del_credito == 0) { c.estadoCredito.txt = "En revisión"; c.estadoCredito.color = "badge-soft-warning"; }
+    if (c.estado_del_credito == 1) { c.estadoCredito.txt = "Aprobado"; c.estadoCredito.color = "badge-soft-success"; }
+    if (c.estado_del_credito == 2) { c.estadoCredito.txt = "Rechazado"; c.estadoCredito.color = "badge-soft-danger"; }
+    if (c.estado_del_credito == 3) { c.estadoCredito.txt = "Pagado(cash)"; c.estadoCredito.color = "badge-soft-info";}
     /** Estado de la instalación */
     c.estadoAgenda = {};
     c.estadoAgenda.txt = "No instalado";
     c.estadoAgenda.color = "badge-soft-dark";
 
-    if (c.estado_agenda == 0) {
-      c.estadoAgenda.txt = "Listo para instalar";
-      c.estadoAgenda.color = "badge-soft-warning";
-    }
-
-    if (c.estado_agenda == 1) {
-      c.estadoAgenda.txt = "Instalado";
-      c.estadoAgenda.color = "badge-soft-success";
-    }
-
-    /** Formateando la fecha */
-    // const f = new Date(c.fecha_test)
-    // c.fecha_test = f.toLocaleDateString("en-US")
+    if (c.estado_agenda == 0) {c.estadoAgenda.txt = "Listo para instalar"; c.estadoAgenda.color = "badge-soft-warning"; }
+    if (c.estado_agenda == 1) { c.estadoAgenda.txt = "Instalado"; c.estadoAgenda.color = "badge-soft-success"; }
   });
 
   // * >>> Renderizado <<<<<
@@ -276,23 +203,10 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
   if (credito.length > 0) {
     credito = credito[0]
-    if (credito.estado_del_credito === '0') {
-      estado.txt = "En revisión";
-      estado.color = 'badge-soft-warning'
-
-    } else if (credito.estado_del_credito == 1) {
-      estado.txt = "Aprobado";
-      estado.color = 'badge-soft-success'
-
-    } else if (credito.estado_del_credito == 2) {
-      estado.txt = "Rechazado";
-      estado.color = 'badge-soft-danger'
-
-    } else if (credito.estado_del_credito == 3) {
-      estado.txt = "Pagado";
-      estado.color = 'badge-soft-info'
-
-    }
+    if (credito.estado_del_credito === '0') {estado.txt = "En revisión";estado.color = 'badge-soft-warning' }
+     else if (credito.estado_del_credito == 1) {estado.txt = "Aprobado"; estado.color = 'badge-soft-success'} 
+      else if (credito.estado_del_credito == 2) { estado.txt = "Rechazado"; estado.color = 'badge-soft-danger' } 
+       else if (credito.estado_del_credito == 3) {estado.txt = "Pagado(cash)"; estado.color = 'badge-soft-info'}
   }
 
   // todo =========================>> Mostrar información del test de agua del cliente
@@ -300,88 +214,58 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
   // * >>> Estados del testeo (visita al cliente)
   let consultaEstado_testAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [info_clientes.id])
-
   let estadoVisita_testAgua = []
   estadoVisita_testAgua.txt = "A la fecha el cliente aun no ha sido visitado";
   estadoVisita_testAgua.color = '';
+
   estadoVisita_testAgua.background = 'noVisitado';
-
-  if (consultaEstado_testAgua.length > 0) {
-    consultaEstado_testAgua = consultaEstado_testAgua[0]
-
-    if (consultaEstado_testAgua.estado_visita_test === '0') {
-      estadoVisita_testAgua.txt = "Se realizó un test de agua el";
-      estadoVisita_testAgua.background = 'visitado';
-    }
+  if (consultaEstado_testAgua.length > 0) {consultaEstado_testAgua = consultaEstado_testAgua[0]
+    if (consultaEstado_testAgua.estado_visita_test === '0') { estadoVisita_testAgua.txt = "Se realizó un test de agua el";
+      estadoVisita_testAgua.background = 'visitado'; }
   }
 
   // todo =========================>> Consulta del PRIMER test de agua para la fecha y grafica
-  let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id DESC LIMIT 1, 1', [info_clientes.id])
-
-  if (consulta_PrimerTestAgua.length > 0) {
-    consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]
-  }
-  const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
+  let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ? ORDER BY id DESC LIMIT 1, 1', [info_clientes.id])
+      if (consulta_PrimerTestAgua.length > 0) { consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]}
+          const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
 
   // todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
-  let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [info_clientes.id])
-
-  if (consulta_UltimoTestAgua.length > 0) {
-    consulta_UltimoTestAgua = consulta_UltimoTestAgua[0]
-  }
-  const datosJson_UltimoTestagua = JSON.stringify(consulta_UltimoTestAgua);
+  let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ? ORDER BY id DESC LIMIT 1; ', [info_clientes.id])
+      if (consulta_UltimoTestAgua.length > 0) { consulta_UltimoTestAgua = consulta_UltimoTestAgua[0] }
+           const datosJson_UltimoTestagua = JSON.stringify(consulta_UltimoTestAgua);
 
   // todo =========================>> Mostrar información del ahorro del cliente
-  let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [info_clientes.id])
-  if (ahorroCalculado.length > 0) {
-    ahorroCalculado = ahorroCalculado[0]
-  }
-  const datosJson_ahorroCalculado = JSON.stringify(ahorroCalculado);
+  let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ? ORDER BY id DESC LIMIT 1', [info_clientes.id])
+      if (ahorroCalculado.length > 0) { ahorroCalculado = ahorroCalculado[0] }
+          const datosJson_ahorroCalculado = JSON.stringify(ahorroCalculado);
 
   // todo =========================>> Estados de la agenda para instalar el producto
   let consultaEstado_instalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [info_clientes.id])
-
   let estado_intalacion = []
   estado_intalacion.txt = "La instalación del producto no ha sido agendada";
   estado_intalacion.background = 'noVisitado';
 
-  if (consultaEstado_instalacion.length > 0) {
-    consultaEstado_instalacion = consultaEstado_instalacion[0]
-
-    if (consultaEstado_instalacion.estado_agenda === '0') {
-      estado_intalacion.txt = "Listo para instalar";
-      estado_intalacion.background = 'producto_instalado';
-
-    } else if (consultaEstado_instalacion.estado_agenda == 1) {
-      estado_intalacion.txt = "Instalado";
-      estado_intalacion.background = 'visitado';
-
-    }
+  if (consultaEstado_instalacion.length > 0) { consultaEstado_instalacion = consultaEstado_instalacion[0]
+    if (consultaEstado_instalacion.estado_agenda === '0') { estado_intalacion.txt = "Listo para instalar";
+         estado_intalacion.background = 'producto_instalado';} 
+       else if (consultaEstado_instalacion.estado_agenda == 1) { estado_intalacion.txt = "Instalado";
+           estado_intalacion.background = 'visitado';}
   }
   // todo ===============================>>> Mostrar evidencia de la instalacion
   let clRegistro_instalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-
-  if (clRegistro_instalacion.length > 0) {
-    clRegistro_instalacion = clRegistro_instalacion[0]
-    var evidenciaF = JSON.parse(clRegistro_instalacion.evidencia_fotografica);
-  }
+      if (clRegistro_instalacion.length > 0) { clRegistro_instalacion = clRegistro_instalacion[0]
+          var evidenciaF = JSON.parse(clRegistro_instalacion.evidencia_fotografica); }
+        
   // todo ===============================>>> Desactivar boton de registro de instalacion ubicado en Perfil-cliente
   let clInstalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-  let estadu = []
-  estadu.txt = "No hecho";
-  estadu.color = 'badge-soft-dark'
-  estadu.verbtnI = false;
+    let estadu = []
+    estadu.txt = "No hecho";
+    estadu.color = 'badge-soft-dark'
+    estadu.verbtnI = false;
 
-  if (clInstalacion.length > 0) {
-    clInstalacion = clInstalacion[0]
-
-    if (clInstalacion.estado_agenda == 0) {
-      estadu.verbtnI = true;
-
-    } else if (clInstalacion.estado_agenda == 1) {
-      estadu.verbtnI = false;
-    }
-
+  if (clInstalacion.length > 0) { clInstalacion = clInstalacion[0]
+     if (clInstalacion.estado_agenda == 0) { estadu.verbtnI = true; } 
+       else if (clInstalacion.estado_agenda == 1) { estadu.verbtnI = false;}
   }
 
   // todo ===============================>>> Mostrar agenda sobre la instalacion del producto
@@ -400,34 +284,18 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   estade.color = 'badge-soft-dark'
   estade.btncredito = false;
 
-  if (clbotonCredito.length > 0) {
-    clbotonCredito = clbotonCredito[0]
-
-    if (clbotonCredito.estado_del_credito == 0) {
-      estade.txt = "si hecho";
-      estade.btncredito = true;
-
-    } else if (clbotonCredito.estado_del_credito == 1) {
-      estade.btncredito = false;
-
-    } else if (clbotonCredito.estado_del_credito == 2) {
-      estade.btncredito = false;
-
-    } else if (clbotonCredito.estado_del_credito == 3) {
-      estade.btncredito = false;
-
-    }
-    if (clbotonCredito.licencia_cliente > 0) {
-      var licenciacredito = JSON.parse(clbotonCredito.licencia_cliente);
+  if (clbotonCredito.length > 0) { clbotonCredito = clbotonCredito[0]
+    if (clbotonCredito.estado_del_credito == 0) { estade.txt = "si hecho"; estade.btncredito = true; }
+     else if (clbotonCredito.estado_del_credito == 1) { estade.btncredito = false;}
+     else if (clbotonCredito.estado_del_credito == 2) { estade.btncredito = false;} 
+     else if (clbotonCredito.estado_del_credito == 3) { estade.btncredito = false; }
+     if (clbotonCredito.licencia_cliente > 0) { var licenciacredito = JSON.parse(clbotonCredito.licencia_cliente);
       // var clfirmaAcuerdo  = clbotonCredito.acuerdo_firmado
-    } else {
-
-    }
+    } else {}
   }
   // todo ========>>> Mostrar producto
   let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
   mostrarProducto = mostrarProducto[0]
-
 
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-cliente", {
@@ -443,10 +311,8 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
 // todo =======>>> Actualizar Estado del credito desde el panel de administrador - perfil-cliente
 exports.ActualizarCredito = async (req, res) => {
-
   const id_cliente = req.body.id_cliente;
   const estado_del_credito = req.body.estado_del_credito;
-
   const datosEstadoCredito = { estado_del_credito, id_cliente };
   await conexion.query("UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosEstadoCredito, id_cliente], (err, result) => {
     if (err) { res.send(false) }
@@ -457,16 +323,15 @@ exports.ActualizarCredito = async (req, res) => {
 exports.ActualizarMontoAprobado = async (req, res) => {
   const id_cliente = req.body.id_cliente;
   const monto_aprobado = req.body.monto_aprobado.replace(/[$ ,]/g, '');
-
   const datosUpdateMontoAprobado = { monto_aprobado, id_cliente };
   await conexion.query("UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosUpdateMontoAprobado, id_cliente], (err, result) => {
     if (err) res.send(false)
     res.send(true)
   });
 };
+
 //todo =======>>> Adjuntar firma en el documento del contrato - form credito interno
 exports.clfirmas = async (req, res) => {
-
   const id_cliente = req.params.id;
   let info_clientes2 = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?",[id_cliente]);
   info_clientes2 = info_clientes2[0];
@@ -476,21 +341,16 @@ exports.clfirmas = async (req, res) => {
   estade.txt = "No hecho";
   estade.color = 'badge-soft-dark'
   estade.btncredito = false;
-
   if (clfirmasAcuerdo.length > 0) {
-    clfirmasAcuerdo = clfirmasAcuerdo[0]
-
-      var firmas  = clfirmasAcuerdo.acuerdo_firmado
+      clfirmasAcuerdo = clfirmasAcuerdo[0]
+        var firmas  = clfirmasAcuerdo.acuerdo_firmado
     }
-
   // * >>> Renderizado <<<<<
   res.render("./1-admin/acuerdo", { user: req.user,info_clientes2, firmas  });
-
 }
 
 // todo --> Formulario servicio instalado y registro de ventas 
 exports.servicioInstaladosx = async (req, res) => {
-
   const fecha_instalacion = req.body.fechaDeInstalacion;
   const producto_instalado = req.body.productoinstaladO;
   const serial_producto = req.body.serial_producto;
@@ -501,7 +361,6 @@ exports.servicioInstaladosx = async (req, res) => {
   const id_cliente = req.body.id_cliente
   const codigo_cliente = req.body.codigo_cliente
   const estado_agenda = 1
-
   const Datos_servicio = { fecha_instalacion, producto_instalado, serial_producto, instalador, evidencia_fotografica, nota, id_cliente }
   const Datos_estado = { estado_agenda }
   const Datos_factura = { producto_instalado, fecha_instalacion, id_cliente, codigo_cliente }
@@ -511,7 +370,6 @@ exports.servicioInstaladosx = async (req, res) => {
   let vendedorI = await conexion.query('SELECT ventas_individuales, id_vendedor FROM registro_de_vendedores')
 
   let cl1 = clienteI.find(item => item.id_cliente == codigo_cliente)
- 
   if(cl1){
     console.log(" ");
     console.log("↓↓ Codigo del vendedor que realizó la ventas ↓↓")
@@ -524,47 +382,37 @@ exports.servicioInstaladosx = async (req, res) => {
               var ventaIndividual
     
       if (producto_instalado == "Reverse Osmosis System 3C Sigma") {
-
           console.log("# de ventas individuales actual: ==>> (",v1.ventas_individuales,")");
           ventaIndividual = (parseFloat( v1.ventas_individuales) + 0.5 )
           console.log("# de ventas individuales Actualizado: ==>> (",ventaIndividual,")");
       
       }else if(producto_instalado == "Reverse Osmosis System") {
-      
           console.log("# de ventas individuales actual: ==>> (",v1.ventas_individuales,")");
           ventaIndividual = (parseFloat( v1.ventas_individuales) + 0.5 )
           console.log("# de ventas individuales Actualizado: ==>> (",ventaIndividual,")");
       
       }else if (producto_instalado == "Whole System"){
-      
           console.log("# de ventas individuales actual: ==>> (",v1.ventas_individuales,")");
           ventaIndividual =  (parseFloat( v1.ventas_individuales) + 1 )
           console.log("# de ventas individuales Actualizado: ==>> (",ventaIndividual,")");
-      
       }
           vendedorIndividual.ventas_individuales  =  ventaIndividual
           conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?", [vendedorIndividual, cl1.codigo_id_vendedor])
       }
-
   }
-
 //* ==>> *** FIN **** 
-
   await conexion.query('UPDATE agendar_instalacion SET ? WHERE id_cliente = ?', [Datos_estado, id_cliente])
   await conexion.query('INSERT INTO factura SET ?', [Datos_factura])
   await conexion.query('INSERT INTO servicios_de_instalacion SET ?', [Datos_servicio], async (err, result) => {
-    
     if (err) throw err;
 
 const clientes = await conexion.query("SELECT cl.*, cr.id_cliente AS idCliente, cr.sistema FROM nuevos_cliente AS cl JOIN solicitar_credito AS cr ON cl.id = cr.id_cliente;")
 const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel, telefono_movil, total_ventas,ventas_individuales, ventas_afiliados FROM registro_de_vendedores")
   
  let cl = clientes.find(item => item.id == id_cliente)
-  
     if(cl){
       cl.vendedores = []
        let v = vendedores.find(item => item.id == cl.id_vendedor)
-
      //* =======>>> VALIDAR SI TIENE UN VENDEDOR 2
           if (v) {
             const vendedor = {}, vendedor1={}, vendedor2 = {}, vendedor22 = {}, vendedor3 = {}, vendedor33 = {}, vendedor4 = {};
@@ -598,7 +446,6 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
                     console.log("# de ventas Actual de afiliados del V2: ==>> ", v2.ventas_afiliados);
                     vAv2 = (parseFloat(v2.ventas_afiliados) + 1) ;
                     console.log("# de ventas Actualizado de afiliados del V2: ==>> ", vAv2 );
-               
             }
           }
               if(v2){
@@ -620,7 +467,6 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
                       nivel = parseInt(2) //Para nivel 2
                       console.log("Nuevo nivel: ==>> ", nivel );
                                v.nivel = nivel
-
                    }
               }else if(ventasActualv11 >= 40.5 && ventasActualv11 <= 60) {
                       if(v.nivel < 3){
@@ -876,11 +722,6 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
 
   })
 }
- exports.probar = async (req, res) => {
-
-  res.render("./1-admin/temporal", {user: req.user, arrayVentas});
-
- };
 
 exports.listarVendedoresss = async (req, res) => {
   const id_cliente = req.params.id;
@@ -890,181 +731,6 @@ exports.listarVendedoresss = async (req, res) => {
   res.render("./1-admin/hola", { user: req.user, epa });
 };
 
-exports.listarClientes_PerfilClientess = async (req, res) => {
-  const id_cliente = req.params.id;
-  let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?",[id_cliente]);
-  info_clientes = info_clientes[0];
-
-// todo ===============================>>> Estado del solicitar credito
-let credito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-let estado = []
-estado.txt = "No solicitado";
-estado.color = 'badge-soft-dark'
-
-if (credito.length > 0) {
-  credito = credito[0]
-  if (credito.estado_del_credito === '0') {
-    estado.txt = "En revisión";
-    estado.color = 'badge-soft-warning'
-
-  } else if (credito.estado_del_credito == 1) {
-    estado.txt = "Aprobado";
-    estado.color = 'badge-soft-success'
-
-  } else if (credito.estado_del_credito == 2) {
-    estado.txt = "Rechazado";
-    estado.color = 'badge-soft-danger'
-
-  } else if (credito.estado_del_credito == 3) {
-    estado.txt = "Pagado";
-    estado.color = 'badge-soft-info'
-
-  }
-}
-
-// todo =========================>> Mostrar información del test de agua del cliente
-let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [info_clientes.id])
-
-// * >>> Estados del testeo (visita al cliente)
-let consultaEstado_testAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [info_clientes.id])
-
- let estadoVisita_testAgua = []
-  estadoVisita_testAgua.txt = "A la fecha el cliente aun no ha sido visitado";
-  estadoVisita_testAgua.color = '';
-  estadoVisita_testAgua.background = 'noVisitado';
-
-if (consultaEstado_testAgua.length > 0) {
-  consultaEstado_testAgua = consultaEstado_testAgua[0]
-
-if (consultaEstado_testAgua.estado_visita_test === '0') {
-    estadoVisita_testAgua.txt= "Se realizó un test de agua el";
-    estadoVisita_testAgua.background= 'visitado';
-      }
-  }
-
-// todo =========================>> Consulta del PRIMER test de agua para la fecha y grafica
-    let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua ORDER BY id DESC LIMIT 1, 1', [info_clientes.id])
-
-    if(consulta_PrimerTestAgua.length > 0 ){
-      consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]
-    }
-    const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
-
-// todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
- let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE estado_visita_test = 0 ORDER BY id DESC LIMIT 1; ', [info_clientes.id])
-
-    if(consulta_UltimoTestAgua.length > 0 ){
-      consulta_UltimoTestAgua = consulta_UltimoTestAgua[0]
-    }
-    const datosJson_UltimoTestagua = JSON.stringify(consulta_UltimoTestAgua);
-
-// todo =========================>> Mostrar información del ahorro del cliente
-    let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [info_clientes.id])
-    if(ahorroCalculado.length > 0 ){
-      ahorroCalculado = ahorroCalculado[0]
-    }
-    const datosJson_ahorroCalculado = JSON.stringify(ahorroCalculado);
-
-// todo =========================>> Estados de la agenda para instalar el producto
-    let consultaEstado_instalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [info_clientes.id])
-
-    let estado_intalacion = []
-    estado_intalacion.txt = "La instalación del producto no ha sido agendada";
-    estado_intalacion.background = 'noVisitado';
-
-    if (consultaEstado_instalacion.length > 0) {
-      consultaEstado_instalacion = consultaEstado_instalacion[0]
-
-    if (consultaEstado_instalacion.estado_agenda === '0') {
-      estado_intalacion.txt= "Listo para instalar";
-      estado_intalacion.background= 'producto_instalado';
-
-    } else if (consultaEstado_instalacion.estado_agenda == 1) {
-      estado_intalacion.txt= "Instalado";
-      estado_intalacion.background= 'visitado';
-
-    }
-}
-// todo ===============================>>> Mostrar evidencia de la instalacion
-let clRegistro_instalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-
-if (clRegistro_instalacion.length > 0) {
-    clRegistro_instalacion = clRegistro_instalacion[0]
-  var evidenciaF= JSON.parse(clRegistro_instalacion.evidencia_fotografica);
-}
-// todo ===============================>>> Desactivar boton de registro de instalacion ubicado en Perfil-cliente
-let clInstalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-let estadu = []
-estadu.txt = "No hecho";
-estadu.color = 'badge-soft-dark'
-estadu.verbtnI = false;
-
-if (clInstalacion.length > 0) {
-  clInstalacion = clInstalacion[0]
-
-  if (clInstalacion.estado_agenda == 0) {
-     estadu.verbtnI = true;
-
-  } else if (clInstalacion.estado_agenda == 1) {
-        estadu.verbtnI = false;
-  }
-
-}
-
-// todo ===============================>>> Mostrar agenda sobre la instalacion del producto
-let mostrarAgenda = await conexion.query("SELECT * FROM agendar_instalacion WHERE id_cliente = ?",[info_clientes.id]);
-mostrarAgenda = mostrarAgenda[0]
-
-let mostrarDatoscreditos= await conexion.query("SELECT * FROM solicitar_credito WHERE id_cliente = ?",[info_clientes.id]);
-mostrarDatoscreditos = mostrarDatoscreditos[0]
-if(mostrarDatoscreditos ) {
-
-mostrarDatoscreditos.monto_financiar_cliente = formatear.format(mostrarDatoscreditos.monto_financiar_cliente)
-}
-let clbotonCredito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-let estade = []
-estade.txt = "No hecho";
-estade.color = 'badge-soft-dark'
-estade.btncredito = false;
-
-if (clbotonCredito.length > 0) {
-  clbotonCredito = clbotonCredito[0]
-
-  if (clbotonCredito.estado_del_credito == 0) {
-    estade.txt = "si hecho";
-       estade.btncredito = true;
-
-  } else if (clbotonCredito.estado_del_credito == 1) {
-        estade.btncredito = false;
-
-  }  else if (clbotonCredito.estado_del_credito == 2) {
-    estade.btncredito = false;
-
-} else if (clbotonCredito.estado_del_credito == 3) {
-  estade.btncredito = false;
-
-}
-if (clbotonCredito.licencia_cliente >0){
-  var licenciacredito = JSON.parse(clbotonCredito.licencia_cliente);
-  // var clfirmaAcuerdo  = clbotonCredito.acuerdo_firmado
-} else  {
-
-}
-}
-// todo ========>>> Mostrar producto
-let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-mostrarProducto = mostrarProducto[0]
-
-  // * >>> Renderizado <<<<<
-  res.render("./1-admin/create", {
-    user: req.user, estado,
-    info_clientes, informacionTestAgua, estadoVisita_testAgua,
-    consulta_PrimerTestAgua, datosJson_PrimerTestagua,
-    consulta_UltimoTestAgua, datosJson_UltimoTestagua,
-    ahorroCalculado, datosJson_ahorroCalculado, estado_intalacion,
-    estadu, mostrarAgenda, mostrarDatoscreditos, estade,
-    licenciacredito,clRegistro_instalacion, evidenciaF,mostrarProducto });
-};
 // ? ========>>> ***********  ZONA DE CLIENTES **************************** <<<========
 
 

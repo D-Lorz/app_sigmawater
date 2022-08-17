@@ -921,7 +921,7 @@
                                                         <td>
                                                     
                                                                    <input type="hidden" name="id_clienteEnviar" value="<%= info_clientes.id_cliente %>">
-                                                                    <input type="hidden" name="id_consecutivo" value="<%= info_clientes.id %>">
+                                                                    <input type="hidden" id="idConsecutivo" name="id_consecutivo" value="<%= info_clientes.id %>">
                                                                     
                                                                     <select style="border:none;background:#ebebeb;border-radius: 9px;" id="estadosCreditoId" name="estadosCredito">
                                                                         <option id="estadosCredito" style="background:gray;color: white;"><%= estado.txt %></option>
@@ -1295,7 +1295,7 @@
                                                             <td style="width: 26%;">Dias disponibles:</td>
                                                           <% if(mostrarAgenda){ %> 
 
-                                                            <td><b><%= mostrarAgenda.lunes %><%= mostrarAgenda.martes %> <%= mostrarAgenda.miercoles %> <%= mostrarAgenda.jueves %> <%= mostrarAgenda.viernes %> <%= mostrarAgenda.sabado %> <%= mostrarAgenda.domingo %></b></td>
+                                                            <td><b><%= mostrarAgenda.lunes %> <%= mostrarAgenda.martes %> <%= mostrarAgenda.miercoles %> <%= mostrarAgenda.jueves %> <%= mostrarAgenda.viernes %> <%= mostrarAgenda.sabado %> <%= mostrarAgenda.domingo %></b></td>
                                                             <td style="width: 26%;">Nota:</td>    
                                                             <p> <td><b><%= mostrarAgenda.nota_solicitud %></b></td></p>     
 
@@ -1560,6 +1560,7 @@ document.addEventListener("DOMContentLoaded", function () {
              .catch(error => console.error('Error', error))
           .then(response => {
                    if(response)   {
+                    location.reload();
                        Swal.fire(
                          '¡Enviado!',
                          'Estado actualizado',

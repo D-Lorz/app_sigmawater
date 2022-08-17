@@ -2,10 +2,7 @@ const express = require('express')
 const router = express.Router()
 const path = require('path');
 const multer = require('multer');
-const { isAuthenticated, nologueado, registrar, login, logout } = require('../controllers/authController');
-
-
-
+const {nologueado, registrar} = require('../controllers/authController');
 
 const rutaAlmacen = multer.diskStorage({
 
@@ -36,18 +33,14 @@ const cargar = multer({
 
 //* para unificar las 2 variables de subir licencia de vendedor
 const multiupload = cargar.fields([{ name: 'licencia' }, { name: 'licencia_trasera' }]);
-
-
  // * ========== Renderizado de vistas vendedor ==========
 //                           ↓↓
-        router.get('/register', nologueado, (req, res) => {
+  router.get('/register', nologueado, (req, res) => {
             res.render('register')
-        });
+  });
 // *   ================ ===== ↑↑ ==============================
 
-
 //* router para los métodos del controller
-
 /*=============================================================*/
 router.post('/registrar', nologueado, multiupload, registrar);
 /*=============================================================*/

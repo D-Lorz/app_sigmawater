@@ -3,7 +3,7 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const cron = require('node-cron');
-const { isAuthenticated, nologueado, registrar, login, logout,listarAfiliados,isSellers } = require('../controllers/authController');
+const { isAuthenticated, listarAfiliados,isSellers } = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
         agendarInstalacionProducto,getRegistrarInstalacion,elegirSistema,historialClientes, historialVendedores } = require('../controllers/customerFormControllers');
@@ -81,9 +81,7 @@ router.get('/nuevo-cliente', isAuthenticated,(req, res) => {
     if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
     res.render('nuevo-cliente', { user: req.user })
 });
-
 router.get('/lista-clientes', isAuthenticated, listarClientes)
-
 router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
     if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
        res.render('afiliados', { user: req.user })
@@ -93,11 +91,10 @@ cron.schedule('0 22 * * Sun',() => {
     console.log("Hola desde cron job")
     historialClientes();
 });
-// cron.schedule('5 * * * * *',() => {
-//     console.log("Hola desde cron job")
-//     historialVendedores();
-// });
-
+cron.schedule('0 15 12 Jan-Dec *',() => {
+    console.log("Hola desde cron job")
+    historialVendedores();
+});
 
 router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes)
 router.get('/solicitar-credito/:id', isAuthenticated ,getSolicitudCreditos)
@@ -105,9 +102,7 @@ router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro)
 router.get('/test-de-agua/:id', isAuthenticated, getTestAgua) 
 router.get('/agendar-instalacion/:id', isAuthenticated,getAgendarinstalacion) 
 router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
-
 //   router.get('/temporal', isAuthenticated)
-
 // *   ================ ===== ↑↑ ==============================
 
 //* router para los métodos del customerFormControllers
@@ -126,6 +121,6 @@ router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 /*=============================================================*/
   router.post('/elegirSistema', isAuthenticated, elegirSistema);
 /*=============================================================*/
-router.post('/historialVendedores',historialVendedores);
+//  router.post('/historialVendedores',historialVendedores);
 
 module.exports = router
