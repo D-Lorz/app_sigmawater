@@ -106,7 +106,7 @@
                                                     <th scope="col">Estado</th>
                                                 </thead>
                                                 <tbody>
-                                                    <% facturacion.forEach((f)=>{ %>
+                                                    <% facturacionPropia.forEach((f)=>{ %>
                                                         <tr>
                                                             <td> <%= f.id_factura %> </td>
                                                             <td> <%= f.fecha_instalacion %> </td>
@@ -396,36 +396,27 @@
                                                     <th scope="col">Nombre del cliente</th>
                                                     <th scope="col">Producto</th>
                                                     <th scope="col">Valor</th>
-                                                    <th scope="col">Vendedor</th>
                                                     <th scope="col">Comisión total</th>
-                                                    <!-- Estado de la factura Pendiente y Pagado-->
                                                     <th scope="col">Estado</th>
                                                 </thead>
-                                                <tbody>
+                                                <tbody>                                                                                                                             
                                                 
-                                                            <tr>
-                                                                <td>
-                                                                
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                                <td style="text-transform: capitalize;">
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                                <td style="text-transform: capitalize;">
-                                                                </td>
-                                                                <td>$
-                                                                </td>
-                                                                <td>
-                                                                
-                                                                </td>
-                                                            </tr>
-                            
+                                                    <% facturacionAfiliado.forEach((f)=>{ %>
+                                                        <tr>
+                                                            <td> <%= f.id_factura %> </td>
+                                                            <td> <%= f.fecha_instalacion %> </td>
+                                                            <td style="text-transform: capitalize;"><%= f.nombre %> <%= f.apellido %></td>
+                                                            <td> <%= f.producto_instalado %></td>
+                                                            <td> <%= f.monto_aprobado %></td></td>
+                                                            <td> <%= f.comision_total %></td>
+                                                            <td>
+                                                              <div class="badge <%= f.facturaAfl.color %> font-size-12">
+                                                                    <%= f.facturaAfl.text %>
+                                                              </div>
+                                                             </td>
+                                                        </tr>
+                                                        <% }) %> 
                                                 </tbody>
-                            
                                             </table>
                                             
                                             <button id="btnSidebar" data-bs-toggle="offcanvas" data-bs-target="#sidebarRight" aria-controls="sidebarRight" style="background: none;border: none;margin: 0;"></button>
