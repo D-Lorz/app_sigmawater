@@ -7,19 +7,20 @@ const { promisify } = require('util')
 
 // todo: REGISTRAR
 exports.registrar = async (req, res) => {
-    let mes = new Date().getMonth()
-    mes == 0 ? mes = 12 : mes = mes+1
-//  ? NOTA: ==>> Esta es la forma para obtener la fecha actual <<<<<
-   const dia = new Date().getDate();
 //  ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
    const year = new Date().getFullYear();
-
+//  ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
+    let mes = new Date().getMonth()
+    mes == 0 ? mes = 12 : mes = mes+1
 //  ? NOTA: ==>> Esta es la forma para obtener el numero de la semana actual del año entero <<<<<
    currentdate = new Date();
    const oneJan = new Date(currentdate.getFullYear(),0,1);
    const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
    const semana = Math.ceil(( currentdate.getDay() + numberOfDays ) / 7) - 1;
    console.log("ESTA ES LA SEMANA ACTUAL ==>> " ,semana);
+//  ? NOTA: ==>> Esta es la forma para obtener la fecha actual <<<<<
+   const dia = new Date().getDate();
+
     const nombres = req.body.nombres
     const apellidos = req.body.apellidos
     const fecha_nacimiento = req.body.fecha_nacimiento
@@ -41,7 +42,7 @@ exports.registrar = async (req, res) => {
     const id_vendedor = generateRandomString(6)
     const pass = generarPass_vendedor(8)
   
-    const nuevoRegistro = {mes, dia, year, semana, nombres, apellidos, fecha_nacimiento, telefono_movil, 
+    const nuevoRegistro = {year,mes,semana,dia, nombres, apellidos, fecha_nacimiento, telefono_movil, 
          correo, seguro_social, ciudad, direccion, apt_suite_unidad, codigo_postal, codigo_afiliado,
          nombre_banco, numero_cuenta, ruta, beneficiario, licencia_conduccion,id_vendedor }
     const usuarios = {correo, pass, id_vendedor, codigo_afiliado }
@@ -228,20 +229,50 @@ exports.isSeller = async (req, res, next) => {
 
 // todo: MOSTRAR LISTA DE VENDEDORES AFILIADOS
 exports.listarAfiliados= async (req, res) => {
-
-    // Capturando el id del Vendedor actual
+// Capturando el id del Vendedor actual
      const id_vendedorA = req.user.id_vendedor;
-   
-   // Consultando en DB los clientes que pertenecen al vendedor actual
+ // Consultando en DB los clientes que pertenecen al vendedor actual
      conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA], (err, result) => {
        if (err) throw err;
        res.render('afiliados', {user: req.user, result: result})
     //    console.log(result);
      })
-       
+}
+// todo: MOSTRAR TABS DE VENTAS PROPIAS
+exports.ventasVendedor = async (req, res) => {
+   const id_vendedorA = req.user.id_vendedor;
+// Consultando en DB los clientes que pertenecen al vendedor actual
+
+const facturacion = await conexion.query('SELECT f.id_factura, f.fecha_instalacion, nc.nombre, nc.apellido, f.producto_instalado, sc.monto_aprobado, f.comision_total, nc.id as idClientenc, f.id_cliente as idClientef, f.estadoFactura as estadoFacturaf  FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente JOIN solicitar_credito sc ON nc.id = sc.id_cliente WHERE nc.codigo_id_vendedor = ? ;', [id_vendedorA])
+   facturacion.forEach(cl => {
+    cl.factura = {}
+        if(cl.idClientenc = cl.idClientef){
+            if(cl.estadoFacturaf == 0){cl.factura.text = "Pendiente"; cl.factura.color = "badge-soft-warning";}
+            if(cl.estadoFacturaf == 1){ cl.factura.text = "Pagado"; cl.factura.color = "badge-soft-success"; }
+        }
+     });
+       res.render('ventas-vendedor', {user: req.user, facturacion})
 }
 
- // todo: GENERADOR DE CODIGO DE VENDEDOR APHANUMERICO
+// // todo: MOSTRAR TABS DE VENTAS AFILIADOS
+// exports.ventasVendedor = async (req, res) => {
+//     const id_vendedorA = req.user.id_vendedor;
+//  // Consultando en DB los clientes que pertenecen al vendedor actual
+ 
+//  const facturacion = await conexion.query('SELECT f.id_factura, f.fecha_instalacion, nc.nombre, nc.apellido, f.producto_instalado, sc.monto_aprobado, f.comision_total, nc.id as idClientenc, f.id_cliente as idClientef, f.estadoFactura as estadoFacturaf  FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente JOIN solicitar_credito sc ON nc.id = sc.id_cliente WHERE nc.codigo_afiliado = ? ;', [id_vendedorA])
+ 
+//     facturacion.forEach(cl => {
+//      cl.factura = {}
+//          if(cl.idClientenc = cl.idClientef){
+//              if(cl.estadoFacturaf == 0){cl.factura.text = "Pendiente"; cl.factura.color = "badge-soft-warning";}
+//              if(cl.estadoFacturaf == 1){ cl.factura.text = "Pagado"; cl.factura.color = "badge-soft-success"; }
+//          }
+//       });
+//         res.render('ventas-vendedor', {user: req.user, facturacion})
+//  }
+
+
+// todo: GENERADOR DE CODIGO DE VENDEDOR APHANUMERICO
 const  generateRandomString = (num) => {
     const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let result1= '';

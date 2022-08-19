@@ -4,19 +4,24 @@ const conexion = require("../database/db");
 
 // todo --> formulario para crear un nuevo cliente
 exports.registrarClientes = async (req, res) => {
+//  ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
+    const year = new Date().getFullYear();
+
   let mes = new Date().getMonth()
   mes == 0 ? mes = 12 : mes = mes + 1
-  //  ? NOTA: ==>> Esta es la forma para obtener la fecha actual <<<<<
+
+//  ? NOTA: ==>> Esta es la forma para obtener el numero de la semana actual del año entero <<<<<
+    currentdate = new Date();
+    const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+    const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+    const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
+    console.log("ESTA ES LA SEMANA ACTUAL ==>> ", semana);
+
+//  ? NOTA: ==>> Esta es la forma para obtener la fecha actual <<<<<
   const dia = new Date().getDate();
   console.log(dia);
-  //  ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
-  const year = new Date().getFullYear();
-  //  ? NOTA: ==>> Esta es la forma para obtener el numero de la semana actual del año entero <<<<<
-  currentdate = new Date();
-  const oneJan = new Date(currentdate.getFullYear(), 0, 1);
-  const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
-  console.log("ESTA ES LA SEMANA ACTUAL ==>> ", semana);
+
+
   const nombre = req.body.nombre;
   const segundo_nombre = req.body.segundo_nombre;
   const apellido = req.body.apellido;
@@ -34,7 +39,7 @@ exports.registrarClientes = async (req, res) => {
   const id_vendedor = req.user.id_consecutivo //del admin saca el id consecutivo del vendedor aprobado 
   const codigo_id_vendedor = req.user.id_vendedor//del admin saca el id alfanumero del vendedor aprobado
   const nuevoRegistroClientes = {
-    mes, dia, year, semana, nombre, segundo_nombre, apellido, correo, telefono, direccion, direccion2,
+    year,mes,semana,dia, nombre, segundo_nombre, apellido, correo, telefono, direccion, direccion2,
     ciudad, latitud, longitud, estado_ubicacion, codigo_postal, id_cliente, id_vendedor, codigo_id_vendedor
   }
 

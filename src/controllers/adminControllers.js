@@ -22,7 +22,8 @@ exports.listarVendedores = async (req, res) => {
       // Validando si la tabla de usuarios tiene registros
          usuarios.forEach((u) => {
         // Comparando tabla de usuarios con vendedores
-        if (v.id_vendedor == u.id_vendedor) { v.estadoDe_laCuenta = u.estado_de_la_cuenta;
+        if (v.id_vendedor == u.id_vendedor) {
+          //  v.estadoDe_laCuenta = u.estado_de_la_cuenta;
           if (u.estado_de_la_cuenta === "aprobado") { v.estadoVendedor.txt = "Aprobado"; v.estadoVendedor.color = "badge-soft-success";}
           if (u.estado_de_la_cuenta === "bloqueado") {v.estadoVendedor.txt = "Bloqueado"; v.estadoVendedor.color = "badge-soft-danger"; }
         }
@@ -363,7 +364,8 @@ exports.servicioInstaladosx = async (req, res) => {
   const estado_agenda = 1
   const Datos_servicio = { fecha_instalacion, producto_instalado, serial_producto, instalador, evidencia_fotografica, nota, id_cliente }
   const Datos_estado = { estado_agenda }
-  const Datos_factura = { producto_instalado, fecha_instalacion, id_cliente, codigo_cliente }
+
+  const Datos_factura = { producto_instalado, fecha_instalacion, id_cliente}
 
   //* ==>> Apartado para sumar ventas individuales
   let clienteI = await conexion.query('SELECT * FROM nuevos_cliente')
@@ -454,6 +456,7 @@ const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_a
                      console.log("ESTA ES LA SUMA DE NUMERO DE VENTAS", suma);
                      vendedor1.total_ventas = suma 
                      console.log("RESULTADO DE VENDEDOR 2", vendedor1);
+
       conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?", [vendedor1, v2.id_vendedor])
 
                 }
