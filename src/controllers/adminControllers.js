@@ -1038,6 +1038,7 @@ exports.factura = async (req, res) => {
       // ---------------------------------------------- INICIO ** SECCIÓN DEDUCCIONES ---------------------------------------------- 
       /******* DEDUCCIONES VENDEDOR 1  *******/
       const ded = factura.find(i => i.id_cliente == cl.id)
+      
       console.log("\n------ DEDUCCIONES --------: ", ded)
       if (ded) { vendedor.deducciones = JSON.parse(ded.deducciones) }
       console.log("DEDUCCIONES v1: " + JSON.stringify(vendedor.deducciones))
@@ -1075,20 +1076,10 @@ exports.factura = async (req, res) => {
         vendedor3.deducciones = []
 
         /******* DEDUCCIONES VENDEDOR 3 *******/
-        if (deducciones.length > 0) {
-          deducciones.forEach(d => {
-            if (d.id_vendedor == v3.id) {
-              vendedor3.deducciones.push({
-                id: d.id,
-                vendedor: d.id_vendedor,
-                descripcion: d.descripcion,
-                monto: d.monto
-              })
-            }
-          });
-        }
+        const ded = factura.find(i => i.factura_cliente == cl.id)
+        if (ded) { vendedor3.deducciones = JSON.parse(ded.deducciones) }
         console.log("DEDUCCIONES v3: " + JSON.stringify(vendedor3.deducciones))
-        /** FIN DEDUCCIONES 3 **/
+        /** FIN DEDUCCIONES 2 **/
 
         v3.codigo_afiliado != '' ? v4 = vendedores.find(item => item.id_vendedor == v3.codigo_afiliado) : v4;
       }
@@ -1104,20 +1095,10 @@ exports.factura = async (req, res) => {
         vendedor4.deducciones = []
 
         /******* DEDUCCIONES VENDEDOR 4 *******/
-        if (deducciones.length > 0) {
-          deducciones.forEach(d => {
-            if (d.id_vendedor == v4.id) {
-              vendedor4.deducciones.push({
-                id: d.id,
-                vendedor: d.id_vendedor,
-                descripcion: d.descripcion,
-                monto: d.monto
-              })
-            }
-          });
-        }
+        const ded = factura.find(i => i.factura_cliente == cl.id)
+        if (ded) { vendedor4.deducciones = JSON.parse(ded.deducciones) }
         console.log("DEDUCCIONES v4: " + JSON.stringify(vendedor4.deducciones))
-        /** FIN DEDUCCIONES 4 **/
+        /** FIN DEDUCCIONES 2 **/
       }
       // ---------------------------------------------- FIN ** SECCIÓN DEDUCCIONES ---------------------------------------------- 
 
@@ -1330,7 +1311,7 @@ exports.factura = async (req, res) => {
             cl.factura.estadoColor = "badge-soft-warning";
           }
           if (f.estadoFactura == 1) {
-            cl.factura.estadoTxt = "Pagado";
+            cl.factura.estadoTxt = "Pagada";
             cl.factura.estadoColor = "badge-soft-success";
             cl.comision_total = f.comision_total;
           }
@@ -1357,7 +1338,11 @@ exports.deducciones = async (req, res) => {
   const {idFactura} = req.body;
   let f = ventasTotales.find(item => item.factura.id == idFactura)
   console.log("\n<<<<< RESULTADO FACTURA SELECCIONADA >>>> ", JSON.stringify(f)+"\n")
-  res.send(f);
+  if (f){
+    res.send(f);
+  } else {
+    res.send(false)
+  }
 }
 //todo ************* -- FIN  DEDUCCIONES ************* */
 
