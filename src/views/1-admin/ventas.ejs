@@ -590,7 +590,7 @@
                     $("#porcentaje-ganar1").css('display', 'none')
                     if (vendedor_principal.nivel == 4) {
                         $("#porcentaje-ganar1").css('display', 'table-row')
-                        comisionFinal = parseFloat(vendedor_principal.comision_base/2)
+                        comisionFinal = parseFloat(vendedor_principal.comision_base/2).toFixed(1)
                     }
                 }
                 
@@ -641,11 +641,13 @@
                     $("#porcentaje-ganar2").css('display', 'none')
                     if (vendedor2.nivel == 4) {
                         $("#porcentaje-ganar2").css('display', 'table-row')
-                        comisionFinal2 = parseFloat(comisionFinal2/2)
+                        comisionFinal2 = parseFloat(comisionFinal2/2).toFixed(1)
                     }
 
-                    $("#total2").text(comisionFinal2)
-                    $("#deduccionTotal2").val(parseFloat($("#total2").text()))
+                    $('#total2').text(comisionFinal2)
+                    $("#deduccionTotal2").val(comisionFinal2)
+                    // $("#total2").text(comisionFinal2)
+                    // $("#deduccionTotal2").val(parseFloat($("#total2").text()))
 
                 }
 
@@ -656,6 +658,7 @@
                     $("#telVendedor3").text(vendedor3.telefono)
                     $("#comisionBase3").text(vendedor3.comision_base)
                     $("#total3").text(vendedor3.comision_base)
+                    let comisionFinal3 = vendedor3.comision_base
 
                     if (datos.factura.estadoTxt == 'Pagada') {
                         const tablaDeducciones_v3 = _crearTablaDeducciones(3, true)
@@ -668,30 +671,34 @@
                     }
 
                     if (dt) {
+                        let subtotal3 = 0;
                         if(dt[2].length > 0) {
 
                             let deducciones3 = ``, i = 1;
-                            const fitro = dt[2]
+                            const filtro = dt[2]
+                            console.log("FILTRO >>> ", filtro)
                             filtro.forEach(x => {
                                 deducciones3 += `<tr id="tab3_row${i}">
                                     <td>${x.descripcion}</td>
                                     <td>${x.monto}</td>
                                 </tr>`
+                                subtotal3 += parseFloat(x.monto)
                                 i++;
                             })
-
                             $('#tablaDeducciones3').append(deducciones3);
+                            $('#subtotal3').text(subtotal3)
+                            comisionFinal3 = parseFloat(vendedor3.comision_base-subtotal3)
                         } 
                     }
 
+                    $("#porcentaje-ganar3").css('display', 'none')
                     if (vendedor3.nivel == 4) {
                         $("#porcentaje-ganar3").css('display', 'table-row')
-                        $("#total3").text(parseFloat(vendedor3.comision_base/2))
-                    } else {
-                        $("#porcentaje-ganar3").css('display', 'none')
-                        $("#total3").text(vendedor3.comision_base)
-                    } 
-                    $("#deduccionTotal3").val(parseFloat($("#total3").text()))
+                        comisionFinal3 = parseFloat(comisionFinal3/2).toFixed(1)
+                    }
+
+                    $("#total3").text(comisionFinal3)
+                    $("#deduccionTotal3").val(comisionFinal3)
 
                 }
 
@@ -702,6 +709,7 @@
                     $("#telVendedor4").text(vendedor4.telefono)
                     $("#comisionBase4").text(vendedor4.comision_base)
                     $("#total4").text(vendedor4.comision_base)
+                    let comisionFinal4 = parseFloat(vendedor4.comision_base/2).toFixed(1)
 
                     if (datos.factura.estadoTxt == 'Pagada') {
                         const tablaDeducciones_v4 = _crearTablaDeducciones(4, true)
@@ -713,6 +721,7 @@
                     }
                     
                     if (dt) {
+                        let subtotal4 = 0;
                         if(dt[3].length > 0) {
 
                             let deducciones4 = ``, i = 1;
@@ -722,22 +731,23 @@
                                     <td>${x.descripcion}</td>
                                     <td>${x.monto}</td>
                                 </tr>`
+                                subtotal4 += parseFloat(x.monto)
                                 i++;
                             })
-
                             $('#tablaDeducciones4').append(deducciones4);
-
+                            $('#subtotal4').text(subtotal4)
+                            comisionFinal4 = parseFloat((vendedor4.comision_base-subtotal4)/2).toFixed(1)
                         }
                     }
 
+                    $("#porcentaje-ganar4").css('display', 'none')
                     if (vendedor4.nivel == 4) {
                         $("#porcentaje-ganar4").css('display', 'table-row')
-                        $("#total4").text(parseFloat(vendedor4.comision_base/2))
-                    } else {
-                        $("#porcentaje-ganar4").css('display', 'none')
-                        $("#total4").text(vendedor4.comision_base)
+                        // comisionFinal4 = parseFloat(comisionFinal4/2).toFixed(1)
                     }
-                    $("#deduccionTotal4").val(parseFloat($("#total4").text()))
+
+                    $("#total4").text(comisionFinal4)
+                    $("#deduccionTotal4").val(comisionFinal4)
 
                 }
 
