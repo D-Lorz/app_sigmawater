@@ -123,6 +123,7 @@
                                                         <% }) %> 
                                                 </tbody>
                                             </table>
+
                                             <button id="btnSidebar" data-bs-toggle="offcanvas" data-bs-target="#sidebarRight" aria-controls="sidebarRight" style="background: none;border: none;margin: 0;"></button>
                                             <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarRight"
                                                 style="width: 50%; padding: 0px 0px 0px 37px; visibility: hidden;" aria-labelledby="sidebarRightLabel"
@@ -900,63 +901,6 @@
           })
     }
 
-    function _agregarFila(i, row, tab) {
-        $('#tablaDeducciones'+i).append(`<tr id="row${row}_${tab}">
-            <td><input type="text" id="descripcion${row}_${tab}"></td>
-            <td><input type="number" id="monto${row}_${tab}"></td>
-            <td style="display: flex;justify-content: center;">
-                <a class="btn btn-primary btn-rounded btn-sm" id="btn${row}_${tab}" onclick="sumarDeduccion('${i}', '${row}', '${tab}')" title="Guardar">
-                    <i class="fas fa-save"></i>
-                </a>
-                <a class="btn btn-danger btn-rounded btn-sm" title="Eliminar">
-                    <i class="fas fa-trash-alt"></i>
-                </a>
-            </td>
-        </tr>`);
-    }
-
-    function agregarDeduccion(item) {
-        /* VENDEDOR 1 */
-        if (item == 'tab_v1') {
-            _agregarFila(1, v1, item)
-            v1 = v1+1;
-        }
-
-        /* VENDEDOR 2 */
-        if (item == 'tab_v2'){
-            _agregarFila(2, v2, item)
-            v2 = v2+1;
-        }
-
-        /* VENDEDOR 3 */
-        if (item == 'tab_v3'){
-            _agregarFila(3, v3, item)
-            v3 = v3+1;
-        }
-
-        /* VENDEDOR 4 */
-        if (item == 'tab_v4'){
-            _agregarFila(4, v4, item)
-            v4 = v4+1;
-        }
-
-    }
-
-    /* REPORTAR FACTURA COMO PAGADA */
-    function reportarFactura(factura, tab) {
-        fetch('/guardarDeduccion', {
-          method: 'POST',
-          body: JSON.stringify({factura, tab}),
-          headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
-          .catch(error => console.error('Error:', error))
-          .then(datos => {
-            if (datos) {
-                console.log("Deducción guardada satisfatoriamente")
-            }
-          })
-    }
-
     function sumarDeduccion(num, row, tab) {
         
         $('#descripcion'+row+'_'+tab).attr('disabled', 'disabled');
@@ -974,10 +918,6 @@
         console.log("\nTotal Deducciones >> ", total);
         $('#total'+num).text(total)
         
-    }
-
-    function eliminarFila() {
-
     }
 
 </script>

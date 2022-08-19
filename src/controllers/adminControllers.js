@@ -855,6 +855,7 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 1
           case 1:
             vendedor.comision_base = comisionMax_nivel1;
+            vendedor.comision_base = vendedor.comision_base.toFixed(1)
             vendedor.comision_final = vendedor.comision_base;
 
             cl.vendedores.push(vendedor)
@@ -867,6 +868,7 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel1);
               }
+              vendedor2.comision_base = vendedor2.comision_base.toFixed(1)
               vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
@@ -878,6 +880,7 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
               }
+              vendedor3.comision_base = vendedor3.comision_base.toFixed(1)
               vendedor3.comision_final = vendedor3.comision_base;
               cl.vendedores.push(vendedor3)
             }
@@ -886,6 +889,7 @@ exports.factura = async (req, res) => {
             if (v4) {
               // Asignando comisión base vendedor nivel 4 -> (Comisión máxima del vendedor nivel 4 menos las comisiones niveles anteriores)
               vendedor4.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor3.comision_base - vendedor2.comision_base - vendedor.comision_base);
+              vendedor4.comision_base = vendedor4.comision_base.toFixed(1)
               vendedor4.comision_final = vendedor4.comision_base;
               cl.vendedores.push(vendedor4)
             }
@@ -905,6 +909,7 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel3 - comisionMax_nivel2)
               }
+              vendedor2.comision_base = vendedor2.comision_base.toFixed(1)
               vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
@@ -912,6 +917,7 @@ exports.factura = async (req, res) => {
             //COMISIÓN VENDEDOR 3 (NIVEL 4)
             if (v3) {
               vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
+              vendedor3.comision_base = vendedor3.comision_base.toFixed(1)
               vendedor3.comision_final = vendedor3.comision_base;
               cl.vendedores.push(vendedor3)
             }
@@ -927,6 +933,7 @@ exports.factura = async (req, res) => {
             //COMISIÓN VENDEDOR 2 (NIVEL 4)
             if (v2.nivel == 4) {
               vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel3 - comisionMax_nivel2 - comisionMax_nivel1)
+              vendedor2.comision_base = vendedor2.comision_base.toFixed(1)
               vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor)
             }
@@ -936,6 +943,7 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 4
           default:
             vendedor.comision_base = (cl.monto_aprobado - gastos_empresa);
+            vendedor.comision_base = vendedor.comision_base.toFixed(1)
             vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
             break;
@@ -951,6 +959,7 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 1
           case 1:
             vendedor.comision_base = parseFloat(porcentaje * comisionMax_nivel1)
+            vendedor.comision_base = vendedor.comision_base.toFixed(1)
             vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
 
@@ -963,6 +972,7 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor.comision_base);
               }
+              vendedor2.comision_base = vendedor2.comision_base.toFixed(1)
               vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
@@ -974,6 +984,7 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
               }
+              vendedor3.comision_base = vendedor3.comision_base.toFixed(1)
               vendedor3.comision_final = vendedor3.comision_base;
               cl.vendedores.push(vendedor3)
             }
@@ -981,6 +992,7 @@ exports.factura = async (req, res) => {
             //COMISIÓN VENDEDOR 4 (NIVEL 4)
             if (v4) {
               vendedor4.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor3.comision_base - vendedor2.comision_base - vendedor.comision_base);
+              vendedor4.comision_base = vendedor4.comision_base.toFixed(1)
               vendedor4.comision_final = vendedor4.comision_base;
               cl.vendedores.push(vendedor4)
             }
@@ -1000,6 +1012,7 @@ exports.factura = async (req, res) => {
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor.comision_base);
               }
+              vendedor2.comision_base = vendedor2.comision_base.toFixed(1)
               vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
@@ -1007,6 +1020,7 @@ exports.factura = async (req, res) => {
             //COMISIÓN VENDEDOR 3 (NIVEL 4)
             if (v3) {
               vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
+              vendedor3.comision_base = vendedor3.comision_base.toFixed(1)
               vendedor3.comision_final = vendedor3.comision_base;
               cl.vendedores.push(vendedor3)
             }
@@ -1016,12 +1030,14 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 3
           case 3:
             vendedor.comision_base = parseFloat(porcentaje * comisionMax_nivel3)
+            vendedor.comision_base = vendedor.comision_base.toFixed(1)
             vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
 
             //COMISIÓN VENDEDOR 2 (NIVEL 4)
             if (v2) {
               vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor.comision_base);
+              vendedor2.comision_base = vendedor2.comision_base.toFixed(1)
               vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
@@ -1031,6 +1047,7 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 4
           default:
             vendedor.comision_base = (cl.monto_aprobado - gastos_empresa);
+            vendedor.comision_base = vendedor.comision_base.toFixed(1)
             vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
             break;
@@ -1043,7 +1060,8 @@ exports.factura = async (req, res) => {
     }
 
     //Sumar comisiónes base de todos los vendedores
-    cl.comision_total = cl.vendedores.map(item => item.comision_base).reduce((prev, curr) => prev + curr, 0);
+    cl.comision_total = cl.vendedores.map(item => item.comision_base).reduce((prev, curr) => prev + curr, '');
+    // cl.comision_total = cl.comision_total.toFixed(1)
 
     /******* ASIGNANDO FACTURA AL CLIENTE *******/
     if (factura.length > 0) {

@@ -102,24 +102,14 @@
                                                     <%= venta.factura.id %>
                                                 </button>
                                             </td>
-                                            <td>
-                                                <%= venta.factura.fecha %>
-                                            </td>
+                                            <td><%= venta.factura.fecha %></td>
                                             <td style="text-transform: capitalize;">
-                                                <%= venta.nombre %>
-                                                    <%= venta.apellido %>
+                                                <%= venta.nombre %> <%= venta.apellido %>
                                             </td>
-                                            <td>
-                                                <%= venta.sistema %>
-                                            </td>
-                                            <td>
-                                                $<%= venta.monto_aprobado %>
-                                            </td>
-                                            <td style="text-transform: capitalize;">
-                                                <%= venta.vendedores[0].nombre %>
-                                            </td>
-                                            <td>$<%= venta.comision_total %>
-                                            </td>
+                                            <td> <%= venta.sistema %> </td>
+                                            <td> $<%= venta.monto_aprobado %> </td>
+                                            <td style="text-transform: capitalize;"><%= venta.vendedores[0].nombre %></td>
+                                            <td>$<%= venta.comision_total %></td>
                                             <td>
                                                 <div class="badge <%= venta.factura.estadoColor %> font-size-12">
                                                     <%= venta.factura.estadoTxt %>
@@ -629,7 +619,7 @@
                                     <td>${x.descripcion}</td>
                                     <td>${x.monto}</td>
                                 </tr>`
-                                subtotal2 += parseFloat(x.monto)
+                                subtotal2 += parseFloat(x.monto).toFixed(1)
                                 i++;
                             })
                             $('#tablaDeducciones2').append(deducciones2);
@@ -682,7 +672,7 @@
                                     <td>${x.descripcion}</td>
                                     <td>${x.monto}</td>
                                 </tr>`
-                                subtotal3 += parseFloat(x.monto)
+                                subtotal3 += parseFloat(x.monto).toFixed(1)
                                 i++;
                             })
                             $('#tablaDeducciones3').append(deducciones3);
@@ -731,7 +721,7 @@
                                     <td>${x.descripcion}</td>
                                     <td>${x.monto}</td>
                                 </tr>`
-                                subtotal4 += parseFloat(x.monto)
+                                subtotal4 += parseFloat(x.monto).toFixed(1)
                                 i++;
                             })
                             $('#tablaDeducciones4').append(deducciones4);
@@ -894,7 +884,7 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 }).then((respu) => {
-                                    setTimeout('document.location.reload()', 1510);
+                                    setTimeout('document.location.reload()', 1450);
                                 })
                             }
                     })
