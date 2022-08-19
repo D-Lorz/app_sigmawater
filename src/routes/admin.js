@@ -1,11 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const path = require('path');
-const multer = require('multer');
 const { isAuthenticated } = require('../controllers/authController');
 const { listarVendedores, listarVendedores_PerfilVendedores, listarClientes_PerfilClientes, listarClientes,
         ActualizarNivel, actualizarEstadoVendedor, ActualizarCredito, ActualizarMontoAprobado,
-        clfirmas, factura, listarVendedoresss, deducciones } = require('../controllers/adminControllers');
+        clfirmas, factura, deducciones, efectuarVenta } = require('../controllers/adminControllers');
 
  // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
@@ -15,8 +13,6 @@ router.get('/listar-clientes', isAuthenticated,listarClientes)
 router.get('/perfil-cliente/:id', isAuthenticated,listarClientes_PerfilClientes)
 router.get('/acuerdo/:id', isAuthenticated,clfirmas )
 router.get('/ventas', isAuthenticated,factura)
-//  router.get('/documento/:id', isAuthenticated,)
-router.get('/hola', isAuthenticated,listarVendedoresss)
 // *   ================ ===== ↑↑ ==============================
 
            
@@ -31,8 +27,10 @@ router.post('/ActualizarCredito', isAuthenticated,ActualizarCredito);
 router.post('/ActualizarMontoAprobado', isAuthenticated,ActualizarMontoAprobado);
 /*=============================================================*/
 
-// * RUTAS PARA DEDUCCIONES EN LAS DISPERSIONES DE VENTAS
-/*=============================================================*/ 
+// * RUTAS PARA VENTAS, COMISIONES, DEDUCCIONES
+router.get('/ventas', isAuthenticated, factura)
 router.post('/deducciones', isAuthenticated, deducciones)
+router.post('/efectuarVenta', isAuthenticated, efectuarVenta)
+/*=============================================================*/
 
 module.exports = router
