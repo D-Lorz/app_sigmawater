@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  
+
     <meta charset="utf-8" />
     <title>Ventas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +13,11 @@
     <link rel="stylesheet" type="text/css" href="../css/colors.min.css">
 
     <!-- DataTables -->
-    <link href="../directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
-    rel="stylesheet" type="text/css" />
+    <link href="../directorio_dash/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+        type="text/css" />
     <!-- Responsive datatable examples -->
     <link href="../directorio_dash/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
-    rel="stylesheet" type="text/css" />
+        rel="stylesheet" type="text/css" />
     <!-- preloader css -->
     <link rel="stylesheet" href="../directorio_dash/css/preloader.min.css" type="text/css" />
     <!-- Bootstrap Css -->
@@ -32,13 +32,15 @@
     <link rel="stylesheet" href="../css/scrolls.css">
 
     <style>
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
 
-        input[type=number] { -moz-appearance:textfield; }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
 
 </head>
@@ -47,715 +49,512 @@
 
     <!-- Begin page -->
     <div id="layout-wrapper">
-
-    <!-- =======FIXME: MENU ========================== -->
-    <%- include ('./partials/menu.ejs')%>
-    <!-- =======FIXME: MENU ========================== -->
-
-        <div class="main-content">
-            <div class="page-content">
-                <div class="container-fluid">
-                    <!-- start page title -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="page-title-box d-sm-flex align-items-center
+        <!-- =======FIXME: MENU ========================== -->
+        <%- include ('./partials/menu.ejs')%>
+            <!-- =======FIXME: MENU ========================== -->
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center
                                         justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18">Ventas </h4>
-        
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript:
+                                    <h4 class="mb-sm-0 font-size-18">Ventas </h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript:
                                                         void(0);">Ventas</a></li>
-                                        <li class="breadcrumb-item active">Facturas</li>
-                                    </ol>
+                                            <li class="breadcrumb-item active">Facturas</li>
+                                        </ol>
+                                    </div>
+
                                 </div>
-        
                             </div>
                         </div>
-                    </div>
-                       <!-- end page title -->
-                                <!-- Nav tabs -->
-                                <ul class="nav justify-content-start nav-pills card-header-pills mb-3" role="tablist">
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
-                                            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                            <span class="d-none d-sm-block">Propios</span> 
-                                        </a>
-                                    </li>
-                                    <li class="nav-item waves-effect waves-light">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#profile-1" role="tab">
-                                            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                            <span class="d-none d-sm-block">Afiliados</span> 
-                                        </a>
-                                    </li>
-                                </ul>
+                        <!-- end page title -->
+                        <!-- Nav tabs -->
+                        <ul class="nav justify-content-start nav-pills card-header-pills mb-3" role="tablist">
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
+                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                    <span class="d-none d-sm-block">Propios</span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link" data-bs-toggle="tab" href="#profile-1" role="tab">
+                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                    <span class="d-none d-sm-block">Afiliados</span>
+                                </a>
+                            </li>
+                        </ul>
 
-                                <!-- Tab panes -->
-                                <div class="tab-content p-3 text-muted">
-                                    <div class="tab-pane active" id="home-1" role="tabpanel">
-                                        <div class="table-responsive mb-4 ">
-                                            <table class="table align-middle datatable dt-responsive table-check nowrap "
-                                                style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
-                                                <thead>
-                                                    <th scope="col" title="Id de factura">Factura</th>
-                                                    <th scope="col" title="Fecha de factura">Fecha de instalación</th>
-                                                    <th scope="col">Nombre del cliente</th>
-                                                    <th scope="col">Producto</th>
-                                                    <th scope="col">Valor</th>
-                                                    <th scope="col">Comisión total</th>
-                                                    <th scope="col">Estado</th>
-                                                </thead>
-                                                <tbody>
-                                                    <% facturacionPropia.forEach((f)=>{ %>
-                                                        <tr>
-                                                            <td> <%= f.id_factura %> </td>
-                                                            <td> <%= f.fecha_instalacion %> </td>
-                                                            <td style="text-transform: capitalize;"><%= f.nombre %> <%= f.apellido %></td>
-                                                            <td> <%= f.producto_instalado %></td>
-                                                            <td> <%= f.monto_aprobado %></td></td>
-                                                            <td> <%= f.comision_total %></td>
-                                                            <td>
-                                                              <div class="badge <%= f.factura.color %> font-size-12">
-                                                                    <%= f.factura.text %>
-                                                              </div>
-                                                            </td>
-                                                        </tr>
-                                                        <% }) %> 
-                                                </tbody>
-                                            </table>
-
-                                            <button id="btnSidebar" data-bs-toggle="offcanvas" data-bs-target="#sidebarRight" aria-controls="sidebarRight" style="background: none;border: none;margin: 0;"></button>
-                                            <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarRight"
-                                                style="width: 50%; padding: 0px 0px 0px 37px; visibility: hidden;" aria-labelledby="sidebarRightLabel"
-                                                aria-hidden="true">
-                                                <div class="offcanvas-header">
-                                                    <h1 id="offcanvasRightLabel" style=" font-size: 111%; "></h1>
-                                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                                </div>
-                                                <div class="offcanvas-body scroll_vertical">
-                                                    <div class="row">
-                                                        <div class="col-lg-12" style="margin-left: -1%;">
-                                                            <div class="invoice-title">
-                                                                <div class="d-flex align-items-start">
-                                                                    <div class="flex-grow-1">
-                                                                        <div class="mb-4">
-                                                                            <img src="../directorio_dash/images/logo.svg" alt="" height="40"><span
-                                                                                class="logo-txt"></span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="flex-shrink-0">
-                                                                        <div class="mb-4">
-                                                                            <h4 class="float-end font-size-16">Factura: <span id="idFactura"></span>
-                                                                            </h4>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                
-                                                            </div>
-                                                
-                                                            <hr class="mb-4">
-                                                
-                                                            <!-- **INICIO** Pestañas para gestionar vendedores -->
-                                                            <ul class="nav justify-content-start nav-pills card-header-pills mb-3" role="tablist">
-                                                                <li class="nav-item waves-effect waves-light">
-                                                                    <a class="nav-link active" data-bs-toggle="tab" href="#v1" role="tab" aria-selected="true">
-                                                                        <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                                                        <span class="d-none d-sm-block">Vendedor Principal</span>
-                                                                    </a>
-                                                                </li>
-                                                
-                                                                <li id="tabFactura2" class="nav-item waves-effect waves-light" style="display: none;">
-                                                                    <a class="nav-link" data-bs-toggle="tab" href="#v2" role="tab" aria-selected="false">
-                                                                        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                                                        <span class="d-none d-sm-block">Vendedor 2</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="nav-item waves-effect waves-light" id="tabFactura3" style="display: none;">
-                                                                    <a class="nav-link" data-bs-toggle="tab" href="#v3" role="tab" aria-selected="false">
-                                                                        <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                                                        <span class="d-none d-sm-block">Vendedor 3</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="nav-item waves-effect waves-light" id="tabFactura4" style="display: none;">
-                                                                    <a class="nav-link" data-bs-toggle="tab" href="#v4" role="tab" aria-selected="false">
-                                                                        <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                                                        <span class="d-none d-sm-block">Vendedor 4</span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                            <!-- **FIN** Pestañas para gestionar vendedores -->
-                                                
-                                                            <!-- **INICIO** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
-                                                            <div class="tab-content p-3 text-muted">
-                                                            
-                                                                <!-- Vendedor 1 -->
-                                                                <div class="tab-pane active" id="v1" role="tabpanel">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <h5 class="font-size-15 mb-2">Producto</h5>
-                                                                            <p class="mb-1 producto"></p>
-                                                                            <p class="mb-1 badge badge-soft-success font-size-12">
-                                                                                $<span class="valor"></span></p>
-                                                                            <h5 class="font-size-14 mb-2">Cliente </h5>
-                                                                            <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
-                                                                            <p class="mb-1 telCliente"></p>
-                                                                            <p class="direccionCliente"></p>
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <div>
-                                                                                <h5 class="font-size-15">Fecha de instalación</h5>
-                                                                                <p class="fecha"></p>
-                                                                            </div>
-                                                                        
-                                                                            <div class="mt-4">
-                                                                                <h5 class="font-size-15">Vendedor</h5>
-                                                                                <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor1"></p>
-                                                                                <p class="mb-1">Nivel: <span id="nivelVendedor1"></span></p>
-                                                                                <p class="mb-1" id="telVendedor"></p>
-                                                                            </div>
-                                                                        
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="badge badge-soft-success font-size-12">Comisión base:
-                                                                            $<span id="comisionBase1"></span></h5>
-                                                                    </div>
-                                                            
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="font-size-15" id="tituloDeduccion_v1">Deducciones</h5>
-                                                                    </div>
-                                                            
-                                                                    <!-- TABLA PARA DEDUCCIONES VENDEDOR PRINCIPAL -->
-                                                                    <div class="table-responsive" style="padding: 12px;" id="divDeducciones">
-                                                                        <!-- Cargando la tabla desde un Script -->
-                                                                    </div>
-                                                            
-                                                                </div>
-                                                            
-                                                                <!-- Vendedor 2 -->
-                                                                <div class="tab-pane" id="v2" role="tabpanel">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <h5 class="font-size-15 mb-2">Producto</h5>
-                                                                            <p class="mb-1 producto"></p>
-                                                                            <p class="mb-1 badge badge-soft-success font-size-12">
-                                                                                $<span class="valor"></span></p>
-                                                                            <h5 class="font-size-14 mb-2">Cliente </h5>
-                                                                            <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
-                                                                            <p class="mb-1 telCliente"></p>
-                                                                            <p class="direccionCliente"></p>
-                                                                        </div>
-                                                            
-                                                                        <div class="col-sm-6">
-                                                                            <div>
-                                                                                <h5 class="font-size-15">Fecha de instalación</h5>
-                                                                                <p class="fecha"></p>
-                                                                            </div>
-                                                                        
-                                                                            <div class="mt-4">
-                                                                                <h5 class="font-size-15">Vendedor</h5>
-                                                                                <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor2"></p>
-                                                                                <p class="mb-1">Nivel: <span id="nivelVendedor2"></span></p>
-                                                                                <p class="mb-1" id="telVendedor2"></p>
-                                                                            </div>
-                                                                        
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="badge badge-soft-success font-size-12">Comisión base:
-                                                                            $<span id="comisionBase2"></span> </h5>
-                                                                    </div>
-                                                            
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="font-size-15" id="tituloDeduccion_v2">Deducciones</h5>
-                                                                    </div>
-                                                            
-                                                                    <!-- TABLA PARA DEDUCCIONES VENDEDOR 2 -->
-                                                                    <div class="table-responsive" style="padding: 12px;" id="divDeducciones2">
-                                                                        <!-- Cargando la tabla desde un Script -->
-                                                                    </div>
-                                                            
-                                                                </div>
-                                                            
-                                                                <!-- Vendedor 3 -->
-                                                                <div class="tab-pane" id="v3" role="tabpanel">
-                                                                    <div class="row">
-                                                            
-                                                                        <div class="col-sm-6">
-                                                                            <h5 class="font-size-15 mb-2">Producto</h5>
-                                                                            <p class="mb-1 producto"></p>
-                                                                            <p class="mb-1 badge badge-soft-success font-size-12">
-                                                                                $<span class="valor"></span></p>
-                                                                            <h5 class="font-size-14 mb-2">Cliente </h5>
-                                                                            <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
-                                                                            <p class="mb-1 telCliente"></p>
-                                                                            <p class="direccionCliente"></p>
-                                                                        </div>
-                                                            
-                                                                        <div class="col-sm-6">
-                                                                            <div>
-                                                                                <h5 class="font-size-15">Fecha de instalación</h5>
-                                                                                <p class="fecha"></p>
-                                                                            </div>
-                                                                        
-                                                                            <div class="mt-4">
-                                                                                <h5 class="font-size-15">Vendedor</h5>
-                                                                                <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor3"></p>
-                                                                                <p class="mb-1">Nivel: <span id="nivelVendedor3"></span></p>
-                                                                                <p class="mb-1" id="telVendedor3"></p>
-                                                                            </div>
-                                                                        
-                                                                        </div>
-                                                            
-                                                                    </div>
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="badge badge-soft-success font-size-12">Comisión base:
-                                                                            $<span id="comisionBase3"></span> </h5>
-                                                                    </div>
-                                                            
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="font-size-15" id="tituloDeduccion_v3">Deducciones</h5>
-                                                                    </div>
-                                                            
-                                                                    <!-- TABLA PARA DEDUCCIONES VENDEDOR 3 -->
-                                                                    <div class="table-responsive" style="padding: 12px;" id="divDeducciones3">
-                                                                        <!-- Cargando la tabla desde un Script -->
-                                                                    </div>
-                    
-                                                                </div>
-                                                            
-                                                                <!-- Vendedor 4 -->
-                                                                <div class="tab-pane" id="v4" role="tabpanel">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                        
-                                                                            <h5 class="font-size-15 mb-2">Producto</h5>
-                                                                            <p class="mb-1 producto"></p>
-                                                                            <p class="mb-1 badge badge-soft-success font-size-12">
-                                                                                $<span class="valor"></span></p>
-                                                                            <h5 class="font-size-14 mb-2">Cliente </h5>
-                                                                            <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
-                                                                            <p class="mb-1 telCliente"></p>
-                                                                            <p class="direccionCliente"></p>
-                                                                        
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <div>
-                                                                                <h5 class="font-size-15">Fecha de instalación</h5>
-                                                                                <p class="fecha"></p>
-                                                                            </div>
-                                                                        
-                                                                            <div class="mt-4">
-                                                                                <h5 class="font-size-15">Vendedor</h5>
-                                                                                <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor4"></p>
-                                                                                <p class="mb-1">Nivel: <span id="nivelVendedor4"></span></p>
-                                                                                <p class="mb-1" id="telVendedor4"></p>
-                                                                            </div>
-                                                                        
-                                                                        
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="badge badge-soft-success font-size-12">Comisión base:
-                                                                            $<span id="comisionBase4"></span> </h5>
-                                                                    </div>
-                                                            
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="font-size-15" id="tituloDeduccion_v4">Deducciones</h5>
-                                                                    </div>
-                                                            
-                                                                    <!-- TABLA PARA DEDUCCIONES VENDEDOR 4 -->
-                                                                    <div class="table-responsive" style="padding: 12px;" id="divDeducciones4">
-                                                                        <!-- Cargando la tabla desde un Script -->
-                                                                    </div>
-                                                                </div>
-                    
-                                                                <!-- BOTÓN GUARDAR FACTURA - ENVIAR A DB -->
-                                                                <div class="d-print-none mt-3">
-                                                                    <center><a href="#" class="btn btn-primary w-md waves-effect waves-light"
-                                                                            style="border-radius: 17px;">Reportar como pagada</a>
-                                                                    </center>
-                                                                </div>
-                    
-                                                            </div>
-                                                            <!-- **FIN** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
-                                                
+                        <!-- Tab panes -->
+                        <div class="tab-content p-3 text-muted">
+                            <div class="tab-pane active" id="home-1" role="tabpanel">
+                                <div class="table-responsive mb-4 ">
+                                    <table class="table align-middle datatable dt-responsive table-check nowrap "
+                                        style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                                        <thead>
+                                            <th scope="col" title="Id de factura">Factura</th>
+                                            <th scope="col" title="Fecha de factura">Fecha de instalación</th>
+                                            <th scope="col">Nombre del cliente</th>
+                                            <th scope="col">Producto</th>
+                                            <th scope="col">Valor</th>
+                                            <th scope="col">Comisión</th>
+                                            <th scope="col">Estado</th>
+                                        </thead>
+                                        <tbody>
+                                            <% facturacionPropia.forEach((f)=>{ %>
+                                                <tr>
+                                                    <td>
+                                                        <button style="background: none;border: none;margin: 0;"
+                                                            onclick="editarFactura('<%=f.id_factura%>')">
+                                                            <%= f.id_factura %>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <%= f.fecha_instalacion %>
+                                                    </td>
+                                                    <td style="text-transform: capitalize;">
+                                                        <%= f.nombre %>
+                                                            <%= f.apellido %>
+                                                    </td>
+                                                    <td>
+                                                        <%= f.producto_instalado %>
+                                                    </td>
+                                                    <td>
+                                                        $<%= f.monto_aprobado %>
+                                                    </td>
+                                                    </td>
+                                                    <td>
+                                                        <% if (!f.comision_total) {%>
+                                                            Por definir
+                                                        <% } else { %>
+                                                            $<%= f.comision_total %>
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <div class="badge <%= f.factura.color %> font-size-12">
+                                                            <%= f.factura.text %>
                                                         </div>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>
+                                    </table>
+
+
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="profile-1" role="tabpanel">
+                                <div class="table-responsive mb-4 ">
+                                    <table class="table align-middle datatable dt-responsive table-check nowrap "
+                                        style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                                        <thead>
+                                            <th scope="col" title="Id de factura">Factura</th>
+                                            <th scope="col" title="Fecha de factura">Fecha de instalación</th>
+                                            <th scope="col">Nombre del cliente</th>
+                                            <th scope="col">Producto</th>
+                                            <th scope="col">Valor</th>
+                                            <th scope="col">Comisión total</th>
+                                            <th scope="col">Estado</th>
+                                        </thead>
+                                        <tbody>
+
+                                            <% facturacionAfiliado.forEach((f)=>{ %>
+                                                <tr>
+                                                    <td>
+                                                        <button style="background: none;border: none;margin: 0;"
+                                                            onclick="editarFactura('<%=f.id_factura%>')">
+                                                            <%= f.id_factura %>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <%= f.fecha_instalacion %>
+                                                    </td>
+                                                    <td style="text-transform: capitalize;">
+                                                        <%= f.nombre %>
+                                                            <%= f.apellido %>
+                                                    </td>
+                                                    <td>
+                                                        <%= f.producto_instalado %>
+                                                    </td>
+                                                    <td>
+                                                        $<%= f.monto_aprobado %>
+                                                    </td>
+                                                    </td>
+                                                    <td>
+                                                        <% if (!f.comision_total) {%>
+                                                            Por definir
+                                                        <% } else { %>
+                                                            $<%= f.comision_total %>
+                                                        <% } %>
+                                                    </td>
+                                                    <td>
+                                                        <div class="badge <%= f.facturaAfl.color %> font-size-12">
+                                                            <%= f.facturaAfl.text %>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button id="btnSidebar" data-bs-toggle="offcanvas" data-bs-target="#sidebarRightVendedores"
+                            aria-controls="sidebarRightVendedores"
+                            style="background: none;border: none;margin: 0;"></button>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarRightVendedores"
+                            style="width: 50%; padding: 0px 0px 0px 37px; visibility: hidden;"
+                            aria-labelledby="sidebarRightVendedoresLabel" aria-hidden="true">
+                            <div class="offcanvas-header">
+                                <h1 id="offcanvasRightLabel" style=" font-size: 111%; "></h1>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body scroll_vertical">
+                                <div class="row">
+                                    <div class="col-lg-12" style="margin-left: -1%;">
+                                        <div class="invoice-title">
+                                            <div class="d-flex align-items-start">
+                                                <div class="flex-grow-1">
+                                                    <div class="mb-4">
+                                                        <img src="../directorio_dash/images/logo.svg" alt=""
+                                                            height="40"><span class="logo-txt"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-shrink-0">
+                                                    <div class="mb-4">
+                                                        <h4 class="float-end font-size-16">Factura: <span
+                                                                id="idFactura"></span>
+                                                        </h4>
                                                     </div>
                                                 </div>
                                             </div>
-                            
+
                                         </div>
-                                    </div>
-                                    <div class="tab-pane" id="profile-1" role="tabpanel">
-                                        <div class="table-responsive mb-4 ">
-                                            <table class="table align-middle datatable dt-responsive table-check nowrap "
-                                                style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
-                                                <thead>
-                                                    <th scope="col" title="Id de factura">Factura</th>
-                                                    <th scope="col" title="Fecha de factura">Fecha de instalación</th>
-                                                    <th scope="col">Nombre del cliente</th>
-                                                    <th scope="col">Producto</th>
-                                                    <th scope="col">Valor</th>
-                                                    <th scope="col">Comisión total</th>
-                                                    <th scope="col">Estado</th>
-                                                </thead>
-                                                <tbody>                                                                                                                             
-                                                
-                                                    <% facturacionAfiliado.forEach((f)=>{ %>
-                                                        <tr>
-                                                            <td> <%= f.id_factura %> </td>
-                                                            <td> <%= f.fecha_instalacion %> </td>
-                                                            <td style="text-transform: capitalize;"><%= f.nombre %> <%= f.apellido %></td>
-                                                            <td> <%= f.producto_instalado %></td>
-                                                            <td> <%= f.monto_aprobado %></td></td>
-                                                            <td> <%= f.comision_total %></td>
-                                                            <td>
-                                                              <div class="badge <%= f.facturaAfl.color %> font-size-12">
-                                                                    <%= f.facturaAfl.text %>
-                                                              </div>
-                                                             </td>
-                                                        </tr>
-                                                        <% }) %> 
-                                                </tbody>
-                                            </table>
-                                            
-                                            <button id="btnSidebar" data-bs-toggle="offcanvas" data-bs-target="#sidebarRight" aria-controls="sidebarRight" style="background: none;border: none;margin: 0;"></button>
-                                            <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarRight"
-                                                style="width: 50%; padding: 0px 0px 0px 37px; visibility: hidden;" aria-labelledby="sidebarRightLabel"
-                                                aria-hidden="true">
-                                                <div class="offcanvas-header">
-                                                    <h1 id="offcanvasRightLabel" style=" font-size: 111%; "></h1>
-                                                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                                </div>
-                                                <div class="offcanvas-body scroll_vertical">
-                                                    <div class="row">
-                                                        <div class="col-lg-12" style="margin-left: -1%;">
-                                                            <div class="invoice-title">
-                                                                <div class="d-flex align-items-start">
-                                                                    <div class="flex-grow-1">
-                                                                        <div class="mb-4">
-                                                                            <img src="../directorio_dash/images/logo.svg" alt="" height="40"><span
-                                                                                class="logo-txt"></span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="flex-shrink-0">
-                                                                        <div class="mb-4">
-                                                                            <h4 class="float-end font-size-16">Factura: <span id="idFactura"></span>
-                                                                            </h4>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                
-                                                            </div>
-                                                
-                                                            <hr class="mb-4">
-                                                
-                                                            <!-- **INICIO** Pestañas para gestionar vendedores -->
-                                                            <ul class="nav justify-content-start nav-pills card-header-pills mb-3" role="tablist">
-                                                                <li class="nav-item waves-effect waves-light">
-                                                                    <a class="nav-link active" data-bs-toggle="tab" href="#v1" role="tab" aria-selected="true">
-                                                                        <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                                                        <span class="d-none d-sm-block">Vendedor Principal</span>
-                                                                    </a>
-                                                                </li>
-                                                
-                                                                <li id="tabFactura2" class="nav-item waves-effect waves-light" style="display: none;">
-                                                                    <a class="nav-link" data-bs-toggle="tab" href="#v2" role="tab" aria-selected="false">
-                                                                        <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                                                        <span class="d-none d-sm-block">Vendedor 2</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="nav-item waves-effect waves-light" id="tabFactura3" style="display: none;">
-                                                                    <a class="nav-link" data-bs-toggle="tab" href="#v3" role="tab" aria-selected="false">
-                                                                        <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                                                        <span class="d-none d-sm-block">Vendedor 3</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="nav-item waves-effect waves-light" id="tabFactura4" style="display: none;">
-                                                                    <a class="nav-link" data-bs-toggle="tab" href="#v4" role="tab" aria-selected="false">
-                                                                        <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
-                                                                        <span class="d-none d-sm-block">Vendedor 4</span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                            <!-- **FIN** Pestañas para gestionar vendedores -->
-                                                
-                                                            <!-- **INICIO** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
-                                                            <div class="tab-content p-3 text-muted">
-                                                            
-                                                                <!-- Vendedor 1 -->
-                                                                <div class="tab-pane active" id="v1" role="tabpanel">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <h5 class="font-size-15 mb-2">Producto</h5>
-                                                                            <p class="mb-1 producto"></p>
-                                                                            <p class="mb-1 badge badge-soft-success font-size-12">
-                                                                                $<span class="valor"></span></p>
-                                                                            <h5 class="font-size-14 mb-2">Cliente </h5>
-                                                                            <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
-                                                                            <p class="mb-1 telCliente"></p>
-                                                                            <p class="direccionCliente"></p>
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <div>
-                                                                                <h5 class="font-size-15">Fecha de instalación</h5>
-                                                                                <p class="fecha"></p>
-                                                                            </div>
-                                                                        
-                                                                            <div class="mt-4">
-                                                                                <h5 class="font-size-15">Vendedor</h5>
-                                                                                <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor1"></p>
-                                                                                <p class="mb-1">Nivel: <span id="nivelVendedor1"></span></p>
-                                                                                <p class="mb-1" id="telVendedor"></p>
-                                                                            </div>
-                                                                        
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="badge badge-soft-success font-size-12">Comisión base:
-                                                                            $<span id="comisionBase1"></span></h5>
-                                                                    </div>
-                                                            
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="font-size-15" id="tituloDeduccion_v1">Deducciones</h5>
-                                                                    </div>
-                                                            
-                                                                    <!-- TABLA PARA DEDUCCIONES VENDEDOR PRINCIPAL -->
-                                                                    <div class="table-responsive" style="padding: 12px;" id="divDeducciones">
-                                                                        <!-- Cargando la tabla desde un Script -->
-                                                                    </div>
-                                                            
-                                                                </div>
-                                                            
-                                                                <!-- Vendedor 2 -->
-                                                                <div class="tab-pane" id="v2" role="tabpanel">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <h5 class="font-size-15 mb-2">Producto</h5>
-                                                                            <p class="mb-1 producto"></p>
-                                                                            <p class="mb-1 badge badge-soft-success font-size-12">
-                                                                                $<span class="valor"></span></p>
-                                                                            <h5 class="font-size-14 mb-2">Cliente </h5>
-                                                                            <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
-                                                                            <p class="mb-1 telCliente"></p>
-                                                                            <p class="direccionCliente"></p>
-                                                                        </div>
-                                                            
-                                                                        <div class="col-sm-6">
-                                                                            <div>
-                                                                                <h5 class="font-size-15">Fecha de instalación</h5>
-                                                                                <p class="fecha"></p>
-                                                                            </div>
-                                                                        
-                                                                            <div class="mt-4">
-                                                                                <h5 class="font-size-15">Vendedor</h5>
-                                                                                <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor2"></p>
-                                                                                <p class="mb-1">Nivel: <span id="nivelVendedor2"></span></p>
-                                                                                <p class="mb-1" id="telVendedor2"></p>
-                                                                            </div>
-                                                                        
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="badge badge-soft-success font-size-12">Comisión base:
-                                                                            $<span id="comisionBase2"></span> </h5>
-                                                                    </div>
-                                                            
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="font-size-15" id="tituloDeduccion_v2">Deducciones</h5>
-                                                                    </div>
-                                                            
-                                                                    <!-- TABLA PARA DEDUCCIONES VENDEDOR 2 -->
-                                                                    <div class="table-responsive" style="padding: 12px;" id="divDeducciones2">
-                                                                        <!-- Cargando la tabla desde un Script -->
-                                                                    </div>
-                                                            
-                                                                </div>
-                                                            
-                                                                <!-- Vendedor 3 -->
-                                                                <div class="tab-pane" id="v3" role="tabpanel">
-                                                                    <div class="row">
-                                                            
-                                                                        <div class="col-sm-6">
-                                                                            <h5 class="font-size-15 mb-2">Producto</h5>
-                                                                            <p class="mb-1 producto"></p>
-                                                                            <p class="mb-1 badge badge-soft-success font-size-12">
-                                                                                $<span class="valor"></span></p>
-                                                                            <h5 class="font-size-14 mb-2">Cliente </h5>
-                                                                            <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
-                                                                            <p class="mb-1 telCliente"></p>
-                                                                            <p class="direccionCliente"></p>
-                                                                        </div>
-                                                            
-                                                                        <div class="col-sm-6">
-                                                                            <div>
-                                                                                <h5 class="font-size-15">Fecha de instalación</h5>
-                                                                                <p class="fecha"></p>
-                                                                            </div>
-                                                                        
-                                                                            <div class="mt-4">
-                                                                                <h5 class="font-size-15">Vendedor</h5>
-                                                                                <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor3"></p>
-                                                                                <p class="mb-1">Nivel: <span id="nivelVendedor3"></span></p>
-                                                                                <p class="mb-1" id="telVendedor3"></p>
-                                                                            </div>
-                                                                        
-                                                                        </div>
-                                                            
-                                                                    </div>
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="badge badge-soft-success font-size-12">Comisión base:
-                                                                            $<span id="comisionBase3"></span> </h5>
-                                                                    </div>
-                                                            
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="font-size-15" id="tituloDeduccion_v3">Deducciones</h5>
-                                                                    </div>
-                                                            
-                                                                    <!-- TABLA PARA DEDUCCIONES VENDEDOR 3 -->
-                                                                    <div class="table-responsive" style="padding: 12px;" id="divDeducciones3">
-                                                                        <!-- Cargando la tabla desde un Script -->
-                                                                    </div>
-                    
-                                                                </div>
-                                                            
-                                                                <!-- Vendedor 4 -->
-                                                                <div class="tab-pane" id="v4" role="tabpanel">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                        
-                                                                            <h5 class="font-size-15 mb-2">Producto</h5>
-                                                                            <p class="mb-1 producto"></p>
-                                                                            <p class="mb-1 badge badge-soft-success font-size-12">
-                                                                                $<span class="valor"></span></p>
-                                                                            <h5 class="font-size-14 mb-2">Cliente </h5>
-                                                                            <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
-                                                                            <p class="mb-1 telCliente"></p>
-                                                                            <p class="direccionCliente"></p>
-                                                                        
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <div>
-                                                                                <h5 class="font-size-15">Fecha de instalación</h5>
-                                                                                <p class="fecha"></p>
-                                                                            </div>
-                                                                        
-                                                                            <div class="mt-4">
-                                                                                <h5 class="font-size-15">Vendedor</h5>
-                                                                                <p class="mb-1 badge badge-soft-dark font-size-12" id="idVendedor4"></p>
-                                                                                <p class="mb-1">Nivel: <span id="nivelVendedor4"></span></p>
-                                                                                <p class="mb-1" id="telVendedor4"></p>
-                                                                            </div>
-                                                                        
-                                                                        
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="badge badge-soft-success font-size-12">Comisión base:
-                                                                            $<span id="comisionBase4"></span> </h5>
-                                                                    </div>
-                                                            
-                                                                    <div class="py-2 mt-3">
-                                                                        <h5 class="font-size-15" id="tituloDeduccion_v4">Deducciones</h5>
-                                                                    </div>
-                                                            
-                                                                    <!-- TABLA PARA DEDUCCIONES VENDEDOR 4 -->
-                                                                    <div class="table-responsive" style="padding: 12px;" id="divDeducciones4">
-                                                                        <!-- Cargando la tabla desde un Script -->
-                                                                    </div>
-                                                                </div>
-                    
-                                                                <!-- BOTÓN GUARDAR FACTURA - ENVIAR A DB -->
-                                                                <div class="d-print-none mt-3">
-                                                                    <center><a href="#" class="btn btn-primary w-md waves-effect waves-light"
-                                                                            style="border-radius: 17px;">Reportar como pagada</a>
-                                                                    </center>
-                                                                </div>
-                    
-                                                            </div>
-                                                            <!-- **FIN** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
-                                                
+
+                                        <hr class="mb-4">
+
+                                        <!-- **INICIO** Pestañas para gestionar vendedores -->
+                                        <ul class="nav justify-content-start nav-pills card-header-pills mb-3"
+                                            role="tablist">
+                                            <li class="nav-item waves-effect waves-light">
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#v1" role="tab"
+                                                    aria-selected="true">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor Principal</span>
+                                                </a>
+                                            </li>
+
+                                            <li id="tabFactura2" class="nav-item waves-effect waves-light"
+                                                style="display: none;">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#v2" role="tab"
+                                                    aria-selected="false">
+                                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor 2</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item waves-effect waves-light" id="tabFactura3"
+                                                style="display: none;">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#v3" role="tab"
+                                                    aria-selected="false">
+                                                    <span class="d-block d-sm-none"><i
+                                                            class="far fa-envelope"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor 3</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item waves-effect waves-light" id="tabFactura4"
+                                                style="display: none;">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#v4" role="tab"
+                                                    aria-selected="false">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor 4</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!-- **FIN** Pestañas para gestionar vendedores -->
+
+                                        <!-- **INICIO** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
+                                        <div class="tab-content p-3 text-muted">
+
+                                            <!-- Vendedor 1 -->
+                                            <div class="tab-pane active" id="v1" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 idCliente">
+                                                        </p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de instalación</h5>
+                                                            <p class="fecha"></p>
                                                         </div>
+
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12"
+                                                                id="idVendedor1"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor1"></span></p>
+                                                            <p class="mb-1" id="telVendedor"></p>
+                                                        </div>
+
                                                     </div>
                                                 </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">Comisión base:
+                                                        $<span id="comisionBase1"></span></h5>
+                                                </div>
+
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15" id="tituloDeduccion_v1">Deducciones</h5>
+                                                </div>
+
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR PRINCIPAL -->
+                                                <div class="table-responsive" style="padding: 12px;"
+                                                    id="divDeducciones">
+                                                    <!-- Cargando la tabla desde un Script -->
+                                                </div>
+
                                             </div>
-                            
+
+                                            <!-- Vendedor 2 -->
+                                            <div class="tab-pane" id="v2" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 idCliente">
+                                                        </p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de instalación</h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12"
+                                                                id="idVendedor2"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor2"></span></p>
+                                                            <p class="mb-1" id="telVendedor2"></p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">Comisión base:
+                                                        $<span id="comisionBase2"></span> </h5>
+                                                </div>
+
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15" id="tituloDeduccion_v2">Deducciones</h5>
+                                                </div>
+
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR 2 -->
+                                                <div class="table-responsive" style="padding: 12px;"
+                                                    id="divDeducciones2">
+                                                    <!-- Cargando la tabla desde un Script -->
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Vendedor 3 -->
+                                            <div class="tab-pane" id="v3" role="tabpanel">
+                                                <div class="row">
+
+                                                    <div class="col-sm-6">
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 idCliente">
+                                                        </p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de instalación</h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12"
+                                                                id="idVendedor3"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor3"></span></p>
+                                                            <p class="mb-1" id="telVendedor3"></p>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">Comisión base:
+                                                        $<span id="comisionBase3"></span> </h5>
+                                                </div>
+
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15" id="tituloDeduccion_v3">Deducciones</h5>
+                                                </div>
+
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR 3 -->
+                                                <div class="table-responsive" style="padding: 12px;"
+                                                    id="divDeducciones3">
+                                                    <!-- Cargando la tabla desde un Script -->
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Vendedor 4 -->
+                                            <div class="tab-pane" id="v4" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 idCliente">
+                                                        </p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de instalación</h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12"
+                                                                id="idVendedor4"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor4"></span></p>
+                                                            <p class="mb-1" id="telVendedor4"></p>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">Comisión base:
+                                                        $<span id="comisionBase4"></span> </h5>
+                                                </div>
+
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15" id="tituloDeduccion_v4">Deducciones</h5>
+                                                </div>
+
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR 4 -->
+                                                <div class="table-responsive" style="padding: 12px;"
+                                                    id="divDeducciones4">
+                                                    <!-- Cargando la tabla desde un Script -->
+                                                </div>
+                                            </div>
+
                                         </div>
+                                        <!-- **FIN** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
+
                                     </div>
                                 </div>
-                           
-                       
-                  
-        
-                  
-                    <!-- end table -->
+                            </div>
+                        </div>
+                        <!-- end table -->
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- =======FIXME: copyright ========================== -->
-        <%- include ('./partials/copyright.ejs')%>
-        <!-- =======FIXME: copyright ========================== -->
-  
+
+            <!-- =======FIXME: copyright ========================== -->
+            <%- include ('./partials/copyright.ejs')%>
+                <!-- =======FIXME: copyright ========================== -->
+
     </div>
-  
-<!-- Right Sidebar -->
-<div class="right-bar">
-    <div data-simplebar class="h-100">
-        <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-            <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                <i class="mdi mdi-close noti-icon"></i>
-            </a>
-        </div>
-    </div> <!-- end slimscroll-menu-->
-</div>
-<!-- /Right-bar -->
-   <!-- JAVASCRIPT -->
-<script src="../directorio_dash/js/scripts_personalizadosdash.js"></script>
-<script src="../directorio_dash/libs/jquery/jquery.min.js"></script>
-<script src="../directorio_dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../directorio_dash/libs/metismenu/metisMenu.min.js"></script>
-<script src="../directorio_dash/libs/simplebar/simplebar.min.js"></script>
-<script src="../directorio_dash/libs/node-waves/waves.min.js"></script>
-<script src="../directorio_dash/libs/feather-icons/feather.min.js"></script>
-<!-- pace js -->
-<script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
-<!-- Required datatable js -->
-<script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-<!-- Responsive examples -->
-<script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-<!-- init js -->
-<script src="../directorio_dash/js/pages/datatable-pages.init.js"></script>
-<!-- Table Editable plugin -->
-<script src="../directorio_dash/libs/table-edits/build/table-edits.min.js"></script>
-<script src="../directorio_dash/js/pages/table-editable.int.js"></script> 
- <script src="../directorio_dash/js/app.js"></script>
 
-<script type="text/javascript">
-    let v1 = 1, v2 = 1, v3 = 1, v4 = 1, suma = 0, sumaDeducciones = [];
+    <!-- Right Sidebar -->
+    <div class="right-bar">
+        <div data-simplebar class="h-100">
+            <div class="rightbar-title d-flex align-items-center bg-dark p-3">
+                <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                    <i class="mdi mdi-close noti-icon"></i>
+                </a>
+            </div>
+        </div> <!-- end slimscroll-menu-->
+    </div>
+    <!-- /Right-bar -->
+    <!-- JAVASCRIPT -->
+    <script src="../directorio_dash/js/scripts_personalizadosdash.js"></script>
+    <script src="../directorio_dash/libs/jquery/jquery.min.js"></script>
+    <script src="../directorio_dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../directorio_dash/libs/metismenu/metisMenu.min.js"></script>
+    <script src="../directorio_dash/libs/simplebar/simplebar.min.js"></script>
+    <script src="../directorio_dash/libs/node-waves/waves.min.js"></script>
+    <script src="../directorio_dash/libs/feather-icons/feather.min.js"></script>
+    <!-- pace js -->
+    <script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
+    <!-- Required datatable js -->
+    <script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Responsive examples -->
+    <script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <!-- init js -->
+    <script src="../directorio_dash/js/pages/datatable-pages.init.js"></script>
+    <!-- Table Editable plugin -->
+    <script src="../directorio_dash/libs/table-edits/build/table-edits.min.js"></script>
+    <script src="../directorio_dash/js/pages/table-editable.int.js"></script>
+    <script src="../directorio_dash/js/app.js"></script>
 
-    function _crearTablaDeducciones(num, datos) {
-        let tabla = `<table class="table table-nowrap align-middle" id="tablaDeducciones${num}">`
-        if (datos) {
-            tabla += `<thead>
+    <script type="text/javascript">
+        let v1 = 1, v2 = 1, v3 = 1, v4 = 1, suma = 0, sumaDeducciones = [];
+
+        function _crearTablaDeducciones(num, datos) {
+            let tabla = `<table class="table table-nowrap align-middle" id="tablaDeducciones${num}">`
+            if (datos) {
+                tabla += `<thead>
                         <tr>
                             <th>Descripción</th>
                             <th>Monto</th>
                         </tr>
                     </thead>`
-        } else {
-            tabla += `<thead>
+            } else {
+                tabla += `<thead>
                         <tr>
                             <th>Descripción</th>
                             <th>Monto</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>`
-        }
-        tabla += `<tbody></tbody>
+            }
+            tabla += `<tbody></tbody>
                             <tfoot>
                                 <tr>
                                     <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Subtotal</b></td>
@@ -769,158 +568,17 @@
                             </tfoot>
                         </table>
                     `
-        return tabla
-    }
+            return tabla
+        }
 
-    function editarFactura(idFactura) {
-        $('.btnAddDeduccion').remove()
-        $('#tablaDeducciones1').remove()
-        $('#tablaDeducciones2').remove()
-        $('#tablaDeducciones3').remove()
-        $('#tablaDeducciones4').remove()
-        v1 = v2 = v3 = v4 = 1;
-        sumaDeducciones = []
+        function editarFactura(idFactura) {
+            console.log("HOLA DESDE EDITAR FACTURA -- NÚMERO: ", idFactura)
 
-        fetch('/deducciones', {
-          method: 'POST',
-          body: JSON.stringify({idFactura}),
-          headers: {'Content-Type': 'application/json'}
-        }).then(res => res.json())
-          .catch(error => console.error('Error:', error))
-          .then(datos => {
-            if (datos) {
-                $("#idFactura").text(idFactura)
-                $(".producto").text(datos.sistema)
-                $(".valor").text(datos.monto_aprobado)
-                $(".idCliente").text(datos.id_cliente)
-                $(".telCliente").text(datos.telefono)
-                $(".direccionCliente").text(datos.direccion)
-                $(".fecha").text(datos.factura.fecha)
+            /* Activar Clic para mostrar Sidebar */
+            $("#btnSidebar").trigger("click");
+        }
 
-                const vendedor_principal = datos.vendedores[0]
-                $("#idVendedor1").text(vendedor_principal.codigo)
-                $("#nivelVendedor1"). text(vendedor_principal.nivel)
-                $("#telVendedor").text(vendedor_principal.telefono)
-                $("#comisionBase1").text(vendedor_principal.comision_base)
-
-                if(vendedor_principal.deducciones.length > 0) {
-                    const tablaDeducciones_v1 = _crearTablaDeducciones(1, true)
-                    $('#divDeducciones').append(tablaDeducciones_v1);
-                    $("#total1").text(vendedor_principal.comision_base)
-                    $("#deduccionTotal1").val(vendedor_principal.comision_base)
-
-                    let deducciones =  ``, i = 1;
-                    vendedor_principal.deducciones.forEach(de => {
-                        deducciones += 
-                            `<tr id="tab1_row${i}_${vendedor_principal.codigo}">
-                                <td>${de.descripcion}</td>
-                                <td>${de.monto}</td>
-                            </tr>`
-                            i++;
-                    });
-
-                    $('#tablaDeducciones1').append(deducciones);
-
-                } else {
-                    $('#tituloDeduccion_v1').append(`<button type="button" onclick="agregarDeduccion('tab_v1')" class="btn btn-primary btn-xs btnAddDeduccion"><i class="mdi mdi-plus"></i></button>`);
-
-                    const tablaDeducciones_v1 = _crearTablaDeducciones(1, false)
- 
-                    $('#divDeducciones').append(tablaDeducciones_v1);
-                    $("#total1").text(vendedor_principal.comision_base)
-                    $("#deduccionTotal1").val(vendedor_principal.comision_base)
-                }
-
-                if (datos.vendedores[1]) {
-                    const vendedor2 = datos.vendedores[1]
-
-                    $("#tabFactura2").css('display', 'block')
-                    $("#idVendedor2").text(vendedor2.codigo)
-                    $("#nivelVendedor2").text(vendedor2.nivel)
-                    $("#telVendedor2").text(vendedor2.telefono)
-                    $("#comisionBase2").text(vendedor2.comision_base)
-                    $("#total2").text(vendedor2.comision_base)
-
-                    if(vendedor2.deducciones.length > 0) {
-                        const tablaDeducciones_v2 = _crearTablaDeducciones(2, true)
-                        $('#divDeducciones2').append(tablaDeducciones_v2);
-                        $("#total2").text(vendedor2.comision_base)
-                        $("#deduccionTotal2").val(vendedor2.comision_base)
-
-                        let deducciones =  ``, i = 1;
-                        vendedor2.deducciones.forEach(de => {
-                            deducciones += 
-                                `<tr id="tab2_row${i}_${vendedor2.codigo}">
-                                    <td>${de.descripcion}</td>
-                                    <td>${de.monto}</td>
-                                </tr>`
-                                i++;
-                        });
-
-                        $('#tablaDeducciones2').append(deducciones);
-
-                    } else {
-                        $('#tituloDeduccion_v2').append(`<button type="button" onclick="agregarDeduccion('tab_v2')" class="btn btn-primary btn-xs btnAddDeduccion"><i class="mdi mdi-plus"></i></button>`);
-
-                        const tablaDeducciones_v2 = _crearTablaDeducciones(2, false)
-    
-                        $('#divDeducciones2').append(tablaDeducciones_v2);
-                        $("#total2").text(vendedor2.comision_base)
-                        $("#deduccionTotal2").val(vendedor2.comision_base)
-                    }
-                    
-                }
-
-                if (datos.vendedores[2]) {
-                    const vendedor3 = datos.vendedores[2]
-                    $("#tabFactura3").css('display', 'block')
-                    $("#idVendedor3").text(vendedor3.codigo)
-                    $("#nivelVendedor3").text(vendedor3.nivel)
-                    $("#telVendedor3").text(vendedor3.telefono)
-                    $("#comisionBase3").text(vendedor3.comision_base)
-                    $("#total3").text(vendedor3.comision_base)
-
-                }
-
-                if (datos.vendedores[3]) {
-                    const vendedor4 = datos.vendedores[3]
-                    $("#tabFactura4").css('display', 'block')
-                    $("#idVendedor4").text(vendedor4.codigo)
-                    $("#nivelVendedor4").text(vendedor4.nivel)
-                    $("#telVendedor4").text(vendedor4.telefono)
-                    $("#comisionBase4").text(vendedor4.comision_base)
-                    $("#total4").text(vendedor4.comision_base)
-                }
-
-                /* -INICIO- Activar Clic para mostrar Sidebar */
-                $("#btnSidebar").trigger("click");
-                /* -FIN- Activar Clic para mostrar Sidebar */
-            } else {
-                console.log("Ocurrió un error en él controlador")
-            }
-          })
-    }
-
-    function sumarDeduccion(num, row, tab) {
-        
-        $('#descripcion'+row+'_'+tab).attr('disabled', 'disabled');
-        $('#monto'+row+'_'+tab).attr('disabled', 'disabled');
-        $('#btn'+row+'_'+tab).css('display', 'none');
-        let monto = $('#monto'+row+'_'+tab).val()
-        monto = parseFloat(monto)
-        sumaDeducciones.push({id: row+'_'+tab, valor: monto})
-        const subTotal = sumaDeducciones.map(item => item.valor).reduce((prev, curr) => prev + curr, 0);
-        console.log("El subtotal Deducciones es >>>> ", subTotal);
-        $('#subtotal'+num).text('')
-        $('#subtotal'+num).text(subTotal)
-        let total = $('#deduccionTotal'+num).val()
-        total = (parseFloat(total)-subTotal).toFixed(1)
-        console.log("\nTotal Deducciones >> ", total);
-        $('#total'+num).text(total)
-        
-    }
-
-</script>
+    </script>
 
 </body>
 

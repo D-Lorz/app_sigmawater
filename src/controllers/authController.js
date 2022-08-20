@@ -241,28 +241,32 @@ exports.listarAfiliados= async (req, res) => {
 }
 // todo: MOSTRAR TABS DE VENTAS PROPIAS
 exports.facturacion = async (req, res) => {
-   const id_vendedorA = req.user.id_vendedor;
-// Consultando en DB los clientes que pertenecen al vendedor actual
- conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA])
+    const id_vendedorA = req.user.id_vendedor;
+    // Consultando en DB los clientes que pertenecen al vendedor actual
+    conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA])
 
-const facturacionPropia = await conexion.query('SELECT f.id_factura, f.fecha_instalacion, nc.nombre, nc.apellido, f.producto_instalado, sc.monto_aprobado, f.comision_total, nc.id as idClientenc, f.id_cliente as idClientef, f.estadoFactura as estadoFacturaf  FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente JOIN solicitar_credito sc ON nc.id = sc.id_cliente WHERE nc.codigo_id_vendedor = ? ;', [id_vendedorA])
-facturacionPropia.forEach(cl => {
-    cl.factura = {}
-        if(cl.idClientenc = cl.idClientef){
-            if(cl.estadoFacturaf == 0){cl.factura.text = "Pendiente"; cl.factura.color = "badge-soft-warning";}
-            if(cl.estadoFacturaf == 1){ cl.factura.text = "Pagado"; cl.factura.color = "badge-soft-success"; }
+    const facturacionPropia = await conexion.query('SELECT f.id_factura, f.fecha_instalacion, nc.nombre, nc.apellido, f.producto_instalado, sc.monto_aprobado, f.comision_total, nc.id as idClientenc, f.id_cliente as idClientef, f.estadoFactura as estadoFacturaf  FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente JOIN solicitar_credito sc ON nc.id = sc.id_cliente WHERE nc.codigo_id_vendedor = ? ;', [id_vendedorA])
+    facturacionPropia.forEach(cl => {
+        cl.factura = {}
+        if (cl.idClientenc = cl.idClientef) {
+            if (cl.estadoFacturaf == 0) { cl.factura.text = "Pendiente"; cl.factura.color = "badge-soft-warning"; }
+            if (cl.estadoFacturaf == 1) { cl.factura.text = "Pagado"; cl.factura.color = "badge-soft-success"; }
         }
-     });
+    });
 
-  const facturacionAfiliado = await conexion.query('SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.estadoFactura as estadoFacturaf, sc.monto_aprobado FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id WHERE codigo_afiliado = ? ;', [id_vendedorA])
-  facturacionAfiliado.forEach(afl => {
-    afl.facturaAfl = {}
-        if(afl.idClientenc = afl.idClientef){
-            if(afl.estadoFacturaf == 0){afl.facturaAfl.text = "Pendiente"; afl.facturaAfl.color = "badge-soft-warning";}
-            if(afl.estadoFacturaf == 1){ afl.facturaAfl.text = "Pagado"; afl.facturaAfl.color = "badge-soft-success"; }
+    const facturacionAfiliado = await conexion.query('SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.estadoFactura as estadoFacturaf, sc.monto_aprobado FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id WHERE codigo_afiliado = ? ;', [id_vendedorA])
+    facturacionAfiliado.forEach(afl => {
+        afl.facturaAfl = {}
+        if (afl.idClientenc = afl.idClientef) {
+            if (afl.estadoFacturaf == 0) { afl.facturaAfl.text = "Pendiente"; afl.facturaAfl.color = "badge-soft-warning"; }
+            if (afl.estadoFacturaf == 1) { afl.facturaAfl.text = "Pagado"; afl.facturaAfl.color = "badge-soft-success"; }
         }
-     });
-       res.render('ventas-vendedor', {user: req.user, facturacionPropia, facturacionAfiliado})
+    });
+
+    console.log("\nFACTURA PROPIA >> ", facturacionPropia)
+    console.log("\nFACTURA AFILIADOS >> ", facturacionAfiliado)
+
+    res.render('ventas-vendedor', { user: req.user, facturacionPropia, facturacionAfiliado })
 }
 
 
