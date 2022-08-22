@@ -3,7 +3,7 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const cron = require('node-cron');
-const { isAuthenticated, listarAfiliados, facturacion} = require('../controllers/authController');
+const { isAuthenticated} = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
         agendarInstalacionProducto,getRegistrarInstalacion,elegirSistema,historialClientes, historialVendedores } = require('../controllers/customerFormControllers');
@@ -82,11 +82,9 @@ router.get('/nuevo-cliente', isAuthenticated,(req, res) => {
     res.render('nuevo-cliente', { user: req.user })
 });
 router.get('/lista-clientes', isAuthenticated, listarClientes)
-router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
-    if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
-       res.render('afiliados', { user: req.user })
-});
-router.get('/ventas-vendedor',isAuthenticated, facturacion)
+
+
+
 
 cron.schedule('0 22 * * Sun',() => {
     console.log("Hola desde cron job")

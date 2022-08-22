@@ -42,7 +42,11 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
   let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ", [id_vendedor]);
   info_vendedor = info_vendedor[0];
   if(info_vendedor){ var licencia = JSON.parse(info_vendedor.licencia_conduccion);
-  }else {}
+  }
+  if(!info_vendedor){
+    res.clearCookie('jwt')
+    return res.redirect('/login')
+  }  
 
   // todo===========>>>  Mostrar afiliados a tal vendedor
   let afiliados = await conexion.query("SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?", [info_vendedor.id_vendedor]);
@@ -194,6 +198,11 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   const id_cliente = req.params.id;
   let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?", [id_cliente]);
   info_clientes = info_clientes[0];
+
+  if(!info_clientes){
+    res.clearCookie('jwt')
+    return res.redirect('/login')
+  }  
 
   // todo ===============================>>> Estado del solicitar credito
   let credito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])

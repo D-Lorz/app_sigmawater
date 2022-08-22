@@ -62,46 +62,46 @@
                                                 <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
                                                     <div class="card-header bg-transparent border-primary">
                                                         <h5 class="my-0 text-primary">
-                                                            <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5>
+                                                            <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5> 
+                                                       
                                                             <a href="/solicitar-credito/<%= clientes2.id_cliente %>" id="verBtn">
                                                                 <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -2%;border-radius:13px;">Formulario de crédito</button>
                                                             </a> 
-
                                                       </div>
                                                     <div class="card-body">
-
                                                         <div class="table-responsive" style="overflow-x: hidden;">
                                                             <table class="table mb-0">
-
                                                                 <tbody>
                                                                     <tr>
                                                                          <td style="width: 23%;">ID</td>
-                                                                         <td><b><%= clientes2.id_cliente %></b></td>
+                                                                         <td><b><%= clientes2.id_cliente%></b></td>
                                                                          <td>Teléfono</td>
-                                                                         <td><b><%= clientes2.telefono %></b></td>
-                                                                    </tr>
+                                                                         <td><b><%= clientes2.id_cliente  %></b></td>
+                                                                        </tr>
                                                                     <tr>
                                                                         <td>Nombre</td>
                                                                         <td style="width: 29%;"><b><%= clientes2.nombre %></b></td>
                                                                         <td style="width:20%">Dirección</td>
                                                                         <td><b><%= clientes2.direccion %> <%= clientes2.ciudad %> <p><%= clientes2.estado_ubicacion %> <%= clientes2.codigo_postal %> </p></b></td>
                                                                     </tr>
-
                                                                     <tr>
                                                                         <td>Segundo nombre</td>
                                                                         <td><b><%= clientes2.segundo_nombre %></b></td>
                                                                         <td>Dirección 2</td>
-                                                                        <td><b><%=clientes2.direccion2%></b></td>
+                                                                        <td><b><%= clientes2.direccion2%></b></td>
                                                                     </tr>
+                                                                 
+                                                                 
                                                                     <tr>
                                                                         <td>Apellido</td>
                                                                         <td><b><%= clientes2.apellido %></b></td>
                                                                         <td>Estado de crédito</td>
-                                                                        <td><div class="badge <%=estado.color%> font-size-12" ><%= estado.txt %></div></td>
+                                                                        <td><div class="badge <%= estado.color%> font-size-12" ><%= estado.txt %></div></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>Correo electronico</td>
                                                                         <td><b><%= clientes2.correo %></b></td>
+                                                                    
                                                                         <td style="width: 24%;">Monto aprobado</td>
                                                                         <% if((mostrarProducto)) { %>
                                                                             <td><div class="badge badge-soft-success font-size-12"><%=mostrarProducto.monto_aprobado%></div></td>
@@ -156,9 +156,10 @@
                                             <h5 class="card-title mb-3" style="text-align: center">Producto de interés</h5>
                                             <form action="/elegirSistema" method="POST" style="text-align: center">
                                                 <div class="btn-group me-1 mt-2">
+                                                 
                                                     <input type="hidden" name="id_clienteCodigo" value="<%= clientes2.id_cliente %>">
                                                     <input type="hidden" name="id_consecutivo" value="<%= clientes2.id %>">
-                                              
+                                           
                                                   <select class="form-select required" required id="reco" onchange="ShowSelected()" name="sistemaElegido">
                                                         <option style="background:gray;color: white;" value=''>Elige un sistema</option>
                                                         <option value="Whole System">Whole System</option>
@@ -262,6 +263,7 @@
                                    <div class="card-header bg-transparent border-primary">
                                         <h5 class="my-0 text-primary">
                                             <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
+                                            
                                             <a href="/test-de-agua/<%= clientes2.id_cliente %>" >
                                                 <button class="btn btn-primary"  type="button" style="float: right;margin-top: -2%;border-radius:13px;">Realizar test</button>
                                             </a> 

@@ -18,7 +18,8 @@ const {numeroClientes} = require('../controllers/customerFormControllers');
       if(!(req.user.rol ==="administrador")){res.redirect('./') }
             res.render('administrador', { user: req.user })
       });
- // *   ================ ===== ↑↑ ==============================
+ 
+  // *   ================ ===== ↑↑ ==============================
            
 // * ROUTER: para los métodos del controller
 /*=============================================================*/

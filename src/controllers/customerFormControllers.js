@@ -250,6 +250,12 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   
   let clientes2 = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id_cliente])
   clientes2 = clientes2[0]
+  console.log("Imprimiendo variable Clientes2 ===>> ",clientes2);
+
+  if(!clientes2){
+    res.clearCookie('jwt')
+    return res.redirect('/login')
+  }  
 
   // todo ===============================>>> Estado del solicitar credito
   let creditoVista_interna = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])

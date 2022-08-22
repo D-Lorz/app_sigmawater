@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const path = require('path');
 const multer = require('multer');
-const {nologueado, registrar} = require('../controllers/authController');
+const {nologueado,isAuthenticated} = require('../controllers/authController');
+const {registrar, listarAfiliados, perfilVendedores,facturacion, hola} = require('../controllers/sellersControllers');
 
 const rutaAlmacen = multer.diskStorage({
 
@@ -37,7 +38,17 @@ const multiupload = cargar.fields([{ name: 'licencia' }, { name: 'licencia_trase
 //                           ↓↓
   router.get('/register', nologueado, (req, res) => {
             res.render('register')
-  });
+});
+
+router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
+    if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
+       res.render('afiliados', { user: req.user })
+});
+  router.get('/perfil-vendedor/:id', isAuthenticated,perfilVendedores)
+  router.get('/ventas-vendedor',isAuthenticated, facturacion)
+  router.get('/hola',  hola,(req, res) => {
+       res.render('hola', { user: req.user })
+});
 // *   ================ ===== ↑↑ ==============================
 
 //* router para los métodos del controller

@@ -585,6 +585,8 @@
                                              </div>
                                          </div>
                                      </div>
+                                     <input type="hidden" id="loc_lat" name="latitud" >
+                                     <input type="hidden" id="loc_long" name="longitud">
 
                                         <center><button type="submit" class="btn btn-primary" style="border-radius:17px;">Guardar</button></center>
                                     </form>
@@ -1910,7 +1912,7 @@
         componentrestrictions: {
           'country': ['US']
         },
-        fields: ['address_components']
+        fields: ['address_components', 'geometry']
       }
     );
 
@@ -1922,6 +1924,8 @@
     const place = autocomplete.getPlace();
     let address1 = "";
     let postcode = "";
+    document.getElementById('loc_lat').value = place.geometry.location.lat();
+    document.getElementById('loc_long').value = place.geometry.location.lng();
 
     for (const component of place.address_components) {
       const componentType = component.types[0];
