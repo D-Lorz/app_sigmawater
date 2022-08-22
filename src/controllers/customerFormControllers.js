@@ -1,5 +1,3 @@
-const { log, count } = require("console");
-const { promisify } = require("util");
 const conexion = require("../database/db");
 
 // todo --> formulario para crear un nuevo cliente
