@@ -198,4 +198,5 @@ exports.facturacion = async (req, res) => {
     console.log("\nFACTURA AFILIADOS >> ", facturacionAfiliado)
 
     res.render('ventas-vendedor', { user: req.user, facturacionPropia, facturacionAfiliado })
+
 }
