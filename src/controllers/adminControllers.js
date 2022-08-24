@@ -755,7 +755,6 @@ exports.factura = async (req, res) => {
   const clientes = await conexion.query("SELECT cl.*, cr.id_cliente AS idCliente, cr.monto_aprobado, cr.porcentaje_aprobado, cr.monto_maximo, cr.sistema FROM nuevos_cliente AS cl JOIN solicitar_credito AS cr ON cl.id = cr.id_cliente")
   const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel, telefono_movil FROM registro_de_vendedores")
   const factura = await conexion.query("SELECT * FROM factura")
-  // const deducciones = await conexion.query("SELECT * FROM deducciones")
 
   const arrayVentas = []
 
@@ -1055,7 +1054,7 @@ exports.factura = async (req, res) => {
 
     //Sumar comisiónes base de todos los vendedores
     cl.comision_total = cl.vendedores.map(item => item.comision_base).reduce((prev, curr) => prev + curr, 0);
-
+    cl.comision_total = parseFloat(cl.comision_total).toFixed(1)
     /******* ASIGNANDO FACTURA AL CLIENTE *******/
     if (factura.length > 0) {
       factura.forEach(f => {
@@ -1070,7 +1069,7 @@ exports.factura = async (req, res) => {
           if (f.estadoFactura == 1) {
             cl.factura.estadoTxt = "Pagada";
             cl.factura.estadoColor = "badge-soft-success";
-            cl.comision_total = f.comision_total;
+            cl.comision_total = parseFloat(f.comision_total).toFixed(1);
           }
         }
       });
@@ -1078,9 +1077,6 @@ exports.factura = async (req, res) => {
     /** FIN DATOS DE LA FACTURA **/
 
     arrayVentas.push(cl)
-    // console.log("\n######################## ** INICIO ** DATOS VENTA CLIENTE + VENDEDORES ########################")
-    // console.log(cl)
-    // console.log("######################## ** FIN ** DATOS VENTA CLIENTE + VENDEDORES ########################\n")
     
   });
 
@@ -1106,21 +1102,36 @@ exports.deducciones = async (req, res) => {
 //todo ************* -- INICIO GUARDAR COMISIONES + DEDUCCIONES EN DB ************* */
 exports.efectuarVenta = async (req, res) => {
   const {factura, dataVendedores} = req.body;
-  let comisiones = [], comision_total = 0, deducciones = [];
+  let comisiones = [], comision_total = 0, deducciones = [], comisiones_base = [];
   
   dataVendedores.forEach(dv => {
-    comisiones.push(dv.comision_final);
+    dv.comision_base = parseFloat(dv.comision_base)
+    dv.comision_final = parseFloat(dv.comision_final)
+    // comisiones_base.push(parseFloat(dv.comision_base));
+    // comisiones.push(dv.comision_final);
     comision_total += dv.comision_final;
-    deducciones.push(dv.deducciones)
+    dv.deducciones == null || dv.deducciones.length == 0 ? dv.deducciones == null : deducciones.push(dv.deducciones);
   });
+
+  deducciones.length > 0 ? deducciones = JSON.stringify(deducciones) : deducciones = null
+  // const datos = {
+  //   mes: new Date().getMonth()+1,
+  //   dia: new Date().getDate(),
+  //   year: new Date().getFullYear(),
+  //   comisiones_base: JSON.stringify(comisiones_base),
+  //   comisiones: JSON.stringify(comisiones),
+  //   comision_total,
+  //   deducciones,
+  //   estadoFactura: 1
+  // }
 
   const datos = {
     mes: new Date().getMonth()+1,
     dia: new Date().getDate(),
     year: new Date().getFullYear(),
-    comisiones: JSON.stringify(comisiones),
-    comision_total,
-    deducciones: JSON.stringify(deducciones),
+    vendedores: JSON.stringify(dataVendedores),
+    comision_total: comision_total.toFixed(1),
+    deducciones,
     estadoFactura: 1
   }
   

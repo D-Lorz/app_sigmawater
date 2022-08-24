@@ -106,27 +106,60 @@ exports.facturacion = async (req, res) => {
     // Consultando en DB los clientes que pertenecen al vendedor actual
     conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA])
 
-    const facturacionPropia = await conexion.query('SELECT f.id_factura, f.fecha_instalacion, nc.nombre, nc.apellido, f.producto_instalado, sc.monto_aprobado, f.comision_total, nc.id as idClientenc, f.id_cliente as idClientef, f.estadoFactura as estadoFacturaf  FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente JOIN solicitar_credito sc ON nc.id = sc.id_cliente WHERE nc.codigo_id_vendedor = ? ;', [id_vendedorA])
-    facturacionPropia.forEach(cl => {
-        cl.factura = {}
-        if (cl.idClientenc = cl.idClientef) {
-            if (cl.estadoFacturaf == 0) { cl.factura.text = "Pendiente"; cl.factura.color = "badge-soft-warning"; }
-            if (cl.estadoFacturaf == 1) { cl.factura.text = "Pagado"; cl.factura.color = "badge-soft-success"; }
+    const facturacionPropia = await conexion.query('SELECT f.id_factura, f.fecha_instalacion, nc.nombre, nc.apellido, f.producto_instalado, sc.monto_aprobado, f.comision_total, nc.id as idCliente, f.id_cliente as cliente_factura, f.estadoFactura, f.comisiones FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente JOIN solicitar_credito sc ON nc.id = sc.id_cliente WHERE nc.codigo_id_vendedor = ? ;', [id_vendedorA])
+
+    facturacionPropia.forEach(fp => {
+        fp.factura = {}
+        if (fp.idCliente = fp.cliente_factura) {
+            if (fp.estadoFactura == 0) { fp.factura.text = "Pendiente"; fp.factura.color = "badge-soft-warning"; }
+            if (fp.estadoFactura == 1) { fp.factura.text = "Pagado"; fp.factura.color = "badge-soft-success"; }
+            if (fp.comisiones){
+                fp.comisiones = JSON.parse(fp.comisiones)
+                fp.comisiones = fp.comisiones[0]
+            } else {
+                fp.comisiones = "Por definir"
+            }
         }
     });
 
-    const facturacionAfiliado = await conexion.query('SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.estadoFactura as estadoFacturaf, sc.monto_aprobado FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id WHERE codigo_afiliado = ? ;', [id_vendedorA])
+
+    const facturacionAfiliado = await conexion.query('SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.estadoFactura, sc.monto_aprobado FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id WHERE codigo_afiliado = ? ;', [id_vendedorA])
+
     facturacionAfiliado.forEach(afl => {
         afl.facturaAfl = {}
-        if (afl.idClientenc = afl.idClientef) {
-            if (afl.estadoFacturaf == 0) { afl.facturaAfl.text = "Pendiente"; afl.facturaAfl.color = "badge-soft-warning"; }
-            if (afl.estadoFacturaf == 1) { afl.facturaAfl.text = "Pagado"; afl.facturaAfl.color = "badge-soft-success"; }
+        if (afl.idClienten = afl.idClientef) {
+            if (afl.estadoFactura == 0) { afl.facturaAfl.text = "Pendiente"; afl.facturaAfl.color = "badge-soft-warning"; }
+            if (afl.estadoFactura == 1) { afl.facturaAfl.text = "Pagado"; afl.facturaAfl.color = "badge-soft-success"; }
         }
     });
 
+    console.log("_----------------_")
     console.log("\nFACTURA PROPIA >> ", facturacionPropia)
     console.log("\nFACTURA AFILIADOS >> ", facturacionAfiliado)
+    console.log("\n")
 
     res.render('ventas-vendedor', { user: req.user, facturacionPropia, facturacionAfiliado })
 
+}
+
+exports.consultarFactura = async (req, res) => {
+    const {idFactura} = req.body;
+    const facturas = await conexion.query('SELECT * FROM factura')
+    const f = facturas.find(i => i.id_factura == idFactura)
+
+    // console.log("FACTURA SELECCIONADA >>>>>> ", (f))
+    // console.log("\n<<<<< RESULTADO FACTURA SELECCIONADA >>>> ", JSON.stringify(f)+"\n")
+    if (f) {
+        const cliente = await conexion.query('SELECT * FROM nuevos_cliente')
+        const c = cliente.find(i => i.id == f.id_cliente)
+        console.log("\nCliente: ", c)
+        f.cliente = c
+
+        console.log("\nFACTURA SELECCIONADA >>>>>> ", (f))
+        if (f.estadoFactura == 1) {
+            res.send(f);
+        } else {
+            res.send(false);
+        }
+    }
 }

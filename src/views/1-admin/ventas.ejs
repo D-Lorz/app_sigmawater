@@ -94,6 +94,7 @@
                             <tbody>
                                 <% if(arrayVentas) {%>
                                     <% arrayVentas.forEach((venta)=>{ %>
+                                        <% if (venta.factura.id) { %>
                                         <tr>
                                             <td>
                                                 <!-- <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="background: none;border: none;margin: 0;"> -->
@@ -126,9 +127,9 @@
                                                 </div>
                                             </td>
                                         </tr>
-        
-                                        <%})%>
-                                            <% } %>
+                                        <% } %>
+                                    <%})%>
+                                <% } %>
                             </tbody>
         
                         </table>
@@ -519,29 +520,37 @@
                 storage = datos // Variable Global..
                 let dt = undefined // Deducciones Totales
 
-                // console.log("DATOS FACTURA >>>> ",datos)
-                if (datos.factura.estadoTxt == "Pagada") {
-                    $("#btnReportarFactura").css('display', 'none')
-                } else {
-                    $("#btnReportarFactura").css('display', 'inline-block')
-                }
+                console.log("STORAGE: ", storage)
 
+                
                 const idCliente = datos.id
+                const nombreCliente = datos.nombre + " " + datos.apellido
                 $("#idFactura").text(idFactura)
                 $(".producto").text(datos.sistema)
                 $(".valor").text(datos.monto_aprobado)
-                $(".idCliente").text(datos.id_cliente)
+                $(".idCliente").text(nombreCliente)
                 $(".telCliente").text(datos.telefono)
                 $(".direccionCliente").text(datos.direccion)
                 $(".fecha").text(datos.factura.fecha)
-
+                
                 const vendedor_principal = datos.vendedores[0]
                 let vendedor2 = {}, vendedor3 = {}, vendedor4 = {};
                 datos.vendedores[1] ? vendedor2 = datos.vendedores[1] : vendedor2 = false;
                 datos.vendedores[2] ? vendedor3 = datos.vendedores[2] : vendedor3 = false;
                 datos.vendedores[3] ? vendedor4 = datos.vendedores[3] : vendedor4 = false;
+                
+                vendedor_principal.comision_base = vendedor_principal.comision_base.toFixed(1)
 
-                $("#idVendedor1").text(vendedor_principal.codigo)
+                // console.log("DATOS FACTURA >>>> ",datos)
+                if (datos.factura.estadoTxt == "Pagada") {
+                    $("#btnReportarFactura").css('display', 'none')
+                    $('.btnAddDeduccion').remove()
+                } else {
+                    $("#btnReportarFactura").css('display', 'inline-block')
+                    _btnAddDeduccion(idCliente, '1', vendedor_principal.nivel)
+                }
+
+                $("#idVendedor1").text(vendedor_principal.nombre)
                 $("#nivelVendedor1"). text(vendedor_principal.nivel)
                 $("#telVendedor").text(vendedor_principal.telefono)
                 $("#comisionBase1").text(vendedor_principal.comision_base)
@@ -549,12 +558,6 @@
                 let comisionFinal = vendedor_principal.comision_base
 
                 vendedor_principal.deducciones ? dt = vendedor_principal.deducciones : dt = dt;
-                // console.log("DEDUCCIONES DESDE BASE DE DATOS >>>> ", vendedor_principal)
-                console.log("VENDEDOR 1 >>>> ", vendedor_principal)
-                console.log("VENDEDOR 2 >>>> ", vendedor2)
-                console.log("VENDEDOR 3 >>>> ", vendedor3)
-                console.log("VENDEDOR 4 >>>> ", vendedor4)
-                
                         
                 if (dt) {
                     const tablaDeducciones_v1 = _crearTablaDeducciones(1, true)
@@ -584,7 +587,7 @@
 
                 } else {
                     // Parametros (idCliente, Pestaña, Nivel del Vendedor)
-                    _btnAddDeduccion(idCliente, '1', vendedor_principal.nivel)
+                    // _btnAddDeduccion(idCliente, '1', vendedor_principal.nivel)
                     const tablaDeducciones_v1 = _crearTablaDeducciones(1, false)
                     $('#divDeducciones').append(tablaDeducciones_v1);
                     $("#porcentaje-ganar1").css('display', 'none')
@@ -600,8 +603,9 @@
 
                 if (vendedor2) {
 
+                    vendedor2.comision_base = vendedor2.comision_base.toFixed(1)
                     $("#tabFactura2").css('display', 'block')
-                    $("#idVendedor2").text(vendedor2.codigo)
+                    $("#idVendedor2").text(vendedor2.nombre)
                     $("#nivelVendedor2").text(vendedor2.nivel)
                     $("#telVendedor2").text(vendedor2.telefono)
                     $("#comisionBase2").text(vendedor2.comision_base)
@@ -609,6 +613,7 @@
                     let comisionFinal2 = vendedor2.comision_base
 
                     if (datos.factura.estadoTxt == 'Pagada') {
+                        $('.btnAddDeduccion').remove()
                         const tablaDeducciones_v2 = _crearTablaDeducciones(2, true)
                         $('#divDeducciones2').append(tablaDeducciones_v2);
                     } else {
@@ -620,7 +625,7 @@
                     // Si ya existen datos en DB
                     if (dt) {
                         let subtotal2 = 0;
-                        if (dt[1].length > 0) {
+                        if (dt[1] && dt[1].length > 0) {
 
                             let deducciones2 = ``, i = 1;
                             const filtro = dt[1]
@@ -650,8 +655,9 @@
                 }
 
                 if (vendedor3) {
+                    vendedor3.comision_base = vendedor3.comision_base.toFixed(1)
                     $("#tabFactura3").css('display', 'block')
-                    $("#idVendedor3").text(vendedor3.codigo)
+                    $("#idVendedor3").text(vendedor3.nombre)
                     $("#nivelVendedor3").text(vendedor3.nivel)
                     $("#telVendedor3").text(vendedor3.telefono)
                     $("#comisionBase3").text(vendedor3.comision_base)
@@ -668,7 +674,7 @@
                     }
 
                     if (dt) {
-                        if(dt[2].length > 0) {
+                        if(dt[2] && dt[2].length > 0) {
 
                             let deducciones3 = ``, i = 1;
                             const fitro = dt[2]
@@ -696,8 +702,9 @@
                 }
 
                 if (vendedor4) {
+                    vendedor4.comision_base = vendedor4.comision_base.toFixed(1)
                     $("#tabFactura4").css('display', 'block')
-                    $("#idVendedor4").text(vendedor4.codigo)
+                    $("#idVendedor4").text(vendedor4.nombre)
                     $("#nivelVendedor4").text(vendedor4.nivel)
                     $("#telVendedor4").text(vendedor4.telefono)
                     $("#comisionBase4").text(vendedor4.comision_base)
@@ -713,7 +720,7 @@
                     }
                     
                     if (dt) {
-                        if(dt[3].length > 0) {
+                        if(dt[3] && dt[3].length > 0) {
 
                             let deducciones4 = ``, i = 1;
                             const filtro = dt[3]
@@ -822,6 +829,8 @@
                 data.deducciones = filtroDeducciones
             }
         });
+
+        console.log("NEW STORAGE >>> ", storage)
     }
 
     // Parameros (idCliente, número de la pestaña, Contador para la fila, nivel del vendedor)
@@ -835,7 +844,7 @@
         let sumatoriaDeduccion = 0;
         const tab = 'tab'+numTab
         const rowTab = 'row'+row+'_tab'+numTab
-        arrayDeducciones.push({idCliente, tab, row, rowTab, descripcion, monto, nivelVendedor})
+        arrayDeducciones.push({idCliente,  tab, row, rowTab, descripcion, monto, nivelVendedor})
 
         // Aplicar cambios (subtotal y total)
         actualizarDeduccion(idCliente, numTab, rowTab, nivelVendedor, arrayDeducciones)
@@ -858,6 +867,7 @@
         // console.log("DATA >>>> ---", JSON.parse(storage)) 
         Swal.fire({
             title: '¿Seguro que desea reportar esta factura?',
+            text: 'Al repotar la factura, confirmas que ya ha sido pagada a los vendedores.',
             icon: 'info',
             showCancelButton: true,
             confirmButtonText: 'Confirmar',
@@ -884,7 +894,7 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 }).then((respu) => {
-                                    setTimeout('document.location.reload()', 1510);
+                                    setTimeout('document.location.reload()', 1300);
                                 })
                             }
                     })
@@ -896,7 +906,6 @@
             } 
             
         })
-
         
     }
 
