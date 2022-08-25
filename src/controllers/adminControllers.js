@@ -28,7 +28,9 @@ exports.listarVendedores = async (req, res) => {
         }
       });
     }
+
   });
+
 
   res.render("./1-admin/vendedores", {
     user: req.user,
@@ -872,12 +874,14 @@ exports.factura = async (req, res) => {
             if (v2) {
               if (vendedor2.nivel == 2) {
                 vendedor2.comision_base = (comisionMax_nivel2 - comisionMax_nivel1)
+                vendedor2.comision_final = vendedor2.comision_base;
               } else if (vendedor2.nivel == 3) {
                 vendedor2.comision_base = (comisionMax_nivel3 - comisionMax_nivel1)
+                vendedor2.comision_final = vendedor2.comision_base;
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel1);
+                vendedor2.comision_final = vendedor2.comision_base/2;
               }
-              vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
 
@@ -885,10 +889,12 @@ exports.factura = async (req, res) => {
             if (v3) {
               if (v3.nivel == 3) {
                 vendedor3.comision_base = (comisionMax_nivel3 - vendedor2.comision_base - vendedor.comision_base);
+                vendedor3.comision_final = vendedor3.comision_base;
               } else {
                 vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
+                vendedor3.comision_final = vendedor3.comision_base/2;
               }
-              vendedor3.comision_final = vendedor3.comision_base;
+              
               cl.vendedores.push(vendedor3)
             }
 
@@ -896,7 +902,7 @@ exports.factura = async (req, res) => {
             if (v4) {
               // Asignando comisión base vendedor nivel 4 -> (Comisión máxima del vendedor nivel 4 menos las comisiones niveles anteriores)
               vendedor4.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor3.comision_base - vendedor2.comision_base - vendedor.comision_base);
-              vendedor4.comision_final = vendedor4.comision_base;
+              vendedor4.comision_final = vendedor4.comision_base/2;
               cl.vendedores.push(vendedor4)
             }
 
@@ -912,17 +918,18 @@ exports.factura = async (req, res) => {
             if (v2) {
               if (v2.nivel == 3) {
                 vendedor2.comision_base = (comisionMax_nivel3 - comisionMax_nivel2)
+                vendedor2.comision_final = vendedor2.comision_base;
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel3 - comisionMax_nivel2)
+                vendedor2.comision_final = vendedor2.comision_base/2;
               }
-              vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
 
             //COMISIÓN VENDEDOR 3 (NIVEL 4)
             if (v3) {
               vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
-              vendedor3.comision_final = vendedor3.comision_base;
+              vendedor3.comision_final = vendedor3.comision_base/2;
               cl.vendedores.push(vendedor3)
             }
 
@@ -937,7 +944,7 @@ exports.factura = async (req, res) => {
             //COMISIÓN VENDEDOR 2 (NIVEL 4)
             if (v2) {
               vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel3 - comisionMax_nivel2 - comisionMax_nivel1)
-              vendedor2.comision_final = vendedor2.comision_base;
+              vendedor2.comision_final = vendedor2.comision_base/2;
               cl.vendedores.push(vendedor2)
             }
 
@@ -946,7 +953,7 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 4
           default:
             vendedor.comision_base = (cl.monto_aprobado - gastos_empresa);
-            vendedor.comision_final = vendedor.comision_base;
+            vendedor.comision_final = vendedor.comision_base/2;
             cl.vendedores.push(vendedor)
             break;
         }
@@ -968,12 +975,15 @@ exports.factura = async (req, res) => {
             if (v2) {
               if (v2.nivel == 2) {
                 vendedor2.comision_base = (parseFloat(porcentaje * comisionMax_nivel2) - vendedor.comision_base)
+                vendedor2.comision_final = vendedor2.comision_base;
               } else if (v2.nivel == 3) {
                 vendedor2.comision_base = (parseFloat(porcentaje * comisionMax_nivel3) - vendedor.comision_base)
+                vendedor2.comision_final = vendedor2.comision_base;
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor.comision_base);
+                vendedor2.comision_final = vendedor2.comision_base/2;
               }
-              vendedor2.comision_final = vendedor2.comision_base;
+              
               cl.vendedores.push(vendedor2)
             }
             
@@ -981,17 +991,19 @@ exports.factura = async (req, res) => {
             if (v3) {
               if (v3.nivel == 3) {
                 vendedor3.comision_base = (parseFloat(porcentaje * comisionMax_nivel3) - vendedor.comision_base)
+                vendedor3.comision_final = vendedor3.comision_base;
               } else {
                 vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
+                vendedor3.comision_final = vendedor3.comision_base/2;
               }
-              vendedor3.comision_final = vendedor3.comision_base;
+              
               cl.vendedores.push(vendedor3)
             }
 
             //COMISIÓN VENDEDOR 4 (NIVEL 4)
             if (v4) {
               vendedor4.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor3.comision_base - vendedor2.comision_base - vendedor.comision_base);
-              vendedor4.comision_final = vendedor4.comision_base;
+              vendedor4.comision_final = vendedor4.comision_base/2;
               cl.vendedores.push(vendedor4)
             }
 
@@ -1007,17 +1019,18 @@ exports.factura = async (req, res) => {
             if (v2) {
               if (v2.nivel == 3) {
                 vendedor2.comision_base = (parseFloat(porcentaje * comisionMax_nivel3) - vendedor.comision_base)
+                vendedor2.comision_final = vendedor2.comision_base;
               } else {
                 vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor.comision_base);
+                vendedor2.comision_final = vendedor2.comision_base/2;
               }
-              vendedor2.comision_final = vendedor2.comision_base;
               cl.vendedores.push(vendedor2)
             }
 
             //COMISIÓN VENDEDOR 3 (NIVEL 4)
             if (v3) {
               vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);
-              vendedor3.comision_final = vendedor3.comision_base;
+              vendedor3.comision_final = vendedor3.comision_base/2;
               cl.vendedores.push(vendedor3)
             }
 
@@ -1032,7 +1045,7 @@ exports.factura = async (req, res) => {
             //COMISIÓN VENDEDOR 2 (NIVEL 4)
             if (v2) {
               vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor.comision_base);
-              vendedor2.comision_final = vendedor2.comision_base;
+              vendedor2.comision_final = vendedor2.comision_base/2;
               cl.vendedores.push(vendedor2)
             }
 
@@ -1041,7 +1054,7 @@ exports.factura = async (req, res) => {
           //VENDEDOR PRINCIPAL NIVEL 4
           default:
             vendedor.comision_base = (cl.monto_aprobado - gastos_empresa);
-            vendedor.comision_final = vendedor.comision_base;
+            vendedor.comision_final = vendedor.comision_base/2;
             cl.vendedores.push(vendedor)
             break;
         }
@@ -1103,15 +1116,26 @@ exports.deducciones = async (req, res) => {
 //todo ************* -- INICIO GUARDAR COMISIONES + DEDUCCIONES EN DB ************* */
 exports.efectuarVenta = async (req, res) => {
   const {factura, dataVendedores} = req.body;
-  let comisiones = [], comision_total = 0, deducciones = [], comisiones_base = [];
+  let comision_total = 0, deducciones = [];
+  const vendedores = await conexion.query("SELECT * FROM registro_de_vendedores")
   
-  dataVendedores.forEach(dv => {
+  dataVendedores.forEach(async dv => {
     dv.comision_base = parseFloat(dv.comision_base)
     dv.comision_final = parseFloat(dv.comision_final)
-    // comisiones_base.push(parseFloat(dv.comision_base));
-    // comisiones.push(dv.comision_final);
     comision_total += dv.comision_final;
+
     dv.deducciones == null || dv.deducciones.length == 0 ? dv.deducciones == null : deducciones.push(dv.deducciones);
+
+    console.log("<<<<< VENDEDOR >>>>>", dv.codigo)
+
+    const ve = vendedores.find(i => i.id_vendedor == dv.codigo)
+    if (ve) {
+      const ganancias = parseFloat(ve.ganancias)+dv.comision_final
+      console.log("\nXDXDXDXD ****** GANANCIAS >>>--- ", ganancias)
+      const actualizarGanancia = {ganancias}
+      await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?", [actualizarGanancia, dv.codigo])
+    }
+    
   });
 
   deducciones.length > 0 ? deducciones = JSON.stringify(deducciones) : deducciones = null
