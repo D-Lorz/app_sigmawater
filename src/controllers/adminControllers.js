@@ -795,7 +795,7 @@ exports.factura = async (req, res) => {
       /******* DEDUCCIONES VENDEDOR 1  *******/
       const ded = factura.find(i => i.id_cliente == cl.id)
       
-      console.log("\n------ DEDUCCIONES --------: ", ded)
+      console.log("\n------ DEDUCCIONES -------- Factura actual: ==>> ", ded)
       if (ded) { vendedor.deducciones = JSON.parse(ded.deducciones) }
       console.log("DEDUCCIONES v1: " + JSON.stringify(vendedor.deducciones))
       /** FIN DEDUCCIONES 1 **/
@@ -935,10 +935,10 @@ exports.factura = async (req, res) => {
             cl.vendedores.push(vendedor)
 
             //COMISIÓN VENDEDOR 2 (NIVEL 4)
-            if (v2.nivel == 4) {
+            if (v2) {
               vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel3 - comisionMax_nivel2 - comisionMax_nivel1)
               vendedor2.comision_final = vendedor2.comision_base;
-              cl.vendedores.push(vendedor)
+              cl.vendedores.push(vendedor2)
             }
 
             break;
@@ -1077,8 +1077,13 @@ exports.factura = async (req, res) => {
     /** FIN DATOS DE LA FACTURA **/
 
     arrayVentas.push(cl)
-    
+    for (let index = 0; index < array.length; index++) {
+      const element = array[index];
+      
+    }
   });
+
+  console.log("<<<<< ARRAY VENTAS >>>>>>> ", JSON.stringify(arrayVentas.vendedores));
 
   ventasTotales = arrayVentas;
 
@@ -1114,16 +1119,6 @@ exports.efectuarVenta = async (req, res) => {
   });
 
   deducciones.length > 0 ? deducciones = JSON.stringify(deducciones) : deducciones = null
-  // const datos = {
-  //   mes: new Date().getMonth()+1,
-  //   dia: new Date().getDate(),
-  //   year: new Date().getFullYear(),
-  //   comisiones_base: JSON.stringify(comisiones_base),
-  //   comisiones: JSON.stringify(comisiones),
-  //   comision_total,
-  //   deducciones,
-  //   estadoFactura: 1
-  // }
 
   const datos = {
     mes: new Date().getMonth()+1,
