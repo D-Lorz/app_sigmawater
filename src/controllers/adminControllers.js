@@ -1077,10 +1077,6 @@ exports.factura = async (req, res) => {
     /** FIN DATOS DE LA FACTURA **/
 
     arrayVentas.push(cl)
-    for (let index = 0; index < array.length; index++) {
-      const element = array[index];
-      
-    }
   });
 
   console.log("<<<<< ARRAY VENTAS >>>>>>> ", JSON.stringify(arrayVentas.vendedores));
