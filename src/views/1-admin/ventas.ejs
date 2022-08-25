@@ -86,8 +86,8 @@
                                 <th scope="col">Producto</th>
                                 <th scope="col">Valor</th>
                                 <th scope="col">Vendedor</th>
+                                <th scope="col">Afiliados</th>
                                 <th scope="col">Comisión total</th>
-                                <!-- Estado de la factura Pendiente y Pagado-->
                                 <th scope="col">Estado</th>
                             </thead>
         
@@ -118,6 +118,11 @@
                                             </td>
                                             <td style="text-transform: capitalize;">
                                                 <%= venta.vendedores[0].nombre %>
+                                            </td>
+                                            <td style="text-transform: capitalize;">
+                                                <%for(let i = 1; i < venta.vendedores.length; i++){%>
+                                                    <%=venta.vendedores[i].nombre%><br>
+                                                <% } %>
                                             </td>
                                             <td>$<%= venta.comision_total %>
                                             </td>
@@ -383,13 +388,6 @@
                                                 </div>
                                             </div>
 
-                                            <!-- BOTÓN GUARDAR FACTURA - ENVIAR A DB -->
-                                            <!-- <div class="d-print-none mt-3">
-                                                <center><a href="#" class="btn btn-primary w-md waves-effect waves-light"
-                                                        style="border-radius: 17px;">Reportar como pagada</a>
-                                                </center>
-                                            </div> -->
-
                                         </div>
                                         <!-- **FIN** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
                             
@@ -489,7 +487,7 @@
 
     // Parametros (idCliente, Pestaña, Nivel del Vendedor)
     function _btnAddDeduccion(idCliente, numTab, nivel) {
-        return $('#tituloDeduccion_'+numTab).append(`<button type="button" onclick="agregarDeduccion(${idCliente}, 'tab${numTab}', ${nivel})" class="btn btn-primary btn-xs btnAddDeduccion"><i class="mdi mdi-plus"></i></button>`);
+        return $('#tituloDeduccion_'+numTab).append(`<button type="button" onclick="agregarDeduccion(${idCliente}, 'tab${numTab}', ${nivel})" class="btn btn-primary btn-xs btnAddDeduccion" style="float: right"><i class="mdi mdi-plus"></i></button>`);
     }
 
     function editarFactura(idFactura) {
@@ -562,16 +560,19 @@
                 if (dt) {
                     const tablaDeducciones_v1 = _crearTablaDeducciones(1, true)
                     $('#divDeducciones').append(tablaDeducciones_v1);
-                    let subtotal = 0;
-                    if (dt[0].length > 0) {
+                    let subtotal = 0, dt1 = [];
+                    dt.forEach(x => {
+                        dt1 = x.filter((i) => i.tab == 'tab1')
+                    })
+                        
+                    if (dt1.length > 0) {
                         let deducciones1 = ``, i = 1;
-                        const filtro = dt[0]
-                        filtro.forEach(x => {
-                            deducciones1 += `<tr id="tab1_row${i}">
+                        dt1.forEach(x => {
+                            deducciones1 += `<tr id="${x.tab}_row${i}">
                                 <td>${x.descripcion}</td>
                                 <td>${x.monto}</td>
-                            </tr>`;
-                            subtotal += parseFloat(x.monto);
+                            </tr>`
+                            subtotal += parseFloat(x.monto)
                             i++;
                         })
                         $('#tablaDeducciones1').append(deducciones1);
@@ -624,19 +625,29 @@
 
                     // Si ya existen datos en DB
                     if (dt) {
-                        let subtotal2 = 0;
-                        if (dt[1] && dt[1].length > 0) {
-
+                        let subtotal2 = 0, dt2 = []
+                        dt.forEach(x => { dt2 = x.filter((i) => i.tab == 'tab2')})
+                        if (dt2.length > 0) {
                             let deducciones2 = ``, i = 1;
-                            const filtro = dt[1]
-                            filtro.forEach(x => {
-                                deducciones2 += `<tr id="tab2_row${i}">
+                            dt2.forEach(x => {
+                                deducciones2 += `<tr id="${x.tab}_row${i}">
                                     <td>${x.descripcion}</td>
                                     <td>${x.monto}</td>
                                 </tr>`
                                 subtotal2 += parseFloat(x.monto)
                                 i++;
                             })
+                            // const filtro = dt[1]
+                            // filtro.forEach(x => {
+                            //     if (x.tab == 'tab2'){
+                            //         deducciones2 += `<tr id="${tab}_row${i}">
+                            //             <td>${x.descripcion}</td>
+                            //             <td>${x.monto}</td>
+                            //         </tr>`
+                            //         subtotal2 += parseFloat(x.monto)
+                            //         i++;
+                            //     }
+                            // })
                             $('#tablaDeducciones2').append(deducciones2);
                             $('#subtotal2').text(subtotal2)
                             comisionFinal2 = parseFloat(vendedor2.comision_base-subtotal2)
@@ -650,7 +661,7 @@
                     }
 
                     $("#total2").text(comisionFinal2)
-                    $("#deduccionTotal2").val(parseFloat($("#total2").text()))
+                    $("#deduccionTotal2").val(comisionFinal2)
 
                 }
 
@@ -662,6 +673,7 @@
                     $("#telVendedor3").text(vendedor3.telefono)
                     $("#comisionBase3").text(vendedor3.comision_base)
                     $("#total3").text(vendedor3.comision_base)
+                    let comisionFinal3 = vendedor3.comision_base
 
                     if (datos.factura.estadoTxt == 'Pagada') {
                         const tablaDeducciones_v3 = _crearTablaDeducciones(3, true)
@@ -674,30 +686,33 @@
                     }
 
                     if (dt) {
-                        if(dt[2] && dt[2].length > 0) {
-
+                        let subtotal3 = 0, dt3 = []
+                        dt.forEach(x => { dt3 = x.filter((i) => i.tab == 'tab3')})
+                        if (dt3.length > 0) {
                             let deducciones3 = ``, i = 1;
-                            const fitro = dt[2]
-                            filtro.forEach(x => {
-                                deducciones3 += `<tr id="tab3_row${i}">
+                            dt3.forEach(x => {
+                                deducciones3 += `<tr id="${x.tab}_row${i}">
                                     <td>${x.descripcion}</td>
                                     <td>${x.monto}</td>
                                 </tr>`
+                                subtotal3 += parseFloat(x.monto)
                                 i++;
                             })
 
                             $('#tablaDeducciones3').append(deducciones3);
+                            $('#subtotal3').text(subtotal3)
+                            comisionFinal3 = parseFloat(vendedor3.comision_base-subtotal3)
                         } 
                     }
 
+                    $("#porcentaje-ganar3").css('display', 'none')
                     if (vendedor3.nivel == 4) {
                         $("#porcentaje-ganar3").css('display', 'table-row')
-                        $("#total3").text(parseFloat(vendedor3.comision_base/2))
-                    } else {
-                        $("#porcentaje-ganar3").css('display', 'none')
-                        $("#total3").text(vendedor3.comision_base)
-                    } 
-                    $("#deduccionTotal3").val(parseFloat($("#total3").text()))
+                        comisionFinal3 = parseFloat(comisionFinal3/2)
+                    }
+
+                    $("#total3").text(comisionFinal3)
+                    $("#deduccionTotal3").val(comisionFinal3)
 
                 }
 
@@ -709,6 +724,7 @@
                     $("#telVendedor4").text(vendedor4.telefono)
                     $("#comisionBase4").text(vendedor4.comision_base)
                     $("#total4").text(vendedor4.comision_base)
+                    let comisionFinal4 = vendedor4.comision_base
 
                     if (datos.factura.estadoTxt == 'Pagada') {
                         const tablaDeducciones_v4 = _crearTablaDeducciones(4, true)
@@ -720,31 +736,33 @@
                     }
                     
                     if (dt) {
-                        if(dt[3] && dt[3].length > 0) {
-
+                        let subtotal4 = 0, dt4 = []
+                        dt.forEach(x => { dt4 = x.filter((i) => i.tab == 'tab4')})
+                        if (dt4.length > 0) {
                             let deducciones4 = ``, i = 1;
-                            const filtro = dt[3]
-                            filtro.forEach(x => {
-                                deducciones4 += `<tr id="tab4_row${i}">
+                            dt3.forEach(x => {
+                                deducciones4 += `<tr id="${x.tab}_row${i}">
                                     <td>${x.descripcion}</td>
                                     <td>${x.monto}</td>
                                 </tr>`
+                                subtotal4 += parseFloat(x.monto)
                                 i++;
                             })
 
                             $('#tablaDeducciones4').append(deducciones4);
-
-                        }
+                            $('#subtotal4').text(subtotal4)
+                            comisionFinal4 = parseFloat(vendedor4.comision_base-subtotal4)
+                        } 
                     }
 
+                    $("#porcentaje-ganar4").css('display', 'none')
                     if (vendedor4.nivel == 4) {
                         $("#porcentaje-ganar4").css('display', 'table-row')
-                        $("#total4").text(parseFloat(vendedor4.comision_base/2))
-                    } else {
-                        $("#porcentaje-ganar4").css('display', 'none')
-                        $("#total4").text(vendedor4.comision_base)
+                        comisionFinal4 = parseFloat(comisionFinal4/2)
                     }
-                    $("#deduccionTotal4").val(parseFloat($("#total4").text()))
+
+                    $("#total4").text(comisionFinal4)
+                    $("#deduccionTotal4").val(comisionFinal4)
 
                 }
 
