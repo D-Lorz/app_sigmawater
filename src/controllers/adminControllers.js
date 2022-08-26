@@ -12,7 +12,7 @@ const formatear = new Intl.NumberFormat('en-US', {
 exports.listarVendedores = async (req, res) => {
   const lista_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores");
   const usuarios = await conexion.query("SELECT * FROM usuarios");
-
+ 
   lista_vendedores.forEach((v) => {
     v.estadoVendedor = {};
     v.estadoVendedor.txt = "Pendiente";
@@ -22,6 +22,13 @@ exports.listarVendedores = async (req, res) => {
       usuarios.forEach((u) => {
         // Comparando tabla de usuarios con vendedores
         if (v.id_vendedor == u.id_vendedor) {
+          if(u.foto){
+            v.foto = JSON.parse(u.foto);
+            v.foto = v.foto.fotoUser 
+          }else{
+            v.foto = "../directorio_dash/images/users/userDefault.gif" 
+          }
+            console.log("IMPIENDO V.FOTO == >>" , v.foto);
           //  v.estadoDe_laCuenta = u.estado_de_la_cuenta;
           if (u.estado_de_la_cuenta === "aprobado") { v.estadoVendedor.txt = "Aprobado"; v.estadoVendedor.color = "badge-soft-success"; }
           if (u.estado_de_la_cuenta === "bloqueado") { v.estadoVendedor.txt = "Bloqueado"; v.estadoVendedor.color = "badge-soft-danger"; }
@@ -38,11 +45,23 @@ exports.listarVendedores = async (req, res) => {
 // ! >>>>>>>>> Vista perfil vendedores <<<<<<<<<<<
 exports.listarVendedores_PerfilVendedores = async (req, res) => {
   const id_vendedor = req.params.id;
-  let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ", [id_vendedor]);
+  let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores r JOIN usuarios u ON u.id_vendedor = r.id_vendedor WHERE r.id_vendedor =  ? ", [id_vendedor]);
   info_vendedor = info_vendedor[0];
+  var licencia 
   if (info_vendedor) {
-    var licencia = JSON.parse(info_vendedor.licencia_conduccion);
+    licencia = JSON.parse(info_vendedor.licencia_conduccion);
   }
+
+  let fotoUpdate
+  if(info_vendedor){
+  if (info_vendedor.foto) {
+      fotoUpdate = JSON.parse(info_vendedor.foto);
+      fotoUpdate = fotoUpdate.fotoUser
+  } else {
+    fotoUpdate = "../directorio_dash/images/users/userDefault.gif"
+  }
+}
+
   if (!info_vendedor) {
     res.clearCookie('jwt')
     return res.redirect('/login')
@@ -50,9 +69,10 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
 
   // todo===========>>>  Mostrar afiliados a tal vendedor
   let afiliados = await conexion.query("SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?", [info_vendedor.id_vendedor]);
+  console.log("IMPRIENOD VARIABLE AFILIADOS ===>>>>", afiliados);
+
 
   // todo===========>>>  Mostrar afiliado a este vendedor
-  // Consultando en DB los clientes que pertenecen al vendedor actual
   let referente = await conexion.query("SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? LIMIT 1",
     [info_vendedor.codigo_afiliado]
   );
@@ -111,7 +131,7 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
 
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-vendedores", {
-    user: req.user, info_vendedor, afiliados,
+    user: req.user, info_vendedor,fotoUpdate, afiliados,
     referente, licencia, viewsUser, infoClientes
   });
 };
@@ -299,6 +319,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
      else if (clbotonCredito.estado_del_credito == 2) { estade.btncredito = false;} 
      else if (clbotonCredito.estado_del_credito == 3) { estade.btncredito = false; }
      if (clbotonCredito.licencia_cliente > 0) { var licenciacredito = JSON.parse(clbotonCredito.licencia_cliente);
+      console.log("LICENCIA MOSTRADA ====== >>>>>",licenciacredito );
       // var clfirmaAcuerdo  = clbotonCredito.acuerdo_firmado
     } else {}
   }

@@ -1,4 +1,6 @@
 const conexion = require("../database/db");
+const bcryptjs = require('bcryptjs')
+const Cryptr = require('cryptr');
 
 // todo: GENERADOR DE CODIGO DE VENDEDOR APHANUMERICO
 const generateRandomString = (num) => {
@@ -95,9 +97,95 @@ exports.listarAfiliados = async (req, res) => {
     })
 }
 
-// todo: PERFIL VENDEDORES
+// todo: PERFIL VENDEDORES 
 exports.perfilVendedores = async (req, res) => {
-    res.render('perfil-vendedor', { user: req.user })
+ // Capturando el id del Vendedor actual
+    const id_vendedor = req.user.id_vendedor;
+ // Consultando en DB los afiliados de ese vendedor
+    let fotoUpdate
+    let vendedor = await conexion.query('SELECT * FROM registro_de_vendedores rv JOIN usuarios u ON u.id_vendedor = rv.id_vendedor WHERE rv.id_vendedor =  ?', [id_vendedor])
+    if (vendedor.length > 0) {
+        vendedor = vendedor[0]
+        console.log("IMPRIMIENDO VENDEDOR.FOTO ===>>", vendedor.foto);
+        if (vendedor.foto) {
+            fotoUpdate = JSON.parse(vendedor.foto);
+            fotoUpdate = fotoUpdate.fotoUser
+        } else {
+            fotoUpdate = "../directorio_dash/images/users/userDefault.gif"   
+        }
+    } 
+    console.log("\n");
+    console.log("IMPRIMIENDO FOTO DE PERFIL DE ESTE VENDEDOR ===>>>", fotoUpdate);
+    console.log("\n");
+
+   res.render('perfil-vendedor', { user: req.user,vendedor,fotoUpdate })
+
+}
+
+// todo: PERFIL VENDEDORES - ACTUALIZAR DATOS
+exports.editInfo = async (req, res) => {
+    const id_vendedor = req.user.id_vendedor;
+    let pass = req.body.editPass
+    const fotoUser = '../fotoVendedor/' + urlLicencias[0]
+    let foto = JSON.stringify({ 'fotoUser': fotoUser, });
+    const vendedor = await conexion.query('SELECT * FROM usuarios WHERE id_vendedor =  ?', [id_vendedor])
+    const passDB = vendedor[0].pass
+
+    if (pass == '') {
+        pass = passDB
+    } else {
+        pass = await bcryptjs.hash(pass, 12)
+    }
+
+     const fotoDB = vendedor[0].foto
+     if (foto == '') {
+        foto = fotoDB
+    } else {
+        foto = JSON.stringify({ 'fotoUser': fotoUser, });
+    }
+
+
+    // **** Información personal *****
+    const correo = req.body.editCorreo
+    const telefono_movil = req.body.editTel
+    const direccion = req.body.editDire
+    const ciudad = req.body.editCiu
+    const apt_suite_unidad = req.body.editApt
+    const codigo_postal = req.body.editPostal
+  
+    // **** Información bancaria *****
+    const nombre_banco = req.body.editBanco
+    const numero_cuenta = req.body.editCuenta
+    const ruta = req.body.editRuta
+    const beneficiario = req.body.editBeneficiario
+
+    let datos_usuarios = { correo, pass, foto }
+    let Datos_personales = {
+        correo, telefono_movil, direccion, ciudad, apt_suite_unidad, codigo_postal,
+        nombre_banco, numero_cuenta, ruta, beneficiario
+    }
+
+    await conexion.query("UPDATE usuarios SET ? WHERE id_vendedor = ?", [datos_usuarios, id_vendedor])
+    await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?", [Datos_personales, id_vendedor], (err, result) => {
+        if (err) throw err;
+        res.redirect('/perfil-vendedor/' + id_vendedor)
+    })
+
+   }
+
+// todo: PERFIL VENDEDORES
+exports.edit = async (req, res) => {
+    // Capturando el id del Vendedor actual
+       const id_vendedorA = req.user.id_vendedor;
+    // Consultando en DB los afiliados de ese vendedor
+      let vendedor = await conexion.query('SELECT * FROM registro_de_vendedores WHERE id_vendedor = ?', [id_vendedorA])
+      vendedor = vendedor[0]
+   
+         res.render('edit', { user: req.user,vendedor })
+   }
+
+exports.hola = async (req, res) => {
+    res.render('hola', { user: req.user })
 }
 
 // todo: MOSTRAR TABS DE VENTAS PROPIAS
@@ -130,3 +218,4 @@ exports.facturacion = async (req, res) => {
     res.render('ventas-vendedor', { user: req.user, facturacionPropia, facturacionAfiliado })
 
 }
+

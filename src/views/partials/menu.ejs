@@ -88,34 +88,28 @@
                     <i data-feather="sun" class="icon-lg layout-mode-light"></i>
                 </button>
             </div> -->
+           
 
-            
-                <div class="dropdown d-inline-block">
-                    <button type="button" class="btn header-item bg-soft-light border-start border-end"
-                        id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="../directorio_dash/images/users/avatar-1.jpg"
-                            alt="Header Avatar">
-
-                            <span class="d-none d-xl-inline-block ms-1 fw-medium">
-                                <% if (user) { %>
-                                  <%= user.nombres %> <%= user.apellidos%> 
-                                <% } %>
-                                </span>
-                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                                  
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item href="/solicitar-credito/<= clientes2.id_cliente %>">-->
-                        <a class="dropdown-item" href="/perfil-vendedor/<%= user.id_vendedor %>"><i
-                                class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Perfil</a>
-                        <!-- <a class="dropdown-item" href="pages-lock-screen"><i
-                                class="mdi mdi-lock font-size-16 align-middle me-1"></i> Bloquear pantalla</a> -->
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout"><i
-                                class="mdi mdi-logout font-size-16 align-middle me-1"></i> Cerrar sesión</a>
-                    </div>
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <% if(user) {%>
+                        <img src="<%= user.foto%>" alt="profile" class="rounded-circle header-profile-user" style="object-fit: cover;" >
+                    <% } %> 
+                       <% if(user) {%>
+                    <span class="d-none d-xl-inline-block ms-1 fw-medium"><%= user.nombres %> </span>
+                    <% } %> 
+                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <!-- item-->
+                    <% if(user) {%> 
+                    <a class="dropdown-item" href="/perfil-vendedor/<%= user.id_vendedor %>"><i
+                        class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Perfil</a>
+                        <% } %>
+                    <a class="dropdown-item" href="logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Cerrar sesión</a>
                 </div>
+            </div>
+              
 
         </div>
     </div>

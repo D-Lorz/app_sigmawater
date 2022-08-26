@@ -82,244 +82,391 @@
                                             <div class="col-sm order-2 order-sm-1">
                                                 <div class="d-flex align-items-start mt-3 mt-sm-0">
                                                     <div class="flex-shrink-0">
-                                                        <div class="avatar-xl me-3">
-                                                            <img src="../directorio_dash/images/users/avatar-2.jpg" alt="" class="img-fluid rounded-circle d-block">
+                                                        <div style="width: 80px !important; height: 80px !important;margin-right: 15px;">
+                                                                <img src="<%= fotoUpdate%>" alt=""
+                                                                    style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;">
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                            <h5 class="font-size-16 mb-1" style="text-transform: capitalize;"><%= user.nombres%> <%= user.apellidos %> </h5>
-                                                            <!-- <p class="text-muted font-size-13">Id: <b style="font-weight:600 ;"> <= user.id_vendedor %></b></p> -->
+                                                        <br>
+                                                        <div>
+                                                            <h5 class="font-size-16 mb-1" style="text-transform: capitalize;"><%= vendedor.nombres %> <%= vendedor.apellidos %></h5>
+                                                           <p class="text-muted font-size-13">Vendedor registrado desde: <b style="font-weight:600 ;"><%= vendedor.mes %>-<%= vendedor.dia%>-<%= vendedor.year  %>  </b></p>
 
-                                                            <!-- <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
-                                                                <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>aqui va el telefono</div>
-                                                                <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>aqui va el correo</div>
-                                                            </div> -->
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>                                                                                                                                                                                                                                              
                                             <div class="col-sm-auto order-1 order-sm-2">
                                                 <div class="d-flex align-items-start justify-content-end gap-2">
-                                                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" 
-                                                aria-controls="offcanvasRight" style=" border-radius: 15px;">Editar informacion</button>
+                                                    <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreen"><i class="fas fa-pencil-alt"></i> Editar Información</button>
+
+                                                    <!-- sample modal content -->
+                                                    <div id="exampleModalFullscreen" class="modal fade" tabindex="-1" aria-labelledby="exampleModalFullscreenLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-sm order-2 order-sm-1">
+                                                                                    <div class="col-xl-3 col-lg-4" style="float: right; margin-right: 10%; margin-top: 7%;">
+                                                                                        <form action="/actualizarPerfil" method="POST" d="validarForm" enctype="multipart/form-data">
+                                                                                            <!--* Cambiar foto de perfil ****  -->
+                                                                                            <div class="">
+                                                                                                    <div style="width: 220px !important; height: 220px !important;">
+                                                                                                            <img src="<%= fotoUpdate%>" alt=""
+                                                                                                                style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;margin-top: 11%;">
+                                                                                                    </div>
+                                                                                                <label class="input-group-btn" style="margin-left: 69%;margin-top: -21%;">
+                                                                                                    <span class="btn btn-primary" style="border-radius: 35px">
+                                                                                                        <h5 class="font-size-20 mb-1" style="color: white;"><i class="fas fa-pencil-alt"></i></h5>
+                                                                                                        <input type="file" name="editFoto" id="campoFile" accept="image/jpg" style="display: none;" id="">
+                                                                                                    </span>
+                                                                                                </label>
+                                                                                            </div>
+                                                                                            <!--* Cambiar foto de perfil ****  -->
+                                                                                    </div>
+                                                                                    <h5 class="font-size-16 mb-1" style="text-transform: capitalize;">Información personal</h5>
+                                                                              <p class="text-muted font-size-13">Edita tu información <b style="font-weight:600 ;">  </b></p>
+                                                                                    </div>  
+                                                                                    <!-- Mensaje de Correo no coincide -->
+                                                                                    <div class="alert alert-danger alert-border-left alert-dismissible fade show mt-2" id="alertaCorreo"
+                                                                                        style="padding: 8px 1rem; display: none" role="alert">
+                                                                                        <i class="fa-solid fa-circle-exclamation me-3 align-middle"></i>
+                                                                                        <label style="font-size: 14px;"><strong>Atención!</strong> -
+                                                                                            <span style="font-weight: 300">Los correos no coinciden</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <!-- Fin de Alerta -->
+                                                                                            <!-- Mensaje de clave no coincide -->
+                                                                                            <div class="alert alert-danger alert-border-left alert-dismissible fade show mt-2" id="alertaPass"
+                                                                                            style="padding: 8px 1rem; display: none" role="alert">
+                                                                                            <i class="fa-solid fa-circle-exclamation me-3 align-middle"></i>
+                                                                                            <label style="font-size: 14px;"><strong>Atención!</strong> -
+                                                                                                <span style="font-weight: 300">Los claves no coinciden</span>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                        <!-- Fin de Alerta -->
+                                                                              </div>
+                                                                              
+                                                                              <div class="todo" style="margin-top: -32%;">
+                                                                              <div class="row" >
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="form-group">
+                                                                                        <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Correo</h5>
+                                                                                        <input type="email" class="form-control" value="<%= vendedor.correo %>" id="idcorreo" required placeholder="ejemplo@gmail.com" id="" name="editCorreo">
+                                                                                    </div>
+                                                                                </div>
+                                                                             </div>
+                                                                             <div class="row">
+                                                                                   <div class="col-lg-6">
+                                                                                    <div class="form-group">
+                                                                                        <label for=""></label>
+                                                                                        <input type="email" class="form-control" value="<%= vendedor.correo %>" required onblur="validarCorreosIguales()" id="idcorreoConfirmar" placeholder="Confirmar correo" >
+                                                                                    </div>
+                                                                                </div> 
+                                                                             </div>
+                                                                             <br>
+                                                                             <div class="row">
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="form-group">
+                                                                                        <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Contraseña</h5>
+                                                                                        <input type="password" class="form-control" onblur="validarPass()" placeholder="********" id="idPass" name="editPass">
+                                                                                    </div>
+                                                                                </div>
+                                                                          </div>
+                                                                          <div class="row">
+                                                                            <div class="col-lg-6">
+                                                                                <div class="form-group">
+                                                                                    <label for=""></label>
+                                                                                    <input type="password" class="form-control" onblur="validarPass()" id="idPassConfirmar" placeholder="Confirmar contraseña" >
+                                                                                </div>
+                                                                            </div>
+                                                                       </div>
+                                                                       <br>
+                                                                       <div class="row">
+                                                                         <div class="col-lg-6">
+                                                                                    <div class="form-group">
+                                                                                        <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Teléfono movil</h5>
+                                                                                        <input type="tel" value="<%= vendedor.telefono_movil%>" required class="form-control" id="" name="editTel">
+                                                                                    </div>
+                                                                             </div> 
+                                                                         </div>
+                                                                         <br>
+                                                                          <div class="row">
+                                                                                <div class="col-lg-3">
+                                                                                        <div class="form-group">
+                                                                                           <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Dirección</h5>
+                                                                                            <input type="text" value="<%= vendedor.direccion%>" required class="form-control" id="" name="editDire">
+                                                                                         </div>
+                                                                                   </div> 
+                                                                                   <div class="col-lg-3">
+                                                                                    <div class="form-group">
+                                                                                       <h5 class="font-size-12 mb-1" style="text-transform: capitalize;">Ciudad</h5>
+                                                                                        <input type="text" value="<%= vendedor.ciudad%>" required class="form-control" id="" name="editCiu">
+                                                                                     </div>
+                                                                               </div> 
+                                                                               <div class="col-lg-3">
+                                                                                <div class="form-group">
+                                                                                   <h5 class="font-size-12 mb-1" style="text-transform: capitalize;">Apt / Suite / Unidad</h5>
+                                                                                    <input type="text" value="<%= vendedor.apt_suite_unidad%>" required class="form-control" id="" name="editApt">
+                                                                                 </div>
+                                                                           </div>
+                                                                           <div class="col-lg-3">
+                                                                            <div class="form-group">
+                                                                               <h5 class="font-size-12 mb-1" style="text-transform: capitalize;">Código postal</h5>
+                                                                                <input type="text" value="<%= vendedor.codigo_postal%>"  required class="form-control" id="" name="editPostal">
+                                                                             </div>
+                                                                          </div>
+                                                                         </div>
+                                                                             <br>
+                                                                            <h5 class="font-size-16 mb-1" style="text-transform: capitalize;">Datos bancarios</h5>
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-lg-3">
+                                                                                    <div class="form-group">
+                                                                                        <label for="">Nombre del banco</label>
+                                                                                        <input type="text" value="<%= vendedor.nombre_banco%>" required class="form-control" id="" name="editBanco">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-3">
+                                                                                    <div class="form-group">
+                                                                                        <label for="">Número de cuenta</label>
+                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control" id="" name="editCuenta">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-3">
+                                                                                    <div class="form-group">
+                                                                                        <label for="">Número de ruta</label>
+                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control" id="" name="editRuta">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-3">
+                                                                                    <div class="form-group">
+                                                                                        <label for="">Beneficiario</label>
+                                                                                        <input type="text" value="<%= vendedor.beneficiario%>" required class="form-control" id="" name="editBeneficiario">
+                                                                                    </div>
+                                                                                </div>
+                                                                             </div> 
+                                                                            </div>
+                                                                             <br>
+                                                                       </div>
+                                                                  </div>  
+                                                                </div>
+                                                    
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Cerrar</button>
+                                                                    <button type="submit" id="btnGCambios" class="btn btn-primary waves-effect waves-light">Guardar cambios </button>
+                                                                </div>
+                                                            </form>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
                                              </div>
                                             </div>
                                         </div>
                                         <br>
-                                          <div class="row justify-content-center">
+                                          <div class="row">
                                               <div class="col-xl-6">
                                                  <ul class="nav nav-pills nav-justified" role="tablist">
                                                  <li class="nav-item waves-effect waves-light">
                                                      <a class="nav-link active" data-bs-toggle="tab" href="#home-1" role="tab">
-                                                         <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                                         <span class="d-none d-sm-block">información personal</span> 
+                                                         <span class="d-block d-sm-none"><i class="fas fa-user"></i></span>
+                                                         <span class="d-none d-sm-block"><i class="fas fa-user"></i> Datos personales</span> 
                                                      </a>
                                                  </li>
-                                                 <li class="nav-item waves-effect waves-light" >
-                                                     <a class="nav-link active" data-bs-toggle="tab" href="#profile-1" role="tab">
-                                                         <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                                         <span class="d-none d-sm-block">información bancaria</span> 
+                                                 <li class="nav-item waves-effect waves-light" id="holaxd" style="margin-left: -30%;">
+                                                     <a class="nav-link" data-bs-toggle="tab" href="#profile-1" role="tab">
+                                                         <span class="d-block d-sm-none"><i class="fas fa-money-check-alt"></i></span>
+                                                         <span class="d-none d-sm-block"><i class="fas fa-money-check-alt"></i> Datos bancarios</span> 
                                                      </a>
                                                  </li>
                                              </ul>
                                           </div>
                                         </div>
                                  </div>
-                                 
-                            </div> 
-                          <div class="card">
-                               <div class="card-body">
-                                           
-                                 
-                              </div>
-                          </div>
+                           </div> 
+                   
+
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="tab-content p-3 text-muted">
+                                            <div class="tab-pane active" id="home-1" role="tabpanel">
+                                                <h5 class="font-size-16 mb-1" style="text-transform: capitalize;letter-spacing: -1px;">Información personal </h5>
+                                               <br>
+                                               <style>
+                                                .iconoDatos{
+                                                    font-size: 19px;
+                                                    background: aliceblue;
+                                                    
+                                                }
+                                               </style>
+                                            
+
+                                                <div class="row justify-content: center;">
+                                                    <div class="col-md-4">
+                                                            <li style="list-style:none"> 
+                                                                    <div class="card-body">
+                                                                        <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="far fa-envelope iconoDatos"></i><%= vendedor.correo%> <br>Correo</label> 
+                                                                    </div> 
+                                                              </li>
+                                                       </div>
+                                                       <div class="col-md-4">
+                                                        <li style="list-style:none"> 
+                                                                <div class="card-body">
+                                                                    <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fas fa-phone iconoDatos"></i><%= vendedor.telefono_movil%> <br>Teléfono</label> 
+                                                                </div> 
+                                                          </li>
+                                                      </div>
+                                                 </div>
+                                                 <div class="row justify-content: center;">
+                                                    <div class="col-md-4">
+                                                        <li style="list-style:none"> 
+                                                                <div class="card-body">
+                                                                    <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fas fa-birthday-cake iconoDatos"></i><%= vendedor.fecha_nacimiento%> <br>Fecha de nacimiento</label> 
+                                                                </div> 
+                                                          </li>
+                                                     </div>
+                                                    <div class="col-md-8">
+                                                        <li style="list-style:none"> 
+                                                            <div class="card-body">
+                                                                <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fas fa-house-user iconoDatos"></i><%= vendedor.ciudad %>, <%= vendedor.direccion%>, <%= vendedor.apt_suite_unidad%>, <%= vendedor.codigo_postal%><br>Dirección</label> 
+                                                            </div> 
+                                                      </li>
+                                                 </div>
+                                             </div>
+                                            </div>
+                                            <div class="tab-pane" id="profile-1" role="tabpanel">
+                                                <h5 class="font-size-16 mb-1" style="text-transform: capitalize;letter-spacing: -1px;">Información bancaria </h5>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <li style="list-style:none;text-transform: capitalize;"> 
+                                                            <div class="card-body">
+                                                                <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fas fa-piggy-bank iconoDatos"></i><%= vendedor.nombre_banco %><br>Nombre del banco</label> 
+                                                            </div> 
+                                                        </li>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <li style="list-style:none"> 
+                                                            <div class="card-body">
+                                                                <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fab fa-slack-hash iconoDatos"></i><%= vendedor.numero_cuenta %><br>Número de cuenta</label> 
+                                                            </div> 
+                                                        </li>
+                                                   </div>
+                                                 </div>
+                                                 <div class="row">
+                                                    <div class="col-md-4">
+                                                         <li style="list-style:none"> 
+                                                            <div class="card-body">
+                                                                <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fab fa-slack-hash iconoDatos"></i><%= vendedor.ruta %><br>Número de enrutamiento </label> 
+                                                            </div> 
+                                                        </li>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <li style="list-style:none; text-transform: capitalize;"> 
+                                                            <div class="card-body">
+                                                                <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fas fa-user-check iconoDatos"></i><%= vendedor.beneficiario %><br>Beneficiario</label> 
+                                                            </div> 
+                                                        </li>
+                                                 </div>
+                                             </div>
+                                            </div>
+                                        </div>
+                                 </div>
+                            </div>     
                        </div>
                             <div class="col-xl-3 col-lg-4">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-3" style="text-align: center;">Estado del vendedor</h5>
-
-                                        <form action="/estadoDelVendedor" method="POST"> 
-                                             <div class="btn-group me-1 mt-2" style="margin-left: 8%;" >
-                                                  <input type="hidden" name="idGenerado" value="= info_vendedor.id_vendedor %>">
-                                                  <input type="hidden" name="id_consecutivoVendedor" value="= info_vendedor.id %>">
-
-                                                    <select class="form-select" id="selectEstado" name="estadoElegido">
-                                                        <option style="background:gray;color: white;text-transform: capitalize;" class="badge-soft-dark">Estado actual: = viewsUser.estado_de_la_cuenta %></option>
-                                                        <br>  
-                                                        <option value="aprobado">Aprobado</option>
-                                                        <option value="bloqueado">Bloquear</option>
-                                                    </select>
-                                                </div>
-                                               <a href="/perfil-vendedores/= info_vendedor.id_vendedor %>">
-                                                    <button class="btn btn-primary" type="submit" 
-                                                    style="border-radius: 13px;margin-left: 24%; margin-top: 4%;
-                                                    width: 47%;">Guadar</button>
-                                                </a> 
-                                         </form>
-                                       </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-3" style="text-align: center;">Nivel del vendedor</h5>
-                                 
-                                            <!-- <form action="/ActualizarNivel" method="POST"> -->
-                                         <input type="hidden" id="coodigoActualizarId" name="coodigoActualizarxs" value="= info_vendedor.id_vendedor %>">
-                                         <input type="hidden" id="v_individualesId" name="v_individuales" value="= info_vendedor.ventas_individuales%>">
-                                         <input type="hidden" id="total_ventasId" name="t_ventas" value="= info_vendedor.total_ventas%>">
-                                         <input type="hidden" id="ventas_afiliadosId" name="v_afiliados" value="= info_vendedor.ventas_afiliados%>">
-
-                                              if(info_vendedor.nivel >= 1 && info_vendedor.nivel <= 3 ) { %> 
-                                                  if(info_vendedor.nivel == 1) { %> 
-                                                    <div class="row justify-content-center">
-                                                       <div class="col-md-8">
-                                                          <select class="form-select" id="niveles" name="nivel">
-                                                             <option style="background:gray;color: white;">Nivel actual: = info_vendedor.nivel %></option>
-                                                             <br>
-                                                             <option value="2">Subir a nivel 2</option>
-                                                          </select>
-                                                      </div>
-                                                    </div>
-                                                   } else if(info_vendedor.nivel == 2) {%> 
-                                                    <div class="row justify-content-center">
-                                                        <div class="col-md-8">
-                                                            <select class="form-select" id="niveles" name="nivel">
-                                                              <option style="background:gray;color: white;">Nivel actual: = info_vendedor.nivel %></option>
-                                                              <br>
-                                                              <option value="3">Subir a nivel 3</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                   } else if(info_vendedor.nivel == 3) {%> 
-                                                    <div class="row justify-content-center">
-                                                        <div class="col-md-8">
-                                                           <select class="form-select" id="niveles" name="nivel">
-                                                             <option style="background:gray;color: white;">Nivel actual: = info_vendedor.nivel %></option>
-                                                             <br>
-                                                            <option value="4">Subir a nivel 4</option>
-                                                          </select> 
-                                                        </div>
-                                                    </div>
-                                                     } %>
-                                               <center><button type="button" class="btn btn-primary" onclick="confirmarNuevoNivel()" style="border-radius: 13px;margin-top: 4%; width: 47%;">Guadar</button></center>
-                                          }else if(info_vendedor.nivel == 4) {%> 
-                                                  <div class="row justify-content-center" style="margin-left: -9%;">
-                                                     <div class="col-md-6">
-                                                         <div class="form-group ">
-                                                            <input type="text" class="form-control" style="background: white;" readonly value="Nivel actual: = info_vendedor.nivel %>">
-                                                         </div>
-                                                     </div>
-                                                  </div>
-                                               <input type="hidden" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;/* font-size: 13px; */" value="Guardar">
-                                            }%> 
-                                            <!-- </form> -->
-                                            <br>
-                                            <h2 class="card-title mb-3" style="text-align: center;font-size: 13px;">Número de ventas</h2>
-                                            <center>Ventas individuales: <div class="badge badge-soft-info font-size-12" >= info_vendedor.ventas_individuales %></div></center>  
-                                            <center>Ventas de afiliados: <div class="badge badge-soft-info font-size-12" >= info_vendedor.ventas_afiliados %></div></center>  
-                                            <center>Ventas totales: <div class="badge badge-soft-info font-size-12" >= info_vendedor.total_ventas %></div></center>  
-                                       
-                                        </div>
-                                   <!-- end card body -->
-                                </div>
-                                <!-- end card -->
-                                 if(referente) {%>  
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title mb-3">Afiliado a</h5>
-                                            <a  href="/perfil-vendedores/- referente.id_vendedor%>" >
-                                                <div class="d-flex align-items-center">
-                                                    <div class="avatar-sm flex-shrink-0 me-3">
-                                                        <img src="../directorio_dash/images/users/avatar-1.jpg" alt="" class="img-thumbnail rounded-circle">
-                                                    </div>
-                                                    <div class="flex-grow-1" style="text-transform: capitalize;">
-                                                        <div>
-                                                            <h5 class="font-size-14 mb-1">= referente.nombres %> = referente.apellidos %></h5>
-                                                       <p class="font-size-13 text-muted mb-0">- referente.id_vendedor%></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <!-- end card body -->
+                                    <div class="card-body" >
+                                        <center><img src="../directorio_dash/images/logo.svg" alt="" style="width: 34%;"></center>
+                                        <br>
+                                        <h5 style="font-size:16px ; text-align: center;">Información de vendedor</h5>
+                                        <br>
+                                          <span style="font-size:14px ; text-align: center;">Nivel actual:<div class="badge badge-soft-info" style="margin-bottom: 8px;"><%= vendedor.nivel %></div> </span><br>
+                                          <% if(vendedor.total_ventas >= 1) { %>
+                                             <span style="font-size:14px ; text-align: center;">Codigo de vendedor:<div class="badge badge-soft-info"><%= vendedor.id_vendedor %></div> </span>
+                                          <% } else { %>
+                                             <span style="font-size:14px ; text-align: center;">Codigo de vendedor:<div class="badge badge-soft-warning font-size-12"> <i class=" fas fa-lock" title="Maximo 1 venta para desbloquear codigo" ></i></div> </span>
+                                          <% } %> 
                                     </div>
-                                    <!-- end card -->
-                                     } else { %> 
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title mb-3">Afiliado a</h5>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="flex-grow-1">
-                                                            <div>
-                                                                <h5 class="font-size-14 mb-1"></h5>
-                                                           <p class="font-size-13 text-muted mb-0">Este vendedor no se registró con un código de afiliado</p>
-    
-                                                           
+                                </div>
+                         
+                               <div class="col-lx-4">
+                                    <div class="card bg-primary text-white shadow-primary card-h-100">
+                                        <div class="card-body p-0">
+                                            <div id="carouselExampleCaptions" class="carousel slide text-center widget-carousel" data-bs-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item active">
+                                                        <div class="text-center p-4">
+                                                            <!-- <i class="mdi mdi-bitcoin widget-box-1-icon"></i> -->
+                                                            <div class="avatar-md m-auto">
+                                                                <span class="avatar-title rounded-circle bg-soft-light text-white font-size-24">
+                                                                    <i class="mdi mdi-currency-btc"></i>
+                                                                </span>
                                                             </div>
+                                                            <h4 class="mt-3 lh-base fw-normal text-white"><b> Motivate</b> </h4>
+                                                            <p class="text-white-50 font-size-13">
+                                                                La confianza en sí mismo es el primer secreto del éxito – Ralph Waldo Emerson
+
+                                                            </p>
+                                                            <button type="button" class="btn btn-light btn-sm">View details <i class="mdi mdi-arrow-right ms-1"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
-                                            </div>
-                                            <!-- end card body -->
-                                        </div>
-                                     }%> 
-
-                                    if(info_vendedor.afiliados) {%>  
-                                <div class="card">
-                                    <div class="card-body">
-                                           <h5 class="card-title mb-3">Afiliados</h5>
-                                         <div class="list-group list-group-flush">
-                                 afiliados.forEach((a)=>{ %> 
-                                             <a href="/perfil-vendedores/- a.id_vendedor%>" class="list-group-item list-group-item-action">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="avatar-sm flex-shrink-0 me-3">
-                                                        <img src="../directorio_dash/images/users/avatar-1.jpg" alt="" class="img-thumbnail rounded-circle">
+                                                    <div class="carousel-item">
+                                                        <div class="text-center p-4">
+                                                            <i class="mdi mdi-ethereum widget-box-1-icon"></i>
+                                                            <div class="avatar-md m-auto">
+                                                                <span class="avatar-title rounded-circle bg-soft-light text-white font-size-24">
+                                                                    <i class="mdi mdi-ethereum"></i>
+                                                                </span>
+                                                            </div>
+                                                            <h4 class="mt-3 lh-base fw-normal text-white"><b>ETH</b>
+                                                                News</h4>
+                                                            <p class="text-white-50 font-size-13"> Bitcoin
+                                                                prices fell sharply amid the global sell-off in
+                                                                equities. Negative news over the past week has
+                                                                dampened sentiment for bitcoin. </p>
+                                                            <button type="button" class="btn btn-light btn-sm">View details <i class="mdi
+                                                        mdi-arrow-right ms-1"></i></button>
+                                                        </div>
                                                     </div>
-                                                    <div class="flex-grow-1" style="text-transform: capitalize;">
-                                                        <div>
-                                                          
-                                                            <h5 class="font-size-14 mb-1">= a.nombres %> = a.apellidos%></h5>
-                                                            <p class="font-size-13 text-muted mb-0">= a.id_vendedor%></p>
-                                                           
+                                                    <div class="carousel-item">
+                                                        <div class="text-center p-4">
+                                                            <i class="mdi mdi-litecoin widget-box-1-icon"></i>
+                                                            <div class="avatar-md m-auto">
+                                                                <span class="avatar-title rounded-circle bg-soft-light text-white font-size-24">
+                                                                    <i class="mdi mdi-litecoin"></i>
+                                                                </span>
+                                                            </div>
+                                                            <h4 class="mt-3 lh-base fw-normal text-white"><b>Litecoin</b> News</h4>
+                                                            <p class="text-white-50 font-size-13"> Bitcoin
+                                                                prices fell sharply amid the global sell-off in
+                                                                equities. Negative news over the past week has
+                                                                dampened sentiment for bitcoin. </p>
+                                                            <button type="button" class="btn btn-light btn-sm">View details <i class="mdi mdi-arrow-right ms-1"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </a>
-                                              })%> 
+                                                <div class="carousel-indicators carousel-indicators-rounded">
+                                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true"
+                                                        aria-label="Slide 1"></button>
+                                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                                </div>
+                                            </div>                                           
                                         </div>
                                     </div>
-                                    <!-- end card body -->
-                                </div>
-                                 } else { %> 
-                                    <div class="card">
-                                        <div class="card-body">
-                                               <h5 class="card-title mb-3">Afiliados</h5>
-                                             <div class="list-group list-group-flush">
-                                  
-                                                  <div class="d-flex align-items-center">
-                                                      
-                                                        <div class="flex-grow-1" >
-                                                            <div>
-                                                              
-                                                                <h5 class="font-size-14 mb-1"></h5>
-                                                                <p class="font-size-13 text-muted mb-0">Este vendedor no tiene afiliados</p>
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        <!-- end card body -->
-                                    </div>
-                                     } %> 
+                                </div>  
+
                             </div>
-                            <!-- end col -->
+                            
                         </div>
-                        <!-- end row -->
-             
-                            </div> <!-- container-fluid -->
-                      </div>
-                <!-- End Page-content -->
-
-                
+                     </div> 
+                  </div>
       <!-- =======FIXME: copyright ========================== -->
       <%- include ('./partials/copyright.ejs')%>
       <!-- =======FIXME: copyright ========================== -->
@@ -357,7 +504,8 @@
  <!-- Responsive examples -->
  <script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
  <script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
+<!-- Script Personalizados -->
+<script src="../js/scripts_personalizados.js"></script>
 
  <!-- Buttons examples -->
  <script src="../directorio_dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -369,56 +517,44 @@
  <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
  <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 
-   
+      <!-- fontawesome icons init -->
+      <script src="../directorio_dash/js/pages/fontawesome.init.js"></script>
+
   <!-- Datatable init js -->
   <script src="../directorio_dash/js/pages/datatables.init.js"></script>    
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
 <script>
+    
+  $(function () {
 
-function confirmarNuevoNivel() {
-    let text ="<b>Esta acción no se puede deshacer.</b>"
-    Swal.fire({
-        title: '<div style="font-weight: 700;"> Subir de nivel a este vendedor</div>',
-        html: '<div style="font-size: 16px;font-weight: 200;">Al aumentar el nivel manualmente, el vendedor quedará desvinculado de su afiliado.</div>',
-        icon: 'warning',
-        footer:'<b style="color:#d33;font-size: 16px;">Esta acción no se puede deshacer.</b>',
-        showCancelButton: true,
-        confirmButtonColor: '#50368C',
-        cancelButtonColor: '#d33',
-        cancelButtonText: 'Cancelar',
-        confirmButtonText: '¡Sí, subir de nivel!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-            const id_vendedor = $("#coodigoActualizarId").val()
-            const nivel = $("#niveles option:selected").val()
-            const ventas_individuales = $("#v_individualesId").val()
-            const total_ventas = $("#total_ventasId").val()
-            const ventas_afiliados = $("#ventas_afiliadosId").val()
+// This code will attach `fileselect` event to all file inputs on the page
+$(document).on('change', ':file', function () {
+  var input = $(this),
+    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+  input.trigger('fileselect', [numFiles, label]);
+});
 
-            fetch('/ActualizarNivel', {
-                method: 'POST',
-                body: JSON.stringify({id_vendedor,nivel, ventas_individuales, total_ventas, ventas_afiliados}),
-                headers: { 'Content-Type': 'application/json' }
-            }).then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => {
-                if (response) {
-                    location.reload();
-                } else {
-                    Swal.fire(
-                        'Error!',
-                        'El nivel no se actualizó correctamente.',
-                        'error'
-                    )
-                }
-            });
-      }
-    })
-  }
 
+$(document).ready(function () {
+  //below code executes on file input change and append name in text control
+  $(':file').on('fileselect', function (event, numFiles, label) {
+
+    var input = $(this).parents('.input-group').find(':text'),
+      log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+    if (input.length) {
+      input.val(log);
+    } else {
+      if (log) ;
+    }
+
+  });
+});
+
+});
 </script>
-
 
 
 

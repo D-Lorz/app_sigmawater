@@ -350,10 +350,10 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
   // todo ===============================>>> Desactivar boton de registro de instalacion
   let clRegistro_instalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [clientes2.id])
-
   if (clRegistro_instalacion.length > 0) {
     clRegistro_instalacion = clRegistro_instalacion[0]
     var evidenciaF = JSON.parse(clRegistro_instalacion.evidencia_fotografica);
+    console.log("MOSTRAR EVIDENCIA FOTOGRAFICA ===>>>", evidenciaF)
   }
 
   // * >>> Renderizado <<<<<

@@ -82,8 +82,9 @@
                                             <div class="col-sm order-2 order-sm-1">
                                                 <div class="d-flex align-items-start mt-3 mt-sm-0">
                                                     <div class="flex-shrink-0">
-                                                        <div class="avatar-xl me-3">
-                                                            <img src="../directorio_dash/images/users/avatar-2.jpg" alt="" class="img-fluid rounded-circle d-block">
+                                                        <div style="width: 80px !important; height: 80px !important;margin-right: 15px;">
+                                                                <img src="<%= fotoUpdate%>" alt=""
+                                                                    style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;">
                                                         </div>
                                                     </div>
                                                     <div class="flex-grow-1">
@@ -91,7 +92,6 @@
                                                             <h5 class="font-size-16 mb-1" style="text-transform: capitalize;"><%= info_vendedor.nombres %> <%= info_vendedor.apellidos %></h5>
                                                             <p class="text-muted font-size-13">Codigo de afiliado: <b style="font-weight:600 ;"><%= info_vendedor.id_vendedor %></b></p>
                           
-
                                                             <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
                                                                 <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i><%= info_vendedor.telefono_movil %></div>
                                                                 <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i><%= info_vendedor.correo %></div>
@@ -734,13 +734,13 @@
                                         </div>
                                     <% }%> 
 
-                                    <%if(info_vendedor.afiliados) {%>  
+                                    <%if(afiliados) {%>  
                                 <div class="card">
                                     <div class="card-body">
                                            <h5 class="card-title mb-3">Afiliados</h5>
                                          <div class="list-group list-group-flush">
                                 <% afiliados.forEach((a)=>{ %> 
-                                             <a href="/perfil-vendedores/<%- a.id_vendedor%>" class="list-group-item list-group-item-action">
+                                              <a href="/perfil-vendedores/<%- a.id_vendedor%>" class="list-group-item list-group-item-action"> 
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar-sm flex-shrink-0 me-3">
                                                         <img src="../directorio_dash/images/users/avatar-1.jpg" alt="" class="img-thumbnail rounded-circle">

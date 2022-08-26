@@ -56,9 +56,10 @@ app.use((req, res, next) => {
 
 //llamar al router
 app.use('/', require('./routes/router'));
-app.use('/', require('./routes/sellers'));
 app.use('/', require('./routes/customer'));
 app.use('/', require('./routes/admin'));
+app.use('/', require('./routes/sellers'));
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

@@ -94,27 +94,22 @@
                     <button type="button" class="btn header-item bg-soft-light border-start border-end"
                         id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="../directorio_dash/images/users/avatar-1.jpg"
+                        <img class="rounded-circle header-profile-user" src="../directorio_perfilClientes/images/favicon.png"
                             alt="Header Avatar">
-
                             <span class="d-none d-xl-inline-block ms-1 fw-medium">
-
                                 <%  if(user.rol === "administrador"){%>
                                     <%= user.correo %> 
-            
-                                    <%  }%>
-
+                                <%  }%>
                                 </span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                                  
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
                         <a class="dropdown-item" href="contacts-profile"><i
                                 class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Perfil</a>
-                        <a class="dropdown-item" href="pages-lock-screen"><i
+                        <!-- <a class="dropdown-item" href="pages-lock-screen"><i
                                 class="mdi mdi-lock font-size-16 align-middle me-1"></i> Bloquear pantalla</a>
-                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider"></div> -->
                         <a class="dropdown-item" href="logout"><i
                                 class="mdi mdi-logout font-size-16 align-middle me-1"></i> Cerrar sesión</a>
                     </div>

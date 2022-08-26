@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 const { promisify } = require('util')
+const { log } = require('console')
 
 // todo: LOGIN
 exports.login = async (req, res) => {
@@ -103,10 +104,18 @@ exports.isAuthenticated = async (req, res, next) => {
         try {
             const decodificada = await promisify(jwt.verify)(req.cookies.jwt, 'super_secret_AppSigmaWater');
             conexion.query('SELECT u.*, r.total_ventas, r.nombres, r.apellidos FROM usuarios u LEFT JOIN registro_de_vendedores r ON r.id = u.id_consecutivo WHERE u.id_consecutivo = ?', [decodificada.id], (error, results) => {
-                if (!results) {
-                    return next()
+                if (!results) {return next()}
+                req.user = results[0]
+                let fotoUpdate
+                if (results[0].foto) {
+                    fotoUpdate = JSON.parse(results[0].foto);
+                    req.user.foto = fotoUpdate.fotoUser         
+                }else {
+                 req.user.foto = "../directorio_dash/images/users/userDefault.gif"     
                 }
-               req.user = results[0]
+                 console.log("IMPRIENOD FOTO DESDE AUTENTICACION ===>>", fotoUpdate);
+               
+                
                 return next()
             })
         } catch (error) {
@@ -156,14 +165,3 @@ exports.isSeller = async (req, res, next) => {
     }
 };
 
-// todo: MOSTRAR LISTA DE VENDEDORES AFILIADOS
-exports.listarAfiliados= async (req, res) => {
-// Capturando el id del Vendedor actual
-     const id_vendedorA = req.user.id_vendedor;
- // Consultando en DB los clientes que pertenecen al vendedor actual
-     conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA], (err, result) => {
-       if (err) throw err;
-       res.render('afiliados', {user: req.user, result: result})
-    //    console.log(result);
-     })
-}
