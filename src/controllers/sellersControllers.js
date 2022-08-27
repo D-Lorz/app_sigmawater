@@ -15,19 +15,16 @@ const generateRandomString = (num) => {
 
 // todo: REGISTRAR VENDEDOR 
 exports.registrar = async (req, res) => {
-    //  ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
     const year = new Date().getFullYear();
-    //  ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
     let mes = new Date().getMonth()
     mes == 0 ? mes = 12 : mes = mes + 1
-    //  ? NOTA: ==>> Esta es la forma para obtener el numero de la semana actual del año entero <<<<<
-    currentdate = new Date();
+    const dia = new Date().getDate();
+    //  ? NOTA: ==>> Esta es la forma para obtener el numero de la semana actual del año <<<<<
+    const currentdate = new Date();
     const oneJan = new Date(currentdate.getFullYear(), 0, 1);
     const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
     const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
     console.log("ESTA ES LA SEMANA ACTUAL ==>> ", semana);
-    //  ? NOTA: ==>> Esta es la forma para obtener la fecha actual <<<<<
-    const dia = new Date().getDate();
 
     const nombres = req.body.nombres
     const apellidos = req.body.apellidos
@@ -61,25 +58,23 @@ exports.registrar = async (req, res) => {
     await conexion.query('INSERT INTO registro_de_vendedores SET ?', [nuevoRegistro])
     let idConsecutivo = await conexion.query('SELECT id FROM registro_de_vendedores WHERE id_vendedor = ?', [id_vendedor])
 
-    let fecha = new Date().toLocaleDateString("en-CA");
+    const fecha = new Date().toLocaleDateString("en-CA");
     const numClientes = 00
     const idVendedor = idConsecutivo[0].id
-    console.log("*************");
-    console.log("FECHA ==XXX", fecha);
-    console.log("numClientes ==XXX", numClientes);
-    console.log("idVendedor ==XXX", idVendedor);
-    console.log("*************");
     const datos_PorDefectosCl = { fecha, numClientes, idVendedor }
-    console.log("DATOS XXXXX", datos_PorDefectosCl);
     await conexion.query('INSERT INTO historialnuevosclientes SET ?', [datos_PorDefectosCl])
 
     let codeAfiliado = await conexion.query('SELECT codigo_afiliado, id_vendedor FROM registro_de_vendedores WHERE id_vendedor = ?', [id_vendedor])
-    let fechas = new Date().toLocaleDateString("en-CA");
+    codeVendedor = codeAfiliado[0].id_vendedor
     const numAfiliados = 00
-    const datos_PorDefectosAfl = { fecha: fechas, numAfiliados: numAfiliados, idVendedor: codeAfiliado[0].id_vendedor }
+    const datos_PorDefectosAfl = { fecha, numAfiliados: numAfiliados, idVendedor: codeAfiliado[0].id_vendedor }
     console.log("DATOS XXXXX", datos_PorDefectosAfl);
-
     await conexion.query('INSERT INTO historialvendedores SET ?', [datos_PorDefectosAfl])
+    
+    // Insertando datos en la tabla historial ganancias de vendedores
+    const dataVentas = { fecha, numVentas: 0, idVendedor: id_vendedor, codigo_afiliado }
+    await conexion.query('INSERT INTO historial_numVentas SET ?', [dataVentas])
+
     res.redirect('https://3csigmawater.com')
 }
 

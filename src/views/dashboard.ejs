@@ -8,42 +8,35 @@
 }
 </style>
     <body>
-
         <!-- Begin page -->
         <div id="layout-wrapper">
-
         <!-- =======FIXME: MENU ========================== -->
         <%- include ('./partials/menu.ejs')%>
         <!-- =======FIXME: MENU ========================== -->
-
-          
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
 
-
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box d-sm-flex align-items-center
-                justify-content-between">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0 font-size-18">Dashboard</h4>
-
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript:
-                                void(0);">Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
                                         <li class="breadcrumb-item active">Dashboard</li>
                                     </ol>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
 
-
+                    <!-- GRÁFICAS DEL DASHBOARD PRINCIPAL x VENDEDOR -->
                     <div class="row">
+
+                        <!-- GRÁFICA PARA NÚMERO DE VENTAS PROPIAS x VENDEDOR -->
                         <div class="col-xl-3 col-md-6">
                             <!-- card -->
                             <div class="card card-h-100">
@@ -51,28 +44,30 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block
-                                    text-truncate">Mis ventas</span>
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Mis ventas</span>
                                             <h4 class="mb-3">
-                                                $<span class="counter-value" data-target="34.846">0</span>
+                                                <span class="counter-value" data-target="<%=numVentas_.propias%>">0</span>
                                             </h4>
                                         </div>
 
                                         <div class="col-6">
-                                            <div id="mini-chart1" data-colors='["#5156be"]'
-                                                class="apex-charts mb-2"></div>
+                                            <div id="chart-ventasPropiasVendedor" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                            <input type="hidden" id="json-ventasVendedor" value="<%= json_ventasVendedor %>">
                                         </div>
                                     </div>
                                     <div class="text-nowrap">
-                                        <span class="badge bg-soft-success
-                                text-success">+$20.9k</span>
-                                        <span class="ms-1 text-muted font-size-13">Since
-                                            last week</span>
+                                        <% if (rendimiento_vPropias > 0 ){ %> 
+                                            <span class="badge bg-soft-success text-success">+<%=rendimiento_vPropias%>%</span>
+                                        <% } else { %> 
+                                            <span class="badge bg-soft-danger text-danger"><%=rendimiento_vPropias%>%</span>
+                                        <% } %>
+                                        <span class="ms-1 text-muted font-size-13">Desde semana anterior</span>
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->
                         </div><!-- end col -->
 
+                        <!-- GRÁFICA PARA NÚMERO DE VENTAS DE AFILIADOS x VENDEDOR -->
                         <div class="col-xl-3 col-md-6">
                             <!-- card -->
                             <div class="card card-h-100">
@@ -80,27 +75,29 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block
-                                    text-truncate">Ventas de afiliados</span>
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Ventas de mis afiliados</span>
                                             <h4 class="mb-3">
-                                                $<span class="counter-value" data-target="6.258">0</span>
+                                                <span class="counter-value" data-target="<%=numVentas_.afiliados%>">0</span>
                                             </h4>
                                         </div>
                                         <div class="col-6">
-                                            <div id="mini-chart2" data-colors='["#5156be"]'
-                                                class="apex-charts mb-2"></div>
+                                            <div id="chart-ventasAfiliadosVendedor" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                            <input type="hidden" id="json-ventasAfiliados" value="<%= json_ventasAfiliados %>">
                                         </div>
                                     </div>
                                     <div class="text-nowrap">
-                                        <span class="badge bg-soft-danger text-danger">-29
-                                            Trades</span>
-                                        <span class="ms-1 text-muted font-size-13">Since
-                                            last week</span>
+                                        <% if(rendimiento_vAfiliados > 0 ){ %> 
+                                            <span class="badge bg-soft-success text-success">+<%=rendimiento_vAfiliados%>%</span>
+                                        <% } else {%> 
+                                            <span class="badge bg-soft-danger text-danger"><%=rendimiento_vAfiliados%>%</span>
+                                        <% } %>
+                                        <span class="ms-1 text-muted font-size-13">Desde semana anterior</span>
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->
                         </div><!-- end col-->
 
+                        <!-- GRÁFICA PARA NÚMERO DE CLIENTES AGREGADOS x VENDEDOR -->
                         <div class="col-xl-3 col-md-6">
                             <!-- card -->
                             <div class="card card-h-100">
@@ -108,13 +105,14 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block
-                                    text-truncate">Clientes añadidos</span>
-                                            <h4 class="mb-3"> <%= totalCliente%></h4>
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Clientes añadidos</span>
+                                            <h4 class="mb-3"> 
+                                                <span class="counter-value" data-target="<%=totalCliente%>"></span>
+                                            </h4>
                                         </div>
                                         <div class="col-6">
-                                            <div id="mini-chart3" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
-                                              <input type="hidden" id="datosJson_clAgregados" value="<%= datosJson_clAgregados %>">
+                                            <div id="chart-clientesAgregados" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                            <input type="hidden" id="datosJson_clAgregados" value="<%= datosJson_clAgregados %>">
                                           </div>
                                      </div>
                                     <div class="text-nowrap">
@@ -129,6 +127,7 @@
                             </div><!-- end card -->
                         </div><!-- end col -->
 
+                        <!-- GRÁFICA PARA NÚMERO DE VENDEDORES AFILIADOS x VENDEDOR LOGUEADO -->
                         <div class="col-xl-3 col-md-6">
                             <!-- card -->
                             <div class="card card-h-100">
@@ -140,7 +139,7 @@
                                             <h4 class="mb-3"><span ><%= totalAfiliado %></span></h4>
                                         </div>
                                         <div class="col-6">
-                                            <div id="mini-chart4" data-colors='["#5156be" ]'class="apex-charts mb-2"></div>
+                                            <div id="chart-afiliadosAgregados" data-colors='["#5156be" ]'class="apex-charts mb-2"></div>
                                             <input type="hidden" id="datosJson_aflAgregados" value="<%= datosJson_aflAgregados %>">
                                         </div>
                                     </div>

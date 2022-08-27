@@ -6,7 +6,7 @@ const cron = require('node-cron');
 const { isAuthenticated} = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
-        agendarInstalacionProducto,getRegistrarInstalacion,elegirSistema,historialClientes, historialVendedores } = require('../controllers/customerFormControllers');
+        agendarInstalacionProducto, getRegistrarInstalacion, elegirSistema, historialClientes, historialVendedores, historial_numVentas } = require('../controllers/customerFormControllers');
 
 const {servicioInstaladosx} = require("../controllers/adminControllers");  
   
@@ -83,15 +83,21 @@ router.get('/nuevo-cliente', isAuthenticated,(req, res) => {
 });
 router.get('/lista-clientes', isAuthenticated, listarClientes)
 
+router.get('probandoG', historial_numVentas)
 
-
-
+// Ejecución Semanal
 cron.schedule('0 22 * * Sun',() => {
-    console.log("Hola desde cron job")
     historialClientes();
+    historial_numVentas();
 });
+
+// cron.schedule('* * * * *',() => {
+//     historialClientes();
+//     historial_numVentas();
+// });
+
+// Ejecución Mensual
 cron.schedule('0 15 12 Jan-Dec *',() => {
-    console.log("Hola desde cron job")
     historialVendedores();
 });
 
