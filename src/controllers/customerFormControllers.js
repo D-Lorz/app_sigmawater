@@ -19,7 +19,6 @@ exports.registrarClientes = async (req, res) => {
   const dia = new Date().getDate();
   console.log(dia);
 
-
   const nombre = req.body.nombre;
   const segundo_nombre = req.body.segundo_nombre;
   const apellido = req.body.apellido;
@@ -567,7 +566,6 @@ exports.numeroClientes = async (req, res) => {
   }
 
   let ventasCiudades = await conexion.query("SELECT nc.ciudad, nc.latitud, nc.longitud, nc.codigo_postal FROM nuevos_cliente nc JOIN servicios_de_instalacion si ON nc.id = si.id_cliente WHERE nc.id_vendedor = ?;", [id_vendedor]);
- 
   if (ventasCiudades.length > 0)  { 
     // ventasCiudades = ventasCiudades[0]
   console.log("VENTAS CIUDADAES =>>>", ventasCiudades);
@@ -575,13 +573,8 @@ exports.numeroClientes = async (req, res) => {
    }
     let datosJson_ventasCiudades = JSON.stringify(ventasCiudades);
  
-  res.render("dashboard", {
-    user: req.user,
-    totalCliente: countCliente[0].totalClientes,
-    totalAfiliado: countAfiliados[0].totalAfiliados,
-    datosJson_clAgregados, rendimientoCl, 
-    datosJson_aflAgregados, rendimientoAfl,
-    datosJson_ventasCiudades
+  res.render("dashboard", { user: req.user, totalCliente: countCliente[0].totalClientes, totalAfiliado: countAfiliados[0].totalAfiliados,
+    datosJson_clAgregados, rendimientoCl, datosJson_aflAgregados, rendimientoAfl, datosJson_ventasCiudades
   });
 };
 

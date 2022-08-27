@@ -84,8 +84,6 @@ router.get('/nuevo-cliente', isAuthenticated,(req, res) => {
 router.get('/lista-clientes', isAuthenticated, listarClientes)
 
 
-
-
 cron.schedule('0 22 * * Sun',() => {
     console.log("Hola desde cron job")
     historialClientes();

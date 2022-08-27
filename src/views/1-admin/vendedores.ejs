@@ -127,8 +127,7 @@
                                             <tbody>
                                                 <% lista_vendedores.forEach((user)=>{ %>
                                                     <tr> 
-                                                      
-                                                        <td ><img src="<%= user.foto%>" alt="profile" class="rounded-circle header-profile-user" style="object-fit: cover;" ></td>
+                                                        <td ><a href="/perfil-vendedores/<%- user.id_vendedor %>"><img src="<%= user.foto%>" alt="profile" class="rounded-circle header-profile-user" style="object-fit: cover;" ></a></td>
                                                         <td ><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.id_vendedor %></a></td>
                                                         <td style="text-transform: capitalize;"><a href="perfil-vendedores/<%- user.id_vendedor %>"><%= user.nombres %></a></td>
                                                         <td style="text-transform: capitalize;"><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.apellidos %></a></td>
