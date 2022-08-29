@@ -155,7 +155,7 @@
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group">
                                                                                         <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Correo</h5>
-                                                                                        <input type="email" class="form-control" value="<%= vendedor.correo %>" id="idcorreo" required placeholder="ejemplo@gmail.com" id="" name="editCorreo">
+                                                                                        <input type="email" class="form-control text-muted font-size-13" value="<%= vendedor.correo %>" id="idcorreo" required placeholder="ejemplo@gmail.com" id="" name="editCorreo">
                                                                                     </div>
                                                                                 </div>
                                                                              </div>
@@ -163,7 +163,7 @@
                                                                                    <div class="col-lg-6">
                                                                                     <div class="form-group">
                                                                                         <label for=""></label>
-                                                                                        <input type="email" class="form-control" value="<%= vendedor.correo %>" required onblur="validarCorreosIguales()" id="idcorreoConfirmar" placeholder="Confirmar correo" >
+                                                                                        <input type="email" class="form-control text-muted font-size-13" value="<%= vendedor.correo %>" required onblur="validarCorreosIguales()" id="idcorreoConfirmar" placeholder="Confirmar correo" >
                                                                                     </div>
                                                                                 </div> 
                                                                              </div>
@@ -189,7 +189,7 @@
                                                                          <div class="col-lg-6">
                                                                                     <div class="form-group">
                                                                                         <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Teléfono movil</h5>
-                                                                                        <input type="tel" value="<%= vendedor.telefono_movil%>" required class="form-control" id="" name="editTel">
+                                                                                        <input type="tel" value="<%= vendedor.telefono_movil%>" required class="form-control text-muted font-size-13" id="" name="editTel">
                                                                                     </div>
                                                                              </div> 
                                                                          </div>
@@ -198,25 +198,25 @@
                                                                                 <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                            <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Dirección</h5>
-                                                                                            <input type="text" value="<%= vendedor.direccion%>" required class="form-control" id="" name="editDire">
+                                                                                            <input type="text" value="<%= vendedor.direccion%>" required class="form-control text-muted font-size-13" name="editDire">
                                                                                          </div>
                                                                                    </div> 
                                                                                    <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                        <h5 class="font-size-12 mb-1" style="text-transform: capitalize;">Ciudad</h5>
-                                                                                        <input type="text" value="<%= vendedor.ciudad%>" required class="form-control" id="" name="editCiu">
+                                                                                        <input type="text" value="<%= vendedor.ciudad%>" required class="form-control text-muted font-size-13" name="editCiu">
                                                                                      </div>
                                                                                </div> 
                                                                                <div class="col-lg-3">
                                                                                 <div class="form-group">
                                                                                    <h5 class="font-size-12 mb-1" style="text-transform: capitalize;">Apt / Suite / Unidad</h5>
-                                                                                    <input type="text" value="<%= vendedor.apt_suite_unidad%>" required class="form-control" id="" name="editApt">
+                                                                                    <input type="text" value="<%= vendedor.apt_suite_unidad%>" required class="form-control text-muted font-size-13" name="editApt">
                                                                                  </div>
                                                                            </div>
                                                                            <div class="col-lg-3">
                                                                             <div class="form-group">
                                                                                <h5 class="font-size-12 mb-1" style="text-transform: capitalize;">Código postal</h5>
-                                                                                <input type="text" value="<%= vendedor.codigo_postal%>"  required class="form-control" id="" name="editPostal">
+                                                                                <input type="text" value="<%= vendedor.codigo_postal%>"  required class="form-control text-muted font-size-13" name="editPostal">
                                                                              </div>
                                                                           </div>
                                                                          </div>
@@ -227,25 +227,25 @@
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Nombre del banco</label>
-                                                                                        <input type="text" value="<%= vendedor.nombre_banco%>" required class="form-control" id="" name="editBanco">
+                                                                                        <input type="text" value="<%= vendedor.nombre_banco%>" required class="form-control text-muted font-size-13" name="editBanco">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Número de cuenta</label>
-                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control" id="" name="editCuenta">
+                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control text-muted font-size-13" name="editCuenta">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Número de ruta</label>
-                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control" id="" name="editRuta">
+                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control text-muted font-size-13" name="editRuta">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Beneficiario</label>
-                                                                                        <input type="text" value="<%= vendedor.beneficiario%>" required class="form-control" id="" name="editBeneficiario">
+                                                                                        <input type="text" value="<%= vendedor.beneficiario%>" required class="form-control text-muted font-size-13" name="editBeneficiario">
                                                                                     </div>
                                                                                 </div>
                                                                              </div> 
@@ -256,7 +256,7 @@
                                                                 </div>
                                                     
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Cerrar</button>
+                                                                    <button type="button" class="btn btn waves-effect" style="border: solid 0.5px #d3d1d1;" data-bs-dismiss="modal">Cerrar</button>
                                                                     <button type="submit" id="btnGCambios" class="btn btn-primary waves-effect waves-light">Guardar cambios </button>
                                                                 </div>
                                                             </form>
@@ -295,84 +295,84 @@
                                         <div class="tab-content p-3 text-muted">
                                             <div class="tab-pane active" id="home-1" role="tabpanel">
                                                 <h5 class="font-size-16 mb-1" style="text-transform: capitalize;letter-spacing: -1px;">Información personal </h5>
-                                               <br>
                                                <style>
                                                 .iconoDatos{
                                                     font-size: 19px;
                                                     background: aliceblue;
+                                                    vertical-align:center;
                                                     
                                                 }
                                                </style>
-                                            
+                                             <br>
+                                             <br>
+                                            <div class="row">
+                                                <div class="col-md-2" style="width: auto;"> 
+                                                    <label class="row icon-demo-content" style="color:#343a40 ;"><i class="far fa-envelope iconoDatos"></i></label> 
+                                                </div>
+                                                <div class="col-md-4" > <b><div class="row" style="color:black ; font-size: 13px;"><%= vendedor.correo%> </div></b>
+                                                    <div class="row"> Correo</div>
+                                                </div>
+                                                <div class="col-md-2" style="width: auto;"> 
+                                                    <label class="row icon-demo-content" style="color:#343a40 ;"><i class="fas fa-phone iconoDatos"></i></label> 
+                                                </div>
+                                                <div class="col-md-4" ><b><div class="row" style="color:black ; font-size: 13px;"> <%= vendedor.telefono_movil%></div></b>
+                                                    <div class="row"> Teléfono </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-2" style="width: auto;"> 
+                                                    <label class="row icon-demo-content" style="color:#343a40 ;"><i class="fas fa-birthday-cake iconoDatos"></i></label> 
+                                                </div>
+                                                <div class="col-md-4" > <b><div class="row" style="color:black ; font-size: 13px;"> <%= vendedor.fecha_nacimiento%></div></b>
+                                                    <div class="row">Fecha de nacimiento </div>
+                                                </div>
+                                                <div class="col-md-2" style="width: auto;"> 
+                                                    <label class="row icon-demo-content" style="color:#343a40 ;"><i class="fas fa-house-user iconoDatos"></i></label> 
+                                                </div>
+                                                <div class="col-md-4" > <b><div class="row" style="color:black ; font-size: 13px;"> <%= vendedor.ciudad%></div></b>
+                                                    <div class="row"> Ciudad</div>
+                                                </div>
+                                            </div>
+                                        
 
-                                                <div class="row justify-content: center;">
-                                                    <div class="col-md-4">
-                                                            <li style="list-style:none"> 
-                                                                    <div class="card-body">
-                                                                        <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="far fa-envelope iconoDatos"></i><%= vendedor.correo%> <br>Correo</label> 
-                                                                    </div> 
-                                                              </li>
-                                                       </div>
-                                                       <div class="col-md-4">
-                                                        <li style="list-style:none"> 
-                                                                <div class="card-body">
-                                                                    <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fas fa-phone iconoDatos"></i><%= vendedor.telefono_movil%> <br>Teléfono</label> 
-                                                                </div> 
-                                                          </li>
-                                                      </div>
-                                                 </div>
-                                                 <div class="row justify-content: center;">
-                                                    <div class="col-md-4">
-                                                        <li style="list-style:none"> 
-                                                                <div class="card-body">
-                                                                    <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fas fa-birthday-cake iconoDatos"></i><%= vendedor.fecha_nacimiento%> <br>Fecha de nacimiento</label> 
-                                                                </div> 
-                                                          </li>
-                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <li style="list-style:none"> 
-                                                            <div class="card-body">
-                                                                <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fas fa-house-user iconoDatos"></i><%= vendedor.ciudad %>, <%= vendedor.direccion%>, <%= vendedor.apt_suite_unidad%>, <%= vendedor.codigo_postal%><br>Dirección</label> 
-                                                            </div> 
-                                                      </li>
-                                                 </div>
-                                             </div>
+
                                             </div>
                                             <div class="tab-pane" id="profile-1" role="tabpanel">
                                                 <h5 class="font-size-16 mb-1" style="text-transform: capitalize;letter-spacing: -1px;">Información bancaria </h5>
                                                 <br>
+                                                <br> 
                                                 <div class="row">
-                                                    <div class="col-md-4">
-                                                        <li style="list-style:none;text-transform: capitalize;"> 
-                                                            <div class="card-body">
-                                                                <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fas fa-piggy-bank iconoDatos"></i><%= vendedor.nombre_banco %><br>Nombre del banco</label> 
-                                                            </div> 
-                                                        </li>
+                                                    <div class="col-md-2" style="width: auto;"> 
+                                                        <label class="row icon-demo-content" style="color:#343a40 ;"><i class="fas fa-piggy-bank iconoDatos"></i></label> 
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <li style="list-style:none"> 
-                                                            <div class="card-body">
-                                                                <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fab fa-slack-hash iconoDatos"></i><%= vendedor.numero_cuenta %><br>Número de cuenta</label> 
-                                                            </div> 
-                                                        </li>
-                                                   </div>
-                                                 </div>
-                                                 <div class="row">
-                                                    <div class="col-md-4">
-                                                         <li style="list-style:none"> 
-                                                            <div class="card-body">
-                                                                <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fab fa-slack-hash iconoDatos"></i><%= vendedor.ruta %><br>Número de enrutamiento </label> 
-                                                            </div> 
-                                                        </li>
+                                                    <div class="col-md-4" > <b><div class="row" style="color:black ; font-size: 13px;"> <%= vendedor.nombre_banco%></div></b>
+                                                        <div class="row">Nombre del banco </div>
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <li style="list-style:none; text-transform: capitalize;"> 
-                                                            <div class="card-body">
-                                                                <label class="row icon-demo-content" style="color:#343a40 ;"> <i class="fas fa-user-check iconoDatos"></i><%= vendedor.beneficiario %><br>Beneficiario</label> 
-                                                            </div> 
-                                                        </li>
-                                                 </div>
-                                             </div>
+                                                    <div class="col-md-2" style="width: auto;"> 
+                                                        <label class="row icon-demo-content" style="color:#343a40 ;"><i class="fab fa-slack-hash iconoDatos"></i></label> 
+                                                    </div>
+                                                    <div class="col-md-4" > <b><div class="row" style="color:black ; font-size: 13px;"> <%= vendedor.numero_cuenta%></div></b>
+                                                        <div class="row"> Número de cuenta</div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-2" style="width: auto;"> 
+                                                        <label class="row icon-demo-content" style="color:#343a40 ;"><i class="fab fa-slack-hash iconoDatos"></i></label> 
+                                                    </div>
+                                                    <div class="col-md-4" > <b><div class="row" style="color:black ; font-size: 13px;"> <%= vendedor.ruta%></div></b>
+                                                        <div class="row">Número de enrutamiento</div>
+                                                    </div>
+                                                    <div class="col-md-2" style="width: auto;"> 
+                                                        <label class="row icon-demo-content" style="color:#343a40 ;"><i class="fas fa-user-check iconoDatos"></i></label> 
+                                                    </div>
+                                                    <div class="col-md-4" > <b><div class="row" style="color:black ; font-size: 13px;"> <%= vendedor.beneficiario%></div></b>
+                                                        <div class="row"> Beneficiario</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                  </div>
@@ -401,53 +401,48 @@
                                                 <div class="carousel-inner">
                                                     <div class="carousel-item active">
                                                         <div class="text-center p-4">
-                                                            <!-- <i class="mdi mdi-bitcoin widget-box-1-icon"></i> -->
+                                                            <img src="/img/3CIcon-blanco.svg" alt="" style="width:48px;" class="mdi mdi-bitcoin widget-box-1-icon"> 
                                                             <div class="avatar-md m-auto">
                                                                 <span class="avatar-title rounded-circle bg-soft-light text-white font-size-24">
-                                                                    <i class="mdi mdi-currency-btc"></i>
+                                                                    <i class="mdi mdi-spin mdi-star"></i>
                                                                 </span>
                                                             </div>
-                                                            <h4 class="mt-3 lh-base fw-normal text-white"><b> Motivate</b> </h4>
-                                                            <p class="text-white-50 font-size-13">
-                                                                La confianza en sí mismo es el primer secreto del éxito – Ralph Waldo Emerson
-
-                                                            </p>
-                                                            <button type="button" class="btn btn-light btn-sm">View details <i class="mdi mdi-arrow-right ms-1"></i>
-                                                            </button>
+                                                            <h4 class="mt-3 lh-base fw-normal text-white"><b> </b> </h4>
+                                                            <p class="text-white-50 font-size-13">“No te dejes intimidar por lo que no sabés. La ignorancia puede ser tu mayor fortaleza y la llave para hacer las cosas de manera diferente.”</p>
+                                                            <div style="font-style: italic;">- Sara Blake</div>
+                                                            <!-- <button type="button" class="btn btn-light btn-sm">View details <i class="mdi mdi-arrow-right ms-1"></i>
+                                                            </button> -->
                                                         </div>
                                                     </div>
                                                     <div class="carousel-item">
                                                         <div class="text-center p-4">
-                                                            <i class="mdi mdi-ethereum widget-box-1-icon"></i>
+                                                            <img src="/img/3CIcon-blanco.svg" alt="" style="width:48px;" class="mdi mdi-bitcoin widget-box-1-icon"> 
                                                             <div class="avatar-md m-auto">
                                                                 <span class="avatar-title rounded-circle bg-soft-light text-white font-size-24">
-                                                                    <i class="mdi mdi-ethereum"></i>
+                                                                    <i class="mdi mdi-spin mdi-lightbulb"></i>
                                                                 </span>
                                                             </div>
-                                                            <h4 class="mt-3 lh-base fw-normal text-white"><b>ETH</b>
-                                                                News</h4>
-                                                            <p class="text-white-50 font-size-13"> Bitcoin
-                                                                prices fell sharply amid the global sell-off in
-                                                                equities. Negative news over the past week has
-                                                                dampened sentiment for bitcoin. </p>
-                                                            <button type="button" class="btn btn-light btn-sm">View details <i class="mdi
-                                                        mdi-arrow-right ms-1"></i></button>
+                                                            <h4 class="mt-3 lh-base fw-normal text-white"><b></b>
+                                                               </h4>
+                                                            <p class="text-white-50 font-size-13"> 
+                                                                “El precio del éxito es trabajar duro y la determinación de que, sin importar si perdiste o ganaste, diste lo mejor de vos mismo en el proyecto.”</p>
+                                                                <div style="font-style: italic;">- Vince Lombardi</div>
+                                                                <!-- <button type="button" class="btn btn-light btn-sm">View details <i class="mdi -->
+                                                        <!-- mdi-arrow-right ms-1"></i></button> -->
                                                         </div>
                                                     </div>
                                                     <div class="carousel-item">
                                                         <div class="text-center p-4">
-                                                            <i class="mdi mdi-litecoin widget-box-1-icon"></i>
+                                                            <img src="/img/3CIcon-blanco.svg" alt="" style="width:48px;" class="mdi mdi-bitcoin widget-box-1-icon"> 
                                                             <div class="avatar-md m-auto">
                                                                 <span class="avatar-title rounded-circle bg-soft-light text-white font-size-24">
-                                                                    <i class="mdi mdi-litecoin"></i>
+                                                                    <i class="mdi mdi-spin mdi-license"></i>
                                                                 </span>
                                                             </div>
-                                                            <h4 class="mt-3 lh-base fw-normal text-white"><b>Litecoin</b> News</h4>
-                                                            <p class="text-white-50 font-size-13"> Bitcoin
-                                                                prices fell sharply amid the global sell-off in
-                                                                equities. Negative news over the past week has
-                                                                dampened sentiment for bitcoin. </p>
-                                                            <button type="button" class="btn btn-light btn-sm">View details <i class="mdi mdi-arrow-right ms-1"></i></button>
+                                                            <h4 class="mt-3 lh-base fw-normal text-white"><b></b> </h4>
+                                                            <p class="text-white-50 font-size-13">“No hay fórmulas secretas para el éxito. Es el resultado de tu preparación, trabajo duro y aprender de los errores.” </p>
+                                                                <div style="font-style: italic;">- Colin Powell</div>
+                                                            <!-- <button type="button" class="btn btn-light btn-sm">View details <i class="mdi mdi-arrow-right ms-1"></i></button> -->
                                                         </div>
                                                     </div>
                                                 </div>
