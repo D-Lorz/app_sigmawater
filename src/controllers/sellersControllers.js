@@ -1,5 +1,6 @@
 const conexion = require("../database/db");
 const bcryptjs = require("bcryptjs");
+var nodemailer = require('nodemailer');
 
 // todo: GENERADOR DE CODIGO DE VENDEDOR APHANUMERICO
 const generateRandomString = (num) => {
@@ -47,7 +48,6 @@ exports.registrar = async (req, res) => {
   const trasera = "../licences/" + urlLicencias[1];
   const licencia_conduccion = JSON.stringify({ frontal: frontal, trasera: trasera});
   const id_vendedor = generateRandomString(6);
-  // const pass = "$2a$12$msXcGKVUSc2qWc6d5TPZtOOByPNy0Vk6387rE6GyvtMLdIBRwqjhC";
 
   const nuevoRegistro = {
     year, mes,semana,dia, nombres, apellidos,fecha_nacimiento,telefono_movil,
@@ -58,6 +58,57 @@ exports.registrar = async (req, res) => {
 
   await conexion.query("INSERT INTO usuarios SET ?", [usuarios]);
   await conexion.query("INSERT INTO registro_de_vendedores SET ?", [ nuevoRegistro ]);
+
+  console.log("\n");
+  console.log("*****");
+  console.log("+========= >>>>>> HUBO UN NUEVO REGISTRO <<<<<<<<<<============"); 
+  console.log("*****"); 
+  console.log("\n");
+
+  // ! **************************************************
+  let admin = await conexion.query("SELECT * FROM usuarios WHERE rol = 'administrador'");
+     
+
+  var isError = false;
+ 
+  var transporter = nodemailer.createTransport({ 
+   host: 'mail.3csigmawater.com',
+      port: 465, //cambiar el puerto a 465 cuando antes de subir al server el proyecto
+      auth: {
+          user: 'noreplys@3csigmawater.com', // Your correo id
+          pass: '3csigma3c' // Your pass
+      }
+   });
+  
+   var mailOptions = {
+       from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
+           to: 'jeancarlos.tovioleiva@unitecnar.edu.co',
+           subject: 'Mensaje solo para administrador',
+           html: 'Hola administrador un nuevo vendedor se a registrado su nombre es:'+ nombres + apellidos ,
+           err: isError
+  
+  };
+    // send mail with defined transport object
+   transporter.sendMail(mailOptions, function (error, info) {
+   if (error) {
+   console.log('\nERROR: ' + error+'\n');
+   res.json({ yo: 'error' });
+   } else {
+    console.log('\nRESPONSE SENT: ' + info.response+'\n');
+  
+   }
+   });
+ 
+ // ! **************************************************
+
+
+
+
+
+
+
+
+
   let idConsecutivo = await conexion.query("SELECT id FROM registro_de_vendedores WHERE id_vendedor = ?", [id_vendedor]);
 
   let fecha = new Date().toLocaleDateString("en-CA");

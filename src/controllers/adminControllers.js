@@ -210,17 +210,17 @@ exports.actualizarEstadoVendedor = async (req, res) => {
   if(estado_de_la_cuenta == "bloqueado") {
     codigo_afiliado = " "
     dato_vacio = {codigo_afiliado}
+    dato_vacioUsuario = {codigo_afiliado,estado_de_la_cuenta}
     await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ? ", [dato_vacio, id_vendedor])
     await conexion.query("UPDATE registro_de_vendedores SET ? WHERE codigo_afiliado = ? ", [dato_vacio, id_vendedor])
-    await conexion.query("UPDATE usuarios SET ? WHERE id_vendedor = ? ", [dato_vacio, id_vendedor])
+    await conexion.query("UPDATE usuarios SET ? WHERE id_vendedor = ? ", [dato_vacioUsuario, id_vendedor])
     await conexion.query("UPDATE usuarios SET ? WHERE codigo_afiliado = ? ", [dato_vacio, id_vendedor])
+  
  }else{
   await conexion.query("UPDATE usuarios SET ? WHERE id_vendedor = ? ", [datosEstado_vendedor, id_vendedor])
     let datosUser = await conexion.query("SELECT * FROM usuarios u JOIN registro_de_vendedores rv ON rv.id_vendedor = u.id_vendedor WHERE estado_de_la_cuenta = 'aprobado' && u.id_vendedor = ?", [id_vendedor]);
     datosUser = datosUser[0]
-    console.log("IMPRIMIENDO VENDEDOR ACEPTADO ===>>" , datosUser.nombres);
-    console.log("IMPRIMIENDO VENDEDOR ACEPTADO ===>>" , datosUser.correo);
-    console.log("IMPRIMIENDO VENDEDOR ACEPTADO ===>>" , datosUser.pass);
+
   // ! **************************************************
 
  var isError = false;
@@ -237,7 +237,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
   var mailOptions = {
       from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
           to: datosUser.correo,
-          subject: 'Reset pass Link',
+          subject: 'Bienvenido has sido aprobado',
           html: '<style>'+
                              
           'a[x-apple-data-detectors] {'+
@@ -318,11 +318,11 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">'+
           '<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
           '<tr>'+
-         ' <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">'+
+          '<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">'+
           '<div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://app.3csigmawater.com/imgcorreo/banner-Vaprobado.png" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>'+
           '</td>'+
           '</tr>'+
-         ' </table>'+
+          '</table>'+
           '<table border="0" cellpadding="0" cellspacing="0" class="image_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
           '<tr>'+
           '<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">'+
@@ -349,7 +349,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '<table border="0" cellpadding="0" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
           '<tr>'+
           '<td class="pad" style="width:100%;text-align:center;">'+
-          '<h1 style="margin: 0; color: #ffffff; font-size: 38px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 200%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">¡Felicidades '+ datosUser.nombres + '¡</span></h1>'+
+          '<h1 style="margin: 0; color: #ffffff; font-size: 38px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 200%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">¡Felicidades '+ datosUser.nombres + '!</span></h1>'+
           '</td>'+
           '</tr>'+
           '</table>'+
@@ -382,7 +382,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">'+
           '<tr>'+
           '<td class="pad" style="padding-top:15px;">'+
-         ' <div style="color:#101112;font-size:18px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-weight:400;line-height:180%;text-align:left;direction:ltr;letter-spacing:0px;mso-line-height-alt:32.4px;">'+
+          '<div style="color:#101112;font-size:18px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-weight:400;line-height:180%;text-align:left;direction:ltr;letter-spacing:0px;mso-line-height-alt:32.4px;">'+
           '<p style="margin: 0;">Para continuar, accede a tu plataforma a través del siguiente link, usando esta contraseña temporal</p>'+
           '</div>'+
           '</td>'+
@@ -405,9 +405,9 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '<!--[if mso]></center></v:textbox></v:roundrect><![endif]-->'+
           '</div>'+
           '</td>'+
-         ' </tr>'+
-         ' </table>'+
-         ' </td>'+
+          '</tr>'+
+          '</table>'+
+          '</td>'+
           '</tr>'+
           '</tbody>'+
           '</table>'+
@@ -546,21 +546,21 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '</td>'+
           '</tr>'+
           '</table>'+
-         ' </td>'+
+          '</td>'+
           '</tr>'+
-         ' </table>'+
-         ' </td>'+
-         ' </tr>'+
-         ' </tbody>'+
-         ' </table>'+
-         ' </td>'+
-         ' </tr>'+
+          '</table>'+
+          '</td>'+
+          '</tr>'+
           '</tbody>'+
           '</table>'+
-         ' </td>'+
-         ' </tr>'+
-         ' </tbody>'+
-         ' </table><!-- End -->',
+          '</td>'+
+          '</tr>'+
+          '</tbody>'+
+          '</table>'+
+          '</td>'+
+          '</tr>'+
+          '</tbody>'+
+          '</table><!-- End -->',
     err: isError
  
  };
@@ -575,13 +575,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
   }
   });
 
-
-
 // ! **************************************************
-
-
-
-
   }
   res.send(true)
  }
