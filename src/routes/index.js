@@ -10,13 +10,13 @@ function sendEmail(correo, token) {
         port: 465, //cambiar el puerto a 465 cuando antes de subir al server el proyecto
         auth: {
             user: 'noreplys@3csigmawater.com', // Your correo id
-            pass: 'hola123321123.' // Your pass
+            pass: '3csigma3c' // Your pass
         }
     });
     var mailOptions = {
         from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
         to: correo,
-        subject: 'Reset pass Link - Tutsmake.com',
+        subject: 'Reset pass Link',
         html: '<p>You requested for reset pass, kindly use this <a href="http://localhost:3000/reset-password?token=' + token + '">link</a> to reset your pass</p>'
  
     };
@@ -38,9 +38,7 @@ router.post('/reset-password-correo', function(req, res, next) {
            var token = randtoken.generate(20);
            var sent = sendEmail(correo, token);
              if (sent != '0') {
-                var data = {
-                    token: token
-                }
+                var data = {token: token}
                 connection.query('UPDATE usuarios SET ? WHERE correo ="' + correo + '"', data, function(err, result) {
                     if(err) throw err
                 })
@@ -91,3 +89,6 @@ router.post('/update-password', function(req, res, next) {
         res.redirect('/restablecer-clave');
     });
 })
+
+// **** CORREO DE APROBACION PARA VENDEDORES *******
+

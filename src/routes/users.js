@@ -15,7 +15,7 @@ function sendEmail(correo, token) {
         port: 465, 
         auth: {
             user: 'noreplys@3csigmawater.com', // Your correo id
-            pass: 'hola123321123.' // Your pass
+            pass: '3csigma3c' // Your pass
         }
     });
     let link = "http://localhost:3000/reset-password?token=' + token + '"
@@ -265,6 +265,7 @@ router.get('/restablecer-clave', function (req, res, next) {
 /* send reset pass link in correo */
 router.post('/reset-password-correo', function (req, res, next) {
     var correo = req.body.correo;
+    console.log("IMPRIMIENDO CORREO =====>>>>", correo);
     //console.log(sendEmail(correo, fullUrl));
     connection.query('SELECT * FROM usuarios WHERE correo ="' + correo + '"', function (err, result) {
         if (err) throw err;

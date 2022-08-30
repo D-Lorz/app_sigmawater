@@ -47,7 +47,6 @@ global.urlLicencias = ['front', 'back'];
 global.urlLicenciasClientes = ['front', 'back', 'acuerdo'];
 global.urlEvidenciaServicioInstalado = ['front'];
 
-
 // No almacenar caché
 app.use((req, res, next) => {
   res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
@@ -58,19 +57,16 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/router'));
 app.use('/', require('./routes/customer'));
 app.use('/', require('./routes/admin'));
-app.use('/', require('./routes/sellers'));
-
+app.use('/', require('./routes/sellers')); 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
- 
+
 //app.use('/', indexRouter);
 app.use('/', usersRouter);
- 
 
  // Configuraciones
  app.set('port', process.env.PORT || 3000);
-
 
  app.listen(app.get('port'), () => {
   console.log("***********************************************************")
