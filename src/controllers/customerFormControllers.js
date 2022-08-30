@@ -640,6 +640,55 @@ exports.numeroClientes = async (req, res) => {
     if (penultimo == 0 && ultimo >= 1) { rendimiento_vAfiliados = 100 }
   }
 
+  // CAPTURANDO LAS FACTURAS RECIENTES x VENDEDOR (7 REGISTROS MÁXIMO)
+  const clientes_ = await conexion.query("SELECT * FROM nuevos_cliente WHERE codigo_id_vendedor = ? ORDER BY id DESC LIMIT 7", [idVendedor]);
+  const total_facturas = await conexion.query("SELECT * FROM factura");
+  const total_creditos = await conexion.query("SELECT id_cliente, monto_aprobado FROM solicitar_credito");
+  const facturas_recientes = []
+  // const clientes_ = total_clientes[0];
+  // const clientes_ = total_clientes.filter(i => i.codigo_id_vendedor == )
+  if (clientes_.length > 0) {
+    clientes_.forEach(x => {
+      const credito = total_creditos.find(i => i.id_cliente == x.id)
+      const factura = total_facturas.find(i => i.id_cliente == x.id)
+      console.log("CREDITO >>> ", credito)
+      if (factura && credito) {
+        let comision = "Por definir";
+        if (factura.vendedores) {
+          f = JSON.parse(factura.vendedores)
+          comision =  f[0].comision_final
+        }
+        facturas_recientes.push({
+          numFactura: factura.id_factura,
+          productoVendido: factura.producto_instalado,
+          valorVenta: credito.monto_aprobado,
+          comision,
+          estado: factura.estadoFactura
+        })
+      }
+    })
+  }
+
+  // COMPARATIVA DE VENTAS x VENDEDOR LOGUEADO
+  let topV_ = {}
+  const top_vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, ganancias FROM registro_de_vendedores ORDER BY ganancias DESC LIMIT 5");
+  if (top_vendedores.length > 0) {
+    let cont = 1;
+    const vActual = top_vendedores.find(i => i.id_vendedor == idVendedor)
+    topV_ = top_vendedores.filter(i => i.id_vendedor != idVendedor)
+    if (topV_ && vActual) {
+      topV_.forEach(x => {
+        x.rendimiento = ((parseFloat(x.ganancias - vActual.ganancias) / vActual.ganancias) * 100).toFixed(1);
+        x.rendimiento = parseFloat(x.rendimiento)
+        x.pos = cont;
+        cont++;
+      })
+    }
+  }
+
+  console.log("TOP v >>> ", topV_)
+
+
   res.render("dashboard", {
     user: req.user,
     totalCliente: countCliente[0].totalClientes,
@@ -648,7 +697,8 @@ exports.numeroClientes = async (req, res) => {
     datosJson_aflAgregados, rendimientoAfl,
     datosJson_ventasCiudades,
     numVentas_, json_ventasVendedor, json_ventasAfiliados,
-    rendimiento_vPropias, rendimiento_vAfiliados
+    rendimiento_vPropias, rendimiento_vAfiliados,
+    facturas_recientes, topVendedores: topV_
   });
 };
 
@@ -674,7 +724,7 @@ exports.historialClientes = async (req, res) => {
     idVendedor = v.id;
     const customerObj = { fecha, numClientes, idVendedor };
     await conexion.query("INSERT INTO historialnuevosclientes SET ?", [customerObj]);
-    console.log("Realizando registro en DB....")
+    console.log("Realizando registro en DB HISTORIAL CLIENTES....")
   });
   return "EJECUCIÓN FINALIZADA..!";
 };
@@ -722,15 +772,39 @@ exports.historial_numVentas = async (req, res) => {
 
   const filtroV = ventasFiltro.filter(v => v.semana == semanaActual && v.year == yearActual)
   if (filtroV) {
+    /** FILTRANDO NÚMERO DE VENTAS PROPIAS */
     filtroV.forEach(async v => {
       const numVentas = v.numVentas;
       const idVendedor = v.idVendedor;
       const codigo_afiliado = v.codigo_afiliado;
       const data = { fecha, numVentas, idVendedor, codigo_afiliado };
       await conexion.query("INSERT INTO historial_numventas SET ?", [data]);
-      console.log("Realizando registro en DB....")
+      console.log("Realizando registro en DB historial ventas propias....")
     })
+
+    /** FILTRANDO NÚMERO DE VENTAS DE AFILIADOS x VENDEDOR */
+    const x = filtroV.reduce((prev, v) => {
+      prev[v.codigo_afiliado] = ++prev[v.codigo_afiliado] || 1;
+      return prev;
+    }, {});
+    const obj = new Map();
+    filtroV.forEach((act) => {
+        if (x[act.codigo_afiliado] > 1){
+            if (!obj.has(act.codigo_afiliado)) {
+                obj.set(act.codigo_afiliado, act.numVentas)
+            } else {
+                obj.set(act.codigo_afiliado, obj.get(act.codigo_afiliado)+act.numVentas)
+            }
+        }
+    })
+    const datos = Array.from(obj, ([codigo, numVentas]) => ({codigo, numVentas}));
+    datos.forEach(x => {
+      const dataDB = { fecha, numVentasAfiliados: x.numVentas, idVendedor: x.codigo }
+      conexion.query("INSERT INTO historial_ventas_afiliados SET ?", [dataDB])
+      console.log("Realizando registro en DB historial ventas afiliados....")
+    })
+    console.log("RESULT >> ", datos)
   }
-  // const filtroA = 
+  
   return "EJECUCIÓN FINALIZADA..!";
 };

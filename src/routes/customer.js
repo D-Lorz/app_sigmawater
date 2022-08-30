@@ -85,13 +85,14 @@ router.get('/lista-clientes', isAuthenticated, listarClientes)
 
 router.get('probandoG', historial_numVentas)
 
-// Ejecución Semanal
+// Ejecución Semanal (Domingo 10pm)
 cron.schedule('0 22 * * Sun',() => {
     historialClientes();
     historial_numVentas();
 });
 
-// cron.schedule('* * * * *',() => {
+// Cada segundo omee
+// cron.schedule('* * * * * *',() => {
 //     historialClientes();
 //     historial_numVentas();
 // });
