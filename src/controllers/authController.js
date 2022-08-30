@@ -113,7 +113,6 @@ exports.isAuthenticated = async (req, res, next) => {
                 }else {
                  req.user.foto = "../directorio_dash/images/users/userDefault.gif"     
                 }
-                 console.log("IMPRIENOD FOTO DESDE AUTENTICACION ===>>", fotoUpdate);
                 
                 return next()
             })

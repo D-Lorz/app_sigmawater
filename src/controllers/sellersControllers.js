@@ -208,16 +208,8 @@ exports.facturacion = async (req, res) => {
   const facturacionPropia = await conexion.query( "SELECT f.id_factura, f.fecha_instalacion, nc.nombre, nc.apellido, f.producto_instalado, sc.monto_aprobado, f.comision_total, nc.id as idCliente, f.id_cliente as cliente_factura, f.vendedores, f.estadoFactura FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente JOIN solicitar_credito sc ON nc.id = sc.id_cliente WHERE nc.codigo_id_vendedor = ? ;",
     [id_vendedorA] );
 
-    let suma = 0
+    let sumaComisionPropia = 0
     facturacionPropia.forEach((fp) => {
-    console.log("*******************");
-    console.log("IMPRIMIENDO COMISION TOTAL ===>>",  fp.comision_total);
-    console.log("*******************");
-
-     fp.comision_total =  parseFloat(fp.comision_total)
-     suma += fp.comision_total
-
- 
     fp.factura = {};
     if ((fp.idCliente = fp.cliente_factura)) {
       if (fp.estadoFactura == 0) {
@@ -231,11 +223,14 @@ exports.facturacion = async (req, res) => {
           const vendedores = JSON.parse(fp.vendedores);
           const v = vendedores.find((i) => i.codigo == id_vendedorA);
           fp.comision = v.comision_final;
+
+          fp.comision = parseFloat(fp.comision)
+          sumaComisionPropia += fp.comision
       }
     }
   });
 
-  console.log("SUMA ====>>>>", suma);
+  console.log("SUMA ====>>>>", sumaComisionPropia);
   
 
   let ventas_Vendedores = await conexion.query( "SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ;", [id_vendedorA]);
@@ -246,7 +241,7 @@ exports.facturacion = async (req, res) => {
 
   const facturacionAfiliado = await conexion.query( "SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.vendedores, f.estadoFactura, sc.monto_aprobado FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id WHERE codigo_afiliado = ? ;",
     [id_vendedorA] );
-
+    let sumaComisionAfiliados = 0
   facturacionAfiliado.forEach((afl) => {
     afl.facturaAfl = {};
     if ((afl.idClienten = afl.idClientef)) {
@@ -259,17 +254,23 @@ exports.facturacion = async (req, res) => {
         afl.facturaAfl.color = "badge-soft-success";
         const vendedores = JSON.parse(afl.vendedores);
         const v = vendedores.find((i) => i.codigo == id_vendedorA);
-        afl.comision = v.comision_final;
+        
+        afl.comision =  parseFloat(v.comision_final)
+      
+        console.log("IMPRIMIENDO ===>>>" , afl.comision)
+        sumaComisionAfiliados += afl.comision
+
+         
       }
     }
   });
+  sumaComisionAfiliados = parseFloat(sumaComisionAfiliados).toFixed(1);
+    console.log("SUMA AFL ====>>>>", sumaComisionAfiliados);
 
-  // console.log("_----------------_");
-  // console.log("\nFACTURA PROPIA >> ", facturacionPropia);
-  // console.log("\nFACTURA AFILIADOS >> ", facturacionAfiliado);
-  // console.log("\n");
+    const totalComisiones = parseFloat(sumaComisionPropia) + parseFloat(sumaComisionAfiliados)
+    console.log("IMPRIMIENOD TOTALCOMISIONES >>>" , totalComisiones);
 
-  res.render("ventas-vendedor", { user: req.user,  facturacionPropia, facturacionAfiliado,ventas_Vendedores });
+  res.render("ventas-vendedor", { user: req.user,  facturacionPropia, facturacionAfiliado,ventas_Vendedores,sumaComisionPropia,sumaComisionAfiliados,totalComisiones });
 };
 
 exports.consultarFactura = async (req, res) => {

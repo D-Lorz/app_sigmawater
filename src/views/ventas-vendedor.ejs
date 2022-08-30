@@ -74,54 +74,115 @@
                                     </div>
 
                                 </div>
-                                <div class="row" style="width: 113%;">
-                                <div class="col-lg-3">
-                                    <div class="card text-black">
-                                        <div class="card-body" style="height: 165px;border-radius: 13px;background-image: radial-gradient(circle at 120.71% 50%, #00bbe1 0, #00bae7 12.5%, #00b8eb 25%, #25b7ef 37.5%, #3cb5f2 50%, #4fb3f4 62.5%, #5fb1f6 75%, #6eaef6 87.5%, #7dacf6 100%);" >
-                                            <h5 class="mb-3 text-black" style="text-align: center;font-size: 17px;font-weight: 900;">Numero de ventas</h5>
-                                            <div class="row justify-content-center">
-                                                <div class="col-md-8" style="font-size: 14px;font-weight: 900;">
-                                                 <strong>Ventas individuales</strong>: <%=ventas_Vendedores.ventas_individuales %> 
-                                                 <strong>Ventas de afiliados</strong>: <%=ventas_Vendedores.ventas_afiliados %> 
-                                                 <strong>Ventas de totales</strong>: <%=ventas_Vendedores.total_ventas %> 
+                              <div class="row" >
+                                <div class="col-lg-3" style="width: auto;">
+                                    <div class="card" style="color: #0e2222; border:none;">
+                                        <div class="card-body" style="padding: 31px;height: auto;border-radius: 13px;background: rgb(255,237,195);
+                                        background: linear-gradient(50deg, rgba(255,237,195,1) 0%, rgba(255,232,177,1) 18%, rgba(214,148,148,1) 46%, rgba(212,146,213,1) 60%, rgba(235,181,236,1) 60%, rgba(233,161,233,1) 100%);" >
+                                            <style>
+                                                .iconoDatos{
+                                                    font-size: 12px;
+                                                    background: #0e2222;
+                                                    vertical-align:center;
+                                                 }
+                                               </style>
+                                           
+                                            <div class="row">
+                                                <div class="col-md-2" style="width: auto;"> 
+                                                    <label class="row icon-demo-content"><i class="fas fa-chart-pie iconoDatos" style="color:white;border: none;"></i></label> 
                                                 </div>
-                                               
-                                                <!-- <div class="col-md-4">
-                                                    xxx
-                                                </div> -->
+                                                <div class="col-md-8 text-black" >
+                                                    <div class="row" style="font-size: 17px;font-weight: 900;margin-top: 9px;margin-bottom: 14%;">Número de ventas 
+                                                    </div>
+                                             </div>
                                             </div>
                                            
-
-                                            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                            <div class="row">
+                                                <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                                                    <div class="row">
+                                                        Ventas propias
+                                                    </div>
+                                                    <div class="row" style="font-size: 29px; font-weight: 800;margin-bottom: 3px;">
+                                                        <strong>
+                                                            <%=ventas_Vendedores.ventas_individuales %>
+                                                        </strong>
+                                                    </div>
+                                                   </div>
+                                                <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                                                    <div class="row">
+                                                        Ventas afiliados
+                                                    </div>
+                                                    <div class="row" style="font-size: 29px; font-weight: 800;">
+                                                        <strong>
+                                                            <%=ventas_Vendedores.ventas_afiliados %>
+                                                        </strong>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row" style="font-size: 13px;font-weight: 500;margin-bottom: -22px;">
+                                                    Ventas totales: <%=ventas_Vendedores.total_ventas %>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    
-                                </div><!-- end 3ol -->
-                                <div class="col-lg-3">
-                                    <div class="card text-white-50">
-                                        <div class="card-body" style="height: 165px;border-radius: 13px;;background-image: radial-gradient(circle at -19.64% 62.28%, #f4deff 0, #e0caf9 25%, #c8b5f2 50%, #aca2ec 75%, #8c91e7 100%);" >
-                                            <h5 class="mb-3 text-white" style="text-align: center;font-size: 17px;">Numero de ventas</h5>
-                                            <div class="row justify-content-center">
-                                                <div class="col-md-8" style="color:white;font-size: 14px;">
-                                                 <strong>Ventas individuales</strong>: <%=ventas_Vendedores.ventas_individuales %> 
-                                                 <strong>Ventas de afiliados</strong>: <%=ventas_Vendedores.ventas_afiliados %> 
-                                                 <strong>Ventas de totales</strong>: <%=ventas_Vendedores.total_ventas %> 
+                                </div>
+                                <div class="col-lg-3" style="width: auto;">
+                                    <div class="card" style="color: #0e2222; border:none">
+                                        <div class="card-body" style="padding: 31px;height: auto;border-radius: 13px;background: rgb(188,169,231);
+                                        background: linear-gradient(50deg, rgba(188,169,231,1) 0%, rgba(188,169,231,1) 18%, rgba(175,155,218,1) 46%, rgba(188,169,231,1) 60%, rgba(235,231,244,1) 60%, rgba(188,169,231,1) 100%);" >
+                                            <style>
+                                                .iconoDatos{
+                                                    font-size: 19px;
+                                                    background: #0e2222;
+                                                    vertical-align:center;
+                                                 }
+                                               </style>
+                                           
+                                            <div class="row">
+                                                <div class="col-md-2" style="width: auto;"> 
+                                                    <label class="row icon-demo-content"><i class="fas fa-chart-line iconoDatos" style="color:white;border: none;"></i></label> 
                                                 </div>
-                                               
-                                                <!-- <div class="col-md-4">
-                                                    xxx
-                                                </div> -->
+                                                <div class="col-md-8 text-black" >
+                                                    <div class="row" style="font-size: 17px;font-weight: 900;margin-top: 9px;margin-bottom: 11%;">Ganancias
+                                                    </div>
+                                             </div>
                                             </div>
                                            
-
-                                            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                                            <div class="row">
+                                                <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                                                    <div class="row">
+                                                        Ganancias propias
+                                                    </div>
+                                                    <div class="row" style="font-size: 29px; font-weight: 800;margin-bottom: 3px;">
+                                                        <strong>
+                                                            $<%=sumaComisionPropia %>
+                                                        </strong>
+                                                    </div>
+                                                   
+                                                </div>
+                                                
+                                                <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                                                    <div class="row">
+                                                        Ganacias de afiliados
+                                                    </div>
+                                                    <div class="row" style="font-size: 29px; font-weight: 800;">
+                                                        <strong>
+                                                            $<%=sumaComisionAfiliados %>
+                                                        </strong>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row" style="font-size: 13px;font-weight: 500;margin-bottom: -22px;">
+                                                    Ganancias totales: $<%=totalComisiones %>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    
-                                </div><!-- end 3ol -->
-                            </div>
+                                </div>
+                             </div>
                             </div>
                         </div>
+                        <br>
                         <!-- end page title -->
 
                         <!-- Nav tabs -->
