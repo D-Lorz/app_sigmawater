@@ -84,7 +84,7 @@ exports.registrar = async (req, res) => {
        from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
            to: 'jeancarlos.tovioleiva@unitecnar.edu.co',
            subject: 'Mensaje solo para administrador',
-           html: 'Hola administrador un nuevo vendedor se a registrado su nombre es:'+ nombres + apellidos ,
+           html: 'Hola administrador un nuevo vendedor se a registrado su nombre es: '+ nombres +' '+ apellidos ,
            err: isError
   
   };

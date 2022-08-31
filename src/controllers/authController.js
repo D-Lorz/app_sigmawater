@@ -81,6 +81,15 @@ exports.login = async (req, res) => {
                         timer: 1200,
                         ruta: './'
                     } 
+
+                     
+                    results.forEach((fp) => {
+                      console.log("\n");
+                        console.log("IMPRIMIENDO XXXXXXXXxxxxxxxxxXXX" , fp.rol);
+                        console.log("IMPRIMIENDO XXXXXXXXxxxxxxxxxXXX" , fp.correo);
+                        console.log("\n");
+                       });
+
                     if(results[0].rol === "administrador"){
                         options.ruta = 'administrador'
 
