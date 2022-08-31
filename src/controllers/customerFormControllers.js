@@ -659,24 +659,43 @@ exports.dashboardVendedor = async (req, res) => {
   }
 
   // COMPARATIVA DE VENTAS x VENDEDOR LOGUEADO
-  let topV_ = {}
+  let topV_ = {}, topVendedores = []
   const top_vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, ganancias FROM registro_de_vendedores ORDER BY ganancias DESC LIMIT 5");
   if (top_vendedores.length > 0) {
     let cont = 1;
     const vActual = top_vendedores.find(i => i.id_vendedor == idVendedor)
     topV_ = top_vendedores.filter(i => i.id_vendedor != idVendedor)
+    
     if (topV_ && vActual) {
       topV_.forEach(x => {
-        x.rendimiento = ((parseFloat(x.ganancias - vActual.ganancias) / vActual.ganancias) * 100).toFixed(1);
-        x.rendimiento = parseFloat(x.rendimiento)
-        x.pos = cont;
+        let rendimiento = ((parseFloat(x.ganancias - vActual.ganancias) / vActual.ganancias) * 100).toFixed(1);
+        rendimiento = parseFloat(rendimiento);
+        
+        if (parseFloat(x.ganancias) == 0 && vActual.ganancias == 0) { rendimiento = 0 }
+        if (vActual.ganancias == 0 && parseFloat(x.ganancias) >= 1) { rendimiento = 100 }
+
+        topVendedores.push({
+          nombre: x.nombres + " " + x.apellidos,
+          rendimiento,
+          pos: cont,
+          gananciaA: vActual.ganancias,
+          gananciaB: x.ganancias
+        })
         cont++;
       })
+
+      const diferenciaTop = 5 - topV_.length
+      if (diferenciaTop != 0) {
+        for (let i = 0; i < diferenciaTop; i++) {
+          topVendedores.push({
+            nombre: "-----------------",
+            pos: cont,
+          })
+          cont++;
+        }
+      }
     }
   }
-
-  console.log("TOP v >>> ", topV_)
-
 
   res.render("dashboard", {
     user: req.user,
@@ -687,7 +706,7 @@ exports.dashboardVendedor = async (req, res) => {
     datosJson_ventasCiudades,
     numVentas_, json_ventasVendedor, json_ventasAfiliados,
     rendimiento_vPropias, rendimiento_vAfiliados,
-    facturas_recientes, topVendedores: topV_
+    facturas_recientes, topVendedores
   });
 };
 

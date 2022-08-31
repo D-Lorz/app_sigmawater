@@ -329,8 +329,9 @@
                                 <div class="card-body">
                                     <div class="d-flex flex-wrap align-items-center mb-4">
                                         <h5 class="card-title me-2">Comparativas de ventas </h5>
-                                        <div class="ms-auto">
-                                            <div>
+                                         <div class="ms-auto">
+                                            <div style="width: 305px;"><h5 class="card-title" style="float:left">Top 5 Vendedores </h5></div>
+                                            <!--<div>
                                                 <button type="button" class="btn btn-soft-primary btn-sm">
                                                     ALL
                                                 </button>
@@ -343,7 +344,7 @@
                                                 <button type="button" class="btn btn-soft-secondary btn-sm active">
                                                     1Y
                                                 </button>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
 
@@ -365,15 +366,19 @@
                                                                     </span>
                                                                 </div>
                                                                 <div class="flex-grow-1 ms-3">
-                                                                    <span class="font-size-16"><%=x.nombres%> <%=x.apellidos%></span>
+                                                                    <span class="font-size-16"><%=x.nombre%></span>
                                                                 </div>
 
                                                                 <div class="flex-shrink-0">
-                                                                    <% if (x.rendimiento > 100) { %>
-                                                                        <span class="badge rounded-pill badge-soft-success font-size-12 fw-medium">+<%=x.rendimiento%>%</span>
-                                                                    <% } else { %>
-                                                                        <span class="badge rounded-pill badge-soft-danger font-size-12 fw-medium"><%=x.rendimiento%>%</span>
-                                                                    <% } %>
+                                                                    <% if (x.gananciaB) { %>
+                                                                        <% if (x.gananciaB > x.gananciaA) { %>
+                                                                            <span class="badge rounded-pill badge-soft-success font-size-12 fw-medium">+<%=x.rendimiento%>%</span>
+                                                                        <% } else { %>
+                                                                            <span class="badge rounded-pill badge-soft-danger font-size-12 fw-medium"><%=x.rendimiento%>%</span>
+                                                                        <% } %>
+                                                                    <%} else {%>
+                                                                        <span class="badge rounded-pill badge-soft-secondary font-size-12 fw-medium">0%</span>
+                                                                    <%}%>
                                                                 </div>
                                                             </div>
                                                         </div>

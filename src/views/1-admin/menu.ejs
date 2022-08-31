@@ -1,55 +1,40 @@
 <header id="page-topbar">
     <div class="navbar-header">
+
         <div class="d-flex">
-
             <div class="navbar-brand-box">
-
                 <a href="#" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="../directorio_dash/images/3clogo.svg" alt="" >
+                        <img src="../directorio_dash/images/3clogo.svg" alt="">
                     </span>
                     <span class="logo-lg">
-                        <img src="../directorio_dash/images/logo.svg" alt=""   style="width: 64%;" > <span class="logo-txt"></span>
+                        <img src="../directorio_dash/images/logo.svg" alt="" style="width: 64%;"> <span
+                            class="logo-txt"></span>
                     </span>
                 </a>
-            
                 <a href="#" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="../directorio_dash/images/3clogo.svg" alt="" >
+                        <img src="../directorio_dash/images/3clogo.svg" alt="">
                     </span>
                     <span class="logo-lg">
-                        <img src="../directorio_dash/images/logo.svg" alt=""   style="width: 64%;" > <span class="logo-txt"></span>
+                        <img src="../directorio_dash/images/logo.svg" alt="" style="width: 64%;"> <span
+                            class="logo-txt"></span>
                     </span>
                 </a>
-                
             </div>
-
-                <button type="button" class="btn btn-sm px-3 font-size-16 header-item" id="vertical-menu-btn">
-                    <i class="fa fa-fw fa-bars"></i>
-                </button>
-
-  
+            <button type="button" class="btn btn-sm px-3 font-size-16 header-item" id="vertical-menu-btn">
+                <i class="fa fa-fw fa-bars"></i>
+            </button>
         </div>
 
         <div class="d-flex">
-
-        
-
-           
-  <!-- <a href="https://3csigmawatersystem.secure.simplybook.me/" target="_blank" type="button" class="btn btn-primary"
-  style="height: 41px;margin-top: 4%;font-size: 12px;border-radius: 17px; width: 36%;">
-  <p style="margin: inherit;">Agendar cita <i class="fas fa-calendar-alt" style="margin-left:8%;"></i></p></a> -->
-
-
             <div class="dropdown d-none d-sm-inline-block">
                 <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-
                     <img src="../directorio_dash/images/flags/spain.jpg" alt="Header Language" height="16">
-
                 </button>
-                <div class="dropdown-menu dropdown-menu-end">
 
+                <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
                     <a href="?clang=en" class="dropdown-item notify-item language">
                         <img src="../directorio_dash/images/flags/us.jpg" alt="user-image" class="me-1" height="12">
@@ -58,7 +43,8 @@
 
                     <!-- item-->
                     <a href="?clang=de" class="dropdown-item notify-item language">
-                        <img src="../directorio_dash/images/flags/germany.jpg" alt="user-image" class="me-1" height="12">
+                        <img src="../directorio_dash/images/flags/germany.jpg" alt="user-image" class="me-1"
+                            height="12">
                         <span class="align-middle"> German </span>
                     </a>
 
@@ -82,38 +68,22 @@
                 </div>
             </div>
 
-            <!-- <div class="dropdown d-none d-sm-inline-block">
-                <button type="button" class="btn header-item" id="mode-setting-btn">
-                    <i data-feather="moon" class="icon-lg layout-mode-dark"></i>
-                    <i data-feather="sun" class="icon-lg layout-mode-light"></i>
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item bg-soft-light border-start border-end"
+                    id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle header-profile-user"
+                        src="../directorio_perfilClientes/images/adminProfile.jpg" alt="Header Avatar">
+                    <span class="d-none d-xl-inline-block ms-1 fw-medium">
+                        <%  if(user.rol === "administrador"){%>
+                            <%= user.nombresUser %> <%= user.apellidosUser %> 
+                        <%  }%>
+                    </span>
+                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
-            </div> -->
-
-            
-                <div class="dropdown d-inline-block">
-                    <button type="button" class="btn header-item bg-soft-light border-start border-end"
-                        id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <img class="rounded-circle header-profile-user" src="../directorio_perfilClientes/images/adminProfile.jpg"
-                            alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1 fw-medium">
-                                <%  if(user.rol === "administrador"){%>
-                                    <%= user.correo %> 
-                                <%  }%>
-                                </span>
-                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item-->
-                        <!-- <a class="dropdown-item" href="contacts-profile"><i
-                                class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Perfil</a> -->
-                        <!-- <a class="dropdown-item" href="pages-lock-screen"><i
-                                class="mdi mdi-lock font-size-16 align-middle me-1"></i> Bloquear pantalla</a>
-                        <div class="dropdown-divider"></div> -->
-                        <a class="dropdown-item" href="logout"><i
-                                class="mdi mdi-logout font-size-16 align-middle me-1"></i> Cerrar sesión</a>
-                    </div>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i>Cerrar sesión</a>
                 </div>
+            </div>
 
         </div>
     </div>
@@ -137,9 +107,9 @@
                     </a>
                 </li>
 
-                 <!--==================FIXME:===== OPCIONES ===========================  -->
-                 <%- include ('../1-admin/opciones-menu.ejs')%>
-                 <!--==================FIXME:===== OPCIONES ===========================  -->
+                <!--==================FIXME:===== OPCIONES ===========================  -->
+                <%- include ('../1-admin/opciones-menu.ejs')%>
+                    <!--==================FIXME:===== OPCIONES ===========================  -->
             </ul>
         </div>
         <!-- Sidebar -->

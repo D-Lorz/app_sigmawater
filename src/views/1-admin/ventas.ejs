@@ -482,7 +482,7 @@
                             </tfoot>
                         </table>
                     `
-        return tabla
+        return tabla;
     }
 
     // Parametros (idCliente, Pestaña, Nivel del Vendedor)
@@ -516,10 +516,8 @@
             if (datos) {
 
                 storage = datos // Variable Global..
-                let dt = undefined // Deducciones Totales
-
+                let dt = undefined // Deducciones Totales|
                 console.log("STORAGE: ", storage)
-
                 
                 const idCliente = datos.id
                 const nombreCliente = datos.nombre + " " + datos.apellido
@@ -543,9 +541,13 @@
                 if (datos.factura.estadoTxt == "Pagada") {
                     $("#btnReportarFactura").css('display', 'none')
                     $('.btnAddDeduccion').remove()
+                    const tablaDeducciones_v1 = _crearTablaDeducciones(1, true)
+                    $('#divDeducciones').append(tablaDeducciones_v1);
                 } else {
                     $("#btnReportarFactura").css('display', 'inline-block')
                     _btnAddDeduccion(idCliente, '1', vendedor_principal.nivel)
+                    const tablaDeducciones_v1 = _crearTablaDeducciones(1, false)
+                    $('#divDeducciones').append(tablaDeducciones_v1);
                 }
 
                 $("#idVendedor1").text(vendedor_principal.nombre)
@@ -556,15 +558,15 @@
                 let comisionFinal = vendedor_principal.comision_base
 
                 vendedor_principal.deducciones ? dt = vendedor_principal.deducciones : dt = dt;
-                        
+                
                 if (dt) {
-                    const tablaDeducciones_v1 = _crearTablaDeducciones(1, true)
-                    $('#divDeducciones').append(tablaDeducciones_v1);
                     let subtotal = 0, dt1 = [];
-                    dt.forEach(x => {
-                        dt1 = x.filter((i) => i.tab == 'tab1')
+                    dt.forEach(x => { 
+                        x.forEach(n => {
+                            if (n.tab == 'tab1') dt1.push(n)
+                        })
                     })
-                        
+                    
                     if (dt1.length > 0) {
                         let deducciones1 = ``, i = 1;
                         dt1.forEach(x => {
@@ -589,8 +591,8 @@
                 } else {
                     // Parametros (idCliente, Pestaña, Nivel del Vendedor)
                     // _btnAddDeduccion(idCliente, '1', vendedor_principal.nivel)
-                    const tablaDeducciones_v1 = _crearTablaDeducciones(1, false)
-                    $('#divDeducciones').append(tablaDeducciones_v1);
+                    // const tablaDeducciones_v1 = _crearTablaDeducciones(1, false)
+                    // $('#divDeducciones').append(tablaDeducciones_v1);
                     $("#porcentaje-ganar1").css('display', 'none')
                     if (vendedor_principal.nivel == 4) {
                         $("#porcentaje-ganar1").css('display', 'table-row')
@@ -626,7 +628,11 @@
                     // Si ya existen datos en DB
                     if (dt) {
                         let subtotal2 = 0, dt2 = []
-                        dt.forEach(x => { dt2 = x.filter((i) => i.tab == 'tab2')})
+                        dt.forEach(x => { 
+                            x.forEach(n => {
+                                if (n.tab == 'tab2') dt2.push(n)
+                            })
+                        })
                         if (dt2.length > 0) {
                             let deducciones2 = ``, i = 1;
                             dt2.forEach(x => {
@@ -675,7 +681,14 @@
 
                     if (dt) {
                         let subtotal3 = 0, dt3 = []
-                        dt.forEach(x => { dt3 = x.filter((i) => i.tab == 'tab3')})
+                        dt.forEach(x => { 
+                            x.forEach(n => {
+                                if (n.tab == 'tab3') dt3.push(n)
+                            })
+                        })
+                        
+                        console.log("\nDT3 >>> ", dt3)
+
                         if (dt3.length > 0) {
                             let deducciones3 = ``, i = 1;
                             dt3.forEach(x => {
@@ -725,7 +738,11 @@
                     
                     if (dt) {
                         let subtotal4 = 0, dt4 = []
-                        dt.forEach(x => { dt4 = x.filter((i) => i.tab == 'tab4')})
+                        dt.forEach(x => { 
+                            x.forEach(n => {
+                                if (n.tab == 'tab4') dt4.push(n)
+                            })
+                        })
                         if (dt4.length > 0) {
                             let deducciones4 = ``, i = 1;
                             dt3.forEach(x => {

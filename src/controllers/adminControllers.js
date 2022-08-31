@@ -46,7 +46,7 @@ exports.listarVendedores = async (req, res) => {
 // ! >>>>>>>>> Vista perfil vendedores <<<<<<<<<<<
 exports.listarVendedores_PerfilVendedores = async (req, res) => {
   const id_vendedor = req.params.id;
-  let info_vendedor = await conexion.query("SELECT r.*, u.id as idC_cl, u.id_vendedor as idVendedor, u.foto FROM registro_de_vendedores r JOIN usuarios u ON u.id_vendedor = r.id_vendedor WHERE r.id_vendedor =  ? ", [id_vendedor]);
+  let info_vendedor = await conexion.query("SELECT * FROM registro_de_vendedores r JOIN usuarios u ON u.id_vendedor = r.id_vendedor WHERE r.id_vendedor =  ? ", [id_vendedor]);
   info_vendedor = info_vendedor[0];
   var licencia 
   if (info_vendedor) {
@@ -149,7 +149,7 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
 
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-vendedores", {
-    user: req.user, info_vendedor,fotoUpdate, afiliados,fotoUpdateA,
+    user: req.user, info_vendedor,fotoUpdate, afiliados, fotoUpdateA,
     referente, fotoUpdateR,licencia, viewsUser, infoClientes
   });
 };
