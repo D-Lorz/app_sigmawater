@@ -355,28 +355,30 @@
                                         </div>
                                         <div class="col-xl-4">
                                             <div class="p-4">
-                                                <% topVendedores.forEach(x => { %>
-                                                <div class="mt-3">
-                                                    <div class="d-flex align-items-center">
-                                                            <div class="avatar-sm m-auto">
-                                                                <span class="avatar-title rounded-circle bg-soft-light text-dark font-size-16">
-                                                                    <%=x.pos%>
-                                                                </span>
-                                                            </div>
-                                                            <div class="flex-grow-1 ms-3">
-                                                                <span class="font-size-16"><%=x.nombres%> <%=x.apellidos%></span>
-                                                            </div>
+                                                <% if (topVendedores) {%>
+                                                    <% topVendedores.forEach(x => { %>
+                                                        <div class="mt-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="avatar-sm m-auto">
+                                                                    <span class="avatar-title rounded-circle bg-soft-light text-dark font-size-16">
+                                                                        <%=x.pos%>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="flex-grow-1 ms-3">
+                                                                    <span class="font-size-16"><%=x.nombres%> <%=x.apellidos%></span>
+                                                                </div>
 
-                                                            <div class="flex-shrink-0">
-                                                                <% if (x.rendimiento > 100) { %>
-                                                                    <span class="badge rounded-pill badge-soft-success font-size-12 fw-medium">+<%=x.rendimiento%>%</span>
-                                                                <% } else { %>
-                                                                    <span class="badge rounded-pill badge-soft-danger font-size-12 fw-medium"><%=x.rendimiento%>%</span>
-                                                                <% } %>
+                                                                <div class="flex-shrink-0">
+                                                                    <% if (x.rendimiento > 100) { %>
+                                                                        <span class="badge rounded-pill badge-soft-success font-size-12 fw-medium">+<%=x.rendimiento%>%</span>
+                                                                    <% } else { %>
+                                                                        <span class="badge rounded-pill badge-soft-danger font-size-12 fw-medium"><%=x.rendimiento%>%</span>
+                                                                    <% } %>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                <%})%>
+                                                    <%})%>
+                                                <%}%>
 
                                                 <div class="mt-4 pt-2">
                                                     <a href="/afiliados" class="btn btn-primary w-100">Ver mis afiliados <i class="mdi mdi-arrow-right ms-1"></i></a>
