@@ -64,7 +64,7 @@
                                 <div class="page-title-box d-sm-flex align-items-center
                                         justify-content-between">
                                     <h4 class="mb-sm-0 font-size-18">Ventas </h4>
-                            
+
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript:
@@ -74,115 +74,8 @@
                                     </div>
 
                                 </div>
-                              <div class="row" >
-                                <div class="col-lg-3" style="width: auto;">
-                                    <div class="card" style="color: #0e2222; border:none;">
-                                        <div class="card-body" style="padding: 31px;height: auto;border-radius: 13px;background: rgb(255,237,195);
-                                        background: linear-gradient(50deg, rgba(255,237,195,1) 0%, rgba(255,232,177,1) 18%, rgba(214,148,148,1) 46%, rgba(212,146,213,1) 60%, rgba(235,181,236,1) 60%, rgba(233,161,233,1) 100%);" >
-                                            <style>
-                                                .iconoDatos{
-                                                    font-size: 12px;
-                                                    background: #0e2222;
-                                                    vertical-align:center;
-                                                 }
-                                               </style>
-                                           
-                                            <div class="row">
-                                                <div class="col-md-2" style="width: auto;"> 
-                                                    <label class="row icon-demo-content"><i class="fas fa-chart-pie iconoDatos" style="color:white;border: none;"></i></label> 
-                                                </div>
-                                                <div class="col-md-8 text-black" >
-                                                    <div class="row" style="font-size: 17px;font-weight: 900;margin-top: 9px;margin-bottom: 14%;">Número de ventas 
-                                                    </div>
-                                             </div>
-                                            </div>
-                                           
-                                            <div class="row">
-                                                <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
-                                                    <div class="row">
-                                                        Ventas propias
-                                                    </div>
-                                                    <div class="row" style="font-size: 29px; font-weight: 800;margin-bottom: 3px;">
-                                                        <strong>
-                                                            <%=ventas_Vendedores.ventas_individuales %>
-                                                        </strong>
-                                                    </div>
-                                                   </div>
-                                                <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
-                                                    <div class="row">
-                                                        Ventas afiliados
-                                                    </div>
-                                                    <div class="row" style="font-size: 29px; font-weight: 800;">
-                                                        <strong>
-                                                            <%=ventas_Vendedores.ventas_afiliados %>
-                                                        </strong>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="row" style="font-size: 13px;font-weight: 500;margin-bottom: -22px;">
-                                                    Ventas totales: <%=ventas_Vendedores.total_ventas %>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3" style="width: auto;">
-                                    <div class="card" style="color: #0e2222; border:none">
-                                        <div class="card-body" style="padding: 31px;height: auto;border-radius: 13px;background: rgb(188,169,231);
-                                        background: linear-gradient(50deg, rgba(188,169,231,1) 0%, rgba(188,169,231,1) 18%, rgba(175,155,218,1) 46%, rgba(188,169,231,1) 60%, rgba(235,231,244,1) 60%, rgba(188,169,231,1) 100%);" >
-                                            <style>
-                                                .iconoDatos{
-                                                    font-size: 19px;
-                                                    background: #0e2222;
-                                                    vertical-align:center;
-                                                 }
-                                               </style>
-                                           
-                                            <div class="row">
-                                                <div class="col-md-2" style="width: auto;"> 
-                                                    <label class="row icon-demo-content"><i class="fas fa-chart-line iconoDatos" style="color:white;border: none;"></i></label> 
-                                                </div>
-                                                <div class="col-md-8 text-black" >
-                                                    <div class="row" style="font-size: 17px;font-weight: 900;margin-top: 9px;margin-bottom: 11%;">Ganancias
-                                                    </div>
-                                             </div>
-                                            </div>
-                                           
-                                            <div class="row">
-                                                <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
-                                                    <div class="row">
-                                                        Ganancias propias
-                                                    </div>
-                                                    <div class="row" style="font-size: 29px; font-weight: 800;margin-bottom: 3px;">
-                                                        <strong>
-                                                            $<%=sumaComisionPropia %>
-                                                        </strong>
-                                                    </div>
-                                                   
-                                                </div>
-                                                
-                                                <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
-                                                    <div class="row">
-                                                        Ganacias de afiliados
-                                                    </div>
-                                                    <div class="row" style="font-size: 29px; font-weight: 800;">
-                                                        <strong>
-                                                            $<%=sumaComisionAfiliados %>
-                                                        </strong>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="row" style="font-size: 13px;font-weight: 500;margin-bottom: -22px;">
-                                                    Ganancias totales: $<%=totalComisiones %>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             </div>
                             </div>
                         </div>
-                        <br>
                         <!-- end page title -->
 
                         <!-- Nav tabs -->
@@ -230,7 +123,7 @@
                                                     <td><%= f.fecha_instalacion %></td>
                                                     <td style="text-transform: capitalize;"><%= f.nombre %> <%= f.apellido %></td>
                                                     <td><%= f.producto_instalado %></td>
-                                                    <td><%= f.monto_aprobado %></td>
+                                                    <td>$<%= f.monto_aprobado %></td>
                                                     <td><%= f.comision %></td>
                                                     <td>
                                                         <div class="badge <%= f.factura.color %> font-size-12">
@@ -272,7 +165,7 @@
                                                     <td><%= f.fecha_instalacion %></td>
                                                     <td style="text-transform: capitalize;"><%= f.cliente %> <%= f.apellido %></td>
                                                     <td><%= f.producto_instalado %></td>
-                                                    <td><%= f.monto_aprobado %></td>
+                                                    <td>$<%= f.monto_aprobado %></td>
                                                     <td><%= f.comision %></td>
                                                     <td>
                                                         <div class="badge <%= f.facturaAfl.color %> font-size-12">

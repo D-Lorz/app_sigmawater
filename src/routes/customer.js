@@ -6,12 +6,10 @@ const cron = require('node-cron');
 const { isAuthenticated} = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
-        agendarInstalacionProducto,getRegistrarInstalacion,elegirSistema,historialClientes, historialVendedores } = require('../controllers/customerFormControllers');
-
+        agendarInstalacionProducto, getRegistrarInstalacion, elegirSistema, historialClientes, historialVendedores, historial_numVentas } = require('../controllers/customerFormControllers');
 const {servicioInstaladosx} = require("../controllers/adminControllers");  
   
 const rutaAlmacen = multer.diskStorage({
-
     destination: function (req, file, callback) {
         const rutaLicencia = path.join(__dirname, '../public/licences_customers')
         callback(null, rutaLicencia);
@@ -31,19 +29,15 @@ const rutaAlmacen = multer.diskStorage({
         } 
       
     }
-
 });
 
-const cargar = multer({
-    storage: rutaAlmacen,
-});
+const cargar = multer({storage: rutaAlmacen});
 
 // * SIRVE PARA UNIFICAR LOS 2 CAMPOS UPLOAD DEL FORMULARIO CLIENTE
 const multiupload = cargar.fields([{ name: 'cliente_frontal' }, { name: 'cliente_trasera' }]);
 
 // todo ===>> subir evidencia fotografica del servicio instalado
 const rutaCarpeta = multer.diskStorage({
-
     destination: function (req, file, callback) {
         const rutaLicencia = path.join(__dirname, '../public/evidenciaServicio')
         callback(null, rutaLicencia);
@@ -64,18 +58,12 @@ const rutaCarpeta = multer.diskStorage({
         } 
       
     }
-
 });
 
-const cargarEvidencia = multer({
-    storage: rutaCarpeta,
-});
-
+const cargarEvidencia = multer({storage: rutaCarpeta});
 const oneUpload = cargarEvidencia.fields([{ name: 'evidencia_fotografica' }, { name: 'xxx' }]);
 
-// todo =========================================================
-
- // * ========== Renderizado de vistas clientes ==========
+// * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
 router.get('/nuevo-cliente', isAuthenticated,(req, res) => {
     if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
@@ -83,13 +71,14 @@ router.get('/nuevo-cliente', isAuthenticated,(req, res) => {
 });
 router.get('/lista-clientes', isAuthenticated, listarClientes)
 
-
+// Ejecución Semanal (Domingo 10pm)
 cron.schedule('0 22 * * Sun',() => {
-    console.log("Hola desde cron job")
     historialClientes();
+    historial_numVentas();
 });
+
+// Ejecución Mensual
 cron.schedule('0 15 12 Jan-Dec *',() => {
-    console.log("Hola desde cron job")
     historialVendedores();
 });
 
@@ -99,7 +88,6 @@ router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro)
 router.get('/test-de-agua/:id', isAuthenticated, getTestAgua) 
 router.get('/agendar-instalacion/:id', isAuthenticated,getAgendarinstalacion) 
 router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
-//   router.get('/temporal', isAuthenticated)
 // *   ================ ===== ↑↑ ==============================
 
 //* router para los métodos del customerFormControllers
@@ -118,6 +106,5 @@ router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 /*=============================================================*/
   router.post('/elegirSistema', isAuthenticated, elegirSistema);
 /*=============================================================*/
-//  router.post('/historialVendedores',historialVendedores);
 
 module.exports = router

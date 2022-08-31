@@ -109,7 +109,6 @@
                                         <table id="datatable-buttons" class="table table dt-responsive nowrap w-100">
                                             <thead>
                                             <tr>
-                                                <th>Foto</th>
                                                 <th>Codigo</th>
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
@@ -117,17 +116,13 @@
                                                 <th>Correo</th>
                                                 <th>Afiliado a</th>
                                                 <th>Nivel</th>
-                                                <!-- <th>Deuda</th> -->
-                                                <th>Ventas</th>
+                                                <th>Ganancias</th>
                                                 <th>Estado</th>
                                             </tr>
                                             </thead>
-        
-        
                                             <tbody>
                                                 <% lista_vendedores.forEach((user)=>{ %>
                                                     <tr> 
-                                                        <td ><a href="/perfil-vendedores/<%- user.id_vendedor %>"><img src="<%= user.foto%>" alt="profile" class="rounded-circle header-profile-user" style="object-fit: cover;" ></a></td>
                                                         <td ><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.id_vendedor %></a></td>
                                                         <td style="text-transform: capitalize;"><a href="perfil-vendedores/<%- user.id_vendedor %>"><%= user.nombres %></a></td>
                                                         <td style="text-transform: capitalize;"><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.apellidos %></a></td>
@@ -142,7 +137,7 @@
                                                         <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><%= user.nivel %></a></td>
                                                         
                                                         <!-- <td><a href="/perfil-vendedores/<- user.id_vendedor %>">$ <%= user.deuda_inicial %></a></td> -->
-                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><div class="badge badge-soft-success font-size-12" >$ <= user.total_ventas %></div></a></td>
+                                                        <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><div class="badge badge-soft-success font-size-12" >$ <%=user.ganancias%></div></a></td>
                                                         <td><a href="/perfil-vendedores/<%- user.id_vendedor %>"><div class="badge <%= user.estadoVendedor.color%> font-size-12"><%= user.estadoVendedor.txt %></div></a></td>
                                                         
                                                     </tr>

@@ -67,19 +67,16 @@ const oneUploadpf = cargarFotoPerfil.fields([{ name: 'editFoto' }, { name: 'yyy'
 
  // * ========== Renderizado de vistas vendedor ==========
 //                           ↓↓
-  router.get('/register', nologueado, (req, res) => {
-            res.render('register')
+router.get('/register', nologueado, (req, res) => {
+    res.render('register')
 });
 
 router.get('/afiliados', isAuthenticated,listarAfiliados, (req, res) => {
     if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
        res.render('afiliados', { user: req.user })
 });
-  router.get('/perfil-vendedor/:id', isAuthenticated, perfilVendedores)
-  router.get('/ventas-vendedor',isAuthenticated, facturacion)
-  router.get('/hola',  (req, res) => {
-       res.render('hola', { user: req.user })
-});
+router.get('/perfil-vendedor/:id', isAuthenticated, perfilVendedores)
+router.get('/ventas-vendedor',isAuthenticated, facturacion)
 // *   ================ ===== ↑↑ ==============================
 
 //* router para los métodos del controller

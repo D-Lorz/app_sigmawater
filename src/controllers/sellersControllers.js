@@ -10,15 +10,12 @@ const generateRandomString = (num) => {
   for (let i = 0; i < num; i++) {
     result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
-
   return result1;
 };
 
 // todo: REGISTRAR VENDEDOR
 exports.registrar = async (req, res) => {
-// ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
   const year = new Date().getFullYear();
-// ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
   let mes = new Date().getMonth();
   mes == 0 ? (mes = 12) : (mes = mes + 1);
 // ? NOTA: ==>> Esta es la forma para obtener el numero de la semana actual del año entero <<<<<
@@ -65,14 +62,9 @@ exports.registrar = async (req, res) => {
   console.log("*****"); 
   console.log("\n");
 
-  // ! **************************************************
-  let admin = await conexion.query("SELECT * FROM usuarios WHERE rol = 'administrador'");
-     
-
-  var isError = false;
- 
-  var transporter = nodemailer.createTransport({ 
-   host: 'mail.3csigmawater.com',
+  // ! ************* PROCESO DEL EMAIL PARA EL ADMIN ************
+  const transporter = nodemailer.createTransport({ 
+    host: 'mail.3csigmawater.com',
       port: 465, //cambiar el puerto a 465 cuando antes de subir al server el proyecto
       auth: {
           user: 'noreplys@3csigmawater.com', // Your correo id
@@ -80,37 +72,25 @@ exports.registrar = async (req, res) => {
       }
    });
   
-   var mailOptions = {
-       from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
-           to: 'jeancarlos.tovioleiva@unitecnar.edu.co',
-           subject: 'Mensaje solo para administrador',
-           html: 'Hola administrador un nuevo vendedor se a registrado su nombre es: '+ nombres +' '+ apellidos ,
-           err: isError
-  
+  const mailOptions = {
+    from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
+    to: 'jeancarlos.tovioleiva@unitecnar.edu.co',
+    subject: 'Mensaje solo para administrador',
+    html: 'Hola administrador un nuevo vendedor se a registrado su nombre es: '+ nombres +' '+ apellidos ,
+    err: false
   };
-    // send mail with defined transport object
-   transporter.sendMail(mailOptions, function (error, info) {
-   if (error) {
-   console.log('\nERROR: ' + error+'\n');
-   res.json({ yo: 'error' });
-   } else {
-    console.log('\nRESPONSE SENT: ' + info.response+'\n');
-  
-   }
-   });
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log('\nERROR: ' + error+'\n');
+      res.json({ yo: 'error' });
+    } else {
+      console.log('\nRESPONSE SENT: ' + info.response+'\n');
+    }
+  });
  
- // ! **************************************************
-
-
-
-
-
-
-
-
-
+ // ! ****************************************************************************************
   let idConsecutivo = await conexion.query("SELECT id FROM registro_de_vendedores WHERE id_vendedor = ?", [id_vendedor]);
-
   let fecha = new Date().toLocaleDateString("en-CA");
   const numClientes = 00;
   const idVendedor = idConsecutivo[0].id;
@@ -118,11 +98,13 @@ exports.registrar = async (req, res) => {
   await conexion.query("INSERT INTO historialnuevosclientes SET ?", [ datos_PorDefectosCl]);
 
   let codeAfiliado = await conexion.query("SELECT codigo_afiliado, id_vendedor FROM registro_de_vendedores WHERE id_vendedor = ?",[id_vendedor]);
-  let fechas = new Date().toLocaleDateString("en-CA");
+  codeVendedor = codeAfiliado[0].id_vendedor
   const numAfiliados = 00;
-  const datos_PorDefectosAfl = {fecha: fechas, numAfiliados: numAfiliados, idVendedor: codeAfiliado[0].id_vendedor, };
-
+  const datos_PorDefectosAfl = {fecha, numAfiliados: numAfiliados, idVendedor: codeVendedor, };
   await conexion.query("INSERT INTO historialvendedores SET ?", [datos_PorDefectosAfl ]);
+  // Insertando datos en la tabla historial ganancias de vendedores
+  const dataVentas = { fecha, numVentas: 0, idVendedor: id_vendedor, codigo_afiliado }
+  await conexion.query('INSERT INTO historial_numVentas SET ?', [dataVentas])
   res.redirect("https://3csigmawater.com");
 };
 
@@ -227,81 +209,51 @@ exports.editInfo = async (req, res) => {
 exports.facturacion = async (req, res) => {
   const id_vendedorA = req.user.id_vendedor;
   // Consultando en DB los clientes que pertenecen al vendedor actual
-  const facturacionPropia = await conexion.query( "SELECT f.id_factura, f.fecha_instalacion, nc.nombre, nc.apellido, f.producto_instalado, sc.monto_aprobado, f.comision_total, nc.id as idCliente, f.id_cliente as cliente_factura, f.vendedores, f.estadoFactura FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente JOIN solicitar_credito sc ON nc.id = sc.id_cliente WHERE nc.codigo_id_vendedor = ? ;",
-    [id_vendedorA] );
+  conexion.query('SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?', [id_vendedorA])
 
-    let sumaComisionPropia = 0
-    facturacionPropia.forEach((fp) => {
-    fp.factura = {};
-    if ((fp.idCliente = fp.cliente_factura)) {
-      if (fp.estadoFactura == 0) {
-          fp.factura.text = "Pendiente";
-          fp.factura.color = "badge-soft-warning";
-          fp.comision = "Por definir";
-         
-      } else {
-          fp.factura.text = "Pagado";
-          fp.factura.color = "badge-soft-success";
-          const vendedores = JSON.parse(fp.vendedores);
-          const v = vendedores.find((i) => i.codigo == id_vendedorA);
-          fp.comision = v.comision_final;
+  const facturacionPropia = await conexion.query('SELECT f.id_factura, f.fecha_instalacion, nc.nombre, nc.apellido, f.producto_instalado, sc.monto_aprobado, f.comision_total, nc.id as idCliente, f.id_cliente as cliente_factura, f.vendedores, f.estadoFactura FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente JOIN solicitar_credito sc ON nc.id = sc.id_cliente WHERE nc.codigo_id_vendedor = ? ;', [id_vendedorA])
 
-          fp.comision = parseFloat(fp.comision)
-          sumaComisionPropia += fp.comision
+  facturacionPropia.forEach(fp => {
+      fp.factura = {}
+      if (fp.idCliente = fp.cliente_factura) {
+          if (fp.estadoFactura == 0) { 
+              fp.factura.text = "Pendiente"; fp.factura.color = "badge-soft-warning"; 
+              fp.comision = "Por definir"
+          } else {
+              fp.factura.text = "Pagado"; fp.factura.color = "badge-soft-success";
+              const vendedores = JSON.parse(fp.vendedores)
+              const v = vendedores.find(i => i.codigo == id_vendedorA)
+              fp.comision = v.comision_final
+          }
       }
-    }
   });
 
-  console.log("SUMA ====>>>>", sumaComisionPropia);
-  
 
-  let ventas_Vendedores = await conexion.query( "SELECT * FROM registro_de_vendedores WHERE id_vendedor = ? ;", [id_vendedorA]);
-  ventas_Vendedores = ventas_Vendedores[0]
-  // console.log("IMPRIMIENDO V individuales ==>>",ventas_Vendedores.ventas_individuales );
-  // console.log("IMPRIMIENDO V de afiliados ==>>",ventas_Vendedores.ventas_afiliados );
-  // console.log("IMPRIMIENDO V totales ==>>",ventas_Vendedores.total_ventas );
+  const facturacionAfiliado = await conexion.query('SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.vendedores, f.estadoFactura, sc.monto_aprobado FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id WHERE codigo_afiliado = ? ;', [id_vendedorA])
 
-  const facturacionAfiliado = await conexion.query( "SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.vendedores, f.estadoFactura, sc.monto_aprobado FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id WHERE codigo_afiliado = ? ;",
-    [id_vendedorA] );
-    let sumaComisionAfiliados = 0
-  facturacionAfiliado.forEach((afl) => {
-    afl.facturaAfl = {};
-    if ((afl.idClienten = afl.idClientef)) {
-      if (afl.estadoFactura == 0) {
-        afl.facturaAfl.text = "Pendiente";
-        afl.facturaAfl.color = "badge-soft-warning";
-        afl.comision = "Por definir";
-      } else {
-        afl.facturaAfl.text = "Pagado";
-        afl.facturaAfl.color = "badge-soft-success";
-        const vendedores = JSON.parse(afl.vendedores);
-        const v = vendedores.find((i) => i.codigo == id_vendedorA);
-        
-        afl.comision =  parseFloat(v.comision_final)
-      
-        console.log("IMPRIMIENDO ===>>>" , afl.comision)
-        sumaComisionAfiliados += afl.comision
-
-         
+  facturacionAfiliado.forEach(afl => {
+      afl.facturaAfl = {}
+      if (afl.idClienten = afl.idClientef) {
+          if (afl.estadoFactura == 0) { 
+              afl.facturaAfl.text = "Pendiente"; afl.facturaAfl.color = "badge-soft-warning";
+              afl.comision = "Por definir"
+          } else {
+              afl.facturaAfl.text = "Pagado"; afl.facturaAfl.color = "badge-soft-success";
+              const vendedores = JSON.parse(afl.vendedores)
+              const v = vendedores.find(i => i.codigo == id_vendedorA)
+              afl.comision = v.comision_final
+          }
       }
-    }
   });
-  sumaComisionAfiliados = parseFloat(sumaComisionAfiliados).toFixed(1);
-    console.log("SUMA AFL ====>>>>", sumaComisionAfiliados);
 
-    const totalComisiones = parseFloat(sumaComisionPropia) + parseFloat(sumaComisionAfiliados)
-    console.log("IMPRIMIENOD TOTALCOMISIONES >>>" , totalComisiones);
-
-  res.render("ventas-vendedor", { user: req.user,  facturacionPropia, facturacionAfiliado,ventas_Vendedores,sumaComisionPropia,sumaComisionAfiliados,totalComisiones });
-};
+  res.render('ventas-vendedor', { user: req.user, facturacionPropia, facturacionAfiliado })
+}
 
 exports.consultarFactura = async (req, res) => {
   const { idFactura } = req.body;
   const facturas = await conexion.query("SELECT * FROM factura");
   const f = facturas.find((i) => i.id_factura == idFactura);
 
-  // console.log("FACTURA SELECCIONADA >>>>>> ", (f))
-  // console.log("\n<<<<< RESULTADO FACTURA SELECCIONADA >>>> ", JSON.stringify(f)+"\n")
   if (f) {
     const cliente = await conexion.query("SELECT * FROM nuevos_cliente");
     const c = cliente.find((i) => i.id == f.id_cliente);

@@ -1,44 +1,30 @@
-const express = require('express')
-const router = express.Router()
-const path = require('path');
-const multer = require('multer');
-const {isAuthenticated, nologueado, login, logout} = require('../controllers/authController');
-const {numeroClientes} = require('../controllers/customerFormControllers');
+const express = require("express");
+const router = express.Router();
+const path = require("path");
+const multer = require("multer");
+const { isAuthenticated, nologueado, login, logout } = require("../controllers/authController");
+const { dashboardVendedor } = require("../controllers/customerFormControllers");
 
- // * ========== Renderizado de vistas generales ==========
+// * ========== Renderizado de vistas generales ==========
 //                           ↓↓
-     router.get('/login', nologueado, (req, res) => {
-        res.render('login', { alert: false })
-     });
-      router.get('/', isAuthenticated,numeroClientes, (req, res) => {
-         if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
-            res.render('dashboard', { user: req.user })
-     });
-    router.get('/administrador', isAuthenticated, (req, res) => {
-      if(!(req.user.rol ==="administrador")){res.redirect('./') }
-            res.render('administrador', { user: req.user })
-      });
+router.get("/login", nologueado, (req, res) => { res.render("login", { alert: false });});
+router.post("/login", nologueado, login);
+router.get("/logout", logout);
+/*=========================================================================*/
+// * ========== RUTAS DASHBOARD PRINCIPAL ADMIN & VENDEDOR ==========
+//                           ↓↓
+router.get("/", isAuthenticated, dashboardVendedor, (req, res) => {
+   if (!(req.user.rol === "vendedor")) {
+     res.redirect("./administrador");
+   }
+   res.render("dashboard", { user: req.user });
+ });
  
-  // *   ================ ===== ↑↑ ==============================
-           
-// * ROUTER: para los métodos del controller
-/*=============================================================*/
-router.post('/login', nologueado, login)
-/*=============================================================*/
-router.get('/logout', logout)
-/*=============================================================*/
+ router.get("/administrador", isAuthenticated, (req, res) => {
+   if (!(req.user.rol === "administrador")) {
+     res.redirect("./");
+   }
+   res.render("administrador", { user: req.user });
+ });
 
-module.exports = router
-
-
-
-
-
-
-// router.get('/atencion-al-cliente"', isAuthenticated, (req, res) => {
-//     res.render('atencion-al-cliente"', { user: req.user })
-// });
-
-// router.get('/detalle_facturas', isAuthenticated, (req, res) => {
-//     res.render('detalle_facturas', { user: req.user })
-// });
+module.exports = router;

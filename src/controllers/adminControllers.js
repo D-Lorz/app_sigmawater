@@ -799,37 +799,34 @@ exports.servicioInstaladosx = async (req, res) => {
 
   //* ==>> Apartado para sumar ventas individuales
   let clienteI = await conexion.query('SELECT * FROM nuevos_cliente')
-  let vendedorI = await conexion.query('SELECT ventas_individuales, id_vendedor FROM registro_de_vendedores')
+  let vendedorI = await conexion.query('SELECT ventas_individuales, id_vendedor, codigo_afiliado FROM registro_de_vendedores')
 
   let cl1 = clienteI.find(item => item.id_cliente == codigo_cliente)
   if (cl1) {
-    console.log(" ");
-    console.log("↓↓ Codigo del vendedor que realizó la ventas ↓↓")
-    console.log(cl1.codigo_id_vendedor);
 
     let v1 = vendedorI.find(item => item.id_vendedor == cl1.codigo_id_vendedor)
     if (v1) {
       const vendedorIndividual = {}
       vendedorIndividual.id_vendedor = v1.id_vendedor
-      var ventaIndividual
+      let ventaIndividual = 0;
+      producto_instalado == "Whole System" ? ventaIndividual = 1 : ventaIndividual  = 0.5;
+      vendedorIndividual.ventas_individuales = (parseFloat(v1.ventas_individuales) + ventaIndividual)
+      // Actualizando numero de ventas del vendedor que la hizo
+      await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?", [vendedorIndividual, cl1.codigo_id_vendedor])
 
-      if (producto_instalado == "Reverse Osmosis System 3C Sigma") {
-        console.log("# de ventas individuales actual: ==>> (", v1.ventas_individuales, ")");
-        ventaIndividual = (parseFloat(v1.ventas_individuales) + 0.5)
-        console.log("# de ventas individuales Actualizado: ==>> (", ventaIndividual, ")");
-
-      } else if (producto_instalado == "Reverse Osmosis System") {
-        console.log("# de ventas individuales actual: ==>> (", v1.ventas_individuales, ")");
-        ventaIndividual = (parseFloat(v1.ventas_individuales) + 0.5)
-        console.log("# de ventas individuales Actualizado: ==>> (", ventaIndividual, ")");
-
-      } else if (producto_instalado == "Whole System") {
-        console.log("# de ventas individuales actual: ==>> (", v1.ventas_individuales, ")");
-        ventaIndividual = (parseFloat(v1.ventas_individuales) + 1)
-        console.log("# de ventas individuales Actualizado: ==>> (", ventaIndividual, ")");
-      }
-      vendedorIndividual.ventas_individuales = ventaIndividual
-      conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?", [vendedorIndividual, cl1.codigo_id_vendedor])
+      // Registrando ventas en la tabla Filtro de Número de ventas
+      const year = new Date().getFullYear();
+      let mes = new Date().getMonth()
+      mes == 0 ? mes = 12 : mes = mes + 1
+      const dia = new Date().getDate();
+      const currentdate = new Date();
+      const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+      const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+      const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
+      const idVendedor = v1.id_vendedor;
+      const codigo_afiliado = v1.codigo_afiliado;
+      const dataVentas = { year, mes, semana, dia, numVentas: ventaIndividual, idVendedor, codigo_afiliado }
+      await conexion.query('INSERT INTO filtro_numventas SET ?', [dataVentas])
     }
   }
   //* ==>> *** FIN **** 
@@ -1207,7 +1204,6 @@ exports.factura = async (req, res) => {
       /******* DEDUCCIONES VENDEDOR 1  *******/
       const ded = factura.find(i => i.id_cliente == cl.id)
       
-      console.log("\n------ DEDUCCIONES -------- Factura actual: ==>> ", ded)
       if (ded) { vendedor.deducciones = JSON.parse(ded.deducciones) }
       console.log("DEDUCCIONES v1: " + JSON.stringify(vendedor.deducciones))
       /** FIN DEDUCCIONES 1 **/
@@ -1498,11 +1494,8 @@ exports.factura = async (req, res) => {
       });
     }
     /** FIN DATOS DE LA FACTURA **/
-
     arrayVentas.push(cl)
   });
-
-  console.log("<<<<< ARRAY VENTAS >>>>>>> ", JSON.stringify(arrayVentas.vendedores));
 
   ventasTotales = arrayVentas;
 

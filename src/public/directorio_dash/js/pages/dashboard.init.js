@@ -1,126 +1,116 @@
-/*
-Template Name: Minia - Admin & Dashboard Template
-Author: Themesbrand
-Website: https://themesbrand.com/
-Contact: themesbrand@gmail.com
-File: Dashboard Init Js File
-*/
-
-// get colors array from the string
-function getChartColorsArray(chartId) {
-    var colors = $(chartId).attr('data-colors');
-    var colors = JSON.parse(colors);
-    return colors.map(function (value) {
-        var newValue = value.replace(' ', '');
-        if (newValue.indexOf('--') != -1) {
-            var color = getComputedStyle(document.documentElement).getPropertyValue(newValue);
-            if (color) return color;
-        } else {
-            return newValue;
-        }
+const year = new Date().getFullYear()
+/** ------------- CAPTURANDO DATOS PARA LA GRÁFICA DE VENTAS PROPIAS x VENDEDOR ------------- **/
+let valoresJSON1 = [];
+const vPropias = [];
+valoresJSON1 = $('#json-ventasVendedor').val();
+vPropias.unshift({x:year, y:0})
+if (valoresJSON1) {
+    vPropias.shift()
+    valoresJSON1 = JSON.parse(valoresJSON1);
+    valoresJSON1.forEach(vp => {
+        const temp = vp.numVentas
+        vPropias.push({ x:"Hasta: "+vp.fecha, y:temp})
     })
 }
-
-//  MINI CHART
-
-// mini-1
-var minichart1Colors = getChartColorsArray("#mini-chart1");
+vPropias.length == 1 ? vPropias.unshift({x:year, y:0}) : true;
+// var minichart1Colors = getChartColorsArray("#chart-ventasPropiasVendedor");
+// Plasmando datos a la gráfica 1
 var options = {
     series: [{
-        data: [2, 10, 18, 22, 36, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15,]
+        data: vPropias
+    }],
+    "yaxis": [{
+        "labels": {
+            "formatter": function (val) {
+                return val.toFixed(1)
+            }
+        }
     }],
     chart: {
         type: 'line',
         height: 50,
-        sparkline: {
-            enabled: true
-        }
+        sparkline: {enabled: true}
     },
-    colors: minichart1Colors,
+    colors: ["#5156be"],
     stroke: {
         curve: 'smooth',
         width: 2,
     },
     tooltip: {
-        fixed: {
-            enabled: false
-        },
-        x: {
-            show: false
-        },
-        y: {
-            title: {
-                formatter: function (seriesName) {
-                    return ''
-                }
-            }
-        },
-        marker: {
-            show: false
-        }
+        fixed: {enabled: false},
+        x: {show: true},
+        y: {title: {formatter: function (seriesName) {return ''}}},
+        marker: {show: false}
     }
 };
-
-var chart = new ApexCharts(document.querySelector("#mini-chart1"), options);
+var chart = new ApexCharts(document.querySelector("#chart-ventasPropiasVendedor"), options);
 chart.render();
 
-// mini-2
-var minichart2Colors = getChartColorsArray("#mini-chart2");
+/** ------------- CAPTURANDO DATOS PARA LA GRÁFICA DE VENTAS AFILIADOS x VENDEDOR ------------- **/
+let valoresJSON2 = []
+const vAfiliados = []
+valoresJSON2 = $('#json-ventasAfiliados').val();
+vAfiliados.unshift({x:year, y:0})
+if (valoresJSON2) {
+    vAfiliados.shift()
+    valoresJSON2 = JSON.parse(valoresJSON2);
+    console.log("\nDATOS JSON 2 >>>", valoresJSON2)
+    valoresJSON2.forEach(va => {
+        const temp = va.numVentasAfiliados
+        vAfiliados.push({ x:"Hasta: "+va.fecha, y:temp})
+    })
+}
+vAfiliados.length == 1 ? vAfiliados.unshift({x:year, y:0}) : true;
+// var minichart2Colors = getChartColorsArray("#chart-ventasAfiliadosVendedor");
+// Plasmando datos a la gráfica 2
 var options = {
     series: [{
-        data: [15, 42, 47, 2, 14, 19, 65, 75, 47, 15, 42, 47, 2, 14, 12,]
+        data: vAfiliados
+    }],
+    "yaxis": [{
+        "labels": {
+            "formatter": function (val) {
+                return val.toFixed(1)
+            }
+        }
     }],
     chart: {
         type: 'line',
         height: 50,
-        sparkline: {
-            enabled: true
-        }
+        sparkline: {enabled: true}
     },
-    colors: minichart2Colors,
+    colors: ["#5156be"],
     stroke: {
         curve: 'smooth',
         width: 2,
     },
     tooltip: {
-        fixed: {
-            enabled: false
-        },
-        x: {
-            show: false
-        },
-        y: {
-            title: {
-                formatter: function (seriesName) {
-                    return ''
-                }
-            }
-        },
-        marker: {
-            show: false
-        }
+        fixed: {enabled: false},
+        x: {show: true},
+        y: {title: {formatter: function (seriesName) {return ''}}},
+        marker: {show: false}
     }
 };
-
-var chart = new ApexCharts(document.querySelector("#mini-chart2"), options);
+var chart = new ApexCharts(document.querySelector("#chart-ventasAfiliadosVendedor"), options);
 chart.render();
 
+/** ------------- CAPTURANDO DATOS PARA LA GRÁFICA DE CLIENTES AGREGADOS x VENDEDOR ------------- **/
 let valores = []
 const datos = []
-    valores = $('#datosJson_clAgregados').val();
-    if (!valores || valores == null || valores == '' || valores == undefined){
-        const year = new Date().getFullYear()
-        datos.unshift({x:year, y:0},{x:year, y:0})
-    } else {
-        valores = JSON.parse(valores);
-        valores.forEach(vl => {
-            const temp = vl.numClientes
-            datos.push({ x:"Hasta: "+vl.fecha, y:temp})
-        })
-    }
-    // mini-3
-    let minichart3Colors = getChartColorsArray("#mini-chart3");
-    var options = {
+valores = $('#datosJson_clAgregados').val();
+datos.unshift({x:year, y:0})
+if (valores) {
+    datos.shift()
+    valores = JSON.parse(valores);
+    valores.forEach(vl => {
+        const temp = vl.numClientes
+        datos.push({ x:"Hasta: "+vl.fecha, y:temp})
+    })
+}
+datos.length == 1 ? datos.unshift({x:year, y:0}) : true;
+// let minichart3Colors = getChartColorsArray("#chart-clientesAgregados");
+// Plasmando datos a la gráfica 3
+var options = {
         series: [{
             data: datos
         }],
@@ -138,7 +128,7 @@ const datos = []
                 enabled: true
             }
         },
-        colors: minichart3Colors,
+        colors: ["#5156be"],
         stroke: {
             curve: 'smooth',
             width: 2,
@@ -162,25 +152,26 @@ const datos = []
                 show: false
             }
         }
-    };
-    var chart = new ApexCharts(document.querySelector("#mini-chart3"), options);
-    chart.render();
+};
+var chart = new ApexCharts(document.querySelector("#chart-clientesAgregados"), options);
+chart.render();
 
-    let valoresAfl = []
-    const datosAfl = []
-        valoresAfl = $('#datosJson_aflAgregados').val();
-        if (!valoresAfl || valoresAfl == null || valoresAfl == '' || valoresAfl == undefined){
-            const years = new Date().getFullYear()
-            datosAfl.unshift({x:years, y:0},{x:years, y:0})
-        } else {
-            valoresAfl = JSON.parse(valoresAfl);
-            valoresAfl.forEach(afl => {
-                const tempafl = afl.numAfiliados
-                datosAfl.push({ x:"Hasta: "+afl.fecha, y:tempafl})
-            })
-        }
-// mini-4
-var minichart4Colors = getChartColorsArray("#mini-chart4");
+/** ------------- CAPTURANDO DATOS PARA LA GRÁFICA DE AFILIADOS AGREGADOS x VENDEDOR ------------- **/
+let valoresAfl = []
+const datosAfl = []
+valoresAfl = $('#datosJson_aflAgregados').val();
+datosAfl.unshift({x:year, y:0})
+if (valoresAfl) {
+    datosAfl.shift()
+    valoresAfl = JSON.parse(valoresAfl);
+    valoresAfl.forEach(afl => {
+        const tempafl = afl.numAfiliados
+        datosAfl.push({ x:"Hasta: "+afl.fecha, y:tempafl})
+    })
+}
+datosAfl.length == 1 ? datosAfl.unshift({x:year, y:0}) : true;
+// var minichart4Colors = getChartColorsArray("#chart-afiliadosAgregados");
+// Plasmando datos a la gráfica 4
 var options = {
     series: [{
         data: datosAfl
@@ -199,7 +190,7 @@ var options = {
             enabled: true
         }
     },
-    colors: minichart4Colors,
+    colors: ["#5156be"],
     stroke: {
         curve: 'smooth',
         width: 2,
@@ -223,10 +214,12 @@ var options = {
         }
     }
 };
-
-var chart = new ApexCharts(document.querySelector("#mini-chart4"), options);
+var chart = new ApexCharts(document.querySelector("#chart-afiliadosAgregados"), options);
 chart.render();
 
+/************************************************************************************************ */
+// todo * OTRAS GRÁFICAS DEL DASHBOARD
+/************************************************************************************************ */
 // 
 // Wallet Balance
 //
@@ -323,7 +316,7 @@ chart.render();
 //
 // Market Overview
 //
-var barchartColors = getChartColorsArray("#market-overview");
+// var barchartColors = getChartColorsArray("#market-overview");
 var options = {
     series: [{
         name: 'Profit',
@@ -345,7 +338,7 @@ var options = {
             // columnWidth: '20%',
         },
     },
-    colors: barchartColors,
+    colors: ["#812082", "#50368c"],
     fill: {
         opacity: 1
     },
@@ -374,45 +367,3 @@ var options = {
 
 var chart = new ApexCharts(document.querySelector("#market-overview"), options);
 chart.render();
-
-// MAp
-
-var vectormapColors = getChartColorsArray("#sales-by-locations");
-$('#sales-by-locations').vectorMap({
-    map: 'world_mill_en',
-    normalizeFunction: 'polynomial',
-    hoverOpacity: 0.7,
-    hoverColor: false,
-    regionStyle: {
-        initial: {
-            fill: '#e9e9ef'
-        }
-    },
-    markerStyle: {
-        initial: {
-            r: 9,
-            'fill': vectormapColors,
-            'fill-opacity': 0.9,
-            'stroke': '#fff',
-            'stroke-width': 7,
-            'stroke-opacity': 0.4
-        },
-
-        hover: {
-            'stroke': '#fff',
-            'fill-opacity': 1,
-            'stroke-width': 1.5
-        }
-    },
-    backgroundColor: 'transparent',
-    markers: [{
-        latLng: [41.90, 12.45],
-        name: 'USA'
-    }, {
-        latLng: [12.05, -61.75],
-        name: 'Russia'
-    }, {
-        latLng: [1.3, 103.8],
-        name: 'Australia'
-    }]
-});
