@@ -36,7 +36,7 @@ var nodemailer = require('nodemailer');
     const direccion = req.body.direccion;
     const apt_suite_unidad = req.body.apt_suite_unidad;
     const codigo_postal = req.body.codigo_postal;
-    const codigo_afiliado = req.body.codigo_afiliado;
+    let codigo_afiliado = req.body.codigo_afiliado;
     const nombre_banco = req.body.nombre_banco;
     const numero_cuenta = req.body.numero_cuenta;
     const ruta = req.body.ruta;
@@ -48,6 +48,7 @@ var nodemailer = require('nodemailer');
     
     const sellerB = await conexion.query("SELECT id_vendedor, estado_de_la_cuenta FROM usuarios WHERE id_vendedor = ? AND estado_de_la_cuenta = 'aprobado'", [codigo_afiliado])
     if (sellerB.length == 0) { codigo_afiliado = "N/A" }
+    
     const nuevoRegistro = {
       year, mes,semana,dia, nombres, apellidos,fecha_nacimiento,telefono_movil,
       correo, seguro_social,ciudad, direccion,apt_suite_unidad, codigo_postal, codigo_afiliado,
