@@ -386,7 +386,7 @@ exports.registrar = async (req, res) => {
   await conexion.query("INSERT INTO historialvendedores SET ?", [datos_PorDefectosAfl ]);
   // Insertando datos en la tabla historial ganancias de vendedores
   const dataVentas = { fecha, numVentas: 0, idVendedor: id_vendedor, codigo_afiliado }
-  await conexion.query('INSERT INTO historial_numVentas SET ?', [dataVentas])
+  await conexion.query('INSERT INTO historial_numventas SET ?', [dataVentas])
   res.redirect("https://3csigmawater.com");
 };
 
