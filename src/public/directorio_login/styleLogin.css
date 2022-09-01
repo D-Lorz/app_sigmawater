@@ -485,7 +485,7 @@ li > a:only-child:after {
   .form-w3ls-left-info p a {
     font-size: 12px;
     color: #fff;
-   float: right;
+    float: right;
     /* letter-spacing: 2px; */
     /* text-transform: uppercase; */
     /* text-decoration: underline; */
@@ -506,9 +506,6 @@ li > a:only-child:after {
   padding-top: 23%;
 
  }
-
-
-
 
 }
 @media (min-width: 992px) {
@@ -759,7 +756,6 @@ a {
   background:white;
   padding: 12px 1px 8px 8px;
   margin: 15px;
-
   font-size: 12px;
 }
 

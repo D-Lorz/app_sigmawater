@@ -1,6 +1,6 @@
 const conexion = require("../database/db");
 
-// todo --> formulario para crear un nuevo cliente
+// todo ==> Formulario para crear un nuevo cliente
 exports.registrarClientes = async (req, res) => {
 //  ? NOTA: ==>> Esta es la forma para obtener el año actual <<<<<
   const year = new Date().getFullYear();
@@ -85,7 +85,7 @@ exports.getAgendarinstalacion = async (req, res) => {
 
 }
 //------------------------------------------------
-// todo -->  Formulario para solicitar credito
+// todo ==> Formulario para solicitar credito
 exports.solicitarCredito = async (req, res) => {
   const monto_financiar_cliente = req.body.monto_financiar_cliente.replace(/[$ ,]/g, '');
   console.log(">>>>>>>>:" + monto_financiar_cliente);
@@ -206,7 +206,7 @@ exports.solicitarCredito = async (req, res) => {
 
 }
 
-// todo -->  Mostrar lista de clientes total por vendedor
+// todo ==> Mostrar lista general de clientes 
 exports.listarClientes = async (req, res) => {
 
   // todo ===============================>>> Estado del solicitar credito
@@ -368,7 +368,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   })
 }
 
-// todo --> Formulario Test de agua
+// todo ==> Formulario Test de agua
 exports.testAgua = async (req, res) => {
   const event = new Date();
   let fecha_test = event.toLocaleDateString("en-US");
@@ -403,7 +403,7 @@ exports.testAgua = async (req, res) => {
 
 }
 
-// todo --> Formulario de calcular ahorro
+// todo ==> Formulario de calcular ahorro
 exports.ahorro = async (req, res) => {
   const agua_embotellada = req.body.agua_embotellada.replace(/[$ ,]/g, '');
   const ahorroMensual_aguaEmbotellada = parseFloat(agua_embotellada * 1)
@@ -446,7 +446,8 @@ exports.ahorro = async (req, res) => {
     if (result) { res.redirect('/perfil-clientes/' + codigo_cliente) }
   })
 }
-// todo --> Formulario agendar instalacion
+
+// todo ==> Formulario agendar instalacion
 exports.agendarInstalacionProducto = async (req, res) => {
   const lunes = req.body.lunes
   const martes = req.body.martes
@@ -468,7 +469,7 @@ exports.agendarInstalacionProducto = async (req, res) => {
   })
 }
 
-// todo ===========>>>  Elegir Sistema
+// todo ==> Elegir Sistema
 exports.elegirSistema = async (req, res) => {
   const id_clienteCodigo = req.body.id_clienteCodigo;
   const id_cliente = req.body.id_consecutivo;
@@ -508,7 +509,7 @@ exports.getRegistrarInstalacion = async (req, res) => {
   })
 }
 
-// todo ====>>>>  Generar codigo numero aleatorio del cliente
+// todo ==> Generar codigo numero aleatorio del cliente
 const generateRandomNumber = (num) => {
   const characters = '0123456789';
   let result1 = '';
@@ -518,20 +519,21 @@ const generateRandomNumber = (num) => {
   }
   return result1;
 }
-// todo ====>>> Formateando precios a una moneda 
+// todo ==> Formateando precios a una moneda 
 const formatear = new Intl.NumberFormat('en-US', {
   style: "currency",
   currency: "USD",
   minimumFractionDigits: 0,
 });
 
-// todo ====>>>> Numero de clientes añadidos
+// todo ==> Numero de clientes añadidos
 exports.dashboardVendedor = async (req, res) => {
   const consecutivo = req.user.id_consecutivo;
   const idVendedor = req.user.id_vendedor;
 
   let countCliente = await conexion.query("SELECT count(correo) as totalClientes FROM nuevos_cliente WHERE id_vendedor = ?", [consecutivo]);
   console.log(countCliente[0].totalClientes);
+
   let countAfiliados = await conexion.query("SELECT count(codigo_afiliado) as totalAfiliados FROM registro_de_vendedores WHERE codigo_afiliado = ?", [idVendedor]);
   console.log(countAfiliados[0].totalAfiliados);
 
@@ -710,6 +712,7 @@ exports.dashboardVendedor = async (req, res) => {
   });
 };
 
+// todo ==> Funciones para tablas historiales
 exports.historialClientes = async (req, res) => {
 
   let clientes = await conexion.query("SELECT * FROM nuevos_cliente");

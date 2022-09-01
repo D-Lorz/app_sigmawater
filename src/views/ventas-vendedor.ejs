@@ -197,8 +197,7 @@
                                         </thead>
                                         <tbody>
                                             <% facturacionPropia.forEach((f)=>{ %>
-                                                <tr>
-                                                    <td>
+                                                <tr><td>
                                                         <button style="background: none;border: none;margin: 0;"
                                                             onclick="consultarFactura('<%=f.id_factura%>', '<%=f.monto_aprobado%>')">
                                                             <%= f.id_factura %>
@@ -208,7 +207,13 @@
                                                     <td style="text-transform: capitalize;"><%= f.nombre %> <%= f.apellido %></td>
                                                     <td><%= f.producto_instalado %></td>
                                                     <td>$<%= f.monto_aprobado %></td>
-                                                    <td>$<%= f.comision %></td>
+                                                    <td>
+                                                        <% if (f.comision == 'Por definir') {%>
+                                                            <%= f.comision %>
+                                                        <%}else{%>
+                                                            $<%= f.comision %>
+                                                        <%}%>
+                                                    </td>
                                                     <td>
                                                         <div class="badge <%= f.factura.color %> font-size-12">
                                                             <%= f.factura.text %>
@@ -250,7 +255,13 @@
                                                     <td style="text-transform: capitalize;"><%= f.cliente %> <%= f.apellido %></td>
                                                     <td><%= f.producto_instalado %></td>
                                                     <td>$<%= f.monto_aprobado %></td>
-                                                    <td>$<%= f.comision %></td>
+                                                    <td>
+                                                        <% if (f.comision == 'Por definir') {%>
+                                                            <%= f.comision %>
+                                                        <%}else{%>
+                                                            $<%= f.comision %>
+                                                        <%}%>
+                                                    </td>
                                                     <td>
                                                         <div class="badge <%= f.facturaAfl.color %> font-size-12">
                                                             <%= f.facturaAfl.text %>

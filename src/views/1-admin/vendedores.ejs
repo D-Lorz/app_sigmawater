@@ -117,20 +117,22 @@
                                             <td><a href="/perfil-vendedores/<%- user.id_vendedor %>">
                                                     <%= user.correo %>
                                                 </a></td>
-                                            <td>
-                                                <% if(user.codigo_afiliado) {%>
-                                                    <div class="badge badge-soft-dark font-size-12"><a
-                                                            href="/perfil-vendedores/<%- user.codigo_afiliado%>">
-                                                            <%= user.codigo_afiliado %>
-                                                        </a></div>
-                                                    <% } else { %>
-                                                        N/A
-                                                        <% }%>
-                                            </td>
-                                            <td><a href="/perfil-vendedores/<%- user.id_vendedor %>">
-                                                    <%= user.nivel %>
-                                                </a></td>
-
+                                                <td>
+                                                    <div class="badge badge-soft-dark font-size-12">
+                                                        <% if(user.codigo_afiliado && user.codigo_afiliado != 'N/A') {%>
+                                                            <a href="/perfil-vendedores/<%- user.codigo_afiliado%>">
+                                                                <%= user.codigo_afiliado %>
+                                                            </a>
+                                                        <% } else { %>
+                                                            N/A
+                                                        <% } %>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a href="/perfil-vendedores/<%- user.id_vendedor %>">
+                                                        <%= user.nivel %>
+                                                    </a>
+                                                </td>
                                             <!-- <td><a href="/perfil-vendedores/<- user.id_vendedor %>">$ <%= user.deuda_inicial %></a></td> -->
                                             <td><a href="/perfil-vendedores/<%- user.id_vendedor %>">
                                                     <div class="badge badge-soft-success font-size-12">$
@@ -142,18 +144,14 @@
                                                         <%= user.estadoVendedor.txt %>
                                                     </div>
                                                 </a></td>
-
-                                        </tr>
+                                          </tr>
                                         <%})%>
                                 </tbody>
                             </table>
-
                         </div>
-
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
-
 
     </div> <!-- container-fluid -->
     </div>

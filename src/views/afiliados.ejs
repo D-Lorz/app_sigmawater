@@ -93,7 +93,7 @@
                             <th scope="col">Nivel</th>
                             <th scope="col">Numero de ventas</th>
                             <th scope="col">Total ganancias</th>
-                          
+                            <th scope="col">Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,14 +101,9 @@
                             <tr>
                                 <th scope="row">
                                     <div class="form-check font-size-16">
-                                        <input type="checkbox"
-                                            class="form-check-input"
-                                            id="contacusercheck1">
-                                        <label class="form-check-label"
-                                            for="contacusercheck1"></label>
-                                    </div>
+                                        <input type="checkbox" class="form-check-input"  id="contacusercheck1">
+                                      <label class="form-check-label" for="contacusercheck1"></label></div>
                                 </th>
-                                
                                 <td><%= user.nombres %></td>
                                 <td><%= user.apellidos %> 
                                 <td><%= user.correo %></td>
@@ -116,7 +111,11 @@
                                 <td><%= user.nivel %></td>
                                 <td><%= user.total_ventas %></td>
                                 <td><div class="badge badge-soft-success font-size-12">$ <%= user.ganancias %></div></td>
-                                
+                                <% if(user.estado_de_la_cuenta == "pendiente") {%> 
+                                <td style="text-transform: capitalize"><div class="badge badge-soft-warning font-size-12"><%= user.estado_de_la_cuenta %></div></td>
+                                    <% } else if(user.estado_de_la_cuenta == "aprobado") {%> 
+                                <td style="text-transform: capitalize"><div class="badge badge-soft-success font-size-12"><%= user.estado_de_la_cuenta %></div></td>
+                                    <% } %>  
                             </tr>
                         <%})%>
                     </tbody>

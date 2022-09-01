@@ -49,11 +49,13 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
 
   let info_vendedor = await conexion.query("SELECT r.*, u.id as idC_cl, u.id_vendedor as idVendedor, u.foto FROM registro_de_vendedores r JOIN usuarios u ON u.id_vendedor = r.id_vendedor WHERE r.id_vendedor =  ? ", [id_vendedor]);
   info_vendedor = info_vendedor[0];
-  
-  var licencia 
+
+  let licencia 
   if (info_vendedor) {
     licencia = JSON.parse(info_vendedor.licencia_conduccion);
+    console.log("IMPRIENOD LICENCIA ========>>>>>>>>" , licencia);
   }
+
 
   let fotoUpdate
   if(info_vendedor){
@@ -393,7 +395,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '<table border="0" cellpadding="0" cellspacing="0" class="heading_block block-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
           '<tr>'+
           '<td class="pad" style="width:100%;text-align:center;padding-top:15px;padding-bottom:15px;">'+
-          '<h1 style="margin: 0; color: #000000; font-size: 38px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: left; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">'+ clave + '</h1>'+
+          '<h1 style="margin: 0; color: #000000; font-size: 38px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: left; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">' +clave+ '</h1>'+
           '</td>'+
           '</tr>'+
           '</table>'+
@@ -706,25 +708,38 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   let mostrarDatoscreditos = await conexion.query("SELECT * FROM solicitar_credito WHERE id_cliente = ?", [info_clientes.id]);
   mostrarDatoscreditos = mostrarDatoscreditos[0]
   if (mostrarDatoscreditos) {
-
     mostrarDatoscreditos.monto_financiar_cliente = formatear.format(mostrarDatoscreditos.monto_financiar_cliente)
   }
+
+  console.log("\n");
+  let licenciacredito 
+  if (mostrarDatoscreditos ) { 
+   licenciacredito = JSON.parse(mostrarDatoscreditos.licencia_cliente);
+        console.log("IMPRIMIENDO VARIABLE NUEVA ===>>>", licenciacredito);
+  }else {
+    
+  } 
+  console.log("IMPRIMIENDO VARIABLE ===>>>", licenciacredito);
+  console.log("\n");
+
+
+
+
   let clbotonCredito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
   let estade = []
   estade.txt = "No hecho";
   estade.color = 'badge-soft-dark'
   estade.btncredito = false;
 
-  if (clbotonCredito.length > 0) { clbotonCredito = clbotonCredito[0]
-    if (clbotonCredito.estado_del_credito == 0) { estade.txt = "si hecho"; estade.btncredito = true; }
+  if (clbotonCredito.length > 0) {
+     clbotonCredito = clbotonCredito[0]
+     if (clbotonCredito.estado_del_credito == 0) { estade.txt = "si hecho"; estade.btncredito = true; }
      else if (clbotonCredito.estado_del_credito == 1) { estade.btncredito = false;}
      else if (clbotonCredito.estado_del_credito == 2) { estade.btncredito = false;} 
-     else if (clbotonCredito.estado_del_credito == 3) { estade.btncredito = false; }
-     if (clbotonCredito.licencia_cliente > 0) { var licenciacredito = JSON.parse(clbotonCredito.licencia_cliente);
-      console.log("LICENCIA MOSTRADA ====== >>>>>",licenciacredito );
-      // var clfirmaAcuerdo  = clbotonCredito.acuerdo_firmado
-    } else {}
+     else if (clbotonCredito.estado_del_credito == 3) { estade.btncredito = false;}
+
   }
+
   // todo ========>>> Mostrar producto
   let mostrarProducto = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
   mostrarProducto = mostrarProducto[0]
