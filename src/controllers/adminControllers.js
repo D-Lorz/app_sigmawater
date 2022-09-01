@@ -239,7 +239,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
   var mailOptions = {
       from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
           to: datosUser.correo,
-          subject: 'Bienvenido has sido aprobado',
+          subject: 'Bienvenido a 3C Sigma Water System',
           html: '<style>'+
                              
           'a[x-apple-data-detectors] {'+
