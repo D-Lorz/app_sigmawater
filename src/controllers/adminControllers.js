@@ -321,14 +321,14 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
           '<tr>'+
           '<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">'+
-          '<div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://app.3csigmawater.com/imgcorreo/banner-Vaprobado.png" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>'+
+          '<div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://3csigmawater.com/correos_html/banner-Vaprobado.png" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>'+
           '</td>'+
           '</tr>'+
           '</table>'+
           '<table border="0" cellpadding="0" cellspacing="0" class="image_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
           '<tr>'+
           '<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">'+
-          '<div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://app.3csigmawater.com/imgcorreo/mensaje-Vaprobado.jpg" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>'+
+          '<div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://3csigmawater.com/correos_html/mensaje-Vaprobado.jpg" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>'+
           '</td>'+
           '</tr>'+
           '</table>'+
@@ -428,7 +428,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
           '<tr>'+
           '<td class="pad" style="padding-right:10px;width:100%;padding-left:0px;">'+
-          '<div align="center" class="alignment" style="line-height:10px"><img src="https://app.3csigmawater.com/imgcorreo/logo1.png" style="display: block; height: auto; border: 0; width: 120px; max-width: 100%;" width="120"/></div>'+
+          '<div align="center" class="alignment" style="line-height:10px"><img src="https://3csigmawater.com/correos_html/logo1.png" style="display: block; height: auto; border: 0; width: 120px; max-width: 100%;" width="120"/></div>'+
           '</td>'+
           '</tr>'+
           '</table>'+
@@ -468,7 +468,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '<table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">'+
           '<!--<![endif]-->'+
           '<tr>'+
-          '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="tel:7862387004" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://app.3csigmawater.com/imgcorreo/phone.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"/></a></td>'+
+          '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="tel:7862387004" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://3csigmawater.com/correos_html/phone.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"/></a></td>'+
           '<td style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; color: #000000; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="tel:7862387004" style="color: #000000; text-decoration: none;" target="_self">Llámanos</a></td>'+
           '</tr>'+
           '</table>'+
@@ -477,7 +477,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '<table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">'+
           '<!--<![endif]-->'+
           '<tr>'+
-          '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="mailto:sales@3csigmawater.com" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://app.3csigmawater.com/imgcorreo/email.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"/></a></td>'+
+          '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="mailto:sales@3csigmawater.com" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://3csigmawater.com/correos_html/email.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"/></a></td>'+
           '<td style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; color: #000000; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="mailto:sales@3csigmawater.com" style="color: #000000; text-decoration: none;" target="_self">Escríbenos</a></td>'+
           '</tr>'+
           '</table>'+
@@ -493,8 +493,8 @@ exports.actualizarEstadoVendedor = async (req, res) => {
           '<div class="alignment" style="text-align:center;">'+
           '<table border="0" cellpadding="0" cellspacing="0" class="social-table" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block;" width="72px">'+
           '<tr>'+
-          '<td style="padding:0 2px 0 2px;"><a href="https://www.facebook.com/3csigmawater" target="_blank"><img alt="Facebook" height="32" src="https://app.3csigmawater.com/imgcorreo/facebook2x.png" style="display: block; height: auto; border: 0;" title="facebook" width="32"/></a></td>'+
-          '<td style="padding:0 2px 0 2px;"><a href="https://www.instagram.com/3csigmawater/" target="_blank"><img alt="Instagram" height="32" src="https://app.3csigmawater.com/imgcorreo/instagram2x.png" style="display: block; height: auto; border: 0;" title="instagram" width="32"/></a></td>'+
+          '<td style="padding:0 2px 0 2px;"><a href="https://www.facebook.com/3csigmawater" target="_blank"><img alt="Facebook" height="32" src="https://3csigmawater.com/correos_html/facebook2x.png" style="display: block; height: auto; border: 0;" title="facebook" width="32"/></a></td>'+
+          '<td style="padding:0 2px 0 2px;"><a href="https://www.instagram.com/3csigmawater/" target="_blank"><img alt="Instagram" height="32" src="https://3csigmawater.com/correos_html/instagram2x.png" style="display: block; height: auto; border: 0;" title="instagram" width="32"/></a></td>'+
           '</tr>'+
           '</table>'+
           '</div>'+

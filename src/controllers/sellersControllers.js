@@ -158,7 +158,7 @@ exports.registrar = async (req, res) => {
                               '<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
                                 '<tr>'+
                                   '<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">'+
-                                    '<div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://app.3csigmawater.com/imgcorreo/banner-admin.jpg" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600" /></div>'+
+                                    '<div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://3csigmawater.com/correos_html/banner-admin.jpg" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600" /></div>'+
                                   '</td>'+
                                 '</tr>'+
                               '</table>'+
@@ -215,7 +215,7 @@ exports.registrar = async (req, res) => {
                                 '<tr>'+
                                   '<td class="pad" style="text-align:center;">'+
                                     '<div align="center" class="alignment">'+
-                                      '<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://app.3csigmawater.com/vendedores" style="height:42px;width:480px;v-text-anchor:middle;" arcsize="15%" stroke="false" fillcolor="#fed061"><w:anchorlock /><v:textbox inset="0px,0px,0px,0px"><center style="color:#000000; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a href="Reemplazar URL" style="text-decoration:none;display:block;color:#000000;background-color:#fed061;border-radius:6px;width:80%; width:calc(80% - 2px);border-top:1px solid #fed061;font-weight:700;border-right:1px solid #fed061;border-bottom:1px solid #fed061;border-left:1px solid #fed061;padding-top:5px;padding-bottom:5px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word; line-height: 32px;">Revisar vendedores</span></span></a>'+
+                                      '<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://app.3csigmawater.com/vendedores" style="height:42px;width:480px;v-text-anchor:middle;" arcsize="15%" stroke="false" fillcolor="#fed061"><w:anchorlock /><v:textbox inset="0px,0px,0px,0px"><center style="color:#000000; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a href="https://3csigmawater.com/vendedores" style="text-decoration:none;display:block;color:#000000;background-color:#fed061;border-radius:6px;width:80%; width:calc(80% - 2px);border-top:1px solid #fed061;font-weight:700;border-right:1px solid #fed061;border-bottom:1px solid #fed061;border-left:1px solid #fed061;padding-top:5px;padding-bottom:5px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word; line-height: 32px;">Revisar vendedores</span></span></a>'+
                                         '<!--[if mso]></center></v:textbox></v:roundrect><![endif]-->'+
                                     '</div>'+
                                   '</td>'+
@@ -224,7 +224,7 @@ exports.registrar = async (req, res) => {
                               '<table border="0" cellpadding="0" cellspacing="0" class="image_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
                                 '<tr>'+
                                   '<td class="pad" style="padding-right:10px;width:100%;padding-left:0px;padding-top:60px;">'+
-                                    '<div align="center" class="alignment" style="line-height:10px"><img src="https://app.3csigmawater.com/imgcorreo/logo1.png" style="display: block; height: auto; border: 0; width: 120px; max-width: 100%;" width="120" /></div>'+
+                                    '<div align="center" class="alignment" style="line-height:10px"><img src="https://3csigmawater.com/correos_html/logo1.png" style="display: block; height: auto; border: 0; width: 120px; max-width: 100%;" width="120" /></div>'+
                                   '</td>'+
                                 '</tr>'+
                               '</table>'+
@@ -264,7 +264,7 @@ exports.registrar = async (req, res) => {
                                             '<table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">'+
                                               '<!--<![endif]-->'+
                                               '<tr>'+
-                                                '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="tel:7862387004" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://app.3csigmawater.com/imgcorreo/phone.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16" /></a></td>'+
+                                                '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="tel:7862387004" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://3csigmawater.com/correos_html/phone.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16" /></a></td>'+
                                                 '<td style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; color: #000000; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="tel:7862387004" style="color: #000000; text-decoration: none;" target="_self">Llámanos</a></td>'+
                                               '</tr>'+
                                             '</table>'+
@@ -273,7 +273,7 @@ exports.registrar = async (req, res) => {
                                               '<table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">'+
                                                 '<!--<![endif]-->'+
                                                 '<tr>'+
-                                                  '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="mailto:sales@3csigmawater.com" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://app.3csigmawater.com/imgcorreo/email.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16" /></a></td>'+
+                                                  '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="mailto:sales@3csigmawater.com" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://3csigmawater.com/correos_html/email.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16" /></a></td>'+
                                                   '<td style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; color: #000000; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="mailto:sales@3csigmawater.com" style="color: #000000; text-decoration: none;" target="_self">Escríbenos</a></td>'+
                                                 '</tr>'+
                                               '</table>'+
@@ -289,8 +289,8 @@ exports.registrar = async (req, res) => {
                                         '<div class="alignment" style="text-align:center;">'+
                                          ' <table border="0" cellpadding="0" cellspacing="0" class="social-table" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block;" width="72px">'+
                                             '<tr>'+
-                                              '<td style="padding:0 2px 0 2px;"><a href="https://www.facebook.com/3csigmawater" target="_blank"><img alt="Facebook" height="32" src="https://app.3csigmawater.com/imgcorreo/facebook2x.png" style="display: block; height: auto; border: 0;" title="facebook" width="32" /></a></td>'+
-                                              '<td style="padding:0 2px 0 2px;"><a href="https://www.instagram.com/3csigmawater/" target="_blank"><img alt="Instagram" height="32" src="https://app.3csigmawater.com/imgcorreo/instagram2x.png" style="display: block; height: auto; border: 0;" title="instagram" width="32" /></a></td>'+
+                                              '<td style="padding:0 2px 0 2px;"><a href="https://www.facebook.com/3csigmawater" target="_blank"><img alt="Facebook" height="32" src="https://3csigmawater.com/correos_html/facebook2x.png" style="display: block; height: auto; border: 0;" title="facebook" width="32" /></a></td>'+
+                                              '<td style="padding:0 2px 0 2px;"><a href="https://www.instagram.com/3csigmawater/" target="_blank"><img alt="Instagram" height="32" src="https://3csigmawater.com/correos_html/instagram2x.png" style="display: block; height: auto; border: 0;" title="instagram" width="32" /></a></td>'+
                                             '</tr>'+
                                           '</table>'+
                                         '</div>'+

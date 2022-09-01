@@ -39,7 +39,7 @@ function sendEmail(correo, token) {
             '<table border="0" cellpadding="0" cellspacing="0" class="image_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">' +
             '<tbody><tr>' +
             '<td style="width:100%;padding-right:0px;padding-left:0px;">' +
-            '<div align="center" style="line-height:10px"><img src="https://app.3csigmawater.com/imgcorreo/logo1.png" style="display: block; height: auto; border: 0; width: 180px; max-width: 100%;" width="180"></div>' +
+            '<div align="center" style="line-height:10px"><img src="https://3csigmawater.com/correos_html/logo1.png" style="display: block; height: auto; border: 0; width: 180px; max-width: 100%;" width="180"></div>' +
             '</td>' +
             '</tr>' +
             '</tbody></table>' +
@@ -60,7 +60,7 @@ function sendEmail(correo, token) {
             '<table border="0" cellpadding="0" cellspacing="0" class="image_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">' +
             '<tbody><tr>' +
             '<td style="width:100%;padding-right:0px;padding-left:0px;">' +
-            '<div align="center" style="line-height:10px"><img src="https://app.3csigmawater.com/imgcorreo/candado.png" style="display: block; height: auto; border: 0; width: 106px; max-width: 100%;" width="106"></div>' +
+            '<div align="center" style="line-height:10px"><img src="https://3csigmawater.com/correos_html/candado.png" style="display: block; height: auto; border: 0; width: 106px; max-width: 100%;" width="106"></div>' +
             '</td>' +
             '</tr>' +
             '</tbody></table>' +
@@ -108,7 +108,7 @@ function sendEmail(correo, token) {
             '<table border="0" cellpadding="0" cellspacing="0" class="image_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">' +
             '<tbody><tr>' +
             '<td style="width:100%;padding-right:10px;padding-left:0px;">' +
-            '<div align="center" style="line-height:10px"><img src="https://app.3csigmawater.com/imgcorreo/logo1.png" style="display: block; height: auto; border: 0; width: 120px; max-width: 100%;" width="120"></div>' +
+            '<div align="center" style="line-height:10px"><img src="https://3csigmawater.com/correos_html/logo1.png" style="display: block; height: auto; border: 0; width: 120px; max-width: 100%;" width="120"></div>' +
             '</td>' +
             '</tr>' +
             '</tbody></table>' +
@@ -148,7 +148,7 @@ function sendEmail(correo, token) {
             ' <table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">' +
             '<!--<![endif]-->' +
             '<tbody><tr>' +
-            '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="tel:7862387004" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://app.3csigmawater.com/imgcorreo/phone.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"></a></td>' +
+            '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="tel:7862387004" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://3csigmawater.com/correos_html/phone.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"></a></td>' +
             ' <td style="font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; color: #000000; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="tel:7862387004" style="color: #000000; text-decoration: none;" target="_self">Llámanos</a></td>' +
             ' </tr>' +
             ' </tbody></table>' +
@@ -157,7 +157,7 @@ function sendEmail(correo, token) {
             '<table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">' +
             '<!--<![endif]-->' +
             '<tbody><tr>' +
-            '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="mailto:sales@3csigmawater.com" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://app.3csigmawater.com/imgcorreo/email.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"></a></td>' +
+            '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="mailto:sales@3csigmawater.com" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://3csigmawater.com/correos_html/email.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"></a></td>' +
             '<td style="font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; color: #000000; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="mailto:sales@3csigmawater.com" style="color: #000000; text-decoration: none;" target="_self">Escríbenos</a></td>' +
             '</tr>' +
             '</tbody></table>' +
@@ -172,8 +172,8 @@ function sendEmail(correo, token) {
             '<td style="text-align:center;padding-left:10px;padding-right:0px;">' +
             '<table align="center" border="0" cellpadding="0" cellspacing="0" class="social-table" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="72px">' +
             '<tbody><tr>' +
-            '<td style="padding:0 2px 0 2px;"><a href="https://www.facebook.com/3csigmawater" target="_blank"><img alt="Facebook" height="32" src="https://app.3csigmawater.com/imgcorreo/facebook2x.png" style="display: block; height: auto; border: 0;" title="facebook" width="32"></a></td>' +
-            '<td style="padding:0 2px 0 2px;"><a href="https://www.instagram.com/3csigmawater/" target="_blank"><img alt="Instagram" height="32" src="https://app.3csigmawater.com/imgcorreo/instagram2x.png" style="display: block; height: auto; border: 0;" title="instagram" width="32"></a></td>' +
+            '<td style="padding:0 2px 0 2px;"><a href="https://www.facebook.com/3csigmawater" target="_blank"><img alt="Facebook" height="32" src="https://3csigmawater.com/correos_html/facebook2x.png" style="display: block; height: auto; border: 0;" title="facebook" width="32"></a></td>' +
+            '<td style="padding:0 2px 0 2px;"><a href="https://www.instagram.com/3csigmawater/" target="_blank"><img alt="Instagram" height="32" src="https://3csigmawater.com/correos_html/instagram2x.png" style="display: block; height: auto; border: 0;" title="instagram" width="32"></a></td>' +
             ' </tr>' +
             ' </tbody></table>' +
             ' </td>' +

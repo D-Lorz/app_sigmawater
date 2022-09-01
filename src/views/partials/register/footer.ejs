@@ -55,7 +55,7 @@
 
    
    const urlParams = new URLSearchParams(location.search);
-   const afiliado =  $('#afiliado').removeAttr("disabled");
+   const afiliado =  $('#afiliado').removeAttr("readonly");
 
   if (location.search) {
 
@@ -64,20 +64,16 @@
       codeAfiliado.push(value)
     }
     $('#afiliado').val(codeAfiliado[0])
-    $('#afiliado').attr("disabled", true);
+    $('#afiliado').attr("readonly", true);
   }
 
-  //  console.log(codeAfiliado[0])
-
-
-
+  
     jQuery('#filter-date').datetimepicker({
       timepicker: false,
       datapicker: true,
       format: 'm-d-Y',
       yearStart: 1800,
       yearEnd: (new Date().getFullYear() - 18)
-
 
     });
 
