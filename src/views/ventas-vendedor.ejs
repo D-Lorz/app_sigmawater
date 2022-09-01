@@ -128,7 +128,7 @@
                                                         <label class="row icon-demo-content"><i class="fas fa-chart-line iconoDatos" style="color:white;border: none;"></i></label>
                                                     </div>
                                                     <div class="col-md-8 text-black">
-                                                        <div class="row" style="font-size: 17px;font-weight: 900;margin-top: 9px;margin-bottom: 11%;">Ganancias</div>
+                                                        <div class="row" style="font-size: 17px;font-weight: 900;margin-top: 9px;margin-bottom: 7.7%;">Ganancias</div>
                                                     </div>
                                                 </div>
                                     
@@ -141,14 +141,21 @@
                                                     </div>
                                     
                                                     <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
-                                                        <div class="row">Ganacias de afiliados</div>
+                                                        <div class="row">Ganacias de afiliados directos</div>
                                                         <div class="row" style="font-size: 29px; font-weight: 800;">
                                                             <strong>$<%=sumaComisionAfiliados %></strong>
                                                         </div>
                                                     </div>
-                                    
+                                                    
                                                     <div class="row" style="font-size: 13px;font-weight: 500;margin-bottom: -22px;">
-                                                        Ganancias totales: $<%=totalComisiones %>
+                                                        <div class="col-sm-1">
+                                                            <button type="button" style="background-color: transparent; border: none;" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Este valor incluye las ganancias de los afiliados de tus afiliados directos" aria-describedby="popover26460">
+                                                                <i class="fas fa-info-circle"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-sm-11" style="margin-left: -15px;">
+                                                            Ganancias totales: $<%=totalComisiones %>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -173,7 +180,7 @@
                             <li class="nav-item waves-effect waves-light">
                                 <a class="nav-link" data-bs-toggle="tab" href="#facturas-afiliados" role="tab">
                                     <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                                    <span class="d-none d-sm-block">Afiliados</span>
+                                    <span class="d-none d-sm-block">Afiliados directos</span>
                                 </a>
                             </li>
                         </ul>

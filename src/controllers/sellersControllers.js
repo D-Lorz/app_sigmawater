@@ -48,7 +48,7 @@ var nodemailer = require('nodemailer');
     
     const sellerB = await conexion.query("SELECT id_vendedor, estado_de_la_cuenta FROM usuarios WHERE id_vendedor = ? AND estado_de_la_cuenta = 'aprobado'", [codigo_afiliado])
     if (sellerB.length == 0) { codigo_afiliado = "N/A" }
-    
+
     const nuevoRegistro = {
       year, mes,semana,dia, nombres, apellidos,fecha_nacimiento,telefono_movil,
       correo, seguro_social,ciudad, direccion,apt_suite_unidad, codigo_postal, codigo_afiliado,
@@ -481,7 +481,7 @@ var nodemailer = require('nodemailer');
   exports.facturacion = async (req, res) => {
     const id_vendedorA = req.user.id_vendedor;
     // Consultando en DB las ventas x vendedor
-    const allSellers = await conexion.query('SELECT id_vendedor, ventas_individuales, ventas_afiliados, total_ventas FROM registro_de_vendedores')
+    const allSellers = await conexion.query('SELECT id_vendedor, ventas_individuales, ventas_afiliados, total_ventas, ganancias FROM registro_de_vendedores')
     const ventasVendedor = allSellers.find(i => i.id_vendedor == id_vendedorA)
 
     const facturacionPropia = await conexion.query('SELECT f.id_factura, f.fecha_instalacion, nc.nombre, nc.apellido, f.producto_instalado, sc.monto_aprobado, f.comision_total, nc.id as idCliente, f.id_cliente as cliente_factura, f.vendedores, f.estadoFactura FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente JOIN solicitar_credito sc ON nc.id = sc.id_cliente WHERE nc.codigo_id_vendedor = ? ;', [id_vendedorA])
@@ -528,7 +528,7 @@ var nodemailer = require('nodemailer');
     });
 
     sumaComisionAfiliados != 0 ? sumaComisionAfiliados = parseFloat(sumaComisionAfiliados).toFixed(1) : sumaComisionAfiliados = 0;
-    const totalComisiones = parseFloat(sumaComisionPropia) + parseFloat(sumaComisionAfiliados)
+    const totalComisiones = parseFloat(ventasVendedor.ganancias)
 
     res.render('ventas-vendedor', { user: req.user, facturacionPropia, facturacionAfiliado, ventasVendedor, sumaComisionPropia, sumaComisionAfiliados, totalComisiones })
   }
