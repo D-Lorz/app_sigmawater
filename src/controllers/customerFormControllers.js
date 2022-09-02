@@ -373,8 +373,15 @@ exports.testAgua = async (req, res) => {
   const event = new Date();
   let fecha_test = event.toLocaleDateString("en-US");
   const dureza_gmXgalon = req.body.dureza_gmXgalon;
-  const hierro = req.body.hierro;
-  const totalDureza_compensada = (parseFloat(dureza_gmXgalon) * 4) + parseFloat(hierro);
+  let hierro = req.body.hierro;
+  let totalDureza_compensada 
+
+  if(hierro){
+    totalDureza_compensada = (parseFloat(dureza_gmXgalon) * 4) + parseFloat(hierro);
+  }else {
+    totalDureza_compensada = (parseFloat(dureza_gmXgalon) * 4) + 0
+  }
+
   const tsd = req.body.tsd;
   const cloro = req.body.cloros;
   const ph = req.body.ph;
