@@ -78,7 +78,7 @@ var nodemailer = require('nodemailer');
     
     const mailOptions = {
       from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
-      to: '3csigmagroup@gmail.com',
+      to: 'finance@3csigmawater.com',
       subject: 'Mensaje solo para administrador',
       html: '<style>'+
       ' a[x-apple-data-detectors] {'+
