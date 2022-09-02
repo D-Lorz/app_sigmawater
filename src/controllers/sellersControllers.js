@@ -69,16 +69,16 @@ var nodemailer = require('nodemailer');
     // ! ************* PROCESO DEL EMAIL PARA EL ADMIN ************
     const transporter = nodemailer.createTransport({ 
       host: 'mail.3csigmawater.com',
-        port: 465, //cambiar el puerto a 465 cuando antes de subir al server el proyecto
+        port: 465, //cambiar el puerto a 465, antes de subir al server el proyecto
         auth: {
-            user: 'noreplys@3csigmawater.com', // Your correo id
+            user: 'noreply@3csigmawater.com', // Your correo id
             pass: '3csigma3c' // Your pass
         }
     });
     
     const mailOptions = {
-      from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
-      to: 'finance@3csigmawater.com',
+      from: "'3C Sigma Water System <noreply@3csigmawater.com>'",
+      to: '3csigmagroup@gmail.com',
       subject: 'Mensaje solo para administrador',
       html: '<style>'+
       ' a[x-apple-data-detectors] {'+

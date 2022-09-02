@@ -233,13 +233,13 @@ exports.actualizarEstadoVendedor = async (req, res) => {
   host: 'mail.3csigmawater.com',
      port: 465, //cambiar el puerto a 465 cuando antes de subir al server el proyecto
      auth: {
-         user: 'noreplys@3csigmawater.com', // Your correo id
+         user: 'noreply@3csigmawater.com', // Your correo id
          pass: '3csigma3c' // Your pass
      }
   });
  
   var mailOptions = {
-      from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
+      from: "'3C Sigma Water System <noreply@3csigmawater.com>'",
           to: datosUser.correo,
           subject: 'Bienvenido a 3C Sigma Water System',
           html: '<style>'+

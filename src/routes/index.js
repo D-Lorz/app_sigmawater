@@ -9,12 +9,12 @@ function sendEmail(correo, token) {
         host: 'mail.3csigmawater.com',
         port: 465, //cambiar el puerto a 465 cuando antes de subir al server el proyecto
         auth: {
-            user: 'noreplys@3csigmawater.com', // Your correo id
+            user: 'noreply@3csigmawater.com', // Your correo id
             pass: '3csigma3c' // Your pass
         }
     });
     var mailOptions = {
-        from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
+        from: "'3C Sigma Water System <noreply@3csigmawater.com>'",
         to: correo,
         subject: 'Reset pass Link',
         html: '<p>You requested for reset pass, kindly use this <a href="http://localhost:3000/reset-password?token=' + token + '">link</a> to reset your pass</p>'

@@ -14,13 +14,13 @@ function sendEmail(correo, token) {
         host: 'mail.3csigmawater.com',
         port: 465, 
         auth: {
-            user: 'noreplys@3csigmawater.com', // Your correo id
+            user: 'noreply@3csigmawater.com', // Your correo id
             pass: '3csigma3c' // Your pass
         }
     });
     let link = "http://localhost:3000/reset-password?token=' + token + '"
     var mailOptions = {
-        from: "'3C Sigma Water System <noreplys@3csigmawater.com>'",
+        from: "'3C Sigma Water System <noreply@3csigmawater.com>'",
         to: correo,
         subject: 'Restablece tu cuenta en 3C Sigma Water',
         html: '<body style="background-color: transparent; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">' +
