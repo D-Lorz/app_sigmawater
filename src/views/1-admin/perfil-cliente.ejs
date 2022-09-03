@@ -823,7 +823,7 @@
                                                                             <a href="<%= licenciacredito.frontal%>" target="_blank">
                                                                               <img src="<%= licenciacredito.frontal%>" alt="" style="width: 85%; margin-left: 10%;">
                                                                             </a> 
-                                                                               <% }%>
+                                                                          <% }%>
                                                                          </div>
                                                                         </div><!-- end col -->
                                                                      </div>
@@ -858,7 +858,7 @@
                                                                                     <img src="<%= licenciacredito.trasera%>" alt=""  style="width: 85%; margin-left: 10%;">
                                                                                    </a> 
                                                                                    <% } else { %> 
-                                                                                    <% } %> 
+                                                                                 <% } %> 
                                                                             </div>
                                                                        </div><!-- end col -->
                                                                     </div>
@@ -1202,6 +1202,12 @@
                                                 <td>$ <%= ahorroCalculado.ropa_lenceria %></td>         
                                                 <td>$ <%= ahorroCalculado.ahorroMensual_ropa_lenceria %></td>        
                                                 <td>$ <%= ahorroCalculado.ahorroAnual_ropa_lenceria %></td>                                              
+                                            </tr>
+                                            <tr>
+                                                <th>Total</td>
+                                                <th>$ <%= ahorroCalculado.sumaGastoMensual %></td>         
+                                                <th>$ <%= ahorroCalculado.sumaAhorroMensual %></td>        
+                                                <th>$ <%= ahorroCalculado.sumaAhorroAnual %></td>                                              
                                             </tr>
                                         </tbody>
                                     </table>

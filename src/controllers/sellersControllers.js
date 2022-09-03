@@ -37,6 +37,7 @@ var nodemailer = require('nodemailer');
     const apt_suite_unidad = req.body.apt_suite_unidad;
     const codigo_postal = req.body.codigo_postal;
     let codigo_afiliado = req.body.codigo_afiliado;
+    const codigo_historial_afiliado = req.body.codigo_afiliado
     const nombre_banco = req.body.nombre_banco;
     const numero_cuenta = req.body.numero_cuenta;
     const ruta = req.body.ruta;
@@ -51,12 +52,12 @@ var nodemailer = require('nodemailer');
 
     const nuevoRegistro = {
       year, mes,semana,dia, nombres, apellidos,fecha_nacimiento,telefono_movil,
-      correo, seguro_social,ciudad, direccion,apt_suite_unidad, codigo_postal, codigo_afiliado,
+      correo, seguro_social,ciudad, direccion,apt_suite_unidad, codigo_postal, codigo_afiliado,codigo_historial_afiliado,
       nombre_banco,numero_cuenta, ruta, beneficiario,licencia_conduccion, id_vendedor};
 
     const nombresUser = nombres
     const apellidosUser = apellidos
-    const usuarios = { nombresUser, apellidosUser, correo, id_vendedor, codigo_afiliado };
+    const usuarios = { nombresUser, apellidosUser, correo, id_vendedor, codigo_afiliado,codigo_historial_afiliado };
 
     await conexion.query("INSERT INTO usuarios SET ?", [usuarios]);
     await conexion.query("INSERT INTO registro_de_vendedores SET ?", [ nuevoRegistro ]);
@@ -78,8 +79,8 @@ var nodemailer = require('nodemailer');
     
     const mailOptions = {
       from: "'3C Sigma Water System <noreply@3csigmawater.com>'",
-      to: '3csigmagroup@gmail.com',
-      subject: 'Mensaje solo para administrador',
+      to: 'desarrollosoftware2022mintic@gmail.com',
+      subject: 'Nuevo vendedor registrado',
       html: '<style>'+
       ' a[x-apple-data-detectors] {'+
         'color: inherit !important;'+
@@ -375,6 +376,7 @@ var nodemailer = require('nodemailer');
     });
   
   // ! ****************************************************************************************
+  
     let idConsecutivo = await conexion.query("SELECT id FROM registro_de_vendedores WHERE id_vendedor = ?", [id_vendedor]);
     let fecha = new Date().toLocaleDateString("en-CA");
     const numClientes = 00;
@@ -398,7 +400,7 @@ var nodemailer = require('nodemailer');
     // Capturando el id del Vendedor actual
     const id_vendedorA = req.user.id_vendedor;
     // Consultando en DB los afiliados de ese vendedor
-    conexion.query("SELECT rv.*, u.estado_de_la_cuenta FROM registro_de_vendedores rv JOIN usuarios u ON u.id_vendedor = rv.id_vendedor WHERE rv.codigo_afiliado = ?", [id_vendedorA],(err, result) => { 
+    conexion.query("SELECT rv.*, u.estado_de_la_cuenta FROM registro_de_vendedores rv JOIN usuarios u ON u.id_vendedor = rv.id_vendedor WHERE rv.codigo_historial_afiliado = ?", [id_vendedorA],(err, result) => { 
         if (err) throw err;
         res.render("afiliados", { user: req.user, result: result });
       }
@@ -506,11 +508,12 @@ var nodemailer = require('nodemailer');
         }
     });
 
-    const facturacionAfiliado = await conexion.query('SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.vendedores, f.estadoFactura, sc.monto_aprobado FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id WHERE codigo_afiliado = ? ;', [id_vendedorA])
+    const facturacionAfiliado = await conexion.query('SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.vendedores, f.estadoFactura, sc.monto_aprobado, u.estado_de_la_cuenta FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id JOIN usuarios u ON rv.id_vendedor = u.id_vendedor WHERE rv.codigo_historial_afiliado = ? ;', [id_vendedorA])
 
     let sumaComisionAfiliados = 0
     facturacionAfiliado.forEach(afl => {
         afl.facturaAfl = {}
+        afl.estado = {}
         if (afl.idClientenc == afl.idClientef) {
             if (afl.estadoFactura == 0) { 
                 afl.facturaAfl.text = "Pendiente"; 
@@ -519,6 +522,10 @@ var nodemailer = require('nodemailer');
             } else {
                 afl.facturaAfl.text = "Pagado"; 
                 afl.facturaAfl.color = "badge-soft-success";
+                if (afl.estado_de_la_cuenta == "bloqueado") {
+                  afl.estado.text = "Desvinculado"; 
+                  afl.estado.color = "badge-soft-danger";
+                }
                 const vendedores = JSON.parse(afl.vendedores)
                 const v = vendedores.find(i => i.codigo == id_vendedorA)
                 afl.comision =  parseFloat(v.comision_final)

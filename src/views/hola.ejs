@@ -2,11 +2,113 @@
 <html>
 <head></head>
 <body>
-    <!-- <form class="" action="/registrar" method="post">
-        <input type="text" name="nombre" value="" placeholder="nombre"><br>
-        <input type="text" name="correo" value="" placeholder="correo"><br>
-        <textarea name="mensaje" rows="4" cols="40" placeholder="mensaje"></textarea><br>
-        <button type="submit" name="">enviar</button>
-       </form> -->
+    <form  action="data/insertcheck.php" method="post" enctype="multipart/form-data">
+        <div class="col-md-4" style="text-align: center" >
+    
+      <label for="imagen1" class="btn">Seleccione Imagen</label>
+      <input  type="file" style="visibility:hidden;"  name="imagen" id="imagen1" onchange="fileValidation()"/>
+    
+      <div class="ima" id="imagePre1">
+    
+      </div>
+    </div>
+    <div class="col-md-4" style="text-align: center" >
+    
+      <label for="imagen2" class="btn">Seleccione imagen</label>
+    <input  type="file" style="visibility:hidden;" name="imagen" id="imagen2" onchange="fileValidation2()"/>
+    
+      <div class="ima" id="imagePre2" >
+    
+      </div>
+    </div>
+     <div class="col-md-8">
+                        <a id="back_paso_b" href="" class="btn btn-info" >Regresar</a>
+                  <input type="submit" value="Guardar" name="btncambiar" id="btncambiar" class="btn btn-success btn-primary">
+              </div>
+    
+            </div>
+    
+          </form>
+
+
+
+
+
+          <script>
+
+            function fileValidation(){
+            
+                var fileInput = document.getElementById('imagen1');
+            
+                var filePath = fileInput.value;
+                var allowedExtensions = /(.jpg|.jpeg)$/i;
+                if(!allowedExtensions.exec(filePath)){
+                    alert('Por favor seleccione archivo de extensión .jpeg/.jpg únicamente.');
+                    fileInput.value = '';
+                    return false;
+                }else{
+                    //Image preview
+                    if (fileInput.files && fileInput.files[0]) {
+            
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.getElementById('imagePre1').innerHTML = '<img src="'+e.target.result+'" style="width:200px; height:200px;"/>';
+            
+                        };
+                        reader.readAsDataURL(fileInput.files[0]);
+                    }
+                }
+            }
+            
+            
+            function fileValidation2(){
+                var fileInput = document.getElementById('imagen2');
+                var filePath = fileInput.value;
+                var allowedExtensions = /(.jpg|.jpeg|.png)$/i;
+                if(!allowedExtensions.exec(filePath)){
+                    alert('Por favor seleccione archivo de extensión .jpeg/.jpg únicamente.');
+                    fileInput.value = '';
+                    return false;
+                }else{
+                    //Image preview
+                    if (fileInput.files && fileInput.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.getElementById('imagePre2').innerHTML = '<img src="'+e.target.result+'" style="width:200px; height:200px;"/>';
+                        };
+                        reader.readAsDataURL(fileInput.files[0]);
+                    }
+                }
+            }
+            
+            function fileValidation3(){
+                var fileInput = document.getElementById('imagen3');
+                var filePath = fileInput.value;
+                var allowedExtensions = /(.jpg|.jpeg|.png)$/i;
+                if(!allowedExtensions.exec(filePath)){
+                    alert('Por favor seleccione archivo de extensión .jpeg/.jpg únicamente.');
+                    fileInput.value = '';
+                    return false;
+                }else{
+                    //Image preview
+                    if (fileInput.files && fileInput.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.getElementById('imagePre3').innerHTML = '<img src="'+e.target.result+'" style="width:200px; height:200px;"/>';
+                        };
+                        reader.readAsDataURL(fileInput.files[0]);
+                    }
+                }
+            }
+            
+            
+            </script>
+
+
+
+
+
+
+
 </body>
 </html>

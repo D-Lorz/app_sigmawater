@@ -251,15 +251,14 @@
                                         <tbody>
 
                                             <% facturacionAfiliado.forEach((f)=>{ %>
-                                                <tr>
-                                                    <td>
+                                                <tr><td>
                                                         <button style="background: none;border: none;margin: 0;"
                                                             onclick="consultarFactura('<%=f.id_factura%>', '<%=f.monto_aprobado%>')">
                                                             <%= f.id_factura %>
                                                         </button>
                                                     </td>
                                                     <td><%= f.fecha_instalacion %></td>
-                                                    <td style="text-transform: capitalize;"><%= f.cliente %> <%= f.apellido %></td>
+                                                    <td style="text-transform: capitalize;"><%= f.nombre %> <%= f.apellido %></td>
                                                     <td><%= f.producto_instalado %></td>
                                                     <td>$<%= f.monto_aprobado %></td>
                                                     <td>
@@ -272,6 +271,10 @@
                                                     <td>
                                                         <div class="badge <%= f.facturaAfl.color %> font-size-12">
                                                             <%= f.facturaAfl.text %>
+                                                        </div>
+                                                        <br>
+                                                        <div class="badge <%= f.estado.color %> font-size-12">
+                                                            <%= f.estado.text %>
                                                         </div>
                                                     </td>
                                                 </tr>
