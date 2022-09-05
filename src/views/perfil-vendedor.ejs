@@ -114,14 +114,15 @@
                                                                                         <form action="/actualizarPerfil" method="POST" d="validarForm" enctype="multipart/form-data">
                                                                                             <!--* Cambiar foto de perfil ****  -->
                                                                                             <div class="">
-                                                                                                    <div style="width: 220px !important; height: 220px !important;">
+                                                                                                    <div id="imagePre1" style="width: 220px !important; height: 220px !important;">
                                                                                                             <img src="<%= fotoUpdate%>" alt=""
                                                                                                                 style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;margin-top: 11%;">
                                                                                                     </div>
                                                                                                 <label class="input-group-btn" style="margin-left: 69%;margin-top: -21%;">
                                                                                                     <span class="btn btn-primary" style="border-radius: 35px">
                                                                                                         <h5 class="font-size-20 mb-1" style="color: white;"><i class="fas fa-pencil-alt"></i></h5>
-                                                                                                        <input type="file" name="editFoto" id="campoFile" accept="image/jpg" style="display: none;" id="">
+                                                                                                        <!-- <input type="file" name="editFoto" id="campoFile" accept="image/jpg"  id=""> -->
+                                                                                                        <input type="file" name="editFoto" id="imagen1" style="display: none;" onchange="fileValidation()">
                                                                                                     </span>
                                                                                                 </label>
                                                                                             </div>
@@ -521,34 +522,30 @@
 
 <script>
     
-  $(function () {
-
-// This code will attach `fileselect` event to all file inputs on the page
-$(document).on('change', ':file', function () {
-  var input = $(this),
-    numFiles = input.get(0).files ? input.get(0).files.length : 1,
-    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-  input.trigger('fileselect', [numFiles, label]);
-});
-
-
-$(document).ready(function () {
-  //below code executes on file input change and append name in text control
-  $(':file').on('fileselect', function (event, numFiles, label) {
-
-    var input = $(this).parents('.input-group').find(':text'),
-      log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-    if (input.length) {
-      input.val(log);
-    } else {
-      if (log) ;
-    }
-
-  });
-});
-
-});
+    function fileValidation(){
+            
+            var fileInput = document.getElementById('imagen1');
+        
+            var filePath = fileInput.value;
+            var allowedExtensions = /(.jpg|.jpeg|.png)$/i;
+            if(!allowedExtensions.exec(filePath)){
+                  alertify.set('notifier', 'position', 'top-center');
+                  alertify.error('Solo archivos .jpg o .png son aceptados');
+                fileInput.value = '';
+                return false;
+            }else{
+                //Image preview
+                if (fileInput.files && fileInput.files[0]) {
+        
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('imagePre1').innerHTML = '<img src="'+e.target.result+'" style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;margin-top: 11%;"/>';
+        
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            }
+        }
 </script>
 
 
