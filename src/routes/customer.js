@@ -6,7 +6,8 @@ const cron = require('node-cron');
 const { isAuthenticated} = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
-        agendarInstalacionProducto, getRegistrarInstalacion, elegirSistema, historialClientes, historialVendedores, historial_numVentas } = require('../controllers/customerFormControllers');
+        agendarInstalacionProducto, getRegistrarInstalacion, elegirSistema, historialClientes, historialVendedores, historial_numVentas,
+        historial_ganancias_vendedores } = require('../controllers/customerFormControllers');
 const {servicioInstaladosx} = require("../controllers/adminControllers");  
   
 const rutaAlmacen = multer.diskStorage({
@@ -106,5 +107,7 @@ router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
 /*=============================================================*/
   router.post('/elegirSistema', isAuthenticated, elegirSistema);
 /*=============================================================*/
+router.post('/historial_ganancias_vendedores', historial_ganancias_vendedores);
+
 
 module.exports = router

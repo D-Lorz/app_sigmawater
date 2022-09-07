@@ -83,15 +83,12 @@
                       <div class="app-content content" style="margin-top:-7px">
                           <!-- Form wizard with step validation section start -->
                           <section id="validation">
-
-                    <div class="card-content collapse show">
-                                      <form action="/agendarInstalacion"  id="demo-form2" data-parsley-validate class="form" method="POST" class="steps wizard-circle" id="validarForm">
+                               <div class="card-content collapse show">
+                                     <form action="/agendarInstalacion"  id="demo-form2" data-parsley-validate class="form" method="POST" class="steps wizard-circle" id="validarForm">
                             
                              <!-- * ========== Primera fila =======  -->
-                           
-                             <input type="hidden" hidden name="id_cliente" value="<%= agendarInstalacion.id %>">
-                             <input type="hidden" hidden name="codigo_cliente" value="<%= agendarInstalacion.id_cliente %>">
-                             
+                             <input type="hidden" hidden name="id_cliente" value="<%= infoCl.id %>">
+                             <input type="hidden" hidden name="codigo_cliente" value="<%= infoCl.id_cliente %>">
                                         <div class="row justify-content-center" style="text-align:center; ">
                                             <div class="col-xl-6">
                                                 <div class="card">
@@ -106,7 +103,6 @@
                                                     background: #545a6d;
                                                     }
                                                 </style>
-                                                  
                                                         <div class="row justify-content-center">
                                                             <div class="col-xl-12">
                                                                 <label for="">Día disponibles para la instalación<span class="danger">*</span></label>
@@ -160,66 +156,29 @@
                                                                         <textarea class="form-control"  id="nota" name="nota_solicitud" ></textarea>
                                                                  </div> 
                                                            </div> 
-                                                      </div> 
-                                                       
-                
-                                                            <!-- end row -->
-                                                        </div>
-                                                   
+                                                        </div> 
+                                                      </div>
                                                 </div><!-- end card -->
                                             </div><!-- end col -->
-                                         
-                                          
                                         </div>
-                       
-                                              </br>
+                                         </br>
                         <center><button type="submit" style="border-radius:15px;" class="btn btn-primary">Guardar</button></center>
-
                                       </form>
-
                                   </div>
-                            
                           </section>
-                          
                       </div>
-            
                   </div>
               </div>
-
               <!-- =======FIXME: copyright ========================== -->
               <%- include ('./partials/copyright.ejs')%>
               <!-- =======FIXME: copyright ========================== -->
-
-
           </div>
       </div>
-
-
-      <!-- Right Sidebar -->
-      <div class="right-bar">
-          <div data-simplebar class="h-100">
-              <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-
-                  <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
-
-                  <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                      <i class="mdi mdi-close noti-icon"></i>
-                  </a>
-              </div>
-
-              <!-- Settings -->
-
-          </div> <!-- end slimscroll-menu-->
-      </div>
-
-
-
 
 <!-- * SCRIPTS DEL CALENDARIO DE NUEVO CLIENTE -->
 <script src="../directorio_nuevoCliente/js/jquery-ui.js"></script>
 <script src="../directorio_nuevoCliente/js/jquery-ui.min.js"></script>
 <!-- * SCRIPTS DEL CALENDARIO DE NUEVO CLIENTE -->
-
 
 <!-- JAVASCRIPT -->
 <script src="../directorio_dash/js/scripts_personalizadosdash.js"></script>
@@ -232,9 +191,7 @@
 
 <script src="../directorio_dash/js/app.js"></script>
 
-
 <!-- ==========FIXME: JS DEL FORMULARIO ================= -->
-
 <!-- BEGIN: Vendor JS-->
 <script src="../directorio_nuevoCliente/js/vendors.min.js"></script>
 <!-- BEGIN Vendor JS-->
@@ -257,11 +214,9 @@
    <script src="../directorio_dash/libs/nouislider/nouislider.min.js"></script>
    <script src="../directorio_dash/libs/wnumb/wNumb.min.js"></script>
 
-   
         <!-- color picker js -->
         <script src="../directorio_dash/libs/@simonwep/pickr/pickr.min.js"></script>
       
-
         <!-- datepicker js -->
         <script src="../directorio_dash/libs/flatpickr/flatpickr.min.js"></script>
 
@@ -269,7 +224,6 @@
         <script src="../directorio_dash/js/pages/form-advanced.init.js"></script>
 
         <script src="../directorio_dash/js/app.js"></script>
-
 
 </body>
 

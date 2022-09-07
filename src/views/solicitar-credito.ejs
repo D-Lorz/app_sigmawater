@@ -66,23 +66,23 @@
                                                   <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="primer_nombref"> Primer nombre<span class="danger">*</span></label>
-                                                          <input type="text" class="form-control required" id="primer_nombref" value="<%= cliente.nombre %>" name="nombre">  
-                                                          <input type="hidden" hidden name="id_cliente" value="<%= cliente.id %>">
-                                                          <input type="hidden" hidden name="numCliente" value="<%= cliente.id_cliente %>">
+                                                          <input type="text" class="form-control required" id="primer_nombref" value="<%= infoCl.nombre %>" name="nombre">  
+                                                          <input type="hidden" hidden name="id_cliente" value="<%= infoCl.id %>">
+                                                          <input type="hidden" hidden name="numCliente" value="<%= infoCl.id_cliente %>">
                                                      
                                                       </div>
                                                     </div>
                                                   <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="segundo_nombref">Segundo nombre</label>
-                                                           <input type="text" class="form-control" id="segundo_nombref" value="<%= cliente.segundo_nombre%>"  name="segundo_nombre" > 
+                                                           <input type="text" class="form-control" id="segundo_nombref" value="<%= infoCl.segundo_nombre%>"  name="segundo_nombre" > 
                                                        </div>
                                                   </div>
       
                                                   <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="apellidosf"> Apellidos <span class="danger">*</span></label>
-                                                           <input type="text" class="form-control required" id="apellidosf" value="<%= cliente.apellido%>" name="apellido" >
+                                                           <input type="text" class="form-control required" id="apellidosf" value="<%= infoCl.apellido%>" name="apellido" >
                                                       </div>
                                                   </div> 
                                               </div>
@@ -198,7 +198,7 @@
                                               <div class="col-md-4">
                                                   <div class="form-group">
                                                       <label for="Correof">Correo electronico <span class="danger">*</span></label>
-                                                      <input type="email" class="form-control required" id="Correof"  value="<%= cliente.correo %>" name="correo">
+                                                      <input type="email" class="form-control required" id="Correof"  value="<%= infoCl.correo %>" name="correo">
                                                   </div>
                                               </div>
                                               <div class="col-md-4">
@@ -234,7 +234,7 @@
                                           <div class="col-md-4">
                                               <div class="form-group">
                                                   <label for="phone-masktelmovil"> Teléfono móvil <span class="danger">*</span> </label>
-                                                  <input type="text" class="form-control required" id="phonesolicitante"  value="<%= cliente.telefono %>" name="telefono"> 
+                                                  <input type="text" class="form-control required" id="phonesolicitante"  value="<%= infoCl.telefono %>" name="telefono"> 
                                               </div>
                                       </div>
                                              <div class="col-md-4">
@@ -261,14 +261,14 @@
                                                 <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="direccionf">  Dirección <span class="danger">*</span></label>
-                                                          <input type="text" class="form-control required" id="direccionf" value="<%= cliente.direccion %>" name="direccion" > 
+                                                          <input type="text" class="form-control required" id="direccionf" value="<%= infoCl.direccion %>" name="direccion" > 
                                                       </div>
                                                   </div>
       
                                                    <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="ciudadf"> Ciudad <span class="danger">*</span></label>
-                                                           <input type="text" class="form-control required" id="ciudadf" value="<%= cliente.ciudad %>" name="ciudad" > 
+                                                           <input type="text" class="form-control required" id="ciudadf" value="<%= infoCl.ciudad %>" name="ciudad" > 
                                                       </div>
                                                   </div>
                                               </div>
@@ -277,14 +277,14 @@
                                                <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="estadof"> Estado <span class="danger">*</span></label>
-                                                           <input type="text" class="form-control required" id="estadof" value="<%= cliente.estado_ubicacion %>" name="estado_ubicacion" > 
+                                                           <input type="text" class="form-control required" id="estadof" value="<%= infoCl.estado_ubicacion %>" name="estado_ubicacion" > 
                                                       </div>
                                                   </div>
               
                                                   <div class="col-md-4">
                                                       <div class="form-group">
                                                           <label for="postalcode"> Codigo postal <span class="danger">*</span> </label>
-                                                           <input type="text" class="form-control required" id="postalcode" value="<%= cliente.codigo_postal %>" name="codigo_postal" > 
+                                                           <input type="text" class="form-control required" id="postalcode" value="<%= infoCl.codigo_postal %>" name="codigo_postal" > 
                                                    </div>
                                                       
       
@@ -850,8 +850,6 @@
                                                 <!--============= //FIXME: ===== *REFERENCIAS* ===== FIXME:=========-->
       
                                                 <!--=============================TODO:TODO:=============================================================-->
-      
-      
                                                 <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
       
                                               <h6><b>CARGAR ARCHIVOS</b></h6>
@@ -866,15 +864,12 @@
                                                         </label>
                                                         <p class="titulolicencia">Licencia de conducir </p>
                                             
-                                            
                                                         <div class="input-group">
                                                             <label class="input-group-btn">
                                                                 <span class="btn btn-primary" style="padding: 10px;">
                                                                     Cargar anverso
-                                            
                                                                     <input type="file" name="cliente_frontal" id="campoFile" accept="image/jpg"
                                                                         style="display: none;" id="licencia_cliente_frontal1" required>
-                                            
                                                                 </span>
                                                             </label>
                                                             <input type="text" class="form-control" style="font-size: 15px;height: 43px;"
@@ -889,7 +884,6 @@
                                             
                                                                     <input type="file" name="cliente_trasera" id="campoFile" accept="image/jpg"
                                                                         style="display: none;" id="licencia_cliente_trasera1" required>
-                                            
                                                                 </span>
                                                             </label>
                                                             <input type="text" class="form-control" style="font-size: 15px; height: 43px;"
@@ -898,7 +892,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                                </fieldset>   
+                                         </fieldset>   
       
                                                 <!--============= //FIXME: ===== *CARGAR ARCHIVOS* ===== FIXME:=========-->
                                                 <!--=============================TODO:TODO:=============================================================-->
@@ -933,17 +927,13 @@
                                                                 ordenó dicho informe y le daremos el nombre y la
                                                                 dirección de la agencia de informes crediticios que
                                                                 proporcionó el informe.</p>
-      
-      
                                                         </div>
                                                         <div class="col-5">
                                                            <label type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modalFirmar">
                                                                 <input type="checkbox" id="btnAceptar" name="" class="required" > Aceptar y firmar los términos
                                                             </label>
                                                         </div>
-      
                                                  </div>
-      
                                                     <div class="col-5">
                                                         <div class="input-group" hidden>
                                                             <label class="input-group-btn">
@@ -988,50 +978,33 @@
        
                                                     <br>
                                                     <input class="btn btn-primary" type="submit" value="Enviar"
-                                                    style="float: left;
-                                                    position: relative;
-                                                    top: 40px;
-                                                    z-index: 3;
-                                                    left: 43em;
-                                                    width: 100px;
-                                                    background: #812082;
-                                                    color: #fff;
-                                                    padding: 7px 12px;
-                                                    border-radius: 2px;
+                                                    style="float: left; position: relative; top: 40px;  z-index: 3;
+                                                    left: 43em; width: 100px; background: #812082;
+                                                    color: #fff; padding: 7px 12px; border-radius: 2px;
                                                     border: 1px solid transparent; height: 39px;">
       
                                                 </fieldset> 
                                                 <!--============= // FIXME:===== *TERMINOS Y CONDICIONES* FIXME:=========-->
       
                                                 <!--=============================TODO:TODO:=============================================================-->
-      
                                             </form>
-      
-      
                                         </div>
                                     </div>
                                 </section>
                                 <!-- Form wizard with step validation section end -->
-      
                             </div>
                             <!-- End: Customizer-->
-      
                             <!--============================================================-->
                             <!--============== TODO:===== *FORMULARIO* ======= TODO:=========-->
                             <!--============================================================-->
-      
                         </div>
                     </div>
-      
                     <!-- =======FIXME: copyright ========================== -->
                     <%- include ('./partials/copyright.ejs')%>
                     <!-- =======FIXME: copyright ========================== -->
       
-      
                 </div>
             </div>
-      
-      
             <!-- Right Sidebar -->
             <div class="right-bar">
                 <div data-simplebar class="h-100">

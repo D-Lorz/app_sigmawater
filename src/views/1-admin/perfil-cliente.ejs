@@ -84,7 +84,8 @@
                                     <div class="card-header bg-transparent border-primary" style="margin-top: 2%;">
                                         <h5 class="my-0 text-primary">
                                             <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5>
-
+                                            
+                                            <label style="margin-top: 7px;margin-bottom: -13px; font-weight: 100; margin-left: 21px;">  Id de cliente  <b><%= info_clientes.id_cliente %></b></label>
                                              <a href="#" id="btncredito">
                                             <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".datoscredito"
                                             style="background: linear-gradient( 189.55deg, #fed061 -131.52%, #812082 -11.9%, #50368c 129.46% );
@@ -870,10 +871,8 @@
                                             </div><!-- /.modal-dialog -->
                                         </div><!-- /.modal -->
                                         
-                                 <button type="button" class="btn-close" style="float: left;
-                                     position: relative;top: 35px; z-index: 3;  left: 46em;
-                                        width: 68px;background: black;  color: #fff;
-                                        padding: 8px 12px;border-radius: 2px;
+                                 <button type="button" class="btn-close" style="float: left; position: relative;top: 35px; z-index: 3;  left: 46em;
+                                        width: 68px;background: black;  color: #fff;  padding: 8px 12px;border-radius: 2px;
                                         border: 1px solid transparent; height: 18px;"
                                   data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
                                </fieldset>   
@@ -886,99 +885,117 @@
                  </div><!-- /.modal-content -->
                </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-                 <input type="hidden" hidden name="id_consecutivo" value="<%= info_clientes.id %>">
-                 <input type="hidden" hidden name="id_cliente" value="<%= info_clientes.id_cliente%>">
          </div>
                                     <div class="card-body">
                                           <div class="table-responsive">
                                             <table class="table mb-0">
+                                                <input type="hidden" id="idClinfo" name="fetchUpdateinfoCl" value="<%= info_clientes.id_cliente %>">
                                                  <tbody>
                                                     <tr>
-                                                       <td style="width: 23%;">ID</td>
-                                                         <td><b><%= info_clientes.id_cliente %></b></td>
-                                                         <td>Teléfono</td>
-                                                         <td><b><%= info_clientes.telefono %></b></td>
+                                                       <td style="width: 23%;">Correo</td>
+                                                        <td><b><input type="text" id="correo" style="border:none; border-radius:9px; background: #ebebeb; width:73%;" value="<%= info_clientes.correo %>"></b>
+                                                            <button type="button" onclick="UpdateinfoCl()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                              <i class="bx bx-check-double font-size-13 align-middle"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td>Teléfono</td>
+                                                        <td><b><input type="text" id="telefono" style="border:none; border-radius:9px; background: #ebebeb; width:73%;"value="<%= info_clientes.telefono %>"></b>
+                                                            <button type="button" onclick="UpdateinfoCl()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                               <i class="bx bx-check-double font-size-13 align-middle"></i>
+                                                           </button>
+                                                        </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Nombre</td>
-                                                        <td style="width: 29%; text-transform: capitalize;"><b><%= info_clientes.nombre %></b></td>
-                                                        <td style="width:20%">Dirección</td>
-                                                        <td><b><%= info_clientes.direccion %> <%= info_clientes.ciudad %> <p><%= info_clientes.estado_ubicacion %> <%= info_clientes.codigo_postal %> </p></b></td>
+                                                        <td>Nombre
+                                                            <br>
+                                                        <label style="margin-top: 8px;font-weight: 200;">Segundo nombre</label>
+                                                        <br>
+                                                        <label style="margin-top: 8px;font-weight: 200;">Apellido</label>
+                                                        </td>
+                                                        <td style="width: 29%; text-transform: capitalize;"><b><input type="text" id="nombre" style="border:none; border-radius:9px; background: #ebebeb; width:49%;"value="<%= info_clientes.nombre %>"></b>
+                                                            <button type="button" onclick="UpdateinfoCl()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                               <i class="bx bx-check-double font-size-13 align-middle"></i>
+                                                           </button>
+                                                           <b><input type="text" id="segundo_nombre" style="border:none; border-radius:9px; background: #ebebeb; width:49%;"value="<%= info_clientes.segundo_nombre %>"></b>
+                                                            <button type="button" onclick="UpdateinfoCl()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                               <i class="bx bx-check-double font-size-13 align-middle"></i>
+                                                           </button>
+                                                           <b><input type="text" id="apellido" style="border:none; border-radius:9px; background: #ebebeb; width:49%;"value="<%= info_clientes.apellido %>"></b>
+                                                            <button type="button" onclick="UpdateinfoCl()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                               <i class="bx bx-check-double font-size-13 align-middle"></i>
+                                                           </button>
+                                                        </td>
+                                                        <td style="width:20%"> Dirección 
+                                                             <br>
+                                                           <label style="margin-top: 8px;font-weight: 200;">Ciudad</label>
+                                                             <br>
+                                                           <label style="font-weight: 200;">Estado de ubicación</label>
+                                                             <br>
+                                                           <label style="font-weight: 200;">Código postal</label>
+                                                           <br>
+                                                           <label style="font-weight: 200;">Dirección 2</label>
+                                                        </td>
+                                                        <td><b><input type="text" id="direccion" style="border:none; border-radius:9px; background: #ebebeb; width:73%;"value="<%= info_clientes.direccion %>"></b>
+                                                              <button type="button" onclick="UpdateinfoCl()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                                <i class="bx bx-check-double font-size-13 align-middle"></i>
+                                                              </button>
+                                                            <b><input type="text" id="ciudad" style="border:none; border-radius:9px; background: #ebebeb; width:73%;"value="<%= info_clientes.ciudad %>"></b>
+                                                              <button type="button" onclick="UpdateinfoCl()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                                <i class="bx bx-check-double font-size-13 align-middle"></i>
+                                                              </button>
+                                                            <b><input type="text" id="estado_ubicacion" style="border:none; border-radius:9px; background: #ebebeb; width:73%;"value="<%= info_clientes.estado_ubicacion %>"></b>
+                                                              <button type="button" onclick="UpdateinfoCl()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                               <i class="bx bx-check-double font-size-13 align-middle"></i>
+                                                              </button>
+                                                            <b><input type="text" id="codigo_postal" style="border:none; border-radius:9px; background: #ebebeb; width:73%;"value="<%= info_clientes.codigo_postal %>"></b>
+                                                              <button type="button" onclick="UpdateinfoCl()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                               <i class="bx bx-check-double font-size-13 align-middle"></i>
+                                                              </button>
+                                                              <b><input type="text" id="direccion2" style="border:none; border-radius:9px; background: #ebebeb; width:73%;"value="<%= info_clientes.direccion2 %>"></b>
+                                                              <button type="button" onclick="UpdateinfoCl()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                                <i class="bx bx-check-double font-size-13 align-middle"></i>
+                                                              </button>
+                                                        </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Segundo nombre</td>
-                                                        <td style="text-transform: capitalize;"><b><%= info_clientes.segundo_nombre %></b></td>
-                                                        <td>Dirección 2</td>
-                                                        <td><b><%= info_clientes.direccion2%></b></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Apellido</td>
-                                                        <td style="text-transform: capitalize;"><b><%= info_clientes.apellido %></b></td>
                                                         <td>Estado de crédito</td>
                                                         <td>
-                                                    
-                                                                   <input type="hidden" name="id_clienteEnviar" value="<%= info_clientes.id_cliente %>">
-                                                                    <input type="hidden" id="idConsecutivo" name="id_consecutivo" value="<%= info_clientes.id %>">
-                                                                    
-                                                                    <select style="border:none;background:#ebebeb;border-radius: 9px;" id="estadosCreditoId" name="estadosCredito">
-                                                                        <option id="estadosCredito" style="background:gray;color: white;"><%= estado.txt %></option>
-                                                                            <br>
-                                                                            <option value="1">Aprobado</option>
-                                                                            <option value="2">Rechazado</option>
-                                                                            <option value="3">Pagado (cash)</option>
-                                                                            <option value="0">En revisión</option>
-                                                                        
-                                                                     </select>
-                                                               <button type="button" onclick="presionarBtnEstadoCredito()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
-                                                                <i class="bx bx-check-double font-size-13 align-middle"></i></button> 
-                                                          
-                                                          </td>
-                                                    </tr>   
-                                                   <tr>
-                                                        <td>Correo</td>
-                                                        <td><b><%= info_clientes.correo %></b></td>
+                                                         <input type="hidden" id="idConsecutivo" name="id_consecutivo" value="<%= info_clientes.id %>">
+                                                          <select style="border:none;background:#ebebeb;border-radius: 9px;" id="estadosCreditoId" name="estadosCredito">
+                                                                    <option id="estadosCredito" style="background:gray;color: white;"><%= estado.txt %></option>
+                                                                        <br>
+                                                                        <option value="1">Aprobado</option>
+                                                                        <option value="2">Rechazado</option>
+                                                                        <option value="3">Pagado (cash)</option>
+                                                                        <option value="0">En revisión</option>
+                                                            </select>
+                                                           <button type="button" onclick="presionarBtnEstadoCredito()" class="btn-soft-success waves-effect waves-light" style="border-radius:13px;">
+                                                            <i class="bx bx-check-double font-size-13 align-middle"></i></button> 
+                                                        </td>
                                                         <td style="width: 24%;">Monto aprobado</td>
                                                         <td>
-                                                           
-                                                                           
-                                                            <input type="hidden" id="clienteEnviarMonto" name="id_clienteEnviarMonto" value="<%= info_clientes.id_cliente %>">
-                                                            <input type="hidden" id="consecutivo" name="id_consecutivo" value="<%= info_clientes.id %>">
-                                                            
+                                                        <input type="hidden" id="consecutivo" name="id_consecutivo" value="<%= info_clientes.id %>">
                                                             <% if(mostrarProducto) { %>
-
                                                                  <input type="text" style="border:none; border-radius:9px; background: #ebebeb; width:68%;"
-                                                                 value="<%=mostrarProducto.monto_aprobado %>"
-                                                                 id="montoAprobadoUpdate"
-                                                                 name="updateMontoAprobado">   
-
+                                                                 value="<%=mostrarProducto.monto_aprobado %>"id="montoAprobadoUpdate" name="updateMontoAprobado">   
                                                             <% } else { %>
-
                                                                 <input type="text" style="border:none; border-radius:9px; background: #ebebeb; width:68%;" 
-                                                                 name="updateMontoAprobado"
-                                                                 id="montoAprobadoUpdate"> 
-
+                                                                 name="updateMontoAprobado" id="montoAprobadoUpdate"> 
                                                             <% } %>
-
-                                                       <button type="button" id="btnActualizarMontoAprobado" 
-                                                               class="btn-soft-success waves-effect waves-light" 
-                                                               style="border-radius:13px;" onclick="presionar()">
+                                                       <button type="button" id="btnActualizarMontoAprobado" class="btn-soft-success waves-effect waves-light"  style="border-radius:13px;" onclick="presionar()">
                                                             <i class="bx bx-check-double font-size-13 align-middle"></i>
                                                        </button> 
-
-                                                    </td>  
-                                                           
-                                                  </tr>
-                                                  </tbody>
+                                                     </td>  
+                                                   </tr>
+                                                </tbody>
                                             </table>
-
-                                         
                                        </div>
-                                  </div>
+                                    </div>
                                  </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                 </div>
               </div>
 
              <style>
@@ -1513,15 +1530,51 @@ document.addEventListener("DOMContentLoaded", function () {
      });
  });
 
- // Actualizar Monto aprobado
+// =====>>>> Actualizar datos del cliente
+function UpdateinfoCl(){
+          const id_cliente = $("#idClinfo").val();
+
+          const correo = $("#correo").val();
+          const telefono = $("#telefono").val();
+          const nombre = $("#nombre").val();
+          const segundo_nombre = $("#segundo_nombre").val();
+          const apellido = $("#apellido").val();
+          const direccion = $("#direccion").val();
+          const ciudad = $("#ciudad").val();
+          const estado_ubicacion = $("#estado_ubicacion").val();
+          const codigo_postal = $("#codigo_postal").val();
+          const direccion2 = $("#direccion2").val();
+
+          fetch('/ActualizarInfoCl', {
+              method: 'POST',
+              body: JSON.stringify({id_cliente,correo,telefono,nombre,segundo_nombre,apellido,direccion,ciudad,estado_ubicacion,codigo_postal,direccion2}),
+              headers: { 'Content-Type': 'application/json' }
+
+           }).then(res => res.json())
+             .catch(error => console.error('Error', error))
+          .then(response => {
+                   if(response)   {
+                       Swal.fire(
+                         '¡Enviado!',
+                         'Datos actualizados',
+                         'success'
+                       )
+                        }else {
+                            Swal.fire(
+                                '¡Error!',
+                                'Ocurrió un problema al guardar los cambios, comunicate con soporte',
+                                'error'
+                             )
+                        }
+                    })
+             }
+
+// =====>>>> Actualizar Monto aprobado
   function presionar(){
      const monto_aprobado = $("#montoAprobadoUpdate").val();
-     //  const monto_aprobado = $("#clienteEnviarMonto").val();
-      const id_cliente = $("#consecutivo").val();
-     
-         
+     const id_cliente = $("#consecutivo").val();
+
           fetch('/ActualizarMontoAprobado', {
-              
               method: 'POST',
               body: JSON.stringify({monto_aprobado,id_cliente}),
               headers: { 'Content-Type': 'application/json' }
@@ -1543,11 +1596,9 @@ document.addEventListener("DOMContentLoaded", function () {
                              )
                         }
                     })
-
-
              }
 
-     // =====>>>> Actualizar Estado del credito
+// =====>>>> Actualizar Estado del credito
   function presionarBtnEstadoCredito(){
      
      const estado_del_credito = $("#estadosCreditoId option:selected").val()
@@ -1564,11 +1615,6 @@ document.addEventListener("DOMContentLoaded", function () {
           .then(response => {
                    if(response)   {
                     location.reload();
-                       Swal.fire(
-                         '¡Enviado!',
-                         'Estado actualizado',
-                         'success'
-                       )
                         }else {
                             Swal.fire(
                                 '¡Error!',

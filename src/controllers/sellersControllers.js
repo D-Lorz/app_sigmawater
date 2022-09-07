@@ -79,7 +79,7 @@ var nodemailer = require('nodemailer');
     
     const mailOptions = {
       from: "'3C Sigma Water System <noreply@3csigmawater.com>'",
-      to: 'desarrollosoftware2022mintic@gmail.com',
+      to: 'finance@3csigmawater.com',
       subject: 'Nuevo vendedor registrado',
       html: '<style>'+
       ' a[x-apple-data-detectors] {'+
@@ -375,21 +375,22 @@ var nodemailer = require('nodemailer');
       }
     });
   
-  // ! ****************************************************************************************
+  // ! **************************************************************
   
     let idConsecutivo = await conexion.query("SELECT id FROM registro_de_vendedores WHERE id_vendedor = ?", [id_vendedor]);
     let fecha = new Date().toLocaleDateString("en-CA");
     const numClientes = 00;
     const idVendedor = idConsecutivo[0].id;
     const datos_PorDefectosCl = { fecha, numClientes, idVendedor };
-    await conexion.query("INSERT INTO historialnuevosclientes SET ?", [ datos_PorDefectosCl]);
+    await conexion.query("INSERT INTO historialnuevosclientes SET ?", [datos_PorDefectosCl]);
 
     let codeAfiliado = await conexion.query("SELECT codigo_afiliado, id_vendedor FROM registro_de_vendedores WHERE id_vendedor = ?",[id_vendedor]);
     codeVendedor = codeAfiliado[0].id_vendedor
     const numAfiliados = 00;
-    const datos_PorDefectosAfl = {fecha, numAfiliados: numAfiliados, idVendedor: codeVendedor, };
+    const datos_PorDefectosAfl = {fecha, numAfiliados: numAfiliados, idVendedor: codeVendedor };
     await conexion.query("INSERT INTO historialvendedores SET ?", [datos_PorDefectosAfl ]);
-    // Insertando datos en la tabla historial ganancias de vendedores
+
+// Insertando datos en la tabla historial_numventas
     const dataVentas = { fecha, numVentas: 0, idVendedor: id_vendedor, codigo_afiliado }
     await conexion.query('INSERT INTO historial_numventas SET ?', [dataVentas])
     res.redirect("https://3csigmawater.com");
@@ -413,21 +414,23 @@ var nodemailer = require('nodemailer');
     const id_vendedor = req.user.id_vendedor;
   // Consultando en DB los afiliados de ese vendedor
 
-    let fotoUpdate;
-    let vendedor = await conexion.query(
-      "SELECT * FROM registro_de_vendedores rv JOIN usuarios u ON u.id_vendedor = rv.id_vendedor WHERE rv.id_vendedor =  ?",
-      [id_vendedor] );
+ let fotoUpdate;
+ let vendedor = await conexion.query("SELECT * FROM registro_de_vendedores rv JOIN usuarios u ON u.id_vendedor = rv.id_vendedor WHERE rv.id_vendedor = ?",[id_vendedor] );
 
     if (vendedor.length > 0) {
         vendedor = vendedor[0];
+    
       if (vendedor.foto) {
+    
           fotoUpdate = JSON.parse(vendedor.foto);
           fotoUpdate = fotoUpdate.fotoUser;
       } else {
         fotoUpdate = "../directorio_dash/images/users/userDefault.gif";
-      }
+       }
     }
-    res.render("perfil-vendedor", { user: req.user, vendedor, fotoUpdate });
+
+
+    res.render("perfil-vendedor", { user: req.user, vendedor, fotoUpdate});
   };
 
 // todo: ==> Actualizar informacion de vendedor
@@ -565,3 +568,5 @@ var nodemailer = require('nodemailer');
       }
     }
   };
+
+ 

@@ -56,7 +56,6 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
     console.log("IMPRIENOD LICENCIA ========>>>>>>>>" , licencia);
   }
 
-
   let fotoUpdate
   if(info_vendedor){
   if (info_vendedor.foto) {
@@ -591,8 +590,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
 // todo ===========>>>  Mostrar lista de CLIENTES y referencia de su vendedor
 exports.listarClientes = async (req, res) => {
   let lista_clientes = await conexion.query(
-    "SELECT N.*, S.sistema,S.estado_del_credito, A.estado_agenda, T.fecha_test FROM nuevos_cliente N LEFT JOIN solicitar_credito S ON N.id = S.id_cliente LEFT JOIN agendar_instalacion A ON N.id = A.id_cliente LEFT JOIN test_agua T ON N.id = T.id_cliente;"
-  );
+    "SELECT N.*, S.sistema,S.estado_del_credito, A.estado_agenda, T.fecha_test FROM nuevos_cliente N LEFT JOIN solicitar_credito S ON N.id = S.id_cliente LEFT JOIN agendar_instalacion A ON N.id = A.id_cliente LEFT JOIN test_agua T ON N.id = T.id_cliente;");
 
     lista_clientes.forEach((c) => {
     /** Estado del Crédito */
@@ -773,6 +771,28 @@ exports.ActualizarMontoAprobado = async (req, res) => {
   const monto_aprobado = req.body.monto_aprobado.replace(/[$ ,]/g, '');
   const datosUpdateMontoAprobado = { monto_aprobado, id_cliente };
   await conexion.query("UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosUpdateMontoAprobado, id_cliente], (err, result) => {
+    if (err) res.send(false)
+    res.send(true)
+  });
+};
+
+// todo =======>>> Actualizar información del cliente - perfil-cliente
+exports.ActualizarInfoCl = async (req, res) => {
+  const id_cliente = req.body.id_cliente;
+  const correo = req.body.correo;
+  const telefono = req.body.telefono;
+  const nombre = req.body.nombre;
+  const segundo_nombre = req.body.segundo_nombre;
+  const apellido = req.body.apellido;
+  const direccion = req.body.direccion;
+  const ciudad = req.body.ciudad;
+  const estado_ubicacion = req.body.estado_ubicacion;
+  const codigo_postal = req.body.codigo_postal;
+  const direccion2 = req.body.direccion2;
+
+  const datosUpdateinfoCL= { correo,telefono, nombre, segundo_nombre,apellido, direccion,ciudad,
+                            estado_ubicacion,codigo_postal,direccion2, id_cliente };
+  await conexion.query("UPDATE nuevos_cliente SET ? WHERE id_cliente = ? ", [datosUpdateinfoCL, id_cliente], (err, result) => {
     if (err) res.send(false)
     res.send(true)
   });
@@ -1549,13 +1569,26 @@ exports.efectuarVenta = async (req, res) => {
     console.log("<<<<< VENDEDOR >>>>>", dv.codigo)
 
     const ve = vendedores.find(i => i.id_vendedor == dv.codigo)
+
     if (ve) {
+      
       const ganancias = parseFloat(ve.ganancias)+dv.comision_final
       console.log("\nXDXDXDXD ****** GANANCIAS >>>--- ", ganancias)
       const actualizarGanancia = {ganancias}
       await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?", [actualizarGanancia, dv.codigo])
+
+
+// * ==>> Insertar ganancias con su fecha a la tabla ganancias 
+      const year = new Date().getFullYear();
+      let mes = new Date().getMonth();
+      mes == 0 ? (mes = 12) : (mes = mes + 1);
+      const ganancia = ganancias
+      const idVendedor = dv.codigo
+
+      const insertarGanancia = {mes, year, ganancia, idVendedor}
+      await conexion.query("INSERT INTO ganancias SET ?", [insertarGanancia])
+   
     }
-    
   });
 
   deducciones.length > 0 ? deducciones = JSON.stringify(deducciones) : deducciones = null
@@ -1578,3 +1611,5 @@ exports.efectuarVenta = async (req, res) => {
   res.send(respuesta);
 }
 //todo ************* -- FIN  GUARDAR COMISIONES + DEDUCCIONES EN DB ************* */
+
+
