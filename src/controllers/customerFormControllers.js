@@ -364,11 +364,11 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
   // todo ===============================>>> Desactivar boton de registro de instalacion
   let clRegistro_instalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [clientes2.id])
-  if (clRegistro_instalacion.length > 0) {
-    clRegistro_instalacion = clRegistro_instalacion[0]
-    var evidenciaF = JSON.parse(clRegistro_instalacion.evidencia_fotografica);
-    console.log("MOSTRAR EVIDENCIA FOTOGRAFICA ===>>>", evidenciaF)
-  }
+  let evidenciaF
+  if (clRegistro_instalacion.length > 0) { 
+        clRegistro_instalacion = clRegistro_instalacion[0]
+        evidenciaF = clRegistro_instalacion.evidencia_fotografica
+    }
 
   // * >>> Renderizado <<<<<
   res.render('perfil-clientes', {
@@ -384,23 +384,21 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 exports.testAgua = async (req, res) => {
   const event = new Date();
   let fecha_test = event.toLocaleDateString("en-US");
-  const dureza_gmXgalon = req.body.dureza_gmXgalon;
-  let hierro = req.body.hierro;
+  const dureza_gmXgalon = parseFloat(req.body.dureza_gmXgalon)
+  const hierro = req.body.hierro
   let totalDureza_compensada 
-
   if(hierro){
     totalDureza_compensada = (parseFloat(dureza_gmXgalon) * 4) + parseFloat(hierro);
   }else {
-    totalDureza_compensada = (parseFloat(dureza_gmXgalon) * 4) + 0
+    totalDureza_compensada = (parseFloat(dureza_gmXgalon) * 4)
   }
-
-  const tsd = req.body.tsd;
+  const tsd = req.body.tsd
   const cloro = req.body.cloros;
-  const ph = req.body.ph;
-  const azufre = req.body.azufre;
-  const tanino = req.body.tanino;
-  const nitrato = req.body.nitrato;
-  const alcalinidad = req.body.alcalinidads;
+  const ph = req.body.ph
+  const azufre = req.body.azufre
+  const tanino = req.body.tanino
+  const nitrato = req.body.nitrato
+  const alcalinidad = req.body.alcalinidad;
   const otro1 = req.body.otro1[0];
   const concentracion1 = req.body.concentracion1[0]
   const otro2 = req.body.otro1[1];

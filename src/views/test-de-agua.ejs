@@ -3,19 +3,14 @@
   <!--==================FIXME:=====HEADER NUEVOS-CLIENTES====================  -->
   
   <body>
-
       <!-- Begin page -->
       <div id="layout-wrapper">
-
           <!-- =======FIXME: MENU ========================== -->
           <%- include ('./partials/menu.ejs')%>
           <!-- =======FIXME: MENU ========================== -->
-
           <div class="main-content">
               <div class="page-content">
                   <div class="container-fluid">
-
-
                       <!--============================================================-->
                       <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
                       <!--============================================================-->
@@ -24,7 +19,6 @@
                                 <div class="page-title-box d-sm-flex align-items-center
                                     justify-content-between" style="margin-bottom: 3%;">
                                     <h4 class="mb-sm-0 font-size-18">Test de agua</h4>
-
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0" style="text-transform: initial;">
                                             <li class="breadcrumb-item"><a href="javascript:
@@ -32,27 +26,20 @@
                                             <li class="breadcrumb-item active" id="reparartexto">Test de agua</li>
                                         </ol>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-
                         <!-- end page title -->
                       <!-- BEGIN: Content-->
                       <div class="app-content content" style="margin-top:-7px">
                           <!-- Form wizard with step validation section start -->
                           <section id="validation">
-
                     <div class="card-content collapse show">
-                                      <form action="/testAgua" id="demo-form2" data-parsley-validate class="form" method="POST" class="steps wizard-circle" id="validarForm">
-                                      
+                                    <form action="/testAgua" id="demo-form2" data-parsley-validate class="form" method="POST" class="steps wizard-circle" id="validarForm">
                                           <!-- * ============== Primera fila  ========================== -->
-                                               
                                                     <input type="hidden" hidden name="id_cliente" value="<%= testAgua.id %>">
                                                     <input type="hidden" hidden name="codigo_cliente" value="<%= testAgua.id_cliente %>">
-                                                    
                                                         <div class="row " style="text-align: center">
-                                                         
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="nombreP">Dureza (gramos por galón)<span class="danger">*</span></label>
@@ -62,7 +49,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="nombreP">Hierro (ppm)</label>
-                                                                    <input type="text" class="form-control campoDecimal" id="" name="hierro">
+                                                                    <input type="number" class="form-control campoDecimal" id="" name="hierro">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -72,20 +59,16 @@
                                                                 </div>
                                                             </div> 
                                                          </div>
-
                                               <!-- * ========== Segunda fila =======  -->
                                                          <div class="row" style="text-align: center">
                                                             <div class="col-md-4">
-                                                               <label for="" class="form-label">Cloro</label>
-                                                               <input class="form-control" autocomplete="none" list="ddd"  name="cloros" placeholder="Escoge el resultado" >
+                                                                <label for="" class="form-label">Cloro</label>
+                                                                <input class="form-control" autocomplete="none" list="ddd" name="cloros" placeholder="Escoge el resultado">
                                                                 <datalist id="ddd">
-                                                                  <option value="Presente"></option>
-                                                                  <option value="No presente"></option>
-                                                                  
+                                                                    <option value="Presente"></option>
+                                                                    <option value="No presente"></option>
                                                                 </datalist>
-                                                        
                                                             </div>
-                                                          
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="">pH<span class="danger">*</span></label>
@@ -98,57 +81,50 @@
                                                                     <input type="text" class="form-control campoDecimal" id="" name="azufre" >
                                                                 </div>
                                                              </div>
-                                                         
-                                                            
                                                         </div>
-                                                    
                                          <!-- * ========== Tercera fila =======  --> 
-                                         <div class="row justify-content-center"style="text-align: center">
+                                        <div class="row justify-content-center" style="text-align: center">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">tanino (ppm)</label>
-                                                    <input type="text" class="form-control campoDecimal" id="" name="tanino" >
+                                                    <input type="text" class="form-control campoDecimal" id="" name="tanino">
                                                 </div>
                                             </div>
-                                            
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="">Nitrato (ppm)</label>
-                                                  <input type="text" class="form-control campoDecimal" id="" name="nitrato" >
+                                                    <input type="text" class="form-control campoDecimal" id="" name="nitrato">
                                                 </div>
-                                               
-                                              <center> <a href="javascript:void(0);" class="btn btn-primary add_button " style="border-radius: 15px;width: 23%;"><i class="fa fa-plus"></i> Otro</a> </center>  
-                                              <br>
-                                            
-                                               </div>
-                                             
+                                                <center> <a href="javascript:void(0);" class="btn btn-primary add_button"
+                                                        style="border-radius: 15px;width: 23%;"><i class="fa fa-plus"></i> Otro</a> </center>
+                                                <br>
+                                            </div>
                                             <div class="col-md-4">
-                                            <label for="" class="form-label">Alcalinidad</label>
-                                                    <input class="form-control" autocomplete="none" list="ddd"  name="alcalinidads" placeholder="Escoge el resultado " >
-                                                     <datalist id="ddd">
-                                                       <option value="Alcalina"></option>
-                                                       <option value="Ácida"></option>
-                                                       <option value="Neutra"></option>
-                                                       
-                                                     </datalist>
-                                              </div>
-                                          
-                                         <div class="col-md-3"> 
-                                            <div class="form-group "> 
-                                             <label for="">Contaminante</label>
-                                                 <input type="text" name="otro1[]" id="otro1" class="form-control " placeholder=""/> 
-                                             </div>
-                                         </div>
-                                              
-                                        <div class="col-md-3"> 
-                                          <div class="form-group"> 
-                                             <label for="">Concentración del contaminante</label>
-                                               '<input type="text" id="concentracion1" name="concentracion1[]" class="form-control campoDecimal" placeholder=""> 
-                                           </div>
-                                         </div>
-                                        </div> 
-                                    </div>
-                                       <div class="row " > 
+                                                <label for="" class="form-label">Alcalinidad</label>
+                                                <input class="form-control" autocomplete="none" list="ddd" name="alcalinidad"
+                                                    placeholder="Escoge el resultado ">
+                                                <datalist id="ddd">
+                                                    <option value="Alcalina"></option>
+                                                    <option value="Ácida"></option>
+                                                    <option value="Neutra"></option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group ">
+                                                    <label for="">Contaminante</label>
+                                                    <input type="text" name="otro1[]" id="otro1" class="form-control " placeholder="" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="">Concentración del contaminante</label>
+                                                    '<input type="text" id="concentracion1" name="concentracion1[]" class="form-control campoDecimal"
+                                                        placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                       <div class="row"> 
                                                       <div>
                                                           <div class="form-group">
                                                               <label for="postalcode">Nota</label>
@@ -156,17 +132,12 @@
                                                        </div> 
                                                  </div> 
                                             </div> 
-                                        
-                                   
                                    </fieldset>  
-                                            
-                     
                                           <!--============= / FIXME:===== *CO-SOLICITANTE* === FIXME:=========-->
                                     <fieldset>
                                         <input hidden id="currency-masksalario">
                                         <input hidden id="currency-maskingresoadi"> 
                                    </fieldset>
-                                      
                                 </br>
                         <center><button type="submit" style="border-radius: 15px;" class="btn btn-primary">Guardar</button></center>
                                       </form>
@@ -185,17 +156,10 @@
       <div class="right-bar">
           <div data-simplebar class="h-100">
               <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-
-                  <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
-
                   <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
                       <i class="mdi mdi-close noti-icon"></i>
                   </a>
               </div>
-
-              <!-- Settings -->
-
-          
           </div> <!-- end slimscroll-menu-->
       </div>
 

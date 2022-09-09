@@ -55,10 +55,7 @@ const rutaCarpetas = multer.diskStorage({
     }
 });
 
-const cargarFotoPerfil = multer({
-    storage: rutaCarpetas,
-});
-// const oneUploadpf = cargarFotoPerfil.fields({ name: 'editFoto' });
+const cargarFotoPerfil = multer({ storage: rutaCarpetas});
 
  // * ========== Renderizado de vistas vendedor ==========
 //                           ↓↓

@@ -39,7 +39,7 @@ exports.registrar = async (req, res) => {
   const apt_suite_unidad = req.body.apt_suite_unidad;
   const codigo_postal = req.body.codigo_postal;
   let codigo_afiliado = req.body.codigo_afiliado;
-  const codigo_historial_afiliado = req.body.codigo_afiliado;
+  let codigo_historial_afiliado = req.body.codigo_afiliado;
   const nombre_banco = req.body.nombre_banco;
   const numero_cuenta = req.body.numero_cuenta;
   const ruta = req.body.ruta;
@@ -58,6 +58,7 @@ exports.registrar = async (req, res) => {
   );
   if (sellerB.length == 0) {
     codigo_afiliado = "N/A";
+    codigo_historial_afiliado = null;
   }
 
   const nuevoRegistro = {
@@ -514,8 +515,6 @@ exports.editInfo = async (req, res) => {
   // **** Información bancaria *****
   let datosPersonales = ({ correo, telefono_movil, direccion, ciudad, apt_suite_unidad, codigo_postal, nombre_banco, numero_cuenta, ruta, beneficiario });
 
-  console.log("\nDatos 1 > ", datos_usuarios)
-  console.log("\nDatos 2 > ", datosPersonales)
 
   const updateUser = await conexion.query("UPDATE usuarios SET ? WHERE id_vendedor = ?", [datos_usuarios, id_vendedor]);
   const updateSeller = await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ?", [datosPersonales, id_vendedor]);
@@ -525,7 +524,6 @@ exports.editInfo = async (req, res) => {
   } else {
     console.log("OCURRIO UN ERROR AL ACTUALIZAR LOS DATOS");
   }
-
 };
 
 exports.actualizarFotoPerfil = async (req, res) => {

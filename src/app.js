@@ -48,6 +48,7 @@ global.urlLicenciasClientes = ['front', 'back', 'acuerdo'];
 global.urlEvidenciaServicioInstalado = ['front'];
 
 global.urlProfile = ''
+global.urlEvidencia = ''
 
 // No almacenar caché
 app.use((req, res, next) => {
