@@ -24,8 +24,7 @@ exports.listarVendedores = async (req, res) => {
         // Comparando tabla de usuarios con vendedores
         if (v.id_vendedor == u.id_vendedor) {
           if(u.foto){
-            v.foto = JSON.parse(u.foto);
-            v.foto = v.foto.fotoUser 
+            v.foto = u.foto
           }else{
             v.foto = "../directorio_dash/images/users/userDefault.gif" 
           }
@@ -57,8 +56,7 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
   let fotoUpdate
   if(info_vendedor){
   if (info_vendedor.foto) {
-      fotoUpdate = JSON.parse(info_vendedor.foto);
-      fotoUpdate = fotoUpdate.fotoUser
+      fotoUpdate = info_vendedor.foto
   } else {
     fotoUpdate = "../directorio_dash/images/users/userDefault.gif"
   }
@@ -659,22 +657,22 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
       estadoVisita_testAgua.background = 'visitado'; }
   }
 
-  // todo =========================>> Consulta del PRIMER test de agua para la fecha y grafica
+// todo =========================>> Consulta del PRIMER test de agua para la fecha y grafica
   let consulta_PrimerTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ? ORDER BY id DESC LIMIT 1, 1', [info_clientes.id])
       if (consulta_PrimerTestAgua.length > 0) { consulta_PrimerTestAgua = consulta_PrimerTestAgua[0]}
           const datosJson_PrimerTestagua = JSON.stringify(consulta_PrimerTestAgua);
 
-  // todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
+// todo =========================>> Consulta del ULTIMO test de agua para la fecha y grafica
   let consulta_UltimoTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ? ORDER BY id DESC LIMIT 1; ', [info_clientes.id])
       if (consulta_UltimoTestAgua.length > 0) { consulta_UltimoTestAgua = consulta_UltimoTestAgua[0] }
            const datosJson_UltimoTestagua = JSON.stringify(consulta_UltimoTestAgua);
 
-  // todo =========================>> Mostrar información del ahorro del cliente
+// todo =========================>> Mostrar información del ahorro del cliente
   let ahorroCalculado = await conexion.query('SELECT * FROM ahorro WHERE id_cliente = ? ORDER BY id DESC LIMIT 1', [info_clientes.id])
       if (ahorroCalculado.length > 0) { ahorroCalculado = ahorroCalculado[0] }
           const datosJson_ahorroCalculado = JSON.stringify(ahorroCalculado);
 
-  // todo =========================>> Estados de la agenda para instalar el producto
+// todo =========================>> Estados de la agenda para instalar el producto
   let consultaEstado_instalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1 ', [info_clientes.id])
   let estado_intalacion = []
   estado_intalacion.txt = "La instalación del producto no ha sido agendada";
@@ -686,11 +684,13 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
        else if (consultaEstado_instalacion.estado_agenda == 1) { estado_intalacion.txt = "Instalado";
            estado_intalacion.background = 'visitado';}
   }
-  // todo ===============================>>> Mostrar evidencia de la instalacion
+// todo ===============================>>> Mostrar evidencia de la instalacion
   let clRegistro_instalacion = await conexion.query('SELECT * FROM servicios_de_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
-      if (clRegistro_instalacion.length > 0) { clRegistro_instalacion = clRegistro_instalacion[0]
-          var evidenciaF = JSON.parse(clRegistro_instalacion.evidencia_fotografica); }
-        
+  let evidenciaF
+  if (clRegistro_instalacion.length > 0) { 
+        clRegistro_instalacion = clRegistro_instalacion[0]
+        evidenciaF = clRegistro_instalacion.evidencia_fotografica
+    }
   // todo ===============================>>> Desactivar boton de registro de instalacion ubicado en Perfil-cliente
   let clInstalacion = await conexion.query('SELECT * FROM agendar_instalacion WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
     let estadu = []
@@ -703,7 +703,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
        else if (clInstalacion.estado_agenda == 1) { estadu.verbtnI = false;}
   }
 
-  // todo ===============================>>> Mostrar agenda sobre la instalacion del producto
+// todo ===============================>>> Mostrar agenda sobre la instalacion del producto
   let mostrarAgenda = await conexion.query("SELECT * FROM agendar_instalacion WHERE id_cliente = ?", [info_clientes.id]);
   mostrarAgenda = mostrarAgenda[0]
 
@@ -723,9 +723,6 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   } 
   console.log("IMPRIMIENDO VARIABLE ===>>>", licenciacredito);
   console.log("\n");
-
-
-
 
   let clbotonCredito = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [info_clientes.id])
   let estade = []
@@ -828,8 +825,7 @@ exports.servicioInstaladosx = async (req, res) => {
   const serial_producto1 = req.body.serial_producto1;
   const serial_producto2 = req.body.serial_producto2;
   const instalador = req.body.instalador;
-  const evidencia = '../evidenciaServicio/' + urlLicencias[0]
-  const evidencia_fotografica = JSON.stringify({ 'evidencia': evidencia, });
+  const evidencia_fotografica = "../evidenciaServicio/" + urlEvidencia
   const nota = req.body.nota;
   const id_cliente = req.body.id_cliente
   const codigo_cliente = req.body.codigo_cliente

@@ -46,23 +46,15 @@ const rutaCarpeta = multer.diskStorage({
 
     filename: function (req, file, callback) {
         const fechaActual = Math.floor(Date.now() / 1000)
-  
-        if (file.fieldname == 'evidencia_fotografica') {
-            urlLicencias[0] = "Evidencia_fotografica" + fechaActual + "_" + file.originalname;
-        
-            callback(null, urlLicencias[0])
-        } 
-        else {
-            urlLicencias[1] = "xxxx" + fechaActual + "_" + file.originalname;
-            callback(null, urlLicencias[1])
-          
-        } 
-      
+            urlEvidencia = "Evidencia_fotografica" + "_" + fechaActual + "_" + file.originalname;
+            callback(null, urlEvidencia)
+
+            if(!file.originalname){
+                urlEvidencia = ''
+            }
     }
 });
-
 const cargarEvidencia = multer({storage: rutaCarpeta});
-const oneUpload = cargarEvidencia.fields([{ name: 'evidencia_fotografica' }, { name: 'xxx' }]);
 
 // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
@@ -108,10 +100,9 @@ router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
  /*=============================================================*/
   router.post('/agendarInstalacion', isAuthenticated,agendarInstalacionProducto);
  /*=============================================================*/
-  router.post('/instalacion', isAuthenticated,oneUpload,servicioInstaladosx);
+  router.post('/instalacion', isAuthenticated, cargarEvidencia.single('evidencia_fotografica'), servicioInstaladosx);
 /*=============================================================*/
   router.post('/elegirSistema', isAuthenticated, elegirSistema); 
 /*=============================================================*/
-
 
 module.exports = router
