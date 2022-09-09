@@ -3,7 +3,8 @@ const router = express.Router()
 const path = require('path');
 const multer = require('multer');
 const {nologueado,isAuthenticated} = require('../controllers/authController');
-const {registrar, listarAfiliados, perfilVendedores, editInfo, facturacion, consultarFactura } = require('../controllers/sellersControllers');
+const {registrar, listarAfiliados, perfilVendedores, editInfo, facturacion, consultarFactura,
+       actualizarFotoPerfil } = require('../controllers/sellersControllers');
 
 const rutaAlmacen = multer.diskStorage({
 
@@ -45,25 +46,19 @@ const rutaCarpetas = multer.diskStorage({
 
     filename: function (req, file, callback) {
         const fechaActual = Math.floor(Date.now() / 1000)
-  
-        if (file.fieldname == 'editFoto') {
-            urlLicencias[0] = "foto_Actualizada" + fechaActual + "_" + file.originalname;
-            callback(null, urlLicencias[0])
-        } 
-        else {
-            urlLicencias[1] = "yyyy" + fechaActual + "_" + file.originalname;
-            callback(null, urlLicencias[1])
-          
-        } 
-      
-    }
+        urlProfile = "foto_Actualizada" + "_" + fechaActual + "_" + file.originalname;
+        callback(null, urlProfile)
 
+        if(!file.originalname){
+            urlProfile = ''
+        }
+    }
 });
 
 const cargarFotoPerfil = multer({
     storage: rutaCarpetas,
 });
-const oneUploadpf = cargarFotoPerfil.fields([{ name: 'editFoto' }, { name: 'yyy' }]);
+// const oneUploadpf = cargarFotoPerfil.fields({ name: 'editFoto' });
 
  // * ========== Renderizado de vistas vendedor ==========
 //                           ↓↓
@@ -82,9 +77,9 @@ router.get('/ventas-vendedor',isAuthenticated, facturacion)
 //* router para los métodos del controller
 /*=============================================================*/
 router.post('/registrar', nologueado, multiupload,registrar);
-router.post('/actualizarPerfil', isAuthenticated,oneUploadpf,editInfo);
+router.post('/actualizarPerfil', isAuthenticated, editInfo);
 /*=============================================================*/
-
+router.post('/actualizarFotoPerfil', isAuthenticated, cargarFotoPerfil.single('foto'), actualizarFotoPerfil);
 /*=============================================================*/
 router.post('/consultarFactura', isAuthenticated, consultarFactura);
 /*=============================================================*/

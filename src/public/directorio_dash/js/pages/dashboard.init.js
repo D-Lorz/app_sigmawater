@@ -1,3 +1,5 @@
+
+
 const year = new Date().getFullYear()
 /** ------------- CAPTURANDO DATOS PARA LA GRÁFICA DE VENTAS PROPIAS x VENDEDOR ------------- **/
 let valoresJSON1 = [];
@@ -317,53 +319,86 @@ chart.render();
 // Market Overview
 //
 // var barchartColors = getChartColorsArray("#market-overview");
-var options = {
-    series: [{
-        name: 'Profit',
-        data: [12.45, 16.2, 8.9, 11.42, 12.6, 18.1, 18.2, 14.16, 11.1, 8.09, 16.34, 12.88]
-    }, {
-        name: 'Loss',
-        data: [-11.45, -15.42, -7.9, -12.42, -12.6, -18.1, -18.2, -14.16, -11.1, -7.09, -15.34, -11.88]
-    }],
-    chart: {
-        type: 'bar',
-        height: 400,
-        stacked: true,
-        toolbar: {
-            show: false
+
+    let valoreshg = [] // => Valores historial ganancias
+    const datosY = [] // => Datos para la barras de la grafica
+    const datosX = [] // => Datos para el eje X (los meses)
+    valoreshg = $('#datosJson_historialG').val();
+    if (valoreshg) {
+        valoreshg = JSON.parse(valoreshg);
+        console.log(valoreshg)
+        valoreshg.forEach(g => {
+           datosY.push(g.ganancias)
+           datosX.push(g.mes)
+        })
+   
+    }
+     var options = {
+        series: [{
+            name: 'Ganancia',
+            data: datosY
+        }],
+        chart: {
+            type: 'bar',
+            height: 400,
+            stacked: true,
+            toolbar: {
+                show: false
+            },
         },
-    },
-    plotOptions: {
-        bar: {
-            // columnWidth: '20%',
+        plotOptions: {
+            bar: {
+                 columnWidth: '8%',
+            },
         },
-    },
-    colors: ["#812082", "#50368c"],
-    fill: {
-        opacity: 1
-    },
-    dataLabels: {
-        enabled: false,
-    },
-    legend: {
-        show: false,
-    },
-    yaxis: {
-        labels: {
-            formatter: function (y) {
-                return y.toFixed(0) + "%";
+         colors: ["#812082", "#50368c"],
+        fill: {
+            opacity: 1
+        },
+        dataLabels: {
+            enabled: false,
+        },
+        legend: {
+            show: false,
+        },
+        yaxis: {
+            labels: {
+                formatter: function (y) {
+                    return y.toFixed(0) + "";
+                }
+            }
+        },
+        xaxis: {
+            categories:
+               datosX
+                // ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            ,
+            labels: {
+                rotate: -90
             }
         }
-    },
-    xaxis: {
-        categories:
-            ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        ,
-        labels: {
-            rotate: -90
-        }
-    }
-};
+    };
 
-var chart = new ApexCharts(document.querySelector("#market-overview"), options);
-chart.render();
+    
+    var chart = new ApexCharts(document.querySelector("#market-overview"), options);
+    chart.render();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

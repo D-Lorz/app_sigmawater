@@ -27,4 +27,8 @@ router.get("/", isAuthenticated, dashboardVendedor, (req, res) => {
    res.render("administrador", { user: req.user });
  });
 
+ router.get("/hola", (req, res) => {
+  res.render("hola", { user: req.user });
+});
+
 module.exports = router;

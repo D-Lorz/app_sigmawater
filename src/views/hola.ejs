@@ -1,12 +1,61 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+
+
+    <link rel="stylesheet" href="./css/alertify.css">
+</head>
 <body>
-    <!-- <form class="" action="/registrar" method="post">
-        <input type="text" name="nombre" value="" placeholder="nombre"><br>
-        <input type="text" name="correo" value="" placeholder="correo"><br>
-        <textarea name="mensaje" rows="4" cols="40" placeholder="mensaje"></textarea><br>
-        <button type="submit" name="">enviar</button>
-       </form> -->
+    <form action="data/insertcheck.php" method="post" enctype="multipart/form-data" accept="image/jpg">
+        <div class="col-md-4" style="text-align: center">
+            <div class="input-group">
+                <label class="input-group-btn">
+                  <span class="btn btn-primary" style="padding: 10px;"> Cargar reverso
+                    <input type="file" name="licencia_trasera" id="imagen1" style="visibility:hidden;" onchange="fileValidation()">
+                  </span>
+                </label>
+              </div>
+
+            <div id="imagePre1" style="width: 220px !important; height: 220px !important;">
+            </div>
+        </div>
+    </form>
+
+    <script src="./js/alertify.min.js"></script>
+    <script src="./js/alertify.js"></script>
+          <script>
+            function fileValidation(){
+            
+                var fileInput = document.getElementById('imagen1');
+            
+                var filePath = fileInput.value;
+                var allowedExtensions = /(.jpg|.jpeg|.png)$/i;
+                if(!allowedExtensions.exec(filePath)){
+                      alertify.set('notifier', 'position', 'top-center');
+                      alertify.error('Solo archivos .jpg o .png son aceptados');
+                    fileInput.value = '';
+                    return false;
+                }else{
+                    //Image preview
+                    if (fileInput.files && fileInput.files[0]) {
+            
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.getElementById('imagePre1').innerHTML = '<img src="'+e.target.result+'" style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;margin-top: 11%;"/>';
+            
+                        };
+                        reader.readAsDataURL(fileInput.files[0]);
+                    }
+                }
+            }
+            
+            </script>
+
+
+
+
+
+
+
 </body>
 </html>

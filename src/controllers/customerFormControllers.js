@@ -50,11 +50,13 @@ exports.registrarClientes = async (req, res) => {
 
 exports.getSolicitudCreditos = async (req, res) => {
   const id = req.params.id
-  await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
-    if (err) throw err;
-    res.render('solicitar-credito', { user: req.user, cliente: result[0] });
-
-  })
+let infoCl = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id])
+infoCl = infoCl[0];
+if (!infoCl) {
+  res.clearCookie('jwt')
+  return res.redirect('/login')
+}
+ res.render('solicitar-credito', { user: req.user, infoCl });
 
 }
 exports.getAhorro = async (req, res) => {
@@ -77,13 +79,15 @@ exports.getTestAgua = async (req, res) => {
 }
 exports.getAgendarinstalacion = async (req, res) => {
   const id = req.params.id
-  await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
-    if (err) throw err;
-    res.render('agendar-instalacion', { user: req.user, agendarInstalacion: result[0] });
-
-  })
-
+  let infoCl = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id])
+  infoCl = infoCl[0]
+    if(!infoCl){
+      res.clearCookie('jwt')
+      return res.redirect('/login')
+    }  
+    res.render('agendar-instalacion', { user: req.user,infoCl });
 }
+
 //------------------------------------------------
 // todo ==> Formulario para solicitar credito
 exports.solicitarCredito = async (req, res) => {
@@ -303,6 +307,14 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
   // todo =========================>> Mostrar información del test de agua del cliente
   let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
+  // let countCliente = await conexion.query("SELECT count(id) as test FROM test_agua WHERE id_cliente = ?", [clientes2.id]);
+  // console.log("=================....>>>", countCliente);
+   let cont = 1
+  informacionTestAgua.forEach(x => {
+    x.cont = cont
+    cont++
+
+  });
 
   // * >>> Estados del testeo (visita al cliente)
   let consultaEstado_testAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ? ORDER BY id DESC LIMIT 1', [clientes2.id])
@@ -402,11 +414,11 @@ exports.testAgua = async (req, res) => {
     fecha_test, dureza_gmXgalon, hierro, totalDureza_compensada, tsd, cloro, ph, azufre, tanino, nitrato, alcalinidad,
     otro1, concentracion1, otro2, concentracion2, otro3, concentracion3, nota, id_cliente
   }
-  await conexion.query('INSERT INTO test_agua SET ?', [Datos_testAgua], (err, result) => {
-    if (err) throw err;
-    if (result) { res.redirect('/perfil-clientes/' + codigo_cliente) }
+  const Datosfecha_test ={fecha_test}
+  await conexion.query('INSERT INTO test_agua SET ?', [Datos_testAgua])
+  await conexion.query("UPDATE nuevos_cliente SET ? WHERE id = ?", [Datosfecha_test, id_cliente]);
 
-  })
+    res.redirect('/perfil-clientes/' + codigo_cliente) 
 
 }
 
@@ -669,17 +681,26 @@ exports.dashboardVendedor = async (req, res) => {
 
   // COMPARATIVA DE VENTAS x VENDEDOR LOGUEADO
   let topV_ = {}, topVendedores = []
+  let icono = false;
+
   const top_vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, ganancias FROM registro_de_vendedores ORDER BY ganancias DESC LIMIT 5");
+
   if (top_vendedores.length > 0) {
     let cont = 1;
     const vActual = top_vendedores.find(i => i.id_vendedor == idVendedor)
-    topV_ = top_vendedores.filter(i => i.id_vendedor != idVendedor)
+    // topV_ = top_vendedores.filter(i => i.id_vendedor != idVendedor)
     
-    if (topV_ && vActual) {
-      topV_.forEach(x => {
+    if (vActual) {
+      top_vendedores.forEach(x => {
         let rendimiento = ((parseFloat(x.ganancias - vActual.ganancias) / vActual.ganancias) * 100).toFixed(1);
         rendimiento = parseFloat(rendimiento);
-        
+
+        if (x.id_vendedor == idVendedor) {
+          icono = 2;
+        } else {
+          icono = 1
+        }
+                
         if (parseFloat(x.ganancias) == 0 && vActual.ganancias == 0) { rendimiento = 0 }
         if (vActual.ganancias == 0 && parseFloat(x.ganancias) >= 1) { rendimiento = 100 }
 
@@ -688,16 +709,17 @@ exports.dashboardVendedor = async (req, res) => {
           rendimiento,
           pos: cont,
           gananciaA: vActual.ganancias,
-          gananciaB: x.ganancias
+          gananciaB: x.ganancias,
+          icono
         })
         cont++;
       })
 
-      const diferenciaTop = 5 - topV_.length
+      const diferenciaTop = 5 - top_vendedores.length
       if (diferenciaTop != 0) {
         for (let i = 0; i < diferenciaTop; i++) {
           topVendedores.push({
-            nombre: "-----------------",
+            nombre: "----------------",
             pos: cont,
           })
           cont++;
@@ -706,16 +728,23 @@ exports.dashboardVendedor = async (req, res) => {
     }
   }
 
-  res.render("dashboard", {
-    user: req.user,
+   // * CAPTURANDO DATOS PARA LA GRÁFICA DE VENTAS MENSUALES X VENDEDOR
+   let histrialGanancias = await conexion.query("SELECT * FROM (SELECT * FROM historial_ganancias_vendedores WHERE idVendedor = ? ORDER BY id DESC LIMIT 12) sub ORDER BY id ASC;", [idVendedor]);
+   
+   let datosJson_historialG, rendimientoHG = 0;
+   if (histrialGanancias.length > 0) {
+    datosJson_historialG = JSON.stringify(histrialGanancias);
+    console.log("\n");
+    console.log("IMPIMIENDO datosJson_h istorialG ====>>>" , datosJson_historialG);
+   }
+
+  res.render("dashboard", { user: req.user,
     totalCliente: countCliente[0].totalClientes,
     totalAfiliado: countAfiliados[0].totalAfiliados,
-    datosJson_clAgregados, rendimientoCl,
-    datosJson_aflAgregados, rendimientoAfl,
-    datosJson_ventasCiudades,
-    numVentas_, json_ventasVendedor, json_ventasAfiliados,
-    rendimiento_vPropias, rendimiento_vAfiliados,
-    facturas_recientes, topVendedores
+    datosJson_clAgregados, rendimientoCl, datosJson_aflAgregados, rendimientoAfl,
+    datosJson_ventasCiudades, numVentas_, json_ventasVendedor, json_ventasAfiliados,
+    rendimiento_vPropias, rendimiento_vAfiliados, facturas_recientes, topVendedores,rendimientoHG,
+    datosJson_historialG
   });
 };
 
@@ -826,3 +855,36 @@ exports.historial_numVentas = async (req, res) => {
   
   return "EJECUCIÓN FINALIZADA..!";
 };
+
+exports.historial_ganancias_vendedores = async (req, res) => {
+  let tablaGanancias = await conexion.query("SELECT * FROM ganancias ");
+  let vendedores = await conexion.query("SELECT id_vendedor FROM registro_de_vendedores");
+
+  let mesActual = new Date().getMonth();
+  mesActual == 0 ? (mesActual = 12) : (mesActual = mesActual + 1);
+  const mesAnterior = mesActual - 1
+  const year = new Date().getFullYear();
+
+  vendedores.forEach(async (v)=> {
+  const filtroGanancias = tablaGanancias.filter((item) => item.idVendedor == v.id_vendedor && mesAnterior == item.mes && year == item.year);
+   
+  if(filtroGanancias.length > 0) {
+  const ganancias = filtroGanancias.map(item => item.ganancia).reduce((prev, curr) => prev + curr, 0);
+      
+  const f = new Date()
+  f.setMonth(mesAnterior - 1);
+
+  let txtMes = f.toLocaleDateString("es", {month: "short"})
+  const mes = txtMes.charAt(0).toUpperCase() + txtMes.slice(1);
+  const idVendedor = v.id_vendedor
+  const datos_ganancias = {mes, year, ganancias, idVendedor}
+  const soloGanancia = {ganancias}
+      const result = await conexion.query("SELECT * FROM historial_ganancias_vendedores WHERE idVendedor = ?", [idVendedor]);
+      if(result.length == 0) {
+        await conexion.query("INSERT INTO historial_ganancias_vendedores SET ?", [datos_ganancias]);
+      }
+    }
+  });
+  // return "EJECUCIÓN FINALIZADA..!";
+  res.send("Todo ok...")
+}

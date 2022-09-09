@@ -6,7 +6,8 @@ const cron = require('node-cron');
 const { isAuthenticated} = require('../controllers/authController');
 const { listarClientes, getSolicitudCreditos, getAhorro, getTestAgua, getAgendarinstalacion,
         registrarClientes,ahorro, testAgua,  listarClientes_PerfilClientes, solicitarCredito,
-        agendarInstalacionProducto, getRegistrarInstalacion, elegirSistema, historialClientes, historialVendedores, historial_numVentas } = require('../controllers/customerFormControllers');
+        agendarInstalacionProducto, getRegistrarInstalacion, elegirSistema, historialClientes, historialVendedores, historial_numVentas,
+        historial_ganancias_vendedores } = require('../controllers/customerFormControllers');
 const {servicioInstaladosx} = require("../controllers/adminControllers");  
   
 const rutaAlmacen = multer.diskStorage({
@@ -19,11 +20,11 @@ const rutaAlmacen = multer.diskStorage({
         const fechaActual = Math.floor(Date.now() / 1000)
   
         if (file.fieldname == 'cliente_frontal') {
-            urlLicencias[0] = "Licencia_Cliente_Frontal_" + fechaActual + "_" + file.originalname;
+            urlLicencias[0] = "Licencia_Cliente_Frontal" + "_" + fechaActual + "_" + file.originalname;
         
             callback(null, urlLicencias[0])
         } else {
-            urlLicencias[1] = "Licencia_Cliente_Trasera_" + fechaActual + "_" + file.originalname;
+            urlLicencias[1] = "Licencia_Cliente_Trasera" + "_" + fechaActual + "_" + file.originalname;
             callback(null, urlLicencias[1])
           
         } 
@@ -82,6 +83,11 @@ cron.schedule('0 15 12 Jan-Dec *',() => {
     historialVendedores();
 });
 
+// Ejecución Mensual
+cron.schedule('0 1 1 * *',() => {
+    historial_ganancias_vendedores();
+});
+
 router.get('/perfil-clientes/:id', isAuthenticated,listarClientes_PerfilClientes)
 router.get('/solicitar-credito/:id', isAuthenticated ,getSolicitudCreditos)
 router.get('/calcular-ahorro/:id', isAuthenticated, getAhorro)
@@ -104,7 +110,8 @@ router.get('/registro-instalacion/:id', isAuthenticated,getRegistrarInstalacion)
  /*=============================================================*/
   router.post('/instalacion', isAuthenticated,oneUpload,servicioInstaladosx);
 /*=============================================================*/
-  router.post('/elegirSistema', isAuthenticated, elegirSistema);
+  router.post('/elegirSistema', isAuthenticated, elegirSistema); 
 /*=============================================================*/
+
 
 module.exports = router

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { isAuthenticated } = require('../controllers/authController');
 const { listarVendedores, listarVendedores_PerfilVendedores, listarClientes_PerfilClientes, listarClientes,
-        ActualizarNivel, actualizarEstadoVendedor, ActualizarCredito, ActualizarMontoAprobado,
+        ActualizarNivel, actualizarEstadoVendedor, ActualizarCredito, ActualizarMontoAprobado,ActualizarInfoCl,
         clfirmas, factura, deducciones, efectuarVenta } = require('../controllers/adminControllers');
 
  // * ========== Renderizado de vistas clientes ==========
@@ -26,6 +26,7 @@ router.post('/ActualizarCredito', isAuthenticated,ActualizarCredito);
 /*=============================================================*/
 router.post('/ActualizarMontoAprobado', isAuthenticated,ActualizarMontoAprobado);
 /*=============================================================*/
+router.post('/ActualizarInfoCl', isAuthenticated,ActualizarInfoCl);
 
 // * RUTAS PARA VENTAS, COMISIONES, DEDUCCIONES
 router.get('/ventas', isAuthenticated, factura)

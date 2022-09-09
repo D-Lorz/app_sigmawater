@@ -115,7 +115,9 @@
                                 <td style="text-transform: capitalize"><div class="badge badge-soft-warning font-size-12"><%= user.estado_de_la_cuenta %></div></td>
                                     <% } else if(user.estado_de_la_cuenta == "aprobado") {%> 
                                 <td style="text-transform: capitalize"><div class="badge badge-soft-success font-size-12"><%= user.estado_de_la_cuenta %></div></td>
-                                    <% } %>  
+                                    <% } else if(user.estado_de_la_cuenta == "bloqueado") {%>  
+                                <td style="text-transform: capitalize"><div class="badge badge-soft-danger font-size-12">Desvinculado</div></td>
+                                    <% } %> 
                             </tr>
                         <%})%>
                     </tbody>

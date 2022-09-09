@@ -108,8 +108,7 @@ exports.isAuthenticated = async (req, res, next) => {
                 req.user = results[0]
                 let fotoUpdate
                 if (results[0].foto) {
-                    fotoUpdate = JSON.parse(results[0].foto);
-                    req.user.foto = fotoUpdate.fotoUser
+                    req.user.foto = results[0].foto
                 } else {
                     req.user.foto = "../directorio_dash/images/users/userDefault.gif"
                 }
