@@ -328,9 +328,9 @@
                                 <!-- card body -->
                                 <div class="card-body">
                                     <div class="d-flex flex-wrap align-items-center mb-4">
-                                        <h5 class="card-title me-2">Comparativas de ventas </h5>
+                                        <h5 class="card-title me-2" style="margin-bottom: -19px;">Mis ganancias </h5>
                                          <div class="ms-auto">
-                                            <div style="width: 305px;"><h5 class="card-title" style="float:left">Top 5 Vendedores </h5></div>
+                                            <div style="width: 305px;"></div>
                                             <!--<div>
                                                 <button type="button" class="btn btn-soft-primary btn-sm">
                                                     ALL
@@ -349,14 +349,14 @@
                                     </div>
 
                                     <div class="row align-items-center">
-                                        <div class="col-xl-8">
+                                        <div class="col-xl-7">
                                             <div>
                                                 <div id="market-overview" data-colors='[" #5156be" ," #34c38f"]' class="apex-charts"></div>
                                                 <input type="hidden" id="datosJson_historialG" value="<%= datosJson_historialG %>">
-
                                             </div>
                                         </div>
-                                        <div class="col-xl-4">
+                                        <div class="col-xl-5">
+                                           <h5 class="card-title" style="text-align: center;">Top 5 Vendedores</h5>
                                             <div class="p-4">
                                                 <% if (topVendedores) {%>
                                                     <% topVendedores.forEach(x => { %>
@@ -368,24 +368,32 @@
                                                                     </span>
                                                                 </div>
                                                                 <div class="flex-grow-1 ms-3">
-                                                                    <span class="font-size-16"><%=x.nombre%></span>
+                                                                    <span class="font-size-13"><%=x.nombre%></span><br>
+                                                                    <span class="badge rounded-pill badge-soft-dark font-size-12 fw-medium">$<%=x.gananciaB%></span>
                                                                 </div>
-
                                                                 <div class="flex-shrink-0">
                                                                     <% if (x.gananciaB) { %>
                                                                         <% if (x.gananciaB > x.gananciaA) { %>
-                                                                            <span class="badge rounded-pill badge-soft-success font-size-12 fw-medium">+<%=x.rendimiento%>%</span>
+                                                                            <span class="badge rounded-pill badge-soft-success font-size-12 fw-medium">+<%=x.rendimiento%>%  </span>
                                                                         <% } else { %>
+                                                                            <% if (x.icono == 1) {%>
                                                                             <span class="badge rounded-pill badge-soft-danger font-size-12 fw-medium"><%=x.rendimiento%>%</span>
+                                                                            <% } else {%>
+                                                                                <svg enable-background="new 0 0 128 128" height="24px" id="Layer_1" version="1.1" viewBox="0 0 128 128" width="24px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M112,36c-6.629,0-12,5.375-12,12c0,1.68,0.352,3.273,0.973,4.727L84,60L69.801,34.445  C73.48,32.391,76,28.508,76,24c0-6.625-5.371-12-12-12s-12,5.375-12,12c0,4.508,2.52,8.391,6.199,10.445L44,60l-16.973-7.273  C27.648,51.273,28,49.68,28,48c0-6.625-5.371-12-12-12S4,41.375,4,48s5.371,12,12,12c0.93,0,1.822-0.133,2.695-0.328L28,100v8  c0,4.422,3.582,8,8,8h56c4.418,0,8-3.578,8-8v-8l9.309-40.328C110.176,59.875,111.07,60,112,60c6.629,0,12-5.375,12-12  S118.629,36,112,36z M64,20c2.207,0,4,1.797,4,4s-1.793,4-4,4s-4-1.797-4-4S61.793,20,64,20z M12,48c0-2.203,1.793-4,4-4  s4,1.797,4,4s-1.793,4-4,4S12,50.203,12,48z M92,108H36v-8h56V108z M93.633,92H34.367L27.34,61.563l13.508,5.789  C41.871,67.789,42.941,68,43.996,68c2.828,0,5.547-1.5,6.996-4.117L64,40.477l13.008,23.406C78.457,66.5,81.176,68,84.004,68  c1.055,0,2.125-0.211,3.148-0.648l13.508-5.789L93.633,92z M112,52c-2.207,0-4-1.797-4-4s1.793-4,4-4s4,1.797,4,4S114.207,52,112,52  z" fill="#fed061"/></svg>
+                                                                            <% } %>
                                                                         <% } %>
                                                                     <%} else {%>
+                                                                        <% if (x.icono == 2) {%>
+                                                                            <svg enable-background="new 0 0 128 128" height="24px" id="Layer_1" version="1.1" viewBox="0 0 128 128" width="24px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M112,36c-6.629,0-12,5.375-12,12c0,1.68,0.352,3.273,0.973,4.727L84,60L69.801,34.445  C73.48,32.391,76,28.508,76,24c0-6.625-5.371-12-12-12s-12,5.375-12,12c0,4.508,2.52,8.391,6.199,10.445L44,60l-16.973-7.273  C27.648,51.273,28,49.68,28,48c0-6.625-5.371-12-12-12S4,41.375,4,48s5.371,12,12,12c0.93,0,1.822-0.133,2.695-0.328L28,100v8  c0,4.422,3.582,8,8,8h56c4.418,0,8-3.578,8-8v-8l9.309-40.328C110.176,59.875,111.07,60,112,60c6.629,0,12-5.375,12-12  S118.629,36,112,36z M64,20c2.207,0,4,1.797,4,4s-1.793,4-4,4s-4-1.797-4-4S61.793,20,64,20z M12,48c0-2.203,1.793-4,4-4  s4,1.797,4,4s-1.793,4-4,4S12,50.203,12,48z M92,108H36v-8h56V108z M93.633,92H34.367L27.34,61.563l13.508,5.789  C41.871,67.789,42.941,68,43.996,68c2.828,0,5.547-1.5,6.996-4.117L64,40.477l13.008,23.406C78.457,66.5,81.176,68,84.004,68  c1.055,0,2.125-0.211,3.148-0.648l13.508-5.789L93.633,92z M112,52c-2.207,0-4-1.797-4-4s1.793-4,4-4s4,1.797,4,4S114.207,52,112,52  z" fill="#fed061"/></svg>
+                                                                        <% } else {%>
                                                                         <span class="badge rounded-pill badge-soft-secondary font-size-12 fw-medium">0%</span>
+                                                                        <% } %>
                                                                     <%}%>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     <%})%>
-                                                <%}%>
+                                                <%} %>
 
                                                 <div class="mt-4 pt-2">
                                                     <a href="/afiliados" class="btn btn-primary w-100">Ver mis afiliados <i class="mdi mdi-arrow-right ms-1"></i></a>
@@ -400,7 +408,7 @@
                             <!-- end col -->
                         </div>
                         <!-- end row-->
-                        <div class="col-lg-4">
+                        <div class="col-xl-4">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title mb-0">Ventas por ciudad</h4>
@@ -413,7 +421,6 @@
                             </div>
                             <!-- end card -->
                         </div>
-                    
                         <!-- end col -->
                     </div>
                     <!-- end row-->
@@ -574,12 +581,8 @@
                                 <% } else { %>
                                     <div class="card-body px-0" style=" display: flex; justify-content: center; align-items: center;">
                                         <div>
-                                            <center><i class="far fa-clipboard" style="font-size: 30px;
-                                                border-radius: 50%;
-                                                border: 3px solid #bbbbbb;
-                                                width: 60px;
-                                                height: 60px;
-                                                padding-top: 10px;"></i></center><br>
+                                            <center><i class="far fa-clipboard" style="font-size: 30px; width: 60px;
+                                                height: 60px; padding-top: 10px;"></i></center><br>
                                             <h2>Aún no se ha registrado</h2>
                                             <center><h2>ninguna factura</h2></center>
                                         </div>

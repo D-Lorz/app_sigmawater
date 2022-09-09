@@ -29,8 +29,6 @@ exports.listarVendedores = async (req, res) => {
           }else{
             v.foto = "../directorio_dash/images/users/userDefault.gif" 
           }
-            
-          //  v.estadoDe_laCuenta = u.estado_de_la_cuenta;
           if (u.estado_de_la_cuenta === "aprobado") { v.estadoVendedor.txt = "Aprobado"; v.estadoVendedor.color = "badge-soft-success"; }
           if (u.estado_de_la_cuenta === "bloqueado") { v.estadoVendedor.txt = "Bloqueado"; v.estadoVendedor.color = "badge-soft-danger"; }
         }
@@ -71,21 +69,27 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
     return res.redirect('/login')
   }
 
-  // todo===========>>>  Mostrar afiliados a tal vendedor
-  let afiliados = await conexion.query("SELECT r.*, u.foto FROM registro_de_vendedores r JOIN usuarios u ON r.id_vendedor = u.id_vendedor WHERE r.codigo_afiliado = ?", [info_vendedor.id_vendedor]);
-  console.log("IMPRIENOD VARIABLE AFILIADOS ===>>>>", afiliados);
+// todo===========>>>  Mostrar afiliados a tal vendedor
+  let afiliados = await conexion.query("SELECT * FROM usuarios WHERE codigo_afiliado = ?", [info_vendedor.id_vendedor]);
+  let afiliadosRV = await conexion.query("SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?", [info_vendedor.id_vendedor]);
 
-  let fotoUpdateA
-  if(afiliados){
-  if (afiliados.foto) {
-      fotoUpdateA = JSON.parse(afiliados.foto);
-      fotoUpdateA = fotoUpdateA.fotoUser
-  } else {
-    fotoUpdateA = "../directorio_dash/images/users/userDefault.gif"
-  }
-}
+  afiliados.forEach(afl_u => {
+    afl_u.datos = {}
+    if (afiliadosRV.length > 0) {
+      afiliadosRV.forEach(afl_rv => {
+        if (afl_u.id_vendedor == afl_rv.id_vendedor) {
+          if (afl_u.foto) {
+            afl_u.foto = JSON.parse(afl_u.foto);
+            afl_u.foto = afl_u.foto.fotoUser
+          } else {
+            afl_u.foto = "../directorio_dash/images/users/userDefault.gif"
+          }
+        }
+      });
+    }
+  });
 
-  // todo===========>>>  Mostrar afiliado a este vendedor
+// todo===========>>>  Mostrar afiliado a este vendedor
   let referente = await conexion.query("SELECT r.*, u.foto FROM registro_de_vendedores r JOIN usuarios u ON r.id_vendedor = u.id_vendedor WHERE r.id_vendedor = ? LIMIT 1",[info_vendedor.codigo_afiliado]);
   referente = referente[0];
 
@@ -99,7 +103,7 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
   }
 }
 
-  // todo===========>>>  Mostrar estado actual de un vendedor
+// todo===========>>>  Mostrar estado actual de un vendedor
   let viewsUser = await conexion.query("SELECT * FROM usuarios WHERE id_vendedor = ? LIMIT 1", [info_vendedor.id_vendedor]);
   viewsUser = viewsUser[0];
 
@@ -152,7 +156,7 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
 
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-vendedores", {
-    user: req.user, info_vendedor,fotoUpdate, afiliados, fotoUpdateA,
+    user: req.user, info_vendedor,fotoUpdate, afiliados, 
     referente, fotoUpdateR,licencia, viewsUser, infoClientes
   });
 };
@@ -590,7 +594,7 @@ exports.actualizarEstadoVendedor = async (req, res) => {
 // todo ===========>>>  Mostrar lista de CLIENTES y referencia de su vendedor
 exports.listarClientes = async (req, res) => {
   let lista_clientes = await conexion.query(
-    "SELECT N.*, S.sistema,S.estado_del_credito, A.estado_agenda, T.fecha_test FROM nuevos_cliente N LEFT JOIN solicitar_credito S ON N.id = S.id_cliente LEFT JOIN agendar_instalacion A ON N.id = A.id_cliente LEFT JOIN test_agua T ON N.id = T.id_cliente;");
+    "SELECT N.*, S.sistema,S.estado_del_credito, A.estado_agenda, N.fecha_test FROM nuevos_cliente N LEFT JOIN solicitar_credito S ON N.id = S.id_cliente LEFT JOIN agendar_instalacion A ON N.id = A.id_cliente;");
 
     lista_clientes.forEach((c) => {
     /** Estado del Crédito */
@@ -821,7 +825,8 @@ exports.clfirmas = async (req, res) => {
 exports.servicioInstaladosx = async (req, res) => {
   const fecha_instalacion = req.body.fechaDeInstalacion;
   const producto_instalado = req.body.productoinstaladO;
-  const serial_producto = req.body.serial_producto;
+  const serial_producto1 = req.body.serial_producto1;
+  const serial_producto2 = req.body.serial_producto2;
   const instalador = req.body.instalador;
   const evidencia = '../evidenciaServicio/' + urlLicencias[0]
   const evidencia_fotografica = JSON.stringify({ 'evidencia': evidencia, });
@@ -829,7 +834,7 @@ exports.servicioInstaladosx = async (req, res) => {
   const id_cliente = req.body.id_cliente
   const codigo_cliente = req.body.codigo_cliente
   const estado_agenda = 1
-  const Datos_servicio = { fecha_instalacion, producto_instalado, serial_producto, instalador, evidencia_fotografica, nota, id_cliente }
+  const Datos_servicio = { fecha_instalacion, producto_instalado, serial_producto1,serial_producto2, instalador, evidencia_fotografica, nota, id_cliente }
   const Datos_estado = { estado_agenda }
 
   const Datos_factura = { producto_instalado, fecha_instalacion, id_cliente }
@@ -1433,7 +1438,7 @@ exports.factura = async (req, res) => {
             //COMISIÓN VENDEDOR 3 (NIVEL 3 o 4)
             if (v3) {
               if (v3.nivel == 3) {
-                vendedor3.comision_base = (parseFloat(porcentaje * comisionMax_nivel3) - vendedor.comision_base)
+                vendedor3.comision_base = (parseFloat(porcentaje * comisionMax_nivel3) - vendedor2.comision_base - vendedor.comision_base)
                 vendedor3.comision_final = vendedor3.comision_base;
               } else {
                 vendedor3.comision_base = (cl.monto_aprobado - gastos_empresa - vendedor2.comision_base - vendedor.comision_base);

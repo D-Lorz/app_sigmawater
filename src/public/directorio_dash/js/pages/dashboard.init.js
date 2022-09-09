@@ -331,15 +331,12 @@ chart.render();
            datosY.push(g.ganancias)
            datosX.push(g.mes)
         })
-        console.log("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-        console.log(datosY)
-        console.log(datosX)
-        console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n")
+   
     }
      var options = {
         series: [{
             name: 'Ganancia',
-            data: [0,0,0,0,0,0,0,300,1,0,0,0]
+            data: datosY
         }],
         chart: {
             type: 'bar',
@@ -351,10 +348,10 @@ chart.render();
         },
         plotOptions: {
             bar: {
-                 columnWidth: '25%',
+                 columnWidth: '8%',
             },
         },
-        colors: ["#812082", "#50368c"],
+         colors: ["#812082", "#50368c"],
         fill: {
             opacity: 1
         },
@@ -373,14 +370,15 @@ chart.render();
         },
         xaxis: {
             categories:
-            //   datosX
-                ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+               datosX
+                // ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             ,
             labels: {
                 rotate: -90
             }
         }
     };
+
     
     var chart = new ApexCharts(document.querySelector("#market-overview"), options);
     chart.render();

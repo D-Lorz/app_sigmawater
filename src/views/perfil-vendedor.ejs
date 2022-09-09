@@ -66,9 +66,9 @@
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Vendedores</a></li>
                                             <li class="breadcrumb-item active">Perfil del vendedor</li>
-                                        </ol>
+                                      </ol>
                                     </div>
-
+                                    <input type="hidden" id="codigoVendedor" value="<%= vendedor.id_vendedor %>">
                                 </div>
                             </div>
                         </div>
@@ -111,25 +111,26 @@
                                                                             <div class="row">
                                                                                 <div class="col-sm order-2 order-sm-1">
                                                                                     <div class="col-xl-3 col-lg-4" style="float: right; margin-right: 10%; margin-top: 7%;">
-                                                                                        <form action="/actualizarPerfil" method="POST" d="validarForm" enctype="multipart/form-data">
-                                                                                            <!--* Cambiar foto de perfil ****  -->
-                                                                                            <div class="">
-                                                                                                    <div id="imagePre1" style="width: 220px !important; height: 220px !important;">
-                                                                                                            <img src="<%= fotoUpdate%>" alt=""
-                                                                                                                style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;margin-top: 11%;">
-                                                                                                    </div>
-                                                                                                <label class="input-group-btn" style="margin-left: 69%;margin-top: -21%;">
-                                                                                                    <span class="btn btn-primary" style="border-radius: 35px">
-                                                                                                        <h5 class="font-size-20 mb-1" style="color: white;"><i class="fas fa-pencil-alt"></i></h5>
-                                                                                                        <!-- <input type="file" name="editFoto" id="campoFile" accept="image/jpg"  id=""> -->
-                                                                                                        <input type="file" name="editFoto" id="imagen1" style="display: none;" onchange="fileValidation()">
-                                                                                                    </span>
-                                                                                                </label>
+
+                                                                                  <!--* <<<<<<====== Cambiar foto de perfil ======>>>>>> -->
+                                                                                        <div>
+                                                                                            <div id="imagePre1" style="width: 220px !important; height: 220px !important;">
+                                                                                                <img src="<%= fotoUpdate%>" alt=""
+                                                                                                    style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;margin-top: 11%;">
                                                                                             </div>
-                                                                                            <!--* Cambiar foto de perfil ****  -->
+                                                                                            <label class="input-group-btn" style="margin-left: 69%;margin-top: -21%;">
+                                                                                                <span class="btn btn-primary" style="border-radius: 35px">
+                                                                                                    <h5 class="font-size-20 mb-1" style="color: white;"><i class="fas fa-pencil-alt"></i></h5>
+                                                                                                    <input type="file" name="editFoto" class="filePhoto" id="previewProfile" style="display: none;" onchange="fileValidation()">
+                                                                                                </span>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                  <!--* <<<<<<====== Cambiar foto de perfil ======>>>>>> -->
+
+                                                                                 <form action="/actualizarPerfil" method="POST" id="validarForm" >
                                                                                     </div>
                                                                                     <h5 class="font-size-16 mb-1" style="text-transform: capitalize;">Información personal</h5>
-                                                                              <p class="text-muted font-size-13">Edita tu información <b style="font-weight:600 ;">  </b></p>
+                                                                                   <p class="text-muted font-size-13">Edita tu información <b style="font-weight:600 ;">  </b></p>
                                                                                     </div>  
                                                                                     <!-- Mensaje de Correo no coincide -->
                                                                                     <div class="alert alert-danger alert-border-left alert-dismissible fade show mt-2" id="alertaCorreo"
@@ -156,7 +157,7 @@
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group">
                                                                                         <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Correo</h5>
-                                                                                        <input type="email" class="form-control text-muted font-size-13" value="<%= vendedor.correo %>" id="idcorreo" required placeholder="ejemplo@gmail.com" id="" name="editCorreo">
+                                                                                        <input type="email" class="form-control text-muted font-size-13" value="<%= vendedor.correo %>" id="idcorreo" required placeholder="ejemplo@gmail.com" id="" name="correo">
                                                                                     </div>
                                                                                 </div>
                                                                              </div>
@@ -173,7 +174,7 @@
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group">
                                                                                         <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Contraseña</h5>
-                                                                                        <input type="password" class="form-control" onblur="validarPass()" placeholder="********" id="idPass" name="editPass">
+                                                                                        <input type="password" class="form-control" onblur="validarPass()" placeholder="********" id="idPass" name="pass">
                                                                                     </div>
                                                                                 </div>
                                                                           </div>
@@ -190,7 +191,7 @@
                                                                          <div class="col-lg-6">
                                                                                     <div class="form-group">
                                                                                         <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Teléfono movil</h5>
-                                                                                        <input type="tel" value="<%= vendedor.telefono_movil%>" required class="form-control text-muted font-size-13" id="" name="editTel">
+                                                                                        <input type="tel" value="<%= vendedor.telefono_movil%>" required class="form-control text-muted font-size-13" id="" name="telefono_movil">
                                                                                     </div>
                                                                              </div> 
                                                                          </div>
@@ -199,25 +200,25 @@
                                                                                 <div class="col-lg-3">
                                                                                         <div class="form-group">
                                                                                            <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Dirección</h5>
-                                                                                            <input type="text" value="<%= vendedor.direccion%>" required class="form-control text-muted font-size-13" name="editDire">
+                                                                                            <input type="text" value="<%= vendedor.direccion%>" required class="form-control text-muted font-size-13" name="direccion">
                                                                                          </div>
                                                                                    </div> 
                                                                                    <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                        <h5 class="font-size-12 mb-1" style="text-transform: capitalize;">Ciudad</h5>
-                                                                                        <input type="text" value="<%= vendedor.ciudad%>" required class="form-control text-muted font-size-13" name="editCiu">
+                                                                                        <input type="text" value="<%= vendedor.ciudad%>" required class="form-control text-muted font-size-13" name="ciudad">
                                                                                      </div>
                                                                                </div> 
                                                                                <div class="col-lg-3">
                                                                                 <div class="form-group">
                                                                                    <h5 class="font-size-12 mb-1" style="text-transform: capitalize;">Apt / Suite / Unidad</h5>
-                                                                                    <input type="text" value="<%= vendedor.apt_suite_unidad%>" class="form-control text-muted font-size-13" name="editApt">
+                                                                                    <input type="text" value="<%= vendedor.apt_suite_unidad%>" class="form-control text-muted font-size-13" name="apt_suite_unidad">
                                                                                  </div>
                                                                            </div>
                                                                            <div class="col-lg-3">
                                                                             <div class="form-group">
                                                                                <h5 class="font-size-12 mb-1" style="text-transform: capitalize;">Código postal</h5>
-                                                                                <input type="text" value="<%= vendedor.codigo_postal%>" required class="form-control text-muted font-size-13" name="editPostal">
+                                                                                <input type="text" value="<%= vendedor.codigo_postal%>" required class="form-control text-muted font-size-13" name="codigo_postal">
                                                                              </div>
                                                                           </div>
                                                                          </div>
@@ -228,25 +229,25 @@
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Nombre del banco</label>
-                                                                                        <input type="text" value="<%= vendedor.nombre_banco%>" required class="form-control text-muted font-size-13" name="editBanco">
+                                                                                        <input type="text" value="<%= vendedor.nombre_banco%>" required class="form-control text-muted font-size-13" name="nombre_banco">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Número de cuenta</label>
-                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control text-muted font-size-13" name="editCuenta">
+                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control text-muted font-size-13" name="numero_cuenta">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Número de ruta</label>
-                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control text-muted font-size-13" name="editRuta">
+                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control text-muted font-size-13" name="ruta">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Beneficiario</label>
-                                                                                        <input type="text" value="<%= vendedor.beneficiario%>" required class="form-control text-muted font-size-13" name="editBeneficiario">
+                                                                                        <input type="text" value="<%= vendedor.beneficiario%>" required class="form-control text-muted font-size-13" name="beneficiario">
                                                                                     </div>
                                                                                 </div>
                                                                              </div> 
@@ -387,7 +388,7 @@
                                         <h5 style="font-size:16px ; text-align: center;">Información de vendedor</h5>
                                         <br>
                                           <span style="font-size:14px ; text-align: center;">Nivel actual:<div class="badge badge-soft-info" style="margin-bottom: 8px;"><%= vendedor.nivel %></div> </span><br>
-                                          <% if(vendedor.total_ventas >= 1) { %>
+                                          <% if(vendedor.total_ventas >= 20.5) { %>
                                              <span style="font-size:14px ; text-align: center;">Codigo de vendedor:<div class="badge badge-soft-info"><%= vendedor.id_vendedor %></div> </span>
                                           <% } else { %>
                                              <span style="font-size:14px ; text-align: center;">Codigo de vendedor:<div class="badge badge-soft-warning font-size-12"> <i class=" fas fa-lock" title="Maximo 1 venta para desbloquear codigo" ></i></div> </span>
@@ -521,11 +522,9 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
 <script>
-    
+// ==> Previsualizar foto de perfil == INICIO <==
     function fileValidation(){
-            
-            var fileInput = document.getElementById('imagen1');
-        
+            var fileInput = document.getElementById('previewProfile');
             var filePath = fileInput.value;
             var allowedExtensions = /(.jpg|.jpeg|.png)$/i;
             if(!allowedExtensions.exec(filePath)){
@@ -540,12 +539,41 @@
                     var reader = new FileReader();
                     reader.onload = function(e) {
                         document.getElementById('imagePre1').innerHTML = '<img src="'+e.target.result+'" style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;margin-top: 11%;"/>';
-        
                     };
                     reader.readAsDataURL(fileInput.files[0]);
                 }
             }
         }
+// ==> Previsualizar foto de perfil == FIN <==
+
+    /* Actualizar foto de perfil en DB */
+    const inptutFoto = document.querySelector('.filePhoto');
+    const codigoVendedor = document.getElementById('codigoVendedor').value;
+    
+    inptutFoto.addEventListener('change', (e) => {
+        console.log(e)
+        const foto = e.target.files[0]
+        const formData = new FormData();
+        formData.append('foto', foto);
+        formData.append('codigoVendedor',codigoVendedor);
+        guardarFoto(formData, codigoVendedor);
+    });
+
+    function guardarFoto(formData) {
+        fetch('/actualizarFotoPerfil', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(resultado => {
+                if (resultado) {
+                    console.log("Todo correcto")
+                } else {
+                    console.log("Sin datos")
+                }
+            })
+    }
 </script>
 
 

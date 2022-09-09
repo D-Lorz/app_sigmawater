@@ -1,7 +1,6 @@
  
 // todo * * * * * * * * * * * * * * * * * *
 // *  ==>> Mascara de telefonos 
-
   document.addEventListener("DOMContentLoaded", function () {
 
     // Pattern (Phone) MASCARA PARA EL CAMPO TELEFONO DEL DASHBOARD

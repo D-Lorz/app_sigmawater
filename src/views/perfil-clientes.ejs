@@ -297,11 +297,10 @@
                                                                             <th>Nota</th>
                                                                         </tr>
                                                                     </thead>
-
                                                                     <tbody>
                                                                         <% informacionTestAgua.forEach((user)=>{ %>
                                                                             <tr>
-                                                                                <td><%= user.id %></td>
+                                                                                  <td><%= user.cont %></td>
                                                                                   <td><%= user.fecha_test %></td>
                                                                                   <td><%= user.dureza_gmXgalon %></td>
                                                                                   <td><%= user.hierro %></td>
@@ -322,7 +321,6 @@
                                                                                   <td><%= user.nota %></td>    
                                                                              </tr>
                                                                             <%})%>
-
                                                                           </tbody>
                                                                        </table>
                                                                             <input type="hidden" id="datosJson_PrimerTestagua" value="<%= datosJson_PrimerTestagua %>">
@@ -335,8 +333,6 @@
                                                        </div>
                                                     </div> <!-- end card -->
                                                 </div> <!-- end col -->
-                                
-
                                         <div class="col-lg-4 ">
                                             <div class="card" style="margin-top: 0%; box-shadow: 0px 0px 10px #e7e7e7;border-radius: 21px;">
                                                 <div class="card-header">
@@ -527,16 +523,12 @@
                                                                                         <img src="<%= evidenciaF.evidencia%>" alt="" style="width: 85%; margin-left: 10%;">
                                                                                        <% } else { %> 
                                                                                         <% } %>  
-
-
-                                                                                 </div>
+                                                                                   </div>
                                                                                 </div><!-- end col -->
                                                                              </div>
-                                                                            <!-- end card-body -->
-                                                                      </div><!-- end col -->
-                                                                </div>
-                                                            </div>
-                                            
+                                                                        </div><!-- end col -->
+                                                                   </div>
+                                                               </div>
                                                             </div>
                                                         </div><!-- /.modal-content -->
                                                     </div><!-- /.modal-dialog -->
@@ -545,111 +537,78 @@
                                                 <div class="card-body">
                                                     <div class="table-responsive">
                                                         <table class="table mb-0">
-                                                            <% if(!(clRegistro_instalacion.id_cliente)) { %> 
-                                                                <tbody>
-                                                         
-                                                                <!-- <h1 style="text-align: center">Aun no se ha registrado la instalación</h1> -->
+                                                          <% if(!(clRegistro_instalacion.id_cliente)) { %> 
+                                                           <tbody>
                                                              <h1 style="text-align: center"><%=  estado_intalacion.txtt %></h1>
                                                                </tbody>
                                                                <% } else { %> 
                                                                    <tbody>
-                                                         
                                                                        <tr>
                                                                          <td style="width: 26%;">Fecha de instalación</td>
                                                                          <% if(clRegistro_instalacion){ %> 
                                                                           <td><b><%= clRegistro_instalacion.fecha_instalacion %></b></td>
                                                                           <td style="width: 26%;">Instalador:</td>
-                                                                         <td style="text-transform: capitalize;"><b><%= clRegistro_instalacion.instalador %></b></td>
+                                                                          <td style="text-transform: capitalize;"><b><%= clRegistro_instalacion.instalador %></b></td>
                                                                          <% } else { %> 
                                                                            <td><b>N/A</b></td>
                                                                            <td style="width: 26%;">Serial_producto:</td>
-                                                                          <td><b>N/A</b></td>
-                                                                           <% }%>
+                                                                           <td><b>N/A</b></td>
+                                                                          <% }%>
                                                                        </tr>
                                                                        <tr>
-                                                                          <td style="width: 26%;">Producto instalado:</td>
+                                                                           <td style="width: 26%;">Producto instalado:</td>
                                                                           <% if(clRegistro_instalacion){ %> 
                                                                            <td><b><%= clRegistro_instalacion.producto_instalado %></b></td>
                                                                            <td style="width: 26%;">Nota:</td>    
-                                                                           <p> <td><b><%= clRegistro_instalacion.nota %></b></td></p>     
+                                                                            <p> <td><b><%= clRegistro_instalacion.nota %></b></td></p>     
                                                                            <% } else { %> 
-                                                                               <td><b>N/A</b></td>
-                                                                               <td style="width: 26%;">Hasta:</td>
-                                                                              <td><b>N/A</b></td>
-                                                                               <% }%>                                         
+                                                                            <td><b>N/A</b></td>
+                                                                            <td style="width: 26%;">Hasta:</td>
+                                                                            <td><b>N/A</b></td>
+                                                                           <% }%>                                         
                                                                        </tr>
                                                                        <tr>
-                                                                           <td style="width: 26%;">Serial del producto:</td>
+                                                                            <td style="width: 26%;">Serial producto 1:</td>
                                                                            <% if(clRegistro_instalacion){ %> 
-                                                                            <td><b><%= clRegistro_instalacion.serial_producto %></b></td>
+                                                                            <td><b><%= clRegistro_instalacion.serial_producto1 %></b></td>
                                                                             <td style="width: 26%;">Registro fotográfico:</td>    
-                                                                            <p> <td><b><button type="button" style="border:none;" class="waves-effect waves-light"
+                                                                            <p><td><b><button type="button" style="border:none;" class="waves-effect waves-light"
                                                                                data-bs-toggle="modal" data-bs-target=".evidencia"> 
                                                                                     <span class="d-block d-sm-none"><i class="far fa-image"></i></span>
                                                                                     <span class="d-none d-sm-block"> <i class="far fa-image"></i> Ver evidencia </span>
-                                                                          </button></b></td></p>   
-                                                                            
-                                                                            <% } else { %> 
-                                                                                <td><b>N/A</b></td>
-                                                                                <td style="width: 26%;">Registro fotográfico:</td>
-                                                                               <td><b>N/A</b></td>
-                                                                                <% }%>                                         
+                                                                              </button></b></td>
+                                                                            </p>   
+                                                                           <% } else { %> 
+                                                                            <td><b>N/A</b></td>
+                                                                            <td style="width: 26%;">Registro fotográfico:</td>
+                                                                            <td><b>N/A</b></td>
+                                                                           <% }%>                                         
                                                                         </tr>
-                                                                    
+                                                                        <tr>
+                                                                            <td style="width: 26%;">Serial producto 2:</td>
+                                                                            <td><b><%= clRegistro_instalacion.serial_producto2 %></b></td>
+                                                                        </tr>
                                                                    </tbody>
-                                                                       <% } %> 
-                                                        </table>
+                                                                      <% } %> 
+                                                             </table>
+                                                        </div>
                                                     </div>
-
-                                                </div>
-
-
-                                            </div>
-                                        </div><!-- end col -->
-
-                                        </div>
-                                    <!-- end card-body -->
-                                </div>
-                                <!-- end card -->
-
-                            </div><!-- end col -->
+                                               </div>
+                                           </div><!-- end col -->
+                                        </div><!-- end card-body -->
+                                     </div><!-- end card -->
+                               </div><!-- end col -->
+                           </div>
                         </div>
-
-                    
                     </div>
+                 </div>
+               </div>
             <!-- * =============>> FIN Agendar instalación  <<============================== -->
-
-
-        </div>
-                </div>
-                    </div>
                     <!-- =======FIXME: copyright ========================== -->
                     <%- include ('./partials/copyright.ejs')%>
-                        <!-- =======FIXME: copyright ========================== -->
-
+                     <!-- =======FIXME: copyright ========================== -->
                 </div>
             </div>
-
-
-            <!-- Right Sidebar -->
-            <div class="right-bar">
-                <div data-simplebar class="h-100">
-                    <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-
-                        <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
-
-                        <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                            <i class="mdi mdi-close noti-icon"></i>
-                        </a>
-                    </div>
-
-                    <!-- Settings -->
-
-                 
-                </div> <!-- end slimscroll-menu-->
-            </div>
-            <!-- /Right-bar -->
-
             <!-- VALIDACIONES BREVES -->
             <% if (!estado.verBtn){%>
             <script>
@@ -658,8 +617,6 @@
                 boton.style.filter = "grayscale(1)";
             </script>
             <%}%>
-
-           
     
  <!-- JAVASCRIPT -->
  <script src="../directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
@@ -716,33 +673,6 @@
 
 <script>
 
-  //  /TODO: FUNCIONES PARA MASCARA  -->
-//     document.addEventListener("DOMContentLoaded", function () {
-//         IMask(document.getElementById('montoAprobadoWS'), {
-//             mask: '$num',
-//             blocks: {
-//                 num: {
-//                 mask: Number,
-//                 thousandsSeparator: ',',
-//                 max: 8500
-//                 }
-//             }
-//         });
-//     }); 
-
-// // Mascara para Monto Aprobado para el producto Reverse Osmosis System
-// document.addEventListener("DOMContentLoaded", function () {
-//    var currencyMask = IMask(document.getElementById('montoAprobadoROS'), {
-//       mask: '$num',
-//       blocks: {
-//         num: {
-//           mask: Number,
-//           thousandsSeparator: ','
-//         }
-//       }
-//     });
-// });
-
 /* FUNCIÓN PARA LA TARJETA/SECCIÓN CREDITO APROBADO */
 
 function ShowSelected()  {
@@ -793,7 +723,6 @@ function ShowSelected()  {
         console.log("NINGÚN PRODUCTO SELECCIONADO")
     }
 }
-
         // // Mascara para el input Monto Aprobado 
         function mascaraMonto (input, maximo) {
             IMask(input, {

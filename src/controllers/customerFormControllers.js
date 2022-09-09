@@ -307,6 +307,14 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
   // todo =========================>> Mostrar información del test de agua del cliente
   let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [clientes2.id])
+  // let countCliente = await conexion.query("SELECT count(id) as test FROM test_agua WHERE id_cliente = ?", [clientes2.id]);
+  // console.log("=================....>>>", countCliente);
+   let cont = 1
+  informacionTestAgua.forEach(x => {
+    x.cont = cont
+    cont++
+
+  });
 
   // * >>> Estados del testeo (visita al cliente)
   let consultaEstado_testAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ? ORDER BY id DESC LIMIT 1', [clientes2.id])
@@ -406,11 +414,11 @@ exports.testAgua = async (req, res) => {
     fecha_test, dureza_gmXgalon, hierro, totalDureza_compensada, tsd, cloro, ph, azufre, tanino, nitrato, alcalinidad,
     otro1, concentracion1, otro2, concentracion2, otro3, concentracion3, nota, id_cliente
   }
-  await conexion.query('INSERT INTO test_agua SET ?', [Datos_testAgua], (err, result) => {
-    if (err) throw err;
-    if (result) { res.redirect('/perfil-clientes/' + codigo_cliente) }
+  const Datosfecha_test ={fecha_test}
+  await conexion.query('INSERT INTO test_agua SET ?', [Datos_testAgua])
+  await conexion.query("UPDATE nuevos_cliente SET ? WHERE id = ?", [Datosfecha_test, id_cliente]);
 
-  })
+    res.redirect('/perfil-clientes/' + codigo_cliente) 
 
 }
 
@@ -673,17 +681,26 @@ exports.dashboardVendedor = async (req, res) => {
 
   // COMPARATIVA DE VENTAS x VENDEDOR LOGUEADO
   let topV_ = {}, topVendedores = []
+  let icono = false;
+
   const top_vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, ganancias FROM registro_de_vendedores ORDER BY ganancias DESC LIMIT 5");
+
   if (top_vendedores.length > 0) {
     let cont = 1;
     const vActual = top_vendedores.find(i => i.id_vendedor == idVendedor)
-    topV_ = top_vendedores.filter(i => i.id_vendedor != idVendedor)
+    // topV_ = top_vendedores.filter(i => i.id_vendedor != idVendedor)
     
-    if (topV_ && vActual) {
-      topV_.forEach(x => {
+    if (vActual) {
+      top_vendedores.forEach(x => {
         let rendimiento = ((parseFloat(x.ganancias - vActual.ganancias) / vActual.ganancias) * 100).toFixed(1);
         rendimiento = parseFloat(rendimiento);
-        
+
+        if (x.id_vendedor == idVendedor) {
+          icono = 2;
+        } else {
+          icono = 1
+        }
+                
         if (parseFloat(x.ganancias) == 0 && vActual.ganancias == 0) { rendimiento = 0 }
         if (vActual.ganancias == 0 && parseFloat(x.ganancias) >= 1) { rendimiento = 100 }
 
@@ -692,16 +709,17 @@ exports.dashboardVendedor = async (req, res) => {
           rendimiento,
           pos: cont,
           gananciaA: vActual.ganancias,
-          gananciaB: x.ganancias
+          gananciaB: x.ganancias,
+          icono
         })
         cont++;
       })
 
-      const diferenciaTop = 5 - topV_.length
+      const diferenciaTop = 5 - top_vendedores.length
       if (diferenciaTop != 0) {
         for (let i = 0; i < diferenciaTop; i++) {
           topVendedores.push({
-            nombre: "-----------------",
+            nombre: "----------------",
             pos: cont,
           })
           cont++;
@@ -718,12 +736,6 @@ exports.dashboardVendedor = async (req, res) => {
     datosJson_historialG = JSON.stringify(histrialGanancias);
     console.log("\n");
     console.log("IMPIMIENDO datosJson_h istorialG ====>>>" , datosJson_historialG);
-
-    //  let ultimoHG, penultimoHG = 0;
-    //  ultimoHG = histrialGanancias[histrialGanancias.length - 1].ganancias;
-    //  if (histrialGanancias.length >= 2) {
-    //    penultimoHG = histrialGanancias[histrialGanancias.length - 2].ganancias;
-    //  }
    }
 
   res.render("dashboard", { user: req.user,
@@ -870,8 +882,6 @@ exports.historial_ganancias_vendedores = async (req, res) => {
       const result = await conexion.query("SELECT * FROM historial_ganancias_vendedores WHERE idVendedor = ?", [idVendedor]);
       if(result.length == 0) {
         await conexion.query("INSERT INTO historial_ganancias_vendedores SET ?", [datos_ganancias]);
-      }else{
-        await conexion.query("UPDATE historial_ganancias_vendedores SET ? WHERE idVendedor = ?", [soloGanancia, idVendedor]);
       }
     }
   });
