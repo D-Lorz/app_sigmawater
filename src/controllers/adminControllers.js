@@ -69,10 +69,10 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
 
 const todosClientes = await conexion.query("SELECT id FROM nuevos_cliente")   
 const cliente = todosClientes.find(i => i.codigo_id_vendedor == id_vendedor)
+let facturaCliente = false;
 if (cliente){
   const facturas = await conexion.query("SELECT * FROM factura ")
   const fCliente = facturas.find(i => i.id_cliente == cliente.id)
-  let facturaCliente = false;
   if (fCliente) {
     if (fCliente.estadoFactura == 0) {facturaCliente = true}
   }
@@ -164,7 +164,7 @@ if (cliente){
 
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-vendedores", {
-    user: req.user, info_vendedor,fotoUpdate, afiliados, referente, fotoUpdateR,licencia, viewsUser, infoClientes, facturaCliente
+  user: req.user, info_vendedor,fotoUpdate, afiliados, referente,fotoUpdateR,licencia, viewsUser, infoClientes, facturaCliente
   });
 };
 // todo ===========>>>  Actualizar nivel de vendedores
