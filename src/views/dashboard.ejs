@@ -44,7 +44,7 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Mis ventas</span>
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Número de ventas</span>
                                             <h4 class="mb-3">
                                                 <span class="counter-value" data-target="<%=numVentas_.propias%>">0</span>
                                             </h4>
@@ -351,8 +351,18 @@
                                     <div class="row align-items-center">
                                         <div class="col-xl-7">
                                             <div>
+                                                <% if(datosJson_historialG) { %> 
                                                 <div id="market-overview" data-colors='[" #5156be" ," #34c38f"]' class="apex-charts"></div>
                                                 <input type="hidden" id="datosJson_historialG" value="<%= datosJson_historialG %>">
+                                                <% } else {%>
+                                                    <div class="card-body px-0" style=" display: flex; justify-content: center; align-items: center;">
+                                                        <div>
+                                                            <center><i class="far fa-clipboard" style="font-size: 30px; width: 60px;
+                                                                height: 60px; padding-top: 10px;"></i></center><br>
+                                                            <h2>Aún no hay información para mostrar</h2>
+                                                        </div>
+                                                    </div>
+                                                <%}%>
                                             </div>
                                         </div>
                                         <div class="col-xl-5">

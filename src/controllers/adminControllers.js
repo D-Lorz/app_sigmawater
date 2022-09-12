@@ -44,79 +44,100 @@ exports.listarVendedores = async (req, res) => {
 exports.listarVendedores_PerfilVendedores = async (req, res) => {
   const id_vendedor = req.params.id;
 
-  let info_vendedor = await conexion.query("SELECT r.*, u.id as idC_cl, u.id_vendedor as idVendedor, u.foto FROM registro_de_vendedores r JOIN usuarios u ON u.id_vendedor = r.id_vendedor WHERE r.id_vendedor =  ? ", [id_vendedor]);
+  let info_vendedor = await conexion.query(
+    "SELECT r.*, u.id as idC_cl, u.id_vendedor as idVendedor, u.foto FROM registro_de_vendedores r JOIN usuarios u ON u.id_vendedor = r.id_vendedor WHERE r.id_vendedor =  ? ",
+    [id_vendedor]
+  );
   info_vendedor = info_vendedor[0];
 
-  let licencia
+  let licencia;
   if (info_vendedor) {
     licencia = JSON.parse(info_vendedor.licencia_conduccion);
-    console.log("IMPRIENOD LICENCIA ========>>>>>>>>" , licencia);
   }
 
-  let fotoUpdate
-  if(info_vendedor){
-  if (info_vendedor.foto) {
-      fotoUpdate = info_vendedor.foto
-  } else {
-    fotoUpdate = "../directorio_dash/images/users/userDefault.gif"
+  let fotoUpdate;
+  if (info_vendedor) {
+    if (info_vendedor.foto) {
+      fotoUpdate = info_vendedor.foto;
+    } else {
+      fotoUpdate = "../directorio_dash/images/users/userDefault.gif";
+    }
   }
-}
 
   if (!info_vendedor) {
-    res.clearCookie('jwt')
-    return res.redirect('/login')
+    res.clearCookie("jwt");
+    return res.redirect("/login");
   }
 
-const todosClientes = await conexion.query("SELECT id FROM nuevos_cliente")   
-const cliente = todosClientes.find(i => i.codigo_id_vendedor == id_vendedor)
-let facturaCliente = false;
-if (cliente){
-  const facturas = await conexion.query("SELECT * FROM factura ")
-  const fCliente = facturas.find(i => i.id_cliente == cliente.id)
-  if (fCliente) {
-    if (fCliente.estadoFactura == 0) {facturaCliente = true}
+  // Consultando en la base de datos vendedores con facturas pendientes.
+  let facturaCliente = false;
+  let fCl = await conexion.query(
+    "SELECT nc.id, nc.codigo_id_vendedor, f.estadoFactura FROM nuevos_cliente nc JOIN factura f ON nc.id = f.id_cliente WHERE nc.codigo_id_vendedor = ?",
+    [id_vendedor]
+  );
+  if (fCl.length > 0) {
+    fCl = fCl[0];
+    if (fCl.estadoFactura == 0) {
+      facturaCliente = true;
+    }
   }
-  console.log("IMPRIMIENDO FACTURA DE CLIENTE ==>", fCliente);
-}
+  console.log("----------\nEXISTE FACTURA DE CLIENTE ==> ", facturaCliente);
+  console.log("\n");
+  // FIN FACTURAS PENDIENTES -------------------------------------
+  //_________________________________________________________________________________________________________
+  // todo===========>>>  Mostrar afiliados a tal vendedor
+  let afiliados = await conexion.query(
+    "SELECT * FROM usuarios WHERE codigo_afiliado = ?",
+    [info_vendedor.id_vendedor]
+  );
+  let afiliadosRV = await conexion.query(
+    "SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?",
+    [info_vendedor.id_vendedor]
+  );
 
-// todo===========>>>  Mostrar afiliados a tal vendedor
-  let afiliados = await conexion.query("SELECT * FROM usuarios WHERE codigo_afiliado = ?", [info_vendedor.id_vendedor]);
-  let afiliadosRV = await conexion.query("SELECT * FROM registro_de_vendedores WHERE codigo_afiliado = ?", [info_vendedor.id_vendedor]);
-
-  afiliados.forEach(afl_u => {
-    afl_u.datos = {}
+  afiliados.forEach((afl_u) => {
+    afl_u.datos = {};
     if (afiliadosRV.length > 0) {
-      afiliadosRV.forEach(afl_rv => {
+      afiliadosRV.forEach((afl_rv) => {
         if (afl_u.id_vendedor == afl_rv.id_vendedor) {
           if (afl_u.foto) {
-            afl_u.foto = afl_u.foto
+            afl_u.foto = afl_u.foto;
           } else {
-            afl_u.foto = "../directorio_dash/images/users/userDefault.gif"
+            afl_u.foto = "../directorio_dash/images/users/userDefault.gif";
           }
         }
       });
     }
   });
 
-// todo===========>>>  Mostrar afiliado a este vendedor
-  let referente = await conexion.query("SELECT r.*, u.foto FROM registro_de_vendedores r JOIN usuarios u ON r.id_vendedor = u.id_vendedor WHERE r.id_vendedor = ? LIMIT 1",[info_vendedor.codigo_afiliado]);
+  // todo===========>>>  Mostrar afiliado a este vendedor
+  let referente = await conexion.query(
+    "SELECT r.*, u.foto FROM registro_de_vendedores r JOIN usuarios u ON r.id_vendedor = u.id_vendedor WHERE r.id_vendedor = ? LIMIT 1",
+    [info_vendedor.codigo_afiliado]
+  );
   referente = referente[0];
 
-  let fotoUpdateR
-  if(referente){
-  if (referente.foto) {
-      fotoUpdateR = referente.foto
-  } else {
-    fotoUpdateR = "../directorio_dash/images/users/userDefault.gif"
+  let fotoUpdateR;
+  if (referente) {
+    if (referente.foto) {
+      fotoUpdateR = referente.foto;
+    } else {
+      fotoUpdateR = "../directorio_dash/images/users/userDefault.gif";
+    }
   }
-}
 
-// todo===========>>>  Mostrar estado actual de un vendedor
-  let viewsUser = await conexion.query("SELECT * FROM usuarios WHERE id_vendedor = ? LIMIT 1", [info_vendedor.id_vendedor]);
+  // todo===========>>>  Mostrar estado actual de un vendedor
+  let viewsUser = await conexion.query(
+    "SELECT * FROM usuarios WHERE id_vendedor = ? LIMIT 1",
+    [info_vendedor.id_vendedor]
+  );
   viewsUser = viewsUser[0];
 
   // todo ===============================>>> Estado del solicitar credito y estado de instalacion + cliente por vendedor
-  let infoClientes = await conexion.query("SELECT * FROM nuevos_cliente WHERE codigo_id_vendedor = ?", [id_vendedor]);
+  let infoClientes = await conexion.query(
+    "SELECT * FROM nuevos_cliente WHERE codigo_id_vendedor = ?",
+    [id_vendedor]
+  );
   let clCredito = await conexion.query("SELECT * FROM solicitar_credito");
   let clAgenda = await conexion.query("SELECT * FROM agendar_instalacion");
   // let cltestAgua = await conexion.query("SELECT * FROM test_agua");
@@ -126,7 +147,7 @@ if (cliente){
     info.estadoCreditoCliente.txt = "No solicitado";
     info.estadoCreditoCliente.color = "badge-soft-dark";
 
-    info.estadoAgendar = {}
+    info.estadoAgendar = {};
     info.estadoAgendar.txt = "No instalado";
     info.estadoAgendar.color = "badge-soft-dark";
 
@@ -136,17 +157,30 @@ if (cliente){
     if (clCredito.length > 0) {
       clCredito.forEach((c) => {
         if (info.id == c.id_cliente) {
-          if (c.estado_del_credito == 0) { info.estadoCreditoCliente.txt = "Pendiente"; info.estadoCreditoCliente.color = "badge-soft-warning"; }
-          if (c.estado_del_credito == 1) { info.estadoCreditoCliente.txt = "Aprobado"; info.estadoCreditoCliente.color = "badge-soft-success"; }
-          if (c.estado_del_credito == 2) { info.estadoCreditoCliente.txt = "Bloqueado"; info.estadoCreditoCliente.color = "badge-soft-danger"; }
+          if (c.estado_del_credito == 0) {
+            info.estadoCreditoCliente.txt = "Pendiente";
+            info.estadoCreditoCliente.color = "badge-soft-warning";
+          }
+          if (c.estado_del_credito == 1) {
+            info.estadoCreditoCliente.txt = "Aprobado";
+            info.estadoCreditoCliente.color = "badge-soft-success";
+          }
+          if (c.estado_del_credito == 2) {
+            info.estadoCreditoCliente.txt = "Bloqueado";
+            info.estadoCreditoCliente.color = "badge-soft-danger";
+          }
         }
       });
     }
     if (clCredito.length > 0) {
       clCredito.forEach((x) => {
         if (info.id == x.id_cliente) {
-          if (x.sistema === "Reverse Osmosis System") { info.sistema.txt = "Reverse Osmosis System"; }
-          if (x.sistema === "Whole System") { info.sistema.txt = "Whole System"; }
+          if (x.sistema === "Reverse Osmosis System") {
+            info.sistema.txt = "Reverse Osmosis System";
+          }
+          if (x.sistema === "Whole System") {
+            info.sistema.txt = "Whole System";
+          }
         }
       });
     }
@@ -154,17 +188,31 @@ if (cliente){
     if (clAgenda.length > 0) {
       clAgenda.forEach((a) => {
         if (info.id == a.id_cliente) {
-          if (a.estado_agenda == 0) { info.estadoAgendar.txt = "Listo para instalar"; info.estadoAgendar.color = "badge-soft-warning"; }
-          if (a.estado_agenda == 1) { info.estadoAgendar.txt = "Instalado"; info.estadoAgendar.color = "badge-soft-success"; }
+          if (a.estado_agenda == 0) {
+            info.estadoAgendar.txt = "Listo para instalar";
+            info.estadoAgendar.color = "badge-soft-warning";
+          }
+          if (a.estado_agenda == 1) {
+            info.estadoAgendar.txt = "Instalado";
+            info.estadoAgendar.color = "badge-soft-success";
+          }
         }
       });
     }
   });
 
-
   // * >>> Renderizado <<<<<
   res.render("./1-admin/perfil-vendedores", {
-  user: req.user, info_vendedor,fotoUpdate, afiliados, referente,fotoUpdateR,licencia, viewsUser, infoClientes, facturaCliente
+    user: req.user,
+    info_vendedor,
+    fotoUpdate,
+    afiliados,
+    referente,
+    fotoUpdateR,
+    licencia,
+    viewsUser,
+    infoClientes,
+    facturaCliente,
   });
 };
 // todo ===========>>>  Actualizar nivel de vendedores
