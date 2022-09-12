@@ -71,8 +71,12 @@ const cliente = await conexion.query("SELECT id FROM nuevos_cliente WHERE codigo
 console.log("IMPRIMIENDO CLIENTE ==>>" , cliente);
 
 const facturas = await conexion.query("SELECT * FROM factura ")
-const facturaCliente = facturas.find(i => i.id_cliente == cliente[0].id)
-console.log("IMPRIMIENDO FACTURA DE CLIENTE ==>", facturaCliente);
+const fCliente = facturas.find(i => i.id_cliente == cliente[0].id)
+let facturaCliente = false;
+if (fCliente) {
+  if (fCliente.estadoFactura == 0) {facturaCliente = true}
+}
+console.log("IMPRIMIENDO FACTURA DE CLIENTE ==>", fCliente);
 
 // todo===========>>>  Mostrar afiliados a tal vendedor
   let afiliados = await conexion.query("SELECT * FROM usuarios WHERE codigo_afiliado = ?", [info_vendedor.id_vendedor]);

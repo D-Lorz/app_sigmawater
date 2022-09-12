@@ -609,7 +609,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title mb-3" style="text-align: center;">Estado del vendedor</h5>
-                                        <% if(facturaCliente.estadoFactura == 1) {%>
+                                        <% if(!facturaCliente) {%>
                                         <div class="btn-group me-1 mt-2" style="margin-left: 8%;" >
                                             <input type="hidden" id="idGeneradoFetch" value="<%= info_vendedor.id_vendedor %>">
                                             <input type="hidden" id="id_consecutivoVendedorFetch" value="<%= info_vendedor.id %>">
@@ -628,14 +628,15 @@
                                                 <% } %>
                                                 <h3>No es posible cambiar el estado</h3>
                                                 <span class="mx-auto text-center font-size-12" style="color:#fd625e;font-weight: 500;">Este vendedor tiene facturas pendientes por pagar</span></center>
-                                        <% } %>
+                                        <% }  %>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title mb-3" style="text-align: center;">Nivel del vendedor</h5>
                                         <!-- <form action="/ActualizarNivel" method="POST"> -->
-                                        <% if(facturaCliente.estadoFactura == 1) {%>
+                                        <% if(!facturaCliente) {%>
+
                                          <input type="hidden" id="coodigoActualizarId" name="coodigoActualizarxs" value="<%= info_vendedor.id_vendedor %>">
                                          <input type="hidden" id="v_individualesId" name="v_individuales" value="<%= info_vendedor.ventas_individuales%>">
                                          <input type="hidden" id="total_ventasId" name="t_ventas" value="<%= info_vendedor.total_ventas%>">
@@ -687,9 +688,7 @@
                                             <% } else { %>
                                                 <center>
                                                     <%if(viewsUser.estado_de_la_cuenta == 'aprobado') {%>
-                                                        <p>
-                                                            <span class="badge-soft-success">Nivel Actual: <%=info_vendedor.nivel%></span>
-                                                        </p>
+                                                        <p><span class="badge-soft-success">Nivel Actual: <%=info_vendedor.nivel%></span></p>
                                                     <% } %>
                                                     <h3>No es posible cambiar el nivel</h3>
                                                     <span class="mx-auto text-center font-size-12" style="color:#fd625e;font-weight: 500;">Este vendedor tiene facturas pendientes por pagar</span></center>
