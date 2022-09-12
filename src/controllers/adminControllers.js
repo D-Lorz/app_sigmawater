@@ -67,16 +67,17 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
     return res.redirect('/login')
   }
 
-const cliente = await conexion.query("SELECT id FROM nuevos_cliente WHERE codigo_id_vendedor = ? ", [id_vendedor])   
-console.log("IMPRIMIENDO CLIENTE ==>>" , cliente);
-
-const facturas = await conexion.query("SELECT * FROM factura ")
-const fCliente = facturas.find(i => i.id_cliente == cliente[0].id)
-let facturaCliente = false;
-if (fCliente) {
-  if (fCliente.estadoFactura == 0) {facturaCliente = true}
+const todosClientes = await conexion.query("SELECT id FROM nuevos_cliente WHERE")   
+const cliente = todosClientes.find(i => i.codigo_id_vendedor == id_vendedor)
+if (cliente){
+  const facturas = await conexion.query("SELECT * FROM factura ")
+  const fCliente = facturas.find(i => i.id_cliente == cliente.id)
+  let facturaCliente = false;
+  if (fCliente) {
+    if (fCliente.estadoFactura == 0) {facturaCliente = true}
+  }
+  console.log("IMPRIMIENDO FACTURA DE CLIENTE ==>", fCliente);
 }
-console.log("IMPRIMIENDO FACTURA DE CLIENTE ==>", fCliente);
 
 // todo===========>>>  Mostrar afiliados a tal vendedor
   let afiliados = await conexion.query("SELECT * FROM usuarios WHERE codigo_afiliado = ?", [info_vendedor.id_vendedor]);
