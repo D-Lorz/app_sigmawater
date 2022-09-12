@@ -67,7 +67,7 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
     return res.redirect('/login')
   }
 
-const todosClientes = await conexion.query("SELECT id FROM nuevos_cliente WHERE")   
+const todosClientes = await conexion.query("SELECT id FROM nuevos_cliente")   
 const cliente = todosClientes.find(i => i.codigo_id_vendedor == id_vendedor)
 if (cliente){
   const facturas = await conexion.query("SELECT * FROM factura ")
