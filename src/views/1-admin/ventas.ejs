@@ -901,10 +901,13 @@
                 if (storage.factura.id == factura) {
 
                     const dataVendedores = storage.vendedores;
+                    const idCliente = storage.idCliente
+                    const id_cliente = storage.id_cliente
+                    const producto_instalado = storage.sistema
 
                     fetch('/efectuarVenta', {
                         method: 'POST',
-                        body: JSON.stringify({factura, dataVendedores}),
+                        body: JSON.stringify({factura, dataVendedores, idCliente,id_cliente,producto_instalado}),
                         headers: {'Content-Type': 'application/json'}
                     }).then(res => res.json())
                         .catch(error => console.error('Error:', error))

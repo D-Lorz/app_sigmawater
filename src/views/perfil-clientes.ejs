@@ -560,8 +560,13 @@
                                                                            <td style="width: 26%;">Producto instalado:</td>
                                                                           <% if(clRegistro_instalacion){ %> 
                                                                            <td><b><%= clRegistro_instalacion.producto_instalado %></b></td>
-                                                                           <td style="width: 26%;">Nota:</td>    
-                                                                            <p> <td><b><%= clRegistro_instalacion.nota %></b></td></p>     
+                                                                           <td style="width: 26%;">Registro fotográfico:</td>    
+                                                                           <p><td><b><button type="button" style="border:none;" class="waves-effect waves-light"
+                                                                            data-bs-toggle="modal" data-bs-target=".evidencia"> 
+                                                                                 <span class="d-block d-sm-none"><i class="far fa-image"></i></span>
+                                                                                 <span class="d-none d-sm-block"> <i class="far fa-image"></i> Ver evidencia </span>
+                                                                           </button></b></td>
+                                                                         </p> 
                                                                            <% } else { %> 
                                                                             <td><b>N/A</b></td>
                                                                             <td style="width: 26%;">Hasta:</td>
@@ -572,13 +577,8 @@
                                                                             <td style="width: 26%;">Serial producto 1:</td>
                                                                            <% if(clRegistro_instalacion){ %> 
                                                                             <td><b><%= clRegistro_instalacion.serial_producto1 %></b></td>
-                                                                            <td style="width: 26%;">Registro fotográfico:</td>    
-                                                                            <p><td><b><button type="button" style="border:none;" class="waves-effect waves-light"
-                                                                               data-bs-toggle="modal" data-bs-target=".evidencia"> 
-                                                                                    <span class="d-block d-sm-none"><i class="far fa-image"></i></span>
-                                                                                    <span class="d-none d-sm-block"> <i class="far fa-image"></i> Ver evidencia </span>
-                                                                              </button></b></td>
-                                                                            </p>   
+                                                                            <td style="width: 26%;">Nota:</td>    
+                                                                            <p> <td><b><%= clRegistro_instalacion.nota %></b></td></p>     
                                                                            <% } else { %> 
                                                                             <td><b>N/A</b></td>
                                                                             <td style="width: 26%;">Registro fotográfico:</td>
@@ -588,6 +588,8 @@
                                                                         <tr>
                                                                             <td style="width: 26%;">Serial producto 2:</td>
                                                                             <td><b><%= clRegistro_instalacion.serial_producto2 %></b></td>
+                                                                            <td></td>
+                                                                            <td></td>
                                                                         </tr>
                                                                    </tbody>
                                                                       <% } %> 

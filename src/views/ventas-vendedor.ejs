@@ -249,7 +249,6 @@
                                             <th scope="col">Estado</th>
                                         </thead>
                                         <tbody>
-
                                             <% facturacionAfiliado.forEach((f)=>{ %>
                                                 <tr><td>
                                                         <button style="background: none;border: none;margin: 0;"
@@ -261,21 +260,17 @@
                                                     <td style="text-transform: capitalize;"><%= f.nombre %> <%= f.apellido %></td>
                                                     <td><%= f.producto_instalado %></td>
                                                     <td>$<%= f.monto_aprobado %></td>
-                                                    <td>
-                                                        <% if (f.comision == 'Por definir') {%>
+                                                    <td><% if (f.comision == 'Por definir') {%>
                                                             <%= f.comision %>
                                                         <%}else{%>
                                                             $<%= f.comision %>
-                                                        <%}%>
+                                                          <%}%>
                                                     </td>
                                                     <td>
-                                                        <div class="badge <%= f.facturaAfl.color %> font-size-12">
-                                                            <%= f.facturaAfl.text %>
-                                                        </div>
-                                                        <br>
-                                                        <div class="badge <%= f.estado.color %> font-size-12">
-                                                            <%= f.estado.text %>
-                                                        </div>
+                                                        <div class="badge <%= f.facturaAfl.color %> font-size-12"> <%= f.facturaAfl.text %> </div>
+                                                          <br>
+                                                        <div class="badge <%= f.estado.color %> font-size-12"> <%= f.estado.text %></div>
+                                                        <div class="badge <%= f.estadoAfl.color %> font-size-12 mt-2"> <%= f.estadoAfl.text %></div>
                                                     </td>
                                                 </tr>
                                             <% }) %>

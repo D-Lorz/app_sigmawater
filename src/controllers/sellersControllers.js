@@ -61,46 +61,23 @@ exports.registrar = async (req, res) => {
     codigo_historial_afiliado = null;
   }
 
-  const nuevoRegistro = {
-    year,
-    mes,
-    semana,
-    dia,
-    nombres,
-    apellidos,
-    fecha_nacimiento,
-    telefono_movil,
-    correo,
-    seguro_social,
-    ciudad,
-    direccion,
-    apt_suite_unidad,
-    codigo_postal,
-    codigo_afiliado,
-    codigo_historial_afiliado,
-    nombre_banco,
-    numero_cuenta,
-    ruta,
-    beneficiario,
-    licencia_conduccion,
-    id_vendedor,
+  const nuevoRegistro = { year, mes, semana, dia, nombres,
+    apellidos, fecha_nacimiento, telefono_movil,
+    correo, seguro_social, ciudad, direccion,
+    apt_suite_unidad,codigo_postal,  codigo_afiliado,
+    codigo_historial_afiliado,nombre_banco, numero_cuenta,
+    ruta, beneficiario, licencia_conduccion, id_vendedor,
   };
 
   const nombresUser = nombres;
   const apellidosUser = apellidos;
-  const usuarios = {
-    nombresUser,
-    apellidosUser,
-    correo,
-    id_vendedor,
-    codigo_afiliado,
+  const usuarios = { nombresUser, apellidosUser,
+    correo, id_vendedor, codigo_afiliado,
     codigo_historial_afiliado,
   };
 
   await conexion.query("INSERT INTO usuarios SET ?", [usuarios]);
-  await conexion.query("INSERT INTO registro_de_vendedores SET ?", [
-    nuevoRegistro,
-  ]);
+  await conexion.query("INSERT INTO registro_de_vendedores SET ?", [ nuevoRegistro]);
 
   console.log(
     "\n+========= >>>>>> HUBO UN NUEVO REGISTRO <<<<<<<<<<============\n"
@@ -460,10 +437,7 @@ exports.listarAfiliados = async (req, res) => {
   // Capturando el id del Vendedor actual
   const id_vendedorA = req.user.id_vendedor;
   // Consultando en DB los afiliados de ese vendedor
-  conexion.query(
-    "SELECT rv.*, u.estado_de_la_cuenta FROM registro_de_vendedores rv JOIN usuarios u ON u.id_vendedor = rv.id_vendedor WHERE rv.codigo_historial_afiliado = ?",
-    [id_vendedorA],
-    (err, result) => {
+  conexion.query("SELECT rv.*, u.estado_de_la_cuenta, u.codigo_afiliado, u.codigo_historial_afiliado FROM registro_de_vendedores rv JOIN usuarios u ON u.id_vendedor = rv.id_vendedor WHERE rv.codigo_historial_afiliado = ?", [id_vendedorA], (err, result) => {
       if (err) throw err;
       res.render("afiliados", { user: req.user, result: result });
     }
@@ -570,14 +544,14 @@ exports.facturacion = async (req, res) => {
         const vendedores = JSON.parse(fp.vendedores);
         const v = vendedores.find((i) => i.codigo == id_vendedorA);
         fp.comision = v.comision_final;
-        fp.comision = parseFloat(fp.comision);
-        sumaComisionPropia += fp.comision;
+        fp.comision = parseFloat(fp.comision).toFixed(1); 
+        sumaComisionPropia += parseFloat(fp.comision)
       }
     }
   });
 
   const facturacionAfiliado = await conexion.query(
-    "SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.vendedores, f.estadoFactura, sc.monto_aprobado, u.estado_de_la_cuenta FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id JOIN usuarios u ON rv.id_vendedor = u.id_vendedor WHERE rv.codigo_historial_afiliado = ? ;",
+    "SELECT nc.id as idClientenc, f.id_cliente as idClientef, rv.id_vendedor, rv.nombres, nc.nombre, nc.apellido, f.id_factura, f.fecha_instalacion, f.producto_instalado, f.comision_total, f.vendedores, f.estadoFactura, sc.monto_aprobado, u.estado_de_la_cuenta, u.codigo_afiliado, u.codigo_historial_afiliado FROM registro_de_vendedores rv JOIN nuevos_cliente nc ON rv.id_vendedor = nc.codigo_id_vendedor JOIN factura f ON f.id_cliente = nc.id JOIN solicitar_credito sc ON sc.id_cliente = nc.id JOIN usuarios u ON rv.id_vendedor = u.id_vendedor WHERE rv.codigo_historial_afiliado = ? ;",
     [id_vendedorA]
   );
 
@@ -585,17 +559,24 @@ exports.facturacion = async (req, res) => {
   facturacionAfiliado.forEach((afl) => {
     afl.facturaAfl = {};
     afl.estado = {};
+    afl.estadoAfl = {};
     if (afl.idClientenc == afl.idClientef) {
       if (afl.estadoFactura == 0) {
         afl.facturaAfl.text = "Pendiente";
         afl.facturaAfl.color = "badge-soft-warning";
         afl.comision = "Por definir";
+        if(afl.codigo_afiliado == 'N/A' && afl.codigo_historial_afiliado)
+        {afl.estadoAfl.text = "Desvinculado"; afl.estadoAfl.color = "badge-soft-danger"; }
       } else {
         afl.facturaAfl.text = "Pagado";
         afl.facturaAfl.color = "badge-soft-success";
         if (afl.estado_de_la_cuenta == "bloqueado") {
           afl.estado.text = "Desvinculado";
           afl.estado.color = "badge-soft-danger";
+        }
+        if(afl.codigo_afiliado == 'N/A' && afl.codigo_historial_afiliado){
+          afl.estadoAfl.text = "Desvinculado";
+          afl.estadoAfl.color = "badge-soft-danger";
         }
         const vendedores = JSON.parse(afl.vendedores);
         const v = vendedores.find((i) => i.codigo == id_vendedorA);

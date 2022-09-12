@@ -609,30 +609,33 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title mb-3" style="text-align: center;">Estado del vendedor</h5>
-
-                                             <div class="btn-group me-1 mt-2" style="margin-left: 8%;" >
-                                                  <input type="hidden" id="idGeneradoFetch" value="<%= info_vendedor.id_vendedor %>">
-                                                  <input type="hidden" id="id_consecutivoVendedorFetch" value="<%= info_vendedor.id %>">
-
-                                                    <select class="form-select" id="selectEstado" >
-                                                        <option style="background:gray;color: white;text-transform: capitalize;" class="badge-soft-dark">Estado actual: <%= viewsUser.estado_de_la_cuenta %></option>
-                                                        <br>  
-                                                        <option value="aprobado">Aprobado</option>
-                                                        <option value="bloqueado">Bloquear</option>
-                                                    </select>
-                                                </div>
-                                              
-                                                    <button class="btn btn-primary" type="button" 
-                                                    style="border-radius: 13px;margin-left: 24%; margin-top: 4%;
-                                                    width: 47%;" onclick="confirmarEstadoVendedor()">Guadar</button>
-                                               
-                                       </div>
+                                        <% if(facturaCliente.estadoFactura == 1) {%>
+                                        <div class="btn-group me-1 mt-2" style="margin-left: 8%;" >
+                                            <input type="hidden" id="idGeneradoFetch" value="<%= info_vendedor.id_vendedor %>">
+                                            <input type="hidden" id="id_consecutivoVendedorFetch" value="<%= info_vendedor.id %>">
+                                            <select class="form-select" id="selectEstado" >
+                                                <option style="background:gray;color: white;text-transform: capitalize;" class="badge-soft-dark">Estado actual: <%= viewsUser.estado_de_la_cuenta %></option>
+                                                <br>  
+                                                <option value="aprobado">Aprobado</option>
+                                                <option value="bloqueado">Bloquear</option>
+                                            </select>
+                                        </div>
+                                            <button class="btn btn-primary" type="button" style="border-radius: 13px;margin-left: 24%; margin-top: 4%; width: 47%;" onclick="confirmarEstadoVendedor()">Guadar</button>
+                                        <% } else { %>
+                                            <center>
+                                                <%if(viewsUser.estado_de_la_cuenta == 'aprobado') {%>
+                                                    <p><span class="badge-soft-success">Aprobado</span></p>
+                                                <% } %>
+                                                <h3>No es posible cambiar el estado</h3>
+                                                <span class="mx-auto text-center font-size-12" style="color:#fd625e;font-weight: 500;">Este vendedor tiene facturas pendientes por pagar</span></center>
+                                        <% } %>
+                                    </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title mb-3" style="text-align: center;">Nivel del vendedor</h5>
-                                 
-                                            <!-- <form action="/ActualizarNivel" method="POST"> -->
+                                        <!-- <form action="/ActualizarNivel" method="POST"> -->
+                                        <% if(facturaCliente.estadoFactura == 1) {%>
                                          <input type="hidden" id="coodigoActualizarId" name="coodigoActualizarxs" value="<%= info_vendedor.id_vendedor %>">
                                          <input type="hidden" id="v_individualesId" name="v_individuales" value="<%= info_vendedor.ventas_individuales%>">
                                          <input type="hidden" id="total_ventasId" name="t_ventas" value="<%= info_vendedor.total_ventas%>">
@@ -679,8 +682,18 @@
                                                          </div>
                                                      </div>
                                                   </div>
-                                               <input type="hidden" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;/* font-size: 13px; */" value="Guardar">
-                                            <%}%> 
+                                               <!-- <input type="hidden" class="btn btn-primary" style="border-radius: 13px;margin-top: 3%;/* font-size: 13px; */" value="Guardar"> -->
+                                            <%}%>
+                                            <% } else { %>
+                                                <center>
+                                                    <%if(viewsUser.estado_de_la_cuenta == 'aprobado') {%>
+                                                        <p>
+                                                            <span class="badge-soft-success">Nivel Actual: <%=info_vendedor.nivel%></span>
+                                                        </p>
+                                                    <% } %>
+                                                    <h3>No es posible cambiar el nivel</h3>
+                                                    <span class="mx-auto text-center font-size-12" style="color:#fd625e;font-weight: 500;">Este vendedor tiene facturas pendientes por pagar</span></center>
+                                            <% } %> 
                                             <!-- </form> -->
                                             <br>
                                             <h2 class="card-title mb-3" style="text-align: center;font-size: 13px;">Número de ventas</h2>
@@ -854,7 +867,7 @@ function confirmarEstadoVendedor() {
                'asegúrate de que sus facturas correspondientes (tanto propias como de sus afiliados)'+ 
                ' estén pagadas, '+text+' y sus afiliados ya no estarán relacionados a él.</div>',
         icon: 'warning',
-        footer:'<b style="color:#d33;font-size: 16px;">Esta acción no se puede deshacer.</b>',
+        footer:'<b style="color:#d33;font-size: 16px; font-weight:900;text-transform: uppercase;">Esta acción no se puede deshacer.</b>',
         showCancelButton: true,
         confirmButtonColor: '#50368C',
         cancelButtonColor: '#d33',
@@ -880,18 +893,14 @@ function confirmarEstadoVendedor() {
                         'Error!',
                         'El vendedor no fue bloqueado exitosamente.',
                         'error'
-                    )
-                }
+                    ) }
             });
       }
-       
-    
     })
     } else {
-        let text ="<b>Esta acción no se puede deshacer.</b>"
     Swal.fire({
         title: '<div style="font-weight: 700;">Vendedor aprobado exitosamente</div>',
-        html:  '<div style="font-size: 16px;font-weight: 200;"></div>',
+        html:  '<div style="font-size: 17px;font-weight: 200;"></div>',
         icon: 'success',
     }).then((result) => {
             if (result.isConfirmed) {
@@ -913,28 +922,22 @@ function confirmarEstadoVendedor() {
                         'Error!',
                         'No se aprobó el correctamente.',
                         'error'
-                    )
-                }
+                    )}
             });
       }
-       
-    
     })
-
     }
-  
-
   }
 
-
-
 function confirmarNuevoNivel() {
-    let text ="<b>Esta acción no se puede deshacer.</b>"
+    let text ="<b>de lo contrario generarás datos incorrectos para los vendedores que estaban conectados a él.</b>"
     Swal.fire({
         title: '<div style="font-weight: 700;"> Subir de nivel a este vendedor</div>',
-        html: '<div style="font-size: 16px;font-weight: 200;">Al aumentar el nivel manualmente, el vendedor quedará desvinculado de su afiliado.</div>',
+        html: '<div style="font-size: 16px;font-weight: 200;">Al aumentar de nivel manualmente, el vendedor quedará '+
+            'desvinculado de sus afiliados, antes de subir el nivel, asegúrate de que sus facturas '+
+             '(tanto propias como de sus afiliados) estén pagadas, '+text+' </div>',
         icon: 'warning',
-        footer:'<b style="color:#d33;font-size: 16px;">Esta acción no se puede deshacer.</b>',
+        footer:'<b style="color:#d33;font-size: 16px; text-transform: uppercase; font-weight:900">Esta acción no se puede deshacer.</b>',
         showCancelButton: true,
         confirmButtonColor: '#50368C',
         cancelButtonColor: '#d33',
@@ -962,20 +965,12 @@ function confirmarNuevoNivel() {
                         'Error!',
                         'El nivel no se actualizó correctamente.',
                         'error'
-                    )
-                }
+                    )}
             });
       }
-       
-    
     })
-
   }
 
 </script>
-
-
-
-
 </body>
 </html>

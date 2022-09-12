@@ -111,13 +111,19 @@
                                 <td><%= user.nivel %></td>
                                 <td><%= user.total_ventas %></td>
                                 <td><div class="badge badge-soft-success font-size-12">$ <%= user.ganancias %></div></td>
+                                <td style="text-transform: capitalize">
                                 <% if(user.estado_de_la_cuenta == "pendiente") {%> 
-                                <td style="text-transform: capitalize"><div class="badge badge-soft-warning font-size-12"><%= user.estado_de_la_cuenta %></div></td>
-                                    <% } else if(user.estado_de_la_cuenta == "aprobado") {%> 
-                                <td style="text-transform: capitalize"><div class="badge badge-soft-success font-size-12"><%= user.estado_de_la_cuenta %></div></td>
-                                    <% } else if(user.estado_de_la_cuenta == "bloqueado") {%>  
-                                <td style="text-transform: capitalize"><div class="badge badge-soft-danger font-size-12">Desvinculado</div></td>
-                                    <% } %> 
+                                   <div class="badge badge-soft-warning font-size-12"><%= user.estado_de_la_cuenta %></div>
+                                <% } else if(user.estado_de_la_cuenta == "aprobado") {%> 
+                                   <div class="badge badge-soft-success font-size-12"><%= user.estado_de_la_cuenta %></div>
+                                <% } else {%>  
+                                   <div class="badge badge-soft-danger font-size-12">Desvinculado</div>
+                                <% } %> 
+                                <% if(user.codigo_afiliado == 'N/A' && user.codigo_historial_afiliado){%> 
+                                    <br>
+                                   <div class="badge badge-soft-danger font-size-12 mt-2">Desvinculado</div>
+                                <% }%> 
+                                </td>
                             </tr>
                         <%})%>
                     </tbody>

@@ -106,7 +106,6 @@ exports.isAuthenticated = async (req, res, next) => {
             conexion.query('SELECT u.*, r.total_ventas, r.nombres, r.apellidos FROM usuarios u LEFT JOIN registro_de_vendedores r ON r.id = u.id_consecutivo WHERE u.id_consecutivo = ?', [decodificada.id], (error, results) => {
                 if (!results) { return next() }
                 req.user = results[0]
-                let fotoUpdate
                 if (results[0].foto) {
                     req.user.foto = results[0].foto
                 } else {
