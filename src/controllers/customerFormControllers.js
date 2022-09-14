@@ -12,7 +12,7 @@ exports.registrarClientes = async (req, res) => {
   currentdate = new Date();
   const oneJan = new Date(currentdate.getFullYear(), 0, 1);
   const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
+  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) ;
   console.log("ESTA ES LA SEMANA ACTUAL ==>> ", semana);
 
 //  ? NOTA: ==>> Esta es la forma para obtener la fecha actual <<<<<
@@ -678,7 +678,7 @@ exports.dashboardVendedor = async (req, res) => {
   }
 
   // COMPARATIVA DE VENTAS x VENDEDOR LOGUEADO
-  let topV_ = {}, topVendedores = []
+  let topVendedores = []
   let icono = false;
 
   const top_vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, ganancias FROM registro_de_vendedores ORDER BY ganancias DESC LIMIT 5");
@@ -686,8 +686,6 @@ exports.dashboardVendedor = async (req, res) => {
   if (top_vendedores.length > 0) {
     let cont = 1;
     const vActual = top_vendedores.find(i => i.id_vendedor == idVendedor)
-    // topV_ = top_vendedores.filter(i => i.id_vendedor != idVendedor)
-    
     if (vActual) {
       top_vendedores.forEach(x => {
         let rendimiento = ((parseFloat(x.ganancias - vActual.ganancias) / vActual.ganancias) * 100).toFixed(1);
@@ -728,7 +726,6 @@ exports.dashboardVendedor = async (req, res) => {
 
    // * CAPTURANDO DATOS PARA LA GRÁFICA DE VENTAS MENSUALES X VENDEDOR
    let histrialGanancias = await conexion.query("SELECT * FROM (SELECT * FROM historial_ganancias_vendedores WHERE idVendedor = ? ORDER BY id DESC LIMIT 12) sub ORDER BY id ASC;", [idVendedor]);
-   
    let datosJson_historialG, rendimientoHG = 0;
    if (histrialGanancias.length > 0) {
     datosJson_historialG = JSON.stringify(histrialGanancias);
@@ -757,7 +754,7 @@ exports.historialClientes = async (req, res) => {
   currentdate = new Date(fecha);
   const oneJan = new Date(currentdate.getFullYear(), 0, 1);
   const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
+  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7);
   console.log("Semana actual ==>> ", semanaActual);
 
   let numClientes = 0
@@ -813,7 +810,7 @@ exports.historial_numVentas = async (req, res) => {
   currentdate = new Date(fecha);
   const oneJan = new Date(currentdate.getFullYear(), 0, 1);
   const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
+  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) ;
 
   const filtroV = ventasFiltro.filter(v => v.semana == semanaActual && v.year == yearActual)
   if (filtroV) {

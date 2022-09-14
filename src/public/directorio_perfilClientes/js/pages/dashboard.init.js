@@ -5,9 +5,6 @@ Website: https://themesbrand.com/
 Contact: themesbrand@gmail.com
 File: Dashboard Init Js File
 */
-
-
-  
   
 // get colors array from the string
 function getChartColorsArray(chartId) {
@@ -27,288 +24,283 @@ function getChartColorsArray(chartId) {
 //  MINI CHART
 
 // mini-1
-// var minichart1Colors = getChartColorsArray("#mini-chart1");
-// var options = {
-//     series: [{
-//         data: [2, 10, 18, 22, 36, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15, ]
-//     }],
-//     chart: {
-//         type: 'line',
-//         height: 50,
-//         sparkline: {
-//             enabled: true
-//         }
-//     },
-//     colors: minichart1Colors,
-//     stroke: {
-//         curve: 'smooth',
-//         width: 2,
-//     },
-//     tooltip: {
-//         fixed: {
-//             enabled: false
-//         },
-//         x: {
-//             show: false
-//         },
-//         y: {
-//             title: {
-//                 formatter: function (seriesName) {
-//                     return ''
-//                 }
-//             }
-//         },
-//         marker: {
-//             show: false
-//         }
-//     }
-// };
+var minichart1Colors = getChartColorsArray("#mini-chart1");
+var options = {
+    series: [{
+        data: [2, 10, 18, 22, 36, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15, ]
+    }],
+    chart: {
+        type: 'line',
+        height: 50,
+        sparkline: {
+            enabled: true
+        }
+    },
+    colors: minichart1Colors,
+    stroke: {
+        curve: 'smooth',
+        width: 2,
+    },
+    tooltip: {
+        fixed: {
+            enabled: false
+        },
+        x: {
+            show: false
+        },
+        y: {
+            title: {
+                formatter: function (seriesName) {
+                    return ''
+                }
+            }
+        },
+        marker: {
+            show: false
+        }
+    }
+};
 
-// var chart = new ApexCharts(document.querySelector("#mini-chart1"), options);
-// chart.render();
+var chart = new ApexCharts(document.querySelector("#mini-chart1"), options);
+chart.render();
 
 // mini-2
-// var minichart2Colors = getChartColorsArray("#mini-chart2");
-// var options = {
-//     series: [{
-//         data: [15, 42, 47, 2, 14, 19, 65, 75, 47, 15, 42, 47, 2, 14, 12, ]
-//     }],
-//     chart: {
-//         type: 'line',
-//         height: 50,
-//         sparkline: {
-//             enabled: true
-//         }
-//     },
-//     colors: minichart2Colors,
-//     stroke: {
-//         curve: 'smooth',
-//         width: 2,
-//     },
-//     tooltip: {
-//         fixed: {
-//             enabled: false
-//         },
-//         x: {
-//             show: false
-//         },
-//         y: {
-//             title: {
-//                 formatter: function (seriesName) {
-//                     return ''
-//                 }
-//             }
-//         },
-//         marker: {
-//             show: false
-//         }
-//     }
-// };
+var minichart2Colors = getChartColorsArray("#mini-chart2");
+var options = {
+    series: [{
+        data: [15, 42, 47, 2, 14, 19, 65, 75, 47, 15, 42, 47, 2, 14, 12, ]
+    }],
+    chart: {
+        type: 'line',
+        height: 50,
+        sparkline: {
+            enabled: true
+        }
+    },
+    colors: minichart2Colors,
+    stroke: {
+        curve: 'smooth',
+        width: 2,
+    },
+    tooltip: {
+        fixed: {
+            enabled: false
+        },
+        x: {
+            show: false
+        },
+        y: {
+            title: {
+                formatter: function (seriesName) {
+                    return ''
+                }
+            }
+        },
+        marker: {
+            show: false
+        }
+    }
+};
 
-// var chart = new ApexCharts(document.querySelector("#mini-chart2"), options);
-// chart.render();
+var chart = new ApexCharts(document.querySelector("#mini-chart2"), options);
+chart.render();
+
 
 // mini-3
-// var minichart3Colors = getChartColorsArray("#mini-chart3");
-// var options = {
-//     series: [{
-//         data: [47, 15, 2, 67, 22, 20, 36, 60, 60, 30, 50, 11, 12, 3, 8, ]
-//     }],
-//     chart: {
-//         type: 'line',
-//         height: 50,
-//         sparkline: {
-//             enabled: true
-//         }
-//     },
-//     colors: minichart3Colors,
-//     stroke: {
-//         curve: 'smooth',
-//         width: 2,
-//     },
-//     tooltip: {
-//         fixed: {
-//             enabled: false
-//         },
-//         x: {
-//             show: false
-//         },
-//         y: {
-//             title: {
-//                 formatter: function (seriesName) {
-//                     return ''
-//                 }
-//             }
-//         },
-//         marker: {
-//             show: false
-//         }
-//     }
-// };
+// let valores = []
+// const datos = []
+// valores = $('#datosJson_clAgregados_Admin').val();
+// datos.unshift({x:year, y:0})
+// if (valores) {
+//     datos.shift()
+//     valores = JSON.parse(valores);
+//     valores.forEach(vl => {
+//         const temp = vl.numClientes
+//         datos.push({ x:"Hasta: "+vl.fecha, y:temp})
+//     })
+// }
+// datos.length == 1 ? datos.unshift({x:year, y:0}) : true;
+// console.log("IMPRASASASASAS" , datos);
 
-// var chart = new ApexCharts(document.querySelector("#mini-chart3"), options);
-// chart.render();
+var minichart3Colors = getChartColorsArray("#mini-chart3");
+var options = {
+    series: [{
+        data: [12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15, ]
+    }],
+    chart: {
+        type: 'line',
+        height: 50,
+        sparkline: {
+            enabled: true
+        }
+    },
+    colors: minichart3Colors,
+    stroke: {
+        curve: 'smooth',
+        width: 2,
+    },
+    tooltip: {
+        fixed: {
+            enabled: false
+        },
+        x: {
+            show: false
+        },
+        y: {
+            title: {
+                formatter: function (seriesName) {
+                    return ''
+                }
+            }
+        },
+        marker: {
+            show: false
+        }
+    }
+};
+
+var chart = new ApexCharts(document.querySelector("#mini-chart3"), options);
+chart.render();
 
 // mini-4
-// var minichart4Colors = getChartColorsArray("#mini-chart4");
-// var options = {
-//     series: [{
-//         data: [12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15, ]
-//     }],
-//     chart: {
-//         type: 'line',
-//         height: 50,
-//         sparkline: {
-//             enabled: true
-//         }
-//     },
-//     colors: minichart4Colors,
-//     stroke: {
-//         curve: 'smooth',
-//         width: 2,
-//     },
-//     tooltip: {
-//         fixed: {
-//             enabled: false
-//         },
-//         x: {
-//             show: false
-//         },
-//         y: {
-//             title: {
-//                 formatter: function (seriesName) {
-//                     return ''
-//                 }
-//             }
-//         },
-//         marker: {
-//             show: false
-//         }
-//     }
-// };
+var minichart4Colors = getChartColorsArray("#mini-chart4");
+var options = {
+    series: [{
+        data: [12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15, ]
+    }],
+    chart: {
+        type: 'line',
+        height: 50,
+        sparkline: {
+            enabled: true
+        }
+    },
+    colors: minichart4Colors,
+    stroke: {
+        curve: 'smooth',
+        width: 2,
+    },
+    tooltip: {
+        fixed: {
+            enabled: false
+        },
+        x: {
+            show: false
+        },
+        y: {
+            title: {
+                formatter: function (seriesName) {
+                    return ''
+                }
+            }
+        },
+        marker: {
+            show: false
+        }
+    }
+};
 
-// var chart = new ApexCharts(document.querySelector("#mini-chart4"), options);
-// chart.render();
+var chart = new ApexCharts(document.querySelector("#mini-chart4"), options);
+chart.render();
 
 // 
 // Wallet Balance
 //
-// var piechartColors = getChartColorsArray("#wallet-balance");
-// var options = {
-//     series: [35, 70, 15],
-//     chart: {
-//         width: 227,
-//         height: 227,
-//         type: 'pie',
-//     },
-//     labels: ['Ethereum', 'Bitcoin', 'Litecoin'],
-//     colors: piechartColors,
-//     stroke: {
-//         width: 0,
-//     },
-//     legend: {
-//         show: false
-//     },
-//     responsive: [{
-//         breakpoint: 480,
-//         options: {
-//             chart: {
-//                 width: 200
-//             },
-//         }
-//     }]
-// };
+var piechartColors = getChartColorsArray("#wallet-balance");
+var options = {
+    series: [35, 70, 15],
+    chart: {
+        width: 227,
+        height: 227,
+        type: 'pie',
+    },
+    labels: ['Ethereum', 'Bitcoin', 'Litecoin'],
+    colors: piechartColors,
+    stroke: {
+        width: 0,
+    },
+    legend: {
+        show: false
+    },
+    responsive: [{
+        breakpoint: 480,
+        options: {
+            chart: {
+                width: 200
+            },
+        }
+    }]
+};
 
-// var chart = new ApexCharts(document.querySelector("#wallet-balance"), options);
-// chart.render();
+var chart = new ApexCharts(document.querySelector("#wallet-balance"), options);
+chart.render();
 
 //
 // Invested Overview
 //
 
-// var radialchartColors = getChartColorsArray("#invested-overview");
-// var options = {
-//     chart: {
-//         height: 270,
-//         type: 'radialBar',
-//         offsetY: -10
-//     },
-//     plotOptions: {
-//         radialBar: {
-//             startAngle: -130,
-//             endAngle: 130,
-//             dataLabels: {
-//                 name: {
-//                     show: false
-//                 },
-//                 value: {
-//                     offsetY: 10,
-//                     fontSize: '18px',
-//                     color: undefined,
-//                     formatter: function (val) {
-//                         return val + "%";
-//                     }
-//                 }
-//             }
-//         }
-//     },
-//     colors: [radialchartColors[0]],
-//     fill: {
-//         type: 'gradient',
-//         gradient: {
-//             shade: 'dark',
-//             type: 'horizontal',
-//             gradientToColors: [radialchartColors[1]],
-//             shadeIntensity: 0.15,
-//             inverseColors: false,
-//             opacityFrom: 1,
-//             opacityTo: 1,
-//             stops: [20, 60]
-//         },
-//     },
-//     stroke: {
-//         dashArray: 4,
-//     },
-//     legend: {
-//         show: false
-//     },
-//     series: [80],
-//     labels: ['Series A'],
-// }
+var radialchartColors = getChartColorsArray("#invested-overview");
+var options = {
+    chart: {
+        height: 270,
+        type: 'radialBar',
+        offsetY: -10
+    },
+    plotOptions: {
+        radialBar: {
+            startAngle: -130,
+            endAngle: 130,
+            dataLabels: {
+                name: {
+                    show: false
+                },
+                value: {
+                    offsetY: 10,
+                    fontSize: '18px',
+                    color: undefined,
+                    formatter: function (val) {
+                        return val + "%";
+                    }
+                }
+            }
+        }
+    },
+    colors: [radialchartColors[0]],
+    fill: {
+        type: 'gradient',
+        gradient: {
+            shade: 'dark',
+            type: 'horizontal',
+            gradientToColors: [radialchartColors[1]],
+            shadeIntensity: 0.15,
+            inverseColors: false,
+            opacityFrom: 1,
+            opacityTo: 1,
+            stops: [20, 60]
+        },
+    },
+    stroke: {
+        dashArray: 4,
+    },
+    legend: {
+        show: false
+    },
+    series: [80],
+    labels: ['Series A'],
+}
 
-// var chart = new ApexCharts(
-//     document.querySelector("#invested-overview"),
-//     options
-// );
+var chart = new ApexCharts(
+    document.querySelector("#invested-overview"),
+    options
+);
 
-// chart.render();
+chart.render();
 
 //
 // Market Overview
 //
 
-// let url = '/viewAhorro'
-// let ahorroCalculado
 
-// fetch(url,{method:'POST'} )
-// .then( response => response.json() )
-// .then(data => console.log(+data) )
-// .catch( error => console.log(error) ) 
-
-
-// (function(){ 
-//     document.write("Hola  "+graficaAhorro);
-//     document.write("Hola  "+valores);
-//     let valores = document.getElementById('graficaAhorro').value()
-//     alert(valores)
-// })();
-
-
-
-
-// if(valoresDel_ahorro){
-
-// }
 let valoresDel_ahorro,graficaAhorroMensual,graficaAhorroAnual
 $( function(){
      valoresDel_ahorro = $('#datosJson_ahorroCalculado').val();

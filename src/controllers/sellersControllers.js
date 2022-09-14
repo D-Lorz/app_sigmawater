@@ -24,7 +24,7 @@ exports.registrar = async (req, res) => {
   const numberOfDays = Math.floor(
     (currentdate - oneJan) / (24 * 60 * 60 * 1000)
   );
-  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
+  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7);
   // ? NOTA: ==>> Esta es la forma para obtener la fecha actual <<<<<
   const dia = new Date().getDate();
 

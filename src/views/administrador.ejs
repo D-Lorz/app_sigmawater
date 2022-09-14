@@ -8,9 +8,6 @@
         <!-- =======FIXME: MENU ========================== -->
          <%- include ('./1-admin/menu.ejs')%> 
         <!-- =======FIXME: MENU ========================== -->
-
-          
-
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
@@ -36,7 +33,6 @@
                     </div>
                     <!-- end page title -->
 
-
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <!-- card -->
@@ -45,25 +41,18 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block
-                                    text-truncate">Mis ventas</span>
-                                            <h4 class="mb-3">
-                                                $<span class="counter-value" data-target="34.846">0</span>
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Número de ventas</span>
+                                            <h4 class="mb-3"> <span class="counter-value" data-target="<%=sumaTotalVentas%>"></span>
                                             </h4>
                                         </div>
 
                                         <div class="col-6">
-                                            <div id="mini-chart1" data-colors='["#5156be"]'
-                                                class="apex-charts mb-2"></div>
+                                            <div id="mini-chart1" data-colors='["#5156be"]'class="apex-charts mb-2"></div>
                                         </div>
                                     </div>
                                     <div class="text-nowrap">
-                                        <span class="badge bg-soft-success
-                                text-success">+$20.9k</span>
-                                        <span class="ms-1 text-muted font-size-13">
-                                            
-                                            Since
-                                            last week</span>
+                                        <span class="badge bg-soft-success text-success">+$20.9k</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->
@@ -76,10 +65,8 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block
-                                    text-truncate">Ventas de afiliados</span>
-                                            <h4 class="mb-3">
-                                                $<span class="counter-value" data-target="6.258">0</span>
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Vendedores</span>
+                                            <h4 class="mb-3"><span class="counter-value" data-target="<%= numVendedores%>"></span>
                                             </h4>
                                         </div>
                                         <div class="col-6">
@@ -88,10 +75,8 @@
                                         </div>
                                     </div>
                                     <div class="text-nowrap">
-                                        <span class="badge bg-soft-danger text-danger">-29
-                                            Trades</span>
-                                        <span class="ms-1 text-muted font-size-13">Since
-                                            last week</span>
+                                        <span class="badge bg-soft-danger text-danger">-29 Trades</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->
@@ -104,27 +89,19 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block
-                                    text-truncate">Clientes añadidos</span>
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Clientes</span>
                                             <h4 class="mb-3">
-                                                <span>    
-                                              
-                                                 12
-                                                      </span>
-                                           
-                                                </span>
+                                                <span class="counter-value" data-target="<%=numClientes%>"> </span>
                                             </h4>
                                         </div>
                                         <div class="col-6">
-                                            <div id="mini-chart3" data-colors='["#5156be"]'
-                                                class="apex-charts mb-2"></div>
+                                            <div id="mini-chart3" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                            <input type="hidden" id="datosJson_clAgregados_Admin" value="<%= datosJson_clAgregados_Admin %>">
                                         </div>
                                     </div>
                                     <div class="text-nowrap">
-                                        <span class="badge bg-soft-success
-                                text-success">+ $2.8k</span>
-                                        <span class="ms-1 text-muted font-size-13">Since
-                                            last week</span>
+                                        <span class="badge bg-soft-success text-success">+ $2.8k</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->
@@ -1901,29 +1878,29 @@
 
 
         <!-- JAVASCRIPT -->
-        <script src="./directorio_dash/js/scripts_personalizadosdash.js"></script>
-        <script src="./directorio_dash/libs/jquery/jquery.min.js"></script>
-        <script src="./directorio_dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="./directorio_dash/libs/metismenu/metisMenu.min.js"></script>
-        <script src="./directorio_dash/libs/simplebar/simplebar.min.js"></script>
-        <script src="./directorio_dash/libs/node-waves/waves.min.js"></script>
-        <script src="./directorio_dash/libs/feather-icons/feather.min.js"></script>
+        <script src="./directorio_perfilClientes/js/scripts_personalizadosdash.js"></script>
+        <script src="./directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
+        <script src="./directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="./directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
+        <script src="./directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
+        <script src="./directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
+        <script src="./directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
         <!-- pace js -->
-        <script src="./directorio_dash/libs/pace-js/pace.min.js"></script>
+        <script src="./directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
 
 
 
         <!-- apexcharts -->
-        <script src="./directorio_dash/libs/apexcharts/apexcharts.min.js"></script>
+        <script src="./directorio_perfilClientes/libs/apexcharts/apexcharts.min.js"></script>
         <!-- Plugins js-->
-        <script src="./directorio_dash/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="./directorio_dash/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="./directorio_perfilClientes/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="./directorio_perfilClientes/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
         <!-- dashboard init -->
-        <script src="./directorio_dash/js/pages/dashboard.init.js"></script>
+        <script src="./directorio_perfilClientes/js/pages/dashboard.init.js"></script>
 
 
 
-        <script src="./directorio_dash/js/app.js"></script>
+        <script src="./directorio_perfilClientes/js/app.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
             integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
             crossorigin="anonymous"></script>
