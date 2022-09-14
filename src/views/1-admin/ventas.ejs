@@ -39,6 +39,12 @@
         }
 
         input[type=number] { -moz-appearance:textfield; }
+
+        .iconoDatos{
+            font-size: 19px;
+            background: #0e2222;
+            vertical-align:center;
+        }
     </style>
 
 </head>
@@ -70,11 +76,83 @@
                                         <li class="breadcrumb-item active">Facturas</li>
                                     </ol>
                                 </div>
-        
+                            </div>
+    <!-- TARJETAS PARA MOSTRAR NÚMERO DE VENTAS + GANANCIAS x VENDEDOR -->
+    <div class="row" >
+        <!-- TARJETA DE NÚMERO DE VENTAS (PROPIAS & AFILIADOS) -->
+        <div class="col-lg-4">
+            <div class="card" style="color: #0e2222; border:none;">
+                <div class="card-body" style="padding: 31px;height: auto;border-radius: 13px;background: rgb(255,237,195);
+                background: linear-gradient(50deg, rgba(255,237,195,1) 0%, rgba(255,232,177,1) 18%, rgba(214,148,148,1) 46%, rgba(212,146,213,1) 60%, rgba(235,181,236,1) 60%, rgba(233,161,233,1) 100%);" >
+                    <div class="row">
+                        <div class="col-md-2" style="width: auto;">
+                            <label class="row icon-demo-content"><i class="fas fa-chart-pie iconoDatos"
+                                    style="color:white;border: none;"></i></label>
+                        </div>
+                        <div class="col-md-8 text-black">
+                            <div class="row" style="font-size: 17px;font-weight: 900;margin-top: 9px;margin-bottom: 7%;">Ventas totales
                             </div>
                         </div>
                     </div>
+                
+                    <div class="row" style="margin-bottom: -13px;">
+                        <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                            <div class="row">Número de ventas</div>
+                            <div class="row" style="font-size: 29px; font-weight: 800;margin-bottom: 3px;">
+                                <strong>
+                                   <%=sumaTotalVentas%> 
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                            <div class="row">Ganacias brutas</div>
+                            <div class="row" style="font-size: 29px; font-weight: 800;">
+                                <strong>$<%=sumaValor%></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TARJETA DE GANANCIAS (PROPIAS & AFILIADOS) -->
+        <div class="col-lg-4">
+            <div class="card" style="color: #0e2222; border:none">
+                <div class="card-body"
+                    style="padding: 31px;height: auto;border-radius: 13px;background: rgb(188,169,231); background: linear-gradient(50deg, rgba(188,169,231,1) 0%, rgba(188,169,231,1) 18%, rgba(175,155,218,1) 46%, rgba(188,169,231,1) 60%, rgba(235,231,244,1) 60%, rgba(188,169,231,1) 100%);">
+                    <div class="row">
+                        <div class="col-md-2" style="width: auto;">
+                            <label class="row icon-demo-content"><i class="fas fa-chart-line iconoDatos" style="color:white;border: none;"></i></label>
+                        </div>
+                        <div class="col-md-8 text-black">
+                            <div class="row" style="font-size: 17px;font-weight: 900;margin-top: 9px;margin-bottom: 6.6%;">Ganancias</div>
+                        </div>
+                    </div>
+                  
+                    <div class="row" style="margin-bottom: -11px;">
+                        <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                            <div class="row">Comisiones pagadas</div>
+                            <div class="row" style="font-size: 29px; font-weight: 800;margin-bottom: 3px;">
+                                <strong>$<%=comisionesPagadas%></strong>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                            <div class="row">Ganacias de empresa</div>
+                            <div class="row" style="font-size: 29px; font-weight: 800;">
+                                <strong>$<%=gananciasEmpresa%></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FINAL TARJETAS -->
+                        </div>
+                    </div>
                     <!-- end page title -->
+                    
         
                     <div class="table-responsive mb-4 ">
                         <table class="table align-middle datatable dt-responsive table-check nowrap "
@@ -87,7 +165,8 @@
                                 <th scope="col">Valor</th>
                                 <th scope="col">Vendedor</th>
                                 <th scope="col">Afiliados</th>
-                                <th scope="col">Comisión total</th>
+                                <th scope="col">Comisiones</th>
+                                <th scope="col">Ganancias</th>
                                 <th scope="col">Estado</th>
                             </thead>
         
@@ -97,7 +176,6 @@
                                         <% if (venta.factura.id) { %>
                                         <tr>
                                             <td>
-                                                <!-- <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="background: none;border: none;margin: 0;"> -->
                                                 <button style="background: none;border: none;margin: 0;"
                                                     onclick="editarFactura('<%=venta.factura.id%>')">
                                                     <%= venta.factura.id %>
@@ -113,18 +191,34 @@
                                             <td>
                                                 <%= venta.sistema %>
                                             </td>
-                                            <td>
+                                            <td class="monto">
                                                 $<%= venta.monto_aprobado %>
                                             </td>
                                             <td style="text-transform: capitalize;">
                                                 <%= venta.vendedores[0].nombre %>
                                             </td>
                                             <td style="text-transform: capitalize;">
-                                                <%for(let i = 1; i < venta.vendedores.length; i++){%>
-                                                    <%=venta.vendedores[i].nombre%><br>
-                                                <% } %>
+                                                <%if (venta.vendedores.length > 1) {%>
+                                                    <%for(let i = 1; i < venta.vendedores.length; i++){%>
+                                                        <%=venta.vendedores[i].nombre%><br>
+                                                    <% } %>
+                                                <%}else{%>
+                                                    N/A
+                                                <%}%>
                                             </td>
-                                            <td>$<%= venta.comision_total %>
+                                            <td>
+                                                <% if(venta.factura.estadoTxt == "Pagada") {%>
+                                                    $<%= venta.comision_total %>
+                                                <%}else{%>
+                                                    Por definir
+                                                <%}%>
+                                            </td>
+                                            <td>
+                                                <% if(venta.ganancias) {%>
+                                                    $<%= venta.ganancias.total %>
+                                                <%}else{%>
+                                                    Por definir
+                                                <%}%>
                                             </td>
                                             <td>
                                                 <div class="badge <%= venta.factura.estadoColor %> font-size-12">
@@ -197,6 +291,14 @@
                                                 <a class="nav-link otrosTab" data-bs-toggle="tab" href="#v4" role="tab" aria-selected="false">
                                                     <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
                                                     <span class="d-none d-sm-block">Vendedor 4</span>
+                                                </a>
+                                            </li>
+                                            
+                                            <!-- Costos adicionales x Factura -->
+                                            <li class="nav-item waves-effect waves-light" id="tabCostos">
+                                                <a class="nav-link otrosTab" data-bs-toggle="tab" href="#costosExtras" role="tab" aria-selected="false">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                                    <span class="d-none d-sm-block">Costos operativos</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -388,6 +490,62 @@
                                                 </div>
                                             </div>
 
+                                            <!-- Costos Adicionales x Factura -->
+                                            <div class="tab-pane" id="costosExtras" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                    
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 idCliente"></p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de instalación</h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+                                                    
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">3C Sigma Water System</h5>
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">Ganancia base: $<span id="gananciaBase"></span></h5>
+                                                </div>
+                                        
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15">Costos operativos
+                                                        <button type="button" onclick="agregarCosto()" id="btnAddCostos" class="btn btn-primary btn-xs" style="float: right"><i class="mdi mdi-plus"></i></button>
+                                                    </h5>
+                                                </div>
+                                        
+                                                <!-- TABLA para Costos Extras - Last Tab -->
+                                                <div class="table-responsive" style="padding: 12px;" id="divCostosExtras">
+                                                    <table class="table table-nowrap align-middle" id="tablaCostosExtras">
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Subtotal</b></td>
+                                                                <td colspan="2">$<span id="subtotalCostos">0</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Ganancias totales</b></td>
+                                                                <td colspan="2">$<span id="totalGanancias"></span></td>
+                                                                <input type="hidden" id="idCliente_">
+                                                                <input type="hidden" id="gananciaTotal">
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <!-- **FIN** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
                             
@@ -444,7 +602,10 @@
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
 <script type="text/javascript">
-    let v1 = 1, v2 = 1, v3 = 1, v4 = 1, arrayDeducciones = [], storage = {};
+    let v1 = 1, v2 = 1, v3 = 1, v4 = 1, cont = 1, arrayDeducciones = [], arrayCostos = [], storage = {};
+    const subtotalCostos = $('#subtotalCostos');
+    const totalGanancias = $('#totalGanancias');
+    const gananciaTotal = $('#gananciaTotal');
 
     function _crearTablaDeducciones(num, datos) {
         let tabla = `<table class="table table-nowrap align-middle" id="tablaDeducciones${num}">`
@@ -499,8 +660,13 @@
         $('#tablaDeducciones2').remove()
         $('#tablaDeducciones3').remove()
         $('#tablaDeducciones4').remove()
+        $('#tablaCostosExtras>tbody').remove()
+        $('#tablaCostosExtras').append('<tbody></tbody>')
+        $("#headTbl").remove()
+        subtotalCostos.text(0)
         v1 = 1, v2 = 1, v3 = 1, v4 = 1;
         arrayDeducciones = []
+        arrayCostos = []
 
         $("#idFacturaActual").val(idFactura);
 
@@ -517,9 +683,9 @@
 
                 storage = datos // Variable Global..
                 let dt = undefined // Deducciones Totales|
-                console.log("STORAGE: ", storage)
                 
                 const idCliente = datos.id
+                $("#idCliente_").val(idCliente)
                 const nombreCliente = datos.nombre + " " + datos.apellido
                 $("#idFactura").text(idFactura)
                 $(".producto").text(datos.sistema)
@@ -538,17 +704,70 @@
                 vendedor_principal.comision_base = vendedor_principal.comision_base.toFixed(1)
 
                 // console.log("DATOS FACTURA >>>> ",datos)
+                let cabeceraCostos = ``
                 if (datos.factura.estadoTxt == "Pagada") {
                     $("#btnReportarFactura").css('display', 'none')
                     $('.btnAddDeduccion').remove()
                     const tablaDeducciones_v1 = _crearTablaDeducciones(1, true)
                     $('#divDeducciones').append(tablaDeducciones_v1);
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
+                    /* SI LA FACTURA FUE PAGADA - MOSTRAR COSTOS OPERACIONALES SI LOS TIENE + VALOR DE GANANCIAS */
+                    $('#btnAddCostos').hide() // Ocultar botón de agregar nuevo costo
+                    cabeceraCostos = `<thead id="headTbl">
+                                                <tr>
+                                                    <th>Descripción</th>
+                                                    <th>Monto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>`;
+                    let costos = ``, subtotal = 0;
+                    if (datos.costos_adicionales){
+                        datos.costos_adicionales.forEach(x => {
+                            costos += `<tr id="${x.row}">
+                                <td>${x.descripcion}</td>
+                                <td>${x.monto}</td>
+                            </tr>`
+                            subtotal += parseFloat(x.monto)
+                        })
+                    }
+                    $('#gananciaBase').text(datos.ganancias.base)
+                    subtotalCostos.text(subtotal)
+                    totalGanancias.text(datos.ganancias.total)
+                    gananciaTotal.val(datos.ganancias.total)
+                    storage.gananciaBase = parseFloat(datos.ganancias.base);
+                    storage.gananciaTotal = parseFloat(datos.ganancias.total)
+                    $('#tablaCostosExtras').append(costos);
+                    /* FIN DE COSTOS + GANANCIAS */
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
                 } else {
                     $("#btnReportarFactura").css('display', 'inline-block')
                     _btnAddDeduccion(idCliente, '1', vendedor_principal.nivel)
                     const tablaDeducciones_v1 = _crearTablaDeducciones(1, false)
                     $('#divDeducciones').append(tablaDeducciones_v1);
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // OPERACIONES PARA COSTOS ADICIONALES - ÚLTIMO TAB
+                    $('#btnAddCostos').show() // Mostrar botón de agregar nuevo costo
+                    cabeceraCostos = `<thead id="headTbl">
+                                                <tr>
+                                                    <th>Descripción</th>
+                                                    <th>Monto</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>`;
+                    const comisionTotal0 = storage.vendedores.map(x => x.comision_final).reduce((prev, curr) => prev + curr, 0);
+                    const gananciaBase = parseFloat(datos.monto_aprobado)-parseFloat(comisionTotal0).toFixed(1);
+                    console.log("\nMonto aprobado >>> ", datos.monto_aprobado)
+                    console.log("Comisión Total Vendedores >>> ", comisionTotal0)
+                    console.log("Ganancia Base Inicial >>> ", gananciaBase)
+                    $("#gananciaBase").text(gananciaBase)
+                    totalGanancias.text(parseFloat(gananciaBase))
+                    gananciaTotal.val(parseFloat(gananciaBase))
+                    storage.gananciaBase = parseFloat(gananciaBase);
+                    storage.gananciaTotal = parseFloat(gananciaBase);
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
+                $('#tablaCostosExtras').append(cabeceraCostos);
 
                 $("#idVendedor1").text(vendedor_principal.nombre)
                 $("#nivelVendedor1"). text(vendedor_principal.nivel)
@@ -745,7 +964,7 @@
                         })
                         if (dt4.length > 0) {
                             let deducciones4 = ``, i = 1;
-                            dt3.forEach(x => {
+                            dt4.forEach(x => {
                                 deducciones4 += `<tr id="${x.tab}_row${i}">
                                     <td>${x.descripcion}</td>
                                     <td>${x.monto}</td>
@@ -774,6 +993,7 @@
                 /* -INICIO- Activar Clic para mostrar Sidebar */
                 $("#btnSidebar").trigger("click");
                 /* -FIN- Activar Clic para mostrar Sidebar */
+                console.log("STORAGE: ", storage)
             } else {
                 console.log("Ocurrió un error en él controlador")
             }
@@ -854,6 +1074,23 @@
         });
 
         console.log("NEW STORAGE >>> ", storage)
+
+        // OPERACIONES PARA COSTOS ADICIONALES - ÚLTIMO TAB
+        const gananciaTotal0 = storage.vendedores.map(x => x.comision_final).reduce((prev, curr) => prev + curr, 0);
+        const gananciaBase = parseFloat(storage.monto_aprobado)-parseFloat(gananciaTotal0).toFixed(1);
+        const actualizarGanancia = parseFloat(gananciaBase)-parseFloat(subtotalCostos.text())
+
+        $("#gananciaBase").text(gananciaBase)
+        totalGanancias.text(parseFloat(actualizarGanancia))
+        gananciaTotal.val(parseFloat(actualizarGanancia))
+        
+        storage.gananciaBase = parseFloat(gananciaBase);
+        storage.gananciaTotal = parseFloat(gananciaTotal.val());
+
+        console.log("Comisión Total VENDEDORES >>> ", gananciaTotal0)
+        console.log("Ganancia Base ACTUALIZADA >>> ", gananciaBase)
+        console.log("\nTOTAL GANANCIA >>> ", gananciaTotal.val())
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     // Parameros (idCliente, número de la pestaña, Contador para la fila, nivel del vendedor)
@@ -885,6 +1122,63 @@
         actualizarDeduccion(idCliente, numTab, rowTab, nivelVendedor, arrayDeducciones)
     }
 
+    /* ------------------------------------------------------ COSTOS ------------------------------------------------------ */
+    function agregarCosto() {
+        const idCliente = $("#idCliente_").val()
+        $('#tablaCostosExtras').append(`<tr id="row${cont}_Costos">
+            <td><input type="text" id="descripcion${cont}_Costos"></td>
+            <td><input type="number" id="monto${cont}_Costos"></td>
+            <td style="display: flex;justify-content: center;">
+                <a class="btn btn-primary btn-rounded btn-sm" id="btn${cont}_Costos" onclick="sumarCostos('${idCliente}', '${cont}')" title="Guardar">
+                    <i class="fas fa-save"></i>
+                </a>
+                <a class="btn btn-danger btn-rounded btn-sm" onclick="eliminarCosto('${idCliente}', '${cont}')" title="Eliminar">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>`);
+        cont++;
+    }
+
+    function eliminarCosto(idCliente, n) {
+        $('#row'+n+'_Costos').remove()
+        const arrayResultado = arrayCostos.filter((i) => i.row !== 'row'+n+'_Costos')
+        arrayCostos = arrayResultado
+        console.log("\nARRAY COSTOS SIN LA FILA ELIMINADA >>>>", arrayCostos)
+        actualizarGanancias(idCliente, arrayCostos)
+    }
+
+    function sumarCostos(idCliente, n) {
+        $('#descripcion'+n+'_Costos').attr('disabled', 'disabled');
+        $('#monto'+n+'_Costos').attr('disabled', 'disabled');
+        $('#btn'+n+'_Costos').css('display', 'none');
+        let monto = $('#monto'+n+'_Costos').val()
+        monto = parseFloat(monto)
+        const descripcion = $('#descripcion'+n+'_Costos').val()
+        let sumatoriaCostos = 0;
+        arrayCostos.push({idCliente, row: 'row'+n+'_Costos', descripcion, monto})
+        // Aplicar cambios (subtotal y total Ganancias)
+        actualizarGanancias(idCliente, arrayCostos)
+    }
+
+    // Parametros => ID Cliente, # de la Fila, Nombre de la Fila, ArrayCostos
+    function actualizarGanancias(idCliente, costos) {
+        const subTotal = costos.map(i => i.monto).reduce((prev, curr) => prev + curr, 0);
+        const gananciaBase = $('#gananciaBase').text()
+        subtotalCostos.text('')
+        subtotalCostos.text(subTotal)
+
+        const total = parseFloat(gananciaBase-subTotal).toFixed(1)
+        gananciaTotal.val(total)
+
+        $('#totalGanancias').text(total)
+        storage.gananciaBase = parseFloat(gananciaBase);
+        storage.gananciaTotal = parseFloat(total);
+        storage.costosOperativos = costos;
+
+        console.log("NEW STORAGE >>> ", storage)
+    }
+
     /* REPORTAR FACTURA COMO PAGADA - Parametros (id de la factura Ej: 000001) */
     function reportarFactura(factura) {
         // console.log("DATA >>>> ---", JSON.parse(storage)) 
@@ -904,10 +1198,12 @@
                     const idCliente = storage.idCliente
                     const id_cliente = storage.id_cliente
                     const producto_instalado = storage.sistema
+                    const costos_adicionales = storage.costosOperativos;
+                    const ganancias_empresa = {base: storage.gananciaBase, total: storage.gananciaTotal}
 
                     fetch('/efectuarVenta', {
                         method: 'POST',
-                        body: JSON.stringify({factura, dataVendedores, idCliente,id_cliente,producto_instalado}),
+                        body: JSON.stringify({factura, dataVendedores, idCliente, producto_instalado, costos_adicionales, ganancias_empresa}),
                         headers: {'Content-Type': 'application/json'}
                     }).then(res => res.json())
                         .catch(error => console.error('Error:', error))

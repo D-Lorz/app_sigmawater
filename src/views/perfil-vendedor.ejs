@@ -32,6 +32,7 @@
 <!-- scroll -->
 <link rel="stylesheet" href="../css/scrolls.css">
 <link href="../directorio_dash/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../css/alertify.css">
 
     </head>
 
@@ -114,8 +115,8 @@
 
                                                                                   <!--* <<<<<<====== Cambiar foto de perfil ======>>>>>> -->
                                                                                         <div>
-                                                                                            <div id="imagePre1" style="width: 220px !important; height: 220px !important;">
-                                                                                                <img src="<%= fotoUpdate%>" alt=""
+                                                                                            <div style="width: 220px !important; height: 220px !important;">
+                                                                                                <img id="imagePre1" src="<%= fotoUpdate%>" alt=""
                                                                                                     style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;margin-top: 11%;">
                                                                                             </div>
                                                                                             <label class="input-group-btn" style="margin-left: 69%;margin-top: -21%;">
@@ -520,30 +521,40 @@
   <!-- Datatable init js -->
   <script src="../directorio_dash/js/pages/datatables.init.js"></script>    
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+  <script src="../js/alertify.min.js"></script>
+  <script src="../js/alertify.js"></script>
 
 <script>
 // ==> Previsualizar foto de perfil == INICIO <==
     function fileValidation(){
-            var fileInput = document.getElementById('previewProfile');
+        var fileInput = document.getElementById('previewProfile')
             var filePath = fileInput.value;
             var allowedExtensions = /(.jpg|.jpeg|.png)$/i;
+            var archivo = fileInput.files[0];
             if(!allowedExtensions.exec(filePath)){
-                  alertify.set('notifier', 'position', 'top-center');
-                  alertify.error('Solo archivos .jpg o .png son aceptados');
+                alertify.set('notifier', 'position', 'top-center');
+                alertify.error('Solo archivos .jpg, jpeg o .png son aceptados');
                 fileInput.value = '';
                 return false;
-            }else{
-                //Image preview
-                if (fileInput.files && fileInput.files[0]) {
-        
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        document.getElementById('imagePre1').innerHTML = '<img src="'+e.target.result+'" style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;margin-top: 11%;"/>';
-                    };
-                    reader.readAsDataURL(fileInput.files[0]);
-                }
+            }else if(archivo.size > 1000000) {
+                alertify.set('notifier', 'position', 'top-center');
+                alertify.error('Tu archivo supera los 1MB de peso');
+                fileInput.value = '';
+                return false;
+            }else {
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                $('#imagePre1').attr('src', e.target.result); // Renderizamos la imagen
             }
-        }
+             reader.readAsDataURL(fileInput.files[0]);
+          }
+       }
+   }
+    $("#imgInp").change(function () {
+    // Código a ejecutar cuando se detecta un cambio de archivO
+    readImage(this);
+ });
 // ==> Previsualizar foto de perfil == FIN <==
 
     /* Actualizar foto de perfil en DB */

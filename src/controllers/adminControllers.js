@@ -1,6 +1,8 @@
 const conexion = require("../database/db");
 var nodemailer = require('nodemailer');
-const bcryptjs = require('bcryptjs')
+const bcryptjs = require('bcryptjs');
+const { ok } = require("assert");
+const { log } = require("console");
 //* Formateando precios a una moneda
 const formatear = new Intl.NumberFormat('en-US', {
   style: "currency",
@@ -914,7 +916,7 @@ exports.factura = async (req, res) => {
   const factura = await conexion.query("SELECT * FROM factura")
 
   const arrayVentas = []
-
+  let sumaValor = 0, gananciasEmpresa = 0, comisionesPagadas = 0;
   clientes.forEach(cl => {
 
     cl.monto_aprobado = parseFloat(cl.monto_aprobado)
@@ -951,8 +953,7 @@ exports.factura = async (req, res) => {
       // ---------------------------------------------- INICIO ** SECCIÓN DEDUCCIONES ----------------------------------------------
       /******* DEDUCCIONES VENDEDOR 1  *******/
       const ded = factura.find(i => i.id_cliente == cl.id)
-
-      if (ded) { vendedor.deducciones = JSON.parse(ded.deducciones) }
+      if (ded) {vendedor.deducciones = JSON.parse(ded.deducciones)}
       console.log("DEDUCCIONES v1: " + JSON.stringify(vendedor.deducciones))
       /** FIN DEDUCCIONES 1 **/
 
@@ -1222,12 +1223,16 @@ exports.factura = async (req, res) => {
     //Sumar comisiónes base de todos los vendedores
     cl.comision_total = cl.vendedores.map(item => item.comision_base).reduce((prev, curr) => prev + curr, 0);
     cl.comision_total = parseFloat(cl.comision_total).toFixed(1)
+    
     /******* ASIGNANDO FACTURA AL CLIENTE *******/
     if (factura.length > 0) {
       factura.forEach(f => {
         if (f.id_cliente == cl.id) {
           cl.factura.id = f.id_factura
           cl.factura.fecha  = f.fecha_instalacion
+
+          // SUMANDO TODOS LOS VALORES DEL MONTO APROBADO x CLIENTE
+          sumaValor += parseFloat(cl.monto_aprobado)
 
           if (f.estadoFactura == 0) {
             cl.factura.estadoTxt = "Pendiente";
@@ -1237,6 +1242,12 @@ exports.factura = async (req, res) => {
             cl.factura.estadoTxt = "Pagada";
             cl.factura.estadoColor = "badge-soft-success";
             cl.comision_total = parseFloat(f.comision_total).toFixed(1);
+            /** COSTOS ADICIONALES + GANANCIAS DE LA EMPRESA */
+            cl.ganancias = JSON.parse(f.ganancias_empresa)
+            cl.costos_adicionales = JSON.parse(f.costos_adicionales)
+            console.log("_________________*********__________***********________\n GANANCIAS >>>> ", cl.ganancias)
+            gananciasEmpresa += parseFloat(cl.ganancias.total)
+            comisionesPagadas += parseFloat(cl.comision_total)
           }
         }
       });
@@ -1245,9 +1256,18 @@ exports.factura = async (req, res) => {
     arrayVentas.push(cl)
   });
 
+   // ==> CONSULTA PARA SACARLA INFORMACION DE VENDEDORES  
+   let info_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores ");
+
+   // ==> SUMANDO EL NUMERO TOTAL DE VENTAS EN GENERAL
+   let sumaTotalVentas = 0;
+   info_vendedores.forEach(iv => {
+     sumaTotalVentas += parseFloat(iv.ventas_individuales)
+   })
+
   ventasTotales = arrayVentas;
 
-  res.render("./1-admin/ventas", { user: req.user, arrayVentas });
+  res.render("./1-admin/ventas", { user: req.user, arrayVentas, sumaTotalVentas, sumaValor, gananciasEmpresa,comisionesPagadas });
 }
 //todo ******************************** --FIN-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
 
@@ -1267,7 +1287,7 @@ exports.deducciones = async (req, res) => {
 
 //todo ************* -- INICIO GUARDAR COMISIONES + DEDUCCIONES EN DB ************* */
 exports.efectuarVenta = async (req, res) => {
-  const {factura, dataVendedores, idCliente, id_cliente, producto_instalado} = req.body;
+  const {factura, dataVendedores, costos_adicionales, ganancias_empresa, idCliente, producto_instalado} = req.body;
 
   let comision_total = 0, deducciones = [];
   const vendedores = await conexion.query("SELECT * FROM registro_de_vendedores")
@@ -1298,13 +1318,21 @@ exports.efectuarVenta = async (req, res) => {
   });
 
   deducciones.length > 0 ? deducciones = JSON.stringify(deducciones) : deducciones = null
+
+  const currentdate = new Date();
+  const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+  const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7);
   const datos = {
     mes: new Date().getMonth()+1,
+    semana,
     dia: new Date().getDate(),
     year: new Date().getFullYear(),
     vendedores: JSON.stringify(dataVendedores),
     comision_total: comision_total.toFixed(1),
     deducciones,
+    costos_adicionales: JSON.stringify(costos_adicionales),
+    ganancias_empresa: JSON.stringify(ganancias_empresa),
     estadoFactura: 1
   }
 
@@ -1353,10 +1381,6 @@ exports.efectuarVenta = async (req, res) => {
       let mes = new Date().getMonth()
       mes == 0 ? mes = 12 : mes = mes + 1
       const dia = new Date().getDate();
-      const currentdate = new Date();
-      const oneJan = new Date(currentdate.getFullYear(), 0, 1);
-      const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-      const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
       const idVendedor = v1.id_vendedor;
       const codigo_afiliado = vendedorPrincipal.codigo_afiliado;
       const dataVentas = { year, mes, semana, dia, numVentas: nuevaVenta, idVendedor, codigo_afiliado }
@@ -1468,3 +1492,63 @@ function _subirNivelVendedor(ventasTotales) {
   }
   return nivel;
 }
+/********************************************************************************************************************************************************************** */
+
+// todo ======>>> DASHBOARD DE ADMINISTRADOR
+exports.dashboardAdministrador = async (req, res) => {
+
+  // ==> CONSULTA PARA SACARLA INFORMACION DE VENDEDORES  
+  let info_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores ");
+
+  // ==> SUMANDO EL NUMERO TOTAL DE VENTAS EN GENERAL
+  let sumaTotalVentas = 0;
+  info_vendedores.forEach(iv => {
+    sumaTotalVentas += parseFloat(iv.ventas_individuales)
+  });
+
+  // ==> CONSULTA PARA CONTAR LA CANTIDAD DE CLIENTES 
+  let countCliente = await conexion.query("SELECT count(correo) as totalClientes FROM nuevos_cliente");
+  console.log(countCliente[0].totalClientes);
+
+  // ==> CONSULTA PARA CONTAR LA CANTIDAD DE VENDEDORES 
+  let countVendedores= await conexion.query("SELECT count(correo) as totalVendedores FROM usuarios WHERE rol = 'vendedor'AND estado_de_la_cuenta = 'aprobado';");
+  console.log(countVendedores[0].totalVendedores)
+
+  let clAgregados_admin = await conexion.query("SELECT * FROM (SELECT * FROM historial_clientes_admin ORDER BY id DESC LIMIT 7) sub ORDER BY id ASC;");
+  let datosJson_clAgregados_Admin
+  if (clAgregados_admin.length > 0) {
+    datosJson_clAgregados_Admin = JSON.stringify(clAgregados_admin);
+  } 
+  console.log("skjbasdbasbdasbvdasbdabsdhbahsdgahsgdhjhajhsgdjagsdhajhsdghjasgdhjajhsdgjagsd" , datosJson_clAgregados_Admin );
+  
+  res.render("administrador", { user: req.user, info_vendedores, 
+    sumaTotalVentas,numClientes: countCliente[0].totalClientes, numVendedores: countVendedores[0].totalVendedores,
+    datosJson_clAgregados_Admin});
+} 
+
+exports.historial_clientes_admin = async (req, res) => {
+
+  let clientes = await conexion.query("SELECT * FROM nuevos_cliente");
+  let fecha = new Date().toLocaleDateString("en-CA");
+  let yearActual = new Date(fecha).getFullYear();
+
+  currentdate = new Date(fecha);
+  const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+  const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7);
+  console.log("Semana actual ==>> ", semanaActual);
+  let numClientes
+  
+  // ==> FILTRANDO CLIENTES POR SEMANA Y AÑO DE REGISTRO CON LA ACTUAL
+  const resultado = clientes.filter((item) => item.semana == semanaActual && item.year == yearActual);
+  if (resultado.length > 0) {
+    numClientes = resultado.length;
+  }
+
+  // ==> ENVIANDO A LA TABLA HISTORIAL CLIENTES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
+  const datosHcl_admin = { fecha, numClientes }; //==> DATOS HISTORIAL CLIENTES ADMIN
+  await conexion.query("INSERT INTO historial_clientes_admin SET ?", [datosHcl_admin]);
+  console.log("Realizando registro en DB HISTORIAL CLIENTES ADMINISTRADOR....")
+ 
+ res.send("todo ok...");
+};
