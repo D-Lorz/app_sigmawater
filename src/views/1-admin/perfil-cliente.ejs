@@ -1299,31 +1299,34 @@
                                                        <tr>
                                                            <td style="width: 26%;">Desde:</td>
                                                          <% if(mostrarAgenda){ %> 
-
                                                            <td><b><%= mostrarAgenda.fechaInicial %></b></td>
                                                            <td style="width: 26%;">Hasta:</td>
                                                            <td><b><%= mostrarAgenda.fechaFinal %></b></td>
-
                                                          <% } else { %> 
                                                             <td><b>N/A</b></td>
                                                             <td style="width: 26%;">Hasta:</td>
                                                             <td><b>N/A</b></td>
                                                          <% }%>
-
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 26%;">Dias disponibles:</td>
                                                           <% if(mostrarAgenda){ %> 
-
                                                             <td><b><%= mostrarAgenda.lunes %> <%= mostrarAgenda.martes %> <%= mostrarAgenda.miercoles %> <%= mostrarAgenda.jueves %> <%= mostrarAgenda.viernes %> <%= mostrarAgenda.sabado %> <%= mostrarAgenda.domingo %></b></td>
                                                             <td style="width: 26%;">Nota:</td>    
                                                             <p> <td><b><%= mostrarAgenda.nota_solicitud %></b></td></p>     
-
                                                           <% } else { %> 
                                                              <td><b>N/A</b></td>
                                                              <td style="width: 26%;">Hasta:</td>
                                                              <td><b>N/A</b></td>
                                                           <% }%>                                         
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Fecha sugerida</td>
+                                                            <% if(mostrarAgenda){ %> 
+                                                            <td><%=mostrarAgenda.fecha_especifica%></td>
+                                                            <% } else { %>
+                                                                <td><b>N/A</b></td>
+                                                            <% }%>  
                                                         </tr>
                                                    </tbody>
                                                     <% } else { %> 

@@ -681,7 +681,7 @@ exports.listarClientes = async (req, res) => {
 // ! >>>> Tarjetas en la vista perfil clientes <<<<<<<<<<<
 exports.listarClientes_PerfilClientes = async (req, res) => {
   const id_cliente = req.params.id;
-  let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?", [id_cliente]);
+  let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente WHERE id_cliente = ?", [id_cliente]);
   info_clientes = info_clientes[0];
 
   if(!info_clientes){
