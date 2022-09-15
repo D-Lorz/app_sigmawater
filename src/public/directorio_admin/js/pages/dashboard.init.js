@@ -106,10 +106,25 @@ var chart = new ApexCharts(document.querySelector("#mini-chart2"), options);
 chart.render();
 
 // mini-3
+
+// let valores = []
+// const datos = []
+// valores = $('#datosJson_clAgregados_Admin').val();
+
+// datos.unshift({x:year, y:0})
+// if (valores) {
+//     datos.shift()
+//     valores = JSON.parse(valores);
+//     valores.forEach(vl => {
+//         const temp = vl.numClientes
+//         datos.push({ x:"Hasta: "+vl.fecha, y:temp})
+//     })
+// }
+// datos.length == 1 ? datos.unshift({x:year, y:0}) : true;
 var minichart3Colors = getChartColorsArray("#mini-chart3");
 var options = {
     series: [{
-        data: [47, 15, 2, 67, 22, 20, 36, 60, 60, 30, 50, 11, 12, 3, 8, ]
+        data: [1,2,3,4,5,6,7,8]
     }],
     chart: {
         type: 'line',
@@ -147,45 +162,45 @@ var chart = new ApexCharts(document.querySelector("#mini-chart3"), options);
 chart.render();
 
 // mini-4
-var minichart4Colors = getChartColorsArray("#mini-chart4");
-var options = {
-    series: [{
-        data: [12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15, ]
-    }],
-    chart: {
-        type: 'line',
-        height: 50,
-        sparkline: {
-            enabled: true
-        }
-    },
-    colors: minichart4Colors,
-    stroke: {
-        curve: 'smooth',
-        width: 2,
-    },
-    tooltip: {
-        fixed: {
-            enabled: false
-        },
-        x: {
-            show: false
-        },
-        y: {
-            title: {
-                formatter: function (seriesName) {
-                    return ''
-                }
-            }
-        },
-        marker: {
-            show: false
-        }
-    }
-};
+// var minichart4Colors = getChartColorsArray("#mini-chart4");
+// var options = {
+//     series: [{
+//         data: [12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15, ]
+//     }],
+//     chart: {
+//         type: 'line',
+//         height: 50,
+//         sparkline: {
+//             enabled: true
+//         }
+//     },
+//     colors: minichart4Colors,
+//     stroke: {
+//         curve: 'smooth',
+//         width: 2,
+//     },
+//     tooltip: {
+//         fixed: {
+//             enabled: false
+//         },
+//         x: {
+//             show: false
+//         },
+//         y: {
+//             title: {
+//                 formatter: function (seriesName) {
+//                     return ''
+//                 }
+//             }
+//         },
+//         marker: {
+//             show: false
+//         }
+//     }
+// };
 
-var chart = new ApexCharts(document.querySelector("#mini-chart4"), options);
-chart.render();
+// var chart = new ApexCharts(document.querySelector("#mini-chart4"), options);
+// chart.render();
 
 // 
 // Wallet Balance

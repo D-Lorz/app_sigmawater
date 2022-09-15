@@ -1,16 +1,19 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
-    <head>
+<head>
+  
+  <meta charset="utf-8" />
+  <title>3C Sigma Water System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+  <meta content="Themesbrand" name="author">
+  
+  <!-- App favicon -->
+  <link rel="shortcut icon" href="./directorio_dash/images/3clogo.svg">
 
-        <meta charset="utf-8" />
-        <title>Dashboard | Minia - Minimal Admin & Dashboard Template</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesbrand" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="../directorio_admin/images/favicon.ico">
+  <base href="#">
 
         <!-- plugin css -->
         <link href="../directorio_admin/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
@@ -33,9 +36,6 @@
     </head>
 
     <body>
-
-    <!-- <body data-layout="horizontal"> -->
-
         <!-- Begin page -->
         <div id="layout-wrapper">
 
@@ -46,123 +46,123 @@
 
                 <div class="page-content">
                     <div class="container-fluid">
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0 font-size-18">Dashboard</h4>
 
-                        <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Dashboard</h4>
-
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                            <li class="breadcrumb-item active">Dashboard</li>
-                                        </ol>
-                                    </div>
-
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                        <li class="breadcrumb-item active">Dashboard</li>
+                                    </ol>
                                 </div>
+
                             </div>
                         </div>
-                        <!-- end page title -->
+                    </div>
+                    <!-- end page title -->
+                        
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Número de ventas</span>
+                                            <h4 class="mb-3"> <span class="counter-value" data-target="<%=sumaTotalVentas%>"></span>
+                                            </h4>
+                                        </div>
 
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <!-- card -->
-                                <div class="card card-h-100">
-                                    <!-- card body -->
-                                    <div class="card-body">
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <span class="text-muted mb-3 lh-1 d-block text-truncate">My Wallet</span>
-                                                <h4 class="mb-3">
-                                                    $<span class="counter-value" data-target="865.2">0</span>k
-                                                </h4>
-                                            </div>
-        
-                                            <div class="col-6">
-                                                <div id="mini-chart1" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
-                                            </div>
+                                        <div class="col-6">
+                                            <div id="mini-chart1" data-colors='["#5156be"]'class="apex-charts mb-2"></div>
                                         </div>
-                                        <div class="text-nowrap">
-                                            <span class="badge bg-soft-success text-success">+$20.9k</span>
-                                            <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-success text-success">+$20.9k</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+
+                        <div class="col-xl-4 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Vendedores</span>
+                                            <h4 class="mb-3"><span class="counter-value" data-target="<%= numVendedores%>"></span>
+                                            </h4>
                                         </div>
-                                    </div><!-- end card body -->
-                                </div><!-- end card -->
-                            </div><!-- end col -->
-        
-                            <div class="col-xl-3 col-md-6">
-                                <!-- card -->
-                                <div class="card card-h-100">
-                                    <!-- card body -->
-                                    <div class="card-body">
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <span class="text-muted mb-3 lh-1 d-block text-truncate">Number of Trades</span>
-                                                <h4 class="mb-3">
-                                                    <span class="counter-value" data-target="6258">0</span>
-                                                </h4>
-                                            </div>
-                                            <div class="col-6">
-                                                <div id="mini-chart2" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
-                                            </div>
+                                        <div class="col-6">
+                                            <div id="mini-chart2" data-colors='["#5156be"]'
+                                                class="apex-charts mb-2"></div>
                                         </div>
-                                        <div class="text-nowrap">
-                                            <span class="badge bg-soft-danger text-danger">-29 Trades</span>
-                                            <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-danger text-danger">-29 Trades</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col-->
+
+                        <div class="col-xl-4 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Clientes</span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value" data-target="<%=numClientes%>"> </span>
+                                            </h4>
                                         </div>
-                                    </div><!-- end card body -->
-                                </div><!-- end card -->
-                            </div><!-- end col-->
-        
-                            <div class="col-xl-3 col-md-6">
-                                <!-- card -->
-                                <div class="card card-h-100">
-                                    <!-- card body -->
-                                    <div class="card-body">
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <span class="text-muted mb-3 lh-1 d-block text-truncate">Invested Amount</span>
-                                                <h4 class="mb-3">
-                                                    $<span class="counter-value" data-target="4.32">0</span>M
-                                                </h4>
-                                            </div>
-                                            <div class="col-6">
-                                                <div id="mini-chart3" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
-                                            </div>
+                                        <div class="col-6">
+                                            <div id="mini-chart3" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                            <input type="hidden" id="datosJson_clAgregados_Admin" value="<%= datosJson_clAgregados_Admin %>">
                                         </div>
-                                        <div class="text-nowrap">
-                                            <span class="badge bg-soft-success text-success">+ $2.8k</span>
-                                            <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-success text-success">+ $2.8k</span>
+                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+                      <!-- 
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-h-100">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block
+                                    text-truncate">Afiliados añadidos</span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value" data-target="12">0</span>
+                                            </h4>
                                         </div>
-                                    </div><!-- end card body -->
-                                </div><!-- end card -->
-                            </div><!-- end col -->
-        
-                            <div class="col-xl-3 col-md-6">
-                                <!-- card -->
-                                <div class="card card-h-100">
-                                    <!-- card body -->
-                                    <div class="card-body">
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <span class="text-muted mb-3 lh-1 d-block text-truncate">Profit Ration</span>
-                                                <h4 class="mb-3">
-                                                    <span class="counter-value" data-target="12.57">0</span>%
-                                                </h4>
-                                            </div>
-                                            <div class="col-6">
-                                                <div id="mini-chart4" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
-                                            </div>
+                                        <div class="col-6">
+                                            <div id="mini-chart4" data-colors='["#5156be" ]'
+                                                class="apex-charts mb-2"></div>
                                         </div>
-                                        <div class="text-nowrap">
-                                            <span class="badge bg-soft-success text-success">+2.95%</span>
-                                            <span class="ms-1 text-muted font-size-13">Since last week</span>
-                                        </div>
-                                    </div><!-- end card body -->
-                                </div><!-- end card -->
-                            </div><!-- end col -->    
-                        </div><!-- end row-->
+                                    </div>
+                                    <div class="text-nowrap">
+                                        <span class="badge bg-soft-success text-success">+2.95%</span>
+                                        <span class="ms-1 text-muted font-size-13">Since
+                                            last week</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div><!-- end row-->
 
                         <div class="row">
                             <div class="col-xl-5">
