@@ -12,7 +12,7 @@ exports.registrarClientes = async (req, res) => {
   currentdate = new Date();
   const oneJan = new Date(currentdate.getFullYear(), 0, 1);
   const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) ;
+  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1 ;
   console.log("ESTA ES LA SEMANA ACTUAL ==>> ", semana);
 
 //  ? NOTA: ==>> Esta es la forma para obtener la fecha actual <<<<<
@@ -475,11 +475,12 @@ exports.agendarInstalacionProducto = async (req, res) => {
   const domingo = req.body.domingo
   const fechaInicial = req.body.fechaInicial
   const fechaFinal = req.body.fechaFinal
+  const fecha_especifica = req.body.fecha_especifica
   const nota_solicitud = req.body.nota_solicitud
   //  const horaInstalacion =  req.body.horaInstalacion
   const id_cliente = req.body.id_cliente
   const codigo_cliente = req.body.codigo_cliente
-  const Datos_agendarSolicitud = { lunes, martes, miercoles, jueves, viernes, sabado, domingo, fechaInicial, fechaFinal, nota_solicitud, id_cliente }
+  const Datos_agendarSolicitud = { lunes, martes, miercoles, jueves, viernes, sabado, domingo, fechaInicial, fechaFinal, fecha_especifica, nota_solicitud, id_cliente }
   await conexion.query('INSERT INTO agendar_instalacion SET ?', [Datos_agendarSolicitud], (err, result) => {
     if (err) throw err;
     if (result) { res.redirect('/perfil-clientes/' + codigo_cliente) }
@@ -754,7 +755,7 @@ exports.historialClientes = async (req, res) => {
   currentdate = new Date(fecha);
   const oneJan = new Date(currentdate.getFullYear(), 0, 1);
   const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7);
+  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
   console.log("Semana actual ==>> ", semanaActual);
 
   let numClientes = 0
@@ -810,7 +811,7 @@ exports.historial_numVentas = async (req, res) => {
   currentdate = new Date(fecha);
   const oneJan = new Date(currentdate.getFullYear(), 0, 1);
   const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) ;
+  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
 
   const filtroV = ventasFiltro.filter(v => v.semana == semanaActual && v.year == yearActual)
   if (filtroV) {

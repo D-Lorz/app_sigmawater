@@ -681,7 +681,7 @@ exports.listarClientes = async (req, res) => {
 // ! >>>> Tarjetas en la vista perfil clientes <<<<<<<<<<<
 exports.listarClientes_PerfilClientes = async (req, res) => {
   const id_cliente = req.params.id;
-  let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente  WHERE id_cliente = ?", [id_cliente]);
+  let info_clientes = await conexion.query("SELECT * FROM nuevos_cliente WHERE id_cliente = ?", [id_cliente]);
   info_clientes = info_clientes[0];
 
   if(!info_clientes){
@@ -937,11 +937,10 @@ exports.factura = async (req, res) => {
     }
 
     let v = vendedores.find(item => item.id == cl.id_vendedor)
-
+    const vendedor = {}, vendedor2 = {}, vendedor3 = {}, vendedor4 = {};
+    let v2 = false, v3 = false, v4 = false;
+    
     if (v) {
-
-      const vendedor = {}, vendedor2 = {}, vendedor3 = {}, vendedor4 = {};
-      let v2 = false, v3 = false, v4 = false;
       vendedor.id = v.id
       vendedor.codigo = v.id_vendedor
       vendedor.nombre = v.nombres + " " + v.apellidos
@@ -1242,10 +1241,18 @@ exports.factura = async (req, res) => {
             cl.factura.estadoTxt = "Pagada";
             cl.factura.estadoColor = "badge-soft-success";
             cl.comision_total = parseFloat(f.comision_total).toFixed(1);
+            /** DATOS COMISIONES SIDEBAR DESPLEGADO */
+            const vendedoresFactura = JSON.parse(f.vendedores)
+
+            if(vendedoresFactura.length > 0) {
+              cl.vendedores = []
+              vendedoresFactura.forEach((x) => {
+                cl.vendedores.push(x);
+              });
+            }
             /** COSTOS ADICIONALES + GANANCIAS DE LA EMPRESA */
             cl.ganancias = JSON.parse(f.ganancias_empresa)
             cl.costos_adicionales = JSON.parse(f.costos_adicionales)
-            console.log("_________________*********__________***********________\n GANANCIAS >>>> ", cl.ganancias)
             gananciasEmpresa += parseFloat(cl.ganancias.total)
             comisionesPagadas += parseFloat(cl.comision_total)
           }
@@ -1322,7 +1329,7 @@ exports.efectuarVenta = async (req, res) => {
   const currentdate = new Date();
   const oneJan = new Date(currentdate.getFullYear(), 0, 1);
   const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7);
+  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
   const datos = {
     mes: new Date().getMonth()+1,
     semana,
@@ -1514,28 +1521,30 @@ exports.dashboardAdministrador = async (req, res) => {
   let countVendedores= await conexion.query("SELECT count(correo) as totalVendedores FROM usuarios WHERE rol = 'vendedor'AND estado_de_la_cuenta = 'aprobado';");
   console.log(countVendedores[0].totalVendedores)
 
+  // ==>>  CONSULTA PARA SACAR LOS DATOS PARA LA GRAFICA "CLIENTES" 
   let clAgregados_admin = await conexion.query("SELECT * FROM (SELECT * FROM historial_clientes_admin ORDER BY id DESC LIMIT 7) sub ORDER BY id ASC;");
   let datosJson_clAgregados_Admin
   if (clAgregados_admin.length > 0) {
     datosJson_clAgregados_Admin = JSON.stringify(clAgregados_admin);
   } 
-  console.log("skjbasdbasbdasbvdasbdabsdhbahsdgahsgdhjhajhsgdjagsdhajhsdghjasgdhjajhsdgjagsd" , datosJson_clAgregados_Admin );
+  console.log(" JSON DE ADMINISTRADOR NUMERO CLIENTES ==>>>>> (" , datosJson_clAgregados_Admin, ")" );
   
   res.render("administrador", { user: req.user, info_vendedores, 
     sumaTotalVentas,numClientes: countCliente[0].totalClientes, numVendedores: countVendedores[0].totalVendedores,
     datosJson_clAgregados_Admin});
 } 
 
+// todo ===>>> INSERTAR DATOS A LA TABLA HISTORIAL CLIENTES ADMIN 
 exports.historial_clientes_admin = async (req, res) => {
 
   let clientes = await conexion.query("SELECT * FROM nuevos_cliente");
   let fecha = new Date().toLocaleDateString("en-CA");
   let yearActual = new Date(fecha).getFullYear();
 
-  currentdate = new Date(fecha);
+  currentdate = new Date();
   const oneJan = new Date(currentdate.getFullYear(), 0, 1);
   const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7);
+  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
   console.log("Semana actual ==>> ", semanaActual);
   let numClientes
   
@@ -1544,6 +1553,7 @@ exports.historial_clientes_admin = async (req, res) => {
   if (resultado.length > 0) {
     numClientes = resultado.length;
   }
+  console.log("NUMERO DE CLIENTES >>>>>" , numClientes );
 
   // ==> ENVIANDO A LA TABLA HISTORIAL CLIENTES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
   const datosHcl_admin = { fecha, numClientes }; //==> DATOS HISTORIAL CLIENTES ADMIN

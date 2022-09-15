@@ -700,10 +700,14 @@
                 datos.vendedores[1] ? vendedor2 = datos.vendedores[1] : vendedor2 = false;
                 datos.vendedores[2] ? vendedor3 = datos.vendedores[2] : vendedor3 = false;
                 datos.vendedores[3] ? vendedor4 = datos.vendedores[3] : vendedor4 = false;
-                
-                vendedor_principal.comision_base = vendedor_principal.comision_base.toFixed(1)
 
-                // console.log("DATOS FACTURA >>>> ",datos)
+                $("#idVendedor1").text(vendedor_principal.nombre)
+                $("#nivelVendedor1").text(vendedor_principal.nivel)
+                $("#telVendedor").text(vendedor_principal.telefono)
+                $("#comisionBase1").text(vendedor_principal.comision_base)
+                $("#porcentaje-ganar1").css('display', 'none')
+                let comisionFinal = vendedor_principal.comision_base
+                
                 let cabeceraCostos = ``
                 if (datos.factura.estadoTxt == "Pagada") {
                     $("#btnReportarFactura").css('display', 'none')
@@ -714,12 +718,12 @@
                     /* SI LA FACTURA FUE PAGADA - MOSTRAR COSTOS OPERACIONALES SI LOS TIENE + VALOR DE GANANCIAS */
                     $('#btnAddCostos').hide() // Ocultar botón de agregar nuevo costo
                     cabeceraCostos = `<thead id="headTbl">
-                                                <tr>
-                                                    <th>Descripción</th>
-                                                    <th>Monto</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>`;
+                                        <tr>
+                                            <th>Descripción</th>
+                                            <th>Monto</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody></tbody>`;
                     let costos = ``, subtotal = 0;
                     if (datos.costos_adicionales){
                         datos.costos_adicionales.forEach(x => {
@@ -734,8 +738,6 @@
                     subtotalCostos.text(subtotal)
                     totalGanancias.text(datos.ganancias.total)
                     gananciaTotal.val(datos.ganancias.total)
-                    storage.gananciaBase = parseFloat(datos.ganancias.base);
-                    storage.gananciaTotal = parseFloat(datos.ganancias.total)
                     $('#tablaCostosExtras').append(costos);
                     /* FIN DE COSTOS + GANANCIAS */
                     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -748,13 +750,13 @@
                     // OPERACIONES PARA COSTOS ADICIONALES - ÚLTIMO TAB
                     $('#btnAddCostos').show() // Mostrar botón de agregar nuevo costo
                     cabeceraCostos = `<thead id="headTbl">
-                                                <tr>
-                                                    <th>Descripción</th>
-                                                    <th>Monto</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>`;
+                                        <tr>
+                                            <th>Descripción</th>
+                                            <th>Monto</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>`;
                     const comisionTotal0 = storage.vendedores.map(x => x.comision_final).reduce((prev, curr) => prev + curr, 0);
                     const gananciaBase = parseFloat(datos.monto_aprobado)-parseFloat(comisionTotal0).toFixed(1);
                     console.log("\nMonto aprobado >>> ", datos.monto_aprobado)
@@ -763,27 +765,16 @@
                     $("#gananciaBase").text(gananciaBase)
                     totalGanancias.text(parseFloat(gananciaBase))
                     gananciaTotal.val(parseFloat(gananciaBase))
-                    storage.gananciaBase = parseFloat(gananciaBase);
-                    storage.gananciaTotal = parseFloat(gananciaBase);
                     /////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
                 $('#tablaCostosExtras').append(cabeceraCostos);
 
-                $("#idVendedor1").text(vendedor_principal.nombre)
-                $("#nivelVendedor1"). text(vendedor_principal.nivel)
-                $("#telVendedor").text(vendedor_principal.telefono)
-                $("#comisionBase1").text(vendedor_principal.comision_base)
-                $("#porcentaje-ganar1").css('display', 'none')
-                let comisionFinal = vendedor_principal.comision_base
-
-                vendedor_principal.deducciones ? dt = vendedor_principal.deducciones : dt = dt;
+                vendedor_principal.deducciones ? dt = vendedor_principal.deducciones : dt = null;
                 
                 if (dt) {
                     let subtotal = 0, dt1 = [];
                     dt.forEach(x => { 
-                        x.forEach(n => {
-                            if (n.tab == 'tab1') dt1.push(n)
-                        })
+                        if (x.tab == 'tab1') dt1.push(x)
                     })
                     
                     if (dt1.length > 0) {
@@ -808,20 +799,22 @@
                     }
 
                 } else {
-                    // Parametros (idCliente, Pestaña, Nivel del Vendedor)
-                    // _btnAddDeduccion(idCliente, '1', vendedor_principal.nivel)
-                    // const tablaDeducciones_v1 = _crearTablaDeducciones(1, false)
-                    // $('#divDeducciones').append(tablaDeducciones_v1);
                     $("#porcentaje-ganar1").css('display', 'none')
                     if (vendedor_principal.nivel == 4) {
                         $("#porcentaje-ganar1").css('display', 'table-row')
                         comisionFinal = parseFloat(vendedor_principal.comision_base/2)
                     }
                 }
+
+                /** COMISIONES DB */
+                if (datos.factura.estadoTxt == "Pagada") {
+                    $('#comisionBase1').text(vendedor_principal.comision_base)
+                    comisionFinal = vendedor_principal.comision_final
+                    comisionFinal = vendedor_principal.comision_final
+                }
                 
                 $('#total1').text(comisionFinal)
                 $("#deduccionTotal1").val(comisionFinal)
-                // $("#deduccionTotal1").val(parseFloat($("#total1").text()))
 
                 if (vendedor2) {
 
@@ -847,10 +840,8 @@
                     // Si ya existen datos en DB
                     if (dt) {
                         let subtotal2 = 0, dt2 = []
-                        dt.forEach(x => { 
-                            x.forEach(n => {
-                                if (n.tab == 'tab2') dt2.push(n)
-                            })
+                        vendedor2.deducciones.forEach(x => { 
+                            if (x.tab == 'tab2') dt2.push(x)
                         })
                         if (dt2.length > 0) {
                             let deducciones2 = ``, i = 1;
@@ -872,6 +863,13 @@
                     if (vendedor2.nivel == 4) {
                         $("#porcentaje-ganar2").css('display', 'table-row')
                         comisionFinal2 = parseFloat(comisionFinal2/2)
+                    }
+
+                    /** COMISIONES DB */
+                    if (datos.factura.estadoTxt == "Pagada") {
+                        $('#comisionBase2').text(vendedor2.comision_base)
+                        comisionFinal2 = vendedor2.comision_final
+                        comisionFinal2 = vendedor2.comision_final
                     }
                     $("#total2").text(comisionFinal2)
                     $("#deduccionTotal2").val(comisionFinal2)
@@ -900,10 +898,8 @@
 
                     if (dt) {
                         let subtotal3 = 0, dt3 = []
-                        dt.forEach(x => { 
-                            x.forEach(n => {
-                                if (n.tab == 'tab3') dt3.push(n)
-                            })
+                        vendedor3.deducciones.forEach(x => { 
+                            if (x.tab == 'tab3') dt3.push(x)
                         })
                         
                         console.log("\nDT3 >>> ", dt3)
@@ -930,7 +926,13 @@
                         $("#porcentaje-ganar3").css('display', 'table-row')
                         comisionFinal3 = parseFloat(comisionFinal3/2)
                     }
-
+                    
+                    /** COMISIONES DB */
+                    if (datos.factura.estadoTxt == "Pagada") {
+                        $('#comisionBase3').text(vendedor3.comision_base)
+                        comisionFinal3 = vendedor3.comision_final
+                        comisionFinal3 = vendedor3.comision_final
+                    }
                     $("#total3").text(comisionFinal3)
                     $("#deduccionTotal3").val(comisionFinal3)
 
@@ -957,10 +959,8 @@
                     
                     if (dt) {
                         let subtotal4 = 0, dt4 = []
-                        dt.forEach(x => { 
-                            x.forEach(n => {
-                                if (n.tab == 'tab4') dt4.push(n)
-                            })
+                        vendedor4.deducciones.forEach(x => { 
+                            if (x.tab == 'tab4') dt4.push(x)
                         })
                         if (dt4.length > 0) {
                             let deducciones4 = ``, i = 1;
@@ -985,6 +985,12 @@
                         comisionFinal4 = parseFloat(comisionFinal4/2)
                     }
 
+                    /** COMISIONES DB */
+                    if (datos.factura.estadoTxt == "Pagada") {
+                        $('#comisionBase4').text(vendedor4.comision_base)
+                        comisionFinal4 = vendedor4.comision_final
+                        comisionFinal4 = vendedor4.comision_final
+                    }
                     $("#total4").text(comisionFinal4)
                     $("#deduccionTotal4").val(comisionFinal4)
 
