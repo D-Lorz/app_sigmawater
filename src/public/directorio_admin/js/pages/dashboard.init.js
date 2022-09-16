@@ -24,10 +24,25 @@ function getChartColorsArray(chartId) {
 //  MINI CHART
 
 // mini-1
-var minichart1Colors = getChartColorsArray("#mini-chart1");
+
+let valoresNv = []
+const datosNv = []
+const yearNv = new Date().getFullYear()
+valoresNv = $('#datosJson_flnumVentas_admin').val();
+datosNv.unshift({x:yearNv, y:0})
+if (valoresNv) {
+    datosNv.shift()
+    valoresNv = JSON.parse(valoresNv);
+    valoresNv.forEach(vl => {
+        const temp = vl.numVentas
+        datosNv.push({ x:"Hasta: "+vl.fecha, y:temp})
+    })
+}
+datosNv.length == 1 ? datosNv.unshift({x:yearNv, y:0}) : true;
+// var minichart1Colors = getChartColorsArray("#mini-chart1");
 var options = {
     series: [{
-        data: [2, 10, 18, 22, 36, 15, 47, 75, 65, 19, 14, 2, 47, 42, 15, ]
+        data: datosNv,
     }],
     chart: {
         type: 'line',
@@ -36,7 +51,7 @@ var options = {
             enabled: true
         }
     },
-    colors: minichart1Colors,
+    colors: ["#5156be"],
     stroke: {
         curve: 'smooth',
         width: 2,
@@ -65,10 +80,25 @@ var chart = new ApexCharts(document.querySelector("#mini-chart1"), options);
 chart.render();
 
 // mini-2
-var minichart2Colors = getChartColorsArray("#mini-chart2");
+
+let valoresVd = []
+const datosVd = []
+const yearVd = new Date().getFullYear()
+valoresVd = $('#datosJson_vdAgregados_Admin').val();
+datosVd.unshift({x:yearVd, y:0})
+if (valoresVd) {
+    datosVd.shift()
+    valoresVd = JSON.parse(valoresVd);
+    valoresVd.forEach(vl => {
+        const temp = vl.numVendedores
+        datosVd.push({ x:"Hasta: "+vl.fecha, y:temp})
+    })
+}
+datosVd.length == 1 ? datosVd.unshift({x:yearVd, y:0}) : true;
+// var minichart2Colors = getChartColorsArray("#mini-chart2");
 var options = {
     series: [{
-        data: [15, 42, 47, 2, 14, 19, 65, 75, 47, 15, 42, 47, 2, 14, 12, ]
+        data: datosVd
     }],
     chart: {
         type: 'line',
@@ -77,7 +107,7 @@ var options = {
             enabled: true
         }
     },
-    colors: minichart2Colors,
+    colors: ["#5156be"],
     stroke: {
         curve: 'smooth',
         width: 2,
@@ -107,24 +137,24 @@ chart.render();
 
 // mini-3
 
-// let valores = []
-// const datos = []
-// valores = $('#datosJson_clAgregados_Admin').val();
-
-// datos.unshift({x:year, y:0})
-// if (valores) {
-//     datos.shift()
-//     valores = JSON.parse(valores);
-//     valores.forEach(vl => {
-//         const temp = vl.numClientes
-//         datos.push({ x:"Hasta: "+vl.fecha, y:temp})
-//     })
-// }
-// datos.length == 1 ? datos.unshift({x:year, y:0}) : true;
-var minichart3Colors = getChartColorsArray("#mini-chart3");
+let valores = []
+const datos = []
+const year = new Date().getFullYear()
+valores = $('#datosJson_clAgregados_Admin').val();
+datos.unshift({x:year, y:0})
+if (valores) {
+    datos.shift()
+    valores = JSON.parse(valores);
+    valores.forEach(vl => {
+        const temp = vl.numClientes
+        datos.push({ x:"Hasta: "+vl.fecha, y:temp})
+    })
+}
+datos.length == 1 ? datos.unshift({x:year, y:0}) : true;
+// var minichart3Colors = getChartColorsArray("#mini-chart3");
 var options = {
     series: [{
-        data: [1,2,3,4,5,6,7,8]
+        data: datos
     }],
     chart: {
         type: 'line',
@@ -133,7 +163,7 @@ var options = {
             enabled: true
         }
     },
-    colors: minichart3Colors,
+    colors: ["#5156be"],
     stroke: {
         curve: 'smooth',
         width: 2,

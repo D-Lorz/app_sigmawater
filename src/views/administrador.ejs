@@ -79,11 +79,16 @@
 
                                         <div class="col-6">
                                             <div id="mini-chart1" data-colors='["#5156be"]'class="apex-charts mb-2"></div>
+                                            <input type="hidden" id="datosJson_flnumVentas_admin" value="<%= datosJson_flnumVentas_admin %>">
                                         </div>
                                     </div>
                                     <div class="text-nowrap">
-                                        <span class="badge bg-soft-success text-success">+$20.9k</span>
-                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                        <% if (rendimientoNumventas > 0 ){ %> 
+                                            <span class="badge bg-soft-success text-success">+<%=rendimientoNumventas%>%</span>
+                                        <% } else { %> 
+                                            <span class="badge bg-soft-danger text-danger"><%=rendimientoNumventas%>%</span>
+                                        <% } %>
+                                        <span class="ms-1 text-muted font-size-13">Desde semana anterior</span>
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->
@@ -101,13 +106,17 @@
                                             </h4>
                                         </div>
                                         <div class="col-6">
-                                            <div id="mini-chart2" data-colors='["#5156be"]'
-                                                class="apex-charts mb-2"></div>
+                                            <div id="mini-chart2" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                            <input type="hidden" id="datosJson_vdAgregados_Admin" value="<%= datosJson_vdAgregados_Admin %>">
                                         </div>
                                     </div>
                                     <div class="text-nowrap">
-                                        <span class="badge bg-soft-danger text-danger">-29 Trades</span>
-                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                        <% if (rendimientoVd > 0 ){ %> 
+                                            <span class="badge bg-soft-success text-success">+<%=rendimientoVd%>%</span>
+                                        <% } else { %> 
+                                            <span class="badge bg-soft-danger text-danger"><%=rendimientoVd%>%</span>
+                                        <% } %>
+                                        <span class="ms-1 text-muted font-size-13">Desde semana anterior</span>
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->
@@ -131,8 +140,12 @@
                                         </div>
                                     </div>
                                     <div class="text-nowrap">
-                                        <span class="badge bg-soft-success text-success">+ $2.8k</span>
-                                        <span class="ms-1 text-muted font-size-13">Since last week</span>
+                                        <% if (rendimientoCl > 0 ){ %> 
+                                            <span class="badge bg-soft-success text-success">+<%=rendimientoCl%>%</span>
+                                        <% } else { %> 
+                                            <span class="badge bg-soft-danger text-danger"><%=rendimientoCl%>%</span>
+                                        <% } %>
+                                        <span class="ms-1 text-muted font-size-13">Desde semana anterior</span>
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->

@@ -560,6 +560,7 @@ exports.dashboardVendedor = async (req, res) => {
   let datosJson_clAgregados, rendimientoCl = 0;
   if (clAgregados.length > 0) {
     datosJson_clAgregados = JSON.stringify(clAgregados);
+
     let ultimo, penultimo = 0;
     ultimo = clAgregados[clAgregados.length - 1].numClientes;
     if (clAgregados.length >= 2) {
@@ -727,7 +728,7 @@ exports.dashboardVendedor = async (req, res) => {
 
    // * CAPTURANDO DATOS PARA LA GRÁFICA DE VENTAS MENSUALES X VENDEDOR
    let histrialGanancias = await conexion.query("SELECT * FROM (SELECT * FROM historial_ganancias_vendedores WHERE idVendedor = ? ORDER BY id DESC LIMIT 12) sub ORDER BY id ASC;", [idVendedor]);
-   let datosJson_historialG, rendimientoHG = 0;
+   let datosJson_historialG
    if (histrialGanancias.length > 0) {
     datosJson_historialG = JSON.stringify(histrialGanancias);
     console.log("\n");
@@ -739,8 +740,7 @@ exports.dashboardVendedor = async (req, res) => {
     totalAfiliado: countAfiliados[0].totalAfiliados,
     datosJson_clAgregados, rendimientoCl, datosJson_aflAgregados, rendimientoAfl,
     datosJson_ventasCiudades, numVentas_, json_ventasVendedor, json_ventasAfiliados,
-    rendimiento_vPropias, rendimiento_vAfiliados, facturas_recientes, topVendedores,rendimientoHG,
-    datosJson_historialG
+    rendimiento_vPropias, rendimiento_vAfiliados, facturas_recientes, topVendedores,datosJson_historialG
   });
 };
 

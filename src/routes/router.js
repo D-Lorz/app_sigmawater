@@ -2,9 +2,20 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const multer = require("multer");
+const cron = require('node-cron');
 const { isAuthenticated, nologueado, login, logout } = require("../controllers/authController");
 const { dashboardVendedor } = require("../controllers/customerFormControllers");
-const { dashboardAdministrador,historial_clientes_admin } = require("../controllers/adminControllers");
+const { dashboardAdministrador,historial_clientes_admin,historial_vendedores_admin,filtro_numventas_admin } = require("../controllers/adminControllers");
+
+
+
+// Ejecución Semanal (Domingo 10pm)
+cron.schedule('0 22 * * Sun',() => {
+  historial_clientes_admin();
+  historial_vendedores_admin();
+  // filtro_numventas_admin();
+});
+
 // * ========== Renderizado de vistas generales ==========
 //                           ↓↓
 router.get("/login", nologueado, (req, res) => { res.render("login", { alert: false });});
@@ -26,6 +37,7 @@ router.get("/", isAuthenticated, dashboardVendedor, (req, res) => {
  router.get("/hola", (req, res) => {
   res.render("hola", { user: req.user });
 });
-router.post('/historial_clientes_admin', historial_clientes_admin);
+
+router.post("/filtro_numventas_admin", filtro_numventas_admin);
 
 module.exports = router;

@@ -907,7 +907,7 @@ exports.servicioInstaladosx = async (req, res) => {
 }
 
 // ? ========>>> ***********  ZONA DE CLIENTES **************************** <<<========
-//todo ******************************** --INICIO-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
+//todo ******************************** --INICIO-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES & GANANCIAS DE LA EMPRESA *************************** */
 let ventasTotales;
 exports.factura = async (req, res) => {
 
@@ -1513,25 +1513,79 @@ exports.dashboardAdministrador = async (req, res) => {
     sumaTotalVentas += parseFloat(iv.ventas_individuales)
   });
 
-  // ==> CONSULTA PARA CONTAR LA CANTIDAD DE CLIENTES 
-  let countCliente = await conexion.query("SELECT count(correo) as totalClientes FROM nuevos_cliente");
-  console.log(countCliente[0].totalClientes);
+  // ==>>  CONSULTA PARA SACAR LOS DATOS PARA LA GRAFICA "NÚMERO DE VENTAS" 
+  //  flnumVentas_admin = filtro número de ventas admin
+  let flnumVentas_admin = await conexion.query("SELECT * FROM (SELECT * FROM filtro_numventas_admin ORDER BY id DESC LIMIT 7) sub ORDER BY id ASC;");
+  let datosJson_flnumVentas_admin, rendimientoNumventas = 0
+  if (flnumVentas_admin.length > 0) {
+    datosJson_flnumVentas_admin = JSON.stringify(flnumVentas_admin);
+
+    let ultimo, penultimo = 0;
+    ultimo = flnumVentas_admin[flnumVentas_admin.length - 1].numVentas;
+    if (flnumVentas_admin.length >= 2) {
+      penultimo = flnumVentas_admin[flnumVentas_admin.length - 2].numVentas;
+      rendimientoNumventas = (parseFloat(ultimo - penultimo) / penultimo) * 100;
+      rendimientoNumventas = rendimientoNumventas.toFixed(1);
+    }
+    if (ultimo == 0 && penultimo == 0) { rendimientoNumventas = 0 }
+    if (penultimo == 0 && ultimo >= 1) { rendimientoNumventas = 100 }
+  
+  } 
+  console.log(" JSON DE ADMINISTRADOR NUMERO VENDEDORES ==>>>>> " , datosJson_flnumVentas_admin);
+  
+
 
   // ==> CONSULTA PARA CONTAR LA CANTIDAD DE VENDEDORES 
   let countVendedores= await conexion.query("SELECT count(correo) as totalVendedores FROM usuarios WHERE rol = 'vendedor'AND estado_de_la_cuenta = 'aprobado';");
   console.log(countVendedores[0].totalVendedores)
 
+  // ==>>  CONSULTA PARA SACAR LOS DATOS PARA LA GRAFICA "VENDEDORES" 
+  let vdAgregados_admin = await conexion.query("SELECT * FROM (SELECT * FROM historial_vendedores_admin ORDER BY id DESC LIMIT 7) sub ORDER BY id ASC;");
+  let datosJson_vdAgregados_Admin, rendimientoVd = 0
+  if (vdAgregados_admin.length > 0) {
+    datosJson_vdAgregados_Admin = JSON.stringify(vdAgregados_admin);
+
+    let ultimoVd, penultimoVd = 0;
+    ultimoVd = vdAgregados_admin[vdAgregados_admin.length - 1].numVendedores;
+    if (vdAgregados_admin.length >= 2) {
+      penultimoVd = vdAgregados_admin[vdAgregados_admin.length - 2].numVendedores;
+      rendimientoVd = (parseFloat(ultimoVd - penultimoVd) / penultimoVd) * 100;
+      rendimientoVd = rendimientoVd.toFixed(1);
+    }
+    if (ultimoVd == 0 && penultimoVd == 0) { rendimientoVd = 0 }
+    if (penultimoVd == 0 && ultimoVd >= 1) { rendimientoVd = 100 }
+
+  } 
+  console.log(" JSON DE ADMINISTRADOR NUMERO VENDEDORES ==>>>>> " , datosJson_vdAgregados_Admin, );
+
+  // ==> CONSULTA PARA CONTAR LA CANTIDAD DE CLIENTES 
+  let countCliente = await conexion.query("SELECT count(correo) as totalClientes FROM nuevos_cliente");
+  console.log(countCliente[0].totalClientes);
+
   // ==>>  CONSULTA PARA SACAR LOS DATOS PARA LA GRAFICA "CLIENTES" 
   let clAgregados_admin = await conexion.query("SELECT * FROM (SELECT * FROM historial_clientes_admin ORDER BY id DESC LIMIT 7) sub ORDER BY id ASC;");
-  let datosJson_clAgregados_Admin
+  let datosJson_clAgregados_Admin, rendimientoCl = 0
   if (clAgregados_admin.length > 0) {
     datosJson_clAgregados_Admin = JSON.stringify(clAgregados_admin);
+
+    let ultimoCl, penultimoCl = 0;
+    ultimoCl = clAgregados_admin[clAgregados_admin.length - 1].numClientes;
+    if (clAgregados_admin.length >= 2) {
+      penultimoCl = clAgregados_admin[clAgregados_admin.length - 2].numClientes;
+      rendimientoCl = (parseFloat(ultimoCl - penultimoCl) / penultimoCl) * 100;
+      rendimientoCl = rendimientoCl.toFixed(1);
+    }
+    if (ultimoCl == 0 && penultimoCl == 0) { rendimientoCl = 0 }
+    if (penultimoCl == 0 && ultimoCl >= 1) { rendimientoCl = 100 }
   } 
-  console.log(" JSON DE ADMINISTRADOR NUMERO CLIENTES ==>>>>> (" , datosJson_clAgregados_Admin, ")" );
+  console.log(" JSON DE ADMINISTRADOR NUMERO CLIENTES ==>>>>> " , datosJson_clAgregados_Admin, );
   
   res.render("administrador", { user: req.user, info_vendedores, 
-    sumaTotalVentas,numClientes: countCliente[0].totalClientes, numVendedores: countVendedores[0].totalVendedores,
-    datosJson_clAgregados_Admin});
+    sumaTotalVentas,numClientes: countCliente[0].totalClientes,
+     numVendedores: countVendedores[0].totalVendedores,
+    datosJson_flnumVentas_admin,rendimientoNumventas,
+    datosJson_vdAgregados_Admin,rendimientoVd,
+    datosJson_clAgregados_Admin, rendimientoCl});
 } 
 
 // todo ===>>> INSERTAR DATOS A LA TABLA HISTORIAL CLIENTES ADMIN 
@@ -1561,4 +1615,74 @@ exports.historial_clientes_admin = async (req, res) => {
   console.log("Realizando registro en DB HISTORIAL CLIENTES ADMINISTRADOR....")
  
  res.send("todo ok...");
+};
+
+// todo ===>>> INSERTAR DATOS A LA TABLA HISTORIAL CLIENTES ADMIN 
+exports.historial_vendedores_admin = async (req, res) => {
+
+  let vendedores = await conexion.query("SELECT * FROM registro_de_vendedores");
+  let numVendedores
+  let fecha = new Date().toLocaleDateString("en-CA");
+  let yearActual = new Date(fecha).getFullYear();
+
+  currentdate = new Date();
+  const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+  const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
+  console.log("Semana actual ==>> ", semanaActual);
+  
+    // ==> FILTRANDO CLIENTES POR SEMANA Y AÑO DE REGISTRO CON LA ACTUAL
+  const resultado = vendedores.filter((item) => item.semana == semanaActual && item.year == yearActual);
+  if (resultado.length > 0) {
+    numVendedores = resultado.length;
+  }
+  console.log("NUMERO DE VENDEDORES >>>>>" , numVendedores );
+
+  // ==> ENVIANDO A LA TABLA HISTORIAL VENDEDORES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
+  const datosHvd_admin = { fecha, numVendedores }; //==> DATOS HISTORIAL CLIENTES ADMIN
+  await conexion.query("INSERT INTO historial_vendedores_admin SET ?", [datosHvd_admin]);
+  console.log("Realizando registro en DB HISTORIAL VENDEDORES ADMINISTRADOR....")
+ 
+ res.send("todo ok...");
+};
+
+// todo ===>>> INSERTAR DATOS A LA TABLA FILTRO NUMVENTAS ADMIN 
+exports.filtro_numventas_admin = async (req, res) => {
+
+  // ==> CONSULTA PARA SACARLA INFORMACION DE VENDEDORES  
+  let info_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores ");
+  // ==> CONSULTA PARA SACARLA INFORMACION DE FILTRO NUMVENTAS ADMINISTRADOR  
+  let flNumventasAdm = await conexion.query("SELECT * FROM filtro_numventas_admin ");
+
+  // ==> SUMANDO EL NUMERO TOTAL DE VENTAS EN GENERAL
+  let numVentas = 0;
+  info_vendedores.forEach(iv => {
+    numVentas += parseFloat(iv.ventas_individuales)
+  });
+
+  let fecha = new Date().toLocaleDateString("en-CA");
+  let year = new Date(fecha).getFullYear();
+  currentdate = new Date();
+  const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+  const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
+
+  // ==>> FILTRANDO LA SEMANA DEL DATO VACIO DE LA TABLA "FILTRO NUMVENTAS ADMINISTRADOR"
+  const resultado = flNumventasAdm.filter((item) => item.semana == semana && item.year == year);
+  let rsemana
+  resultado.forEach(r => {
+    rsemana = r.semana;
+  });
+
+  // ==>> VALIDANDO SI EXISTE SEMANA ACTUAL CON LA QUE SE ENCUENTRA EN EL VALOR POR DEDFECTO DE LA TABLA
+  const datos_update = {numVentas}
+  const datos_insert = {fecha, year,semana, numVentas}
+  if (rsemana == semana) {
+    await conexion.query("UPDATE filtro_numventas_admin SET ?" , [datos_update])
+  }else {
+    await conexion.query("INSERT INTO filtro_numventas_admin SET ?", [datos_insert]);
+  }
+  
+  res.send("todo ok...");
+
 };
