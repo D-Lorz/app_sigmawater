@@ -708,7 +708,7 @@
                 $("#porcentaje-ganar1").css('display', 'none')
                 let comisionFinal = vendedor_principal.comision_base
                 
-                let cabeceraCostos = ``
+                let cabeceraCostos = ``, gananciaBaseActual = 0;
                 if (datos.factura.estadoTxt == "Pagada") {
                     $("#btnReportarFactura").css('display', 'none')
                     $('.btnAddDeduccion').remove()
@@ -734,6 +734,7 @@
                             subtotal += parseFloat(x.monto)
                         })
                     }
+                    gananciaBaseActual = datos.ganancias.base
                     $('#gananciaBase').text(datos.ganancias.base)
                     subtotalCostos.text(subtotal)
                     totalGanancias.text(datos.ganancias.total)
@@ -762,12 +763,15 @@
                     console.log("\nMonto aprobado >>> ", datos.monto_aprobado)
                     console.log("Comisión Total Vendedores >>> ", comisionTotal0)
                     console.log("Ganancia Base Inicial >>> ", gananciaBase)
+                    gananciaBaseActual = gananciaBase;
                     $("#gananciaBase").text(gananciaBase)
                     totalGanancias.text(parseFloat(gananciaBase))
                     gananciaTotal.val(parseFloat(gananciaBase))
                     /////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
                 $('#tablaCostosExtras').append(cabeceraCostos);
+                storage.gananciaBase = parseFloat(gananciaBaseActual);
+                storage.gananciaTotal = parseFloat(gananciaTotal.val());
 
                 vendedor_principal.deducciones ? dt = vendedor_principal.deducciones : dt = null;
                 
