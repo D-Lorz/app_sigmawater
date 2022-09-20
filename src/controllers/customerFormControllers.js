@@ -727,10 +727,10 @@ exports.dashboardVendedor = async (req, res) => {
   }
 
    // * CAPTURANDO DATOS PARA LA GRÁFICA DE VENTAS MENSUALES X VENDEDOR
-   let histrialGanancias = await conexion.query("SELECT * FROM (SELECT * FROM historial_ganancias_vendedores WHERE idVendedor = ? ORDER BY id DESC LIMIT 12) sub ORDER BY id ASC;", [idVendedor]);
+   let historialGanancias = await conexion.query("SELECT * FROM (SELECT * FROM historial_ganancias_vendedores WHERE idVendedor = ? ORDER BY id DESC LIMIT 12) sub ORDER BY id ASC;", [idVendedor]);
    let datosJson_historialG
-   if (histrialGanancias.length > 0) {
-    datosJson_historialG = JSON.stringify(histrialGanancias);
+   if (historialGanancias.length > 0) {
+    datosJson_historialG = JSON.stringify(historialGanancias);
     console.log("\n");
     console.log("IMPIMIENDO datosJson_h istorialG ====>>>" , datosJson_historialG);
    }
@@ -874,7 +874,6 @@ exports.historial_ganancias_vendedores = async (req, res) => {
   const mes = txtMes.charAt(0).toUpperCase() + txtMes.slice(1);
   const idVendedor = v.id_vendedor
   const datos_ganancias = {mes, year, ganancias, idVendedor}
-  const soloGanancia = {ganancias}
       const result = await conexion.query("SELECT * FROM historial_ganancias_vendedores WHERE idVendedor = ?", [idVendedor]);
       if(result.length == 0) {
         await conexion.query("INSERT INTO historial_ganancias_vendedores SET ?", [datos_ganancias]);

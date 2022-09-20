@@ -3,7 +3,7 @@ const router = express.Router()
 const { isAuthenticated } = require('../controllers/authController');
 const { listarVendedores, listarVendedores_PerfilVendedores, listarClientes_PerfilClientes, listarClientes,
         ActualizarNivel, actualizarEstadoVendedor, ActualizarCredito, ActualizarMontoAprobado,ActualizarInfoCl,
-        clfirmas, factura, deducciones, efectuarVenta } = require('../controllers/adminControllers');
+        clfirmas, factura, deducciones, efectuarVenta,ganancias_mensuales_admin } = require('../controllers/adminControllers');
 
  // * ========== Renderizado de vistas clientes ==========
 //                           ↓↓
@@ -32,6 +32,8 @@ router.post('/ActualizarInfoCl', isAuthenticated,ActualizarInfoCl);
 router.get('/ventas', isAuthenticated, factura)
 router.post('/deducciones', isAuthenticated, deducciones)
 router.post('/efectuarVenta', isAuthenticated, efectuarVenta)
+router.post('/efectuarVenta', isAuthenticated, efectuarVenta)
+router.post('/ganancias_mensuales_admin', ganancias_mensuales_admin)
 /*=============================================================*/
 
 module.exports = router

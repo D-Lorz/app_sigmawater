@@ -3,6 +3,7 @@ var nodemailer = require('nodemailer');
 const bcryptjs = require('bcryptjs');
 const { ok } = require("assert");
 const { log } = require("console");
+
 //* Formateando precios a una moneda
 const formatear = new Intl.NumberFormat('en-US', {
   style: "currency",
@@ -217,6 +218,7 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
     facturaCliente,
   });
 };
+
 // todo ===========>>>  Actualizar nivel de vendedores
 exports.ActualizarNivel = async (req, res) => {
   const id_vendedor = req.body.id_vendedor;
@@ -915,8 +917,10 @@ exports.factura = async (req, res) => {
   const vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel, telefono_movil FROM registro_de_vendedores")
   const factura = await conexion.query("SELECT * FROM factura")
 
+  let gananciasE = 0 // ==>> Ganancias empresa
+
   const arrayVentas = []
-  let sumaValor = 0, gananciasEmpresa = 0, comisionesPagadas = 0;
+  let sumaValor = 0, comisionesPagadas = 0;
   clientes.forEach(cl => {
 
     cl.monto_aprobado = parseFloat(cl.monto_aprobado)
@@ -1253,7 +1257,7 @@ exports.factura = async (req, res) => {
             /** COSTOS ADICIONALES + GANANCIAS DE LA EMPRESA */
             cl.ganancias = JSON.parse(f.ganancias_empresa)
             cl.costos_adicionales = JSON.parse(f.costos_adicionales)
-            gananciasEmpresa += parseFloat(cl.ganancias.total)
+            gananciasE += parseFloat(cl.ganancias.total)
             comisionesPagadas += parseFloat(cl.comision_total)
           }
         }
@@ -1274,7 +1278,7 @@ exports.factura = async (req, res) => {
 
   ventasTotales = arrayVentas;
 
-  res.render("./1-admin/ventas", { user: req.user, arrayVentas, sumaTotalVentas, sumaValor, gananciasEmpresa,comisionesPagadas });
+  res.render("./1-admin/ventas", { user: req.user, arrayVentas, sumaTotalVentas, sumaValor, gananciasE,comisionesPagadas });
 }
 //todo ******************************** --FIN-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
 
@@ -1503,7 +1507,6 @@ function _subirNivelVendedor(ventasTotales) {
 
 // todo ======>>> DASHBOARD DE ADMINISTRADOR
 exports.dashboardAdministrador = async (req, res) => {
-
   // ==> CONSULTA PARA SACARLA INFORMACION DE VENDEDORES  
   let info_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores ");
 
@@ -1532,8 +1535,6 @@ exports.dashboardAdministrador = async (req, res) => {
   
   } 
   console.log(" JSON DE ADMINISTRADOR NUMERO VENDEDORES ==>>>>> " , datosJson_flnumVentas_admin);
-  
-
 
   // ==> CONSULTA PARA CONTAR LA CANTIDAD DE VENDEDORES 
   let countVendedores= await conexion.query("SELECT count(correo) as totalVendedores FROM usuarios WHERE rol = 'vendedor'AND estado_de_la_cuenta = 'aprobado';");
@@ -1578,14 +1579,106 @@ exports.dashboardAdministrador = async (req, res) => {
     if (ultimoCl == 0 && penultimoCl == 0) { rendimientoCl = 0 }
     if (penultimoCl == 0 && ultimoCl >= 1) { rendimientoCl = 100 }
   } 
-  console.log(" JSON DE ADMINISTRADOR NUMERO CLIENTES ==>>>>> " , datosJson_clAgregados_Admin, );
-  
-  res.render("administrador", { user: req.user, info_vendedores, 
+  console.log(" JSON DE ADMINISTRADOR NUMERO CLIENTES ==>>>>> " , datosJson_clAgregados_Admin);
+
+  // ==>> CONSULTA PARA SACAR LOS DATOS PARA EL MAPA Y MOSTRAR LOS CLIENTES 
+  let ventasCiudades = await conexion.query("SELECT nc.ciudad, nc.latitud, nc.longitud, nc.codigo_postal FROM nuevos_cliente nc JOIN servicios_de_instalacion si ON nc.id = si.id_cliente");
+  let datosJson_ventasCiudades_admin
+  if (ventasCiudades.length > 0) {
+    datosJson_ventasCiudades_admin = JSON.stringify(ventasCiudades);
+  }
+
+  // * CAPTURANDO DATOS PARA LA GRÁFICA DE VENTAS MENSUALES
+  let historialGananciasAdm = await conexion.query("SELECT * FROM (SELECT * FROM ganancias_mensuales_admin ORDER BY id DESC LIMIT 12) sub ORDER BY id ASC;");
+  let datosJson_historialG_adm
+  if (historialGananciasAdm.length > 0) {
+    datosJson_historialG_adm = JSON.stringify(historialGananciasAdm);
+    console.log("\n");
+    console.log("IMPIMIENDO datosJson_historialG_adm ====>>>", datosJson_historialG_adm);
+  }
+
+   //* ==>> COMPARATIVA DE VENTAS 
+   let topVendedores = []
+   let icono = false;
+   const top_vendedores = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, total_ventas, id_vendedor, ganancias FROM registro_de_vendedores ORDER BY ganancias DESC LIMIT 5");
+ 
+   if (top_vendedores.length > 0) {
+     let cont = 1;
+     const vActual = top_vendedores.find(i => i.id_vendedor)
+     if (vActual) {
+       top_vendedores.forEach(x => {
+         topVendedores.push({
+           nombre: x.nombres + " " + x.apellidos,
+           total_ventas : x.total_ventas ,
+           pos: cont,
+           gananciaA: vActual.ganancias,
+           gananciaB: x.ganancias,
+           
+         })
+         cont++;
+       })
+ 
+       const diferenciaTop = 5 - top_vendedores.length
+       if (diferenciaTop != 0) {
+         for (let i = 0; i < diferenciaTop; i++) {
+           topVendedores.push({
+             nombre: "----------------",
+             pos: cont,
+           })
+           cont++;
+         }
+       }
+     }
+   }
+
+     // CAPTURANDO LAS FACTURAS RECIENTES x VENDEDOR (7 REGISTROS MÁXIMO)
+  const clientes_ = await conexion.query("SELECT * FROM nuevos_cliente ORDER BY id DESC LIMIT 7");
+  const total_facturas = await conexion.query("SELECT * FROM factura");
+  const total_creditos = await conexion.query("SELECT id_cliente, monto_aprobado FROM solicitar_credito");
+  const facturas_recientes = []
+  if (clientes_.length > 0) {
+    clientes_.forEach(x => {
+      const credito = total_creditos.find(i => i.id_cliente == x.id)
+      const factura = total_facturas.find(i => i.id_cliente == x.id)
+      console.log("CREDITO >>> ", credito)
+      if (factura && credito) {
+        let comision = "Por definir";
+        if (factura.vendedores) {
+          f = JSON.parse(factura.vendedores)
+          comision =  f[0].comision_final
+        }
+        facturas_recientes.push({
+          numFactura: factura.id_factura,
+          productoVendido: factura.producto_instalado,
+          valorVenta: credito.monto_aprobado,
+          comision,
+          estado: factura.estadoFactura
+        })
+      }
+    })
+  }
+
+  // ==>> CONSULTA PARA MOSTRAR ACCESO DIRECTO EL ESTADO DE LA INSTALACIÓN 
+  let Agenda= await conexion.query(
+    "SELECT N.*, S.monto_aprobado, A.estado_agenda FROM nuevos_cliente N LEFT JOIN solicitar_credito S ON N.id = S.id_cliente LEFT JOIN agendar_instalacion A ON N.id = A.id_cliente WHERE A.estado_agenda = 0");
+
+    Agenda.forEach((c) => {
+    /** Estado de la instalación */
+    c.estadoAgenda = {};
+    c.estadoAgenda.txt = "No instalado";
+    c.estadoAgenda.color = "badge-soft-dark";
+
+    if (c.estado_agenda == 0) {c.estadoAgenda.txt = "Instalación pendiente"; c.estadoAgenda.color = "badge-soft-warning"; }
+    if (c.estado_agenda == 1) { c.estadoAgenda.txt = "Instalado"; c.estadoAgenda.color = "badge-soft-success"; }
+  });
+
+   res.render("administrador", { user: req.user, info_vendedores, 
     sumaTotalVentas,numClientes: countCliente[0].totalClientes,
-     numVendedores: countVendedores[0].totalVendedores,
+    numVendedores: countVendedores[0].totalVendedores,
     datosJson_flnumVentas_admin,rendimientoNumventas,
     datosJson_vdAgregados_Admin,rendimientoVd,
-    datosJson_clAgregados_Admin, rendimientoCl});
+    datosJson_clAgregados_Admin, rendimientoCl, datosJson_ventasCiudades_admin,datosJson_historialG_adm,
+    topVendedores,facturas_recientes,Agenda});
 } 
 
 // todo ===>>> INSERTAR DATOS A LA TABLA HISTORIAL CLIENTES ADMIN 
@@ -1678,11 +1771,61 @@ exports.filtro_numventas_admin = async (req, res) => {
   const datos_update = {numVentas}
   const datos_insert = {fecha, year,semana, numVentas}
   if (rsemana == semana) {
-    await conexion.query("UPDATE filtro_numventas_admin SET ?" , [datos_update])
-  }else {
     await conexion.query("INSERT INTO filtro_numventas_admin SET ?", [datos_insert]);
+  }else {
+    await conexion.query("UPDATE filtro_numventas_admin SET ?" , [datos_update])
   }
   
   res.send("todo ok...");
 
 };
+
+
+// todo ===>>> INSERTAR DATOS A LA TABLA FILTRO NUMVENTAS ADMIN 
+exports.ganancias_mensuales_admin = async (req, res) => {
+
+  const factura = await conexion.query("SELECT * FROM factura")
+  let gananciaObtenida
+  let comisionObtenida
+
+  let fecha = new Date().toLocaleDateString("en-CA");
+  let mesActual = new Date().getMonth();
+  mesActual == 0 ? (mesActual = 12) : (mesActual = mesActual + 1);
+  const mesAnterior = mesActual - 1
+  const year = new Date().getFullYear();
+
+  let filtroGanancias, gananciasEmpresa = 0, comisionEmpresa = 0 ;
+  filtroGanancias = factura.filter((item) => mesAnterior == item.mes && year == item.year);
+  if (filtroGanancias.length > 0) {
+
+    filtroGanancias.forEach(fg => {
+      gananciaObtenida = JSON.parse(fg.ganancias_empresa);
+      console.log("/gananciaObtenida/ ===>>>>>>", gananciaObtenida.total);
+      gananciasEmpresa += parseFloat(gananciaObtenida.total)
+
+      comisionObtenida = fg.comision_total
+      console.log("/comisionObtenida/ ===>>>>>>", comisionObtenida);
+      comisionEmpresa += parseFloat(comisionObtenida)
+    });
+  }
+  comisionEmpresa = comisionEmpresa * (-1)
+
+  console.log("/SUMAAA/ ===>>>>>>", gananciasEmpresa);
+  console.log("/SUMAAA/ ===>>>>>>", comisionEmpresa);
+
+  const f = new Date()
+  f.setMonth(mesAnterior - 1);
+  let txtMes = f.toLocaleDateString("es", { month: "short" })
+  const mes = txtMes.charAt(0).toUpperCase() + txtMes.slice(1);
+
+  const guardarGanancias = { fecha, mes, gananciasEmpresa, comisionEmpresa }
+  await conexion.query("INSERT INTO ganancias_mensuales_admin SET ?", [guardarGanancias]);
+  
+  res.send("todo ok...");
+
+};
+
+
+
+
+
