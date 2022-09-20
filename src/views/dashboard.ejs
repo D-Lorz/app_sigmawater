@@ -426,7 +426,6 @@
                                 <div class="card-body">
                                     <div id="leaflet-map-group-control" class="leaflet-map"></div>
                                     <input type="hidden" id="datosJson_ventasCiudades" value="<%= datosJson_ventasCiudades %>">
-
                                 </div>
                             </div>
                             <!-- end card -->
@@ -529,10 +528,9 @@
                                         <input type="hidden" id="loc_long" name="longitud">
 
                                             <center><button type="submit" class="btn btn-primary" style="border-radius:17px;">Guardar</button></center>
-                                    </form>
-                                </div>
-                                          </div>
-                                      
+                                       </form>
+                                   </div>
+                                   </div>
                                     </div>
                                     <!-- end tab content -->
                                 </div>
@@ -550,8 +548,8 @@
                                     <div class="flex-shrink-0">
                                         <a href="/ventas-vendedor" class="btn btn-primary">Ver todas</a>
                                     </div>
-                                </div><!-- end card header -->
-
+                                </div>
+                                <!-- end card header -->
                                 <% if (facturas_recientes.length > 0) { %>
                                     <div class="card-body px-0">
                                         <div class="px-3" data-simplebar style="max-height:352px;">
@@ -604,33 +602,21 @@
                         </div>
                         <!-- end col -->
                     </div><!-- end row -->
-
                 </div>
             </div>
-
       <!-- =======FIXME: copyright ========================== -->
       <%- include ('./partials/copyright.ejs')%>
       <!-- =======FIXME: copyright ========================== -->
-    
             </div>
         </div>
-
-
         <!-- Right Sidebar -->
         <div class="right-bar">
             <div data-simplebar class="h-100">
                 <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-
-                    <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
-
                     <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
                         <i class="mdi mdi-close noti-icon"></i>
                     </a>
                 </div>
-
-                <!-- Settings -->
-
-            
             </div> <!-- end slimscroll-menu-->
         </div>
         <!-- /Right-bar -->

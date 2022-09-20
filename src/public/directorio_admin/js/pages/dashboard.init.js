@@ -235,108 +235,127 @@ chart.render();
 // 
 // Wallet Balance
 //
-var piechartColors = getChartColorsArray("#wallet-balance");
-var options = {
-    series: [35, 70, 15],
-    chart: {
-        width: 227,
-        height: 227,
-        type: 'pie',
-    },
-    labels: ['Ethereum', 'Bitcoin', 'Litecoin'],
-    colors: piechartColors,
-    stroke: {
-        width: 0,
-    },
-    legend: {
-        show: false
-    },
-    responsive: [{
-        breakpoint: 480,
-        options: {
-            chart: {
-                width: 200
-            },
-        }
-    }]
-};
+// var piechartColors = getChartColorsArray("#wallet-balance");
+// var options = {
+//     series: [35, 70, 15],
+//     chart: {
+//         width: 227,
+//         height: 227,
+//         type: 'pie',
+//     },
+//     labels: ['Ethereum', 'Bitcoin', 'Litecoin'],
+//     colors: piechartColors,
+//     stroke: {
+//         width: 0,
+//     },
+//     legend: {
+//         show: false
+//     },
+//     responsive: [{
+//         breakpoint: 480,
+//         options: {
+//             chart: {
+//                 width: 200
+//             },
+//         }
+//     }]
+// };
 
-var chart = new ApexCharts(document.querySelector("#wallet-balance"), options);
-chart.render();
+// var chart = new ApexCharts(document.querySelector("#wallet-balance"), options);
+// chart.render();
 
 //
 // Invested Overview
 //
 
-var radialchartColors = getChartColorsArray("#invested-overview");
-var options = {
-    chart: {
-        height: 270,
-        type: 'radialBar',
-        offsetY: -10
-    },
-    plotOptions: {
-        radialBar: {
-            startAngle: -130,
-            endAngle: 130,
-            dataLabels: {
-                name: {
-                    show: false
-                },
-                value: {
-                    offsetY: 10,
-                    fontSize: '18px',
-                    color: undefined,
-                    formatter: function (val) {
-                        return val + "%";
-                    }
-                }
-            }
-        }
-    },
-    colors: [radialchartColors[0]],
-    fill: {
-        type: 'gradient',
-        gradient: {
-            shade: 'dark',
-            type: 'horizontal',
-            gradientToColors: [radialchartColors[1]],
-            shadeIntensity: 0.15,
-            inverseColors: false,
-            opacityFrom: 1,
-            opacityTo: 1,
-            stops: [20, 60]
-        },
-    },
-    stroke: {
-        dashArray: 4,
-    },
-    legend: {
-        show: false
-    },
-    series: [80],
-    labels: ['Series A'],
-}
+// var radialchartColors = getChartColorsArray("#invested-overview");
+// var options = {
+//     chart: {
+//         height: 270,
+//         type: 'radialBar',
+//         offsetY: -10
+//     },
+//     plotOptions: {
+//         radialBar: {
+//             startAngle: -130,
+//             endAngle: 130,
+//             dataLabels: {
+//                 name: {
+//                     show: false
+//                 },
+//                 value: {
+//                     offsetY: 10,
+//                     fontSize: '18px',
+//                     color: undefined,
+//                     formatter: function (val) {
+//                         return val + "%";
+//                     }
+//                 }
+//             }
+//         }
+//     },
+//     colors: [radialchartColors[0]],
+//     fill: {
+//         type: 'gradient',
+//         gradient: {
+//             shade: 'dark',
+//             type: 'horizontal',
+//             gradientToColors: [radialchartColors[1]],
+//             shadeIntensity: 0.15,
+//             inverseColors: false,
+//             opacityFrom: 1,
+//             opacityTo: 1,
+//             stops: [20, 60]
+//         },
+//     },
+//     stroke: {
+//         dashArray: 4,
+//     },
+//     legend: {
+//         show: false
+//     },
+//     series: [80],
+//     labels: ['Series A'],
+// }
 
-var chart = new ApexCharts(
-    document.querySelector("#invested-overview"),
-    options
-);
+// var chart = new ApexCharts(
+//     document.querySelector("#invested-overview"),
+//     options
+// );
 
-chart.render();
+// chart.render();
 
 //
 // Market Overview
 //
-var barchartColors = getChartColorsArray("#market-overview");
+
+let valoreshg = []  // => Valores historial ganancias
+const datosY = []  // => Datos para la barras de la grafica
+const datosX = [] // => Datos para el eje X (los meses)
+const datosI = []// => Datos para el eje -X (comsiones pagadas)
+valoreshg = $('#datosJson_historialG_adm').val();
+if (valoreshg) {
+    valoreshg = JSON.parse(valoreshg);
+    console.log(valoreshg)
+    valoreshg.forEach(g => {
+       datosY.push(g.gananciasEmpresa)
+       datosX.push(g.mes)
+       datosI.push(g.comisionEmpresa)
+    })
+
+}
+
+// var barchartColors = getChartColorsArray("#market-overview");
 var options = {
     series: [{
-        name: 'Profit',
-        data: [12.45, 16.2, 8.9, 11.42, 12.6, 18.1, 18.2, 14.16, 11.1, 8.09, 16.34, 12.88]
-    }, {
-        name: 'Loss',
-        data: [-11.45, -15.42, -7.9, -12.42, -12.6, -18.1, -18.2, -14.16, -11.1, -7.09, -15.34, -11.88]
-    }],
+        name: 'Ganancias',
+        data: datosY 
+    }, 
+    {
+        name: 'Comsiones',
+        data: datosI
+    }
+],
     chart: {
         type: 'bar',
         height: 400,
@@ -347,10 +366,10 @@ var options = {
     },
     plotOptions: {
         bar: {
-            columnWidth: '20%',
+            columnWidth: '8%',
         },
     },
-    colors: barchartColors,
+    colors: ["#812082", "#50368c"],
     fill: {
         opacity: 1
     },
@@ -363,12 +382,12 @@ var options = {
     yaxis: {
         labels: {
             formatter: function (y) {
-                return y.toFixed(0) + "%";
+                return y.toFixed(1) + "";
             }
         }
     },
     xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        categories: datosX,
         labels: {
             rotate: -90
         }
