@@ -258,5 +258,5 @@
   g(document).on("DOMNodeInserted.mask", "*[data-mask]", y);
 });
 
-$("#seguro").mask("000-00-0000");
+$("#seguro,#seguroSocial,#numero_se_social").mask("000-00-0000");
 

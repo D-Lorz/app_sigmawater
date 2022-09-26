@@ -8,6 +8,7 @@
 <!--FIXME: ================================================================== -->
 
 
+
 <!-- Jquery-->
 <script src="./js/jquery-3.6.0.min.js"></script>
 <!-- Common script -->
@@ -40,7 +41,10 @@
 <script src="./js/jquery.datetimepicker.full.min.js"></script>
 <!-- * SCRIPTS DEL CALENDARIO DE REGISTER -->
 <!-- *==================== SCRIPTS =================================== -->
-
+<!-- MASCARAS DE TELEFONOS -->
+<script src="../js/scripts-mask-phone.js"></script>
+<!-- VALIDANDO CAMPOS  -->
+<script src="./js/scripts-validar-campos.js"></script>
 
 <!-- ====================================================================-->
 <!-- === CALENDARIO == -->
@@ -78,24 +82,6 @@
     });
 
   });
-
-
-  /////////////////////////////////////////////////////////////////////////=-->
-
-
-  //  /TODO: FUNCIONES PARA MASCARA  -->
-
-  document.addEventListener("DOMContentLoaded", function () {
-
-    // Pattern (Phone) MASCARA PARA EL CAMPO TELEFONO DE SOLICITANTE
-    var phoneMaskRegister = IMask(document.getElementById('telefonoform'), {
-      mask: '+{1} (000) 000-0000'
-    });
-
-  });
-
-  //  /TODO: FUNCIONES PARA MASCARA  -->
-
 
   // ====================================================================-->
   //=== ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT == -->
@@ -144,7 +130,6 @@
     }
 
   }
-  // ======> VALIDAR LIMITANTE DEL CAMPO NUMBER
 
   /////////////////////////////////////////////////////////////////////////=-->
 

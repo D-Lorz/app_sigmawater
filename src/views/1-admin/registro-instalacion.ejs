@@ -85,93 +85,105 @@
                         <section id="validation">
       
                   <div class="card-content collapse show">
-                    
-
-                                    <form action="/instalacion" enctype="multipart/form-data" method="POST" id="demo-form2" data-parsley-validate class="form"id="validarForm">
-                          
-                                        <input type="hidden"  name="id_cliente" value="<%= cl_instalacion.id %>">
-                                        <input type="hidden"  name="codigo_cliente" value="<%= cl_instalacion.id_cliente %>">
-                       <!-- * ========== Primera fila =======  -->
-                                                     
-                                      <div class="row justify-content-center" style="text-align:center; ">
-                                           <div class="col-md-4">
-                                              <div class="form-group">
-                                                  <label for="fechaInstalacion">Fecha de instalación<span class="danger">*</span></label>
-                                                  <input type="tex" placeholder="Selecciona la fecha en que se instaló el producto"
-                                                   class="form-control required" id="fechaInstalacion" required name="fechaDeInstalacion" readonly> 
-                                              </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="exampleDataList" class="form-label">Producto instalado</label> <span class="danger">*</span>
-                                         <% if(cl_instalacion.sistema) {%>
-                                            <% if(cl_instalacion.sistema =="Reverse Osmosis System") {%>
-                                              <input class="form-control" required list="estado_sistema" name="productoinstaladO" placeholder="Selecciona el tipo de sistema" >
-                                                 <datalist id="estado_sistema">
-                                                   <option value="Reverse Osmosis System 3C Sigma"></option>
-                                                   <option value="Reverse Osmosis System"></option>
-                                                 </datalist>
-                                              <% } else if(cl_instalacion.sistema =="Whole System") {%> 
-                                                  <div class="form-group">
-                                                      <input type="tex" class="form-control" value="<%=cl_instalacion.sistema%>" name="productoinstaladO" readonly> 
-                                                  </div>
-                                                <% } %> 
-                                            <% } %> 
-                                        </div> 
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="">Serial producto 1<span class="danger">*</span></label>
-                                                <input type="text" class="form-control" required  name="serial_producto1">
-                                            </div>
-                                        </div>  
-                                        <div class="col-md-2">
-                                          <div class="form-group">
-                                              <label for="">Serial producto 2</label>
-                                              <input type="text" class="form-control" name="serial_producto2">
-                                          </div>
-                                      </div>  
-                                    </div>
-                            <!-- * ========== Segunda fila =======  -->
-                            <div class="row justify-content-center" style="text-align:center; ">
-                              <div class="col-md-4">
-                                  <div class="form-group">
-                                      <label for="">Instalador<span class="danger">*</span></label>
-                                      <input type="text" class="form-control " required  name="instalador" >
-                                  </div>
-                              </div> 
-                              <div class="col-md-4">
-
-                              <div class="input-group" style="margin-top:22px ;">
-                                <label class="input-group-btn">
-                                  <span class="btn btn-primary" style="padding: 10px;">
-                                    Evidencia fotográfica<input type="file" name="evidencia_fotografica" id="campoFile" accept="image/jpg"
-                                      style="display: none;" id="licencia" class="required">
-                                    <!-- style="display: none;" class="inputfile" multiple -->
-                                  </span>
-                                </label>
-                                <input type="text" class="form-control" style="height:42px"
-                                  placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" readonly>
-                              </div>
+                    <!-- Fin de Alerta -->
+                    <!-- Mensaje de clave no coincide -->
+                    <div class="alert alert-danger alert-border-left alert-dismissible fade show mt-2" id="alertaFecha"
+                      style="padding: 8px 1rem; display: none" role="alert">
+                      <i class="fa-solid fa-circle-exclamation me-3 align-middle"></i>
+                      <label style="font-size: 14px;"><strong>Atención!</strong> -
+                        <span style="font-weight: 300">La fecha de instalación es obligatoria</span>
+                      </label>
+                    </div>
+                    <!-- Fin de Alerta -->
+                  
+                    <form action="/instalacion" enctype="multipart/form-data" method="POST" id="demo-form2" data-parsley-validate
+                      class="form" id="validarForm">
+                  
+                      <input type="hidden" name="id_cliente" value="<%= cl_instalacion.id %>">
+                      <input type="hidden" name="codigo_cliente" value="<%= cl_instalacion.id_cliente %>">
+                      <!-- * ========== Primera fila =======  -->
+                  
+                      <div class="row justify-content-center" style="text-align:center; ">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="fechaInstalacion">Fecha de instalación<span class="danger">*</span></label>
+                            <input type="tex" placeholder="Selecciona la fecha en que se instaló el producto"
+                              class="form-control required" onchange="validarFecha()" id="fechaInstalacion" name="fechaDeInstalacion" readonly>
+                          </div>
                         </div>
-                              <div class="col-md-4">
-                                  <div>
-                                      <div class="form-group">
-                                          <label for="postalcode">Nota</label>
-                                          <textarea class="form-control" style="height:0px"  id="" name="nota" ></textarea>
-                                   </div> 
-                             </div> 
-                         </div>
-                          
-                          </div> 
-      
-                      
-                                 
-                                 </fieldset>  
-                                       </br>
-                      <center><button type="submit" class="btn btn-primary">Guardar</button></center>
-      
-                                    </form>
-      
+                        <div class="col-md-4">
+                          <label for="exampleDataList" class="form-label">Producto instalado</label> <span class="danger">*</span>
+                          <% if(cl_instalacion.sistema) {%>
+                            <% if(cl_instalacion.sistema=="Reverse Osmosis System" ) {%>
+                              <input class="form-control" onblur="validarFecha()" required list="estado_sistema" name="productoinstaladO"
+                                placeholder="Selecciona el tipo de sistema">
+                              <datalist id="estado_sistema">
+                                <option value="Reverse Osmosis System 3C Sigma"></option>
+                                <option value="Reverse Osmosis System"></option>
+                              </datalist>
+                              <% } else if(cl_instalacion.sistema=="Whole System" ) {%>
+                                <div class="form-group">
+                                  <input type="tex" class="form-control" onblur="validarFecha()" value="<%=cl_instalacion.sistema%>" name="productoinstaladO"
+                                    readonly>
                                 </div>
+                                <% } %>
+                                  <% } %>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <label for="">Serial producto 1<span class="danger">*</span></label>
+                            <input type="text" class="form-control" required name="serial_producto1">
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <label for="">Serial producto 2</label>
+                            <input type="text" class="form-control" name="serial_producto2">
+                          </div>
+                        </div>
+                      </div>
+                      <!-- * ========== Segunda fila =======  -->
+                      <div class="row justify-content-center" style="text-align:center; ">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="">Instalador<span class="danger">*</span></label>
+                            <input type="text" class="form-control " required name="instalador">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                  
+                          <div class="input-group" style="margin-top:22px ;">
+                            <label class="input-group-btn">
+                              <span class="btn btn-primary" style="padding: 10px;">
+                                Evidencia fotográfica<input type="file" name="evidencia_fotografica" id="campoFile" accept="image/jpg"
+                                  style="display: none;" id="licencia" class="required">
+                                <!-- style="display: none;" class="inputfile" multiple -->
+                              </span>
+                            </label>
+                            <input type="text" class="form-control" style="height:42px"
+                              placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" readonly>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div>
+                            <div class="form-group">
+                              <label for="postalcode">Nota</label>
+                              <textarea class="form-control" style="height:0px" id="" name="nota"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                  
+                      </div>
+                  
+                  
+                  
+                      </fieldset>
+                      </br>
+                      <center><button type="submit" id="btnRegistro" class="btn btn-primary">Guardar</button></center>
+                  
+                    </form>
+                  
+                  </div>
                           
                         </section>
                         
@@ -237,8 +249,12 @@
   <!--  SCRIPTS DEL CALENDARIO DE NUEVO CLIENTE -->
   <script src="../directorio_nuevoCliente/js/jquery-ui.js"></script>
   <script src="../directorio_nuevoCliente/js/jquery-ui.min.js"></script>
-  
+  <!-- SCRIPTS PARA VALIDAR LA FECHA OBLIGATORIA -->
+  <script src="../js/scripts_personalizados.js"></script>
   <script>
+
+
+
   $.datepicker.regional['es'] = {
      monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
      monthNamesShort: ['Enero','Febrero','Marzo','Abril', 'Mayo','Junio','Julio','Agosto','Septiembre', 'Octubre','Noviembre','Diciembre'],

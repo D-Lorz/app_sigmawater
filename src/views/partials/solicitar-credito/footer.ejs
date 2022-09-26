@@ -74,12 +74,14 @@
 <script src="../directorio_nuevoCliente/js/jquery-ui.min.js"></script>
 <!-- * SCRIPTS DEL CALENDARIO DE NUEVO CLIENTE -->
 
-
+<!-- Validaciónes campos -->
+<script src="../js/scripts-validar-campos.js"></script>
 <!-- ==========FIXME: JS DEL FORMULARIO ================= -->
 
- <!-- === CALENDARIO == --> 
+<!-- ==== MASCARA PARA EL CAMPO SEGURO SOCIAL ==== -->
+<script src="../js/mascara.js"></script>
 
-
+<!-- === CALENDARIO == --> 
 <script>
  $.datepicker.regional['es'] = {
         monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -178,9 +180,7 @@ $.datepicker.regional['es'] = {
     console.log(obj.value);
     if (obj.value.length > obj.maxLength) {
       obj.value = obj.value.slice(0, obj.maxLength);
-
     }
-
   }
 
   //-================================ ======================-->

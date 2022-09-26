@@ -50,15 +50,11 @@ exports.registrarClientes = async (req, res) => {
 
 exports.getSolicitudCreditos = async (req, res) => {
   const id = req.params.id
-let infoCl = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id])
-infoCl = infoCl[0];
-if (!infoCl) {
-  res.clearCookie('jwt')
-  return res.redirect('/login')
+  let infoCl = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id])
+  infoCl = infoCl[0];
+  res.render('solicitar-credito', { user: req.user, infoCl });
 }
- res.render('solicitar-credito', { user: req.user, infoCl });
 
-}
 exports.getAhorro = async (req, res) => {
   const id = req.params.id
   await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
@@ -81,11 +77,7 @@ exports.getAgendarinstalacion = async (req, res) => {
   const id = req.params.id
   let infoCl = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id])
   infoCl = infoCl[0]
-    if(!infoCl){
-      res.clearCookie('jwt')
-      return res.redirect('/login')
-    }  
-    res.render('agendar-instalacion', { user: req.user,infoCl });
+  res.render('agendar-instalacion', { user: req.user, infoCl });
 }
 
 //------------------------------------------------
@@ -163,6 +155,7 @@ exports.solicitarCredito = async (req, res) => {
   const licencia_cliente = JSON.stringify({'frontal': frontal,'trasera': trasera });
   const acuerdo_firmado = req.body.acuerdo_firmado
   const id_cliente = req.body.id_cliente
+  const estado_del_credito = "En revisión"
 
   const objeto_datos = {
     monto_financiar_cliente, sistema, numero_licencia_cliente, estado_licencia_cliente,
@@ -184,7 +177,7 @@ exports.solicitarCredito = async (req, res) => {
     ingresos_co_solicitante, ingresos_adicionales_co_solicitante, nom_referencia1_co_solicitante,
     parentesco1_co_solicitante, tel_movil1_co_solicitante, nom_referencia2_co_solicitante,
     parentesco2_co_solicitante, tel_movil2_co_solicitante, nom_referencia3_co_solicitante,
-    parentesco3_co_solicitante, tel_movil3_co_solicitante, licencia_cliente, acuerdo_firmado, id_cliente
+    parentesco3_co_solicitante, tel_movil3_co_solicitante, licencia_cliente, acuerdo_firmado, id_cliente,estado_del_credito
 
   }
   // * --> Actualizar datos personales del cliente
@@ -226,10 +219,10 @@ exports.listarClientes = async (req, res) => {
 
     if (listaCl.length > 0) {
       if (v.idd == v.idd_cliente) {
-        if (v.eestado_del_credito == 0) { v.estadopro.txt = "En revisión"; v.estadopro.color = "badge-soft-warning"; }
-        if (v.eestado_del_credito == 1) { v.estadopro.txt = "Aprobado"; v.estadopro.color = "badge-soft-success"; }
-        if (v.eestado_del_credito == 2) { v.estadopro.txt = "Rechazado"; v.estadopro.color = "badge-soft-danger"; }
-        if (v.eestado_del_credito == 3) { v.estadopro.txt = "Pagado (cash)"; v.estadopro.color = "badge-soft-info"; }
+        if (v.eestado_del_credito === 'En revisión') { v.estadopro.txt = "En revisión"; v.estadopro.color = "badge-soft-warning"; }
+        if (v.eestado_del_credito === 'Aprobado') { v.estadopro.txt = "Aprobado"; v.estadopro.color = "badge-soft-success"; }
+        if (v.eestado_del_credito === 'Rechazado') { v.estadopro.txt = "Rechazado"; v.estadopro.color = "badge-soft-danger"; }
+        if (v.eestado_del_credito === 'Pagado(cash)') { v.estadopro.txt = "Pagado(cash)"; v.estadopro.color = "badge-soft-info"; }
       }
     }
     v.estadoAgenda = {};
@@ -251,11 +244,6 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   let clientes2 = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id_cliente])
   clientes2 = clientes2[0]
 
-  if (!clientes2){
-    res.clearCookie('jwt')
-    return res.redirect('/login')
-  }  
-
   // todo ===============================>>> Estado del solicitar credito
   let creditoVista_interna = await conexion.query('SELECT * FROM solicitar_credito WHERE id_cliente = ? LIMIT 1', [clientes2.id])
 
@@ -266,17 +254,17 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
   if (creditoVista_interna.length > 0) {
     creditoVista_interna = creditoVista_interna[0]
-    if (creditoVista_interna.estado_del_credito === '0') {
+    if (creditoVista_interna.estado_del_credito === 'En revisión') {
       estado.txt = "En revisión"; estado.color = 'badge-soft-warning'
       estado.verBtn = false;
-    } else if (creditoVista_interna.estado_del_credito == 1) {
+    } else if (creditoVista_interna.estado_del_credito == 'Aprobado') {
       estado.txt = "Aprobado"; estado.color = 'badge-soft-success'
       estado.verBtn = false;
-    } else if (creditoVista_interna.estado_del_credito == 2) {
+    } else if (creditoVista_interna.estado_del_credito == 'Rechazado') {
       estado.txt = "Rechazado"; estado.color = 'badge-soft-danger'
       estado.verBtn = false;
     } else {
-      estado.txt = "Pagado (cash)"; estado.color = 'badge-soft-info'
+      estado.txt = "Pagado(cash)"; estado.color = 'badge-soft-info'
       estado.verBtn = false;
     }
   }
@@ -287,10 +275,10 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   estadoBtn.btnAgenda = false;
   if (validarBtnInstalacion.length > 0) {
     validarBtnInstalacion = validarBtnInstalacion[0]
-    if (validarBtnInstalacion.estado_del_credito == 0) { estadoBtn.btnAgenda = false; }
-    else if (validarBtnInstalacion.estado_del_credito == 1) { estadoBtn.btnAgenda = true; estadoBtn.txt = "Solicitar instalación"; }
-    else if (validarBtnInstalacion.estado_del_credito == 2) { estadoBtn.btnAgenda = false; }
-    else if (validarBtnInstalacion.estado_del_credito == 3) { estadoBtn.btnAgenda = true; estadoBtn.txt = "Solicitar instalación"; }
+    if (validarBtnInstalacion.estado_del_credito == 'En revisión') { estadoBtn.btnAgenda = false; }
+    else if (validarBtnInstalacion.estado_del_credito == 'Aprobado') { estadoBtn.btnAgenda = true; estadoBtn.txt = "Solicitar instalación"; }
+    else if (validarBtnInstalacion.estado_del_credito == 'Rechazado') { estadoBtn.btnAgenda = false; }
+    else if (validarBtnInstalacion.estado_del_credito == 'Pagado(cash)') { estadoBtn.btnAgenda = true; estadoBtn.txt = "Solicitar instalación"; }
   } else if (!validarBtnInstalacion) { estadoBtn.btnAgenda = false; }
 
   // todo ===========>>> Desactivar btn: Solicitar instalación cuando el admin ya subío la evidencia 
@@ -492,7 +480,7 @@ exports.elegirSistema = async (req, res) => {
   const id_clienteCodigo = req.body.id_clienteCodigo;
   const id_cliente = req.body.id_consecutivo;
   const sistema = req.body.sistemaElegido;
-  const estado_del_credito = 1
+  const estado_del_credito = 'Aprobado'
   const monto_aprobado = req.body.montoAprobadoPorFuera.replace(/[$ ,]/g, '');
   let monto_maximo = 8500
   let porcentaje_aprobado = ((monto_aprobado * 100) / monto_maximo).toFixed(1)
@@ -512,7 +500,7 @@ exports.elegirSistema = async (req, res) => {
   if (creditoVista_interna.length > 0) {
     creditoVista_interna = creditoVista_interna[0]
 
-    if (creditoVista_interna.estado_del_credito == 1) {
+    if (creditoVista_interna.estado_del_credito == 'Aprobado') {
       estadoPorfuera.verBtn = false;
     }
   }
@@ -521,10 +509,13 @@ exports.elegirSistema = async (req, res) => {
 exports.getRegistrarInstalacion = async (req, res) => {
   const id = req.params.id
   console.log("IMPIMIENDO ID: ==>>  ", id)
-  await conexion.query('SELECT n.id, n.id_cliente, c.sistema FROM nuevos_cliente n JOIN solicitar_credito c ON n.id = c.id_cliente WHERE n.id_cliente = ? LIMIT 1', [id], (err, result) => {
-    if (err) throw err;
-    res.render('./1-admin/registro-instalacion', { user: req.user, cl_instalacion: result[0] });
-  })
+  let cl_instalacion = await conexion.query('SELECT n.id, n.id_cliente, c.sistema FROM nuevos_cliente n JOIN solicitar_credito c ON n.id = c.id_cliente WHERE n.id_cliente = ? LIMIT 1', [id])
+      cl_instalacion = cl_instalacion[0]
+    if (!cl_instalacion) {
+      res.clearCookie("jwt");
+      return res.redirect("/login");
+    }
+    res.render('./1-admin/registro-instalacion', { user: req.user, cl_instalacion });
 }
 
 // todo ==> Generar codigo numero aleatorio del cliente

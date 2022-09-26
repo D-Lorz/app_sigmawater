@@ -40,7 +40,7 @@ function validarCorreosIguales() {
 }
 
 /**
-* *Validar Campos de Correo que sean iguales en perfil del vendedor
+* *Validar Campos de CONTRASEÑAS que sean iguales en perfil del vendedor
 * 
 */
 
@@ -59,6 +59,24 @@ function validarPass() {
   }
 
 
+}
+
+/**
+* *Validar campo de FECHA DE INSTALACIÓN 
+* 
+*/
+function validarFecha() {
+  let valor = document.getElementById("fechaInstalacion");
+  const btnRegistro = document.getElementById("btnRegistro");
+  const alertaFechas = document.getElementById("alertaFecha");
+
+  if (valor.value == "" || valor.value == null) {
+    btnRegistro.disabled = true;
+    alertaFecha.style.display = 'block'
+  } else if(valor.value){
+    btnRegistro.disabled = false;
+    alertaFecha.style.display = 'none'
+  }
 }
 
 

@@ -463,16 +463,16 @@
                                         <div class="row" style="margin-bottom: 2%;">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="nombreP">Nombre<span class="danger">*</span></label>
-                                                        <input type="text" class="form-control" required id="nombreP" name="nombre">
-                                                        <input type="hidden" class="form-control" required id="nombreP" value="" name="segundo_nombre">
+                                                        <label for="nombreCl_dash">Nombre<span class="danger">*</span></label>
+                                                        <input type="text" class="form-control" required id="nombreCl_dash" name="nombre">
+                                                        <input type="hidden" class="form-control" required value="" name="segundo_nombre">
                                                     </div>
                                                 </div>
                                             
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="apellidoP"> Apellidos<span class="danger">*</span></label>
-                                                        <input type="text" class="form-control" required id="apellidoP" name="apellido" >
+                                                        <label for="apellidoCl_dash"> Apellidos<span class="danger">*</span></label>
+                                                        <input type="text" class="form-control" required id="apellidoCl_dash" name="apellido" >
                                                     </div>
                                                 </div> 
                                             </div>
@@ -487,8 +487,8 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="telefonoP">Teléfono<span class="danger">*</span></label>
-                                                        <input type="text" class="form-control" required id="telefonoP" name="telefono">
+                                                        <label for="tel-cliente-dash">Teléfono<span class="danger">*</span></label>
+                                                        <input type="text" class="form-control" required id="tel-cliente-dash" name="telefono">
                                                     </div>
                                                 </div>
                                             </div>
@@ -655,8 +655,11 @@
             crossorigin="anonymous"></script>
  <!-- Google Maps JavaScript library -->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBZBkIUU7yQ-Rsy8a7KG70aJ_VDOsaf6fE"></script>
-<script src="../directorio_nuevoCliente/libs/imask/imask.min.js"></script>
-<script src="./js/scripts-generales.js"></script>
+<!-- Mascaras de teléfonos  -->
+<script src="./libs/imask/imask.min.js"></script>
+<script src="./js/scripts-mask-phone.js"></script>
+<!-- Valdar campos -->
+<script src="./js/scripts-validar-campos.js"></script>
 
 <script>
 // ======================================================= ==============-->
