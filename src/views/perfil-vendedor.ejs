@@ -34,6 +34,24 @@
 <link href="../directorio_dash/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="../css/alertify.css">
 
+<!-- Quitar las flechas del input  -->
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    /* estilo a los iconos del contenido de los tabs */
+    .iconoDatos {
+        font-size: 19px;
+        background: aliceblue;
+        vertical-align: center;
+    }
+</style>
     </head>
 
     <body>
@@ -192,7 +210,7 @@
                                                                          <div class="col-lg-6">
                                                                                     <div class="form-group">
                                                                                         <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Teléfono movil</h5>
-                                                                                        <input type="tel" value="<%= vendedor.telefono_movil%>" required class="form-control text-muted font-size-13" id="" name="telefono_movil">
+                                                                                        <input type="text" value="<%= vendedor.telefono_movil%>" required class="form-control text-muted font-size-13" id="telefono_movil" name="telefono_movil">
                                                                                     </div>
                                                                              </div> 
                                                                          </div>
@@ -207,7 +225,7 @@
                                                                                    <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                        <h5 class="font-size-12 mb-1" style="text-transform: capitalize;">Ciudad</h5>
-                                                                                        <input type="text" value="<%= vendedor.ciudad%>" required class="form-control text-muted font-size-13" name="ciudad">
+                                                                                        <input type="text" value="<%= vendedor.ciudad%>" required class="form-control text-muted font-size-13" id="editCiudad" name="ciudad">
                                                                                      </div>
                                                                                </div> 
                                                                                <div class="col-lg-3">
@@ -230,25 +248,25 @@
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Nombre del banco</label>
-                                                                                        <input type="text" value="<%= vendedor.nombre_banco%>" required class="form-control text-muted font-size-13" name="nombre_banco">
+                                                                                        <input type="text" value="<%= vendedor.nombre_banco%>" required class="form-control text-muted font-size-13" id="editBanco" name="nombre_banco">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Número de cuenta</label>
-                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control text-muted font-size-13" name="numero_cuenta">
+                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control text-muted font-size-13" id="editCuenta" name="numero_cuenta">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Número de ruta</label>
-                                                                                        <input type="number" value="<%= vendedor.numero_cuenta%>" required class="form-control text-muted font-size-13" name="ruta">
+                                                                                        <input type="number" value="<%= vendedor.ruta%>" oninput="maxlengthNumber(this);" required class="form-control text-muted font-size-13" id="editRuta" name="ruta" maxlength="9">
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-lg-3">
                                                                                     <div class="form-group">
                                                                                         <label for="">Beneficiario</label>
-                                                                                        <input type="text" value="<%= vendedor.beneficiario%>" required class="form-control text-muted font-size-13" name="beneficiario">
+                                                                                        <input type="text" value="<%= vendedor.beneficiario%>" required class="form-control text-muted font-size-13" id="editBeneficiario" name="beneficiario">
                                                                                     </div>
                                                                                 </div>
                                                                              </div> 
@@ -298,14 +316,6 @@
                                         <div class="tab-content p-3 text-muted">
                                             <div class="tab-pane active" id="home-1" role="tabpanel">
                                                 <h5 class="font-size-16 mb-1" style="text-transform: capitalize;letter-spacing: -1px;">Información personal </h5>
-                                               <style>
-                                                .iconoDatos{
-                                                    font-size: 19px;
-                                                    background: aliceblue;
-                                                    vertical-align:center;
-                                                    
-                                                }
-                                               </style>
                                              <br>
                                              <br>
                                             <div class="row">
@@ -486,13 +496,11 @@
 <!-- pace js -->
 <script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
 
-
 <!-- init js -->
 <script src="./directorio_dash/js/pages/datatable-pages.init.js"></script>
 <script src="../directorio_dash/js/pages/table-responsive.init.js"></script>
 <script src="../directorio_perfilClientes/js/app.js"></script>
    
-               
 <script src="./directorio_dash/js/app.js"></script>
  <!-- Required datatable js -->
  <script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -520,9 +528,16 @@
 
   <!-- Datatable init js -->
   <script src="../directorio_dash/js/pages/datatables.init.js"></script>    
+  <!-- Sweetalert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+  <!-- alertify -->
   <script src="../js/alertify.min.js"></script>
   <script src="../js/alertify.js"></script>
+  <!-- mascara pata teléfono -->
+  <script src="../libs/imask/imask.min.js"></script>
+  <script src="../js/scripts-mask-phone.js"></script>
+  <!-- Validar campos -->
+  <script src="../js/scripts-validar-campos.js"></script>
 
 <script>
 // ==> Previsualizar foto de perfil == INICIO <==
@@ -585,6 +600,8 @@
                 }
             })
     }
+
+    
 </script>
 
 

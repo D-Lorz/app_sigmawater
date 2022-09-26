@@ -160,16 +160,16 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
     if (clCredito.length > 0) {
       clCredito.forEach((c) => {
         if (info.id == c.id_cliente) {
-          if (c.estado_del_credito == 0) {
+          if (c.estado_del_credito == 'En revisión') {
             info.estadoCreditoCliente.txt = "Pendiente";
             info.estadoCreditoCliente.color = "badge-soft-warning";
           }
-          if (c.estado_del_credito == 1) {
+          if (c.estado_del_credito == 'Aprobado') {
             info.estadoCreditoCliente.txt = "Aprobado";
             info.estadoCreditoCliente.color = "badge-soft-success";
           }
-          if (c.estado_del_credito == 2) {
-            info.estadoCreditoCliente.txt = "Bloqueado";
+          if (c.estado_del_credito == 'Rechazado') {
+            info.estadoCreditoCliente.txt = "Rechazado";
             info.estadoCreditoCliente.color = "badge-soft-danger";
           }
         }
@@ -663,10 +663,10 @@ exports.listarClientes = async (req, res) => {
     c.estadoCredito.txt = "No solicitado";
     c.estadoCredito.color = "badge-soft-dark";
 
-    if (c.estado_del_credito == 0) { c.estadoCredito.txt = "En revisión"; c.estadoCredito.color = "badge-soft-warning"; }
-    if (c.estado_del_credito == 1) { c.estadoCredito.txt = "Aprobado"; c.estadoCredito.color = "badge-soft-success"; }
-    if (c.estado_del_credito == 2) { c.estadoCredito.txt = "Rechazado"; c.estadoCredito.color = "badge-soft-danger"; }
-    if (c.estado_del_credito == 3) { c.estadoCredito.txt = "Pagado(cash)"; c.estadoCredito.color = "badge-soft-info";}
+    if (c.estado_del_credito == 'En revisión') { c.estadoCredito.txt = "En revisión"; c.estadoCredito.color = "badge-soft-warning"; }
+    if (c.estado_del_credito == 'Aprobado') { c.estadoCredito.txt = "Aprobado"; c.estadoCredito.color = "badge-soft-success"; }
+    if (c.estado_del_credito == 'Rechazado') { c.estadoCredito.txt = "Rechazado"; c.estadoCredito.color = "badge-soft-danger"; }
+    if (c.estado_del_credito == 'Pagado(cash)') { c.estadoCredito.txt = "Pagado(cash)"; c.estadoCredito.color = "badge-soft-info";}
     /** Estado de la instalación */
     c.estadoAgenda = {};
     c.estadoAgenda.txt = "No instalado";
@@ -699,10 +699,10 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
   if (credito.length > 0) {
     credito = credito[0]
-    if (credito.estado_del_credito === '0') {estado.txt = "En revisión";estado.color = 'badge-soft-warning' }
-     else if (credito.estado_del_credito == 1) {estado.txt = "Aprobado"; estado.color = 'badge-soft-success'}
-      else if (credito.estado_del_credito == 2) { estado.txt = "Rechazado"; estado.color = 'badge-soft-danger' }
-       else if (credito.estado_del_credito == 3) {estado.txt = "Pagado(cash)"; estado.color = 'badge-soft-info'}
+    if (credito.estado_del_credito === 'En revisión') {estado.txt = "En revisión";estado.color = 'badge-soft-warning' }
+     else if (credito.estado_del_credito == 'Aprobado') {estado.txt = "Aprobado"; estado.color = 'badge-soft-success'}
+      else if (credito.estado_del_credito == 'Rechazado') { estado.txt = "Rechazado"; estado.color = 'badge-soft-danger' }
+       else if (credito.estado_del_credito == 'Pagado(cash)') {estado.txt = "Pagado(cash)"; estado.color = 'badge-soft-info'}
   }
 
   // todo =========================>> Mostrar información del test de agua del cliente
@@ -795,10 +795,10 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
   if (clbotonCredito.length > 0) {
      clbotonCredito = clbotonCredito[0]
-     if (clbotonCredito.estado_del_credito == 0) { estade.txt = "si hecho"; estade.btncredito = true; }
-     else if (clbotonCredito.estado_del_credito == 1) { estade.btncredito = false;}
-     else if (clbotonCredito.estado_del_credito == 2) { estade.btncredito = false;}
-     else if (clbotonCredito.estado_del_credito == 3) { estade.btncredito = false;}
+     if (clbotonCredito.estado_del_credito == 'En revisión') { estade.txt = "si hecho"; estade.btncredito = true; }
+     else if (clbotonCredito.estado_del_credito == 'Aprobado') { estade.btncredito = false;}
+     else if (clbotonCredito.estado_del_credito == 'Rechazado') { estade.btncredito = false;}
+     else if (clbotonCredito.estado_del_credito == 'Pagado(cash)') { estade.btncredito = false;}
 
   }
 
