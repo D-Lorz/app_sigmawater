@@ -78,10 +78,10 @@
                         <!-- Form wizard with step validation section start -->
                         <section id="validation">
                   <div class="card-content collapse show">
-                    <form action="/agendarInstalacion"  id="demo-form2" data-parsley-validate class="form" method="POST" class="steps wizard-circle" id="validarForm">
+
                         <!-- * ========== Primera fila =======  -->
-                        <input type="hidden" hidden name="id_cliente" value="<%= infoCl.id %>">
-                        <input type="hidden" hidden name="codigo_cliente" value="<%= infoCl.id_cliente %>">
+                        <input type="hidden" hidden id="id_cliente" value="<%= infoCl.id %>">
+                        <input type="hidden" hidden id="codigo_cliente" value="<%= infoCl.id_cliente %>">
                                    <div class="row justify-content-center" style="text-align:center; ">
                                        <div class="col-xl-6">
                                            <div class="card">
@@ -101,26 +101,26 @@
                                                            <label for="">Día disponibles para la instalación</label>
                                                            <div class="btn-group btn-group-sm mt-2" required role="group" aria-label="Basic checkbox toggle button group">
                                                              
-                                                               <input type="checkbox" class="btn-check" id="btncheck1" name="lunes" value="lunes" autocomplete="off" >
-                                                               <label class="btn btn-primary colorBoton" for="btncheck1">Lunes</label>
+                                                               <input type="checkbox" class="btn-check" id="lunes" autocomplete="off" >
+                                                               <label class="btn btn-primary colorBoton" for="lunes">Lunes</label>
            
-                                                               <input type="checkbox" class="btn-check" id="btncheck2"  name="martes"  value="martes" autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="btncheck2" >Martes</label>
+                                                               <input type="checkbox" class="btn-check" id="martes" autocomplete="off">
+                                                               <label class="btn btn-primary colorBoton" for="martes" >Martes</label>
            
-                                                               <input type="checkbox" class="btn-check" id="btncheck3"  name="miercoles" value="miercoles"  autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="btncheck3">Miercoles</label>
+                                                               <input type="checkbox" class="btn-check" id="miercoles" autocomplete="off">
+                                                               <label class="btn btn-primary colorBoton" for="miercoles">Miercoles</label>
            
-                                                               <input type="checkbox" class="btn-check" id="btncheck4"  name="jueves" value="jueves"  autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="btncheck4">Jueves</label>
+                                                               <input type="checkbox" class="btn-check" id="jueves" autocomplete="off">
+                                                               <label class="btn btn-primary colorBoton" for="jueves">Jueves</label>
            
-                                                               <input type="checkbox" class="btn-check" id="btncheck5"  name="viernes"value="viernes"   autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="btncheck5">Viernes</label>
+                                                               <input type="checkbox" class="btn-check" id="viernes" autocomplete="off">
+                                                               <label class="btn btn-primary colorBoton" for="viernes">Viernes</label>
            
-                                                               <input type="checkbox" class="btn-check" id="btncheck6"  name="sabado" value="sabado"  autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="btncheck6">Sabado</label>
+                                                               <input type="checkbox" class="btn-check" id="sabado" autocomplete="off">
+                                                               <label class="btn btn-primary colorBoton" for="sabado">Sabado</label>
            
-                                                               <input type="checkbox" class="btn-check" id="btncheck7"  name="domingo" value="domingo"  autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="btncheck7">Domingo</label>
+                                                               <input type="checkbox" class="btn-check" id="domingo" autocomplete="off">
+                                                               <label class="btn btn-primary colorBoton" for="domingo">Domingo</label>
                                                            </div>
                                                        </div>
                                                        <!-- end col -->
@@ -129,15 +129,16 @@
                                                            <div class="mt-3 mt-lg-0">
                                                                <div class="mb-3">
                                                                    <label class="form-label">Desde</label>
-                                                                   <input type="time" class="form-control"  name="fechaInicial" >
+                                                                   <input type="time" id="fechaInicial" class="form-control">
                                                                </div>
                                                          </div>
                                                        </div>
+                                                      
                                                        <div class="col-lg-3">
                                                            <div class="mt-3 mt-lg-0">
                                                                <div class="mb-3">
                                                                    <label class="form-label">Hasta</label>
-                                                                   <input type="time" class="form-control" name="fechaFinal" >
+                                                                   <input type="time" id="fechaFinal" class="form-control" >
                                                                </div>
                                                          </div>
                                                        </div>
@@ -145,7 +146,7 @@
                                                            <div class="form-group">
                                                                <label for="fechaInstalacion" style="width: max-content;">¿Tienes una fecha específica?</label>
                                                                <input type="tex" placeholder="Selecciona la fecha"
-                                                                class="form-control" id="fechacita" required name="fecha_especifica" readonly> 
+                                                                class="form-control" id="fechacita" required readonly> 
                                                            </div>
                                                      </div>
 
@@ -153,7 +154,7 @@
                                                            <div>
                                                                <div class="form-group">
                                                                    <label for="nota">Nota de la solicitud</label>
-                                                                   <textarea class="form-control"  id="nota" name="nota_solicitud" ></textarea>
+                                                                   <textarea class="form-control" id="nota" ></textarea>
                                                             </div> 
                                                       </div> 
                                                    </div> 
@@ -162,8 +163,7 @@
                                        </div><!-- end col -->
                                    </div>
                                     </br>
-                   <center><button type="submit" style="border-radius:15px;" class="btn btn-primary">Guardar</button></center>
-                                 </form>
+                   <center><button type="button" style="border-radius:15px;" onclick="enviarAgenda()" class="btn btn-primary">Guardar</button></center>
                                 </div>
                         </section>
                     </div>
@@ -220,34 +220,125 @@
   <!--  SCRIPTS DEL CALENDARIO DE NUEVO CLIENTE -->
   <script src="../directorio_nuevoCliente/js/jquery-ui.js"></script>
   <script src="../directorio_nuevoCliente/js/jquery-ui.min.js"></script>
-  
+
   <script>
-  $.datepicker.regional['es'] = {
-     monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-     monthNamesShort: ['Enero','Febrero','Marzo','Abril', 'Mayo','Junio','Julio','Agosto','Septiembre', 'Octubre','Noviembre','Diciembre'],
-     dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles',   'Jueves', 'Viernes', 'Sábado'],
-     dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-     dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-     weekHeader: 'Sm',
-     dateFormat: 'mm/dd/yy',
-     firstDay: 1,
-     isRTL: false,
-     showMonthAfterYear: false,
-     yearSuffix: ''
-     };
-     $.datepicker.setDefaults($.datepicker.regional['es']);
-  
-     const dateToday = new Date();
-     const yrRangeFuture = (dateToday.getFullYear()) + ":" + '3000';
-     const hoyFuture = new Date().getDate();
-   $(function () {
-   $("#fechacita").datepicker({
-    yearRange: yrRangeFuture,
-      minDate: '1M',
-      changeMonth: true,
-      changeYear: true
-   });
-  });
+    $.datepicker.regional['es'] = {
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+        weekHeader: 'Sm',
+        dateFormat: 'mm/dd/yy',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''
+    };
+    $.datepicker.setDefaults($.datepicker.regional['es']);
+
+    const dateToday = new Date();
+    const yrRangeFuture = (dateToday.getFullYear()) + ":" + '3000';
+    $(function () {
+        $("#fechacita").datepicker({
+            yearRange: yrRangeFuture,
+            minDate: '0M',
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+
+    let time1, time2
+    let inputEle = document.getElementById('fechaInicial');
+    var inputEle2 = document.getElementById('fechaFinal');
+
+       function enviarAgenda(){
+    // => Capturando valores del primer imput time 
+        let timeSplit = inputEle.value.split(':'),
+                hours,
+                minutes,
+                meridian;
+            hours = timeSplit[0];
+            minutes = timeSplit[1];
+    // => Validando las jornadas
+            if (hours > 12) {
+                meridian = 'PM';
+                hours -= 12 ;
+            } else if (hours < 12) {
+                meridian = 'AM';
+                if (hours == 0) {
+                    hours = '' ;
+                    minutes = '';
+                    meridian = '';
+                }
+            } else {
+                meridian = 'PM';
+            }
+    // => Capturando valores del segundo imput time 
+            let timeSplit2 = inputEle2.value.split(':'),
+                hours2,
+                minutes2,
+                meridian2;
+            hours2 = timeSplit2[0];
+            minutes2 = timeSplit2[1];
+
+            if (hours2 > 12) {
+                meridian2 = 'PM';
+                hours2 -= 12;
+            } else if (hours2 < 12) {
+                meridian2 = 'AM';
+                if (hours2 == 0) {
+                    hours2 = '';
+                    minutes2 = '';
+                    meridian2 = '';
+                }
+            } else {
+                meridian2 = 'PM';
+            }
+
+            time1 = hours + ' ' + minutes + ' ' + meridian
+            time2 = hours2 + ' ' + minutes2 + ' ' + meridian2
+            
+            const id_cliente = $("#id_cliente").val();
+            const codigo_cliente = $("#codigo_cliente").val();
+            const fechaInicial = time1;
+            const fechaFinal = time2;
+            let lunes = $("#lunes").is(':checked') 
+            let martes = $("#martes").is(':checked')
+            let miercoles = $("#miercoles").is(':checked')
+            let jueves = $("#jueves").is(':checked')
+            let viernes = $("#viernes").is(':checked')
+            let sabado = $("#sabado").is(':checked')
+            let domingo = $("#domingo").is(':checked')
+            const fecha_especifica = $("#fechacita").val();
+            const nota_solicitud = $("#nota").val();
+ 
+        fetch('/agendarInstalacion', {
+             
+            method: 'POST',
+            body: JSON.stringify({id_cliente,codigo_cliente,fechaInicial,fechaFinal,lunes,martes,miercoles,jueves,viernes,sabado,domingo,fecha_especifica,nota_solicitud}),
+            headers: { 'Content-Type': 'application/json' }
+
+          }).then(res => res.json())
+            .catch(error => console.error('Error', error))
+         .then(response => {
+                  if(response)   {
+                    // Swal.fire(
+                    //            'Enviado!',
+                    //            'Agenda solicitada',
+                    //            'success'
+                    //         )
+                            window.location.replace('/perfil-clientes/' + codigo_cliente);
+                       }else {
+                           Swal.fire(
+                               '¡Error!',
+                               'Ocurrió un problema al guardar los cambios, comunicate con soporte',
+                               'error'
+                            )
+                       }
+                   })
+            }
+     
   </script>
   </body>
   

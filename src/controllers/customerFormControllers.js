@@ -454,24 +454,18 @@ exports.ahorro = async (req, res) => {
 
 // todo ==> Formulario agendar instalacion
 exports.agendarInstalacionProducto = async (req, res) => {
-  const lunes = req.body.lunes
-  const martes = req.body.martes
-  const miercoles = req.body.miercoles
-  const jueves = req.body.jueves
-  const viernes = req.body.viernes
-  const sabado = req.body.sabado
-  const domingo = req.body.domingo
-  const fechaInicial = req.body.fechaInicial
-  const fechaFinal = req.body.fechaFinal
-  const fecha_especifica = req.body.fecha_especifica
-  const nota_solicitud = req.body.nota_solicitud
-  //  const horaInstalacion =  req.body.horaInstalacion
-  const id_cliente = req.body.id_cliente
-  const codigo_cliente = req.body.codigo_cliente
+  let {lunes,martes,miercoles,jueves,viernes,sabado,domingo,fechaInicial,fechaFinal,fecha_especifica,nota_solicitud,id_cliente } = req.body
+  lunes ? lunes = 'lunes' : lunes = ''
+  martes ? martes = 'martes': martes = ''
+  miercoles ? miercoles = 'miercoles' : miercoles = ''
+  jueves ? jueves = 'jueves' : jueves = ''
+  viernes ? viernes = 'viernes' : viernes = ''
+  sabado ? sabado = 'sabado' : sabado = ''
+  domingo ? domingo = 'domingo' : domingo = ''
   const Datos_agendarSolicitud = { lunes, martes, miercoles, jueves, viernes, sabado, domingo, fechaInicial, fechaFinal, fecha_especifica, nota_solicitud, id_cliente }
   await conexion.query('INSERT INTO agendar_instalacion SET ?', [Datos_agendarSolicitud], (err, result) => {
-    if (err) throw err;
-    if (result) { res.redirect('/perfil-clientes/' + codigo_cliente) }
+    if (err) { res.send(false) }
+    res.send(true)
   })
 }
 

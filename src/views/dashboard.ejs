@@ -504,7 +504,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="ciudadP">Ciudad<span class="danger">*</span></label>
-                                                        <input type="text" class="form-control" required id="clciudad" name="ciudad" >
+                                                        <input type="text" class="form-control" readonly required id="clciudad" name="ciudad" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -514,13 +514,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="">Estado<span class="danger">*</span></label>
-                                                        <input type="text" class="form-control" required id="clestado" name="estado_ubicacion" >
+                                                        <input type="text" class="form-control" readonly required id="clestado" name="estado_ubicacion" >
                                                     </div>
                                                 </div>
                                             <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="postalcode">Codigo postal<span class="danger">*</span></label>
-                                                        <input type="text" class="form-control" required id="clpostalcode" name="codigo_postal" >
+                                                        <input type="text" class="form-control" readonly required id="clpostalcode" name="codigo_postal" >
                                                 </div>
                                             </div>
                                         </div>
@@ -654,7 +654,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
             crossorigin="anonymous"></script>
  <!-- Google Maps JavaScript library -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBZBkIUU7yQ-Rsy8a7KG70aJ_VDOsaf6fE"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDnXrGToxsOSdtK01dW0yynlYxRsv8D6ro"></script>
 <!-- Mascaras de teléfonos  -->
 <script src="./libs/imask/imask.min.js"></script>
 <script src="./js/scripts-mask-phone.js"></script>
@@ -662,8 +662,9 @@
 <script src="./js/scripts-validar-campos.js"></script>
 
 <script>
+
 // ======================================================= ==============-->
-  // ==   ==TODO: PARA LA API DE GOOGLE MAPS ======================================= -->
+  // ==== PARA LA API DE GOOGLE MAPS ======================================= -->
 
   let autocomplete;
   let postalField = document.getElementById('clpostalcode')

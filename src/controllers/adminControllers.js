@@ -1,8 +1,6 @@
 const conexion = require("../database/db");
-var nodemailer = require('nodemailer');
 const bcryptjs = require('bcryptjs');
-const { ok } = require("assert");
-const { log } = require("console");
+const { aceptarVendedorHTML, sendEmail } = require('../lib/correo')
 
 //* Formateando precios a una moneda
 const formatear = new Intl.NumberFormat('en-US', {
@@ -289,365 +287,23 @@ exports.actualizarEstadoVendedor = async (req, res) => {
     let datosUser = await conexion.query("SELECT * FROM usuarios u JOIN registro_de_vendedores rv ON rv.id_vendedor = u.id_vendedor WHERE estado_de_la_cuenta = 'aprobado' && u.id_vendedor = ?", [id_vendedor]);
     datosUser = datosUser[0]
 
-  // ! **************************************************
+  // ! ************* PROCESO DEL EMAIL PARA VENDEDOR ************
+  const email =  datosUser.correo
+  const asunto = "Bienvenido a 3C Sigma Water System"
+  const plantilla = aceptarVendedorHTML(datosUser.nombres, clave)
+  // Enviar email
+  const resultEmail = await sendEmail(email, asunto, plantilla)
+ 
+    if (!resultEmail) {
+      res.json("Ocurrio un error inesperado al enviar el email al vendedor")
+    } else {
+        console.log("\n<<<<< Email - Enviado >>>>>\n")
+    }
+  // ! **************************************************************
 
- var isError = false;
-
- var transporter = nodemailer.createTransport({
-  host: 'mail.3csigmawater.com',
-     port: 465, //cambiar el puerto a 465 cuando antes de subir al server el proyecto
-     auth: {
-         user: 'noreply@3csigmawater.com', // Your correo id
-         pass: '3csigma3c' // Your pass
-     }
-  });
-
-  var mailOptions = {
-      from: "'3C Sigma Water System <noreply@3csigmawater.com>'",
-          to: datosUser.correo,
-          subject: 'Bienvenido a 3C Sigma Water System',
-          html: '<style>'+
-
-          'a[x-apple-data-detectors] {'+
-          '  color: inherit !important;'+
-           ' text-decoration: inherit !important;'+
-          '}'+
-
-          '#MessageViewBody a {'+
-           ' color: inherit;'+
-           ' text-decoration: none;'+
-         ' }'+
-
-         ' p {'+
-          '  line-height: inherit'+
-         ' }'+
-
-         ' .desktop_hide,'+
-          '.desktop_hide table {'+
-          '  mso-hide: all;'+
-          '  display: none;'+
-          '  max-height: 0px;'+
-          '  overflow: hidden;'+
-         ' }'+
-
-          '@media (max-width:620px) {'+
-            '.desktop_hide table.icons-inner {'+
-              'display: inline-block !important;'+
-           ' }'+
-
-           ' .icons-inner {'+
-             ' text-align: center;'+
-           ' }'+
-
-           ' .icons-inner td {'+
-             ' margin: 0 auto;'+
-           ' }'+
-
-            '.fullMobileWidth,'+
-            '.row-content {'+
-            '  width: 100% !important;'+
-           ' }'+
-
-            '.mobile_hide {'+
-             ' display: none;'+
-            '}'+
-
-           ' .stack .column {'+
-              'width: 100%;'+
-             ' display: block;'+
-           ' }'+
-
-           ' .mobile_hide {'+
-             ' min-height: 0;'+
-             ' max-height: 0;'+
-             ' max-width: 0;'+
-             ' overflow: hidden;'+
-             ' font-size: 0px;'+
-           ' }'+
-
-            '.desktop_hide,'+
-            '.desktop_hide table {'+
-            '  display: table !important;'+
-            '  max-height: none !important;'+
-           ' }'+
-         ' }'+
-       ' </style>'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="nl-container" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: transparent;" width="100%">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #f6f6f6; color: #000000; width: 600px;" width="600">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">'+
-          '<div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://3csigmawater.com/correos_html/banner-Vaprobado.png" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="image_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">'+
-          '<div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://3csigmawater.com/correos_html/mensaje-Vaprobado.jpg" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; background-color: #812082; width: 600px;" width="600">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-left: 40px; padding-right: 40px; vertical-align: top; padding-top: 40px; padding-bottom: 40px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="width:100%;text-align:center;">'+
-          '<h1 style="margin: 0; color: #ffffff; font-size: 38px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 200%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">¡Felicidades '+ datosUser.nombres + '!</span></h1>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">'+
-          '<tr>'+
-          '<td class="pad">'+
-          '<div style="color:#ffffff;font-size:16px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-weight:400;line-height:120%;text-align:center;direction:ltr;letter-spacing:0px;mso-line-height-alt:19.2px;">'+
-          '<p style="margin: 0; margin-bottom: 16px;">Has sido aprobado como vendedor en</p>'+
-          '<p style="margin: 0;">3C Sigma Water System</p>'+
-          '</div>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;" width="100%">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; width: 600px;" width="600">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-left: 15px; padding-right: 15px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="50%">'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="paragraph_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="padding-top:15px;">'+
-          '<div style="color:#101112;font-size:18px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-weight:400;line-height:180%;text-align:left;direction:ltr;letter-spacing:0px;mso-line-height-alt:32.4px;">'+
-          '<p style="margin: 0;">Para continuar, accede a tu plataforma a través del siguiente link, usando esta contraseña temporal</p>'+
-          '</div>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="heading_block block-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="width:100%;text-align:center;padding-top:15px;padding-bottom:15px;">'+
-          '<h1 style="margin: 0; color: #000000; font-size: 38px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: left; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;">' +clave+ '</h1>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '</td>'+
-          '<td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="50%">'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="button_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="text-align:center;padding-top:80px;">'+
-          '<div align="center" class="alignment">'+
-          '<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://app.3csigmawater.com/login" style="height:42px;width:240px;v-text-anchor:middle;" arcsize="15%" stroke="false" fillcolor="#fed061"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#000000; font-family:Arial, sans-serif; font-size:16px"><![endif]--><a href="https://app.3csigmawater.com/login" style="text-decoration:none;display:block;color:#000000;background-color:#fed061;border-radius:6px;width:80%; width:calc(80% - 2px);border-top:1px solid #fed061;font-weight:700;border-right:1px solid #fed061;border-bottom:1px solid #fed061;border-left:1px solid #fed061;padding-top:5px;padding-bottom:5px;font-family:Helvetica Neue, Helvetica, Arial, sans-serif;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word; line-height: 32px;">Ingresar</span></span></a>'+
-          '<!--[if mso]></center></v:textbox></v:roundrect><![endif]-->'+
-          '</div>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 600px;" width="600">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 25px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="padding-right:10px;width:100%;padding-left:0px;">'+
-          '<div align="center" class="alignment" style="line-height:10px"><img src="https://3csigmawater.com/correos_html/logo1.png" style="display: block; height: auto; border: 0; width: 120px; max-width: 100%;" width="120"/></div>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '<div class="spacer_block mobile_hide" style="height:25px;line-height:25px;font-size:1px;"> </div>'+
-          '<div class="spacer_block" style="height:5px;line-height:5px;font-size:1px;"> </div>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-5" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 600px;" width="600">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="padding-top:30px;text-align:center;width:100%;">'+
-          '<h3 style="margin: 0; color: #000000; direction: ltr; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 17px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">¿Tienes dudas?</span></h3>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="icons_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="vertical-align: middle; color: #000000; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; padding-right: 20px; text-align: center;">'+
-          '<table cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="alignment" style="vertical-align: middle; text-align: center;">'+
-          '<!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->'+
-          '<!--[if !vml]><!-->'+
-          '<table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">'+
-          '<!--<![endif]-->'+
-          '<tr>'+
-          '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="tel:7862387004" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://3csigmawater.com/correos_html/phone.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"/></a></td>'+
-          '<td style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; color: #000000; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="tel:7862387004" style="color: #000000; text-decoration: none;" target="_self">Llámanos</a></td>'+
-          '</tr>'+
-          '</table>'+
-          '<!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->'+
-          '<!--[if !vml]><!-->'+
-          '<table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">'+
-          '<!--<![endif]-->'+
-          '<tr>'+
-          '<td style="vertical-align: middle; text-align: center; padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"><a href="mailto:sales@3csigmawater.com" style="text-decoration: none;" target="_self"><img align="center" alt="" class="icon" height="16" src="https://3csigmawater.com/correos_html/email.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="16"/></a></td>'+
-          '<td style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 14px; color: #000000; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="mailto:sales@3csigmawater.com" style="color: #000000; text-decoration: none;" target="_self">Escríbenos</a></td>'+
-          '</tr>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="social_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="padding-left:10px;text-align:center;padding-right:0px;">'+
-          '<div class="alignment" style="text-align:center;">'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="social-table" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block;" width="72px">'+
-          '<tr>'+
-          '<td style="padding:0 2px 0 2px;"><a href="https://www.facebook.com/3csigmawater" target="_blank"><img alt="Facebook" height="32" src="https://3csigmawater.com/correos_html/facebook2x.png" style="display: block; height: auto; border: 0;" title="facebook" width="32"/></a></td>'+
-          '<td style="padding:0 2px 0 2px;"><a href="https://www.instagram.com/3csigmawater/" target="_blank"><img alt="Instagram" height="32" src="https://3csigmawater.com/correos_html/instagram2x.png" style="display: block; height: auto; border: 0;" title="instagram" width="32"/></a></td>'+
-          '</tr>'+
-          '</table>'+
-          '</div>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-6" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff; color: #000000; width: 600px;" width="600">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">'+
-          '<div class="spacer_block" style="height:30px;line-height:30px;font-size:1px;"> </div>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-7" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td>'+
-          '<table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;" width="600">'+
-          '<tbody>'+
-          '<tr>'+
-          '<td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">'+
-          '<table border="0" cellpadding="0" cellspacing="0" class="icons_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="pad" style="vertical-align: middle; color: #9d9d9d; font-family: inherit; font-size: 15px; padding-bottom: 5px; padding-top: 5px; text-align: center;">'+
-          '<table cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">'+
-          '<tr>'+
-          '<td class="alignment" style="vertical-align: middle; text-align: center;">'+
-          '<!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->'+
-          '<!--[if !vml]><!-->'+
-          '<table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;">'+
-          '<!--<![endif]-->'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table>'+
-          '</td>'+
-          '</tr>'+
-          '</tbody>'+
-          '</table><!-- End -->',
-    err: isError
-
- };
-   // send mail with defined transport object
-  transporter.sendMail(mailOptions, function (error, info) {
-  if (error) {
-  console.log('\nERROR: ' + error+'\n');
-  res.json({ yo: 'error' });
-  } else {
-   console.log('\nRESPONSE SENT: ' + info.response+'\n');
-
-  }
-  });
-
-// ! **************************************************
   }
   res.send(true)
  }
-
 
 // ? ========>>> ***********  ZONA DE VENDEDORES ****************************  <<<========
 
@@ -1395,7 +1051,12 @@ exports.efectuarVenta = async (req, res) => {
       const idVendedor = v1.id_vendedor;
       const codigo_afiliado = vendedorPrincipal.codigo_afiliado;
       const dataVentas = { year, mes, semana, dia, numVentas: nuevaVenta, idVendedor, codigo_afiliado }
+      let fecha = new Date().toLocaleDateString("en-CA");
+      const dataVentas_adm = {fecha, year, semana, numVentas: nuevaVenta }
+      console.log("========>>>>>>>>>>>>>>>>>>>>>>>" , dataVentas_adm);
       await conexion.query('INSERT INTO filtro_numventas SET ?', [dataVentas])
+      await conexion.query("INSERT INTO filtro_numventas_admin SET ?", [dataVentas_adm]);
+
       //* ==>> *** FIN **** sumar ventas individuales <<===
 
       //* ==>> Apartado para sumar ventas a la cadena <<===
@@ -1518,7 +1179,7 @@ exports.dashboardAdministrador = async (req, res) => {
 
   // ==>>  CONSULTA PARA SACAR LOS DATOS PARA LA GRAFICA "NÚMERO DE VENTAS" 
   //  flnumVentas_admin = filtro número de ventas admin
-  let flnumVentas_admin = await conexion.query("SELECT * FROM (SELECT * FROM filtro_numventas_admin ORDER BY id DESC LIMIT 7) sub ORDER BY id ASC;");
+  let flnumVentas_admin = await conexion.query("SELECT * FROM (SELECT * FROM historial_numventas_admin ORDER BY id DESC LIMIT 7) sub ORDER BY id ASC;");
   let datosJson_flnumVentas_admin, rendimientoNumventas = 0
   if (flnumVentas_admin.length > 0) {
     datosJson_flnumVentas_admin = JSON.stringify(flnumVentas_admin);
@@ -1697,17 +1358,26 @@ exports.historial_clientes_admin = async (req, res) => {
   
   // ==> FILTRANDO CLIENTES POR SEMANA Y AÑO DE REGISTRO CON LA ACTUAL
   const resultado = clientes.filter((item) => item.semana == semanaActual && item.year == yearActual);
+
   if (resultado.length > 0) {
     numClientes = resultado.length;
-  }
-  console.log("NUMERO DE CLIENTES >>>>>" , numClientes );
+    console.log("NUMERO DE CLIENTES >>>>>", numClientes);
 
-  // ==> ENVIANDO A LA TABLA HISTORIAL CLIENTES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
-  const datosHcl_admin = { fecha, numClientes }; //==> DATOS HISTORIAL CLIENTES ADMIN
-  await conexion.query("INSERT INTO historial_clientes_admin SET ?", [datosHcl_admin]);
-  console.log("Realizando registro en DB HISTORIAL CLIENTES ADMINISTRADOR....")
- 
- res.send("todo ok...");
+    // ==> ENVIANDO A LA TABLA HISTORIAL CLIENTES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
+    const datosHcl_admin = { fecha, numClientes }; //==> DATOS HISTORIAL CLIENTES ADMIN
+    await conexion.query("INSERT INTO historial_clientes_admin SET ?", [datosHcl_admin]);
+    console.log("Realizando registro en DB HISTORIAL CLIENTES ADMINISTRADOR....")
+  } else {
+    let numRepetido = await conexion.query("SELECT * FROM historial_clientes_admin ORDER BY id DESC LIMIT 1");
+    numClientes = numRepetido[0].numClientes
+    // ==> ENVIANDO A LA TABLA HISTORIAL CLIENTES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
+    const datosHcl_admin = { fecha, numClientes }; //==> DATOS HISTORIAL CLIENTES ADMIN
+    await conexion.query("INSERT INTO historial_clientes_admin SET ?", [datosHcl_admin]);
+    console.log("Realizando registro en DB HISTORIAL CLIENTES ADMINISTRADOR....")
+  }
+
+
+  res.send("todo ok...");
 };
 
 // todo ===>>> INSERTAR DATOS A LA TABLA HISTORIAL CLIENTES ADMIN 
@@ -1724,35 +1394,34 @@ exports.historial_vendedores_admin = async (req, res) => {
   const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
   console.log("Semana actual ==>> ", semanaActual);
   
-    // ==> FILTRANDO CLIENTES POR SEMANA Y AÑO DE REGISTRO CON LA ACTUAL
+  // ==> FILTRANDO CLIENTES POR SEMANA Y AÑO DE REGISTRO CON LA ACTUAL
   const resultado = vendedores.filter((item) => item.semana == semanaActual && item.year == yearActual);
   if (resultado.length > 0) {
     numVendedores = resultado.length;
+    // ==> ENVIANDO A LA TABLA HISTORIAL VENDEDORES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
+    const datosHvd_admin = { fecha, numVendedores }; //==> DATOS HISTORIAL CLIENTES ADMIN
+    await conexion.query("INSERT INTO historial_vendedores_admin SET ?", [datosHvd_admin]);
+    console.log("Realizando registro en DB HISTORIAL VENDEDORES ADMINISTRADOR....")
+  } else {
+    let numRepetido = await conexion.query("SELECT * FROM historial_vendedores_admin ORDER BY id DESC LIMIT 1");
+    numVendedores = numRepetido[0].numVendedores
+    // ==> ENVIANDO A LA TABLA HISTORIAL  VENDEDORES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
+    const datosHcl_admin = { fecha, numVendedores }; //==> DATOS HISTORIAL VENDEDORES ADMIN
+    await conexion.query("INSERT INTO historial_vendedores_admin SET ?", [datosHcl_admin]);
+    console.log("Realizando registro en DB HISTORIAL VENDEDORES ADMINISTRADOR....")
   }
-  console.log("NUMERO DE VENDEDORES >>>>>" , numVendedores );
+  console.log("NUMERO DE VENDEDORES >>>>>", numVendedores);
 
-  // ==> ENVIANDO A LA TABLA HISTORIAL VENDEDORES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
-  const datosHvd_admin = { fecha, numVendedores }; //==> DATOS HISTORIAL CLIENTES ADMIN
-  await conexion.query("INSERT INTO historial_vendedores_admin SET ?", [datosHvd_admin]);
-  console.log("Realizando registro en DB HISTORIAL VENDEDORES ADMINISTRADOR....")
- 
  res.send("todo ok...");
 };
 
 // todo ===>>> INSERTAR DATOS A LA TABLA FILTRO NUMVENTAS ADMIN 
 exports.filtro_numventas_admin = async (req, res) => {
 
-  // ==> CONSULTA PARA SACARLA INFORMACION DE VENDEDORES  
-  let info_vendedores = await conexion.query("SELECT * FROM registro_de_vendedores ");
   // ==> CONSULTA PARA SACARLA INFORMACION DE FILTRO NUMVENTAS ADMINISTRADOR  
   let flNumventasAdm = await conexion.query("SELECT * FROM filtro_numventas_admin ");
 
-  // ==> SUMANDO EL NUMERO TOTAL DE VENTAS EN GENERAL
-  let numVentas = 0;
-  info_vendedores.forEach(iv => {
-    numVentas += parseFloat(iv.ventas_individuales)
-  });
-
+  let numVentas 
   let fecha = new Date().toLocaleDateString("en-CA");
   let year = new Date(fecha).getFullYear();
   currentdate = new Date();
@@ -1765,21 +1434,17 @@ exports.filtro_numventas_admin = async (req, res) => {
   let rsemana
   resultado.forEach(r => {
     rsemana = r.semana;
+    numVentas = r.numVentas
   });
-
   // ==>> VALIDANDO SI EXISTE SEMANA ACTUAL CON LA QUE SE ENCUENTRA EN EL VALOR POR DEDFECTO DE LA TABLA
-  const datos_update = {numVentas}
-  const datos_insert = {fecha, year,semana, numVentas}
+  const datos_insert = {fecha, numVentas}
   if (rsemana == semana) {
-    await conexion.query("INSERT INTO filtro_numventas_admin SET ?", [datos_insert]);
-  }else {
-    await conexion.query("UPDATE filtro_numventas_admin SET ?" , [datos_update])
+    await conexion.query("INSERT INTO historial_numventas_admin SET ?", [datos_insert]);
   }
   
   res.send("todo ok...");
 
 };
-
 
 // todo ===>>> INSERTAR DATOS A LA TABLA FILTRO NUMVENTAS ADMIN 
 exports.ganancias_mensuales_admin = async (req, res) => {
