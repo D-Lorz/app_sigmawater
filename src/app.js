@@ -62,18 +62,17 @@ app.use('/', require('./routes/customer'));
 app.use('/', require('./routes/admin'));
 app.use('/', require('./routes/sellers')); 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+app.use('/', require('./routes/users'))
 
 //app.use('/', indexRouter);
-app.use('/', usersRouter);
+// app.use('/', usersRouter);
 
- // Configuraciones
- app.set('port', process.env.PORT || 3000);
+// Configuraciones
+app.set('port', process.env.PORT || 3000);
 
- app.listen(app.get('port'), () => {
+app.listen(app.get('port'), () => {
   console.log("***********************************************************")
   console.log('===> 🚀 SERVIDOR CORRIENDO en http://localhost:' + app.get('port')) 
 });
- 
+
 module.exports = app;

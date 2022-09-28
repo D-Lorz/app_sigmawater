@@ -1,8 +1,11 @@
 const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
-const conexion = require('../database/db')
+const conexion = require('../database/db.js');
+const bcrypt = require('bcrypt');
 const { promisify } = require('util')
-const { log } = require('console')
+const randtoken = require('rand-token');
+const { recuperarClaveHTML, sendEmail } = require('../lib/correo')
+
 
 // todo: LOGIN
 exports.login = async (req, res) => {
@@ -121,7 +124,6 @@ exports.isAuthenticated = async (req, res, next) => {
     } else {
         res.redirect('/login')
     }
-
 }
 
 // todo: LOGOUT
@@ -161,3 +163,84 @@ exports.isSeller = async (req, res, next) => {
     }
 };
 
+/**************************************************************************************************************** */
+// --------------------------------------- RESTABLECER CONTRASEÑA ----------------------------------------------
+exports.resetPassword = async (req, res, next) => {
+    const { correo } = req.body;
+
+    conexion.query("SELECT * FROM usuarios WHERE correo = ?", [correo], (err, result) => {
+        if (err) throw err;
+        let type = ''
+        let msg = ''
+        if (result.length > 0) {
+            const token = randtoken.generate(20);
+             // ! ************* PROCESO DEL EMAIL PARA VENDEDOR ************
+            const email = correo
+            const asunto = "Bienvenido a 3C Sigma Water System"
+            const plantilla = recuperarClaveHTML(token)
+            // Enviar email
+            const resultEmail = sendEmail(email, asunto, plantilla)
+            
+            if (!resultEmail) {
+                type = 'error';
+                msg = 'Something goes to wrong. Please try again';
+                // res.json("Ocurrio un error inesperado al enviar el email al vendedor")
+            } else {
+                const data = {
+                    token: token
+                }
+                conexion.query("UPDATE usuarios SET ? WHERE correo = ?", [data, correo], (err, result) => {
+                    if (err) throw err
+                })
+                type = 'success';
+                msg = 'Revisa tu bandeja de entrada';
+            }
+            // ! **************************************************************
+        } else {
+            console.log('2');
+            type = 'error';
+            msg = 'Este correo no está registrado';
+        }
+        req.flash(type, msg);
+        res.redirect('/restablecer-clave');
+    });
+}
+
+exports.updatePassword = async (req, res, next) => {
+    const { token, pass } = req.body;
+    conexion.query('SELECT * FROM usuarios WHERE token = ?', [token], (err, result) => {
+        if (err) throw err;
+        let type
+        let msg
+        if (result.length > 0) {
+            const correo = result[0].correo
+            const saltRounds = 10;
+            bcrypt.genSalt(saltRounds, (err, salt) => {
+                if (err) throw err;
+                bcrypt.hash(pass, salt, (err, hash) => {
+                    if (err) throw err;
+                    const data = { pass: hash}
+                    conexion.query('UPDATE usuarios SET ? WHERE correo = ?', [data, correo], (err, result) => {
+                        if (err) throw err
+                    });
+                });
+            });
+            type = 'success';
+            msg = 'Contraseña actualizada correctamente';
+          } else {
+            console.log('2');
+            type = 'error';
+            msg = 'Invalid link; please try again';
+        }
+        req.flash(type, msg);
+        res.render('login', {
+            alert: true,
+            alertTitle: "Cambio exitoso",
+            alertMessage: "Tu contraseña ha sido actualizada",
+            alertIcon: 'success',
+            showConfirmButton: true,
+            timer: false,
+            ruta: 'login'
+        });
+    });
+}
