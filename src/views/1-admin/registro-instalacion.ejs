@@ -85,15 +85,15 @@
                         <section id="validation">
       
                   <div class="card-content collapse show">
-                    <!-- Fin de Alerta -->
-                    <!-- Mensaje de clave no coincide -->
-                    <div class="alert alert-danger alert-border-left alert-dismissible fade show mt-2" id="alertaFecha"
-                      style="padding: 8px 1rem; display: none" role="alert">
-                      <i class="fa-solid fa-circle-exclamation me-3 align-middle"></i>
-                      <label style="font-size: 14px;"><strong>Atención!</strong> -
-                        <span style="font-weight: 300">La fecha de instalación es obligatoria</span>
-                      </label>
-                    </div>
+                    <!-- INICIO de Alerta -->
+                     <!-- Mensaje de fecha no ingresada-->
+                      <div class="alert alert-danger alert-border-left alert-dismissible fade show mt-2" id="alertaFecha"
+                        style="padding: 8px 1rem; display: none" role="alert">
+                        <i class="fa-solid fa-circle-exclamation me-3 align-middle"></i>
+                        <label style="font-size: 14px;"><strong>Atención!</strong> -
+                          <span style="font-weight: 300">La fecha de instalación es obligatoria</span>
+                        </label>
+                      </div>
                     <!-- Fin de Alerta -->
                   
                     <form action="/instalacion" enctype="multipart/form-data" method="POST" id="demo-form2" data-parsley-validate
@@ -132,7 +132,7 @@
                         <div class="col-md-2">
                           <div class="form-group">
                             <label for="">Serial producto 1<span class="danger">*</span></label>
-                            <input type="text" class="form-control" required name="serial_producto1">
+                            <input type="text" class="form-control" onblur="validarFecha()" required name="serial_producto1">
                           </div>
                         </div>
                         <div class="col-md-2">
@@ -250,7 +250,7 @@
   <script src="../directorio_nuevoCliente/js/jquery-ui.js"></script>
   <script src="../directorio_nuevoCliente/js/jquery-ui.min.js"></script>
   <!-- SCRIPTS PARA VALIDAR LA FECHA OBLIGATORIA -->
-  <script src="../js/scripts_personalizados.js"></script>
+  <script src="../js/scripts-comparar-campos.js"></script>
   <script>
 
 

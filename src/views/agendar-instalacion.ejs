@@ -43,151 +43,167 @@
 
 <body>
     <div id="layout-wrapper">
-
+    
         <!-- =======FIXME: MENU ========================== -->
         <%- include ('./partials/menu.ejs')%>
-        <!-- =======FIXME: MENU ========================== -->
-      
-        <div class="main-content">
-            <div class="page-content">
-                <div class="container-fluid">
-      
-                      <!--============================================================-->
-                      <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
-                      <!--============================================================-->
-                      <div class="row">
-                        <div class="col-12">
-                            <div class="page-title-box d-sm-flex align-items-center
-                                justify-content-between" style="margin-bottom: 3%;">
-                                <h4 class="mb-sm-0 font-size-18">Servicio de instalación</h4>
-
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0" style="text-transform: initial;">
-                                        <li class="breadcrumb-item"><a href="javascript:
-                                                void(0);">Perfil cliente</a></li>
-                                        <li class="breadcrumb-item active" id="reparartexto">Servicio de instalación</li>
-                                    </ol>
+            <!-- =======FIXME: MENU ========================== -->
+    
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+    
+                        <!--============================================================-->
+                        <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
+                        <!--============================================================-->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center
+                                    justify-content-between" style="margin-bottom: 3%;">
+                                    <h4 class="mb-sm-0 font-size-18">Servicio de instalación</h4>
+    
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0" style="text-transform: initial;">
+                                            <li class="breadcrumb-item"><a href="javascript:
+                                                    void(0);">Perfil cliente</a></li>
+                                            <li class="breadcrumb-item active" id="reparartexto">Servicio de instalación
+                                            </li>
+                                        </ol>
+                                    </div>
+    
                                 </div>
-
                             </div>
                         </div>
-                    </div>
-                      <!-- end page title -->
-                    <!-- BEGIN: Content-->
-                    <div class="app-content content" style="margin-top:-7px">
-                        <!-- Form wizard with step validation section start -->
-                        <section id="validation">
-                  <div class="card-content collapse show">
-
-                        <!-- * ========== Primera fila =======  -->
-                        <input type="hidden" hidden id="id_cliente" value="<%= infoCl.id %>">
-                        <input type="hidden" hidden id="codigo_cliente" value="<%= infoCl.id_cliente %>">
-                                   <div class="row justify-content-center" style="text-align:center; ">
-                                       <div class="col-xl-6">
-                                           <div class="card">
-                                               <div class="card-header">
-                                                   <h4 class="card-title"></h4>
-                                                   <p class="card-title-desc" >Por favor introduce los días y el rango de horas que mejor se acomoden a la disponibilidad del cliente,
-                                                        con esta información un administrador de  
-                                                   <b>3C Sigma Water System</b>  agendará la cita para la instalación del producto solicitado </p>
-                                               </div><!-- end card header -->
-                                           <style>
-                                               .colorBoton{
-                                               background: #545a6d;
-                                               }
-                                           </style>
-                                                   <div class="row justify-content-center">
-                                                       <div class="col-xl-12">
-                                                           <label for="">Día disponibles para la instalación</label>
-                                                           <div class="btn-group btn-group-sm mt-2" required role="group" aria-label="Basic checkbox toggle button group">
-                                                             
-                                                               <input type="checkbox" class="btn-check" id="lunes" autocomplete="off" >
-                                                               <label class="btn btn-primary colorBoton" for="lunes">Lunes</label>
-           
-                                                               <input type="checkbox" class="btn-check" id="martes" autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="martes" >Martes</label>
-           
-                                                               <input type="checkbox" class="btn-check" id="miercoles" autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="miercoles">Miercoles</label>
-           
-                                                               <input type="checkbox" class="btn-check" id="jueves" autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="jueves">Jueves</label>
-           
-                                                               <input type="checkbox" class="btn-check" id="viernes" autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="viernes">Viernes</label>
-           
-                                                               <input type="checkbox" class="btn-check" id="sabado" autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="sabado">Sabado</label>
-           
-                                                               <input type="checkbox" class="btn-check" id="domingo" autocomplete="off">
-                                                               <label class="btn btn-primary colorBoton" for="domingo">Domingo</label>
-                                                           </div>
-                                                       </div>
-                                                       <!-- end col -->
-  
-                                                       <div class="col-lg-3">
-                                                           <div class="mt-3 mt-lg-0">
-                                                               <div class="mb-3">
-                                                                   <label class="form-label">Desde</label>
-                                                                   <input type="time" id="fechaInicial" class="form-control">
-                                                               </div>
-                                                         </div>
-                                                       </div>
-                                                      
-                                                       <div class="col-lg-3">
-                                                           <div class="mt-3 mt-lg-0">
-                                                               <div class="mb-3">
-                                                                   <label class="form-label">Hasta</label>
-                                                                   <input type="time" id="fechaFinal" class="form-control" >
-                                                               </div>
-                                                         </div>
-                                                       </div>
-                                                       <div class="col-md-4">
-                                                           <div class="form-group">
-                                                               <label for="fechaInstalacion" style="width: max-content;">¿Tienes una fecha específica?</label>
-                                                               <input type="tex" placeholder="Selecciona la fecha"
-                                                                class="form-control" id="fechacita" required readonly> 
-                                                           </div>
-                                                     </div>
-
-                                                          <div class="row"> 
-                                                           <div>
-                                                               <div class="form-group">
-                                                                   <label for="nota">Nota de la solicitud</label>
-                                                                   <textarea class="form-control" id="nota" ></textarea>
-                                                            </div> 
-                                                      </div> 
-                                                   </div> 
-                                                 </div>
-                                           </div><!-- end card -->
-                                       </div><!-- end col -->
-                                   </div>
+                        <!-- end page title -->
+                        <!-- BEGIN: Content-->
+                        <div class="app-content content" style="margin-top:-7px">
+                            <!-- Form wizard with step validation section start -->
+                            <section id="validation">
+                                <div class="card-content collapse show">
+    
+                                    <!-- * ========== Primera fila =======  -->
+                                    <input type="hidden" hidden id="id_cliente" value="<%= infoCl.id %>">
+                                    <input type="hidden" hidden id="codigo_cliente" value="<%= infoCl.id_cliente %>">
+                                    <div class="row justify-content-center" style="text-align:center; ">
+                                        <div class="col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title"></h4>
+                                                    <p class="card-title-desc">Por favor introduce los días y el rango de
+                                                        horas que mejor se acomoden a la disponibilidad del cliente,
+                                                        con esta información un administrador de
+                                                        <b>3C Sigma Water System</b> agendará la cita para la instalación
+                                                        del producto solicitado
+                                                    </p>
+                                                </div><!-- end card header -->
+                                                <style>
+                                                    .colorBoton {
+                                                        background: #545a6d;
+                                                    }
+                                                </style>
+                                                <div class="row justify-content-center">
+                                                    <div class="col-xl-12">
+                                                        <label for="">Día disponibles para la instalación</label>
+                                                        <div class="btn-group btn-group-sm mt-2" required role="group"
+                                                            aria-label="Basic checkbox toggle button group">
+    
+                                                            <input type="checkbox" class="btn-check" id="lunes"
+                                                                autocomplete="off">
+                                                            <label class="btn btn-primary colorBoton"
+                                                                for="lunes">Lunes</label>
+    
+                                                            <input type="checkbox" class="btn-check" id="martes"
+                                                                autocomplete="off">
+                                                            <label class="btn btn-primary colorBoton"
+                                                                for="martes">Martes</label>
+    
+                                                            <input type="checkbox" class="btn-check" id="miercoles"
+                                                                autocomplete="off">
+                                                            <label class="btn btn-primary colorBoton"
+                                                                for="miercoles">Miercoles</label>
+    
+                                                            <input type="checkbox" class="btn-check" id="jueves"
+                                                                autocomplete="off">
+                                                            <label class="btn btn-primary colorBoton"
+                                                                for="jueves">Jueves</label>
+    
+                                                            <input type="checkbox" class="btn-check" id="viernes"
+                                                                autocomplete="off">
+                                                            <label class="btn btn-primary colorBoton"
+                                                                for="viernes">Viernes</label>
+    
+                                                            <input type="checkbox" class="btn-check" id="sabado"
+                                                                autocomplete="off">
+                                                            <label class="btn btn-primary colorBoton"
+                                                                for="sabado">Sabado</label>
+    
+                                                            <input type="checkbox" class="btn-check" id="domingo"
+                                                                autocomplete="off">
+                                                            <label class="btn btn-primary colorBoton"
+                                                                for="domingo">Domingo</label>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end col -->
+    
+                                                    <div class="col-lg-3">
+                                                        <div class="mt-3 mt-lg-0">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Desde</label>
+                                                                <input type="time" id="horaInicial" onblur="validarHoras()" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="col-lg-3">
+                                                        <div class="mt-3 mt-lg-0">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Hasta</label>
+                                                                <input type="time" id="horaFinal" onchange="validarHoras()"  class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="fechaInstalacion"
+                                                                style="width: max-content;">¿Tienes una fecha
+                                                                específica?</label>
+                                                            <input type="tex" placeholder="Selecciona la fecha"
+                                                                class="form-control" id="fechacita" required readonly>
+                                                        </div>
+                                                    </div>
+                                                    <!-- INICIO de Alerta -->
+                                                    <!-- Mensaje de fecha no ingresada-->
+                                                    <div class="alert alert-danger alert-border-left alert-dismissible fade show mt-2"
+                                                        id="alertaHoras" style="width: 44%;display: none;" role="alert">
+                                                        <i class="fa-solid fa-circle-exclamation me-3 align-middle"></i>
+                                                        <label style="font-size: 12px;"><strong style="margin-left: -25px;">Atención!</strong> -
+                                                            <span style="font-weight: 300">Introduce el horario completo</span>
+                                                        </label>
+                                                    </div>
+                                                    <!-- Fin de Alerta -->
+                                                    <div class="row">
+                                                        <div>
+                                                            <div class="form-group">
+                                                                <label for="nota">Nota de la solicitud</label>
+                                                                <textarea class="form-control" id="nota"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card -->
+                                        </div><!-- end col -->
+                                    </div>
                                     </br>
-                   <center><button type="button" style="border-radius:15px;" onclick="enviarAgenda()" class="btn btn-primary">Guardar</button></center>
+                                    <center><button type="button" style="border-radius:15px;" id="btnAgenda" onclick="enviarAgenda()" class="btn btn-primary">Guardar</button></center>
                                 </div>
-                        </section>
+                            </section>
+                        </div>
                     </div>
                 </div>
+                <!-- =======FIXME: copyright ========================== -->
+                <%- include ('./partials/copyright.ejs')%>
+                    <!-- =======FIXME: copyright ========================== -->
             </div>
-            <!-- =======FIXME: copyright ========================== -->
-            <%- include ('./partials/copyright.ejs')%>
-            <!-- =======FIXME: copyright ========================== -->
-        </div>
-      </div>
-<!-- Right Sidebar -->
-<div class="right-bar">
-    <div data-simplebar class="h-100">
-        <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-  
-            <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
-  
-            <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                <i class="mdi mdi-close noti-icon"></i>
-            </a>
-        </div>
-        <!-- Settings -->
-    </div> <!-- end slimscroll-menu-->
-  </div>
+    </div>
   
   <!-- JAVASCRIPT -->
   <script src="../directorio_dash/js/scripts_personalizadosdash.js"></script>
@@ -212,14 +228,11 @@
   <script src="../directorio_nuevoCliente/js/breadcrumbs-with-stats.min.js"></script>
   <script src="../directorio_nuevoCliente/js/estilosPropios.js"></script>
   
-  <!-- MENSAJES DE LA VALIDACIÓN DE EVIDENCIA -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
-  <script src="../js/alertify.min.js"></script>
-  <script src="../js/alertify.js"></script>
-
   <!--  SCRIPTS DEL CALENDARIO DE NUEVO CLIENTE -->
   <script src="../directorio_nuevoCliente/js/jquery-ui.js"></script>
   <script src="../directorio_nuevoCliente/js/jquery-ui.min.js"></script>
+  <!-- Script comparar campos --> 
+  <script src="../js/scripts-comparar-campos.js"></script>
 
   <script>
     $.datepicker.regional['es'] = {
@@ -248,61 +261,61 @@
         });
     });
 
-    let time1, time2
-    let inputEle = document.getElementById('fechaInicial');
-    var inputEle2 = document.getElementById('fechaFinal');
+    let desde, hasta
+    let inputEle = document.getElementById('horaInicial');
+    var inputEle2 = document.getElementById('horaFinal');
 
        function enviarAgenda(){
     // => Capturando valores del primer imput time 
         let timeSplit = inputEle.value.split(':'),
-                hours,
-                minutes,
-                meridian;
-            hours = timeSplit[0];
-            minutes = timeSplit[1];
+                initialHours,
+                initialMinutes,
+                initialMeridian;
+            initialHours = timeSplit[0];
+            initialMinutes = timeSplit[1];
     // => Validando las jornadas
-            if (hours > 12) {
-                meridian = 'PM';
-                hours -= 12 ;
-            } else if (hours < 12) {
-                meridian = 'AM';
-                if (hours == 0) {
-                    hours = '' ;
-                    minutes = '';
-                    meridian = '';
+            if (initialHours > 12) {
+                initialMeridian = 'PM';
+                initialHours -= 12 ;
+            } else if (initialHours < 12) {
+                initialMeridian = 'AM';
+                if (initialHours == 0) {
+                    initialHours = '' ;
+                    initialMinutes = '';
+                    initialMeridian = '';
                 }
             } else {
-                meridian = 'PM';
+                initialMeridian = 'PM';
             }
     // => Capturando valores del segundo imput time 
             let timeSplit2 = inputEle2.value.split(':'),
-                hours2,
-                minutes2,
-                meridian2;
-            hours2 = timeSplit2[0];
-            minutes2 = timeSplit2[1];
+                finalHours,
+                finalMinutes,
+                finalMeridian;
+            finalHours = timeSplit2[0];
+            finalMinutes = timeSplit2[1];
 
-            if (hours2 > 12) {
-                meridian2 = 'PM';
-                hours2 -= 12;
-            } else if (hours2 < 12) {
-                meridian2 = 'AM';
-                if (hours2 == 0) {
-                    hours2 = '';
-                    minutes2 = '';
-                    meridian2 = '';
+            if (finalHours > 12) {
+                finalMeridian = 'PM';
+                finalHours -= 12;
+            } else if (finalHours < 12) {
+                finalMeridian = 'AM';
+                if (finalHours == 0) {
+                    finalHours = '';
+                    finalMinutes = '';
+                    finalMeridian = '';
                 }
             } else {
                 meridian2 = 'PM';
             }
 
-            time1 = hours + ' ' + minutes + ' ' + meridian
-            time2 = hours2 + ' ' + minutes2 + ' ' + meridian2
+            desde = initialHours + ' ' + initialMinutes + ' ' + initialMeridian
+            hasta = finalHours + ' ' + finalMinutes + ' ' + finalMeridian
             
             const id_cliente = $("#id_cliente").val();
             const codigo_cliente = $("#codigo_cliente").val();
-            const fechaInicial = time1;
-            const fechaFinal = time2;
+            const hora_inicial = desde;
+            const hora_final = hasta;
             let lunes = $("#lunes").is(':checked') 
             let martes = $("#martes").is(':checked')
             let miercoles = $("#miercoles").is(':checked')
@@ -316,7 +329,7 @@
         fetch('/agendarInstalacion', {
              
             method: 'POST',
-            body: JSON.stringify({id_cliente,codigo_cliente,fechaInicial,fechaFinal,lunes,martes,miercoles,jueves,viernes,sabado,domingo,fecha_especifica,nota_solicitud}),
+            body: JSON.stringify({id_cliente,codigo_cliente,hora_inicial,hora_final,lunes,martes,miercoles,jueves,viernes,sabado,domingo,fecha_especifica,nota_solicitud}),
             headers: { 'Content-Type': 'application/json' }
 
           }).then(res => res.json())
@@ -339,6 +352,8 @@
                    })
             }
      
+
+          
   </script>
   </body>
   

@@ -29,11 +29,11 @@
                   <h3 class="main_question"><strong>1/4</strong>Registro de vendedor</h3>
                   <!-- <h7 class="main_question">3C Sigma Water System</h7> -->
                   <br>
-                  <!-- Mensaje de Correo no coincide -->
+                  <!-- Mensaje de Correo no coincide y correo existente -->
                   <div class="alert alert-danger alert-border-left alert-dismissible fade show mt-2" id="alertaCorreos" style="padding: 8px 1rem; display: none" role="alert">
                     <i class="fa-solid fa-circle-exclamation me-3 align-middle"></i>
                     <label style="font-size: 14px;"><strong>Atención!</strong> - 
-                      <span style="font-weight: 300">Los correos no coinciden</span>
+                      <span style="font-weight: 300" id="mensaje"></span>
                     </label>
                   </div>
                   <!-- Fin de Alerta -->
@@ -51,14 +51,12 @@
                           placeholder="Apellidos *">
                       </div>
                     </div>
-
                     <div class="col-md-4">
                       <div class="form-group">
                         <input type="text" name="fecha_nacimiento" autocomplete="off"  id="filter-date" class="form-control required"
                           placeholder="Fecha de nacimiento*" >
                       </div>
                     </div>
-
                   </div>
                   <!-- /row -->
 
@@ -70,7 +68,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input type="email" name="correo" id="correo"  class="form-control required"
+                        <input type="email" name="correo" id="correo" onblur="validarCorreo()"  class="form-control required"
                           placeholder="Correo*">
                       </div>
                     </div>
@@ -249,12 +247,7 @@
 
                         </scroll-page>
                       </scroll-container>
-
-
                     </div>
-
-
-
                   </div>
                   <div class="form-group terms">
                     <input name="terms" type="checkbox" value="yes" class="icheck required">
@@ -262,10 +255,7 @@
                     </label>
                   </div>
                 </div>
-
-
               </div>
-
               <!-- /middle-wizard -->
               <div id="bottom-wizard">
                 <button type="button" name="backward" class="backward">Retroceder </button>

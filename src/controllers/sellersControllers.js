@@ -27,7 +27,6 @@ exports.registrar = async (req, res) => {
   const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
   // ? NOTA: ==>> Esta es la forma para obtener la fecha actual <<<<<
   const dia = new Date().getDate();
-
   const nombres = req.body.nombres;
   const apellidos = req.body.apellidos;
   const fecha_nacimiento = req.body.fecha_nacimiento;
@@ -51,6 +50,7 @@ exports.registrar = async (req, res) => {
     trasera: trasera,
   });
   const id_vendedor = generateRandomString(6);
+
 
   const sellerB = await conexion.query(
     "SELECT id_vendedor, estado_de_la_cuenta FROM usuarios WHERE id_vendedor = ? AND estado_de_la_cuenta = 'aprobado'",
@@ -139,6 +139,18 @@ exports.registrar = async (req, res) => {
   };
   await conexion.query("INSERT INTO historial_numventas SET ?", [dataVentas]);
   res.redirect("https://3csigmawater.com");
+};
+
+exports.consultarCorreo = async (req, res) => {
+  const { correo } = req.body;
+  let valido = true;
+  console.log("correo =============>>>", correo);
+  let resultCorreo = await conexion.query("SELECT correo FROM usuarios WHERE correo = ?", [correo]);
+  if (resultCorreo.length > 0) {
+    console.log("resultCorreo =============>>>", resultCorreo[0].correo);
+    valido = false;
+  }
+  res.send(valido)
 };
 
 // todo: ==> Mostrar informacion del vendedor afiliado
