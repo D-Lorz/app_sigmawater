@@ -4,7 +4,7 @@ const path = require('path');
 const multer = require('multer');
 const {nologueado,isAuthenticated} = require('../controllers/authController');
 const {registrar, listarAfiliados, perfilVendedores, editInfo, facturacion, consultarFactura,
-       actualizarFotoPerfil } = require('../controllers/sellersControllers');
+       actualizarFotoPerfil,consultarCorreo } = require('../controllers/sellersControllers');
 
 const rutaAlmacen = multer.diskStorage({
 
@@ -74,6 +74,7 @@ router.get('/ventas-vendedor',isAuthenticated, facturacion)
 //* router para los métodos del controller
 /*=============================================================*/
 router.post('/registrar', nologueado, multiupload,registrar);
+router.post('/consultarCorreo', nologueado, consultarCorreo);
 router.post('/actualizarPerfil', isAuthenticated, editInfo);
 /*=============================================================*/
 router.post('/actualizarFotoPerfil', isAuthenticated, cargarFotoPerfil.single('foto'), actualizarFotoPerfil);

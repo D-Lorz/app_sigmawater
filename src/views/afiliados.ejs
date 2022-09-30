@@ -83,9 +83,6 @@
                     table-check nowrap" style="border-collapse: collapse;
                     border-spacing: 0 8px; width: 100%;">
                     <thead>
-                    
-                            <th scope="col"></th>
-                            <!-- <th scope="col">ID de afiliado</th> -->
                             <th scope="col">Nombres</th>
                             <th scope="col">Apellidos</th>
                             <th scope="col">Correo electronico</th>
@@ -99,11 +96,6 @@
                     <tbody>
                         <% result.forEach((user)=>{ %>
                             <tr>
-                                <th scope="row">
-                                    <div class="form-check font-size-16">
-                                        <input type="checkbox" class="form-check-input"  id="contacusercheck1">
-                                      <label class="form-check-label" for="contacusercheck1"></label></div>
-                                </th>
                                 <td><%= user.nombres %></td>
                                 <td><%= user.apellidos %> 
                                 <td><%= user.correo %></td>

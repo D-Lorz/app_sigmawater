@@ -380,22 +380,22 @@ exports.testAgua = async (req, res) => {
   }else {
     totalDureza_compensada = (parseFloat(dureza_gmXgalon) * 4)
   }
-  const tsd = req.body.tsd
+  const tsd = req.body.tsd;
   const cloro = req.body.cloros;
-  const ph = req.body.ph
-  const azufre = req.body.azufre
-  const tanino = req.body.tanino
-  const nitrato = req.body.nitrato
+  const ph = req.body.ph;
+  const azufre = req.body.azufre;
+  const tanino = req.body.tanino;
+  const nitrato = req.body.nitrato;
   const alcalinidad = req.body.alcalinidad;
   const otro1 = req.body.otro1[0];
-  const concentracion1 = req.body.concentracion1[0]
+  const concentracion1 = req.body.concentracion1[0];
   const otro2 = req.body.otro1[1];
-  const concentracion2 = req.body.concentracion1[1]
+  const concentracion2 = req.body.concentracion1[1];
   const otro3 = req.body.otro1[2];
-  const concentracion3 = req.body.concentracion1[2]
+  const concentracion3 = req.body.concentracion1[2];
   const nota = req.body.nota;
-  const id_cliente = req.body.id_cliente
-  const codigo_cliente = req.body.codigo_cliente
+  const id_cliente = req.body.id_cliente;
+  const codigo_cliente = req.body.codigo_cliente;
   const Datos_testAgua = {
     fecha_test, dureza_gmXgalon, hierro, totalDureza_compensada, tsd, cloro, ph, azufre, tanino, nitrato, alcalinidad,
     otro1, concentracion1, otro2, concentracion2, otro3, concentracion3, nota, id_cliente
@@ -454,7 +454,7 @@ exports.ahorro = async (req, res) => {
 
 // todo ==> Formulario agendar instalacion
 exports.agendarInstalacionProducto = async (req, res) => {
-  let {lunes,martes,miercoles,jueves,viernes,sabado,domingo,fechaInicial,fechaFinal,fecha_especifica,nota_solicitud,id_cliente } = req.body
+  let {lunes,martes,miercoles,jueves,viernes,sabado,domingo,hora_inicial,hora_final,fecha_especifica,nota_solicitud,id_cliente } = req.body
   lunes ? lunes = 'lunes' : lunes = ''
   martes ? martes = 'martes': martes = ''
   miercoles ? miercoles = 'miercoles' : miercoles = ''
@@ -462,7 +462,7 @@ exports.agendarInstalacionProducto = async (req, res) => {
   viernes ? viernes = 'viernes' : viernes = ''
   sabado ? sabado = 'sabado' : sabado = ''
   domingo ? domingo = 'domingo' : domingo = ''
-  const Datos_agendarSolicitud = { lunes, martes, miercoles, jueves, viernes, sabado, domingo, fechaInicial, fechaFinal, fecha_especifica, nota_solicitud, id_cliente }
+  const Datos_agendarSolicitud = { lunes, martes, miercoles, jueves, viernes, sabado, domingo, hora_inicial, hora_final, fecha_especifica, nota_solicitud, id_cliente }
   await conexion.query('INSERT INTO agendar_instalacion SET ?', [Datos_agendarSolicitud], (err, result) => {
     if (err) { res.send(false) }
     res.send(true)

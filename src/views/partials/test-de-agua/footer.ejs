@@ -12,8 +12,8 @@
        
 <!-- pace js -->
 <script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
-<!-- Script Personalizados -->
-<script src="../js/scripts_personalizados.js"></script>
+<!-- Script comparar campos -->
+<script src="../js/scripts-comparar-campos.js"></script>
 
 <script src="../directorio_dash/js/app.js"></script>
 
@@ -46,33 +46,30 @@
 <!-- init js -->
  <script src="../directorio_dash/js/pages/form-advanced.init.js"></script>
 
-<!-- ==========FIXME: JS DEL FORMULARIO ================= -->
+<!-- ==========FIXME: JS DEL FORMULARIOa ================= -->
 
 <script type="text/javascript">
-
-
     $(document).on('keyup', ".form-group", function () {
-        var cantidad = $(this).find("input[title=cantidad]").val();
-        var pu = $(this).find("input[title=pu]").val();
+        let cantidad = $(this).find("input[title=cantidad]").val();
+        let pu = $(this).find("input[title=pu]").val();
     
         $(this).find("[title=subtotal]").html(parseInt(cantidad) * parseInt(pu));
     
         //subtotal = cantidad * pu;
         //document.formulario_01.subtotal.value = subtotal;
     });
-    
       
       $(document).ready(function () {
-        var maxField = 3; //Input fields increment limitation
-        var addButton = $('.add_button'); //Add button selector
-        var wrapper = $('.form'); //Input field wrapper
-        var fieldHTML = 
+        let maxField = 3; //Input fields increment limitation
+        let addButton = $('.add_button'); //Add button selector
+        let wrapper = $('.form'); //Input field wrapper
+        let fieldHTML = 
         // '<center>'+
           '<div class="row justify-content-center">' +
                    '<div class="col-md-3">' +
                        '<div class="form-group ">' +
                         '<label for="">Contaminante</label>'+
-                            '<input type="text" name="otro1[]" id="otro1" class="form-control " placeholder=""/>' +
+                            '<input type="text" name="otro1[]" id="otro1" class="form-control" placeholder=""/>' +
                         '</div>'+
                     '</div>'+
                    '<div class="col-md-3">' +
@@ -86,7 +83,7 @@
               '<br>';
             // '</center>';
     
-        var x = 1; //El contador de campo inicial es 1
+        let x = 1; //El contador de campo inicial es 1
         $(addButton).click(function () { //Una vez que se hace clic en el botón Agregar
             if (x < maxField) { //Comprobar el número máximo de campos de entrada
                 x++; //Increment field counter

@@ -168,7 +168,7 @@
                         <!-- end page title -->
 
                         <!-- Nav tabs -->
-                        <ul class="nav justify-content-start nav-pills card-header-pills mb-3" role="tablist">
+                        <ul class="nav justify-content-start nav-pills card-header-pills mb-3" role="tablist" style="margin-left: 2px;">
                             <li class="nav-item waves-effect waves-light">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#facturas-propias" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
@@ -187,7 +187,7 @@
                         <div class="tab-content p-3 text-muted">
 
                             <!-- FACTURAS PROPIAS (VENDEDOR LOGUEADO) -->
-                            <div class="tab-pane active" id="facturas-propias" role="tabpanel">
+                            <div class="tab-pane active" id="facturas-propias" role="tabpanel" style="margin-left: -10px;">
                                 <div class="table-responsive mb-4 ">
                                     <table class="table align-middle datatable dt-responsive table-check nowrap "
                                         style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
@@ -233,7 +233,7 @@
                             </div>
 
                             <!-- FACTURAS PARA AFILIADOS -->
-                            <div class="tab-pane" id="facturas-afiliados" role="tabpanel">
+                            <div class="tab-pane" id="facturas-afiliados" role="tabpanel" style="margin-left: -10px;">
                                 <div class="table-responsive mb-4 ">
                                     <table class="table align-middle datatable dt-responsive table-check nowrap "
                                         style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
@@ -266,8 +266,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="badge <%= f.facturaAfl.color %> font-size-12"> <%= f.facturaAfl.text %> </div>
-                                                          <br>
-                                                        <div class="badge <%= f.estado.color %> font-size-12"> <%= f.estado.text %></div>
+                                                        <br>
                                                         <div class="badge <%= f.estadoAfl.color %> font-size-12 mt-2"> <%= f.estadoAfl.text %></div>
                                                     </td>
                                                 </tr>

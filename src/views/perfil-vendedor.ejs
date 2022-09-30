@@ -176,7 +176,7 @@
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group">
                                                                                         <h5 class="font-size-14 mb-1" style="text-transform: capitalize;">Correo</h5>
-                                                                                        <input type="email" class="form-control text-muted font-size-13" value="<%= vendedor.correo %>" id="idcorreo" required placeholder="ejemplo@gmail.com" id="" name="correo">
+                                                                                        <input type="email" class="form-control text-muted font-size-13" value="<%= vendedor.correo %>" id="idcorreo" onblur="validarCorreosIguales()" required placeholder="ejemplo@gmail.com" id="" name="correo">
                                                                                     </div>
                                                                                 </div>
                                                                              </div>
@@ -201,7 +201,11 @@
                                                                             <div class="col-lg-6">
                                                                                 <div class="form-group">
                                                                                     <label for=""></label>
-                                                                                    <input type="password" class="form-control" onblur="validarPass()" id="idPassConfirmar" placeholder="Confirmar contraseña" >
+                                                                                    <div class="input-group auth-pass-inputgroup">
+                                                                                        <input type="password" class="form-control" onblur="validarPass()" id="idPassConfirmar"
+                                                                                            aria-describedby="emailHelp"  placeholder="Confirmar contraseña" aria-label="Password" aria-describedby="password-addon" onfocus="">
+                                                                                        <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                        </div>
@@ -510,8 +514,8 @@
  <!-- Responsive examples -->
  <script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
  <script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-<!-- Script Personalizados -->
-<script src="../js/scripts_personalizados.js"></script>
+<!-- Script comparar campos -->
+<script src="../js/scripts-comparar-campos.js"></script>
 
  <!-- Buttons examples -->
  <script src="../directorio_dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -538,6 +542,8 @@
   <script src="../js/scripts-mask-phone.js"></script>
   <!-- Validar campos -->
   <script src="../js/scripts-validar-campos.js"></script>
+   <!-- password addon init -->
+   <script src="../directorio_dash/js/pages/pass-addon.init.js"></script>
 
 <script>
 // ==> Previsualizar foto de perfil == INICIO <==

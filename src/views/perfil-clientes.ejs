@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
     <title>Perfil clientes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,591 +33,582 @@
  <link href="../directorio_dash/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
  <link rel="stylesheet" href="../css/scrolls.css">
+
+ <style>
+    .noVisitado{
+         background: #50515c;
+         }
+         .letra{
+             color:white;
+         }
+     .visitado{
+         background: #89c278;
+     }
+     .producto_instalado{
+        background: #fed061;
+     }
+   
+</style>
 </head>
 
 <body>
 
-    <!-- Begin page -->
-    <div id="layout-wrapper">
-
-        <!-- =======FIXME: MENU ========= -->
-
-        <%- include ('./partials/menu.ejs')%>
-
-            <!-- =======FIXME: MENU ====== -->
-
-            <div class="main-content">
-                <div class="page-content">
-                    <div class="container-fluid">
-
-           <!-- * =============>> Datos del cliente  <<========================== -->
-                    <div class="row">
-                            <div class="col-xl-8" >
-                                <div class="">
+<!-- Begin page -->
+<div id="layout-wrapper">
+<!-- ======= MENU ========= -->
+<%- include ('./partials/menu.ejs')%>
+<!-- ======= MENU ====== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+    <!-- * =============>> Datos del cliente  <<========================== -->
+            <div class="row"> 
+                    <div class="col-xl-8">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-14">
+                                    <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7;height: 87%;">
+                                        <div class="card-header bg-transparent border-primary">
+                                            <h5 class="my-0 text-primary">
+                                            <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5> 
+                                            <a href="/solicitar-credito/<%= clientes2.id_cliente %>" id="verBtn">
+                                                <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -2%;border-radius:13px;">Formulario de crédito</button>
+                                            </a> 
+                                        </div>
                                     <div class="card-body">
-                                      
-                                        <div class="row">
-                                            <div class="col-lg-14">
-                                                <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
-                                                    <div class="card-header bg-transparent border-primary">
-                                                        <h5 class="my-0 text-primary">
-                                                            <i class="fa fa-user-circle"></i>&nbsp; Datos del cliente</h5> 
-                                                       
-                                                            <a href="/solicitar-credito/<%= clientes2.id_cliente %>" id="verBtn">
-                                                                <button class="btn btn-primary" id="btn_credito" type="button" style="float: right;margin-top: -2%;border-radius:13px;">Formulario de crédito</button>
-                                                            </a> 
-                                                      </div>
-                                                    <div class="card-body">
-                                                        <div class="table-responsive" style="overflow-x: hidden;">
-                                                            <table class="table mb-0">
-                                                                <tbody>
-                                                                    <tr>
-                                                                         <td style="width: 23%;">ID</td>
-                                                                         <td><b><%= clientes2.id_cliente%></b></td>
-                                                                         <td>Teléfono</td>
-                                                                         <td><b><%= clientes2.telefono  %></b></td>
-                                                                        </tr>
-                                                                    <tr>
-                                                                        <td>Nombre</td>
-                                                                        <td style="width: 29%;"><b><%= clientes2.nombre %></b></td>
-                                                                        <td style="width:20%">Dirección</td>
-                                                                        <td><b><%= clientes2.direccion %> <%= clientes2.ciudad %> <p><%= clientes2.estado_ubicacion %> <%= clientes2.codigo_postal %> </p></b></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Segundo nombre</td>
-                                                                        <td><b><%= clientes2.segundo_nombre %></b></td>
-                                                                        <td>Dirección 2</td>
-                                                                        <td><b><%= clientes2.direccion2%></b></td>
-                                                                    </tr>
-                                                                 
-                                                                 
-                                                                    <tr>
-                                                                        <td>Apellido</td>
-                                                                        <td><b><%= clientes2.apellido %></b></td>
-                                                                        <td>Estado de crédito</td>
-                                                                        <td><div class="badge <%= estado.color%> font-size-12" ><%= estado.txt %></div></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Correo electronico</td>
-                                                                        <td><b><%= clientes2.correo %></b></td>
-                                                                    
-                                                                        <td style="width: 24%;">Monto aprobado</td>
-                                                                        <% if((mostrarProducto)) { %>
-                                                                            <td><div class="badge badge-soft-success font-size-12"><%=mostrarProducto.monto_aprobado%></div></td>
-                                                                        <% } else {%>
-                                                                        <td><div class="badge badge-soft-success font-size-12">$ 0</div></td>
-                                                                           <%}%>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                 </div>
-                                            </div><!-- end col -->
-                                         </div> <!-- end card-body -->
-                                    </div> <!-- end card -->
-                                 </div><!-- end col -->
-                              </div>
-                          
-                              <style>
-                                    .noVisitado{
-                                         background: #50515c;
-                                         }
-                                         .letra{
-                                             color:white;
-                                         }
-                                     .visitado{
-                                         background: #89c278;
-                                     }
-                                     .producto_instalado{
-                                        background: #fed061;
-                                     }
-                                   
-                                </style>
-
-
-                                <div class="col-lg-4">
-                                   
-                                    <div class="card" style="border-radius: 21px; margin-top: 20px;box-shadow: 0px 0px 10px #e7e7e7;">
-                                      <div class="card-body">
-
-                                            <% if((mostrarProducto)) { %>
-                                            <h5 class="card-title mb-3" style="text-align: center">3C Sigma Water System</h5>
-                                              <form action="/elegirSistema" method="POST" style="text-align: center">
-                                                    <div class="btn-group me-1 mt-2">
-                                                <div class="badge badge-soft-success font-size-12">Sistema solicitado: <%=mostrarProducto.sistema %> </div>
-                                                    
-                                                    </div>
-                                                    <br>
-                                                   
-                                                </form>
-                                         <% } else {%>
-                                            <h5 class="card-title mb-3" style="text-align: center">Producto de interés</h5>
-                                            <form action="/elegirSistema" method="POST" style="text-align: center">
-                                                <div class="btn-group me-1 mt-2">
-                                                 
-                                                    <input type="hidden" name="id_clienteCodigo" value="<%= clientes2.id_cliente %>">
-                                                    <input type="hidden" name="id_consecutivo" value="<%= clientes2.id %>">
-                                           
-                                                  <select class="form-select required" required id="reco" onchange="ShowSelected()" name="sistemaElegido">
-                                                        <option style="background:gray;color: white;" value=''>Elige un sistema</option>
-                                                        <option value="Whole System">Whole System</option>
-                                                        <option value="Reverse Osmosis System">Reverse Osmosis System</option>
-                                                   </select>
-                                                </div>
-
-                                                <br>
-                                                <br>
-
-                                                <div class="card-body" style="margin-top: -5.5%;">
-                                                    <ul class="nav nav-pills nav-justified" role="tablist" >
-                                                        <li id="cursorBtn" class="nav-item waves-effect waves-light" style="border-radius: 13px; cursor: default;">
-                                                            <button type="button" style="border-radius: 14px; " class="btn btn-success waves-effect waves-light"
-                                                                 data-bs-toggle="modal" data-bs-target=".monto" id="btnCreditoAprobado" disabled="disabled" > 
-                                                                      <span class="d-block d-sm-none"><i class="fas fa-id-card"></i></span>
-                                                                      <span class="d-none d-sm-block">Crédito aprobado</span>
-                                                            </button>
-                                                              </a> 
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                                <div class="modal fade monto" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <br>
-                                                           <div class="header">
-                                                         <div>
-                                                              <?xml version="1.0" ?><svg viewBox="0 0 32 32" width="17%" xmlns="http://www.w3.org/2000/svg">
-                                                                <defs><style>.cls-1{fill:#FFBF53;}
-                                                                    </style></defs><title/><g data-name="Layer 57" id="Layer_57">
-                                                                        <path class="cls-1" d="M16,31A15,15,0,1,1,31,16,15,15,0,0,1,16,31ZM16,3A13,13,0,1,0,29,16,13,13,0,0,0,16,3Z"/>
-                                                                        <path class="cls-1" d="M16,24a2,2,0,1,1,2-2A2,2,0,0,1,16,24Zm0-2Z"/>
-                                                                        <path class="cls-1" d="M16,18a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v9A1,1,0,0,1,16,18Z"/>
-                                                                    </g></svg>  
-                                                                </div>
-                                                                <br>
-                                                            <h5 style="font-size: 160%; color: #595959;letter-spacing: -1px;">Valor del sistema</h5>
-                                                            <h2 style="color: #595959;font-weight: 300;">Introduce el valor del producto aprobado por la financista</h2>
-                                                                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                                                            </div>
-                                                       
-                                                            <div class="modal-body">
-                                                                <div class="row justify-content-center">
-                                                                   <div class="col-md-6">
-                                                                    
-                                                                    <div id="inputsMonto"></div>
-                                                                    <!-- <input type="text" class="form-control required" required id="montoAprobadoWS" style="margin-left: 2%; display: none" placeholder="Máximo: $8,500">
-
-                                                                    <input type="text" class="form-control required" required id="montoAprobadoROS" style="margin-left: 2%; display: none" placeholder="Máximo: $4,250"> -->
-
-                                                                        <div class="modal-footer">
-                                                                            <input type="submit" class="btn btn-success" value="Confirmar" id="botonesOMG" style="border-radius:17px" >
-                                                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="border-radius:17px">Cerrar</button>
-                                                                        </div>
-                                                                  </div>
-                                                                </div>
-                                                            </div>
+                                        <div class="table-responsive" style="overflow-x: hidden;">
+                                            <table class="table mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 23%;">ID</td>
+                                                        <td><b> <%= clientes2.id_cliente%></b></td>
+                                                        <td>Teléfono</td>
+                                                        <td><b><%= clientes2.telefono %></b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nombre</td>
+                                                        <td style="width: 29%;"><b><%= clientes2.nombre %></b></td>
+                                                        <td style="width:20%">Dirección</td>
+                                                        <td><b><%= clientes2.direccion %> <%= clientes2.ciudad %>
+                                                            <p><%= clientes2.estado_ubicacion %> <%= clientes2.codigo_postal %></b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Segundo nombre</td>
+                                                        <td><b><%= clientes2.segundo_nombre %></b></td>
+                                                        <td>Dirección 2</td>
+                                                        <td><b> <%= clientes2.direccion2%></b></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Apellido</td>
+                                                        <td><b><%= clientes2.apellido %></b></td>
+                                                        <td>Estado de crédito</td>
+                                                        <td><div class="badge <%= estado.color%> font-size-12"><%= estado.txt %></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Correo electronico</td>
+                                                        <td><b><%= clientes2.correo %></b></td>
+                                                        <td style="width: 24%;">Monto aprobado</td>
+                                                    <% if((mostrarProducto)) { %>
+                                                        <td><div class="badge badge-soft-success font-size-12"><%=mostrarProducto.monto_aprobado%></div></td>
+                                                    <% } else {%>
+                                                        <td><div class="badge badge-soft-success font-size-12">$ 0</div></td>
+                                                    <%}%>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div>
+                <style>
+                    @media (min-width: 1200px) {
+                    .tarjetas-informativas{
+                        width: 33%;
+                    }
+                    }
+                    @media (max-width: 992px) {
+                    .tarjetas-informativas{
+                        width: 96%;
+                        margin-left: 18px;
+                    }
+                    }
+                    @media (max-width: 1180px) {
+                    .tarjetas-informativas{
+                        width: 96.5%;
+                        margin-left: 18px;
+                    }
+                    }
+                </style>
+                <div class="tarjetas-informativas">
+                    <div class="card" style="border-radius: 21px; margin-top: 20px;box-shadow: 0px 0px 10px #e7e7e7;">
+                        <div class="card-body">
+                            <% if((mostrarProducto)) { %>
+                                <h5 class="card-title mb-3" style="text-align: center">3C Sigma Water System</h5>
+                                <center><div class="btn-group me-1 mt-2">
+                                    <div class="badge badge-soft-success font-size-12">Sistema solicitado: <%=mostrarProducto.sistema %></div>
+                                </div></center>
+                                <br>
+                            <% } else {%>
+                                <h5 class="card-title mb-3" style="text-align: center">Producto de interés</h5>
+                                    <form action="/elegirSistema" method="POST" style="text-align: center">
+                                        <div class="btn-group me-1 mt-2">
+                                            <input type="hidden" name="id_clienteCodigo" value="<%= clientes2.id_cliente %>">
+                                            <input type="hidden" name="id_consecutivo" value="<%= clientes2.id %>">
+                                                <select class="form-select required" required id="reco" onchange="ShowSelected()" name="sistemaElegido">
+                                                    <option style="background:gray;color: white;" value=''>Elige un sistema</option>
+                                                    <option value="Whole System">Whole System</option>
+                                                    <option value="Reverse Osmosis System">Reverse Osmosis System</option>
+                                                </select>
+                                        </div>
+                                        <br>
+                                        <br>
+                                    <div class="card-body" style="margin-top: -5.5%;">
+                                        <ul class="nav nav-pills nav-justified" role="tablist" >
+                                            <li id="cursorBtn" class="nav-item waves-effect waves-light" style="border-radius: 13px; cursor: default;">
+                                                <button type="button" style="border-radius: 14px; " class="btn btn-success waves-effect waves-light"
+                                                    data-bs-toggle="modal" data-bs-target=".monto" id="btnCreditoAprobado" disabled="disabled"> 
+                                                        <span class="d-block d-sm-none"><i class="fas fa-id-card"></i></span>
+                                                        <span class="d-none d-sm-block">Crédito aprobado</span>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="modal fade monto" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                            <br>
+                                            <div class="header">
+                                                <?xml version="1.0" ?><svg viewBox="0 0 32 32" width="17%" xmlns="http://www.w3.org/2000/svg">
+                                                    <defs><style>.cls-1{fill:#FFBF53;}
+                                                    </style></defs><title/><g data-name="Layer 57" id="Layer_57">
+                                                    <path class="cls-1" d="M16,31A15,15,0,1,1,31,16,15,15,0,0,1,16,31ZM16,3A13,13,0,1,0,29,16,13,13,0,0,0,16,3Z"/>
+                                                    <path class="cls-1" d="M16,24a2,2,0,1,1,2-2A2,2,0,0,1,16,24Zm0-2Z"/>
+                                                    <path class="cls-1" d="M16,18a1,1,0,0,1-1-1V8a1,1,0,0,1,2,0v9A1,1,0,0,1,16,18Z"/>
+                                                </g></svg>  
+                                            <br>
+                                            <h5 style="font-size: 160%; color: #595959;letter-spacing: -1px;">Valor del sistema</h5>
+                                            <h2 style="color: #595959;font-weight: 300;">Introduce el valor del producto aprobado por la financista</h2>
+                                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-md-6">
+                                                        <div id="inputsMonto"></div>
+                                                        <!-- <input type="text" class="form-control required" required id="montoAprobadoWS" style="margin-left: 2%; display: none" placeholder="Máximo: $8,500">
+                                                        <input type="text" class="form-control required" required id="montoAprobadoROS" style="margin-left: 2%; display: none" placeholder="Máximo: $4,250"> -->
+                                                        <div class="modal-footer">
+                                                            <input type="submit" class="btn btn-success" value="Confirmar" id="botonesOMG" style="border-radius:17px" >
+                                                                <button type="button" class="btn btn-light" data-bs-dismiss="modal" style="border-radius:17px">Cerrar</button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                             </form>
-                                             
-
-                                         <% } %>
-                                      </div><!-- end card body -->
-                                    </div>
-
-                                 <div class="card border-primary text-white-50 <%= estadoVisita_testAgua.background %>" style="margin-top: 5%;">
-                                        <div class="card-body">
-                                            <h6 class="mb-3 text-white">Estado de visitas</h6>
-                                            <p class="card-text" style="color:white;">
-                                                <td><div class="badge <%= estadoVisita_testAgua.color %> font-size-12 letra" > <%= estadoVisita_testAgua.txt  %>
-                                                 <%= consulta_UltimoTestAgua.fecha_test %></div></td>
-                                            </p>
+                                            </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="card  border-primary text-white-50 <%= estado_intalacion.background %>">
-                                        <div class="card-body">
-                                            <h6 class="mb-3 text-white">Estado de la instalación del producto</h6>
-                                            <p class="card-text" style="color:white;">
-                                                <td><div class="badge <%= estado_intalacion.color %> font-size-12 letra" > <%= estado_intalacion.txt %> </div></td>
-                                             </p>
-                                        </div>
-                                    </div>
-                                 </div>
-                                
+                                </form>
+                            <% } %>
+                        </div><!-- end card body -->
                     </div>
-            <!-- * =============>> FIN Datos del cliente  <<===================== -->
-
-            <!-- * =============>> Test de agua  <<============================== -->
+                    <div class="card border-primary text-white-50 <%= estadoVisita_testAgua.background %>" style="margin-top: 5%;">
+                        <div class="card-body">
+                        <h6 class="mb-3 text-white">Estado de visitas</h6>
+                        <p class="card-text" style="color:white;">
+                            <td><div class="badge <%= estadoVisita_testAgua.color %> font-size-12 letra"><%= estadoVisita_testAgua.txt  %> <%= consulta_UltimoTestAgua.fecha_test %></div></td>
+                        </p>
+                        </div>
+                    </div>
+                    <div class="card border-primary text-white-50 <%= estado_intalacion.background %>">
+                        <div class="card-body">
+                            <h6 class="mb-3 text-white">Estado de la instalación del producto</h6>
+                                <p class="card-text" style="color:white;">
+                                    <td><div class="badge <%= estado_intalacion.color %> font-size-12 letra" > <%= estado_intalacion.txt %> </div></td>
+                                </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <!-- * =============>> FIN Datos del cliente  <<===================== -->
+    <!-- * =============>> Test de agua  <<============================== -->
+        <div class="row">
+            <div class="col-xl-8">
+                <div style="width: 95%;margin-left: 22px">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
+                            <div class="card-header bg-transparent border-primary">
+                                    <h5 class="my-0 text-primary">
+                                        <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
+                                        <a href="/test-de-agua/<%= clientes2.id_cliente %>" >
+                                            <button class="btn btn-primary"  type="button" style="float: right;margin-top: -2%;border-radius:13px;">Realizar test</button>
+                                        </a> 
+                            </div> 
+                            <div class="card-body">
+                                <div class="">
+                                    <div class="table-responsive" style="height: 24em;" >
+                                    <table class="table table" id="idahorro" class="dataTables_filter" id="tech-companies-1" 
+                                     class="dataTables_info" style="margin-top: 2%;" >
+                                            <thead class="">
+                                                <tr>
+                                                    <th>Numero <br>de test</th>
+                                                    <th>Fecha</th>
+                                                    <th>Dureza <br>(gpg)</th>
+                                                    <th>Hierro <br>(ppm)</th>
+                                                    <th>Total dureza <br>compensada</th>
+                                                    <th>TSD <br> (Total de solidos disueltos)</th>
+                                                    <th>Cloro<br> (ppm)</th>
+                                                    <th>pH</th>
+                                                    <th>Azufre <br>(ppm)</th>
+                                                    <th>Tanino<br> (ppm)</th>
+                                                    <th>Nitrato <br>(ppm)</th>
+                                                    <th>Alcalinidad</th>
+                                                    <th>Otro</th>
+                                                    <th>Concentración</th>
+                                                    <th>Otro</th>
+                                                    <th>Concentración</th>
+                                                    <th>Otro</th>
+                                                    <th>Concentración</th>
+                                                    <th>Nota</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                        <% informacionTestAgua.forEach((user)=>{ %>
+                                                <tr>
+                                                    <td><%= user.cont %> </td>
+                                                    <td><%= user.fecha_test %></td>
+                                                    <td><%= user.dureza_gmXgalon %></td>
+                                                    <td><%= user.hierro %></td>
+                                                    <td><%= user.totalDureza_compensada %></td>
+                                                    <td><%= user.tsd %></td>
+                                                    <td><%= user.cloro %></td>
+                                                    <td><%= user.ph %></td>
+                                                    <td><%= user.azufre %></td>
+                                                    <td><%= user.tanino %></td>
+                                                    <td><%= user.nitrato %> </td>
+                                                    <td><%= user.alcalinidad %></td>
+                                                    <td><%= user.otro1 %></td>
+                                                    <td><%= user.concentracion1 %></td>
+                                                    <td><%= user.otro2 %></td>
+                                                    <td><%= user.concentracion2 %></td>
+                                                    <td><%= user.otro3 %></td>
+                                                    <td><%= user.concentracion3 %></td>
+                                                    <td><%= user.nota %></td>
+                                                </tr>
+                                            <%})%>
+                                                </tbody>
+                                        </table>
+                                         <input type="hidden" id="datosJson_PrimerTestagua" value="<%= datosJson_PrimerTestagua %>">
+                                         <input type="hidden" id="datosJson_UltimoTestagua" value="<%= datosJson_UltimoTestagua %>">
+                                    </div>
+                                </div>
+                            </div> <!-- end card -->
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end card -->
+            </div> <!-- end col -->
+                <style>
+                    @media (min-width: 1200px) {
+                        .test-grafica{
+                            width: 33%;
+                        }
+                    }
+                    @media (max-width: 992px) {
+                        .test-grafica{
+                            width: 97%;
+                            margin-left: 18px;
+                        }
+                    }
+                    @media (max-width: 1180px) {
+                        .test-grafica{
+                            width: 95.8%;
+                            margin-left: 18px;
+                        }
+                    }
+                </style>
+            <div class="test-grafica">
+                <div class="card" style="margin-top: 0%; box-shadow: 0px 0px 10px #e7e7e7;border-radius: 21px;">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">Calidad de agua del hogar</h4>
+                    </div>
+                     <div class="card-body">
+                        <div id="column_chart" data-colors='["#a99bcb", "#50368c"]' class="apex-charts" dir="ltr"></div>                                      
+                    </div>
+                </div> <!--end card-->
+            </div>
+        </div>
+    <!-- * =============>> FIN Test de agua  <<============================= -->
+    <!-- * =============>> Ahorro  <<===================================== -->
             <div class="row">
                 <div class="col-xl-8">
                     <div class="">
-                    
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
-
-                                   <div class="card-header bg-transparent border-primary">
-                                        <h5 class="my-0 text-primary">
-                                            <i class="fas fa-water"></i>&nbsp; Test de agua</h5>
-                                            
-                                            <a href="/test-de-agua/<%= clientes2.id_cliente %>" >
-                                                <button class="btn btn-primary"  type="button" style="float: right;margin-top: -2%;border-radius:13px;">Realizar test</button>
-                                            </a> 
-                                    </div> 
-                  
-                                    <div class="card-body">
-                                        <div class="">
-                                            <div class="table-responsive" >
-                                             <table class="table table" id="idahorro" class="dataTables_filter" id="tech-companies-1" 
-                                             class="dataTables_info" style="margin-top: 2%;" >
-                                                                    <thead class="">
-                                                                        <tr>
-                                                                            <th>Numero <br>de test</th>
-                                                                            <th>Fecha</th>
-                                                                            <th>Dureza <br>(gpg)</th>
-                                                                            <th>Hierro <br>(ppm)</th>
-                                                                            <th>Total dureza <br>compensada</th>
-                                                                            <th >TSD <br> (Total de solidos disueltos)</th>
-                                                                            <th>Cloro<br> (ppm)</th>
-                                                                            <th>pH</th>
-                                                                            <th>Azufre <br>(ppm)</th>
-                                                                            <th>Tanino<br> (ppm)</th>
-                                                                            <th>Nitrato <br>(ppm)</th>
-                                                                            <th>Alcalinidad</th>
-                                                                            <th>Otro</th>
-                                                                            <th>Concentración</th>
-                                                                            <th>Otro</th>
-                                                                            <th>Concentración</th>
-                                                                            <th>Otro</th>
-                                                                            <th>Concentración</th>
-                                                                            <th>Nota</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <% informacionTestAgua.forEach((user)=>{ %>
-                                                                            <tr>
-                                                                                  <td><%= user.cont %></td>
-                                                                                  <td><%= user.fecha_test %></td>
-                                                                                  <td><%= user.dureza_gmXgalon %></td>
-                                                                                  <td><%= user.hierro %></td>
-                                                                                  <td><%= user.totalDureza_compensada %></td>
-                                                                                  <td><%= user.tsd %></td>
-                                                                                  <td><%= user.cloro %></td>
-                                                                                  <td><%= user.ph %></td>
-                                                                                  <td><%= user.azufre %></td>
-                                                                                  <td><%= user.tanino %></td>
-                                                                                  <td><%= user.nitrato %></td>
-                                                                                  <td><%= user.alcalinidad %></td>
-                                                                                  <td><%= user.otro1 %></td>
-                                                                                  <td><%= user.concentracion1 %></td>
-                                                                                  <td><%= user.otro2 %></td>
-                                                                                  <td><%= user.concentracion2 %></td>
-                                                                                  <td><%= user.otro3 %></td>
-                                                                                  <td><%= user.concentracion3 %></td>   
-                                                                                  <td><%= user.nota %></td>    
-                                                                             </tr>
-                                                                            <%})%>
-                                                                          </tbody>
-                                                                       </table>
-                                                                            <input type="hidden" id="datosJson_PrimerTestagua" value="<%= datosJson_PrimerTestagua %>">
-                                                                            <input type="hidden" id="datosJson_UltimoTestagua" value="<%= datosJson_UltimoTestagua %>">
-                                                                        </div>
-                                                                    </div>
-                                                                </div> <!-- end card -->
-                                                            </div>
-                                                         </div>
-                                                       </div>
-                                                    </div> <!-- end card -->
-                                                </div> <!-- end col -->
-                                        <div class="col-lg-4 ">
-                                            <div class="card" style="margin-top: 0%; box-shadow: 0px 0px 10px #e7e7e7;border-radius: 21px;">
-                                                <div class="card-header">
-                                                    <h4 class="card-title mb-0">Calidad de agua del hogar</h4>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div id="column_chart" data-colors='["#a99bcb", "#50368c"]' class="apex-charts" dir="ltr"></div>                                      
-                                                </div>
-                                            </div> <!--end card-->
-                                        </div>
-                                 </div>
-            <!-- * =============>> FIN Test de agua  <<=============================->
-
-            <!-- * =============>> Ahorro  <<===================================== -->
-                    <div class="row">
-                                <div class="col-xl-8">
-                                    <div class="">
-                                        <div class="card-body">
-                                          
-                                            <div class="row">
-                                                <div class="col-lg-14">
-                                                    <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
-                                                        <div class="card-header bg-transparent border-primary">
-                                                            <h5 class="my-0 text-primary">
-                                                                <i class="fas fa-money-bill"></i>&nbsp; Ahorro</h5>
-                                                                <a href="/calcular-ahorro/<%= clientes2.id_cliente %>" >
-                                                                    <button class="btn btn-primary"  type="button" style="float: right;margin-top: -2%;border-radius:13px;">Calcular</button>
-                                                                </a> 
-                                                            </div>
-                                                          <div class="card-body">
-                                                            <div class="table-responsive" style="overflow-x: hidden;" >
-                                                               
-                                                                <table class="table table-striped mb-0" 
-                                                                  id="copyahorro" class="dataTables_filter" 
-                                                                  class="dataTables_paginate "
-                                                                  class="dataTables_info" style="margin-top: 2%;">
-                                                             <style>
-                                                               
-                                                                .dataTables_filter{
-                                                                     display: none;
-                                                                 }
-                                                                 .dataTables_paginate{
-                                                                     display: none;
-                                                                 }
-                                                                 .dataTables_info{
-                                                                     display: none;
-                                                                 } 
-                                                             </style>
-                                                                    <thead class="table-light">
-                                                                        <tr>
-                                                                            <th ></th>
-                                                                            <th>Gasto mensual</th>
-                                                                            <th>Ahorro mensual</th>
-                                                                            <th>Ahorro anual</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                      
-                                                                        <tr>
-                                                                            <td>Agua embotellada</td>
-                                                                            <td>$ <%= ahorroCalculado.agua_embotellada %></td>
-                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_aguaEmbotellada %></td>  
-                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_aguaEmbotellada %></td>                                                                      
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> Jabones</td>
-                                                                            <td>$ <%= ahorroCalculado.jabones %></td>   
-                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_jabon %></td>  
-                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_jabon %></td>                                                             
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> Productos de limpieza</td>
-                                                                            <td>$ <%= ahorroCalculado.productos_limpieza %></td>    
-                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_productos_limpieza %></td>      
-                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_productos_limpieza %></td>                                                  
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> Agua caliente</td>
-                                                                            <td>$ <%= ahorroCalculado.agua_caliente %></td>     
-                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_agua_caliente %></td>   
-                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_agua_caliente %></td>                                                            
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> Plomería y electrodomésticos</td>
-                                                                            <td>$ <%= ahorroCalculado.plomeria_electrodomesticos %></td>    
-                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_plomeria_electrodomesticos %></td>    
-                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_plomeria_electrodomesticos %></td>                                                             
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Ropa y lencería</td>
-                                                                            <td>$ <%= ahorroCalculado.ropa_lenceria %></td>         
-                                                                            <td>$ <%= ahorroCalculado.ahorroMensual_ropa_lenceria %></td>        
-                                                                            <td>$ <%= ahorroCalculado.ahorroAnual_ropa_lenceria %></td>                                              
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>Total</td>
-                                                                            <th>$ <%= ahorroCalculado.sumaGastoMensual %></td>         
-                                                                            <th>$ <%= ahorroCalculado.sumaAhorroMensual %></td>        
-                                                                            <th>$ <%= ahorroCalculado.sumaAhorroAnual %></td>                                              
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                                <input type="hidden" id="datosJson_ahorroCalculado" value="<%= datosJson_ahorroCalculado %>">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- end col -->
-                                                 </div>
-                                            <!-- end card-body -->
-                                        </div>
-                                        <!-- end card -->
-    
-                                    </div><!-- end col -->
-                                 </div>
-    
-                                  
-                                 <div class="col-xl-4">
-                                    <!-- card -->
-                                    <div class="card" style="margin-top: 5%;box-shadow: 0px 0px 10px #e7e7e7;border-radius: 21px;">
-                                        <div class="card-header">
-                                            <h4 class="card-title mb-0">Ahorro total</h4>
-                                        </div>
-                                        <!-- card body -->
-                                        <div class="card-body">
-
-                                        
-                
-                                            <div class="row align-items-center">
-                                                <div class="col-xl-13">
-                                                    <div>
-                                                        <div id="market-overview" data-colors='["#a99bcb", "#50368c"]' class="apex-charts"></div>
-                                                    </div>
-                                                </div>
-                                              
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-14">
+                                    <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
+                                        <div class="card-header bg-transparent border-primary">
+                                            <h5 class="my-0 text-primary">
+                                                <i class="fas fa-money-bill"></i>&nbsp; Ahorro</h5>
+                                                <a href="/calcular-ahorro/<%= clientes2.id_cliente %>" >
+                                                    <button class="btn btn-primary"  type="button" style="float: right;margin-top: -2%;border-radius:13px;">Calcular</button>
+                                                </a> 
+                                            </div>
+                                          <div class="card-body">
+                                            <div class="table-responsive" style="overflow-x: hidden;" >
+                                               
+                                                <table class="table table-striped mb-0" 
+                                                  id="copyahorro" class="dataTables_filter" 
+                                                  class="dataTables_paginate "
+                                                  class="dataTables_info" style="margin-top: 2%;">
+                                             <style>
+                                                .dataTables_filter{
+                                                     display: none;
+                                                 }
+                                                 .dataTables_paginate{
+                                                     display: none;
+                                                 }
+                                                 .dataTables_info{
+                                                     display: none;
+                                                 } 
+                                             </style>
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Gasto mensual</th>
+                                                            <th>Ahorro mensual</th>
+                                                            <th>Ahorro anual</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Agua embotellada</td>
+                                                            <td>$ <%= ahorroCalculado.agua_embotellada %></td>
+                                                            <td>$ <%= ahorroCalculado.ahorroMensual_aguaEmbotellada %></td>  
+                                                            <td>$ <%= ahorroCalculado.ahorroAnual_aguaEmbotellada %></td>                                                                      
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Jabones</td>
+                                                            <td>$ <%= ahorroCalculado.jabones %></td>   
+                                                            <td>$ <%= ahorroCalculado.ahorroMensual_jabon %></td>  
+                                                            <td>$ <%= ahorroCalculado.ahorroAnual_jabon %></td>                                                             
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Productos de limpieza</td>
+                                                            <td>$ <%= ahorroCalculado.productos_limpieza %></td>    
+                                                            <td>$ <%= ahorroCalculado.ahorroMensual_productos_limpieza %></td>      
+                                                            <td>$ <%= ahorroCalculado.ahorroAnual_productos_limpieza %></td>                                                  
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Agua caliente</td>
+                                                            <td>$ <%= ahorroCalculado.agua_caliente %></td>     
+                                                            <td>$ <%= ahorroCalculado.ahorroMensual_agua_caliente %></td>   
+                                                            <td>$ <%= ahorroCalculado.ahorroAnual_agua_caliente %></td>                                                            
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Plomería y electrodomésticos</td>
+                                                            <td>$ <%= ahorroCalculado.plomeria_electrodomesticos %></td>    
+                                                            <td>$ <%= ahorroCalculado.ahorroMensual_plomeria_electrodomesticos %></td>    
+                                                            <td>$ <%= ahorroCalculado.ahorroAnual_plomeria_electrodomesticos %></td>                                                             
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Ropa y lencería</td>
+                                                            <td>$ <%= ahorroCalculado.ropa_lenceria %></td>         
+                                                            <td>$ <%= ahorroCalculado.ahorroMensual_ropa_lenceria %></td>        
+                                                            <td>$ <%= ahorroCalculado.ahorroAnual_ropa_lenceria %></td>                                              
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Total</td>
+                                                            <th>$ <%= ahorroCalculado.sumaGastoMensual %></td>         
+                                                            <th>$ <%= ahorroCalculado.sumaAhorroMensual %></td>        
+                                                            <th>$ <%= ahorroCalculado.sumaAhorroAnual %></td>                                              
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <input type="hidden" id="datosJson_ahorroCalculado" value="<%= datosJson_ahorroCalculado %>">
                                             </div>
                                         </div>
-                                        <!-- end card -->
                                     </div>
-                                    <!-- end col -->
+                                </div><!-- end col -->
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                 </div>
+                 <style>
+                    @media (min-width: 1200px) {
+                        .tarjeta-ahorro{
+                            width: 33%;
+                        }
+                    }
+                    @media (max-width: 992px) {
+                        .tarjeta-ahorro{
+                            width: 97%;
+                            margin-left: 18px;
+                        }
+                    }
+                    @media (max-width: 1180px) {
+                        .tarjeta-ahorro{
+                            width: 95.8%;
+                            margin-left: 18px;
+                        }
+                    }
+                </style>
+                 <div class="tarjeta-ahorro">
+                    <div class="card" style="margin-top: 5%;box-shadow: 0px 0px 10px #e7e7e7;border-radius: 21px;height: 90%;">
+                        <div class="card-header">
+                            <h4 class="card-title mb-0">Ahorro total</h4>
+                        </div>
+                        <!-- card body -->
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-xl-13">
+                                    <div>
+                                        <div id="market-overview" data-colors='["#a99bcb", "#50368c"]' class="apex-charts"></div>
+                                    </div>
                                 </div>
-                                <!-- end row-->
-                
-
-    
-                    </div>
-            <!-- * =============>> FIN Ahorro  <<================================ -->
-     
-            <!-- * =============>> Agendar instalación  <<================================== -->
-                    <div class="row">
-                        <div class="col-xl-8">
-                            <div class="">
-                                <div class="card-body">
-                                
-                                    <div class="row">
-                                        <div class="col-lg-14">
-                                            <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
-                                                <div class="card-header bg-transparent border-primary">
-                                                    <h5 class="my-0 text-primary">
-                                                        <i class="fas fa-wrench"></i>&nbsp; Agendar instalación</h5>
-
-                                                        <a href="/agendar-instalacion/<%= clientes2.id_cliente %>" id="btnAgenda">
-                                                            <button class="btn btn-primary" id="btn_Agendar"  type="button" style="float: right;margin-top: -2%;border-radius:13px;"> <%= estadoBtn.txt%></button>
-                                                        </a> 
-                                                        <% if (!estadoBtn.btnAgenda){%>
-                                                            <script>
-                                                                const botonn = document.getElementById("btn_Agendar")
-                                                                botonn.setAttribute("disabled", "")
-                                                                botonn.style.filter = "grayscale(1)";
-                                                            </script>
-                                                            <%}%>
-                                                       
-                                                </div>
-                                             
-                                            <div class="modal fade evidencia" tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered ">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Registro fotográfico</h5>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                          <div class="row">
-                                                                <div class="" >
-                                                                    <div class="">
-                                                                      <div class="row">
-                                                                                <div class="col-md-11">
-                                                                                   <div class="card-body" style="margin-top: -3%;text-align: center;">
-                                                                                    <% if(evidenciaF) { %> 
-                                                                                        <img src="<%= evidenciaF%>" alt="" style="width: 85%; margin-left: 10%;">
-                                                                                       <% } else { %> 
-                                                                                        Evidencia no registrada
-                                                                                        <% } %>  
-                                                                                   </div>
-                                                                                </div><!-- end col -->
-                                                                             </div>
-                                                                        </div><!-- end col -->
-                                                                   </div>
-                                                               </div>
-                                                            </div>
-                                                        </div><!-- /.modal-content -->
-                                                    </div><!-- /.modal-dialog -->
-                                                </div><!-- /.modal -->
-                                            
-                                                <div class="card-body">
-                                                    <div class="table-responsive">
-                                                        <table class="table mb-0">
-                                                          <% if(!(clRegistro_instalacion.id_cliente)) { %> 
-                                                           <tbody>
-                                                             <h1 style="text-align: center"><%=  estado_intalacion.txtt %></h1>
-                                                               </tbody>
-                                                               <% } else { %> 
-                                                                   <tbody>
-                                                                       <tr>
-                                                                         <td style="width: 26%;">Fecha de instalación</td>
-                                                                         <% if(clRegistro_instalacion){ %> 
-                                                                          <td><b><%= clRegistro_instalacion.fecha_instalacion %></b></td>
-                                                                          <td style="width: 26%;">Instalador:</td>
-                                                                          <td style="text-transform: capitalize;"><b><%= clRegistro_instalacion.instalador %></b></td>
-                                                                         <% } else { %> 
-                                                                           <td><b>N/A</b></td>
-                                                                           <td style="width: 26%;">Serial_producto:</td>
-                                                                           <td><b>N/A</b></td>
-                                                                          <% }%>
-                                                                       </tr>
-                                                                       <tr>
-                                                                           <td style="width: 26%;">Producto instalado:</td>
-                                                                          <% if(clRegistro_instalacion){ %> 
-                                                                           <td><b><%= clRegistro_instalacion.producto_instalado %></b></td>
-                                                                           <td style="width: 26%;">Registro fotográfico:</td>    
-                                                                           <p><td><b><button type="button" style="border:none;" class="waves-effect waves-light"
-                                                                            data-bs-toggle="modal" data-bs-target=".evidencia"> 
-                                                                                 <span class="d-block d-sm-none"><i class="far fa-image"></i></span>
-                                                                                 <span class="d-none d-sm-block"> <i class="far fa-image"></i> Ver evidencia </span>
-                                                                           </button></b></td>
-                                                                         </p> 
-                                                                           <% } else { %> 
-                                                                            <td><b>N/A</b></td>
-                                                                            <td style="width: 26%;">Hasta:</td>
-                                                                            <td><b>N/A</b></td>
-                                                                           <% }%>                                         
-                                                                       </tr>
-                                                                       <tr>
-                                                                            <td style="width: 26%;">Serial producto 1:</td>
-                                                                           <% if(clRegistro_instalacion){ %> 
-                                                                            <td><b><%= clRegistro_instalacion.serial_producto1 %></b></td>
-                                                                            <td style="width: 26%;">Nota:</td>    
-                                                                            <p> <td><b><%= clRegistro_instalacion.nota %></b></td></p>     
-                                                                           <% } else { %> 
-                                                                            <td><b>N/A</b></td>
-                                                                            <td style="width: 26%;">Registro fotográfico:</td>
-                                                                            <td><b>N/A</b></td>
-                                                                           <% }%>                                         
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="width: 26%;">Serial producto 2:</td>
-                                                                            <td><b><%= clRegistro_instalacion.serial_producto2 %></b></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                   </tbody>
-                                                                      <% } %> 
-                                                             </table>
-                                                        </div>
-                                                    </div>
-                                               </div>
-                                           </div><!-- end col -->
-                                        </div><!-- end card-body -->
-                                     </div><!-- end card -->
-                               </div><!-- end col -->
-                           </div>
+                            </div>
                         </div>
                     </div>
-                 </div>
-               </div>
-            <!-- * =============>> FIN Agendar instalación  <<============================== -->
-                    <!-- =======FIXME: copyright ========================== -->
-                    <%- include ('./partials/copyright.ejs')%>
-                     <!-- =======FIXME: copyright ========================== -->
+                </div>
+             </div>
+    <!-- * =============>> FIN Ahorro  <<================================ -->
+    <!-- * =============>> Agendar instalación  <<================================== -->
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-14">
+                                <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
+                                    <div class="card-header bg-transparent border-primary">
+                                        <h5 class="my-0 text-primary">
+                                            <i class="fas fa-wrench"></i>&nbsp; Agendar instalación</h5>
+                                        <a href="/agendar-instalacion/<%= clientes2.id_cliente %>" id="btnAgenda">
+                                            <button class="btn btn-primary" id="btn_Agendar"  type="button" style="float: right;margin-top: -2%;border-radius:13px;"> <%= estadoBtn.txt%></button>
+                                        </a> 
+                                        <% if (!estadoBtn.btnAgenda){%>
+                                            <script>
+                                                const botonn = document.getElementById("btn_Agendar")
+                                                botonn.setAttribute("disabled", "")
+                                                botonn.style.filter = "grayscale(1)";
+                                            </script>
+                                            <%}%>
+                                    </div>
+                                    <div class="modal fade evidencia" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered ">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Registro fotográfico</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                            <div class="row">
+                                                    <div class="" >
+                                                        <div class="">
+                                                        <div class="row">
+                                                                    <div class="col-md-11">
+                                                                    <div class="card-body" style="margin-top: -3%;text-align: center;">
+                                                                        <% if(evidenciaF) { %> 
+                                                                            <img src="<%= evidenciaF%>" alt="" style="width: 85%; margin-left: 10%;">
+                                                                        <% } else { %> 
+                                                                            Evidencia no registrada
+                                                                            <% } %>  
+                                                                    </div>
+                                                                    </div><!-- end col -->
+                                                                </div>
+                                                            </div><!-- end col -->
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0">
+                                          <% if(!(clRegistro_instalacion.id_cliente)) { %> 
+                                           <tbody>
+                                             <h1 style="text-align: center"><%=  estado_intalacion.txtt %></h1>
+                                               </tbody>
+                                               <% } else { %> 
+                                                   <tbody>
+                                                       <tr>
+                                                         <td style="width: 26%;">Fecha de instalación</td>
+                                                         <% if(clRegistro_instalacion){ %> 
+                                                          <td><b><%= clRegistro_instalacion.fecha_instalacion %></b></td>
+                                                          <td style="width: 26%;">Instalador:</td>
+                                                          <td style="text-transform: capitalize;"><b><%= clRegistro_instalacion.instalador %></b></td>
+                                                         <% } else { %> 
+                                                           <td><b>N/A</b></td>
+                                                           <td style="width: 26%;">Serial_producto:</td>
+                                                           <td><b>N/A</b></td>
+                                                          <% }%>
+                                                       </tr>
+                                                       <tr>
+                                                           <td style="width: 26%;">Producto instalado:</td>
+                                                          <% if(clRegistro_instalacion){ %> 
+                                                           <td><b><%= clRegistro_instalacion.producto_instalado %></b></td>
+                                                           <td style="width: 26%;">Registro fotográfico:</td>    
+                                                           <p><td><b><button type="button" style="border:none;" class="waves-effect waves-light"
+                                                            data-bs-toggle="modal" data-bs-target=".evidencia"> 
+                                                                 <span class="d-block d-sm-none"><i class="far fa-image"></i></span>
+                                                                 <span class="d-none d-sm-block"> <i class="far fa-image"></i> Ver evidencia </span>
+                                                           </button></b></td>
+                                                         </p> 
+                                                           <% } else { %> 
+                                                            <td><b>N/A</b></td>
+                                                            <td style="width: 26%;">Hasta:</td>
+                                                            <td><b>N/A</b></td>
+                                                           <% }%>                                         
+                                                       </tr>
+                                                       <tr>
+                                                            <td style="width: 26%;">Serial producto 1:</td>
+                                                           <% if(clRegistro_instalacion){ %> 
+                                                            <td><b><%= clRegistro_instalacion.serial_producto1 %></b></td>
+                                                            <td style="width: 26%;">Nota:</td>    
+                                                            <p> <td><b><%= clRegistro_instalacion.nota %></b></td></p>     
+                                                           <% } else { %> 
+                                                            <td><b>N/A</b></td>
+                                                            <td style="width: 26%;">Registro fotográfico:</td>
+                                                            <td><b>N/A</b></td>
+                                                           <% }%>                                         
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 26%;">Serial producto 2:</td>
+                                                            <td><b><%= clRegistro_instalacion.serial_producto2 %></b></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                   </tbody>
+                                                <% } %> 
+                                             </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- end col -->
+                         </div><!-- end card-body -->
+                      </div><!-- end card -->
+                    </div><!-- end col -->
                 </div>
             </div>
-            <!-- VALIDACIONES BREVES -->
-            <% if (!estado.verBtn){%>
-            <script>
-                const boton = document.getElementById("btn_credito")
-                boton.setAttribute("disabled", "")
-                boton.style.filter = "grayscale(1)";
-            </script>
+    <!-- * =============>> FIN Agendar instalación  <<============================== -->
+        </div>
+     </div>
+  </div>
+    <!-- =======FIXME: copyright ========================== -->
+    <%- include ('./partials/copyright.ejs')%>
+    <!-- =======FIXME: copyright ========================== -->
+</div>
+
+<!-- VALIDACIONES BREVES -->
+    <% if (!estado.verBtn){%>
+    <script>
+        const boton = document.getElementById("btn_credito")
+        boton.setAttribute("disabled", "")
+        boton.style.filter = "grayscale(1)";
+    </script>
             <%}%>
     
  <!-- JAVASCRIPT -->
@@ -627,7 +617,7 @@
  <script src="../directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
  <script src="../directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
  <script src="../directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
-<script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
+ <script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
 <!-- pace js -->
 <script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
  <!-- * ====== Scripts de las graficas ======= -->

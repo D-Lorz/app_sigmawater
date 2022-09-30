@@ -4938,8 +4938,8 @@ fieldset:disabled .btn {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #7a7fdc;
-  border-color: #7a7fdc;
+  background-color: #50368c;
+  border-color: #50368c;
 }
 .page-item.disabled .page-link {
   color: #ced4da;
