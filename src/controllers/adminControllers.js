@@ -289,13 +289,15 @@ exports.actualizarEstadoVendedor = async (req, res) => {
 
   // ! ************* PROCESO DEL EMAIL PARA VENDEDOR ************
   const email =  datosUser.correo
+  const nomVendedor =  datosUser.nombres
   const asunto = "Bienvenido a 3C Sigma Water System"
-  const plantilla = aceptarVendedorHTML(datosUser.nombres, clave)
+  const plantilla = aceptarVendedorHTML(nomVendedor, clave)
   // Enviar email
+  console.log("ENVIANDO CORREO DE APROBACION...");
   const resultEmail = await sendEmail(email, asunto, plantilla)
  
     if (!resultEmail) {
-      res.json("Ocurrio un error inesperado al enviar el email al vendedor")
+      console.log("Ocurrio un error inesperado al enviar el email al vendedor")
     } else {
         console.log("\n<<<<< Email - Enviado >>>>>\n")
     }
@@ -363,6 +365,12 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
 
   // todo =========================>> Mostrar información del test de agua del cliente
   let informacionTestAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ', [info_clientes.id])
+  let cont = 1
+  informacionTestAgua.forEach(x => {
+    x.cont = cont
+    cont++
+
+  });
 
   // * >>> Estados del testeo (visita al cliente)
   let consultaEstado_testAgua = await conexion.query('SELECT * FROM test_agua WHERE id_cliente = ?  ORDER BY id DESC LIMIT 1', [info_clientes.id])

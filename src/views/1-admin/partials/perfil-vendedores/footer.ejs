@@ -1,0 +1,120 @@
+
+<script>
+    function confirmarEstadoVendedor() {
+        const estadoElegido = $("#selectEstado option:selected").val()
+        if (estadoElegido == "bloqueado") {
+            let text ="<b>después de bloquearlo ya no podrás ver su información en las facturas pendientes</b>"
+        Swal.fire({
+            title: '<div style="font-weight: 700;">¿Seguro que deseas bloquear este vendedor?</div>',
+            html:  '<div style="font-size: 16px;font-weight: 200;">Antes de bloquear a este vendedor,'+
+                   'asegúrate de que sus facturas correspondientes (tanto propias como de sus afiliados)'+ 
+                   ' estén pagadas, '+text+' y sus afiliados ya no estarán relacionados a él.</div>',
+            icon: 'warning',
+            footer:'<b style="color:#d33;font-size: 16px; font-weight:900;text-transform: uppercase;">Esta acción no se puede deshacer.</b>',
+            showCancelButton: true,
+            confirmButtonColor: '#50368C',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Bloquear'
+        }).then((result) => {
+                if (result.isConfirmed) {
+                const idGenerado = $("#idGeneradoFetch").val()
+                const id_consecutivoVendedor = $("#id_consecutivoVendedorFetch").val()
+                const estadoElegido = $("#selectEstado option:selected").val()
+    
+                fetch('/estadoDelVendedor', {
+                    method: 'POST',
+                    body: JSON.stringify({idGenerado,id_consecutivoVendedor, estadoElegido}),
+                    headers: { 'Content-Type': 'application/json' }
+                }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => {
+                    if (response) {
+                        location.reload();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'El vendedor no fue bloqueado exitosamente.',
+                            'error'
+                        ) }
+                });
+          }
+        })
+        } else {
+        Swal.fire({
+            title: '<div style="font-weight: 700;">Vendedor aprobado exitosamente</div>',
+            html:  '<div style="font-size: 17px;font-weight: 200;"></div>',
+            icon: 'success',
+        }).then((result) => {
+                if (result.isConfirmed) {
+                const idGenerado = $("#idGeneradoFetch").val()
+                const id_consecutivoVendedor = $("#id_consecutivoVendedorFetch").val()
+                const estadoElegido = $("#selectEstado option:selected").val()
+    
+                fetch('/estadoDelVendedor', {
+                    method: 'POST',
+                    body: JSON.stringify({idGenerado,id_consecutivoVendedor, estadoElegido}),
+                    headers: { 'Content-Type': 'application/json' }
+                }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => {
+                    if (response) {
+                        location.reload();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'No se aprobó el correctamente.',
+                            'error'
+                        )}
+                });
+          }
+        })
+        }
+      }
+    
+    function confirmarNuevoNivel() {
+        let text ="<b>de lo contrario generarás datos incorrectos para los vendedores que estaban conectados a él.</b>"
+        Swal.fire({
+            title: '<div style="font-weight: 700;"> Subir de nivel a este vendedor</div>',
+            html: '<div style="font-size: 16px;font-weight: 200;">Al aumentar de nivel manualmente, el vendedor quedará '+
+                'desvinculado de sus afiliados, antes de subir el nivel, asegúrate de que sus facturas '+
+                 '(tanto propias como de sus afiliados) estén pagadas, '+text+' </div>',
+            icon: 'warning',
+            footer:'<b style="color:#d33;font-size: 16px; text-transform: uppercase; font-weight:900">Esta acción no se puede deshacer.</b>',
+            showCancelButton: true,
+            confirmButtonColor: '#50368C',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: '¡Sí, subir de nivel!'
+        }).then((result) => {
+                if (result.isConfirmed) {
+                const id_vendedor = $("#coodigoActualizarId").val()
+                const nivel = $("#niveles option:selected").val()
+                const ventas_individuales = $("#v_individualesId").val()
+                const total_ventas = $("#total_ventasId").val()
+                const ventas_afiliados = $("#ventas_afiliadosId").val()
+    
+                fetch('/ActualizarNivel', {
+                    method: 'POST',
+                    body: JSON.stringify({id_vendedor,nivel, ventas_individuales, total_ventas, ventas_afiliados}),
+                    headers: { 'Content-Type': 'application/json' }
+                }).then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(response => {
+                    if (response) {
+                        location.reload();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            'El nivel no se actualizó correctamente.',
+                            'error'
+                        )}
+                });
+          }
+        })
+      }
+    
+    </script>
+    </body>
+    </html>
+    

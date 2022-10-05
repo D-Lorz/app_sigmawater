@@ -1,59 +1,9 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  
-  <meta charset="utf-8" />
-  <title>3C Sigma Water System</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
-  <meta content="Themesbrand" name="author">
-  
-  <!-- App favicon -->
-  <link rel="shortcut icon" href="./directorio_dash/images/3clogo.svg">
-
-  <base href="#">
-
-        <!-- plugin css -->
-        <link href="../directorio_admin/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-
-        <!-- preloader css -->
-        <link rel="stylesheet" href="../directorio_admin/css/preloader.min.css" type="text/css" />
-
-        <!-- Bootstrap Css -->
-        <link href="../directorio_admin/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-        <!-- Icons Css -->
-        <link href="../directorio_admin/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <!-- App Css-->
-        <link href="../directorio_admin/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="./css/colors.min.css">
-        <script src="./js/jquery/scripts_personalizados.js"></script>
-        <link rel="stylesheet" href="./css/typeFont.css" type="text/css" />
-         <!-- scroll -->
-         <link rel="stylesheet" href="./css/scrolls.css">
-         <link href="../directorio_admin/libs/leaflet/leaflet.css" rel="stylesheet" type="text/css" />
-
-         <style>
-            .apexcharts-tooltip, .apexcharts-tooltip-title {
-                background: rgb(255 255 255 / 50%) !important;
-            }
-            .leaflet-control-attribution.leaflet-control {
-            display: none;
-        }
-        </style>
-
-    </head>
-
+<%- include ('./1-admin/partials/administrador/header.ejs')%> 
     <body>
         <!-- Begin page -->
         <div id="layout-wrapper">
-
-          <!-- =======FIXME: MENU ========================== -->
          <%- include ('./1-admin/menu.ejs')%> 
-         <!-- =======FIXME: MENU ========================== -->
             <div class="main-content">
-
                 <div class="page-content">
                     <div class="container-fluid">
                     <!-- start page title -->
@@ -73,7 +23,6 @@
                         </div>
                     </div>
                     <!-- end page title -->
-                        
                     <div class="row">
                         <div class="col-xl-4 col-md-6">
                             <!-- card -->
@@ -131,7 +80,6 @@
                                 </div><!-- end card body -->
                             </div><!-- end card -->
                         </div><!-- end col-->
-
                         <div class="col-xl-4 col-md-6">
                             <!-- card -->
                             <div class="card card-h-100">
@@ -604,46 +552,10 @@
                     <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
- <!-- =======FIXME: copyright ========================== -->
  <%- include ('./partials/copyright.ejs')%>
- <!-- =======FIXME: copyright ========================== -->
-
             </div>
-            <!-- end main content-->
-
         </div>
-        <!-- END layout-wrapper -->
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
+ <%- include ('./1-admin/partials/administrador/footer.ejs')%>
+    
 
-        <!-- JAVASCRIPT -->
-        <script src="../directorio_admin/libs/jquery/jquery.min.js"></script>
-        <script src="../directorio_admin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="../directorio_admin/libs/metismenu/metisMenu.min.js"></script>
-        <script src="../directorio_admin/libs/simplebar/simplebar.min.js"></script>
-        <script src="../directorio_admin/libs/node-waves/waves.min.js"></script>
-        <script src="../directorio_admin/libs/feather-icons/feather.min.js"></script>
-        <!-- pace js -->
-        <script src="../directorio_admin/libs/pace-js/pace.min.js"></script>
-
-        <!-- apexcharts -->
-        <script src="../directorio_admin/libs/apexcharts/apexcharts.min.js"></script>
-
-        <!-- Plugins js-->
-        <script src="../directorio_admin/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="../directorio_admin/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
-        <!-- dashboard init -->
-        <script src="../directorio_admin/js/pages/dashboard.init.js"></script>
-
-        <script src="../directorio_admin/js/app.js"></script>
-            <!-- leaflet plugin -->
-            <script src="../directorio_admin/libs/leaflet/leaflet.js"></script>
-
-            <!-- leaflet map.init -->
-            <script src="../directorio_admin/js/pages/leaflet-us-states.js"></script>
-            <script src="../directorio_admin/js/pages/leaflet-map.init.js"></script>
-             <!-- Google Maps JavaScript library -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBZBkIUU7yQ-Rsy8a7KG70aJ_VDOsaf6fE"></script>
-    </body>
-
-</html>
+     

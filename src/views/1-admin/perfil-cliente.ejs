@@ -2,80 +2,21 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
     <title>Perfil clientes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
-    <meta content="Themesbrand" name="author">
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="../directorio_perfilClientes/images/favicon.png">
-    <link rel="stylesheet" type="text/css" href="../css/colors.min.css">
-
-    <base href="#">
-
-
-
- <!-- App favicon -->
- <link rel="shortcut icon" href="./directorio_perfilClientes/images/favicon.png">
-
- <!-- Responsive Table css -->
- <link href="../directorio_dash/libs/admin-resources/rwd-table/rwd-table.min.css" rel="stylesheet" type="text/css" />
-
- <!-- preloader css -->
- <link rel="stylesheet" href="../directorio_perfilClientes/css/preloader.min.css" type="text/css" />
-
- <!-- Bootstrap Css -->
- <link href="../directorio_perfilClientes/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
- <!-- Icons Css -->
- <link href="../directorio_perfilClientes/css/icons.min.css" rel="stylesheet" type="text/css" />
- <!-- App Css-->
- <link href="../directorio_perfilClientes/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
- <link rel="stylesheet" href="../css/typeFont.css" type="text/css" />
-<!-- scroll -->
-<link rel="stylesheet" href="../css/scrolls.css">
- <!-- Sweet Alert-->
- <link href="../directorio_dash/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
-
-  <!-- ==========FIXME: CSS DEL FORMULARIO ================= -->
-
-  <!-- BEGIN: Theme CSS-->
-  <!-- <link rel="stylesheet" type="text/css" href="../directorio_nuevoCliente/css/bootstrapp.min.css"> -->
-  <link rel="stylesheet" type="text/css" href="../directorio_nuevoCliente/css/bootstrap-extended.min.css">
-  <!-- <link rel="stylesheet" type="text/css" href="../directorio_nuevoCliente/css/components.min.css"> -->
-  <!-- END: Theme CSS-->
-
-  <!-- BEGIN: Page CSS-->.
-  <link rel="stylesheet" type="text/css" href="../directorio_nuevoCliente/css/palette-gradient.min.css">
-  <link rel="stylesheet" type="text/css" href="../directorio_nuevoCliente/css/wizard.min.css">
-  <link rel="stylesheet" type="text/css" href="../directorio_nuevoCliente/css/daterange.min.css">
-  <!-- END: Page CSS-->
-
-   <!-- ==========FIXME: FIN CSS DEL FORMULARIO ================= -->
-   <link rel="stylesheet" href="../directorio_nuevoCliente/css/estiloCanvas.css">
-   <link rel="stylesheet" type="text/css" href="../directorio_nuevoCliente/css/estilosPropios.css">
-
-
-</head>
-
+    <%- include ('../1-admin/partials/perfil-cliente/header.ejs')%>
 <body>
-
-    <!-- Begin page -->
     <div id="layout-wrapper">
-
-        <!-- =======FIXME: MENU ========================== -->
         <%- include ('../1-admin/menu.ejs')%>
-        <!-- =======FIXME: MENU ========================== -->
-
-    <div class="main-content">
-       <div class="page-content">
-        <div class="container-fluid">
+       <div class="main-content">
+          <div class="page-content">
+             <div class="container-fluid">
     <!-- * =============>> Datos del vendedor  <<========================== -->
-          <div class="row">
-            <div class="col-xl-8" >
+             <div class="row">
+              <div class="col-xl-8" >
                 <div class="">
                     <div class="card-body">
-                      
                         <div class="row">
                             <div class="col-lg-14">
                                 <div class="card border border-primary" style="box-shadow:0px 0px 10px #e7e7e7">
@@ -105,93 +46,89 @@
                                                             boton.style.filter = "grayscale(1)";
                                                            </script>
                                                         <%}%>
-
-                              <!-- BEGIN: Content-->
-                              <div class="app-content content" style="margin-top:-7px">
-                                <!-- Form wizard with step validation section start -->
-                              <section id="validation">
-                             <div class="card-content collapse show">
-
-                            <form class="steps-validation wizard-circle" id="validarForm"  >
+                                            <div class="app-content content" style="margin-top:-7px">
+                                            <section id="validation">
+                                            <div class="card-content collapse show">
+                                    <form class="steps-validation wizard-circle" id="validarForm"  >
                                  
                      <!--============= /FIXME:===== *SOLICITANTE* =======FIXME:=========-->
                           <!-- Step 1 -->
-                           <h6><b>SOLICITANTE</b></h6>
-                        <fieldset>
-                        <% if(mostrarDatoscreditos){ %> 
-                        <div class="row text-align: center">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="monto_financiarf"> Monto a financiar</label>
-                        
-                                    <input type="text" class="form-control" id="salida"
-                                        value="<%=mostrarDatoscreditos.monto_financiar_cliente%>" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="exampleDataList" class="form-label">Sistema</label>
-                                <input class="form-control" value="<%= mostrarDatoscreditos.sistema%>" readonly>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for=""> Número de licencia</label>
-                                    <input type="number" class="form-control" value="<%= mostrarDatoscreditos.numero_licencia_cliente%>"
-                                        readonly>
-                                </div>
-                            </div>
-                        </div>
-                    <div class="row text-align: center;">
-                        <div class="col-md-4">
-                            <label for="exampleDataList" class="form-label">Estado de licencia</label>
-                            <input class="form-control" value="<%= mostrarDatoscreditos.estado_licencia_cliente%>" readonly>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="f_expediccion">Fecha de expedición de licencia</label>
-                                <input type="text" class="form-control" value="<%= mostrarDatoscreditos.fecha_expedicion_licencia_cliente%>"
-                                    readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="fecha_vencimientof">Fecha de vencimiento de licencia</label>
-                                <input type="text" class="form-control"
-                                    value="<%= mostrarDatoscreditos.fecha_vencimiento_licencia_cliente%>" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for=""> Número de seguro Social / ITIN</label>
-                                <input type="number" class="form-control" value="<%= mostrarDatoscreditos.seguro_social_licencia%>"
-                                    readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for=""> Tipo de documento</label>
-                                <input type="text" class="form-control" value="<%= mostrarDatoscreditos.tipo_de_seguro %>" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="fecha_nacimientof">Fecha de nacimiento</label>
-                                <input type="text" class="form-control " value="<%= mostrarDatoscreditos.fecha_nacimiento_cliente%>"
-                                    readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="phone-masktwo">Teléfono secundario</label>
-                                <input type="text" class="form-control " value="<%= mostrarDatoscreditos.telefono_secundario_cliente%>"
-                                    readonly>
-                            </div>
-                        </div>
-                    </div>
-                <% } else { %> 
-                   <% } %> 
-            </fieldset> 
+                                     <h6><b>SOLICITANTE</b></h6>
+                                            <fieldset>
+                                            <% if(mostrarDatoscreditos){ %> 
+                                            <div class="row text-align: center">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="monto_financiarf"> Monto a financiar</label>
+                                            
+                                                        <input type="text" class="form-control" id="salida"
+                                                            value="<%=mostrarDatoscreditos.monto_financiar_cliente%>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="exampleDataList" class="form-label">Sistema</label>
+                                                    <input class="form-control" value="<%= mostrarDatoscreditos.sistema%>" readonly>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for=""> Número de licencia</label>
+                                                        <input type="number" class="form-control" value="<%= mostrarDatoscreditos.numero_licencia_cliente%>"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <div class="row text-align: center;">
+                                            <div class="col-md-4">
+                                                <label for="exampleDataList" class="form-label">Estado de licencia</label>
+                                                <input class="form-control" value="<%= mostrarDatoscreditos.estado_licencia_cliente%>" readonly>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="f_expediccion">Fecha de expedición de licencia</label>
+                                                    <input type="text" class="form-control" value="<%= mostrarDatoscreditos.fecha_expedicion_licencia_cliente%>"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="fecha_vencimientof">Fecha de vencimiento de licencia</label>
+                                                    <input type="text" class="form-control"
+                                                        value="<%= mostrarDatoscreditos.fecha_vencimiento_licencia_cliente%>" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for=""> Número de seguro Social / ITIN</label>
+                                                    <input type="number" class="form-control" value="<%= mostrarDatoscreditos.seguro_social_licencia%>"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for=""> Tipo de documento</label>
+                                                    <input type="text" class="form-control" value="<%= mostrarDatoscreditos.tipo_de_seguro %>" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="fecha_nacimientof">Fecha de nacimiento</label>
+                                                    <input type="text" class="form-control " value="<%= mostrarDatoscreditos.fecha_nacimiento_cliente%>"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="phone-masktwo">Teléfono secundario</label>
+                                                    <input type="text" class="form-control " value="<%= mostrarDatoscreditos.telefono_secundario_cliente%>"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } else { %> 
+                                    <% } %> 
+                            </fieldset> 
                     <!--============= //FIXME:===== *SOLICITANTE* =======FIXME:=========-->
 
                     <!--============= /FIXME:===== *CASA* ==============FIXME:=========-->
@@ -226,7 +163,6 @@
                                             <% } %> 
                                         </div>
                                     </div>
-    
                                 </div>
                           <div class="row justify-content-center">
                             <% if(mostrarDatoscreditos) { %> 
@@ -238,12 +174,8 @@
                                    </div>
                                   </div>
                                 <% } else { %> 
-                                                                
                                <% } %> 
                             </div>
-
-                           
-
                             <div class="row justify-content-center">
                                 <div class="col-md-4">
                                     <div class="form-group"  >
@@ -255,9 +187,7 @@
                                         <% } %> 
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="row justify-content-center">
                                 <div class="col-md-4">
                                     <div class="form-group"  >
@@ -269,10 +199,7 @@
                                         <% } %> 
                                     </div>
                                 </div> 
-
                             </div>   
-             
-
                           </fieldset> 
                     <!--============= //FIXME:===== *CASA* ======= ===== FIXME:=========-->
                         
@@ -280,32 +207,27 @@
                           <!-- Step 3 -->
                          <h6><b>INGRESOS</b></h6>
                           <fieldset>
-
-                             <div class="row text-align: center;">
-                         <div class="col-md-4">
+                            <div class="row text-align: center;">
+                              <div class="col-md-4">
                                 <div class="form-group">
                                     <label for=""> Empleador del aplicante</label>
                                      <labe id="content" style="display: none; ">Trabajador independiente</labe> 
                                      <% if(mostrarDatoscreditos) { %> 
                                    <input type="text" class="form-control" value="<%= mostrarDatoscreditos.empleador_aplicante_cliente%>" readonly >
                                    <% } else { %> 
-                                  
                                 <% } %> 
-                                  
                                </div>
                            </div>
-
-                      <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Años trabajando</label>
-                                    <% if(mostrarDatoscreditos) { %> 
-                                    <input type="text"  class="form-control " value="<%= mostrarDatoscreditos.anios_trabajando_ingresos%>" readonly  >
-                                    <% } else { %> 
-                                      
-                                    <% } %> 
-                                </div>
-                           </div>
-
+                        <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Años trabajando</label>
+                                        <% if(mostrarDatoscreditos) { %> 
+                                        <input type="text"  class="form-control " value="<%= mostrarDatoscreditos.anios_trabajando_ingresos%>" readonly  >
+                                        <% } else { %> 
+                                        
+                                        <% } %> 
+                                    </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for=""> Meses trabajando</label>
@@ -316,9 +238,7 @@
                                     <% } %> 
                                 </div>
                             </div>
-
                       </div>
-
                       <div class="row text-align: center;">
                              <div class="col-md-4">
                                 <div class="form-group">
@@ -330,7 +250,6 @@
                                     <% } %> 
                                 </div>
                              </div>
-                       
                          <div class="col-md-4">
                                 <div class="form-group">
                                     <label for=""> Ocupación</label>
@@ -341,7 +260,6 @@
                                     <% } %> 
                                 </div>
                           </div>
-                    
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="phone-maskk"> Teléfono de trabajo </label>
@@ -351,9 +269,7 @@
                                     <% } %> 
                                 </div>
                              </div> 
-
                              <% if(mostrarDatoscreditos) { %>  
-                                
                                 <% if(mostrarDatoscreditos.bancarrota == "Si" ) { %> 
                           <div class="col-md-4">
                           <label>¿Ha estado en bancarrota?</label>
@@ -375,22 +291,17 @@
                              <div id="tipo_bancarrota">
                                 <label for="exampleDataList" class="form-label">Tipo de bancarrota</label>
                                 <input class="form-control " value="<%= mostrarDatoscreditos.tipo_bancarrota_ingresos%>" readonly >
-                                
                              </div>
                         </div>
 
                         <% } else { %> 
                             <% } %> 
                         <% }%> 
-                           
                   </div> 
-
                          <br>
                          <% if(mostrarDatoscreditos) { %>  
                             <% if(mostrarDatoscreditos.empleador_anterior_ingresos ) { %> 
-                                
                         <h4 style="text-align: center;" >Otros ingresos </h4>
-
                        <div class="row text-align: center;">
                              <div class="col-md-4">
                                 <div class="form-group">
@@ -398,14 +309,12 @@
                                    <input type="text" class="form-control " value="<%= mostrarDatoscreditos.empleador_anterior_ingresos%>" readonly>
                                   </div>
                             </div>
-
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Fuente de otros ingresos</label>
                                     <input type="text" class="form-control " value="<%= mostrarDatoscreditos.otros_ingresos_ingresos%>" readonly >
                                   </div>
                             </div>
-
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="currency-maskthree">  Ingresos adicionales</label>
@@ -422,7 +331,6 @@
                     <!--============= //FIXME:===== *INFORMACION BANCARIA* ======= FIXME:=========-->
                            <h6><b>INFORMACIÓN BANCARIA</b></h6>
                           <fieldset>
-                              
                    <div class="row text-align: center;">
                                    <div class="col-md-4">
                                      <label for="exampleDataList" class="form-label">Tipo de cuenta</label> 
@@ -431,7 +339,6 @@
                                      <% } else { %> 
                                     <% } %> 
                                     </div>
-
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for=""> Número de ruta</label>
@@ -441,7 +348,6 @@
                                         <% } %> 
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for=""> Número de cuenta </label>
@@ -451,10 +357,7 @@
                                         <% } %> 
                                     </div>
                                 </div>
-
                                 </div>      
-
-
                           </fieldset>   
                     <!--============= //FIXME: ===== *CONFIGURACION BANCARIA* ===== FIXME:=========-->
 
@@ -463,9 +366,7 @@
                           <% if(mostrarDatoscreditos) { %> 
                             <% if(mostrarDatoscreditos.licencia_co_solicitante) { %> 
                             <h6><b>CO-SOLICITANTE</b></h6>
-                     
                           <fieldset>
-                          
                                   <div class="row text-align: center;">
                                       <div class="col-md-4">
                                           <div class="form-group">
@@ -473,48 +374,39 @@
                                               <input type="number" class="form-control " value="<%= mostrarDatoscreditos.licencia_co_solicitante%>" readonly>
                                            </div>
                                     </div>
-
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="expedicion_licenciaf"> Fecha de expedición de licencia</label>
                                                 <input type="text" class="form-control" value="<%= mostrarDatoscreditos.expedicion_licencia_co_solicitante%>" readonly>
                                            </div>
                                       </div>
-
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="vencimiento_licenciaf">Fecha de vencimiento de licencia</label>
                                               <input type="text" class="form-control" value="<%= mostrarDatoscreditos.vencimiento_licencia_co_solicitante%>"  readonly>
                                             </div>
                                       </div>
-
                                   </div>
-
                                   <div class="row text-align: center;">
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for=""> Número de seguro social/ITIN </label>
                                             <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.numero_se_social_co_solicitante%>" readonly>
                                         </div>
-
                                       </div>
-
                                       <div class="col-md-4">
                                         <div class="form-group">
                                         <label for=""> Tipo de documento </label>
                                       <input type="text" class="form-control" value="<%= mostrarDatoscreditos.tipo_seguro_co_solicitante%>" readonly>
                                     </div>
                                     </div>
-
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="fecha_nacif"> Fecha de nacimiento</label>
                                                 <input type="text" class="form-control "  value="<%= mostrarDatoscreditos.fecha_nacimiento_co_solicitante%>" readonly>
                                                   </div>
                                             </div>
-                                  
                                      </div>
-
                                   <div class="row text-align: center;">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -528,7 +420,6 @@
                                               <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.segundo_nombre_co_solicitante%>" readonly>
                                              </div>
                                       </div>
-
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="">Apellidos</label>
@@ -536,7 +427,6 @@
                                                  </div>
                                           </div>
                                      </div>
-
                                   <div class="row text-align: center;">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -551,7 +441,6 @@
                                                 <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.tel_secundario_co_solicitante%>" readonly>
                                                </div>
                                       </div>
-
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="direc_co_solicitantef"> Dirección del co-solicitante</label>
@@ -576,10 +465,8 @@
 
                             </div>
                             <h4 style="text-align: center;">Empleo del co-solicitante</h4>
-
                                   <br>
                                   <br>
-
                                   <div class="row text-align: center;">
                                       <div class="col-md-4">
                                           <div class="form-group">
@@ -587,23 +474,19 @@
                                                  <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.empleador_co_solicitante%>" readonly>
                                                 </div>
                                         </div>
-
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for=""> Años trabajando</label>
                                                <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.anios_trabajando_co_solicitante%>" readonly>
                                               </div>
                                       </div>
-
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for=""> Meses trabajando </label>
                                                   <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.meses_trabajando_co_solicitante%>" readonly>
                                                </div>
                                        </div>
-
                                   </div>
-
                                   <div class="row text-align: center;">
                                       <div class="col-md-4">
                                           <div class="form-group">
@@ -611,7 +494,6 @@
                                                 <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.salario_mensual_co_solicitante%>" readonly>
                                                </div>
                                           </div>
-
                                       <div class="col-md-4">
                                           <div class="form-group">
                                               <label for="">Ocupación </label>
@@ -648,10 +530,7 @@
                                               <input type="text" class="form-control social"  value="<%= mostrarDatoscreditos.ingresos_adicionales_co_solicitante%>" readonly>
                                               </div>
                                       </div>
-
                                   </div>
-                              
-
                           </fieldset>  
                           <% } else { %>
                               <% } %> 
@@ -672,25 +551,20 @@
                                           <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.nom_referencia1_co_solicitante%>" readonly>
                                         </div>
                                   </div>
-
                                   <div class="col-md-4">
                                       <div class="form-group">
                                           <label for=""> Relación/parentesco </label>
                                           <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.parentesco1_co_solicitante%>" readonly>
                                       </div>
                                   </div>
-
                                   <div class="col-md-4">
                                       <div class="form-group">
                                           <label for="phone-masktelreferenciasone">Teléfono</label>
                                            <input type="text" class="form-control"  value="<%= mostrarDatoscreditos.tel_movil1_co_solicitante%>" readonly>
                                      </div>
                                   </div>
-
                               </div>
-
                               <hr class="bg-primary" style="padding:2px; background:#812082!important">
-
                               <div class="row text-align: center;">
                                   <div class="col-md-4">
                                       <div class="form-group">
@@ -1040,9 +914,9 @@
                                                         </thead>
                                                         <tbody>
                                                             <% if(informacionTestAgua) {%> 
-                                                             <%informacionTestAgua.forEach((user)=>{ %> 
+                                                              <%informacionTestAgua.forEach((user)=>{ %> 
                                                                <tr>
-                                                                  <td><%= user.id %></td>
+                                                                  <td><%= user.cont%></td>
                                                                       <td><%= user.fecha_test %></td>
                                                                       <td><%= user.dureza_gmXgalon %></td>
                                                                       <td><%= user.hierro %></td>
@@ -1354,243 +1228,10 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
-
-
                   </div>
                 </div>
             </div>
-                        <!-- =======FIXME: copyright ========================== -->
                     <%- include ('../partials/copyright.ejs')%>
-                        <!-- =======FIXME: copyright ========================== -->
-
                 </div>
             </div>
-
-
-            <!-- Right Sidebar -->
-            <div class="right-bar">
-                <div data-simplebar class="h-100">
-                    <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-
-                        <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
-
-                        <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                            <i class="mdi mdi-close noti-icon"></i>
-                        </a>
-                    </div>
-
-                    <!-- Settings -->
-
-                 
-                </div> <!-- end slimscroll-menu-->
-            </div>
-            <!-- /Right-bar -->
-
-             
-            <!-- JAVASCRIPT -->
-            <script src="../directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
-            <script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
-            <!-- pace js -->
-            <script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
-            <!-- * ====== Scripts de las graficas ======= -->
-                    <!-- apexcharts js -->
-                    <script src="../directorio_perfilClientes/libs/apexcharts/apexcharts.min.js"></script>
-                    <!-- apexcharts init -->
-                    <script src="../directorio_perfilClientes/js/pages/apexcharts.init.js"></script>
-                    <!-- dashboard init -->
-                    <script src="../directorio_perfilClientes/js/pages/dashboard.init.js"></script>
-            <!-- * ====== Scripts de las graficas ======= -->
- 
-        <!-- Required datatable js -->
-        <script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <!-- Responsive Table js -->
-        <script src="../directorio_dash/libs/admin-resources/rwd-table/rwd-table.min.js"></script>
-        <!-- Responsive examples -->
-        <script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-  
-
-        <!-- Buttons examples -->
-        <script src="../directorio_dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-        <script src="../directorio_dash/libs/jszip/jszip.min.js"></script>
-        <script src="../directorio_dash/libs/pdfmake/build/pdfmake.min.js"></script>
-        <script src="../directorio_dash/libs/pdfmake/build/vfs_fonts.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-
-         <!-- Init js -->
-         <script src="../directorio_dash/js/pages/table-responsive.init.js"></script>
-         <script src="../directorio_perfilClientes/js/app.js"></script>
-             
-         <!-- Datatable init js -->
-         <script src="../directorio_dash/js/pages/datatables.init.js"></script>    
-
-
-
-<!-- ==========FIXME: JS DEL FORMULARIO ================= -->
-
-<!-- BEGIN: Vendor JS-->
-<script src="../directorio_nuevoCliente/js/vendors.min.js"></script>
-<!-- BEGIN Vendor JS-->
-
-<!-- BEGIN: Page Vendor JS-->
-<script src="../directorio_nuevoCliente/js/jquery.sticky.js"></script>
-<script src="../directorio_nuevoCliente/js/jquery.sparkline.min.js"></script>
-<script src="../directorio_nuevoCliente/js/jquery.steps.min.js"></script>
-<script src="../directorio_nuevoCliente/js/moment-with-locales.min.js"></script>
-
-
-<script src="../directorio_nuevoCliente/js/jquery.validate.min.js"></script>
-<!-- END: Page Vendor JS-->
-
-<!-- BEGIN: Theme JS-->
-<script src="../directorio_nuevoCliente/js/app-menu.min.js"></script>
-<script src="../directorio_nuevoCliente/js/app.min.js"></script>
-<!-- <script src="./directorio_nuevoCliente/js/customizer.min.js"></script> -->
-<!-- END: Theme JS-->
-
-<!-- BEGIN: Page JS-->
-<script src="../directorio_nuevoCliente/js/breadcrumbs-with-stats.min.js"></script>
-<script src="../directorio_nuevoCliente/js/wizard-steps.min.js"></script>
-
-<script src="../directorio_nuevoCliente/js/estilosPropios.js"></script>
-<!-- END: Page JS-->
-<script src="../directorio_nuevoCliente/js/script_canvas.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
-
-<!-- ==========FIXME: JS DEL FORMULARIO ================= -->
-<!-- form mask -->
-<script src="../libs/imask/imask.min.js"></script>
-<!-- form mask init -->
-<script src="../directorio_dash/js/pages/form-mask.init.js"></script>
-<script src="../js/scripts-mask-phone.js"></script>
-<script src="../js/scripts-validar-campos.js"></script>
-<!--FIXME: ================================================================== -->
-
-
-<script>
-// Mascara  para monto aprobado
-document.addEventListener("DOMContentLoaded", function () {
-    // Pattern (Phone)
-    var currencyMask = IMask(document.getElementById('montoAprobadoUpdate'), {
-       mask: '$num',
-       blocks: {
-         num: {
-           // nested masks are available!
-           mask: Number,
-           thousandsSeparator: ','
-         }
-       }
-     });
- });
-
-// =====>>>> Actualizar datos del cliente
-function UpdateinfoCl(){
-          const id_cliente = $("#idClinfo").val();
-          const correo = $("#correo").val();
-          const telefono = $("#PclTelefono").val();
-          const nombre = $("#PclNombre").val();
-          const segundo_nombre = $("#PclSegundo_nombre").val();
-          const apellido = $("#PclApellido").val();
-          const direccion = $("#direccion").val();
-          const ciudad = $("#PclCiudad").val();
-          const estado_ubicacion = $("#estado_ubicacion").val();
-          const codigo_postal = $("#codigo_postal").val();
-          const direccion2 = $("#direccion2").val();
-
-          fetch('/ActualizarInfoCl', {
-              method: 'POST',
-              body: JSON.stringify({id_cliente,correo,telefono,nombre,segundo_nombre,apellido,direccion,ciudad,estado_ubicacion,codigo_postal,direccion2}),
-              headers: { 'Content-Type': 'application/json' }
-
-           }).then(res => res.json())
-             .catch(error => console.error('Error', error))
-          .then(response => {
-                   if(response)   {
-                       Swal.fire(
-                         '¡Enviado!',
-                         'Datos actualizados',
-                         'success'
-                       )
-                        }else {
-                            Swal.fire(
-                                '¡Error!',
-                                'Ocurrió un problema al guardar los cambios, comunicate con soporte',
-                                'error'
-                             )
-                        }
-                    })
-             }
-
-// =====>>>> Actualizar Monto aprobado
-  function presionar(){
-     const monto_aprobado = $("#montoAprobadoUpdate").val();
-     const id_cliente = $("#consecutivo").val();
-
-          fetch('/ActualizarMontoAprobado', {
-              method: 'POST',
-              body: JSON.stringify({monto_aprobado,id_cliente}),
-              headers: { 'Content-Type': 'application/json' }
-
-           }).then(res => res.json())
-             .catch(error => console.error('Error', error))
-          .then(response => {
-                   if(response)   {
-                       Swal.fire(
-                         '¡Enviado!',
-                         'Monto actualizado',
-                         'success'
-                       )
-                        }else {
-                            Swal.fire(
-                                '¡Error!',
-                                'Ocurrió un problema al guardar los cambios, comunicate con soporte',
-                                'error'
-                             )
-                        }
-                    })
-             }
-
-// =====>>>> Actualizar Estado del credito
-  function presionarBtnEstadoCredito(){
-     
-      const estado_del_credito = $("#estadosCreditoId option:selected").val()
-      const id_cliente = $("#idConsecutivo").val()
-
-          fetch('/ActualizarCredito', {
-              
-              method: 'POST',
-              body: JSON.stringify({estado_del_credito,id_cliente}),
-              headers: { 'Content-Type': 'application/json' }
-
-           }).then(res => res.json())
-             .catch(error => console.error('Error', error))
-          .then(response => {
-                   if(response)   {
-                    location.reload();
-                        }else {
-                            Swal.fire(
-                                '¡Error!',
-                                'Ocurrió un problema al guardar los cambios, comunicate con soporte',
-                                'error'
-                             )
-                        }
-                    })
-             }
-                                        
- </script>
-
-
-
-
- 
-    </body>
-    </html>
+            <%- include ('../1-admin/partials/perfil-cliente/footer.ejs')%>

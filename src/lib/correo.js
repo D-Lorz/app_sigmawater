@@ -23,7 +23,7 @@ let transporter = nodemailer.createTransport({
 const sendEmail = async (email, subject, html) => {
 	try {
 		await transporter.sendMail({
-			from: `3C Sigma Water System <${mail.user}>`, // sender address
+			from: `3C Sigma Water System <noreply@3csigmawater.com>`, // sender address
 			to: email, // list of receivers
 			subject, // Subject line
 			html, // html body
@@ -37,7 +37,7 @@ const sendEmail = async (email, subject, html) => {
 /* --------------- PLANTILLAS DE CORREOS HTML ----------------- */
 
 // Correo para el admin - nuevo vendedor registrado
-const nuevoVendedorHTML = (nombresUser, nombres, apellidos) => {
+const nuevoVendedorHTML = (nomAdmin, vendedor) => {
 	return `
     <!DOCTYPE html>
     
@@ -161,8 +161,7 @@ const nuevoVendedorHTML = (nombresUser, nombres, apellidos) => {
     <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
     <tr>
     <td class="pad" style="width:100%;text-align:center;">
-    <h1 style="margin: 0; color: #8a3c90; font-size: 38px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">`+ Hola +
-    + nombresUser +`</span></h1>
+    <h1 style="margin: 0; color: #8a3c90; font-size: 38px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder"> Hola ` + nomAdmin +`</span></h1>
     </td>
     </tr>
     </table>
@@ -170,7 +169,7 @@ const nuevoVendedorHTML = (nombresUser, nombres, apellidos) => {
     <tr>
     <td class="pad" style="padding-top:25px;">
     <div style="color:#101112;font-size:16px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-weight:400;line-height:120%;text-align:center;direction:ltr;letter-spacing:0px;mso-line-height-alt:19.2px;">
-    <p style="margin: 0; margin-bottom: 2px;">`+ nombres + " " + apellidos + `acaba de registrarse como vendedor en</p>
+    <p style="margin: 0; margin-bottom: 2px;">`+ vendedor + ` acaba de registrarse como vendedor en</p>
     <p style="margin: 0;">3C Sigma Water System</p>
     </div>
     </td>
@@ -345,7 +344,7 @@ const nuevoVendedorHTML = (nombresUser, nombres, apellidos) => {
 }
 
 // Correo de aceptación para el vendedor
-const aceptarVendedorHTML = (nombres, clave) => {
+const aceptarVendedorHTML = (nomVendedor, clave) => {
 	return `
     <!DOCTYPE html>
     
@@ -476,7 +475,7 @@ const aceptarVendedorHTML = (nombres, clave) => {
     <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
     <tr>
     <td class="pad" style="width:100%;text-align:center;">
-    <h1 style="margin: 0; color: #ffffff; font-size: 38px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 200%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">¡Felicidades `+ nombres + `!</span></h1>
+    <h1 style="margin: 0; color: #ffffff; font-size: 38px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 200%; text-align: center; direction: ltr; font-weight: 700; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">¡Felicidades `+ nomVendedor + `!</span></h1>
     </td>
     </tr>
     </table>
@@ -914,8 +913,7 @@ const recuperarClaveHTML = (token) => {
     </tbody>
     </table><!-- End -->
 
-    </body>'`;
+    </body>`;
 }
 
 module.exports = {sendEmail, nuevoVendedorHTML,aceptarVendedorHTML,recuperarClaveHTML}
-

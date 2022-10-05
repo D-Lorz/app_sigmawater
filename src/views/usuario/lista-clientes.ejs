@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Lista de clientes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if(header) {%> <%- include ('../partials/header.ejs')%><% } %> 
+</head>
+<body>
+  <!-- Begin page -->
+  <div id="layout-wrapper">
+   <%- include ('../partials/menu.ejs')%>
+   <div class="main-content">
+    <div class="page-content">
+      <div class="container-fluid">
+      <div class="row">
+          <div class="col-12">
+              <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                  <h4 class="mb-sm-0 font-size-18">Lista de clientes</h4>
+                  <div class="page-title-right">
+                      <ol class="breadcrumb m-0">
+                          <li class="breadcrumb-item"><a href="javascript:
+                                  void(0);">Clientes</a></li>
+                          <li class="breadcrumb-item active">Lista de clientes</li>
+                      </ol>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+    <div class="row ">
+        <div class="col-md-12" style="margin-bottom: -48px;">
+                  <div class="d-flex flex-wrap justify-content-end gap-2 mb-3">
+                      <div>
+                          <a href="/nuevo-cliente"  style=" border-radius: 15px;" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar nuevo cliente</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+            <div class="table-responsive mb-4 " >
+                <table class="table align-middle datatable dt-responsive table-check nowrap " style="border-collapse: collapse;
+                    border-spacing: 0 8px; width: 100%;">
+                    <thead>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Estado de crédito</th>
+                        <th scope="col">Estado de instalación</th>
+                    </thead>
+                    <tbody>
+                        <% listaCl.forEach((user)=>{ %>
+                            <tr>
+                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.nombre %></a></td>
+                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.apellido %></a></td>
+                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.correo %></a></td>
+                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.telefono %></a></td>
+                                <td><a href="/perfil-clientes/<%- user.id_cliente %>"><%= user.direccion %></a></td>
+                                <td><div class="badge <%= user.estadopro.color%> font-size-12" ><%= user.estadopro.txt %></div></td>
+                                <td><div class="badge <%= user.estadoAgenda.color%> font-size-12 letra" > <%= user.estadoAgenda.txt %> </div></td>
+                            </tr>
+                        <%})%> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    <%- include ('../partials/copyright.ejs')%>
+    </div>
+  </div>
+  <% if(footer){%> <%- include ('../partials/footer.ejs')%><% } %> 
+</body>
+
+</html>

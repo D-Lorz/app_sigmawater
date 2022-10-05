@@ -1,0 +1,124 @@
+
+
+<script>
+$.datepicker.regional['es'] = {
+    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    monthNamesShort: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+    weekHeader: 'Sm',
+    dateFormat: 'mm/dd/yy',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: ''
+};
+$.datepicker.setDefaults($.datepicker.regional['es']);
+
+const dateToday = new Date();
+const yrRangeFuture = (dateToday.getFullYear()) + ":" + '3000';
+$(function () {
+    $("#fechacita").datepicker({
+        yearRange: yrRangeFuture,
+        minDate: '0M',
+        changeMonth: true,
+        changeYear: true
+    });
+});
+
+let desde, hasta
+let inputEle = document.getElementById('horaInicial');
+var inputEle2 = document.getElementById('horaFinal');
+
+   function enviarAgenda(){
+// => Capturando valores del primer imput time 
+    let timeSplit = inputEle.value.split(':'),
+            initialHours,
+            initialMinutes,
+            initialMeridian;
+        initialHours = timeSplit[0];
+        initialMinutes = timeSplit[1];
+// => Validando las jornadas
+        if (initialHours > 12) {
+            initialMeridian = 'PM';
+            initialHours -= 12 ;
+        } else if (initialHours < 12) {
+            initialMeridian = 'AM';
+            if (initialHours == 0) {
+                initialHours = '' ;
+                initialMinutes = '';
+                initialMeridian = '';
+            }
+        } else {
+            initialMeridian = 'PM';
+        }
+// => Capturando valores del segundo imput time 
+        let timeSplit2 = inputEle2.value.split(':'),
+            finalHours,
+            finalMinutes,
+            finalMeridian;
+        finalHours = timeSplit2[0];
+        finalMinutes = timeSplit2[1];
+
+        if (finalHours > 12) {
+            finalMeridian = 'PM';
+            finalHours -= 12;
+        } else if (finalHours < 12) {
+            finalMeridian = 'AM';
+            if (finalHours == 0) {
+                finalHours = '';
+                finalMinutes = '';
+                finalMeridian = '';
+            }
+        } else {
+            meridian2 = 'PM';
+        }
+
+        desde = initialHours + ' ' + initialMinutes + ' ' + initialMeridian
+        hasta = finalHours + ' ' + finalMinutes + ' ' + finalMeridian
+        
+        const id_cliente = $("#id_cliente").val();
+        const codigo_cliente = $("#codigo_cliente").val();
+        const hora_inicial = desde;
+        const hora_final = hasta;
+        let lunes = $("#lunes").is(':checked') 
+        let martes = $("#martes").is(':checked')
+        let miercoles = $("#miercoles").is(':checked')
+        let jueves = $("#jueves").is(':checked')
+        let viernes = $("#viernes").is(':checked')
+        let sabado = $("#sabado").is(':checked')
+        let domingo = $("#domingo").is(':checked')
+        const fecha_especifica = $("#fechacita").val();
+        const nota_solicitud = $("#nota").val();
+
+    fetch('/agendarInstalacion', {
+         
+        method: 'POST',
+        body: JSON.stringify({id_cliente,codigo_cliente,hora_inicial,hora_final,lunes,martes,miercoles,jueves,viernes,sabado,domingo,fecha_especifica,nota_solicitud}),
+        headers: { 'Content-Type': 'application/json' }
+
+      }).then(res => res.json())
+        .catch(error => console.error('Error', error))
+     .then(response => {
+              if(response)   {
+                // Swal.fire(
+                //            'Enviado!',
+                //            'Agenda solicitada',
+                //            'success'
+                //         )
+                        window.location.replace('/perfil-clientes/' + codigo_cliente);
+                   }else {
+                       Swal.fire(
+                           '¡Error!',
+                           'Ocurrió un problema al guardar los cambios, comunicate con soporte',
+                           'error'
+                        )
+                   }
+               })
+        }
+ 
+        </script>
+        </body>
+        
+        </html>

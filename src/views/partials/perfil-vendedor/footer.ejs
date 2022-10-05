@@ -1,0 +1,77 @@
+<!--=============================// INICIO SCRIPTS =========================================-->
+
+<!-- Buttons examples -->
+<script src="../directorio_dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../directorio_dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="../directorio_dash/libs/jszip/jszip.min.js"></script>
+<script src="../directorio_dash/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="../directorio_dash/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<!-- password addon init -->
+<script src="./directorio_dash/js/pages/pass-addon.init.js"></script>
+
+<script>
+    // ==> Previsualizar foto de perfil == INICIO <==
+        function fileValidation(){
+            var fileInput = document.getElementById('previewProfile')
+                var filePath = fileInput.value;
+                var allowedExtensions = /(.jpg|.jpeg|.png)$/i;
+                var archivo = fileInput.files[0];
+                if(!allowedExtensions.exec(filePath)){
+                    alertify.set('notifier', 'position', 'top-center');
+                    alertify.error('Solo archivos .jpg, jpeg o .png son aceptados');
+                    fileInput.value = '';
+                    return false;
+                }else if(archivo.size > 1000000) {
+                    alertify.set('notifier', 'position', 'top-center');
+                    alertify.error('Tu archivo supera los 1MB de peso');
+                    fileInput.value = '';
+                    return false;
+                }else {
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                    $('#imagePre1').attr('src', e.target.result); // Renderizamos la imagen
+                }
+                 reader.readAsDataURL(fileInput.files[0]);
+              }
+           }
+       }
+        $("#imgInp").change(function () {
+        // Código a ejecutar cuando se detecta un cambio de archivO
+        readImage(this);
+     });
+    // ==> Previsualizar foto de perfil == FIN <==
+    
+        /* Actualizar foto de perfil en DB */
+        const inptutFoto = document.querySelector('.filePhoto');
+        const codigoVendedor = document.getElementById('codigoVendedor').value;
+        
+        inptutFoto.addEventListener('change', (e) => {
+            console.log(e)
+            const foto = e.target.files[0]
+            const formData = new FormData();
+            formData.append('foto', foto);
+            formData.append('codigoVendedor',codigoVendedor);
+            guardarFoto(formData, codigoVendedor);
+        });
+    
+        function guardarFoto(formData) {
+            fetch('/actualizarFotoPerfil', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(res => res.json())
+                .catch(error => console.error('Error:', error))
+                .then(resultado => {
+                    if (resultado) {
+                        console.log("Todo correcto")
+                    } else {
+                        console.log("Sin datos")
+                    }
+                })
+        }
+    </script>
+<!--=============================// FIN SCRIPTS =========================================-->

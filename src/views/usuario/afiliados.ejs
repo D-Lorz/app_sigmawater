@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Lista de clientes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include ('../partials/header.ejs')%>
+</head>
+<body>
+  <div id="layout-wrapper">
+   <%- include ('../partials/menu.ejs')%>
+    <div class="main-content">
+      <div class="page-content">
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center
+                    justify-content-between">
+                    <h4 class="mb-sm-0 font-size-18">Lista de afiliados</h4>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript:
+                                    void(0);">Afiliados</a></li>
+                            <li class="breadcrumb-item active">Lista de Afiliados</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+            <div class="table-responsive mb-4">
+                <table class="table align-middle datatable dt-responsive
+                    table-check nowrap" style="border-collapse: collapse;
+                    border-spacing: 0 8px; width: 100%;">
+                    <thead>
+                            <th scope="col">Nombres</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Correo electronico</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Nivel</th>
+                            <th scope="col">Numero de ventas</th>
+                            <th scope="col">Total ganancias</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% result.forEach((user)=>{ %>
+                            <tr>
+                                <td><%= user.nombres %></td>
+                                <td><%= user.apellidos %> 
+                                <td><%= user.correo %></td>
+                                <td><%= user.telefono_movil %></td>
+                                <td><%= user.nivel %></td>
+                                <td><%= user.total_ventas %></td>
+                                <td><div class="badge badge-soft-success font-size-12">$ <%= user.ganancias %></div></td>
+                                <td style="text-transform: capitalize">
+                                <% if(user.estado_de_la_cuenta == "pendiente") {%> 
+                                   <div class="badge badge-soft-warning font-size-12"><%= user.estado_de_la_cuenta %></div>
+                                <% } else if(user.estado_de_la_cuenta == "aprobado") {%> 
+                                   <div class="badge badge-soft-success font-size-12"><%= user.estado_de_la_cuenta %></div>
+                                <% } else {%>  
+                                   <div class="badge badge-soft-danger font-size-12">Desvinculado</div>
+                                <% } %> 
+                                <% if(user.codigo_afiliado == 'N/A' && user.codigo_historial_afiliado){%> 
+                                    <br>
+                                   <div class="badge badge-soft-danger font-size-12 mt-2">Desvinculado</div>
+                                <% }%> 
+                                </td>
+                            </tr>
+                        <%})%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    <%- include ('../partials/copyright.ejs')%>
+    </div>
+  </div>
+  <% if(footerVendedor) {%> 
+    <%- include ('../partials/footer.ejs')%>
+    <% } %> 
+</body>
+
+</html>

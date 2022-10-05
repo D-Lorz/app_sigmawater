@@ -49,18 +49,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     <link href="./directorio_login/icon_fonts/css/all_icons_min.css" rel="stylesheet">
     <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> 
-
-
 </head>
-
 <body>
-
     <!-- main -->
     <div class="main-top-intro">
         <div class="bg-layer">
             <!-- header -->
             <div class="wrapper">
                 <header>
+                    <div>
                     <nav>
                         <ul class="cd-primary-nav">
                             <li><a href="/" class="animated_link">Regresar</a></li>
@@ -68,67 +65,49 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </nav>
                     <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
                     <div class="header-w3layouts">
-                        <img src="/img/logoLogin.png" alt="" srcset="">
+                        <img src="/img/logoLogin.png" id="logoBlanco" alt="" srcset="">
+                    </div>
                     </div>
                 </header>
+                
                 <!-- header -->
                 <div class="content-inner-info">
                     <p class="bienvenida">Bienvenido a 3C Sigma Water System</p>
-                    <h2>Ingresa con tus datos</h2>
-                    <p class="link_registrarse">¿Deseas convertirte en vendedor? <a href="/register"
-                            style="color: #fed061;font-size: 14px;">haz clic aquí.</a></p>
+                    <h2 class="h2Id">Ingresa con tus datos</h2>
+                    <br>
+                    <br>
+                    <p class="link_registrarse">¿Deseas convertirte en vendedor? <a href="/register" id="clickAqui">haz clic aquí.</a></p>
                     <div class="content-w3layouts-main">
-                        <!-- <p > -->
                         <div class="form-w3ls-left-info">
                             <!-- TODO FORMULARIO LOGIN ==============-->
-
                             <form action="/login" method="post" id="idLogin">
-                               <label style="margin-left: 8px; font-size: 10px; padding: 5px 9px;">Email</label>
-                                <input type="email" class="email" name="correo" id="correo" placeholder="Ejemplo@tudominio.com" />
+                               <label class="labelEmail">Email</label>
+                                <input type="email" class="email" name="correo" id="correo" placeholder="Ejemplo@tudominio.com"/>
                                   <br>
                                   <br>
-                               <label style="margin-left: 8px; font-size: 10px; padding: 5px 9px;">Contraseña</label>
+                               <label class="labelPass">Contraseña</label>
                                 <input type="password" class="password" id="pass" name="pass" placeholder="**********" />
                                 <label style="margin-left: 8px; font-size: 10px; padding: 5px 9px;" id = "GFG_DOWN" ></label>
-                                <!-- <p id = "GFG_DOWN" style =
-                                "color:green; font-size: 20px; font-weight: bold;">
-                            </p> -->
                                   <br>
                                   <br>
                                 <div class="recuerdame">
-                                    <p> <a href="https://app.3csigmawater.com/restablecer-clave" style="float:left;">¿Olvidaste tu contraseña?</a></p>
+                                    <p><a href="/restablecer-clave" id="olvidastePass">¿Olvidaste tu contraseña?</a></p>
                                 </div>
-                                <div class="bottom" style="transition:none ;">
+                                <div class="bottom" style="transition:none;">
                                     <button class="btn btn-primary" type="submit"> Ingresar</button>
                                 </div>
-
                             </form>
-                            
                             <!-- TODO FORMULARIO LOGIN ==============-->
                         </div>
                     </div>
-
-                    <!-- !REDES SOCIALES================  -->
-                    <ul class="redesSociales">
-                        <li><a href="https://www.facebook.com/3csigmawater" target="_blank"><i
-                                    class="icon-facebook"></i></a></li>
-                        <!-- <li><a href="#0"><i class="icon-twitter"></i></a></li> -->
-                        <li><a href="https://instagram.com/3csigmawater" target="_blank"><i
-                                    class="icon-instagram"></i></a></li>
-                        <!-- <li><a href="#0"><i class="icon-linkedin"></i></a></li> -->
-                    </ul>
-                    <!-- !REDES SOCIALES================  -->
-                </div>
-
-                <!-- copyright -->
+                    <div class="redesSociales">
+                        <li><a href="https://www.facebook.com/3csigmawater" target="_blank"><i class="icon-facebook"></i></a></li>
+                        <li><a href="https://instagram.com/3csigmawater" target="_blank"><i class="icon-instagram"></i></a></li>
+                    </div>
                 <div class="copy-w3layouts-inf" id="copycopy">
-                    <a href="/login">
-                        <p>3C Sigma Water System ® 2022.
-                    </a>
-                    </p>
-                    <div class="clear"></div>
+                    <a href="/login" id="c_right"> <p>3C Sigma Water System ® 2022.</a> </p>
                 </div>
-                <!-- copyright  -->
+            </div>
             </div>
         </div>
     </div>

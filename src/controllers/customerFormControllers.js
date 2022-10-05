@@ -52,14 +52,14 @@ exports.getSolicitudCreditos = async (req, res) => {
   const id = req.params.id
   let infoCl = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id])
   infoCl = infoCl[0];
-  res.render('solicitar-credito', { user: req.user, infoCl });
+  res.render('usuario/solicitar-credito', {headerSolicitarC:true, footerSolicitarC:true, user: req.user, infoCl });
 }
 
 exports.getAhorro = async (req, res) => {
   const id = req.params.id
   await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
     if (err) throw err;
-    res.render('calcular-ahorro', { user: req.user, ahorroCliente: result[0] });
+    res.render('usuario/calcular-ahorro', { header:true, footer:true, user: req.user, ahorroCliente: result[0] });
 
   })
 
@@ -68,7 +68,7 @@ exports.getTestAgua = async (req, res) => {
   const id = req.params.id
   await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id], (err, result) => {
     if (err) throw err;
-    res.render('test-de-agua', { user: req.user, testAgua: result[0] });
+    res.render('usuario/test-de-agua', { header: true, footer:true, user: req.user, testAgua: result[0] });
 
   })
 
@@ -77,7 +77,7 @@ exports.getAgendarinstalacion = async (req, res) => {
   const id = req.params.id
   let infoCl = await conexion.query('SELECT * FROM nuevos_cliente WHERE id_cliente = ? LIMIT 1', [id])
   infoCl = infoCl[0]
-  res.render('agendar-instalacion', { user: req.user, infoCl });
+  res.render('usuario/agendar-instalacion', { header:true, footer:true, user: req.user, infoCl });
 }
 
 //------------------------------------------------
@@ -235,7 +235,7 @@ exports.listarClientes = async (req, res) => {
       }
     }
   });
-  res.render('lista-clientes', { user: req.user, listaCl })
+  res.render('usuario/lista-clientes', { header:true, footer:true, user: req.user, listaCl })
 }
 // ! >>>>>>>>>  Tarjetas en la vista perfil clientes <<<<<<<<<<<
 exports.listarClientes_PerfilClientes = async (req, res) => {
@@ -359,7 +359,8 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
     }
 
   // * >>> Renderizado <<<<<
-  res.render('perfil-clientes', {
+  res.render('usuario/perfil-clientes', {
+    footerClientes:true, headerClientes:true,
     user: req.user, clientes2, estado, estadoBtn,
     informacionTestAgua, estadoVisita_testAgua, consulta_PrimerTestAgua,
     datosJson_PrimerTestagua, consulta_UltimoTestAgua, datosJson_UltimoTestagua,
@@ -720,7 +721,7 @@ exports.dashboardVendedor = async (req, res) => {
     console.log("IMPIMIENDO datosJson_h istorialG ====>>>" , datosJson_historialG);
    }
 
-  res.render("dashboard", { user: req.user,
+  res.render("usuario/dashboard", { user: req.user,
     totalCliente: countCliente[0].totalClientes,
     totalAfiliado: countAfiliados[0].totalAfiliados,
     datosJson_clAgregados, rendimientoCl, datosJson_aflAgregados, rendimientoAfl,

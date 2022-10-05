@@ -1,0 +1,646 @@
+
+<script type="text/javascript">
+    let v1 = 1, v2 = 1, v3 = 1, v4 = 1, cont = 1, arrayDeducciones = [], arrayCostos = [], storage = {};
+    const subtotalCostos = $('#subtotalCostos');
+    const totalGanancias = $('#totalGanancias');
+    const gananciaTotal = $('#gananciaTotal');
+
+    function _crearTablaDeducciones(num, datos) {
+        let tabla = `<table class="table table-nowrap align-middle" id="tablaDeducciones${num}">`
+        if (datos) {
+            tabla += `<thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>`
+        } else {
+            tabla += `<thead>
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Monto</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>`
+        }
+        tabla += `<tbody></tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Subtotal</b></td>
+                                    <td colspan="2">$<span id="subtotal${num}">0</span></td>
+                                </tr>
+                                <tr id="porcentaje-ganar${num}">
+                                    <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Porcentaje ganancia</b></td>
+                                    <td colspan="2">50%</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Comisión Total</b></td>
+                                    <td colspan="2">$<span id="total${num}"></span></td>
+                                    <input type="hidden" id="deduccionTotal${num}" value="">
+                                </tr>
+                            </tfoot>
+                        </table>
+                    `
+        return tabla;
+    }
+
+    // Parametros (idCliente, Pestaña, Nivel del Vendedor)
+    function _btnAddDeduccion(idCliente, numTab, nivel) {
+        return $('#tituloDeduccion_'+numTab).append(`<button type="button" onclick="agregarDeduccion(${idCliente}, 'tab${numTab}', ${nivel})" class="btn btn-primary btn-xs btnAddDeduccion" style="float: right"><i class="mdi mdi-plus"></i></button>`);
+    }
+
+    function editarFactura(idFactura) {
+        $("#tabFactura2").css('display', 'none')
+        $("#tabFactura3").css('display', 'none')
+        $("#tabFactura4").css('display', 'none')
+        $('.btnAddDeduccion').remove()
+        $('#tablaDeducciones1').remove()
+        $('#tablaDeducciones2').remove()
+        $('#tablaDeducciones3').remove()
+        $('#tablaDeducciones4').remove()
+        $('#tablaCostosExtras>tbody').remove()
+        $('#tablaCostosExtras').append('<tbody></tbody>')
+        $("#headTbl").remove()
+        subtotalCostos.text(0)
+        v1 = 1, v2 = 1, v3 = 1, v4 = 1;
+        arrayDeducciones = []
+        arrayCostos = []
+
+        $("#idFacturaActual").val(idFactura);
+
+        $("#btnReportarFactura").attr('onclick', `reportarFactura('${idFactura}')`)
+
+        fetch('/deducciones', {
+          method: 'POST',
+          body: JSON.stringify({idFactura}),
+          headers: {'Content-Type': 'application/json'}
+        }).then(res => res.json())
+          .catch(error => console.error('Error:', error))
+          .then(datos => {
+            if (datos) {
+
+                storage = datos // Variable Global..
+                let dt = undefined // Deducciones Totales|
+                
+                const idCliente = datos.id
+                $("#idCliente_").val(idCliente)
+                const nombreCliente = datos.nombre + " " + datos.apellido
+                $("#idFactura").text(idFactura)
+                $(".producto").text(datos.sistema)
+                $(".valor").text(datos.monto_aprobado)
+                $(".idCliente").text(nombreCliente)
+                $(".telCliente").text(datos.telefono)
+                $(".direccionCliente").text(datos.direccion)
+                $(".fecha").text(datos.factura.fecha)
+                
+                const vendedor_principal = datos.vendedores[0]
+                let vendedor2 = {}, vendedor3 = {}, vendedor4 = {};
+                datos.vendedores[1] ? vendedor2 = datos.vendedores[1] : vendedor2 = false;
+                datos.vendedores[2] ? vendedor3 = datos.vendedores[2] : vendedor3 = false;
+                datos.vendedores[3] ? vendedor4 = datos.vendedores[3] : vendedor4 = false;
+
+                $("#idVendedor1").text(vendedor_principal.nombre)
+                $("#nivelVendedor1").text(vendedor_principal.nivel)
+                $("#telVendedor").text(vendedor_principal.telefono)
+                $("#comisionBase1").text(vendedor_principal.comision_base)
+                $("#porcentaje-ganar1").css('display', 'none')
+                let comisionFinal = vendedor_principal.comision_base
+                
+                let cabeceraCostos = ``, gananciaBaseActual = 0;
+                if (datos.factura.estadoTxt == "Pagada") {
+                    $("#btnReportarFactura").css('display', 'none')
+                    $('.btnAddDeduccion').remove()
+                    const tablaDeducciones_v1 = _crearTablaDeducciones(1, true)
+                    $('#divDeducciones').append(tablaDeducciones_v1);
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
+                    /* SI LA FACTURA FUE PAGADA - MOSTRAR COSTOS OPERACIONALES SI LOS TIENE + VALOR DE GANANCIAS */
+                    $('#btnAddCostos').hide() // Ocultar botón de agregar nuevo costo
+                    cabeceraCostos = `<thead id="headTbl">
+                                        <tr>
+                                            <th>Descripción</th>
+                                            <th>Monto</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody></tbody>`;
+                    let costos = ``, subtotal = 0;
+                    if (datos.costos_adicionales){
+                        datos.costos_adicionales.forEach(x => {
+                            costos += `<tr id="${x.row}">
+                                <td>${x.descripcion}</td>
+                                <td>${x.monto}</td>
+                            </tr>`
+                            subtotal += parseFloat(x.monto)
+                        })
+                    }
+                    gananciaBaseActual = datos.ganancias.base
+                    $('#gananciaBase').text(datos.ganancias.base)
+                    subtotalCostos.text(subtotal)
+                    totalGanancias.text(datos.ganancias.total)
+                    gananciaTotal.val(datos.ganancias.total)
+                    $('#tablaCostosExtras').append(costos);
+                    /* FIN DE COSTOS + GANANCIAS */
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
+                } else {
+                    $("#btnReportarFactura").css('display', 'inline-block')
+                    _btnAddDeduccion(idCliente, '1', vendedor_principal.nivel)
+                    const tablaDeducciones_v1 = _crearTablaDeducciones(1, false)
+                    $('#divDeducciones').append(tablaDeducciones_v1);
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // OPERACIONES PARA COSTOS ADICIONALES - ÚLTIMO TAB
+                    $('#btnAddCostos').show() // Mostrar botón de agregar nuevo costo
+                    cabeceraCostos = `<thead id="headTbl">
+                                        <tr>
+                                            <th>Descripción</th>
+                                            <th>Monto</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>`;
+                    const comisionTotal0 = storage.vendedores.map(x => x.comision_final).reduce((prev, curr) => prev + curr, 0);
+                    const gananciaBase = parseFloat(datos.monto_aprobado)-parseFloat(comisionTotal0).toFixed(1);
+                    console.log("\nMonto aprobado >>> ", datos.monto_aprobado)
+                    console.log("Comisión Total Vendedores >>> ", comisionTotal0)
+                    console.log("Ganancia Base Inicial >>> ", gananciaBase)
+                    gananciaBaseActual = gananciaBase;
+                    $("#gananciaBase").text(gananciaBase)
+                    totalGanancias.text(parseFloat(gananciaBase))
+                    gananciaTotal.val(parseFloat(gananciaBase))
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
+                }
+                $('#tablaCostosExtras').append(cabeceraCostos);
+                storage.gananciaBase = parseFloat(gananciaBaseActual);
+                storage.gananciaTotal = parseFloat(gananciaTotal.val());
+
+                vendedor_principal.deducciones ? dt = vendedor_principal.deducciones : dt = null;
+                
+                if (dt) {
+                    let subtotal = 0, dt1 = [];
+                    dt.forEach(x => { 
+                        if (x.tab == 'tab1') dt1.push(x)
+                    })
+                    
+                    if (dt1.length > 0) {
+                        let deducciones1 = ``, i = 1;
+                        dt1.forEach(x => {
+                            deducciones1 += `<tr id="${x.tab}_row${i}">
+                                <td>${x.descripcion}</td>
+                                <td>${x.monto}</td>
+                            </tr>`
+                            subtotal += parseFloat(x.monto)
+                            i++;
+                        })
+                        $('#tablaDeducciones1').append(deducciones1);
+                    }
+
+                    $('#subtotal1').text(subtotal)
+                    comisionFinal = parseFloat(vendedor_principal.comision_base-subtotal)
+                    $("#porcentaje-ganar1").css('display', 'none')
+                    if (vendedor_principal.nivel == 4) {
+                        $("#porcentaje-ganar1").css('display', 'table-row')
+                        comisionFinal = parseFloat((vendedor_principal.comision_base-subtotal)/2)
+                    }
+
+                } else {
+                    $("#porcentaje-ganar1").css('display', 'none')
+                    if (vendedor_principal.nivel == 4) {
+                        $("#porcentaje-ganar1").css('display', 'table-row')
+                        comisionFinal = parseFloat(vendedor_principal.comision_base/2)
+                    }
+                }
+
+                /** COMISIONES DB */
+                if (datos.factura.estadoTxt == "Pagada") {
+                    $('#comisionBase1').text(vendedor_principal.comision_base)
+                    comisionFinal = vendedor_principal.comision_final
+                    comisionFinal = vendedor_principal.comision_final
+                }
+                
+                $('#total1').text(comisionFinal)
+                $("#deduccionTotal1").val(comisionFinal)
+
+                if (vendedor2) {
+
+                    vendedor2.comision_base = vendedor2.comision_base.toFixed(1)
+                    $("#tabFactura2").css('display', 'block')
+                    $("#idVendedor2").text(vendedor2.nombre)
+                    $("#nivelVendedor2").text(vendedor2.nivel)
+                    $("#telVendedor2").text(vendedor2.telefono)
+                    $("#comisionBase2").text(vendedor2.comision_base)
+                    $("#total2").text(vendedor2.comision_base)
+                    let comisionFinal2 = vendedor2.comision_base
+
+                    if (datos.factura.estadoTxt == 'Pagada') {
+                        $('.btnAddDeduccion').remove()
+                        const tablaDeducciones_v2 = _crearTablaDeducciones(2, true)
+                        $('#divDeducciones2').append(tablaDeducciones_v2);
+                    } else {
+                        _btnAddDeduccion(idCliente, '2', vendedor2.nivel)
+                        const tablaDeducciones_v2 = _crearTablaDeducciones(2, false)
+                        $('#divDeducciones2').append(tablaDeducciones_v2);
+                    }
+
+                    // Si ya existen datos en DB
+                    if (dt) {
+                        let subtotal2 = 0, dt2 = []
+                        vendedor2.deducciones.forEach(x => { 
+                            if (x.tab == 'tab2') dt2.push(x)
+                        })
+                        if (dt2.length > 0) {
+                            let deducciones2 = ``, i = 1;
+                            dt2.forEach(x => {
+                                deducciones2 += `<tr id="${x.tab}_row${i}">
+                                    <td>${x.descripcion}</td>
+                                    <td>${x.monto}</td>
+                                </tr>`
+                                subtotal2 += parseFloat(x.monto)
+                                i++;
+                            })
+                            $('#tablaDeducciones2').append(deducciones2);
+                            $('#subtotal2').text(subtotal2)
+                            comisionFinal2 = parseFloat(vendedor2.comision_base-subtotal2)
+                        }
+                    }
+
+                    $("#porcentaje-ganar2").css('display', 'none')
+                    if (vendedor2.nivel == 4) {
+                        $("#porcentaje-ganar2").css('display', 'table-row')
+                        comisionFinal2 = parseFloat(comisionFinal2/2)
+                    }
+
+                    /** COMISIONES DB */
+                    if (datos.factura.estadoTxt == "Pagada") {
+                        $('#comisionBase2').text(vendedor2.comision_base)
+                        comisionFinal2 = vendedor2.comision_final
+                        comisionFinal2 = vendedor2.comision_final
+                    }
+                    $("#total2").text(comisionFinal2)
+                    $("#deduccionTotal2").val(comisionFinal2)
+
+                }
+
+                if (vendedor3) {
+                    vendedor3.comision_base = vendedor3.comision_base.toFixed(1)
+                    $("#tabFactura3").css('display', 'block')
+                    $("#idVendedor3").text(vendedor3.nombre)
+                    $("#nivelVendedor3").text(vendedor3.nivel)
+                    $("#telVendedor3").text(vendedor3.telefono)
+                    $("#comisionBase3").text(vendedor3.comision_base)
+                    $("#total3").text(vendedor3.comision_base)
+                    let comisionFinal3 = vendedor3.comision_base
+
+                    if (datos.factura.estadoTxt == 'Pagada') {
+                        const tablaDeducciones_v3 = _crearTablaDeducciones(3, true)
+                        $('#divDeducciones3').append(tablaDeducciones_v3);
+                    } else {
+                        // Parametros (idCliente, Pestaña, Nivel del Vendedor)
+                        _btnAddDeduccion(idCliente, '3', vendedor3.nivel)
+                        const tablaDeducciones_v3 = _crearTablaDeducciones(3, false)
+                        $('#divDeducciones3').append(tablaDeducciones_v3);
+                    }
+
+                    if (dt) {
+                        let subtotal3 = 0, dt3 = []
+                        vendedor3.deducciones.forEach(x => { 
+                            if (x.tab == 'tab3') dt3.push(x)
+                        })
+                        
+                        console.log("\nDT3 >>> ", dt3)
+
+                        if (dt3.length > 0) {
+                            let deducciones3 = ``, i = 1;
+                            dt3.forEach(x => {
+                                deducciones3 += `<tr id="${x.tab}_row${i}">
+                                    <td>${x.descripcion}</td>
+                                    <td>${x.monto}</td>
+                                </tr>`
+                                subtotal3 += parseFloat(x.monto)
+                                i++;
+                            })
+
+                            $('#tablaDeducciones3').append(deducciones3);
+                            $('#subtotal3').text(subtotal3)
+                            comisionFinal3 = parseFloat(vendedor3.comision_base-subtotal3)
+                        } 
+                    }
+
+                    $("#porcentaje-ganar3").css('display', 'none')
+                    if (vendedor3.nivel == 4) {
+                        $("#porcentaje-ganar3").css('display', 'table-row')
+                        comisionFinal3 = parseFloat(comisionFinal3/2)
+                    }
+                    
+                    /** COMISIONES DB */
+                    if (datos.factura.estadoTxt == "Pagada") {
+                        $('#comisionBase3').text(vendedor3.comision_base)
+                        comisionFinal3 = vendedor3.comision_final
+                        comisionFinal3 = vendedor3.comision_final
+                    }
+                    $("#total3").text(comisionFinal3)
+                    $("#deduccionTotal3").val(comisionFinal3)
+
+                }
+
+                if (vendedor4) {
+                    vendedor4.comision_base = vendedor4.comision_base.toFixed(1)
+                    $("#tabFactura4").css('display', 'block')
+                    $("#idVendedor4").text(vendedor4.nombre)
+                    $("#nivelVendedor4").text(vendedor4.nivel)
+                    $("#telVendedor4").text(vendedor4.telefono)
+                    $("#comisionBase4").text(vendedor4.comision_base)
+                    $("#total4").text(vendedor4.comision_base)
+                    let comisionFinal4 = vendedor4.comision_base
+
+                    if (datos.factura.estadoTxt == 'Pagada') {
+                        const tablaDeducciones_v4 = _crearTablaDeducciones(4, true)
+                        $('#divDeducciones4').append(tablaDeducciones_v4);
+                    } else {
+                        _btnAddDeduccion(idCliente, '4', vendedor4.nivel)
+                        const tablaDeducciones_v4 = _crearTablaDeducciones(4, false)
+                        $('#divDeducciones4').append(tablaDeducciones_v4);
+                    }
+                    
+                    if (dt) {
+                        let subtotal4 = 0, dt4 = []
+                        vendedor4.deducciones.forEach(x => { 
+                            if (x.tab == 'tab4') dt4.push(x)
+                        })
+                        if (dt4.length > 0) {
+                            let deducciones4 = ``, i = 1;
+                            dt4.forEach(x => {
+                                deducciones4 += `<tr id="${x.tab}_row${i}">
+                                    <td>${x.descripcion}</td>
+                                    <td>${x.monto}</td>
+                                </tr>`
+                                subtotal4 += parseFloat(x.monto)
+                                i++;
+                            })
+
+                            $('#tablaDeducciones4').append(deducciones4);
+                            $('#subtotal4').text(subtotal4)
+                            comisionFinal4 = parseFloat(vendedor4.comision_base-subtotal4)
+                        } 
+                    }
+
+                    $("#porcentaje-ganar4").css('display', 'none')
+                    if (vendedor4.nivel == 4) {
+                        $("#porcentaje-ganar4").css('display', 'table-row')
+                        comisionFinal4 = parseFloat(comisionFinal4/2)
+                    }
+
+                    /** COMISIONES DB */
+                    if (datos.factura.estadoTxt == "Pagada") {
+                        $('#comisionBase4').text(vendedor4.comision_base)
+                        comisionFinal4 = vendedor4.comision_final
+                        comisionFinal4 = vendedor4.comision_final
+                    }
+                    $("#total4").text(comisionFinal4)
+                    $("#deduccionTotal4").val(comisionFinal4)
+
+                }
+
+                /* -INICIO- Activar Clic para mostrar Sidebar */
+                $("#btnSidebar").trigger("click");
+                /* -FIN- Activar Clic para mostrar Sidebar */
+                console.log("STORAGE: ", storage)
+            } else {
+                console.log("Ocurrió un error en él controlador")
+            }
+          })
+    }
+
+    // Parameros (idCliente, número de la pestaña, Contador para la fila, nivel del vendedor)
+    function _agregarFila(idCliente, numTab, row, nivel) {
+        $('#tablaDeducciones'+numTab).append(`<tr id="row${row}_tab${numTab}">
+            <td><input type="text" id="descripcion${row}_tab${numTab}"></td>
+            <td><input type="number" id="monto${row}_tab${numTab}"></td>
+            <td style="display: flex;justify-content: center;">
+                <a class="btn btn-primary btn-rounded btn-sm" id="btn${row}_tab${numTab}" onclick="sumarDeduccion('${idCliente}', '${numTab}', '${row}', '${nivel}')" title="Guardar">
+                    <i class="fas fa-save"></i>
+                </a>
+                <a class="btn btn-danger btn-rounded btn-sm" onclick="eliminarFila('${idCliente}', '${numTab}', '${row}', '${nivel}')" title="Eliminar">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>`);
+    }
+
+    // Parameros (idCliente, número de la pestaña, nivel del vendedor)
+    function agregarDeduccion(idCliente, numTab, nivel) {
+        /* VENDEDOR 1 */
+        if (numTab == 'tab1') {
+            _agregarFila(idCliente, 1, v1, nivel)
+            v1 = v1+1;
+        }
+
+        /* VENDEDOR 2 */
+        if (numTab == 'tab2'){
+            _agregarFila(idCliente, 2, v2, nivel)
+            v2 = v2+1;
+        }
+
+        /* VENDEDOR 3 */
+        if (numTab == 'tab3'){
+            _agregarFila(idCliente, 3, v3, nivel)
+            v3 = v3+1;
+        }
+
+        /* VENDEDOR 4 */
+        if (numTab == 'tab4'){
+            _agregarFila(idCliente, 4, v4, nivel)
+            v4 = v4+1;
+        }
+
+    }
+
+    // Parameros (idCliente, número de la pestaña, número de la fila, nivel del vendedor, arrayDeducciones)
+    function actualizarDeduccion(idCliente, numTab, rowTab, nivelVendedor, deducciones) {
+        // console.log("\nDATOS RECIBIDOS POR ACTUALIZAR DEDUCCIONES >>>> ", deducciones)
+        const tab = 'tab'+numTab
+        const filtroDeducciones = deducciones.filter((i) => i.tab == tab) //Filtrar por pestañas o vendedor
+        const subTotal = filtroDeducciones.map(i => i.monto).reduce((prev, curr) => prev + curr, 0);
+        const comisionTotal = $('#deduccionTotal'+numTab)
+        $('#subtotal'+numTab).text('')
+        $('#subtotal'+numTab).text(subTotal)
+
+        let total = $("#comisionBase"+numTab).text()
+        total = parseFloat(total-subTotal).toFixed(1)
+        comisionTotal.val(total)
+
+        if (nivelVendedor == '4' || nivelVendedor == 4) {
+            const valor = $("#comisionBase"+numTab).text()
+            total = parseFloat((valor-subTotal)/2).toFixed(1)
+            comisionTotal.val(total)
+        }
+
+        $('#total'+numTab).text(total)
+        const idFactura = $("#idFacturaActual").val();
+        storage.vendedores.forEach(data => {
+            if (data.nivel == nivelVendedor) {
+                data.comision_final = parseFloat(total);
+                data.deducciones = filtroDeducciones
+            }
+        });
+
+        console.log("NEW STORAGE >>> ", storage)
+
+        // OPERACIONES PARA COSTOS ADICIONALES - ÚLTIMO TAB
+        const gananciaTotal0 = storage.vendedores.map(x => x.comision_final).reduce((prev, curr) => prev + curr, 0);
+        const gananciaBase = parseFloat(storage.monto_aprobado)-parseFloat(gananciaTotal0).toFixed(1);
+        const actualizarGanancia = parseFloat(gananciaBase)-parseFloat(subtotalCostos.text())
+
+        $("#gananciaBase").text(gananciaBase)
+        totalGanancias.text(parseFloat(actualizarGanancia))
+        gananciaTotal.val(parseFloat(actualizarGanancia))
+        
+        storage.gananciaBase = parseFloat(gananciaBase);
+        storage.gananciaTotal = parseFloat(gananciaTotal.val());
+
+        console.log("Comisión Total VENDEDORES >>> ", gananciaTotal0)
+        console.log("Ganancia Base ACTUALIZADA >>> ", gananciaBase)
+        console.log("\nTOTAL GANANCIA >>> ", gananciaTotal.val())
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+    // Parameros (idCliente, número de la pestaña, Contador para la fila, nivel del vendedor)
+    function sumarDeduccion(idCliente, numTab, row, nivelVendedor) {
+        $('#descripcion'+row+'_tab'+numTab).attr('disabled', 'disabled');
+        $('#monto'+row+'_tab'+numTab).attr('disabled', 'disabled');
+        $('#btn'+row+'_tab'+numTab).css('display', 'none');
+        let monto = $('#monto'+row+'_tab'+numTab).val()
+        monto = parseFloat(monto)
+        const descripcion = $('#descripcion'+row+'_tab'+numTab).val()
+        let sumatoriaDeduccion = 0;
+        const tab = 'tab'+numTab
+        const rowTab = 'row'+row+'_tab'+numTab
+        arrayDeducciones.push({idCliente,  tab, row, rowTab, descripcion, monto, nivelVendedor})
+
+        // Aplicar cambios (subtotal y total)
+        actualizarDeduccion(idCliente, numTab, rowTab, nivelVendedor, arrayDeducciones)
+    }
+
+    function eliminarFila(idCliente, numTab, row, nivelVendedor) {
+        $('#row'+row+'_tab'+numTab).remove()
+        const arrayResultado = arrayDeducciones.filter((i) => i.rowTab !== 'row'+row+'_tab'+numTab)
+        // const filtroTab = arrayDeducciones.filter((i) => i.tab == 'tab'+numTab)
+        // console.log("\nEDIT >>>", filtroTab)
+        // const arrayResultado = filtroTab.filter((i) => i.row !== row)
+        arrayDeducciones = arrayResultado
+        const rowTab = 'row'+row+'_tab'+numTab
+        console.log("Datos sin la fila Eliminada >>>", arrayDeducciones)
+        actualizarDeduccion(idCliente, numTab, rowTab, nivelVendedor, arrayDeducciones)
+    }
+
+    /* ------------------------------------------------------ COSTOS ------------------------------------------------------ */
+    function agregarCosto() {
+        const idCliente = $("#idCliente_").val()
+        $('#tablaCostosExtras').append(`<tr id="row${cont}_Costos">
+            <td><input type="text" id="descripcion${cont}_Costos"></td>
+            <td><input type="number" id="monto${cont}_Costos"></td>
+            <td style="display: flex;justify-content: center;">
+                <a class="btn btn-primary btn-rounded btn-sm" id="btn${cont}_Costos" onclick="sumarCostos('${idCliente}', '${cont}')" title="Guardar">
+                    <i class="fas fa-save"></i>
+                </a>
+                <a class="btn btn-danger btn-rounded btn-sm" onclick="eliminarCosto('${idCliente}', '${cont}')" title="Eliminar">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>`);
+        cont++;
+    }
+
+    function eliminarCosto(idCliente, n) {
+        $('#row'+n+'_Costos').remove()
+        const arrayResultado = arrayCostos.filter((i) => i.row !== 'row'+n+'_Costos')
+        arrayCostos = arrayResultado
+        console.log("\nARRAY COSTOS SIN LA FILA ELIMINADA >>>>", arrayCostos)
+        actualizarGanancias(idCliente, arrayCostos)
+    }
+
+    function sumarCostos(idCliente, n) {
+        $('#descripcion'+n+'_Costos').attr('disabled', 'disabled');
+        $('#monto'+n+'_Costos').attr('disabled', 'disabled');
+        $('#btn'+n+'_Costos').css('display', 'none');
+        let monto = $('#monto'+n+'_Costos').val()
+        monto = parseFloat(monto)
+        const descripcion = $('#descripcion'+n+'_Costos').val()
+        let sumatoriaCostos = 0;
+        arrayCostos.push({idCliente, row: 'row'+n+'_Costos', descripcion, monto})
+        // Aplicar cambios (subtotal y total Ganancias)
+        actualizarGanancias(idCliente, arrayCostos)
+    }
+
+    // Parametros => ID Cliente, # de la Fila, Nombre de la Fila, ArrayCostos
+    function actualizarGanancias(idCliente, costos) {
+        const subTotal = costos.map(i => i.monto).reduce((prev, curr) => prev + curr, 0);
+        const gananciaBase = $('#gananciaBase').text()
+        subtotalCostos.text('')
+        subtotalCostos.text(subTotal)
+
+        const total = parseFloat(gananciaBase-subTotal).toFixed(1)
+        gananciaTotal.val(total)
+
+        $('#totalGanancias').text(total)
+        storage.gananciaBase = parseFloat(gananciaBase);
+        storage.gananciaTotal = parseFloat(total);
+        storage.costosOperativos = costos;
+
+        console.log("NEW STORAGE >>> ", storage)
+    }
+
+    /* REPORTAR FACTURA COMO PAGADA - Parametros (id de la factura Ej: 000001) */
+    function reportarFactura(factura) {
+        // console.log("DATA >>>> ---", JSON.parse(storage)) 
+        Swal.fire({
+            title: '¿Seguro que desea reportar esta factura?',
+            text: 'Al repotar la factura, confirmas que ya ha sido pagada a los vendedores.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: `Cancelar`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("\n\nDatos a comparar para enviar >>>",storage)
+                if (storage.factura.id == factura) {
+
+                    const dataVendedores = storage.vendedores;
+                    const idCliente = storage.idCliente
+                    const id_cliente = storage.id_cliente
+                    const producto_instalado = storage.sistema
+                    const costos_adicionales = storage.costosOperativos;
+                    const ganancias_empresa = {base: storage.gananciaBase, total: storage.gananciaTotal}
+
+                    fetch('/efectuarVenta', {
+                        method: 'POST',
+                        body: JSON.stringify({factura, dataVendedores, idCliente, producto_instalado, costos_adicionales, ganancias_empresa}),
+                        headers: {'Content-Type': 'application/json'}
+                    }).then(res => res.json())
+                        .catch(error => console.error('Error:', error))
+                        .then(datos => {
+                            if (datos) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Reporte exitoso!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then((respu) => {
+                                    setTimeout('document.location.reload()', 800);
+                                })
+                            }
+                    })
+
+                } else {
+                    Swal.fire('Incosistencia con los datos!', 'Por favor conctactar con soporte', 'error')
+                }
+                
+            } 
+            
+        })
+        
+    }
+
+</script>
+
+</body>
+
+</html>

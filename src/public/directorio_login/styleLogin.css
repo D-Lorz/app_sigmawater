@@ -199,10 +199,9 @@ nav.horizontal ul li {
 }
 
 /* horizontal menu */
-img {
+/* img {
   max-width: 100%;
-
-}
+} */
 
 /*-- end reset --*/
 
@@ -455,7 +454,6 @@ li > a:only-child:after {
 
   #copycopy {
     margin-top: 25%;
-   
   }
 
   body h2 {
@@ -476,11 +474,11 @@ li > a:only-child:after {
     width: 99%;
   }
 
-  img {
-    max-width: 100%;
+  /* img {
+    width: 100%;
     margin-top: 7%;
   
-  }
+  } */
 
   .form-w3ls-left-info p a {
     font-size: 12px;
@@ -716,6 +714,7 @@ px
 
 .bienvenida {
   color: #ffffff;
+  font-size: 13px;
 }
 
 .main-icon {
@@ -1004,18 +1003,16 @@ ul.w3layouts-icons li a.vk:hover {
     padding: 1em 0;
   }
 
-
-
   .form-w3ls-left-info input[type="email"],
   .form-w3ls-left-info input[type="password"] {
     width: 99%;
   }
-
+/* 
   img {
     max-width: 100%;
     margin-top: 7%;
   
-  }
+  } */
 
   .form-w3ls-left-info p a {
     font-size: 12px;
@@ -1056,9 +1053,7 @@ ul.w3layouts-icons li a.vk:hover {
 .redesSociales{
   padding-top: 23%;
   padding-right: 42%;
-  
  }
-
 }
 
 @media (max-width: 480px) {
@@ -1070,31 +1065,18 @@ ul.w3layouts-icons li a.vk:hover {
     width: 62%;
   }
 
-
-.bienvenida {
-  color: #ffffff;
-  text-align: center;
-}
 .form-w3ls-left-info input[type="email"], .form-w3ls-left-info input[type="password"] {
   width: 100.1%;
 }
 
-
 }
-
-
 @media (max-width: 441px) {
-
-
   .nav_w3pvt {
     float: left;
     width: 60%;
     margin: 1em 0 0 0;
   }
-
-  
 }
-
 @media (max-width: 384px) {
   body h2 {
     font-size: 1.75em;
@@ -1109,8 +1091,6 @@ ul.w3layouts-icons li a.vk:hover {
   .content-inner-info {
     padding-top: 7em;
   }
-
-
 }
 
 @media (max-width: 350px) {
@@ -1137,7 +1117,7 @@ label {
   /* font-family: 'Oblivian'; */
   /* font-style: normal; */
   /* font-weight: 400; */
-  font-size: 14px;
+  font-size: 13px;
   /* line-height: 14px; */
   color: white;
 }
@@ -1167,4 +1147,90 @@ label {
 }
 
 
-    
+#clickAqui{
+  color: #fed061;font-size: 13px;
+}
+.labelEmail{
+  margin-left: 8px; font-size: 10px; padding: 5px 9px;
+}
+.labelPass{
+  margin-left: 8px; font-size: 10px; padding: 5px 9px;
+}
+#olvidastePass{
+  float:left;
+}
+@media (min-width: 1920px) {
+  .form-w3ls-left-info input[type="email"] {
+      width: 132%;
+      height: 68px;
+      left: 76px;
+      font-size: 13px;
+      top: 357px;
+      border: none;
+      opacity: 0.29;
+      border-radius: 5px;
+  }
+
+  .form-w3ls-left-info input[type="password"] {
+      width: 132%;
+      height: 68px;
+      left: 76px;
+      top: 357px;
+      border: none;
+      font-size: 13px;
+      opacity: 0.29;
+      border-radius: 5px;
+      margin-bottom: -10px;
+  }
+  .bienvenida, .link_registrarse{
+     font-size: 19px;
+  }
+  #clickAqui{
+     font-size: 19px;
+  }
+  .h2Id{
+      font-size: 48px;
+  }
+  .labelEmail, .labelPass{
+      font-size: 15px;
+  }
+  ::placeholder {
+  color: #5b1b74;
+  background:white;
+  padding: 12px 1px 8px 8px;
+  margin: 15px;
+  font-size: 15px;
+  }
+  #olvidastePass, #c_right{
+      font-size: 17px;
+  }
+  .form-w3ls-left-info button.btn {
+  background: #ffffff;
+  margin-top: 27px;
+  color: #76368f;
+  font-size: 19px;
+  padding: 1.1em 4.5em;
+  transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  border-radius: 11px;
+  float: left;
+  }
+  img{
+      width: 13em;
+  }
+  .cd-nav-trigger {
+      top: auto;
+  right: 15px;
+  height: 44px;
+  width: 44px;
+  z-index: 5;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+  .content-inner-info {
+      padding-top: 11em;
+      width: 100.2%;
+  }
+}

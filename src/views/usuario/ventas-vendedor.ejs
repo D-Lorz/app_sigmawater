@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Ventas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include ('../partials/header.ejs')%>
+    <style>
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        .iconoDatos{
+            font-size: 19px;
+            background: #0e2222;
+            vertical-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div id="layout-wrapper">
+        <%- include ('../partials/menu.ejs')%>
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center
+                                        justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Ventas </h4>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript:
+                                                        void(0);">Ventas</a></li>
+                                            <li class="breadcrumb-item active">Facturas</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <!-- TARJETAS PARA MOSTRAR NÚMERO DE VENTAS + GANANCIAS x VENDEDOR -->
+                                <div class="row" >
+                                    <!-- TARJETA DE NÚMERO DE VENTAS (PROPIAS & AFILIADOS) -->
+                                    <div class="col-lg-3" style="width: auto;">
+                                        <div class="card" style="color: #0e2222; border:none;">
+                                            <div class="card-body" style="padding: 31px;height: auto;border-radius: 13px;background: rgb(255,237,195);
+                                            background: linear-gradient(50deg, rgba(255,237,195,1) 0%, rgba(255,232,177,1) 18%, rgba(214,148,148,1) 46%, rgba(212,146,213,1) 60%, rgba(235,181,236,1) 60%, rgba(233,161,233,1) 100%);" >
+                                                <div class="row">
+                                                    <div class="col-md-2" style="width: auto;"> 
+                                                        <label class="row icon-demo-content"><i class="fas fa-chart-pie iconoDatos" style="color:white;border: none;"></i></label> 
+                                                    </div>
+                                                    <div class="col-md-8 text-black" >
+                                                        <div class="row" style="font-size: 17px;font-weight: 900;margin-top: 9px;margin-bottom: 14%;">Número de ventas</div>
+                                                </div>
+                                                </div>
+                                            
+                                                <div class="row">
+                                                    <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                                                        <div class="row">Ventas propias</div>
+                                                        <div class="row" style="font-size: 29px; font-weight: 800;margin-bottom: 3px;">
+                                                            <strong>
+                                                                <%=ventasVendedor.ventas_individuales%>
+                                                            </strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                                                        <div class="row">Ventas afiliados</div>
+                                                        <div class="row" style="font-size: 29px; font-weight: 800;">
+                                                            <strong><%=ventasVendedor.ventas_afiliados%></strong>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="row" style="font-size: 13px;font-weight: 500;margin-bottom: -22px;">
+                                                        Ventas totales: <%=ventasVendedor.total_ventas%>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- TARJETA DE GANANCIAS (PROPIAS & AFILIADOS) -->
+                                    <div class="col-lg-3" style="width: auto;">
+                                        <div class="card" style="color: #0e2222; border:none">
+                                            <div class="card-body"
+                                                style="padding: 31px;height: auto;border-radius: 13px;background: rgb(188,169,231); background: linear-gradient(50deg, rgba(188,169,231,1) 0%, rgba(188,169,231,1) 18%, rgba(175,155,218,1) 46%, rgba(188,169,231,1) 60%, rgba(235,231,244,1) 60%, rgba(188,169,231,1) 100%);">
+                                                <div class="row">
+                                                    <div class="col-md-2" style="width: auto;">
+                                                        <label class="row icon-demo-content"><i class="fas fa-chart-line iconoDatos" style="color:white;border: none;"></i></label>
+                                                    </div>
+                                                    <div class="col-md-8 text-black">
+                                                        <div class="row" style="font-size: 17px;font-weight: 900;margin-top: 9px;margin-bottom: 7.7%;">Ganancias</div>
+                                                    </div>
+                                                </div>
+                                    
+                                                <div class="row">
+                                                    <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                                                        <div class="row">Ganancias propias</div>
+                                                        <div class="row" style="font-size: 29px; font-weight: 800;margin-bottom: 3px;">
+                                                            <strong>$<%=sumaComisionPropia %></strong>
+                                                        </div>
+                                                    </div>
+                                    
+                                                    <div class="col-md-6" style="font-size: 12px;font-weight: 100;">
+                                                        <div class="row">Ganacias de afiliados directos</div>
+                                                        <div class="row" style="font-size: 29px; font-weight: 800;">
+                                                            <strong>$<%=sumaComisionAfiliados %></strong>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="row" style="font-size: 13px;font-weight: 500;margin-bottom: -22px;">
+                                                        <div class="col-sm-1">
+                                                            <button type="button" style="background-color: transparent; border: none;" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Este valor incluye las ganancias de los afiliados de tus afiliados directos" aria-describedby="popover26460">
+                                                                <i class="fas fa-info-circle"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-sm-11" style="margin-left: -15px;">
+                                                            Ganancias totales: $<%=totalComisiones %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FINAL TARJETAS -->
+                            </div>
+                        </div>
+                        <br>
+                        <!-- end page title -->
+
+                        <!-- Nav tabs -->
+                        <ul class="nav justify-content-start nav-pills card-header-pills mb-3" role="tablist" style="margin-left: 2px;">
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#facturas-propias" role="tab">
+                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                    <span class="d-none d-sm-block">Propias</span>
+                                </a>
+                            </li>
+                            <li class="nav-item waves-effect waves-light">
+                                <a class="nav-link" data-bs-toggle="tab" href="#facturas-afiliados" role="tab">
+                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                    <span class="d-none d-sm-block">Afiliados directos</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes (TABLAS GENERALES EXTERNAS) -->
+                        <div class="tab-content p-3 text-muted">
+
+                            <!-- FACTURAS PROPIAS (VENDEDOR LOGUEADO) -->
+                            <div class="tab-pane active" id="facturas-propias" role="tabpanel" style="margin-left: -10px;">
+                                <div class="table-responsive mb-4 ">
+                                    <table class="table align-middle datatable dt-responsive table-check nowrap "
+                                        style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                                        <thead>
+                                            <th scope="col" title="Id de factura">Factura</th>
+                                            <th scope="col" title="Fecha de factura">Fecha de instalación</th>
+                                            <th scope="col">Nombre del cliente</th>
+                                            <th scope="col">Producto</th>
+                                            <th scope="col">Valor</th>
+                                            <th scope="col">Comisión</th>
+                                            <th scope="col">Estado</th>
+                                        </thead>
+                                        <tbody>
+                                            <% facturacionPropia.forEach((f)=>{ %>
+                                                <tr><td>
+                                                        <button style="background: none;border: none;margin: 0;"
+                                                            onclick="consultarFactura('<%=f.id_factura%>', '<%=f.monto_aprobado%>')">
+                                                            <%= f.id_factura %>
+                                                        </button>
+                                                    </td>
+                                                    <td><%= f.fecha_instalacion %></td>
+                                                    <td style="text-transform: capitalize;"><%= f.nombre %> <%= f.apellido %></td>
+                                                    <td><%= f.producto_instalado %></td>
+                                                    <td>$<%= f.monto_aprobado %></td>
+                                                    <td>
+                                                        <% if (f.comision == 'Por definir') {%>
+                                                            <%= f.comision %>
+                                                        <%}else{%>
+                                                            $<%= f.comision %>
+                                                        <%}%>
+                                                    </td>
+                                                    <td>
+                                                        <div class="badge <%= f.factura.color %> font-size-12">
+                                                            <%= f.factura.text %>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                            <!-- FACTURAS PARA AFILIADOS -->
+                            <div class="tab-pane" id="facturas-afiliados" role="tabpanel" style="margin-left: -10px;">
+                                <div class="table-responsive mb-4 ">
+                                    <table class="table align-middle datatable dt-responsive table-check nowrap "
+                                        style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                                        <thead>
+                                            <th scope="col" title="Id de factura">Factura</th>
+                                            <th scope="col" title="Fecha de factura">Fecha de instalación</th>
+                                            <th scope="col">Nombre del cliente</th>
+                                            <th scope="col">Producto</th>
+                                            <th scope="col">Valor</th>
+                                            <th scope="col">Comisión</th>
+                                            <th scope="col">Estado</th>
+                                        </thead>
+                                        <tbody>
+                                            <% facturacionAfiliado.forEach((f)=>{ %>
+                                                <tr><td>
+                                                        <button style="background: none;border: none;margin: 0;"
+                                                            onclick="consultarFactura('<%=f.id_factura%>', '<%=f.monto_aprobado%>')">
+                                                            <%= f.id_factura %>
+                                                        </button>
+                                                    </td>
+                                                    <td><%= f.fecha_instalacion %></td>
+                                                    <td style="text-transform: capitalize;"><%= f.nombre %> <%= f.apellido %></td>
+                                                    <td><%= f.producto_instalado %></td>
+                                                    <td>$<%= f.monto_aprobado %></td>
+                                                    <td><% if (f.comision == 'Por definir') {%>
+                                                            <%= f.comision %>
+                                                        <%}else{%>
+                                                            $<%= f.comision %>
+                                                          <%}%>
+                                                    </td>
+                                                    <td>
+                                                        <div class="badge <%= f.facturaAfl.color %> font-size-12"> <%= f.facturaAfl.text %> </div>
+                                                        <br>
+                                                        <div class="badge <%= f.estadoAfl.color %> font-size-12 mt-2"> <%= f.estadoAfl.text %></div>
+                                                    </td>
+                                                </tr>
+                                            <% }) %>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- BARRA LATERAL DERECHA -->
+                        <button id="btnSidebar" data-bs-toggle="offcanvas" data-bs-target="#sidebarRight"
+                            aria-controls="sidebarRight" style="background: none;border: none;margin: 0;"></button>
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarRight"
+                            style="width: 50%; padding: 0px 0px 0px 37px; visibility: hidden;"
+                            aria-labelledby="sidebarRightLabel" aria-hidden="true">
+                            <div class="offcanvas-header" style="margin-bottom: -26px;margin-top: -39px;">
+                                <h1 id="offcanvasRightLabel" style=" font-size: 111%; "></h1>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body scroll_vertical">
+                                <div class="row">
+                                    <div class="col-lg-12" style="margin-left: -1%;">
+                                        <div class="invoice-title">
+                                            <div class="d-flex align-items-start">
+                                                <div class="flex-grow-1">
+                                                    <div class="mb-4">
+                                                        <img src="../directorio_dash/images/logo.svg" alt=""
+                                                            height="40"><span class="logo-txt"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-shrink-0">
+                                                    <div class="mb-4">
+                                                        <h4 class="float-end font-size-16">Factura: <span id="idFactura"></span>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <hr class="mb-4">
+
+                                        <!-- **INICIO** Pestañas para gestionar vendedores -->
+                                        <ul class="nav justify-content-start nav-pills card-header-pills mb-3"
+                                            role="tablist">
+                                            <li class="nav-item waves-effect waves-light">
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#v1" role="tab"
+                                                    aria-selected="true">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor
+                                                        Principal</span>
+                                                </a>
+                                            </li>
+
+                                            <li id="tabFactura2" class="nav-item waves-effect waves-light"
+                                                style="display: none;">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#v2" role="tab"
+                                                    aria-selected="false">
+                                                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor 2</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item waves-effect waves-light" id="tabFactura3"
+                                                style="display: none;">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#v3" role="tab"
+                                                    aria-selected="false">
+                                                    <span class="d-block d-sm-none"><i
+                                                            class="far fa-envelope"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor 3</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item waves-effect waves-light" id="tabFactura4"
+                                                style="display: none;">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#v4" role="tab"
+                                                    aria-selected="false">
+                                                    <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                                                    <span class="d-none d-sm-block">Vendedor 4</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!-- **FIN** Pestañas para gestionar vendedores -->
+
+                                        <!-- **INICIO** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
+                                        <div class="tab-content p-3 text-muted">
+
+                                            <!-- Vendedor 1 -->
+                                            <div class="tab-pane active" id="v1" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 nomCliente">
+                                                        </p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de pago comisión
+                                                            </h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12"
+                                                                id="nomVendedor1"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor1"></span></p>
+                                                            <p class="mb-1" id="telVendedor"></p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">
+                                                        Comisión base:
+                                                        $<span id="comisionBase1"></span></h5>
+                                                </div>
+
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15" id="tituloDeduccion_v1">
+                                                        Deducciones</h5>
+                                                </div>
+
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR PRINCIPAL -->
+                                                <div class="table-responsive" style="padding: 12px;"
+                                                    id="divDeducciones">
+                                                    <!-- Cargando la tabla desde un Script -->
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Vendedor 2 -->
+                                            <div class="tab-pane" id="v2" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 nomCliente">
+                                                        </p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de pago comisión
+                                                            </h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12"
+                                                                id="nomVendedor2"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor2"></span></p>
+                                                            <p class="mb-1" id="telVendedor2"></p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">
+                                                        Comisión base:
+                                                        $<span id="comisionBase2"></span> </h5>
+                                                </div>
+
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15" id="tituloDeduccion_v2">
+                                                        Deducciones</h5>
+                                                </div>
+
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR 2 -->
+                                                <div class="table-responsive" style="padding: 12px;"
+                                                    id="divDeducciones2">
+                                                    <!-- Cargando la tabla desde un Script -->
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Vendedor 3 -->
+                                            <div class="tab-pane" id="v3" role="tabpanel">
+                                                <div class="row">
+
+                                                    <div class="col-sm-6">
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 nomCliente">
+                                                        </p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de pago comisión
+                                                            </h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12"
+                                                                id="nomVendedor3"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor3"></span></p>
+                                                            <p class="mb-1" id="telVendedor3"></p>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">
+                                                        Comisión base:
+                                                        $<span id="comisionBase3"></span> </h5>
+                                                </div>
+
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15" id="tituloDeduccion_v3">
+                                                        Deducciones</h5>
+                                                </div>
+
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR 3 -->
+                                                <div class="table-responsive" style="padding: 12px;"
+                                                    id="divDeducciones3">
+                                                    <!-- Cargando la tabla desde un Script -->
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Vendedor 4 -->
+                                            <div class="tab-pane" id="v4" role="tabpanel">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+
+                                                        <h5 class="font-size-15 mb-2">Producto</h5>
+                                                        <p class="mb-1 producto"></p>
+                                                        <p class="mb-1 badge badge-soft-success font-size-12">
+                                                            $<span class="valor"></span></p>
+                                                        <h5 class="font-size-14 mb-2">Cliente </h5>
+                                                        <p class="mb-1 badge badge-soft-dark font-size-12 nomCliente">
+                                                        </p>
+                                                        <p class="mb-1 telCliente"></p>
+                                                        <p class="direccionCliente"></p>
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div>
+                                                            <h5 class="font-size-15">Fecha de pago comisión
+                                                            </h5>
+                                                            <p class="fecha"></p>
+                                                        </div>
+
+                                                        <div class="mt-4">
+                                                            <h5 class="font-size-15">Vendedor</h5>
+                                                            <p class="mb-1 badge badge-soft-dark font-size-12"
+                                                                id="nomVendedor4"></p>
+                                                            <p class="mb-1">Nivel: <span id="nivelVendedor4"></span></p>
+                                                            <p class="mb-1" id="telVendedor4"></p>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="badge badge-soft-success font-size-12">
+                                                        Comisión base:
+                                                        $<span id="comisionBase4"></span> </h5>
+                                                </div>
+
+                                                <div class="py-2 mt-3">
+                                                    <h5 class="font-size-15" id="tituloDeduccion_v4">
+                                                        Deducciones</h5>
+                                                </div>
+
+                                                <!-- TABLA PARA DEDUCCIONES VENDEDOR 4 -->
+                                                <div class="table-responsive" style="padding: 12px;"
+                                                    id="divDeducciones4">
+                                                    <!-- Cargando la tabla desde un Script -->
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- **FIN** CONTENIDO DE LOS TABS - INFO DE VENDEDORES  -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%- include ('../partials/copyright.ejs')%>
+    </div>
+    <% if(footerVendedor) { %>
+        <%- include ('../partials/footer.ejs')%>
+        <%- include ('../partials/ventas-vendedor/footer.ejs')%>
+     <% } %>    
+</body>
+
+</html>
