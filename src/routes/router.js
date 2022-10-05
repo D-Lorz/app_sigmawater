@@ -34,16 +34,12 @@ router.get("/logout", logout);
 //                           ↓↓
 router.get("/", isAuthenticated, dashboardVendedor, (req, res) => {
    if (!(req.user.rol === "vendedor")) { res.redirect("./administrador"); }
-   res.render("dashboard", { user: req.user });
+   res.render("usuario/dashboard", { user: req.user });
  });
  
  router.get("/administrador", isAuthenticated,dashboardAdministrador, (req, res) => {
    if (!(req.user.rol === "administrador")) { res.redirect("./"); }
    res.render("administrador", { user: req.user });
  });
-
- router.get("/hola", (req, res) => {
-  res.render("hola", { user: req.user });
-});
 
 module.exports = router;

@@ -1,0 +1,130 @@
+<!-- VALIDACIONES BREVES -->
+<% if (!estado.verBtn){%>
+    <script>
+        const boton = document.getElementById("btn_credito")
+        boton.setAttribute("disabled", "")
+        boton.style.filter = "grayscale(1)";
+    </script>
+            <%}%>
+    
+ <!-- JAVASCRIPT -->
+ <script src="../directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
+ <script src="../directorio_perfilClientes/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <script src="../directorio_perfilClientes/libs/metismenu/metisMenu.min.js"></script>
+ <script src="../directorio_perfilClientes/libs/simplebar/simplebar.min.js"></script>
+ <script src="../directorio_perfilClientes/libs/node-waves/waves.min.js"></script>
+ <script src="../directorio_perfilClientes/libs/feather-icons/feather.min.js"></script>
+<!-- pace js -->
+<script src="../directorio_perfilClientes/libs/pace-js/pace.min.js"></script>
+ <!-- * ====== Scripts de las graficas ======= -->
+ <!-- apexcharts js -->
+ <script src="../directorio_perfilClientes/libs/apexcharts/apexcharts.min.js"></script>
+ <!-- apexcharts init -->
+<script src="../directorio_perfilClientes/js/pages/apexcharts.init.js"></script>
+<!-- dashboard init -->
+<script src="../directorio_perfilClientes/js/pages/dashboard.init.js"></script>
+<!-- * ====== Scripts de las graficas ======= -->
+ <!-- Required datatable js -->
+ <script src="../directorio_dash/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="../directorio_dash/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+ <!-- Responsive Table js -->
+ <script src="../directorio_dash/libs/admin-resources/rwd-table/rwd-table.min.js"></script>
+ <!-- Responsive examples -->
+ <script src="../directorio_dash/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../directorio_dash/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+ <!-- Buttons examples -->
+ <script src="../directorio_dash/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+ <script src="../directorio_dash/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+ <script src="../directorio_dash/libs/jszip/jszip.min.js"></script>
+ <script src="../directorio_dash/libs/pdfmake/build/pdfmake.min.js"></script>
+ <script src="../directorio_dash/libs/pdfmake/build/vfs_fonts.js"></script>
+ <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+ <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+ <script src="../directorio_dash/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+ <!-- Init js -->
+ <script src="../directorio_dash/js/pages/table-responsive.init.js"></script>
+ <script src="../directorio_perfilClientes/js/app.js"></script>
+<!-- Table Editable plugin -->
+ <script src="../directorio_dash/libs/table-edits/build/table-edits.min.js"></script>
+ <script src="../directorio_dash/js/pages/table-editable.int.js"></script> 
+ <!-- Datatable init js -->
+ <script src="../directorio_dash/js/pages/datatables.init.js"></script>    
+ <!-- Sweet Alerts js -->
+ <script src="../directorio_dash/libs/sweetalert2/sweetalert2.min.js"></script>
+ <!-- Sweet alert init js-->
+ <script src="../directorio_dash/js/pages/sweetalert.init.js"></script>
+<!-- FIXME: ================================================================== -->
+<!-- form mask -->
+<script src="../libs/imask/imask.min.js"></script>
+<!-- form mask init -->
+<script src="../directorio_dash/js/pages/form-mask.init.js"></script>
+<!--FIXME: ================================================================== -->
+
+<script>
+
+/* FUNCIÓN PARA LA TARJETA/SECCIÓN CREDITO APROBADO */
+
+function ShowSelected()  {
+    const cod = $("#reco option:selected").val()
+    const cursorBtn = $("#cursorBtn")
+    const btnCredito = $("#btnCreditoAprobado")
+    let inputsMonto = document.getElementById('inputsMonto')
+    let inputWS = document.createElement("input");
+    let inputROS = document.createElement("input");
+
+    // <input type="text" class="form-control required" required id="montoAprobadoWS" style="margin-left: 2%; display: none" placeholder="Máximo: $8,500">
+
+    if (cod == "Whole System") {
+        btnCredito.prop('disabled', false);
+        cursorBtn.prop('style', 'cursor:auto')
+        $('#inputROS').remove()
+        inputWS.type= "text",
+        inputWS.className= "form-control required",
+        inputWS.style= "margin-left: 2%;",
+        inputWS.placeholder= "Máximo: $8,500",
+        inputWS.name= 'montoAprobadoPorFuera',
+        inputWS.id = 'inputWS'
+        inputsMonto.appendChild(inputWS);
+
+        mascaraMonto(inputWS, 8500)
+
+    } else if (cod == "Reverse Osmosis System"){
+        btnCredito.prop('disabled', false);
+        cursorBtn.prop('style', 'cursor:auto')
+        $('#inputWS').remove()
+        inputROS.type= "text",
+        inputROS.className= "form-control required",
+        inputROS.style= "margin-left: 2%;",
+        inputROS.placeholder= "Máximo: $4,250",
+        inputROS.name= 'montoAprobadoPorFuera'
+        inputROS.id = 'inputROS'
+        inputsMonto.appendChild(inputROS);
+
+        mascaraMonto(inputROS, 4250)
+
+    } else {
+        inputWS.value = ''
+        inputROS.value = ''
+        inputWS.remove()
+        inputROS.remove()
+        btnCredito.prop('disabled', true);
+        cursorBtn.prop('style', 'cursor:default')
+        console.log("NINGÚN PRODUCTO SELECCIONADO")
+    }
+}
+        // // Mascara para el input Monto Aprobado 
+        function mascaraMonto (input, maximo) {
+            IMask(input, {
+                mask: '$num',
+                blocks: {
+                    num: {
+                        mask: Number,
+                        thousandsSeparator: ',',
+                        min: 500,
+                        max: maximo
+                    }
+                }
+            });
+        }
+                                                                
+</script>

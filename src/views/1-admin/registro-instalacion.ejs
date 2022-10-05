@@ -6,60 +6,14 @@
 <meta charset="utf-8" />
 <title>Registro de instalación</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
-<meta content="Themesbrand" name="author">
-<!-- JQUERY 3.4 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<!-- App favicon -->
-<link rel="shortcut icon" href="../directorio_dash/images/favicon.png">
-
-<base href="#">
-
-<!-- preloader css -->
-<link rel="stylesheet" href="./directorio_dash/css/preloader.min.css" type="text/css" />
-<!-- Bootstrap Css -->
-<link rel="stylesheet" type="text/css" href="../directorio_dash/css/bootstrap.min.css" id="bootstrap-style" />
-<!-- Icons Css -->
-<link rel="stylesheet" type="text/css" href="../directorio_dash/css/icons.min.css" />
-<!-- App Css-->
-<link rel="stylesheet" type="text/css" href="../directorio_dash/css/app.min.css" id="app-style" />
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-
-
-<!-- ==========FIXME: CSS DEL FORMULARIO ================= -->
-
-<link rel="stylesheet" href="../css/mainarchivos.css" />
-<link rel="stylesheet" type="text/css" href="../directorio_nuevoCliente/css/bootstrap-extended.min.css">
-<link rel="stylesheet" type="text/css" href="../directorio_nuevoCliente/css/colors.min.css">
-
-<!--* CSS DE CALENDARIO -->
-<link rel="stylesheet" href="../directorio_nuevoCliente/css/jquery-ui.css">
-<link rel="stylesheet" href="../directorio_nuevoCliente/css/ jquery-ui.min.css">
-
-<link rel="stylesheet" href="../css/alertify.css">
-<!-- Tipo de letra -->
-<link rel="stylesheet" href="../css/typeFont.css">
-
-<!-- ==========FIXME: FIN CSS DEL FORMULARIO ================= -->
-
+<%- include ('../partials/header.ejs')%>
 </head>
-
 <body>
     <div id="layout-wrapper">
-
-        <!-- =======FIXME: MENU ========================== -->
         <%- include ('../1-admin/menu.ejs')%>
-        <!-- =======FIXME: MENU ========================== -->
-      
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
-      
-      
-                    <!--============================================================-->
-                    <!--============= TODO:===== *FORMULARIO* ======= TODO:=========-->
-                    <!--============================================================-->
                       <div class="row">
                           <div class="col-12">
                               <div class="page-title-box d-sm-flex align-items-center
@@ -77,7 +31,6 @@
                               </div>
                           </div>
                       </div>
-      
                       <!-- end page title -->
                     <!-- BEGIN: Content-->
                     <div class="app-content content" style="margin-top:-7px">
@@ -172,210 +125,24 @@
                             </div>
                           </div>
                         </div>
-                  
                       </div>
-                  
-                  
-                  
                       </fieldset>
                       </br>
                       <center><button type="submit" id="btnRegistro" class="btn btn-primary">Guardar</button></center>
-                  
                     </form>
-                  
                   </div>
-                          
-                        </section>
-                        
-                    </div>
-          
-                </div>
+                </section>
+              </div>
             </div>
-      
-            <!-- =======FIXME: copyright ========================== -->
-            <%- include ('../partials/copyright.ejs')%>
-            <!-- =======FIXME: copyright ========================== -->
-      
-      
+           </div>
+          <%- include ('../partials/copyright.ejs')%>
         </div>
       </div>
-
-<!-- Right Sidebar -->
-<div class="right-bar">
-    <div data-simplebar class="h-100">
-        <div class="rightbar-title d-flex align-items-center bg-dark p-3">
-  
-            <!-- <h5 class="m-0 me-2 text-white">Theme Customizer</h5> -->
-  
-            <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                <i class="mdi mdi-close noti-icon"></i>
-            </a>
-        </div>
-  
-        <!-- Settings -->
-  
-      
-    </div> <!-- end slimscroll-menu-->
-  </div>
-  
-  <!-- JAVASCRIPT -->
-  <script src="../directorio_dash/js/scripts_personalizadosdash.js"></script>
-  <script src="../libs/jquery/jquery.min.js"></script>
-  <script src="../libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../libs/metismenu/metisMenu.min.js"></script>
-  <script src="../libs/simplebar/simplebar.min.js"></script>
-  <script src="../libs/node-waves/waves.min.js"></script>
-  <script src="../libs/feather-icons/feather.min.js"></script>
-  <script src="../directorio_dash/js/app.js"></script>
-  
-  <!-- ==========FIXME: JS DEL FORMULARIO ================= -->
-  <!-- BEGIN: Vendor JS-->
-  <script src="../directorio_nuevoCliente/js/vendors.min.js"></script>
-  <!-- BEGIN Vendor JS-->
-  
-  <!-- BEGIN: Theme JS-->
-  <script src="../directorio_nuevoCliente/js/app-menu.min.js"></script>
-  <script src="../directorio_nuevoCliente/js/app.min.js"></script>
-  
-  <!-- BEGIN: Page JS-->
-  <script src="../directorio_nuevoCliente/js/breadcrumbs-with-stats.min.js"></script>
-  <script src="../directorio_nuevoCliente/js/estilosPropios.js"></script>
-  
-  <!-- MENSAJES DE LA VALIDACIÓN DE EVIDENCIA -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
-  <script src="../js/alertify.min.js"></script>
-  <script src="../js/alertify.js"></script>
-
-  <!--  SCRIPTS DEL CALENDARIO DE NUEVO CLIENTE -->
-  <script src="../directorio_nuevoCliente/js/jquery-ui.js"></script>
-  <script src="../directorio_nuevoCliente/js/jquery-ui.min.js"></script>
-  <!-- SCRIPTS PARA VALIDAR LA FECHA OBLIGATORIA -->
-  <script src="../js/scripts-comparar-campos.js"></script>
-  <script>
+      <%- include ('../partials/footer.ejs')%>
+      <%- include ('../1-admin/partials/registro-instalacion/footer.ejs')%>
 
 
 
-  $.datepicker.regional['es'] = {
-     monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-     monthNamesShort: ['Enero','Febrero','Marzo','Abril', 'Mayo','Junio','Julio','Agosto','Septiembre', 'Octubre','Noviembre','Diciembre'],
-     dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles',   'Jueves', 'Viernes', 'Sábado'],
-     dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-     dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-     weekHeader: 'Sm',
-     dateFormat: 'mm/dd/yy',
-     firstDay: 1,
-     isRTL: false,
-     showMonthAfterYear: false,
-     yearSuffix: ''
-     };
-     $.datepicker.setDefaults($.datepicker.regional['es']);
-  
-     const dateToday = new Date();
-     const yrRange = '1900' + ":" + (dateToday.getFullYear());
-     const hoy = new Date().getDate();
-   $(function () {
-   $("#fechaInstalacion").datepicker({
-     yearRange: yrRange,
-     maxDate:hoy,
-     changeMonth: true,
-     changeYear: true
-  
-   });
-  });
-
-
-  // ====================================================================-->
-  //=== ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT == -->
-  //====================================================================-->
-  $(function () {
-
-// This code will attach `fileselect` event to all file inputs on the page
-$(document).on('change', ':file', function () {
-  var input = $(this),
-    numFiles = input.get(0).files ? input.get(0).files.length : 1,
-    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-  input.trigger('fileselect', [numFiles, label]);
-});
-
-
-$(document).ready(function () {
-  //below code executes on file input change and append name in text control
-  $(':file').on('fileselect', function (event, numFiles, label) {
-
-    var input = $(this).parents('.input-group').find(':text'),
-      log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-    if (input.length) {
-      input.val(log);
-    } else {
-      if (log) alert(log);
-    }
-
-  });
-});
-
-});
-
-
-////VALIDAR LIMITANTE DEL CAMPO NUMBER///=-->
-
-function maxlengthNumber(obj) {
-console.log(obj.value);
-if (obj.value.length > obj.maxLength) {
-  obj.value = obj.value.slice(0, obj.maxLength);
-  }
-}
-// ===========================
-
- // ============ validar el campo licencia de conduccion ===== -->
-
-  // V1: validación el tamaño maximo 5 MB 
-  // V2: convertir minusculas a mayusculas
-  // V3: tipo de archivo aceptados
-
-  $(document).on('change', 'input[type="file"]', function () {
-    // this.files[0].size recupera el tamaño del archivo
-    // alert(this.files[0].size);
-
-    var fileName = this.files[0].name;
-    var fileSize = this.files[0].size;
-
-    if (fileSize > 5000000) { //  V1 --> validacion del tamaño de archivo
-      alertify.set('notifier', 'position', 'top-center');
-      alertify.error('El archivo supera los 5MB de peso');
-      this.value = '';
-      this.files[0].name = '';
-    } else {
-      // recuperamos la extensión del archivo
-      var ext = fileName.split('.').pop();
-
-      // V2: --> Convertimos en minúscula porque la extensión del archivo puede estar en mayúscula
-      ext = ext.toLowerCase();
-
-      // console.log(ext);
-      switch (ext) { // V3: --> aqui eligo el formato del restringido 
-        case 'png':
-        case 'jpg':
-        case 'jpeg':
-          break;
-        default:
-          alertify.set('notifier', 'position', 'top-center');
-          alertify.error('Solo archivos .jpg o .png son aceptados');
-
-          this.value = ''; // reset del valor
-          this.files[0].name = '';
-      }
-    }
-
-  });
-  
-  </script>
-  </body>
-  
-  </html>
-  
-  
-  
   
   
   

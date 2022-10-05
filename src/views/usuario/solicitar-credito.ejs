@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+  <title>Solicitar credito</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if(headerSolicitarC){ %> <%- include ('../partials/solicitar-credito/header.ejs')%><% } %> 
+</head>
+    <body>
+        <div id="layout-wrapper">
+    <%- include ('../partials/menu.ejs')%>
+        <div class="main-content">
+            <div class="page-content">
+              <div class="container-fluid">
+            <!--============= :===== *FORMULARIO* ======= :=========-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">Solicitar credito</h4>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0" style="text-transform: initial;">
+                                    <li class="breadcrumb-item"> <a href="javascript: void(0);">Perfil clientes</a></li>
+                                    <li class="breadcrumb-item active" id="reparartexto">Solicitar credito</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+            <!-- BEGIN: Content-->
+            <div class="app-content content" style="margin-top:-7px">
+            <!-- Form wizard with step validation section start -->
+                <section id="validation">
+                  <div class="card">
+                    <div class="card-content collapse show">
+                      <form action="/solicitarCredito" method="POST" class="steps-validation wizard-circle" id="validarForm" enctype="multipart/form-data">
+                    <!-- * ================== *SOLICITANTE* ================-->
+                    <!-- Step 1 -->
+                        <h6><b>SOLICITANTE</b></h6>
+                        <fieldset>
+                            <div class="row  justify-content: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombreCl_Scredito"> Primer nombre<span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" id="nombreCl_Scredito" value="<%= infoCl.nombre %>"
+                                            name="nombre">
+                                        <input type="hidden" hidden name="id_cliente" value="<%= infoCl.id %>">
+                                        <input type="hidden" hidden name="numCliente" value="<%= infoCl.id_cliente %>">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="SegundoNcl_Scredito">Segundo nombre</label>
+                                        <input type="text" class="form-control" id="SegundoNcl_Scredito" value="<%= infoCl.segundo_nombre%>" name="segundo_nombre">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="apellidosCl_Scredito"> Apellidos <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" id="apellidosCl_Scredito" value="<%= infoCl.apellido%>" name="apellido">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-align: center">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="monto_financiarf"> Monto a financiar<span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" id="monto-financiar" id="monto_financiarf" name="monto_financiar_cliente">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="exampleDataList" class="form-label">Sistema</label>
+                                    <span class="danger">*</span>
+                                    <input class="form-control required" autocomplete="none" list="estado_sistema" name="sistema" placeholder="Eliga el sistema deseado">
+                                    <datalist id="estado_sistema">
+                                        <option value="Whole System"></option>
+                                        <option value="Reverse Osmosis System"></option>
+                                    </datalist>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="licencia_solicitante"> Número de licencia<span class="danger">*</span></label>
+                                        <input type="number" class="form-control required" id="licencia_solicitante" name="numero_licencia_cliente">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <label for="exampleDataList" class="form-label">Estado de licencia</label>
+                                    <span class="danger">*</span>
+                                    <input class="form-control required" autocomplete="none" list="estado_licencia" id="exampleDataList"
+                                        name="estado_licencia_cliente" placeholder="Escribe para buscar...">
+                                    <datalist id="estado_licencia">
+                                        <option value="Alaska"></option>
+                                        <option value="Alabama"></option>
+                                        <option value="Arkansas"></option>
+                                        <option value="Arizona"></option>
+                                        <option value="California"></option>
+                                        <option value="Colorado"></option>
+                                        <option value="Connecticut"></option>
+                                        <option value="District of Columbia"></option>
+                                        <option value="Delaware"></option>
+                                        <option value="Florida"></option>
+                                        <option value="Georgia"></option>
+                                        <option value="Hawaii"></option>
+                                        <option value="Iowa"></option>
+                                        <option value="Idaho"></option>
+                                        <option value="Illinois"></option>
+                                        <option value="Indiana"></option>
+                                        <option value="Kansas"></option>
+                                        <option value="Kentucky"></option>
+                                        <option value="Louisiana"></option>
+                                        <option value="Massachusetts"></option>
+                                        <option value="Maryland"></option>
+                                        <option value="Maine"></option>
+                                        <option value="Michigan"></option>
+                                        <option value="Minnesota"></option>
+                                        <option value="Missouri"></option>
+                                        <option value="Mississippi"></option>
+                                        <option value="Montana"></option>
+                                        <option value="North Carolina"></option>
+                                        <option value="North Dakota"></option>
+                                        <option value="Nebraska"></option>
+                                        <option value="New Hampshire"></option>
+                                        <option value="New Jersey"></option>
+                                        <option value="New Mexico"></option>
+                                        <option value="Nevada"></option>
+                                        <option value="New York"></option>
+                                        <option value="Ohio"></option>
+                                        <option value="Oklahoma"></option>
+                                        <option value="Oregon"></option>
+                                        <option value="Pennsylvania"></option>
+                                        <option value="Puerto Rico"></option>
+                                        <option value="Rhode Island"></option>
+                                        <option value="South Carolina"></option>
+                                        <option value="South Dakota"></option>
+                                        <option value="Tennessee"></option>
+                                        <option value="Texas"></option>
+                                        <option value="Utah"></option>
+                                        <option value="Virginia"></option>
+                                        <option value="Vermont"></option>
+                                        <option value="Washington"></option>
+                                        <option value="Wisconsin"></option>
+                                        <option value="West Virginia"></option>
+                                        <option value="Wyoming"></option>
+                                    </datalist>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="f_expediccion">Fecha de expedición de licencia <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" placeholder="Precione aqui para elegir fecha"
+                                            id="f_expediccion" name="fecha_expedicion_licencia_cliente" readonly>
+                                    </div>
+                                </div>
+                            
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="fecha_vencimientof">Fecha de vencimiento de licencia<span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" placeholder="Precione aqui para elegir fecha"
+                                            id="fecha_vencimientof" name="fecha_vencimiento_licencia_cliente" readonly>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Correof">Correo electronico <span class="danger">*</span></label>
+                                        <input type="email" class="form-control required" id="Correof" value="<%= infoCl.correo %>" name="correo">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="seguroSocial"> Número de seguro Social / ITIN<span class="danger">*</span></label>
+                                        <input type="tel" class="form-control required " id="seguroSocial" name="seguro_social_licencia">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div>
+                                        <div class="form-check mb-3 required">
+                                            <input class="form-check-input" type="radio" name="tipo_de_seguro" id="idssn" value="SSN" checked>
+                                            <label class="form-check-label" for="idssn">SSN</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="tipo_de_seguro" id="iditin" value="ITIN">
+                                            <label class="form-check-label" for="iditin"> ITIN</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="fecha_nacimientof">Fecha de nacimiento <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" placeholder="Precione aqui para elegir fecha" id="fecha_nacimientof" name="fecha_nacimiento_cliente" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="phone-masktelmovil"> Teléfono móvil <span class="danger">*</span> </label>
+                                        <input type="text" class="form-control required" id="phonesolicitante" value="<%= infoCl.telefono %>" name="telefono">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="phone-masktwo">Teléfono secundario</label>
+                                        <input type="text" class="form-control " id="phonetwosolicitante" name="telefono_secundario_cliente">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset> 
+                    <!--=============  FIN :===== *SOLICITANTE* ================-->
+                    <!--============= ===== *CASA* =======================-->
+                        <!-- Step 2 -->
+                        <h6><b>CASA</b></h6>
+                        <fieldset style="text-align: center">                       
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="direccionf"> Dirección <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" id="direccionf" value="<%= infoCl.direccion %>" name="direccion">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ciudadf"> Ciudad <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" id="ciudadf" value="<%= infoCl.ciudad %>" name="ciudad">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="estadof"> Estado <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" id="estadof" value="<%= infoCl.estado_ubicacion %>" name="estado_ubicacion">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="postalcode"> Codigo postal <span class="danger">*</span> </label>
+                                        <input type="text" class="form-control required" id="postalcode" value="<%= infoCl.codigo_postal %>" name="codigo_postal">
+                                    </div>
+                                    <p style="margin-left: -101%;">Indica la condición de tu vivienda</p>
+                                    <div id="prod " style="margin-left: -94%;">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="condicion_vivienda" id="hipotecada" value="Hipotecada">
+                                            <label class="form-check-label" for="hipotecada">Hipotecada</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="condicion_vivienda" id="pagada" value="Pagada">
+                                            <label class="form-check-label" for="pagada">Pagada</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="condicion_vivienda" id="rentada" value="Rentada">
+                                            <label class="form-check-label" for="rentada">Rentada</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="condicion_vivienda" id="padres" value="vive con sus padres">
+                                            <label class="form-check-label" for="padres">Vive con sus padres</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <br>
+                             <br>
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">
+                                    <div class="form-group" id="c_hipotecaria" style="margin-top: 7%;">
+                                        <label for="cHipotecaria"> Compañia hipotecaria<span class="danger">*</span></label></label>
+                                        <input type="text" class="form-control required" id="cHipotecaria" name="compa_hipotecaria_cliente">
+                                    </div>
+                                </div>
+                            </div>
+                             <br>
+                             <br>
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="anio_residencia">Años de residencia<span class="danger">*</span></label>
+                                        <input type="number" oninput="maxlengthNumber(this);" minlength="1" maxlength="2" class="form-control required"
+                                             id="anio_residencia" name="anio_residencia_cliente">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="meses_residencia">Meses de residencia<span class="danger">*</span> </label>
+                                        <input type="number" oninput="maxlengthNumber(this);" minlength="1" maxlength="2" class="form-control required" 
+                                            id="meses_residencia" name="meses_residencia_cliente">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset> 
+                    <!--============= //:===== *CASA* =====================-->
+                    <!--============= /:===== *INGRESOS* =================-->
+                        <!-- Step 3 -->
+                        <h6><b>INGRESOS</b></h6>
+                        <fieldset>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="empleador_aplicante"> Empleador del aplicante <span class="danger">*</span> </label>
+                                        <input type="text" class="form-control required" id="empleador_aplicante" name="empleador_aplicante_cliente">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="anios_trabajando">Años trabajando <span class="danger">*</span> </label>
+                                        <input type="number" oninput="maxlengthNumber(this);" minlength="1" maxlength="2" class="form-control required"
+                                             id="anios_trabajando" name="anios_trabajando_ingresos">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="meses_trabajando"> Meses trabajando <span class="danger">*</span></label>
+                                        <input type="number" oninput="maxlengthNumber(this);" minlength="1" maxlength="2" class="form-control required" 
+                                            id="meses_trabajando" name="meses_trabajando_ingresos">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="currency-masktwo"> Salario mensual <span class="danger">*</span> </label>
+                                        <input type="text" class="form-control required" id="salario-mensual" name="salario_mensual_ingresos">
+                                    </div>
+                                    <label>¿Ha estado en bancarrota?</label>
+                                    <br>
+                                    <div class="form-check form-check-inline ">
+                                        <label class="form-check-label" for="si_bancarrota">Si</label>
+                                        <input class="form-check-input required" type="radio" name="bancarrota" id="si_bancarrota" value="Si"
+                                            checked>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label" for="no_bancarrota">No</label>
+                                        <input class="form-check-input" type="radio" name="bancarrota" id="no_bancarrota" value="No">
+                                    </div>
+                                    <div id="acc_pendiente">
+                                        <br>
+                                        <label>¿Tiene acción pendiente?</label>
+                                        <br>
+                                        <div class="form-check form-check-inline" id="acc_pendiente">
+                                            <input class="form-check-input" type="radio" name="sacc_pendiente" id="si_pendiente" value="Si">
+                                            <label class="form-check-label" for="si_pendiente">Si</label>
+                                        </div>
+                                        <div class="form-check form-check-inline" id="acc_pendiente">
+                                            <input class="form-check-input" type="radio" name="sacc_pendiente" id="no_pendiente" value="No" checked>
+                                            <label class="form-check-label" for="no_pendiente">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ocupacion"> Ocupación<span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" id="ocupacion" name="ocupacion_ingresos">
+                                    </div>
+                                    <div class="col-md-15" id="anio_bancarrotaid">
+                                        <div class="form-group" id="anio_bancarrotaid">
+                                            <label for="anio_bancarrota">Año de bancarrota<span class="danger">*</span> </label>
+                                            <input type="number" class="form-control required" oninput="maxlengthNumber(this);" maxlength="4" id="anio_bancarrota" name="anio_bancarrota_ingresos">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="phone-maskk">Teléfono de trabajo </label>
+                                        <input type="text" class="form-control " id="phone-work" name="telefono_trabajo_ingresos">
+                                    </div>
+                                    <div id="tipo_bancarrota">
+                                        <label for="exampleDataList" class="form-label">Tipo de bancarrota</label><span class="danger">*</span>
+                                        <input class="form-control required" list="tipos_bank" name="tipo_bancarrota_ingresos" id="exampleDataList">
+                                        <datalist id="tipos_bank">
+                                            <option>Non-adjudicated</option>
+                                            <option>Dismissed CH-11</option>
+                                            <option>Discharged CH-11</option>
+                                            <option>CH-12 Filed</option>
+                                            <option>Discharged CH-12</option>
+                                            <option>involuntary CH-7</option>
+                                            <option>Dismissed CH-12</option>
+                                            <option>Dismissed CH-13</option>
+                                            <option>Discharged CH-13</option>
+                                            <option>Dismissed CH-7</option>
+                                            <option>Voluntary CH-7</option>
+                                            <option>CH-13 Filed</option>
+                                            <option>CH-11 Filed</option>
+                                            <option>Discharged CH-7</option>
+                                        </datalist>
+                                    </div>
+                                </div>
+                            </div>
+                             <br>
+                                 <h4 style="text-align: center;" >Otros ingresos </h4>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="empleador_anterior">Empleador anterior </label>
+                                        <input type="text" class="form-control " id="empleador_anterior" name="empleador_anterior_ingresos">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="otros_ingresos">Fuente de otros ingresos</label>
+                                        <input type="text" class="form-control " id="otros_ingresos" name="otros_ingresos_ingresos">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="currency-maskthree">Ingresos adicionales</label>
+                                        <input type="text" class="form-control" id="ingresos-adicionales1" id="ingresos_adicionalesf" name="ingresos_adicionales_ingresos">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>   
+                <!--================== *INGRESOS* ===================-->
+                <!--================== *INFORMACION BANCARIA* ================-->
+                        <h6><b>INFORMACIÓN BANCARIA</b></h6>
+                        <fieldset>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <label for="exampleDataList" class="form-label">Tipo de cuenta</label>
+                                    <input class="form-control" autocomplete="none" list="datalistOptions" name="tipo_cuenta_bancaria"
+                                        id="exampleDataList" placeholder="Seleccione">
+                                    <datalist id="datalistOptions">
+                                        <option>Cuenta corriente</option>
+                                        <option>Cuenta de ahorros</option>
+                                    </datalist>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="numero_ruta">Número de ruta</label>
+                                        <input type="number" class="form-control" id="numero_ruta" name="numero_ruta_bancaria">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="numero_cuenta">Número de cuenta </label>
+                                        <input type="number" class="form-control" id="numero_cuenta" name="numero_cuenta_bancaria">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>   
+                <!--================== *CONFIGURACION BANCARIA* ==============-->
+                <!--================== *CO-SOLICITANTE* ============-->
+                        <!-- Step 4 -->
+                        <h6><b>CO-SOLICITANTE</b></h6>
+                        <fieldset>
+                            <center><b>La solicitud tiene co-solicitante</b>
+                                <br>
+                                <input type="checkbox" name="mostrar" id="mostrar" value="1" onchange="javascript:showContent()" />
+                            </center>
+                                <br>
+                        <div id="contentt" style="display: none; ">
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="licencia"> Identificación / licencia de conducción <span class="danger">*</span></label>
+                                        <input type="number" class="form-control required" id="licencia" name="licencia_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="expedicion_licenciaf"> Fecha de expedición de licencia <span class="danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control required" id="expedicion_licenciaf"
+                                            name="expedicion_licencia_co_solicitante" placeholder="Presione aqui para elegir fecha" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="vencimiento_licenciaf">Fecha de vencimiento de licencia<span class="danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control required" id="vencimiento_licenciaf"
+                                            name="vencimiento_licencia_co_solicitante" placeholder="Presione aqui para elegir fecha" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="numero_se_social"> Número de seguro social/ITIN <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required social" id="numero_se_social" name="numero_se_social_co_solicitante">
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input " type="radio" checked name="tipo_seguro_co_solicitante" id="SSNco" value="SSN">
+                                        <label class="form-check-label" for="SSNco">SSN</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="tipo_seguro_co_solicitante" id="ITINco" value="ITIN">
+                                        <label class="form-check-label" for="ITINco">ITIN</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="fecha_nacif">Fecha de nacimiento <span class="danger">*</span> </label>
+                                        <input type="text" class="form-control required" id="fecha_nacif" name="fecha_nacimiento_co_solicitante"
+                                            placeholder="Presione aqui para elegir fecha" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombre_co">Nombre <span class="danger">*</span> </label>
+                                        <input type="text" class="form-control required" id="nombre_co" name="nombre_co_solicitante">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="segundo_nombre_co">Segundo nombre</label>
+                                        <input type="text" class="form-control" id="segundo_nombre_co" name="segundo_nombre_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="apelli_co">Apellidos <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" id="apelli_co" name="apellido_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="phone-masktel">Teléfono móvil <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" id="phone-masktel" name="telefono_movil_co_solicitante">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="phone-maskteltwo">Teléfono secundario </label>
+                                        <input type="text" class="form-control" id="phone-maskteltwo" name="tel_secundario_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="direc_co_solicitantef">Dirección del co-solicitante <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" id="direc_co_solicitantef" name="direccion_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="relacion">Relación/parentesco <span class="danger">*</span></label>
+                                        <input type="text" class="form-control required" placeholder="Ej. Amigo, pareja, padre..." id="relacion"
+                                            name="relacion_parentesco_co_solicitante">
+                                    </div>
+                                </div>
+                            </div>
+                                <label>¿Es militar activo?</label>
+                                <br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input inline required" type="radio" name="militar_active" id="si_activo" value="si">
+                                    <label class="form-check-label" for="si_activo">Si</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input inline" type="radio" name="militar_active" id="no_activo" value="no" checked>
+                                    <label class="form-check-label" for="no_activo">No</label>
+                                    <br>
+                                </div>
+                                <h4 style="text-align: center;">Empleo del co-solicitante</h4>
+                                <br>
+                                <br>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="empleador_co">Empleador del co-solicitante<span class="danger">*</span> </label>
+                                        <input type="text" class="form-control required" id="empleador_co" name="empleador_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="anios_trabajando_co">Años trabajando<span class="danger">*</span> </label>
+                                        <input type="number" oninput="maxlengthNumber(this);" minlength="1" maxlength="2"
+                                            class="form-control required" id="anios_trabajando_co" name="anios_trabajando_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="meses_trabajando_co">Meses trabajando <span class="danger">*</span> </label>
+                                        <input type="number" oninput="maxlengthNumber(this);" minlength="1" maxlength="2"
+                                            class="form-control required" id="meses_trabajando_co" name="meses_trabajando_co_solicitante">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="currency-masksalario">Salario mensual <span class="danger">*</span> </label>
+                                        <input type="text" class="form-control required" id="currency-masksalario"
+                                            name="salario_mensual_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ocupacion_co">Ocupación <span class="danger">*</span> </label>
+                                        <input type="text" class="form-control required" id="ocupacion_co" name="ocupacion_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="phone-maskteltrabajo">Teléfono de trabajo<span class="danger">*</span> </label>
+                                        <input type="text" class="form-control required" id="phone-maskteltrabajo"
+                                            name="telefono_trabajo_co_solicitante">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="empleador_anterior_co">Empleador anterior </label>
+                                        <input type="text" class="form-control" id="empleador_anterior_co" name="empleador_anterior_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ingresos_co">Fuente de otros ingresos</label>
+                                        <input type="text" class="form-control " id="ingresos_co" name="ingresos_co_solicitante">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="currency-maskingresoadi"> Ingresos adicionales</label>
+                                        <input type="text" class="form-control" id="currency-maskingresoadi"
+                                            name="ingresos_adicionales_co_solicitante">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>  
+            <!--================== *CO-SOLICITANTE* =============-->
+            <!--================== *REFERENCIAS* ================-->
+                    <h6><b>REFERENCIAS</b></h6>
+                    <fieldset>
+                        <div class="row text-align: center;">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="nom_referencia1_co">Nombre de referencia</label>
+                                    <input type="text" class="form-control" id="nom_referencia1_co" name="nom_referencia1_co_solicitante">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="parentesco1_co">Relación/parentesco </label>
+                                    <input type="text" class="form-control" id="parentesco1_co" name="parentesco1_co_solicitante">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="phone-masktelreferenciasone">Teléfono móvil</label>
+                                    <input type="text" class="form-control" id="phone-masktelreferenciasone" name="tel_movil1_co_solicitante">
+                                </div>
+                            </div>
+                        </div>
+                            <hr class="bg-primary" style="padding:2px; background:#812082!important">
+                        <div class="row text-align: center;">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="nom_referencia2_co">Nombre de referencia </label>
+                                    <input type="text" class="form-control" id="nom_referencia2_co" name="nom_referencia2_co_solicitante">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="parentesco2_co">Relación/parentesco </label>
+                                    <input type="text" class="form-control" id="parentesco2_co" name="parentesco2_co_solicitante">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="phone-masktelreferenciastwo">Teléfono móvil</label>
+                                    <input type="text" class="form-control" id="phone-masktelreferenciastwo" name="tel_movil2_co_solicitante">
+                                </div>
+                            </div>
+                        </div>
+                            <hr class="bg-primary" style="padding:2px; background:#812082!important">
+                        <div class="row text-align: center;">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="nom_referencia3_co">Nombre de referencia </label>
+                                    <input type="text" class="form-control" id="nom_referencia3_co" name="nom_referencia3_co_solicitante">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="parentesco3_co">Relación/parentesco </label>
+                                    <input type="text" class="form-control" id="parentesco3_co" name="parentesco3_co_solicitante">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="phone-masktelreferenciasthree">Teléfono móvil
+                                    </label>
+                                    <input type="text" class="form-control " id="phone-masktelreferenciasthree"  name="tel_movil3_co_solicitante">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>  
+            <!--================== *REFERENCIAS* ==============-->
+            <!--================== *CARGAR ARCHIVOS* ==============-->
+                    <h6><b>CARGAR ARCHIVOS</b></h6>
+                    <fieldset>
+                        <div class="container">
+                            <div class="row" style=" display: flex; justify-content: center; align-items: center;padding-bottom: 3em;">
+                                <div class="col-6">
+                                    <label class="licencia">Por favor carga el documento solicitado para que
+                                        podamos realizar el proceso de verificación de identidad
+                                        <br>
+                                    </label>
+                                    <p class="titulolicencia">Licencia de conducir </p>
+                                    <div class="input-group">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary" style="padding: 10px;"> Cargar anverso
+                                                <input type="file" name="cliente_frontal" id="campoFile" accept="image/jpg"
+                                                    style="display: none;" id="licencia_cliente_frontal1" required>
+                                            </span>
+                                        </label>
+                                        <input type="text" class="form-control" style="font-size: 15px;height: 43px;"
+                                            placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required readonly>
+                                    </div>
+                                    <br>
+                                    <div class="input-group">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary" style="padding: 10px;"> Cargar reverso
+                                                <input type="file" name="cliente_trasera" id="campoFile" accept="image/jpg" style="display: none;" id="licencia_cliente_trasera1" required>
+                                            </span>
+                                        </label>
+                                        <input type="text" class="form-control" style="font-size: 15px; height: 43px;"
+                                            placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+            <!--================== *CARGAR ARCHIVOS* ==============-->
+            <!--======== //======== * TERMINOS Y CONDICIONES* =========-->
+                    <h6><b>TÉRMINOS Y CONDICIONES</b></h6>
+                    <fieldset>
+                        <div class="row">
+                            <div class="container" style="text-align: center; text-align: justify;margin-bottom: 19px;">
+                                <h6><b>DIVULGACIÓN DE RESPONSABILIDAD</b></h6>
+                                <p>Al hacer clic en Continuar, promete que toda la información es
+                                    verdadera y completa Tiene la intención de que el
+                                    vendedor y/o el dealer confíen en esta información para
+                                    decidir si le otorgan o no crédito Usted autoriza una
+                                    investigación completa y la divulgación de su historial
+                                    crediticio y su historial laboral También autoriza al
+                                    vendedor y/o dealer a divulgar información sobre la
+                                    experiencia crediticia con ellos Usted acepta recibir
+                                    llamadas de mensajes pregrabados o marcados automáticamente de
+                                    nosotros o de aquellos que actúan en nuestro
+                                    nombre en cualquier número de teléfono móvil que nos
+                                    proporcione.</p>
+                                <p><b>AVISO DE INFORME DE CRÉDITO:</b> Podemos solicitar un
+                                    informe de crédito para cualquier propósito legítimo asociado
+                                    con su solicitud de crédito, extensión de crédito,
+                                    modificación de los términos de su contrato de crédito o
+                                    cobro en su cuenta. Si lo solicita, le informaremos si se
+                                    ordenó dicho informe y le daremos el nombre y la
+                                    dirección de la agencia de informes crediticios que
+                                    proporcionó el informe.</p>
+                            </div>
+                            <div class="col-5">
+                                <label type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-keyboard="false"
+                                    data-target="#modalFirmar">
+                                    <input type="checkbox" id="btnAceptar" name="" class="required"> Aceptar y firmar los términos
+                                </label>
+                            </div>
+                        </div>
+                            <div class="col-5">
+                                <div class="input-group" hidden>
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-primary" style="padding: 10px;"> Cargar pdf firmado
+                                            <input type="hidden" name="acuerdo_firmado" id="code_base64" value="" required>
+                                        </span>
+                                    </label>
+                                    <input type="text" class="form-control" id="miFirma_png" style="font-size: 15px; height: 42px;"
+                                        placeholder="Cargar archivo firmado" value="" required readonly>
+                                </div>
+                            </div>
+                        <!-- Modal -->
+                            <div class="modal fade" id="modalFirmar" tabindex="-1" role="dialog" aria-labelledby="modalFirmarTitle"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalFirmarLongTitle">Firmar a continuación</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <canvas id="canvas"></canvas>
+                                            <br>
+                                            <br>
+                                            <button type="button" class="btn btn-danger" id="btnLimpiar">Limpiar</button>
+                                            <button type="button" class="btn btn-warning" hidden id="btnDescargar">Descargar</button>
+                                        </div>
+                                        <div class="modal-footer" id="ocultar">
+                                            <button type="button" class="btn btn-primary" id="btnSiguienteFirmado"
+                                                data-dismiss="modal">Siguiente</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <br>
+                            <input class="btn btn-primary" type="submit" value="Enviar" style="float: left; position: relative; top: 40px;  z-index: 3;
+                                        left: 43em; width: 100px; background: #812082;color: #fff; padding: 7px 12px; border-radius: 2px;
+                                        border: 1px solid transparent; height: 39px;">
+                    </fieldset> 
+            <!--================== *TERMINOS Y CONDICIONES* =========-->
+            </form>
+         </div>
+        </div>
+       </section>
+      </div>
+<!--============== :===== *FORMULARIO* ======= :=========-->
+     </div>
+    </div>
+<!-- =======FIXME: copyright ========================== -->
+    <%- include ('../partials/copyright.ejs')%>
+<!-- =======FIXME: copyright ========================== -->
+    </div>
+      </div>
+      <% if(footerSolicitarC){ %> 
+     <%- include ('../partials/solicitar-credito/footer.ejs')%>
+     <% } %> 
+
+      
+      
+      
+      
+      
+      
+      

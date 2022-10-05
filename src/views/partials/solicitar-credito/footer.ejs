@@ -21,8 +21,8 @@
 <script src="../js/scripts-comparar-campos.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
-<script src="../directorio_nuevoCliente/js/alertify.min.js"></script>
-<script src="../directorio_nuevoCliente/js/alertify.js"></script>
+<script src="../directorio_dash/js_clientes/alertify.min.js"></script>
+<script src="../directorio_dash/js_clientes/alertify.js"></script>
 
 <!-- Required datatable js -->
 <script src="../libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -38,44 +38,46 @@
 <!-- ==========FIXME: JS DEL FORMULARIO ================= -->
 
 <!-- BEGIN: Vendor JS-->
-<script src="../directorio_nuevoCliente/js/vendors.min.js"></script>
+<script src="../directorio_dash/js_clientes/vendors.min.js"></script>
 <!-- BEGIN Vendor JS-->
 
 <!-- BEGIN: Page Vendor JS-->
-<script src="../directorio_nuevoCliente/js/jquery.sticky.js"></script>
-<script src="../directorio_nuevoCliente/js/jquery.sparkline.min.js"></script>
-<script src="../directorio_nuevoCliente/js/jquery.steps.min.js"></script>
-<script src="../directorio_nuevoCliente/js/moment-with-locales.min.js"></script>
+<script src="../directorio_dash/js_clientes/jquery.sticky.js"></script>
+<script src="../directorio_dash/js_clientes/jquery.sparkline.min.js"></script>
+<script src="../directorio_dash/js_clientes/jquery.steps.min.js"></script>
+<script src="../directorio_dash/js_clientes/moment-with-locales.min.js"></script>
 
 
-<script src="../directorio_nuevoCliente/js/jquery.validate.min.js"></script>
+<script src="../directorio_dash/js_clientes/jquery.validate.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="../directorio_nuevoCliente/js/app-menu.min.js"></script>
-<script src="../directorio_nuevoCliente/js/app.min.js"></script>
-<!-- <script src="./directorio_nuevoCliente/js/customizer.min.js"></script> -->
+<script src="../directorio_dash/js_clientes/app-menu.min.js"></script>
+<script src="../directorio_dash/js_clientes/app.min.js"></script>
+<!-- <script src="./directorio_dash/js_clientes/customizer.min.js"></script> -->
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="../directorio_nuevoCliente/js/breadcrumbs-with-stats.min.js"></script>
-<script src="../directorio_nuevoCliente/js/wizard-steps.min.js"></script>
+<script src="../directorio_dash/js_clientes/breadcrumbs-with-stats.min.js"></script>
+<script src="../directorio_dash/js_clientes/wizard-steps.min.js"></script>
 
-<script src="../directorio_nuevoCliente/js/estilosPropios.js"></script>
+<script src="../directorio_dash/js_clientes/estilosPropios.js"></script>
 <!-- END: Page JS-->
-<script src="../directorio_nuevoCliente/js/script_canvas.js"></script>
+<script src="../directorio_dash/js_clientes/script_canvas.js"></script>
 
 <!-- Google Maps JavaScript library -->
 <script
   src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDnXrGToxsOSdtK01dW0yynlYxRsv8D6ro"></script>
 
 <!-- * SCRIPTS DEL CALENDARIO DE NUEVO CLIENTE -->
-<script src="../directorio_nuevoCliente/js/jquery-ui.js"></script>
-<script src="../directorio_nuevoCliente/js/jquery-ui.min.js"></script>
+<script src="../directorio_dash/js_clientes/jquery-ui.js"></script>
+<script src="../directorio_dash/js_clientes/jquery-ui.min.js"></script>
 <!-- * SCRIPTS DEL CALENDARIO DE NUEVO CLIENTE -->
 
 <!-- Validaciónes campos -->
 <script src="../js/scripts-validar-campos.js"></script>
+<script src="../js/scripts-mask-currency.js"></script>
+<script src="../js/scripts-mask-phone.js"></script>
 <!-- ==========FIXME: JS DEL FORMULARIO ================= -->
 
 <!-- ==== MASCARA PARA EL CAMPO SEGURO SOCIAL ==== -->
@@ -356,159 +358,6 @@ $.datepicker.regional['es'] = {
   //  /TODO: FUNCIONES PARA OCULTAR Y MOSTRAR APARTADO DE BANCARROTA - NUEVO CLIENTE  -->
 
   //  /TODO: FUNCIONES PARA MASCARA  -->
-
-  document.addEventListener("DOMContentLoaded", function () {
-
-  // Pattern (Phone) MASCARA PARA EL CAMPO TELEFONO DE PRE-FORMULARIO
-  var phoneMasktelmovilP = IMask(document.getElementById('telefonoP'), {
-      mask: '+{1} (000) 000-0000'
-    });
-
-
-  });
-
-  document.addEventListener("DOMContentLoaded", function () {
-
-    // Pattern (Phone) MASCARA PARA EL CAMPO TELEFONO DE SOLICITANTE
-    var phoneMasktelmovilsolicitante = IMask(document.getElementById('phonesolicitante'), {
-      mask: '+{1} (000) 000-0000'
-    });
-        // Pattern (Phone)  MASCARA PARA EL CAMPO TELEFONO SECUNDARIO DE SOLICITANTE
-        var phoneMaskphonetwosolicitante = IMask(document.getElementById('phonetwosolicitante'), {
-      mask: '+{1} (000) 000-0000'
-    });
-
-
-});
-
-
-  //  /TODO: FUNCIONES PARA MASCARA  -->
-
-  document.addEventListener("DOMContentLoaded", function () {
-   // Pattern (Phone)
-   var currencyMask = IMask(document.getElementById('currency-mask'), {
-      mask: '$num',
-      blocks: {
-        num: {
-          // nested masks are available!
-          mask: Number,
-          thousandsSeparator: ','
-        }
-      }
-    });
-
-    // Pattern (Phone)
-    var currencyMask = IMask(document.getElementById('currency-masktwo'), {
-      mask: '$num',
-      blocks: {
-        num: {
-          // nested masks are available!
-          mask: Number,
-          thousandsSeparator: ','
-        }
-      }
-    });
-
-    // Pattern (Phone)
-    var currencyMask = IMask(document.getElementById('currency-maskthree'), {
-      mask: '$num',
-      blocks: {
-        num: {
-          // nested masks are available!
-          mask: Number,
-          thousandsSeparator: ','
-        }
-      }
-    });
-
-  });
-
-  // /TODO: FUNCIONES PARA MASCARA  -->
-
-  document.addEventListener("DOMContentLoaded", function () {
-    // Pattern (Phone)
-    var phoneMask = IMask(document.getElementById('phone-maskk'), {
-      mask: '+{1} (000) 000-0000'
-    });
-  });
-
-  //======//TODO: MASCARAS PARA LOS CAMPOS CO-SOLICITANTE=========  -->
-
-  //-----> MASCARA PARA EL CAMPO TELEFONO MOVIL //FIXME: DE CO-SOLICITANTE
-  document.addEventListener("DOMContentLoaded", function () {
-    // Pattern (Phone) 
-    var phoneMasktel = IMask(document.getElementById('phone-masktel'), {
-      mask: '+{1} (000) 000-0000'
-    });
-  });
-
-  //-------> MASCARA PARA EL CAMPO TELEFONO MOVIL //FIXME: SECUNDARIO DE CO-SOLICITANTE
-  document.addEventListener("DOMContentLoaded", function () {
-    // Pattern (Phone) 
-    var phoneMaskteltwo = IMask(document.getElementById('phone-maskteltwo'), {
-      mask: '+{1} (000) 000-0000'
-    });
-  });
-
-  //-------> MASCARA PARA EL CAMPO TELEFONO DE TRABAJO //FIXME: DE CO-SOLICITANTE
-  document.addEventListener("DOMContentLoaded", function () {
-    // Pattern (Phone) 
-    var phoneMaskteltrabajo = IMask(document.getElementById('phone-maskteltrabajo'), {
-      mask: '+{1} (000) 000-0000'
-    });
-  });
-
-  //-------> MASCARA PARA EL CAMPO SALARIO MENSUAL //FIXME: SALARIO MENSUALES DE CO-SOLICITANTE
-  var currencyMasksalario = IMask(document.getElementById('currency-masksalario'), {
-    mask: '$num',
-    blocks: {
-      num: {
-        // nested masks are available!
-        mask: Number,
-        thousandsSeparator: ','
-      }
-    }
-  });
-
-  //-------> MASCARA PARA EL CAMPO INGRESO ADICIONAL//FIXME:  CO-SOLICITANTE
-  var currencyMaskingresosadi = IMask(document.getElementById('currency-maskingresoadi'), {
-    mask: '$num',
-    blocks: {
-      num: {
-        // nested masks are available!
-        mask: Number,
-        thousandsSeparator: ','
-      }
-    }
-  });
-
-  //======//TODO: MASCARAS PARA LOS CAMPOS REFERENCIAS=========  -->
-
-  //-----> MASCARA PARA EL PRIMER CAMPO TELEFONO MOVIL //FIXME: REFERENCIAS
-  document.addEventListener("DOMContentLoaded", function () {
-
-    var phoneMasktelreferenciasone = IMask(document.getElementById('phone-masktelreferenciasone'), {
-      mask: '+{1} (000) 000-0000'
-    });
-  });
-
-  //-----> MASCARA PARA EL SEGUNDO CAMPO TELEFONO MOVIL //FIXME: REFERENCIAS
-  document.addEventListener("DOMContentLoaded", function () {
-    var phoneMasktelreferenciastwo = IMask(document.getElementById('phone-masktelreferenciastwo'), {
-      mask: '+{1} (000) 000-0000'
-    });
-
-  });
-
-  //-----> MASCARA PARA EL TERCER CAMPO TELEFONO MOVIL //FIXME: REFERENCIAS
-  document.addEventListener("DOMContentLoaded", function () {
-    var phoneMasktelreferenciasthree = IMask(document.getElementById('phone-masktelreferenciasthree'), {
-      mask: '+{1} (000) 000-0000'
-    });
-
-  });
-
-  //======//TODO: MASCARAS PARA LOS CAMPOS REFERENCIAS=========  -->
 
 
   $(document).on('change', '#campoFile', function () {

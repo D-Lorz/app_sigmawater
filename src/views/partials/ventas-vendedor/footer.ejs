@@ -1,0 +1,185 @@
+<script type="text/javascript">
+    function _crearTablaDeducciones(num) {
+        let tabla = `
+            <table class="table table-nowrap align-middle" id="tablaDeducciones${num}">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Subtotal</b></td>
+                        <td colspan="2">$<span id="subtotal${num}">0</span></td>
+                    </tr>
+                    <tr id="porcentaje-ganar${num}">
+                        <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Porcentaje ganancia</b></td>
+                        <td colspan="2">50%</td>
+                    </tr>
+                    <tr>
+                        <td class="text-end" style="font-weight: 700;font-size: 15px;"><b>Comisión Total</b></td>
+                        <td colspan="2">$<span id="total${num}"></span></td>
+                    </tr>
+                </tfoot>
+            </table>`
+        return tabla
+    }
+
+    function consultarFactura(idFactura, monto) {
+        const pestania2 = $("#tabFactura2")
+        const pestania3 = $("#tabFactura3")
+        const pestania4 = $("#tabFactura4")
+        pestania2.css('display', 'none')
+        pestania3.css('display', 'none')
+        pestania4.css('display', 'none')
+        $('#tablaDeducciones1').remove()
+        $('#tablaDeducciones2').remove()
+        $('#tablaDeducciones3').remove()
+        $('#tablaDeducciones4').remove()
+
+        fetch('/consultarFactura', {
+            method: 'POST',
+            body: JSON.stringify({idFactura}),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(datos => {
+                if (datos) {
+
+                    console.log("DATOS AF >> ", datos)
+                    console.log("<<<< >>>> ", JSON.parse(datos.deducciones))
+
+                    $("#idFactura").text(idFactura)
+                    $(".producto").text(datos.producto_instalado)
+                    $(".valor").text(monto)
+                    $(".nomCliente").text(datos.cliente.nombre)
+                    $(".telCliente").text(datos.cliente.telefono)
+                    $(".direccionCliente").text(datos.cliente.direccion)
+                    $(".fecha").text(datos.fecha_pago)
+
+                    let vendedor1 = datos.vendedores[0], vendedor2 = {}, vendedor3 = {}, vendedor4 = {};
+                    datos.vendedores[1] ? vendedor2 = datos.vendedores[1] : vendedor2 = false;
+                    datos.vendedores[2] ? vendedor3 = datos.vendedores[2] : vendedor3 = false;
+                    datos.vendedores[3] ? vendedor4 = datos.vendedores[3] : vendedor4 = false;
+
+                    $("#nomVendedor1").text(vendedor1.nombre)
+                    $("#nivelVendedor1"). text(vendedor1.nivel)
+                    $("#telVendedor").text(vendedor1.telefono)
+                    $("#comisionBase1").text(vendedor1.comision_base)
+
+                    // DEDUCCIONES VENDEDOR PRINCIPAL
+                    const tablaDeducciones1 = _crearTablaDeducciones(1)
+                    $('#divDeducciones').append(tablaDeducciones1);
+                    $("#total1").text(vendedor1.comision_final)
+
+                    let deducciones1 = ``, i = 1, subTotal = 0;
+                    if (vendedor1.deducciones) {
+                        vendedor1.deducciones.forEach(x => {
+                            deducciones1 += `<tr id="${x.tab}_row${i}">
+                                <td>${x.descripcion}</td>
+                                <td>${x.monto}</td>
+                            </tr>`
+                            subTotal += parseFloat(x.monto)
+                            i++;
+                        });
+                    }
+                    $('#tablaDeducciones1').append(deducciones1);
+                    $('#subtotal1').text(subTotal)
+                    $("#porcentaje-ganar1").css('display', 'none')
+                    if (vendedor1.nivel == 4) {
+                        $("#porcentaje-ganar1").css('display', 'table-row')
+                    }
+
+                    if (vendedor2) {
+                        pestania2.css('display', 'block')
+                        $("#nomVendedor2").text(vendedor2.nombre)
+                        $("#nivelVendedor2"). text(vendedor2.nivel)
+                        $("#telVendedo2").text(vendedor2.telefono)
+                        $("#comisionBase2").text(vendedor2.comision_base)
+                        
+                        const tablaDeducciones2 = _crearTablaDeducciones(2)
+                        $('#divDeducciones2').append(tablaDeducciones2);
+                        $("#total2").text(vendedor2.comision_final)
+                        let deducciones2 = ``, i = 1, subTotal2 = 0;
+                        vendedor2.deducciones.forEach(x => {
+                            deducciones2 += `<tr id="${x.tab}_row${i}">
+                                <td>${x.descripcion}</td>
+                                <td>${x.monto}</td>
+                            </tr>`
+                            subTotal2 += parseFloat(x.monto)
+                            i++;
+                        });
+                        $('#tablaDeducciones2').append(deducciones2);
+                        $('#subtotal2').text(subTotal2)
+                        $("#porcentaje-ganar2").css('display', 'none')
+                        if (vendedor2.nivel == 4) {
+                            $("#porcentaje-ganar2").css('display', 'table-row')
+                        }
+                    }
+
+                    if (vendedor3) {
+                        pestania3.css('display', 'block')
+                        $("#nomVendedor3").text(vendedor3.nombre)
+                        $("#nivelVendedor3"). text(vendedor3.nivel)
+                        $("#telVendedo3").text(vendedor3.telefono)
+                        $("#comisionBase3").text(vendedor3.comision_base)
+                        
+                        const tablaDeducciones3 = _crearTablaDeducciones(3)
+                        $('#divDeducciones3').append(tablaDeducciones3);
+                        $("#total3").text(vendedor3.comision_final)
+                        let deducciones3 = ``, i = 1, subTotal3 = 0;
+                        vendedor3.deducciones.forEach(x => {
+                            deducciones3 += `<tr id="${x.tab}_row${i}">
+                                <td>${x.descripcion}</td>
+                                <td>${x.monto}</td>
+                            </tr>`
+                            subTotal3 += parseFloat(x.monto)
+                            i++;
+                        });
+                        $('#tablaDeducciones3').append(deducciones3);
+                        $('#subtotal3').text(subTotal3)
+                        $("#porcentaje-ganar3").css('display', 'none')
+                        if (vendedor3.nivel == 4) {
+                            $("#porcentaje-ganar3").css('display', 'table-row')
+                        }
+                    }
+
+                    if (vendedor4) {
+                        pestania4.css('display', 'block')
+                        $("#nomVendedor4").text(vendedor4.nombre)
+                        $("#nivelVendedor4"). text(vendedor4.nivel)
+                        $("#telVendedo4").text(vendedor4.telefono)
+                        $("#comisionBase4").text(vendedor4.comision_base)
+                        
+                        const tablaDeducciones4 = _crearTablaDeducciones(4)
+                        $('#divDeducciones4').append(tablaDeducciones4);
+                        $("#total4").text(vendedor4.comision_final)
+                        let deducciones4 = ``, i = 1, subTotal4 = 0;
+                        vendedor4.deducciones.forEach(x => {
+                            deducciones4 += `<tr id="${x.tab}_row${i}">
+                                <td>${x.descripcion}</td>
+                                <td>${x.monto}</td>
+                            </tr>`
+                            subTotal4 += parseFloat(x.monto)
+                            i++;
+                        });
+                        $('#tablaDeducciones4').append(deducciones4);
+                        $('#subtotal4').text(subTotal4)
+                        $("#porcentaje-ganar4").css('display', 'none')
+                        if (vendedor4.nivel == 4) {
+                            $("#porcentaje-ganar4").css('display', 'table-row')
+                        }
+                    }
+
+                    
+                    $("#btnSidebar").trigger("click"); // Arbrir Sidebar
+                } else {
+                    Swal.fire('Factura pendiente', 'El administrador aún no ha procesado esta factura', 'info')
+                }
+            })
+
+    }
+
+</script>

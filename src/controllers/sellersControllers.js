@@ -79,34 +79,30 @@ exports.registrar = async (req, res) => {
   await conexion.query("INSERT INTO usuarios SET ?", [usuarios]);
   await conexion.query("INSERT INTO registro_de_vendedores SET ?", [ nuevoRegistro]);
 
-  console.log(
-    "\n+========= >>>>>> HUBO UN NUEVO REGISTRO <<<<<<<<<<============\n"
-  );
+  console.log("\n+========= >>>>>> HUBO UN NUEVO REGISTRO <<<<<<<<<<============\n"); 
 
-  let admin = await conexion.query(
-    " SELECT * FROM usuarios WHERE rol = 'administrador';"
-  );
-  admin = admin[0];
+  let admin = await conexion.query(" SELECT * FROM usuarios WHERE rol = 'administrador';");
+  admin = admin[0]
 
   // ! ************* PROCESO DEL EMAIL PARA EL ADMIN ************
+  const nomAdmin = admin.nombresUser
+  const vendedor = nombresUser + " " + apellidosUser
   const email = "3csigmagroup@gmail.com"
   const asunto = "Nuevo vendedor registrado"
-  const plantilla = nuevoVendedorHTML(admin.nombresUser, nombres, apellidos)
+  const plantilla = nuevoVendedorHTML(nomAdmin, vendedor)
   // Enviar email
+  console.log("ENVIANDO CORREO DEL EMAIL PARA EL ADMIN...");
   const resultEmail = await sendEmail(email, asunto, plantilla)
-      // ESTO ES PARA EL ADMIN ****************
- 
-    if (!resultEmail) {
-      res.json("Ocurrio un error inesperado al enviar el email al administrador")
-    } else {
-        console.log("\n<<<<< Email - Enviado >>>>>\n")
-    }
+  // ESTO ES PARA EL ADMIN ****************
+  // console.log("==================>>>", resultEmail);
+  // if (resultEmail) {
+  //   console.log("\n<<<<< Email - Enviado >>>>>\n")
+  // } else {
+  //   console.log("Ocurrio un error inesperado al enviar el email al administrador" )
+  // }
   // ! **************************************************************
 
-  let idConsecutivo = await conexion.query(
-    "SELECT id FROM registro_de_vendedores WHERE id_vendedor = ?",
-    [id_vendedor]
-  );
+  let idConsecutivo = await conexion.query("SELECT id FROM registro_de_vendedores WHERE id_vendedor = ?",[id_vendedor]);
   let fecha = new Date().toLocaleDateString("en-CA");
   const numClientes = 00;
   const idVendedor = idConsecutivo[0].id;
@@ -160,7 +156,7 @@ exports.listarAfiliados = async (req, res) => {
   // Consultando en DB los afiliados de ese vendedor
   conexion.query("SELECT rv.*, u.estado_de_la_cuenta, u.codigo_afiliado, u.codigo_historial_afiliado FROM registro_de_vendedores rv JOIN usuarios u ON u.id_vendedor = rv.id_vendedor WHERE rv.codigo_historial_afiliado = ?", [id_vendedorA], (err, result) => {
       if (err) throw err;
-      res.render("afiliados", { user: req.user, result: result });
+      res.render("usuario/afiliados", {footerVendedor:true, user: req.user, result: result });
     }
   );
 };
@@ -186,7 +182,7 @@ exports.perfilVendedores = async (req, res) => {
     }
   }
 
-  res.render("perfil-vendedor", { user: req.user, vendedor, fotoUpdate });
+  res.render("usuario/perfil-vendedor", { footerVendedor: true,  user: req.user, vendedor, fotoUpdate });
 };
 
 // todo: ==> Actualizar informacion de vendedor
@@ -312,7 +308,8 @@ exports.facturacion = async (req, res) => {
     : (sumaComisionAfiliados = 0);
   const totalComisiones = parseFloat(ventasVendedor.ganancias);
 
-  res.render("ventas-vendedor", {
+  res.render("usuario/ventas-vendedor", {
+    footerVendedor : true,
     user: req.user,
     facturacionPropia,
     facturacionAfiliado,

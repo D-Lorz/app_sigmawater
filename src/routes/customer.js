@@ -60,19 +60,15 @@ const cargarEvidencia = multer({storage: rutaCarpeta});
 //                           ↓↓
 router.get('/nuevo-cliente', isAuthenticated,(req, res) => {
     if(!(req.user.rol ==="vendedor")){res.redirect('./administrador') }
-    res.render('nuevo-cliente', { user: req.user })
+    res.render('usuario/nuevo-cliente', { header:true, footer:true, user: req.user })
 });
 router.get('/lista-clientes', isAuthenticated, listarClientes)
 
 // Ejecución Semanal (Domingo 10pm)
 cron.schedule('0 22 * * Sun',() => {
+    historialVendedores();
     historialClientes();
     historial_numVentas();
-});
-
-// Ejecución Mensual
-cron.schedule('0 15 12 Jan-Dec *',() => {
-    historialVendedores();
 });
 
 // Ejecución Mensual

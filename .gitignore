@@ -1,6 +1,7 @@
 node_modules
 env/.env
 keys.js 
-public/licences
-public/licences_customers
-info.txt
+public/licences/*.jpg
+public/licences/*.png
+public/licences_customers/*.jpg
+public/licences_customers/*.png
