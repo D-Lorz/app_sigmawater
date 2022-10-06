@@ -1474,11 +1474,11 @@ exports.ganancias_mensuales_admin = async (req, res) => {
     filtroGanancias.forEach(fg => {
       gananciaObtenida = JSON.parse(fg.ganancias_empresa);
       console.log("/gananciaObtenida/ ===>>>>>>", gananciaObtenida.total);
-      gananciasEmpresa += parseFloat(gananciaObtenida.total)
+      gananciasEmpresa += parseFloat(gananciaObtenida.total).toFixed(1);
 
       comisionObtenida = fg.comision_total
       console.log("/comisionObtenida/ ===>>>>>>", comisionObtenida);
-      comisionEmpresa += parseFloat(comisionObtenida)
+      comisionEmpresa += parseFloat(comisionObtenida).toFixed(1)  
     });
   }
   comisionEmpresa = comisionEmpresa * (-1)

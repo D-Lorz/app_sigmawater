@@ -361,7 +361,7 @@ var options = {
         height: 400,
         stacked: true,
         toolbar: {
-            show: false
+            show: true
         },
     },
     plotOptions: {
@@ -381,9 +381,9 @@ var options = {
     },
     yaxis: {
         labels: {
-            formatter: function (y) {
-                return y.toFixed(1) + "";
-            }
+            // formatter: function (y) {
+            //     return y.toFixed(1) + "";
+            // }
         }
     },
     xaxis: {
