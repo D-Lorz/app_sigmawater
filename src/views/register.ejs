@@ -2,30 +2,21 @@
   <!--==================FIXME:=====HEADER REGISTER====================  -->
   <%- include ('partials/register/header.ejs')%>
   <!--==================FIXME:=====HEADER REGISTER=====================  -->
-
-
-
   <main>
     <div id="form_container">
       <div class="row">
         <!-- id="contenedorRegistro -->
-
         <div class="col-lg-7">
-
           <div id="wizard_container">
             <div id="top-wizard">
               <div id="progressbar"></div>
             </div>
-
-
             <!-- /top-wizard -->
             <form action="/registrar" name="example-1" id="wizard" method="post"  enctype="multipart/form-data">
               <input id="website" name="website" type="text" value="">
               <!-- Leave for security protection, read docs for details -->
               <div id="middle-wizard">
-
                 <div class="step">
-
                   <h3 class="main_question"><strong>1/4</strong>Registro de vendedor</h3>
                   <!-- <h7 class="main_question">3C Sigma Water System</h7> -->
                   <br>
@@ -72,7 +63,6 @@
                           placeholder="Correo*">
                       </div>
                     </div>
-
                     <div class="col-md-4">
                       <div class="form-group">
                         <input type="email" name="confirmar_correo" id="confirmar_correo"  class="form-control required"
@@ -89,14 +79,12 @@
                           class="form-control required social" required />
                       </div>
                     </div>
-
                     <div class="col-md-4">
                       <div class="form-group">
                         <input type="text" name="ciudad" id="ciudad" class="form-control required"
                           placeholder="Ciudad donde vive*">
                       </div>
                     </div>
-
                     <div class="col-md-4">
                       <div class="form-group">
                         <input type="text" name="direccion" id="direccion" pattern="[a-zA-Z]+"
@@ -104,7 +92,6 @@
                       </div>
                     </div>
                   </div>
-
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
@@ -112,14 +99,12 @@
                           placeholder="Apt / Suite / Unidad">
                       </div>
                     </div>
-
                     <div class="col-md-4">
                       <div class="form-group">
                         <input type="text" name="codigo_postal" id="postal" class="form-control required"
                           placeholder="Codigo postal*">
                       </div>
                     </div>
-
                     <div class="col-md-4">
                       <div class="form-group">
                         <input type="text" name="codigo_afiliado" id="afiliado" class="form-control " pattern="[0-9]+" placeholder="Codigo de afiliado" onkeyup="javascript:this.value=this.value.toUpperCase();" minlength="6" maxlength="6" >
@@ -128,7 +113,6 @@
                   </div>
                   <!-- /row -->
                 </div>
-
                 <!-- /step--2   CONFIGURACION BANCARIA -->
                 <div class="step">
                   <h3 class="main_question" style="margin-bottom: 10%;">
@@ -156,36 +140,27 @@
                           placeholder="Numero de ruta*" oninput="maxlengthNumber(this);">
                       </div>
                     </div>
-
-
                     <div class="col-md-6">
                       <div class="form-group">
                         <input type="text" name="beneficiario" id="beneficiario" class="form-control required"
                           placeholder="Nombre del beneficiario*">
                       </div>
                     </div>
-
-
                   </div>
                   <!-- /row -->
                 </div>
                 <!-- /step-->
                 <!-- /step--3 -->
-
                 <div class="step">
-
-                  <h3 class="main_question" style="margin-bottom: 10%;"><strong>3/4</strong>Carga tus
-                    documentos</h3>
+                  <h3 class="main_question" style="margin-bottom: 10%;"><strong>3/4</strong>Carga tus documentos</h3>
 
                   <div class="row">
                     <div class="col-10">
-
                       <label class="licencia">Por favor carga el documento solicitado para que
                         podamos realizar el proceso de verificación de identidad
                         <br>
                       </label>
                       <p class="titulolicencia">Licencia de conducir </p>
-
                       <div class="input-group">
                         <label class="input-group-btn">
                           <span class="btn btn-primary" style="padding: 10px;">
@@ -197,7 +172,6 @@
                         <input type="text" class="form-control" style="font-size: 15px;	"
                           placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" readonly>
                       </div>
-
                       <div class="input-group">
                         <label class="input-group-btn">
                           <span class="btn btn-primary" style="padding: 10px;"> Cargar reverso<input type="file" 
@@ -208,21 +182,14 @@
                         <input type="text" class="form-control" style="font-size: 15px;	"
                           placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" readonly>
                       </div>
-
-
                     </div>
-      
-
                   </div>
-         
                 </div>
-      
                 <div class="submit step">
                   <h3 class="main_question"><strong>4/4</strong>Firma tu solicitud</h3>
                   <div class="form-group">
                     <div class="container">
                       <!-- scroll------------------------------------------  -->
-
                       <scroll-container>
                         <scroll-page>
                           <p>3C Sigma Holding puede recopilar esta información a través de un sitio web. Al completar
@@ -243,8 +210,6 @@
                             recibir mensajes que le enviamos por SMS como parte de la operación comercial normal de su
                             uso de la Plataforma. Si no desea recibir comunicaciones nuestras, en la oficina principal
                             de 3C Sigma Holding.</p>
-
-
                         </scroll-page>
                       </scroll-container>
                     </div>
@@ -265,17 +230,12 @@
               </div>
               <!-- /bottom-wizard -->
             </form>
-
-
           </div>
           <!-- /Wizard container -->
         </div>
-
-
         <div class="col-lg-5" id="videoderecho">
           <!-- <img  src="/video/regis.gif" style="margin-left: 4%;height: -122px;padding: 40px 0 0;	width: 97%;"> -->
           <video src="/video/Banner.mp4" id="videobanner" autoplay muted loop></video>
-
         </div>
       </div>
     </div><!-- /Row -->
@@ -284,21 +244,15 @@
   </main>
 
   </footer>
-  <!-- end footer-->
 
   <div class="cd-overlay-nav">
     <span></span>
-    
   </div>
-  <!-- cd-overlay-nav -->
-
   <div class="cd-overlay-content">
     <span></span>
   </div>
-  <!-- cd-overlay-content -->
 
   <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
-
 
   <script>
 

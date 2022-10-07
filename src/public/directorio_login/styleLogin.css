@@ -256,6 +256,10 @@ h1 {
   min-height: 100vh;
 }
 
+.contenedor-footer{
+  margin-top: 22px;
+}
+
 .bg-layer {
   min-height: 100vh;
 }
@@ -436,226 +440,14 @@ li > a:only-child:after {
 -----
 
 
+
 ---------------------------------------- */
-@media (min-width: 1600px) {
-  .content-inner-info {
-    padding-top: 8em;
-  }
 
-
-  .content-inner-info {
-    padding-top: 8em;
-  }
-
-  .form-w3layouts-grid .search {
-    outline: none;
-    padding: 10px 10px;
-  }
-
-  #copycopy {
-    margin-top: 25%;
-  }
-
-  body h2 {
-    /* width: 327px; */
-    /* height: 38px; */
-    /* margin-top: -2%; */
-    /* padding-top: 7%; */
-    /* top: 243px; */
-    /* margin-bottom: 1%; */
-    font-weight: 800;
-    font-size: 32px;
-    /* line-height: 38px; */
-    color: #ffffff;
+.copyRight {
+  float: right;
+  color: white;
+  padding-right: 15px;
 }
-
-  .form-w3ls-left-info input[type="email"],
-  .form-w3ls-left-info input[type="password"] {
-    width: 99%;
-  }
-
-  /* img {
-    width: 100%;
-    margin-top: 7%;
-  
-  } */
-
-  .form-w3ls-left-info p a {
-    font-size: 12px;
-    color: #fff;
-    float: right;
-    /* letter-spacing: 2px; */
-    /* text-transform: uppercase; */
-    /* text-decoration: underline; */
-}
-
-  .cd-nav-trigger {
-    top: 10px;
-    right: 15px;
-    height: 44px;
-    width: 44px;
-    z-index: 5;
-    overflow: hidden;
-    text-indent: 100%;
-    white-space: nowrap;
-}
-
-.redesSociales{
-  padding-top: 23%;
-
- }
-
-}
-@media (min-width: 992px) {
-  #logo {
-    display: block;
-    padding: 0;
-    width: 100%;
-    text-align: center;
-    float: none;
-  }
-
-  nav {
-    margin: 0;
-  }
-
-  .header-w3layouts {
-    float: left;
-  }
-
-  nav ul {
-    width: 100%;
-  }
-  
-  /* Hide the navigation menu by default */
-  /* Also hide the  */
-  .toggle + a,
-  .menu {
-    display: none;
-  }
-
-  /* Stylinf the toggle lable */
-  .toggle {
-    display: block;
-    padding: 8px 18px;
-    font-size: 20px;
-    text-decoration: none;
-    border: none;
-    float: right;
-    background-color: #f7f7f7;
-    color: #00bcd4;
-    cursor: pointer !important;
-  }
-
-  .menu .toggle {
-    float: none;
-    text-align: center;
-    margin: auto;
-    width: 25%;
-    padding: 5px;
-    font-weight: normal;
-    font-size: 15px;
-    letter-spacing: 1px;
-  }
-
-  .toggle:hover {
-    color: #333;
-    background-color: #fff;
-  }
-
-  /* Display Dropdown when clicked on Parent Lable */
-  [id^="drop"]:checked + ul {
-    display: block;
-    background: #f7f7f7;
-    padding: 15px 0;
-    text-align: center;
-  }
-
-  /* Change menu item's width to 100% */
-  nav ul li {
-    display: block;
-    width: 100%;
-    padding: 0px 0;
-  }
-
-  nav ul ul .toggle,
-  nav ul ul a {
-    padding: 0 40px;
-  }
-
-  nav ul ul ul a {
-    padding: 0 80px;
-  }
-
-  nav a:hover,
-  nav ul ul ul a {
-    background-color: transparent;
-  }
-
-  nav ul li ul li .toggle,
-  nav ul ul a,
-  nav ul ul ul a {
-    padding: 14px 20px;
-    color: #fff;
-    font-size: 17px;
-  }
-
-  /* Hide Dropdowns by Default */
-  nav ul ul {
-    float: none;
-    position: static;
-    color: #ffffff;
-    /* has to be the same number as the "line-height" of "nav a" */
-  }
-
-  /* Hide menus on hover */
-  nav ul ul li:hover > ul,
-  nav ul li:hover > ul {
-    display: none;
-  }
-
-  /* Fisrt Tier Dropdown */
-  nav ul ul li {
-    display: block;
-    width: 100%;
-    padding: 0;
-  }
-
-  nav ul ul ul li {
-    position: static;
-    /* has to be the same number as the "width" of "nav ul ul li" */
-  }
-
-  nav a {
-    color: #333;
-  }
-
-  nav a:hover {
-    color: #333;
-  }
-
-  .menu li.active a {
-    color: #333;
-  }
-
-  nav ul ul li a {
-    display: inline-block;
-    font-size: 15px;
-  }
-
-  ul.inner-dropdown {
-    padding-bottom: 0 !important;
-    padding-top: 8px !important;
-  }
-}
-
-@media all and (max-width: 330px) {
-  nav ul li {
-    display: block;
-    width: 94%;
-  }
-}
-
 form.newsletter {
   background: transparent;
   padding: 0.3em;
@@ -790,20 +582,10 @@ input {
 
 .form-w3ls-left-info button.btn {
   background: #ffffff;
-  margin-top: 27px;
   color: #76368f;
-  font-size: 14px;
- 
+  margin-top: 27px;
   padding: 0.7em 3em;
-  /* letter-spacing: 1px; */
-  transition: 0.5s all;
-  /* -webkit-transition: 0.5s all; */
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  /* display: inline-block; */
-  /* cursor: pointer; */
-  /* outline: none; */
-  /* border: none; */
+  font-size: 14px;
   float: left;
 }
 
@@ -827,10 +609,6 @@ button.btn.reg {
 .form-w3ls-left-info p a {
     font-size: 12px;
     color: #fff;
-   
-    /* letter-spacing: 2px; */
-    /* text-transform: uppercase; */
-    /* text-decoration: underline; */
 }
 
 .heading h5 {
@@ -868,13 +646,6 @@ button.btn.reg {
 }
 
 /* social-icons footer */
-ul.w3layouts-icons {
-     /* float: right; */
-      /* width: 24px; */
-     /* height: 24px; */
-     /* top: 44px; */
-}
-
 ul.w3layouts-icons li {
   display: inline-block;
   margin: 0 0.3em;
@@ -895,18 +666,6 @@ ul.w3layouts-icons li a {
   -ms-transition: 0.5s all;
   display: inline-block;
 }
-
-/* ul.w3layouts-icons li a.face-b:hover {
-  background: #3b5998;
-  color: #fff;
-  border-color: #3b5998;
-}
-
-ul.w3layouts-icons li a.twit:hover {
-  background: #55acee;
-  color: #fff;
-  border-color: #55acee;
-} */
 
 ul.w3layouts-icons li a.dribble:hover {
   background: #f26522;
@@ -979,7 +738,7 @@ ul.w3layouts-icons li a.vk:hover {
   }
 
   body h2 {
-    font-size: 2.0em;
+    font-size: 1.94em;
     margin: 2em 0 0 0;
   }
 }
@@ -1007,37 +766,15 @@ ul.w3layouts-icons li a.vk:hover {
   .form-w3ls-left-info input[type="password"] {
     width: 99%;
   }
-/* 
-  img {
-    max-width: 100%;
-    margin-top: 7%;
-  
-  } */
 
-  .form-w3ls-left-info p a {
-    font-size: 12px;
-    color: #fff;
-   float: right;
-    /* letter-spacing: 2px; */
-    /* text-transform: uppercase; */
-    /* text-decoration: underline; */
-}
+ 
   .form-w3ls-left-info button.btn {
     background: #ffffff;
     margin-top: 27px;
     color: #76368f;
     font-size: 14px;
     padding: 0.7em 3em;
-  margin-left: 30%;
-    transition: 0.5s all;
-    /* -webkit-transition: 0.5s all; */
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    /* display: inline-block; */
-    /* cursor: pointer; */
-    /* outline: none; */
-    /* border: none; */
-    /* float: left; */
+    margin-left: 30%;
 }
   .cd-nav-trigger {
     top: 10px;
@@ -1050,56 +787,164 @@ ul.w3layouts-icons li a.vk:hover {
     white-space: nowrap;
 }
 
-.redesSociales{
-  padding-top: 23%;
-  padding-right: 42%;
- }
+ .bienvenida{
+  margin-bottom: -54px;
+  text-align: center;
+}
+.redesSociales {
+  margin-bottom: 20px;
+  margin-right: 132px;
+}
+.copyRight {
+  float: right;
+  color: white;
+  padding-right: 15px;
+}
 }
 
-@media (max-width: 480px) {
-  header {
-    padding: 1em 0;
-  }
-
-  .menu .toggle {
-    width: 62%;
-  }
-
-.form-w3ls-left-info input[type="email"], .form-w3ls-left-info input[type="password"] {
-  width: 100.1%;
-}
-
-}
-@media (max-width: 441px) {
-  .nav_w3pvt {
-    float: left;
-    width: 60%;
-    margin: 1em 0 0 0;
-  }
-}
-@media (max-width: 384px) {
-  body h2 {
-    font-size: 1.75em;
-    margin: 2em 0 0 0;
-  }
-
-  .content-w3layouts-main {
-    max-width: 350px;
-    padding: 2em 0em;
-  }
-
-  .content-inner-info {
-    padding-top: 7em;
-  }
-}
-
-@media (max-width: 350px) {
+@media (min-width: 350px) and (max-width: 393px) {
+ 
   body h2 {
     font-size: 1.6em;
   }
+  .bienvenida{
+    margin-bottom: -54px;
+    text-align: center;
+  }
+  .form-w3ls-left-info button.btn {
+    margin-left: 28%;
+}
+.olvidastePass{
+  float: none;
+  text-align: center;
+}
+  .redesSociales {
+    margin-bottom: 20px;
+    margin-right: 148px;
+  }
+  .copyRight {
+    float: right;
+    color: white;
+    padding-right: 48px;
+  }
+
 }
 
-/*--//responsive--*/
+@media (min-width: 400px) and (max-width:480px) {
+
+.olvidastePass{
+  float: none;
+  text-align: center;
+}
+.redesSociales {
+  margin-bottom: 20px;
+  margin-right: 148px;
+}
+.copyRight {
+  float: right;
+  color: white;
+  padding-right: 69px;
+}
+}
+
+@media (min-width: 390px){
+  .p-4 {
+    padding: 2.5rem !important;
+  }
+
+
+}
+
+@media (min-width: 1024px) and (max-width:1280px) {
+  .form-w3ls-left-info input[type="email"] {
+    width: 85%;
+    height: 68px;
+    left: 76px;
+    font-size: 13px;
+    top: 357px;
+    border: none;
+    opacity: 0.29;
+    border-radius: 5px;
+}
+
+.form-w3ls-left-info input[type="password"] {
+    width: 85%;
+    height: 68px;
+    left: 76px;
+    top: 357px;
+    border: none;
+    font-size: 13px;
+    opacity: 0.29;
+    border-radius: 5px;
+    margin-bottom: -10px;
+}
+.bienvenida{
+   font-size: 19px;
+}
+.link_registrarse {
+  font-size: 20px !important; 
+}
+#clickAqui{
+   font-size: 20px !important; 
+}
+.h2Id{
+    font-size: 48px;
+}
+.labelEmail, .labelPass{
+    font-size: 18px !important;
+}
+::placeholder {
+color: #5b1b74;
+background:white;
+padding: 12px 1px 8px 8px;
+margin: 15px;
+font-size: 19px !important;
+}
+/* olvidastes pass */
+.form-w3ls-left-info p a {
+  font-size: 19px;
+}
+.form-w3ls-left-info button.btn {
+background: #ffffff;
+color: #76368f;
+margin-top: 27px;
+margin-left: -0.3em;
+font-size: 19px;
+padding: 1.1em 3.5em;
+border-radius: 11px;
+}
+img{
+    width: 13em;
+}
+.cd-nav-trigger {
+    top: auto;
+right: 15px;
+height: 44px;
+width: 44px;
+z-index: 5;
+overflow: hidden;
+text-indent: 100%;
+white-space: nowrap;
+}
+.content-inner-info {
+    padding-top: 11em;
+    width: 100.2%;
+}
+.contenedor-footer{
+  margin-top: 77px;
+}
+.redesSociales{
+  margin-top: -70px !important;
+}
+.copyRight {
+  float: right;
+  color: white;
+  padding-right: 15px;
+  margin-top: -43px;
+  font-size: 20px;
+}
+}
+
 
 label {
   position: absolute;
@@ -1110,15 +955,8 @@ label {
 }
 
 .link_registrarse {
-  /* width: 263px; */
   height: 14px;
-  /* left: 75px; */
-  /* top: 312px; */
-  /* font-family: 'Oblivian'; */
-  /* font-style: normal; */
-  /* font-weight: 400; */
   font-size: 13px;
-  /* line-height: 14px; */
   color: white;
 }
 
@@ -1139,13 +977,12 @@ label {
 .redesSociales{
   float: right;
   margin-top: -3%;
+  padding-right: 15px;
 }
-
 
 .icon-instagram:hover{
   color:#D2358B;
 }
-
 
 #clickAqui{
   color: #fed061;font-size: 13px;
@@ -1156,12 +993,10 @@ label {
 .labelPass{
   margin-left: 8px; font-size: 10px; padding: 5px 9px;
 }
-#olvidastePass{
-  float:left;
-}
+
 @media (min-width: 1920px) {
   .form-w3ls-left-info input[type="email"] {
-      width: 132%;
+      width: 113%;
       height: 68px;
       left: 76px;
       font-size: 13px;
@@ -1172,7 +1007,7 @@ label {
   }
 
   .form-w3ls-left-info input[type="password"] {
-      width: 132%;
+      width: 113%;
       height: 68px;
       left: 76px;
       top: 357px;
@@ -1201,20 +1036,18 @@ label {
   margin: 15px;
   font-size: 15px;
   }
-  #olvidastePass, #c_right{
-      font-size: 17px;
-  }
+ /* olvidastes pass */
+.form-w3ls-left-info p a {
+  font-size: 20px;
+}
   .form-w3ls-left-info button.btn {
   background: #ffffff;
-  margin-top: 27px;
   color: #76368f;
+  margin-top: 27px;
+  margin-left: -0.3em;
   font-size: 19px;
-  padding: 1.1em 4.5em;
-  transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
+  padding: 1.1em 4.0em;
   border-radius: 11px;
-  float: left;
   }
   img{
       width: 13em;
@@ -1233,4 +1066,10 @@ label {
       padding-top: 11em;
       width: 100.2%;
   }
+  .contenedor-footer{
+    margin-top: 77px;
+  }
+}
+.icon-instagram:hover{
+  color:#D2358B;
 }

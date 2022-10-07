@@ -1,157 +1,125 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 
-<!DOCTYPE html>
-<html lang="zxx">
-
-<head>
-    <title>Iniciar sesion</title>
-    <!-- Meta tag Keywords -->
-    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords"
-        content="Utilizer Login Form template Responsive, Login form web template, Flat Pricing tables, Flat Drop downs Sign up Web Templates, Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-
-    <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-
-    </script>
-
-    <link rel="stylesheet" href="./directorio_login/bootstrap.min.css">
-    <!-- Bootstrap-Core-CSS -->
-    <link rel="stylesheet" href="./directorio_login/styleLogin.css" type="text/css" media="all" />
-    <!-- Style-CSS -->
-    <!-- font-awesome-icons -->
-    <link href="./directorio_login/font-awesomeLogin.css" rel="stylesheet">
-    <!-- font-awesome-icons  -->
-    <!-- /Fonts -->
-    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700"
-        rel="stylesheet">
-    <!-- css menu -->
+<!doctype html >
+<html lang="en" >
+    <head>
+        <meta charset="utf-8" />
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <%- include ('./partials/resetPass_&_restablecerPass/header.ejs')%>
+         <link rel="stylesheet" href="./directorio_login/styleLogin.css" type="text/css" media="all" />
+        <!-- font-awesome-icons -->
+        <link href="./directorio_login/icon_fonts/css/all_icons_min.css" rel="stylesheet">
+         <!-- css menu -->
     <link href="./directorio_login/menuLogin.css" rel="stylesheet">
-    <link href="./directorio_login/animate.min.css" rel="stylesheet">
+    </head>
+    <body style="background-image: url('/img/banner_login.jpg');  background-size: cover;-webkit-background-size: cover; 
+            -moz-background-size: cover;  background-attachment: fixed; position: relative;">
+             <!-- <body data-layout="horizontal"> -->
+                   <div class="auth-page">
+                        <div class="d-flex p-sm-5 p-4" >
+                                <div class="d-flex flex-column" style="margin-top:-12px ;">
+                                    <header style="margin-bottom:-100px ;">
+                                         <!-- ======\\ MENU //======== -->
+                                        <nav>
+                                            <ul class="cd-primary-nav">
+                                                <li><a href="/" class="animated_link">Regresar</a></li>
+                                            </ul>
+                                        </nav>
+                                         <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a> 
+                                        <div class="header-w3layouts">
+                                            <img src="/img/logoLogin.png" id="logoBlanco" alt="" srcset="">
+                                        </div>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link href="./directorio_login/icon_fonts/css/all_icons_min.css" rel="stylesheet">
-    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script> 
-</head>
-<body>
-    <!-- main -->
-    <div class="main-top-intro">
-        <div class="bg-layer">
-            <!-- header -->
-            <div class="wrapper">
-                <header>
-                    <div>
-                    <nav>
-                        <ul class="cd-primary-nav">
-                            <li><a href="/" class="animated_link">Regresar</a></li>
-                        </ul>
-                    </nav>
-                    <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a>
-                    <div class="header-w3layouts">
-                        <img src="/img/logoLogin.png" id="logoBlanco" alt="" srcset="">
-                    </div>
-                    </div>
-                </header>
-                
-                <!-- header -->
-                <div class="content-inner-info">
-                    <p class="bienvenida">Bienvenido a 3C Sigma Water System</p>
-                    <h2 class="h2Id">Ingresa con tus datos</h2>
-                    <br>
-                    <br>
-                    <p class="link_registrarse">¿Deseas convertirte en vendedor? <a href="/register" id="clickAqui">haz clic aquí.</a></p>
-                    <div class="content-w3layouts-main">
-                        <div class="form-w3ls-left-info">
-                            <!-- TODO FORMULARIO LOGIN ==============-->
-                            <form action="/login" method="post" id="idLogin">
-                               <label class="labelEmail">Email</label>
-                                <input type="email" class="email" name="correo" id="correo" placeholder="Ejemplo@tudominio.com"/>
-                                  <br>
-                                  <br>
-                               <label class="labelPass">Contraseña</label>
-                                <input type="password" class="password" id="pass" name="pass" placeholder="**********" />
-                                <label style="margin-left: 8px; font-size: 10px; padding: 5px 9px;" id = "GFG_DOWN" ></label>
-                                  <br>
-                                  <br>
-                                <div class="recuerdame">
-                                    <p><a href="https://app.3csigmawater.com//restablecer-clave" id="olvidastePass">¿Olvidaste tu contraseña?</a></p>
+                                       
+                                        <div class="cd-overlay-nav">
+                                            <span></span>
+                                        </div>
+                                        <div class="cd-overlay-content">
+                                            <span></span>
+                                        </div>
+                                        <!-- ======\\ MENU //======== -->
+                                    </header>
+                                    <br>
+                                    <br>
+                                    <div class="auth-content my-auto">
+                                        <div class="content-inner-info">
+                                          <p class="bienvenida">Bienvenido a 3C Sigma Water System</p>
+                                             <h2 class="h2Id">Ingresa con tus datos</h2>
+                                         <br>
+                                         <br>
+                                          <p class="link_registrarse">¿Deseas convertirte en vendedor? <a href="/register" id="clickAqui">haz clic aquí.</a></p>
+                                         <br>
+                                        </div>
+                                        <div class="form-w3ls-left-info">
+                                            <!-- TODO FORMULARIO LOGIN ==============-->
+                                            <form action="/login" method="post" id="idLogin">
+                                               <label class="labelEmail">Email</label>
+                                                <input type="email" class="email" name="correo" id="correo" placeholder="Ejemplo@tudominio.com"/>
+                                                  <br>
+                                                  <br>
+                                               <label class="labelPass">Contraseña</label>
+                                                <input type="password" class="password" id="pass" name="pass" placeholder="**********" />
+                                                <label style="margin-left: 8px; font-size: 10px; padding: 5px 9px;" id = "GFG_DOWN" ></label>
+                                                  <br>
+                                                  <br>
+                                                <div class="olvidastePass">
+                                                    <p ><a href="https://app.3csigmawater.com//restablecer-clave" >¿Olvidaste tu contraseña?</a></p>
+                                                </div>
+                                                <div class="bottom" style="transition:none; ">
+                                                    <button class="btn btn-primary" type="submit"> Ingresar</button>
+                                                </div>
+                                            </form>
+                                            <!-- TODO FORMULARIO LOGIN ==============-->
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="bottom" style="transition:none;">
-                                    <button class="btn btn-primary" type="submit"> Ingresar</button>
-                                </div>
-                            </form>
-                            <!-- TODO FORMULARIO LOGIN ==============-->
+                           
+                        </div>
+                        <div class="contenedor-footer" >
+                        <div class="redesSociales">
+                            <li><a href="https://www.facebook.com/3csigmawater" target="_blank"><i class="icon-facebook"></i></a></li>
+                            <li><a href="https://instagram.com/3csigmawater" target="_blank"><i class="icon-instagram"></i></a></li>
+                        </div>
+                        <div class="copyRight">
+                            3C Sigma Water System ®  <script>document.write(new Date().getFullYear())</script> 
                         </div>
                     </div>
-                    <div class="redesSociales">
-                        <li><a href="https://www.facebook.com/3csigmawater" target="_blank"><i class="icon-facebook"></i></a></li>
-                        <li><a href="https://instagram.com/3csigmawater" target="_blank"><i class="icon-instagram"></i></a></li>
-                    </div>
-                <div class="copy-w3layouts-inf" id="copycopy">
-                    <a href="/login" id="c_right"> <p>3C Sigma Water System ® 2022.</a> </p>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-    <!-- main -->
-
-    <script>
-        $("#pass").on('keypress', function(e) { 
-            var s = String.fromCharCode( e.which );
-            if ((s.toUpperCase() === s && s.toLowerCase() !== s 
-                && !e.shiftKey) || (s.toUpperCase() !== s && 
-                s.toLowerCase() === s && e.shiftKey)) {
-                    $('#GFG_DOWN').text("Mayuscula activada");
-                } 
-                else if ((s.toLowerCase() === s && s.toUpperCase() !== s
-                && !e.shiftKey) || (s.toLowerCase() !== s 
-                && s.toUpperCase() === s && e.shiftKey)) { 
-                    $('#GFG_DOWN').text("");
-                } 
-        });
-    </script> 
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <% if(alert) { %>
+                     </div>
+        <%- include ('./partials/resetPass_&_restablecerPass/footer.ejs')%>
         <script>
-            Swal.fire({
-                title: '<%= alertTitle %>',
-                text: '<%= alertMessage %>',
-                icon: '<%= alertIcon %>',
-                showConfirmButton: <%= showConfirmButton %>,
-                timer: <%= timer %>
-      }).then(() => {
-                    window.location = '/<%= ruta %>'
-                })
-        </script>
-        <% } %>
-
-       
-
-<!-- Jquery-->
-  <script src="./js/jquery-3.6.0.min.js"></script>
-<!-- Menu script -->
-  <script src="./js/velocity.min.js"></script>
-  <script src="./js/main.js"></script>
-
-</body>
-
-</html>
+            $("#pass").on('keypress', function(e) { 
+                var s = String.fromCharCode( e.which );
+                if ((s.toUpperCase() === s && s.toLowerCase() !== s 
+                    && !e.shiftKey) || (s.toUpperCase() !== s && 
+                    s.toLowerCase() === s && e.shiftKey)) {
+                        $('#GFG_DOWN').text("Mayuscula activada");
+                    } 
+                    else if ((s.toLowerCase() === s && s.toUpperCase() !== s
+                    && !e.shiftKey) || (s.toLowerCase() !== s 
+                    && s.toUpperCase() === s && e.shiftKey)) { 
+                        $('#GFG_DOWN').text("");
+                    } 
+            });
+        </script> 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <% if(alert) { %>
+            <script>
+                Swal.fire({
+                    title: '<%= alertTitle %>',
+                    text: '<%= alertMessage %>',
+                    icon: '<%= alertIcon %>',
+                    showConfirmButton: <%= showConfirmButton %>,
+                    timer: <%= timer %>
+          }).then(() => {
+                        window.location = '/<%= ruta %>'
+                    })
+            </script>
+            <% } %>
+    <!-- Jquery-->
+      <script src="./js/jquery-3.6.0.min.js"></script>
+    <!-- Menu script -->
+      <script src="./js/velocity.min.js"></script>
+      <script src="./js/main.js"></script>
+    
+    </body>
+    </html>
