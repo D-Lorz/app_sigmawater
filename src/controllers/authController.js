@@ -4,7 +4,8 @@ const conexion = require('../database/db.js');
 const bcrypt = require('bcrypt');
 const { promisify } = require('util')
 const randtoken = require('rand-token');
-const { recuperarClaveHTML, sendEmail } = require('../lib/correo')
+const { recuperarClaveHTML, sendEmail } = require('../lib/correo');
+const { log } = require('console');
 
 
 // todo: LOGIN
@@ -176,6 +177,7 @@ exports.resetPassword = async (req, res, next) => {
             const token = randtoken.generate(20);
              // ! ************* PROCESO DEL EMAIL PARA VENDEDOR ************
             const email = correo
+            console.log("+++++++++++++++++++++++++++++++++++>>>>>>>" , email)
             const asunto = "Bienvenido a 3C Sigma Water System"
             const plantilla = recuperarClaveHTML(token)
             // Enviar email

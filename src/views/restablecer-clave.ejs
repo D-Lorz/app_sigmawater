@@ -34,19 +34,14 @@
                                         <form action="/reset-password-correo" method="post" name="form1">
                                             <div class="mb-3">
                                                 <label class="form-label">Correo electrónico</label>
-
-                                                <input type="email" name="correo" class="form-control" id="correo"
-                                aria-describedby="emailHelp" placeholder="Escribe algo" value="" onfocus="">
-                                                
+                                                <input type="email" name="correo" class="form-control" id="correo" aria-describedby="emailHelp" placeholder="Escribe algo" value="" onfocus="">
                                             </div>
-
                                             <div class="mb-3 mt-4">
                                                 <center><button class="btn btn-primary w-50 waves-effect waves-light"
                                                    style="border-radius:17px;" type="submit">Enviar <i class="fab fa-telegram-plane" id="iconoE"></i></button></center>
                                               </div> 
-
-                                             
                                         </form>
+
                                         <% if (messages.error) { %>
                                             <div class="alert alert-danger alert-border-left alert-dismissible fade show" style="width: 102%;" role="alert">
                                                 <i class="mdi mdi-block-helper me-3 align-middle"></i><strong>Error:</strong> <%- messages.error %>
@@ -59,9 +54,7 @@
                                                         <i class="mdi mdi-check-all me-3 align-middle" ></i><strong>Enviado:</strong> - <%- messages.success %>
                                                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                     </div>
-                                                   
-                                                    <% } %>
-
+                                                <% } %>
                                         <div class="mt-5 text-center">
                                             <p class="text-muted mb-0">¿Recordaste? <a href="https://app.3csigmawater.com/login"
                                               class="text-primary fw-semibold">Ingresa aquí</a> </p>

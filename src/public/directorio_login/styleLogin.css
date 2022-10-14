@@ -550,7 +550,7 @@ a {
   font-size: 12px;
 }
 
-.form-w3ls-left-info input[type="email"] {
+ input[type="email"] {
   width: 284px;
   height: 47px;
   left: 76px;
@@ -815,7 +815,6 @@ ul.w3layouts-icons li a.vk:hover {
     margin-left: 28%;
 }
 .olvidastePass{
-  float: none;
   text-align: center;
 }
   .redesSociales {
@@ -961,10 +960,17 @@ label {
 }
 
 .links {
-  margin-left: 10rem;
-  margin-bottom: -2%;
+  /* margin-left: 10rem;
+  margin-bottom: -2%; */
   margin-top: -25px
 
+}
+.form-w3ls-left-info p a {
+    font-size: 8px;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: underline;
 }
 
 .redesSociales li {

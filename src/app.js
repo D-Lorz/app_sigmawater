@@ -61,11 +61,12 @@ app.use('/', require('./routes/router'));
 app.use('/', require('./routes/customer'));
 app.use('/', require('./routes/admin'));
 app.use('/', require('./routes/sellers')); 
-
 app.use('/', require('./routes/users'))
 
-//app.use('/', indexRouter);
-// app.use('/', usersRouter);
+// RUTAS PARA ERROR 404
+app.get('*', (req, res, next) => {
+  res.render('404');
+});
 
 // Configuraciones
 app.set('port', process.env.PORT || 3000);
