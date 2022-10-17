@@ -6,191 +6,43 @@
         <title>Restablecer-contraseña</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%- include ('./partials/resetPass_&_restablecerPass/header.ejs')%>
-        <style>
-            @import url("https://fonts.cdnfonts.com/css/oblivian-text");
-            body {font-family: "Oblivian Text" !important;}
-            /* ...........== LOGOS ==............. */
-            /* Logo blanco */
-            #logoBlanco{float: left;}
-
-            /* ...........== CONTENEDORES ==............. */
-            .contenedor-personalizado{width:100% ;}
-
-            /* ...........== MENSAJES ==............. */
-            /* Mensaje de bienvenida del login */
-            .bienvenida{font-size: 13px;color:white;margin: 0;font-weight: 400;}
-            /* Mensaje de titulo del login */
-            .h2Id{ font-size: 32px;color:white;font-weight: 800;}
-            /* Mensaje en blanco antes del mensaje amarillo */
-            .link_registrarse{font-size: 13px;color:white;font-weight: 400;margin: 0;}
-            /* Mensaje del click aqui */
-            #clickAqui{color: #fed061;font-size: 13px;font-weight: 400;}
-
-              /* ...........== LABEL ==............. */
-            /* Label en general */
-            label { position: absolute;font-size: 12px;color: white;margin: 3px; padding: 1px 9px 6px; }
-            /* Label de correo */
-            .labelEmail{ margin-left: 8px; font-size: 10px; padding: 5px 9px;}
-            /* Label de clave */
-            .labelPass{ margin-left: 8px; font-size: 10px; padding: 5px 9px; }
-
-               /* ...........== CAMPOS ==............. */
-            /* Input general */
-            input {color: #000000;text-align: justify;padding: 14px 2px 1px 9px;}
-            /* Campo de correo */
-            .cssCorreo{ width: -webkit-fill-available; height: 47px; left: 76px; font-size: 13px;top: 357px; border: none;opacity: 0.29;border-radius: 5px;}
-            /* Campo de la clave */
-            .password{width: -webkit-fill-available; height: 47px;left: 76px;font-size: 13px; top: 357px; border: none; opacity: 0.29;border-radius: 5px; }
-
-            /* ...........== PLACEHOLDER ==............. */
-            ::placeholder {color: #5b1b74; background:white; padding: 12px 1px 8px 8px; margin: 15px;font-size: 12px; }
-           
-            /* ...........== RECORDARME ==............. */
-            input[switch] + label { width: 101px;}
-            input[switch]:checked + label:after {left: 80px;}
-            
-            /* ...........== OLVIDAR CLAVE ==............. */
-            #olvidarPass{color: white; }
-
-            /* ...........== BOTON ==............. */
-            /* Boton de ingresar sesion */
-            #boton{border-radius: 5px;color: #76368f;font-size: 13px; padding: 0.7em 3em;background: white;    margin-bottom: -12px;}
-            .btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary:hover {color: #76368f;background-color: #ffffff;}
-
-            /* ...........== COPYRIGHT ==............. */
-            .copyRight { float: right; color: white; padding-right: 15px;margin-top: -60px;font-size: 13px;font-weight: 400;}
-
-            /* ...........== REDES SOCIALES ==............. */
-            .redesSociales{float: right;color: white;padding-right: 15px;margin-top: -83px;font-size: 13px;}
-            #face{width: 16px;color: white;font-weight: 400;}
-
-             /* ...........== RESPONSIVE ==............. */
-             /* 350 px hasta 393 px ==>> moviles */
-            @media (min-width: 350px) and (max-width: 393px) {
-
-                #logoBlanco{float: none;margin-bottom: -53px;} 
-                .bienvenida{text-align: center;font-size: 16px;}
-                .h2Id{text-align: center;font-size: 27px;}
-                .divBtn, .link_registrarse{text-align: center;}
-                .copyRight{float: none;text-align: center;padding: 0;}  
-                .redesSociales{float: none;text-align: center;padding: 0;}  
-                .footer-personalizado{margin-top: 23px;}
-            }
-            @media (min-width: 400px) and (max-width:480px) {
-
-                #logoBlanco{float: none;margin-bottom: -62px;} 
-                .bienvenida{text-align: center;font-size: 16px;margin-top: -42%;}
-                .h2Id{text-align: center;font-size: 27px;}
-                .link_registrarse{text-align: center;font-size: 16px}
-                .divBtn, .link_registrarse{text-align: center;}
-                .copyRight{float: none;text-align: center;padding: 0;}  
-                .redesSociales{float: none;text-align: center;padding: 0;}
-                .footer-personalizado{ margin-top: -43%;}  
-            }
-            @media (min-width: 1024px) and (max-width:1280px) {
-                .footer-personalizado{margin-right: 30px;}
-                /* Campo de correo */
-                .cssCorreo{width: 35em; height: 57px; }
-                /* Campo de la clave */
-                .password{width: 35em; height: 57px; }
-                /* Label de correo */
-                .labelEmail{ font-size: 13px;}
-                /* Label de clave */
-                .labelPass{ font-size: 13px; }
-                /* ...........== PLACEHOLDER ==............. */
-                ::placeholder {font-size: 14px; }
-                /* ...........== CONTENEDORES ==............. */
-                .contenedor-personalizado{width:auto ;}
-                .bienvenida {font-size: 17px;}
-                .h2Id {font-size: 35px;}
-                .link_registrarse, #clickAqui {font-size: 15px;}
-                #boton {font-size: 17px; padding: 0.9em 2.5em; }
-                #logoBlanco {width: 40%;}
-            }
-            @media (min-width: 1368px) and (max-width: 1920px) {
-                .footer-personalizado{margin-right: 30px;}
-                .contenedor-personalizado{width:auto ;}
-                .content-inner-info{width: max-content}
-                .cssCorreo {width: 41em; height: 69px;font-size: 13px; }
-                .password{width: 41em; height: 69px;font-size: 13px; }
-                .labelEmail{ font-size: 15px;}
-                .labelPass{ font-size: 15px; }
-                ::placeholder {font-size: 15px; }
-                .bienvenida, .link_registrarse, #clickAqui{ font-size: 19px; margin-top: 31px;}
-                #olvidarPass{ font-size: 16px;}
-                .h2Id{ font-size: 48px;}
-                #boton {font-size: 20px;padding: 0.7em 2.5em; }
-                .my-auto {margin-top: 11% !important;}
-                #logoBlanco {width: 42%;}
-                .copyRight{font-size: 18px;}
-                .redesSociales {font-size: 18px; margin-top: -91px;}
-            }
-
-            @media (min-width: 2560px) {
-                .footer-personalizado{margin-right: 30px;}
-                .contenedor-personalizado{width:auto ;}
-                .content-inner-info{width: max-content}
-                .cssCorreo {width: 27.2em;;height: 115px;font-size: 35px;border-radius: 13px;}
-                .password{width: 27.2em;;height: 115px;font-size: 35px;border-radius: 13px;} 
-                .labelEmail{ font-size: 24px;}
-                .labelPass{ font-size: 24px; }
-                ::placeholder {font-size: 30px;font-weight: 700; }
-                .bienvenida, .link_registrarse, #clickAqui{ font-size: 36px; margin-top: 31px;}
-                #olvidarPass{ font-size: 30px;}
-                .h2Id{ font-size: 88px;}
-                #boton {font-size: 38px;margin-top: 61px;padding: 0.7em 2.5em;border-radius: 17px; }
-                .my-auto {margin-top: 11% !important;}
-                #logoBlanco {width: 34%;margin-top: 27px;}
-                #face{width: 48px;color: white;font-weight: 400;}
-                .copyRight{font-size: 32px;}
-                .redesSociales {font-size: 37px;margin-top: -118px;}
-                input[switch]:checked + label:after {left: 163px;}
-                input[switch] + label:after {
-                    content: "";
-                    position: absolute;
-                    left: 4px;
-                    background-color: #e9e9ef;
-                    -webkit-box-shadow: none;
-                    box-shadow: none;
-                    border-radius: 2rem;
-                    height: 49px;
-                    width: 43px;
-                    top: 2px;
-                    -webkit-transition: all 0.1s ease-in-out;
-                    transition: all 0.1s ease-in-out;
-                }
-                input[switch] + label:before {
-                    color: #343a40;
-                    content: attr(data-off-label);
-                    display: block;
-                    font-family: inherit;
-                    font-size: 24px;
-                    line-height: 21px;
-                    position: absolute;
-                    right: 1px;
-                    margin: 9px;
-                    top: 7px;
-                    min-width: 1.66667rem;
-                    overflow: hidden;
-                }
-                input[switch] + label {
-                    width: 208px;
-                    height: 53px;
-                }
-            }
-        </style>
+        <link href="./directorio_login/menuLogin.css" rel="stylesheet">
+        <link href="./directorio_login/styleLogin.css" rel="stylesheet">
     </head>
     <body style="background-image: url('/img/banner_login.jpg');  background-size: cover;-webkit-background-size: cover; 
     -moz-background-size: cover;  background-attachment: fixed; position: relative;">
     <!-- <body data-layout="horizontal"> -->
         <div class="auth-page">
+
             <div class="container-fluid p-0">
+                
                 <div class="row g-0">
+                    <header >
+                        <!-- ======\\ MENU //======== -->
+                       <nav>
+                           <ul class="cd-primary-nav">
+                               <li><a href="/" class="animated_link">Regresar</a></li>
+                           </ul>
+                       </nav>
+                        <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a> 
+                       <div class="cd-overlay-nav">
+                           <span class="" style="transform: scaleX(0) scaleY(0); height: 3012.76px; width: 3012.76px; top: -1506.38px; left: -1506.38px;"></span>
+                       </div>
+                       <div class="cd-overlay-content">
+                           <span class="" style="transform: scaleX(0) scaleY(0); height: 3012.76px; width: 3012.76px; top: -1506.38px; left: -1506.38px;"></span>
+                       </div>
+                       <!-- ======\\ MENU //======== -->
+                   </header>
                     <div class="col-xxl-3 col-lg-4 col-md-5">
+                        
                         <div class="auth-full-page-content d-flex p-sm-5 p-4">
+                   
                             <div class="contenedor-personalizado">
+                                
                                 <div class="d-flex flex-column h-100">
+                                    
                                     <div class="mb-4 mb-md-5 text-center">
+                                        
                                         <a href="#" class="d-block auth-logo">
                                             <img src="/img/logoLogin.png" id="logoBlanco" alt="LogoWhite" srcset="">
                                         </a>
@@ -215,9 +67,14 @@
                                                     <label style="margin-left: 8px; font-size: 10px; padding: 5px 9px;" id = "GFG_DOWN" ></label>
                                                 </div>
                                                 <div class="text-center">
-                                                    <input type="checkbox" switch="none" id="remember_me" value="remember-me"  />
-                                                    <label for="remember_me" style="float: left;" data-on-label="Olvidar" data-off-label="Recordarme"></label>
-                                                    <p class="text-muted mb-0" style="float: right;"><a href="https://app.3csigmawater.com/restablecer-clave" id="olvidarPass">¿Olvidaste tu contraseña?</a></p>
+                                                    <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
+                                                        <input type="checkbox" class="form-check-input" id="remember_me" value="remember-me">
+                                                        <label class="form-check-label" for="remember_me">Recuerdame</label>
+                                                        <p class="text-muted mb-0" style="float: right; font-size: 11px;"><a href="https://app.3csigmawater.com/restablecer-clave" id="olvidarPass">¿Olvidaste tu contraseña?</a></p>
+                                                    </div>
+                                                    <!-- <p for="" style="float: left;color: white;"><input type="checkbox" name="" id="" > Recuerdame </p>                                                    </p> -->
+                                                    <!-- <input type="checkbox" switch="none" id="remember_me" value="remember-me"/>
+                                                    <label for="remember_me" style="float: left;" data-on-label="s" data-off-label="a"></label> -->
                                                 </div>
                                                 <br>
                                                 <br>

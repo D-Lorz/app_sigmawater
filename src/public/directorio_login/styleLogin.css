@@ -1,1081 +1,156 @@
-/*--
-	Author: W3Layouts
-	Author URL: http://w3layouts.com
-	License: Creative Commons Attribution 3.0 Unported
-	License URL: http://creativecommons.org/licenses/by/3.0/
-
---*/
-
 @import url("https://fonts.cdnfonts.com/css/oblivian-text");
-
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-dl,
-dt,
-dd,
-ol,
-nav ul,
-nav li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-
-ol,
-ul {
-  list-style: none;
-  margin: 0px;
-  padding: 0px;
-}
-
-blockquote,
-q {
-  quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/*-- start editing from here --*/
-a {
-  text-decoration: none;
-}
-
-.txt-rt {
-  text-align: right;
-}
-
-/* text align right */
-.txt-lt {
-  text-align: left;
-}
-
-/* text align left */
-.txt-center {
-  text-align: center;
-}
-
-/* text align center */
-.float-rt {
-  float: right;
-}
-
-/* float right */
-.float-lt {
-  float: left;
-}
-
-/* float left */
-.clear {
-  clear: both;
-}
-
-/* clear float */
-.pos-relative {
-  position: relative;
-}
-
-/* Position Relative */
-.pos-absolute {
-  position: absolute;
-}
-
-/* Position Absolute */
-.vertical-base {
-  vertical-align: baseline;
-}
-
-/* vertical align baseline */
-.vertical-top {
-  vertical-align: top;
-}
-
-/* vertical align top */
-nav.vertical ul li {
-  display: block;
-}
-
-/* vertical menu */
-nav.horizontal ul li {
-  display: inline-block;
-}
-
-/* horizontal menu */
-/* img {
-  max-width: 100%;
-} */
-
-/*-- end reset --*/
-
-scroll-container {
-  overflow-y: scroll;
-}
-
-body {
-  font-family: "Oblivian Text" !important;
-}
-
-/*-- main --*/
-
-h1 {
-  font-size: 45px;
-  color: #fff;
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  text-align: center;
-}
-
-/*-- slide --*/
-
-@keyframes slideleft {
-  from {
-    background-position: 0%;
-  }
-
-  to {
-    background-position: 90000%;
-  }
-}
-
-@-webkit-keyframes slideleft {
-  from {
-    background-position: 0%;
-  }
-
-  to {
-    background-position: 90000%;
-  }
-}
-
-.main-top-intro {
-  background-image: url("/img/banner_login.jpg");
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-attachment: fixed;
-  position: relative;
-  min-height: 100vh;
-}
-
-.contenedor-footer{
-  margin-top: 22px;
-}
-
-.bg-layer {
-  min-height: 100vh;
-}
-
-/*-- //slide --*/
-
-/*--header start here--*/
-header {
-  padding: 2em 0;
-}
-
-/* header */
-.wrapper {
-  margin: 0 auto;
-  width: 90%;
-}
-
-.header-w3layouts {
-  float: left;
-}
-
-.nav_w3pvt {
-  float: left;
-  width: 50%;
-}
-
-.buttons {
-  float: right;
-}
-
-a.navbar-brand {
-  font-size: 0.9em;
-  color: #fff;
-  padding: 0;
-  margin: 0;
-  text-transform: capitalize;
-  letter-spacing: 1px;
-  position: relative;
-  font-weight: 800;
-}
-
-a.navbar-brand.logo span.fa {
-  color: #fff;
-}
-
-.buttons a {
-  background: #00bcd4;
-  padding: 10px 25px;
-  color: #fff;
-  display: block;
-  border-radius: 0px;
-  letter-spacing: 0.5px;
-  border: 2px solid #00bcd4;
-}
-
-/* CSS Document */
-
-.toggle,
-[id^="drop"] {
-  display: none;
-}
-
-/* Giving a background-color to the nav container. */
-nav {
-  margin: 0;
-  padding: 0;
-}
-
-/* Since we'll have the "ul li" "float:left"
- * we need to add a clear after the container. */
-
-nav:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Removing padding, margin and "list-style" from the "ul",
- * and adding "position:reltive" */
-nav ul {
-  float: right;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  position: relative;
-}
-
-/* Positioning the navigation items inline */
-nav ul li {
-  margin: 0px;
-  display: inline-block;
-  float: left;
-}
-
-/* Styling the links */
-nav a {
-  text-transform: capitalize;
-  color: #fff;
-  letter-spacing: 1px;
-  font-size: 15px;
-  font-weight: 400;
-  display: block;
-  padding: 10px 15px;
-}
-
-nav ul li ul li:hover {
-  background: #f8f9fa;
-}
-
-nav a:hover {
-  color: #fff;
-}
-/* 
-.menu li.active a {
-  color: #00bcd4;
-  background: transparent;
-} */
-
-.inner-dropdown li a {
-  color: #333 !important;
-}
-
-/* .inner-dropdown li.active a {
-  color: #00bcd4 !important;
-} */
-
-/* Hide Dropdowns by Default
- * and giving it a position of absolute */
-nav ul ul {
-  display: none;
-  position: absolute;
-  /* has to be the same number as the "line-height" of "nav a" */
-  top: 30px;
-  background: #fff;
-  padding: 10px;
-}
-
-ul.inner-dropdown a:hover {
-  color: #333;
-}
-
-/* Display Dropdowns on Hover */
-nav ul li:hover > ul {
-  display: inherit;
-}
-
-/* Fisrt Tier Dropdown */
-nav ul ul li {
-  width: 160px;
-  float: none;
-  display: list-item;
-  position: relative;
-}
-
-nav ul ul li a {
-  padding: 5px 10px;
-  display: block;
-  font-size: 13px;
-}
-
-/* Second, Third and more Tiers	
- * We move the 2nd and 3rd etc tier dropdowns to the left
- * by the amount of the width of the first tier.
-*/
-nav ul ul ul li {
-  position: relative;
-  top: -60px;
-  /* has to be the same number as the "width" of "nav ul ul li" */
-  left: 170px;
-}
-
-/* Change ' +' in order to change the Dropdown symbol */
-li > a:only-child:after {
-  content: "";
-}
-
-/* Media Queries
------
-
-
-
----------------------------------------- */
-
-.copyRight {
-  float: right;
-  color: white;
-  padding-right: 15px;
-}
-form.newsletter {
-  background: transparent;
-  padding: 0.3em;
-  border: 2px solid #fff;
-}
-
-.form-w3layouts-grid .search {
-  outline: none;
-  padding: 10px 20px;
-  font-size: 14px;
-  color: #fff;
-  width: 85%;
-  background: transparent;
-  text-transform: capitalize;
-  border: none;
-  letter-spacing: 2px;
-  float: left;
-}
-
-.form-w3layouts-grid button.btn {
-  color: #fff;
-  border: none;
-  padding: 10px 0px;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: transparent;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  -ms-transition: 0.5s all;
-  transition: 0.5s all;
-  float: right;
-  cursor: pointer;
-  width: 15%;
-  font-size: 14px;
-  text-align: center;
-}
-
-/*-- //header --*/
-
-body h2 {
-  /*  width: 327px; */
-  /* height: 38px; */
-  /* left: 75px
-px
-; */
-  /* margin-top: -2%; */
-  /* padding-top: 7%; */
-  /* top: 243px; */
-  /* margin-bottom: 1%; */
-  font-weight: 800;
-  font-size: 32px;
-  /* line-height: 38px; */
-  color: #ffffff;
-}
-
-.bienvenida {
-  color: #ffffff;
-  font-size: 13px;
-}
-
-.main-icon {
-  text-align: center;
-}
-
-.content-inner-info {
-  padding-top: 6em;
-  width: 100.2%;
-}
-
-a {
-  color: #ffffff;
-  margin: 0em;
-}
-
-.bottom {
-  margin: 1em 0 0;
-}
-
-.content-w3layouts-main {
-  max-width: 350px;
-  position: relative;
-  padding: 3em 0em;
-}
-
-.header-left {
-  background: #fff;
-  padding: 0px;
-}
-
-/* ::-webkit-input-placeholder {
- 
-} */
-
-::placeholder {
-  color: #5b1b74;
-  background:white;
-  padding: 12px 1px 8px 8px;
-  margin: 15px;
-  font-size: 12px;
-}
-
- input[type="email"] {
-  width: 284px;
-  height: 47px;
-  left: 76px;
-  font-size: 13px;
-  top: 357px;
-  border: none;
-  opacity: 0.29;
-  border-radius: 5px;
-}
-
-input {
-  color: #000000;
-  text-align: justify;
-  padding: 14px 2px 1px 9px;
-  /* height: 10%;*/
-}
-
-.form-w3ls-left-info input[type="password"] {
-  width: 284px;
-  height: 47px;
-  left: 76px;
-  top: 357px;
-  border: none;
-  font-size: 13px;
-  opacity: 0.29;
-  border-radius: 5px;
-  margin-bottom: -10px;
-}
-
-.form-w3ls-left-info button.btn {
-  background: #ffffff;
-  color: #76368f;
-  margin-top: 27px;
-  padding: 0.7em 3em;
-  font-size: 14px;
-  float: left;
-}
-
-button.btn.reg {
-  margin-left: 2%;
-  background: #4cc2c4;
-}
-
-/*--  --*/
-/* .form-w3ls-left-info p {
-  color: rgb(255, 255, 255);
-  display: inline-block;
-  margin: 20px 0;
-  letter-spacing: 1px;
-} */
-
-.form-w3ls-left-info p.right {
-  text-align: right;
-}
-
-.form-w3ls-left-info p a {
-    font-size: 12px;
-    color: #fff;
-}
-
-.heading h5 {
-  color: #c5c5c5;
-  color: #000000;
-  margin-top: 8px;
-  font-size: 20px;
-}
-
-/*-- header end here --*/
-
-/*-- copyright --*/
-.copy-w3layouts-inf {
-  margin-top: 3em;
-  padding: 2em 0;
-}
-
-.copy-w3layouts-inf p {
-  font-size: 0.85em;
-  letter-spacing: 1px;
-  color: #fff;
-  line-height: 1.8em;
-  float: right;
-  margin-top: -5%;
-}
-
-
-.copy-w3layouts-inf p a {
-  color: #fff;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  -ms-transition: 0.5s all;
-  transition: 0.5s all;
-}
-
-/* social-icons footer */
-ul.w3layouts-icons li {
-  display: inline-block;
-  margin: 0 0.3em;
-}
-
-ul.w3layouts-icons li a {
-  height: 40px;
-  width: 40px;
-  line-height: 2.5;
-  background: none;
-  background: transparent;
-  color: #fff;
-  text-align: center;
-  transition: 0.5s all;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  -ms-transition: 0.5s all;
-  display: inline-block;
-}
-
-ul.w3layouts-icons li a.dribble:hover {
-  background: #f26522;
-  color: #fff;
-  border-color: #f26522;
-}
-
-ul.w3layouts-icons li a.vk:hover {
-  background: #45668e;
-  color: #fff;
-  border-color: #45668e;
-}
-
-/* //social-icons footer */
-/*-- //copyright --*/
-/*-- //main --*/
-
-/*-- responsive-design --*/
-
-@media (max-width: 992px) {
-  header {
-    padding: 2em 0;
-    position: absolute;
-    width: 90%;
-    z-index: 999;
-  }
-}
-
-@media (max-width: 800px) {
-  .nav_w3pvt {
-    float: left;
-    width: 44%;
-  }
-}
-
-@media (max-width: 736px) {
-  .copy-w3layouts-inf p {
-    float: none;
-    text-align: center;
-  }
-
-  ul.w3layouts-icons {
-    float: none;
-    text-align: center;
-    margin-top: 1em;
-  }
-
-  .nav_w3pvt {
-    float: left;
-    width: 60%;
-  }
-
-  .buttons {
-    float: right;
-    width: 40%;
-  }
-
-  .header-w3layouts {
-    float: none;
-    text-align: center;
-  }
-
-  .toggle {
-    border: none;
-    float: left;
-  }
-
-  .form-w3layouts-grid {
-    margin-top: 0.5em;
-  }
-
-  body h2 {
-    font-size: 1.94em;
-    margin: 2em 0 0 0;
-  }
-}
-
-@media (max-width: 600px) {
-  .content-inner-info {
-    padding-top: 8em;
-  }
-
-  .content-inner-info {
-    padding-top: 8em;
-  }
-
-  .form-w3layouts-grid .search {
-    outline: none;
-    padding: 10px 10px;
-  }
-
-  .copy-w3layouts-inf {
-    margin-top: 10em;
-    padding: 1em 0;
-  }
-
-  .form-w3ls-left-info input[type="email"],
-  .form-w3ls-left-info input[type="password"] {
-    width: 99%;
-  }
-
- 
-  .form-w3ls-left-info button.btn {
-    background: #ffffff;
-    margin-top: 27px;
-    color: #76368f;
-    font-size: 14px;
-    padding: 0.7em 3em;
-    margin-left: 30%;
-}
-  .cd-nav-trigger {
-    top: 10px;
-    right: -11px;
-    height: 44px;
-    width: 44px;
-    z-index: 5;
-    overflow: hidden;
-    text-indent: 100%;
-    white-space: nowrap;
-}
-
- .bienvenida{
-  margin-bottom: -54px;
-  text-align: center;
-}
-.redesSociales {
-  margin-bottom: 20px;
-  margin-right: 132px;
-}
-.copyRight {
-  float: right;
-  color: white;
-  padding-right: 15px;
-}
-}
-
+body {font-family: "Oblivian Text" !important;}
+/* ...........== LOGOS ==............. */
+/* Logo blanco */
+#logoBlanco{float: left;}
+
+/* ...........== CONTENEDORES ==............. */
+.contenedor-personalizado{width:100% ;}
+
+/* ...........== MENSAJES ==............. */
+/* Mensaje de bienvenida del login */
+.bienvenida{font-size: 13px;color:white;margin: 0;font-weight: 400;}
+/* Mensaje de titulo del login */
+.h2Id{ font-size: 32px;color:white;font-weight: 800;}
+/* Mensaje en blanco antes del mensaje amarillo */
+.link_registrarse{font-size: 13px;color:white;font-weight: 400;margin: 0;}
+/* Mensaje del click aqui */
+#clickAqui{color: #fed061;font-size: 13px;font-weight: 400;}
+
+  /* ...........== LABEL ==............. */
+/* Label en general */
+label { position: absolute;font-size: 12px;color: white;margin: 3px; padding: 1px 9px 6px; }
+/* Label de correo */
+.labelEmail{ margin-left: 8px; font-size: 10px; padding: 5px 9px;}
+/* Label de clave */
+.labelPass{ margin-left: 8px; font-size: 10px; padding: 5px 9px; }
+
+   /* ...........== CAMPOS ==............. */
+/* Input general */
+input {color: #000000;text-align: justify;padding: 14px 2px 1px 9px;}
+/* Campo de correo */
+.cssCorreo{ width: -webkit-fill-available; height: 47px; left: 76px; font-size: 13px;top: 357px; border: none;opacity: 0.29;border-radius: 5px;}
+/* Campo de la clave */
+.password{width: -webkit-fill-available; height: 47px;left: 76px;font-size: 13px; top: 357px; border: none; opacity: 0.29;border-radius: 5px; }
+
+/* ...........== PLACEHOLDER ==............. */
+::placeholder {color: #5b1b74; background:white; padding: 12px 1px 8px 8px; margin: 15px;font-size: 12px; }
+
+/* ...........== RECORDARME ==............. */
+.form-switch-lg .form-check-label { font-size: 13px;margin-top: -14px; margin-left: -25px;vertical-align: middle;}
+.form-switch .form-check-input { width: 1.5em; margin-left: -2.5em; margin-top: -4px;}
+.form-check-input {height: 0.5em;}
+
+/* ...........== OLVIDAR CLAVE ==............. */
+p.text-muted.mb-0 {float: right;font-size: 11px; margin-top: -14px; }
+#olvidarPass{color: white; }
+
+/* ...........== BOTON ==............. */
+/* Boton de ingresar sesion */
+#boton{border-radius: 5px;color: #76368f;font-size: 13px; padding: 0.7em 3em;background: white;  margin-top: -27%;   margin-bottom: -12px;}
+.btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary:hover {color: #76368f;background-color: #ffffff;}
+
+/* ...........== COPYRIGHT ==............. */
+.copyRight { float: right; color: white; padding-right: 15px;margin-top: -60px;font-size: 13px;font-weight: 400;}
+
+/* ...........== REDES SOCIALES ==............. */
+.redesSociales{float: right;color: white;padding-right: 15px;margin-top: -83px;font-size: 13px;}
+#face{width: 16px;color: white;font-weight: 400;}
+
+ /* ...........== RESPONSIVE ==............. */
+ /* 350 px hasta 393 px ==>> moviles */
 @media (min-width: 350px) and (max-width: 393px) {
- 
-  body h2 {
-    font-size: 1.6em;
-  }
-  .bienvenida{
-    margin-bottom: -54px;
-    text-align: center;
-  }
-  .form-w3ls-left-info button.btn {
-    margin-left: 28%;
-}
-.olvidastePass{
-  text-align: center;
-}
-  .redesSociales {
-    margin-bottom: 20px;
-    margin-right: 148px;
-  }
-  .copyRight {
-    float: right;
-    color: white;
-    padding-right: 48px;
-  }
 
+    #logoBlanco{float: none;margin-bottom: -53px;} 
+    .bienvenida{text-align: center;font-size: 16px;}
+    .h2Id{text-align: center;font-size: 27px;}
+    .divBtn, .link_registrarse{text-align: center;}
+    .copyRight{float: none;text-align: center;padding: 0;}  
+    .redesSociales{float: none;text-align: center;padding: 0;}  
+    .footer-personalizado{margin-top: 23px;}
 }
-
 @media (min-width: 400px) and (max-width:480px) {
 
-.olvidastePass{
-  float: none;
-  text-align: center;
+    #logoBlanco{float: none;margin-bottom: -62px;} 
+    .bienvenida{text-align: center;font-size: 16px;margin-top: -42%;}
+    .h2Id{text-align: center;font-size: 27px;}
+    .link_registrarse{text-align: center;font-size: 16px}
+    .divBtn, .link_registrarse{text-align: center;}
+    .copyRight{float: none;text-align: center;padding: 0;}  
+    .redesSociales{float: none;text-align: center;padding: 0;}
+    .footer-personalizado{ margin-top: -43%;}  
 }
-.redesSociales {
-  margin-bottom: 20px;
-  margin-right: 148px;
-}
-.copyRight {
-  float: right;
-  color: white;
-  padding-right: 69px;
-}
-}
-
-@media (min-width: 390px){
-  .p-4 {
-    padding: 2.5rem !important;
-  }
-
-
-}
-
 @media (min-width: 1024px) and (max-width:1280px) {
-  .form-w3ls-left-info input[type="email"] {
-    width: 85%;
-    height: 68px;
-    left: 76px;
-    font-size: 13px;
-    top: 357px;
-    border: none;
-    opacity: 0.29;
-    border-radius: 5px;
+    .footer-personalizado{margin-right: 30px;}
+    /* Campo de correo */
+    .cssCorreo{width: 35em; height: 57px; }
+    /* Campo de la clave */
+    .password{width: 35em; height: 57px; }
+    /* Label de correo */
+    .labelEmail{ font-size: 13px;}
+    /* Label de clave */
+    .labelPass{ font-size: 13px; }
+    /* ...........== PLACEHOLDER ==............. */
+    ::placeholder {font-size: 14px; }
+    /* ...........== CONTENEDORES ==............. */
+    .contenedor-personalizado{width:auto ;}
+    .bienvenida {font-size: 17px;}
+    .h2Id {font-size: 35px;}
+    .link_registrarse, #clickAqui {font-size: 15px;}
+    #boton {font-size: 17px; padding: 0.9em 2.5em;margin-top: -19%; }
+    #logoBlanco {width: 40%;}
+}
+@media (min-width: 1368px) and (max-width: 1920px) {
+  p.text-muted.mb-0 { font-size: 10px; margin-top: -4px; }
+    .footer-personalizado{margin-right: 30px;}
+    .contenedor-personalizado{width:auto ;}
+    .content-inner-info{width: max-content}
+    .cssCorreo {width: 41em; height: 69px;font-size: 13px; }
+    .password{width: 41em; height: 69px;font-size: 13px; }
+    .labelEmail{ font-size: 15px;}
+    .labelPass{ font-size: 15px; }
+    ::placeholder {font-size: 15px; }
+    .bienvenida, .link_registrarse, #clickAqui{ font-size: 19px;}
+    #olvidarPass{ font-size: 16px;}
+    .h2Id{ font-size: 48px;}
+    #boton {font-size: 20px;padding: 0.7em 2.5em; margin-top: -14%;}
+    .my-auto {margin-top: 11% !important;}
+    #logoBlanco {width: 42%;}
+    .copyRight{font-size: 18px;}
+    .redesSociales {font-size: 18px; margin-top: -91px;}
+    .form-switch-lg .form-check-label {font-size: 16px;margin-top: -4px;}
+    .form-switch .form-check-input {width: 1.5em; margin-left: -2.5em;  margin-top: 6px;  }
 }
 
-.form-w3ls-left-info input[type="password"] {
-    width: 85%;
-    height: 68px;
-    left: 76px;
-    top: 357px;
-    border: none;
-    font-size: 13px;
-    opacity: 0.29;
-    border-radius: 5px;
-    margin-bottom: -10px;
-}
-.bienvenida{
-   font-size: 19px;
-}
-.link_registrarse {
-  font-size: 20px !important; 
-}
-#clickAqui{
-   font-size: 20px !important; 
-}
-.h2Id{
-    font-size: 48px;
-}
-.labelEmail, .labelPass{
-    font-size: 18px !important;
-}
-::placeholder {
-color: #5b1b74;
-background:white;
-padding: 12px 1px 8px 8px;
-margin: 15px;
-font-size: 19px !important;
-}
-/* olvidastes pass */
-.form-w3ls-left-info p a {
-  font-size: 19px;
-}
-.form-w3ls-left-info button.btn {
-background: #ffffff;
-color: #76368f;
-margin-top: 27px;
-margin-left: -0.3em;
-font-size: 19px;
-padding: 1.1em 3.5em;
-border-radius: 11px;
-}
-img{
-    width: 13em;
-}
-.cd-nav-trigger {
-    top: auto;
-right: 15px;
-height: 44px;
-width: 44px;
-z-index: 5;
-overflow: hidden;
-text-indent: 100%;
-white-space: nowrap;
-}
-.content-inner-info {
-    padding-top: 11em;
-    width: 100.2%;
-}
-.contenedor-footer{
-  margin-top: 77px;
-}
-.redesSociales{
-  margin-top: -70px !important;
-}
-.copyRight {
-  float: right;
-  color: white;
-  padding-right: 15px;
-  margin-top: -43px;
-  font-size: 20px;
-}
-}
-
-
-label {
-  position: absolute;
-  font-size: 12px;
-  color: white;
-  margin: 3px;
-  padding: 1px 9px 6px;
-}
-
-.link_registrarse {
-  height: 14px;
-  font-size: 13px;
-  color: white;
-}
-
-.links {
-  /* margin-left: 10rem;
-  margin-bottom: -2%; */
-  margin-top: -25px
-
-}
-.form-w3ls-left-info p a {
-    font-size: 8px;
-    color: #fff;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: underline;
-}
-
-.redesSociales li {
-  display:inline;
-  padding-left:3px;
-  padding-right:3px;
-
-}
-
-.redesSociales{
-  float: right;
-  margin-top: -3%;
-  padding-right: 15px;
-}
-
-.icon-instagram:hover{
-  color:#D2358B;
-}
-
-#clickAqui{
-  color: #fed061;font-size: 13px;
-}
-.labelEmail{
-  margin-left: 8px; font-size: 10px; padding: 5px 9px;
-}
-.labelPass{
-  margin-left: 8px; font-size: 10px; padding: 5px 9px;
-}
-
-@media (min-width: 1920px) {
-  .form-w3ls-left-info input[type="email"] {
-      width: 113%;
-      height: 68px;
-      left: 76px;
-      font-size: 13px;
-      top: 357px;
-      border: none;
-      opacity: 0.29;
-      border-radius: 5px;
-  }
-
-  .form-w3ls-left-info input[type="password"] {
-      width: 113%;
-      height: 68px;
-      left: 76px;
-      top: 357px;
-      border: none;
-      font-size: 13px;
-      opacity: 0.29;
-      border-radius: 5px;
-      margin-bottom: -10px;
-  }
-  .bienvenida, .link_registrarse{
-     font-size: 19px;
-  }
-  #clickAqui{
-     font-size: 19px;
-  }
-  .h2Id{
-      font-size: 48px;
-  }
-  .labelEmail, .labelPass{
-      font-size: 15px;
-  }
-  ::placeholder {
-  color: #5b1b74;
-  background:white;
-  padding: 12px 1px 8px 8px;
-  margin: 15px;
-  font-size: 15px;
-  }
- /* olvidastes pass */
-.form-w3ls-left-info p a {
-  font-size: 20px;
-}
-  .form-w3ls-left-info button.btn {
-  background: #ffffff;
-  color: #76368f;
-  margin-top: 27px;
-  margin-left: -0.3em;
-  font-size: 19px;
-  padding: 1.1em 4.0em;
-  border-radius: 11px;
-  }
-  img{
-      width: 13em;
-  }
-  .cd-nav-trigger {
-      top: auto;
-  right: 15px;
-  height: 44px;
-  width: 44px;
-  z-index: 5;
-  overflow: hidden;
-  text-indent: 100%;
-  white-space: nowrap;
-}
-  .content-inner-info {
-      padding-top: 11em;
-      width: 100.2%;
-  }
-  .contenedor-footer{
-    margin-top: 77px;
-  }
-}
-.icon-instagram:hover{
-  color:#D2358B;
+@media (min-width: 2560px) {
+   p.text-muted.mb-0 { font-size: 10px;margin-top: 19px; }
+    .footer-personalizado{margin-right: 30px;}
+    .contenedor-personalizado{width:auto ;}
+    .content-inner-info{width: max-content}
+    .cssCorreo {width: 27.2em;;height: 115px;font-size: 35px;border-radius: 13px;}
+    .password{width: 27.2em;;height: 115px;font-size: 35px;border-radius: 13px;} 
+    .labelEmail{ font-size: 24px;}
+    .labelPass{ font-size: 24px; }
+    ::placeholder {font-size: 30px;font-weight: 700; }
+    .bienvenida, .link_registrarse, #clickAqui{ font-size: 36px; margin-top: 31px;}
+    #olvidarPass{ font-size: 30px;}
+    .h2Id{ font-size: 88px;}
+    #boton {font-size: 38px;margin-top: 36px;padding: 0.7em 2.5em;border-radius: 17px; }
+    .my-auto {margin-top: 11% !important;}
+    #logoBlanco {width: 34%;margin-top: 27px;}
+    #face{width: 48px;color: white;font-weight: 400;}
+    .copyRight{font-size: 32px;}
+    .redesSociales {font-size: 37px;margin-top: -118px;}
+    input[switch]:checked + label:after {left: 163px;}
+    input[switch] + label:after { content: "";position: absolute; left: 4px; background-color: #e9e9ef;
+        -webkit-box-shadow: none;box-shadow: none; border-radius: 2rem;
+        height: 49px;width: 43px;top: 2px;-webkit-transition: all 0.1s ease-in-out;transition: all 0.1s ease-in-out;
+    }
+    input[switch] + label:before { color: #343a40;content: attr(data-off-label); display: block;font-family: inherit;
+        font-size: 24px;line-height: 21px;position: absolute;right: 1px; margin: 9px; top: 7px; min-width: 1.66667rem;overflow: hidden;
+    }
+    input[switch] + label { width: 208px; height: 53px;}
+    .form-switch .form-check-input { width: 5em;margin-left: -2.5em; margin-top: 9px;}
+    .form-check-input {height: 2em; }
+    .form-switch-lg .form-check-label {font-size: 30px; margin-top: 15px; margin-left: 5px;vertical-align: middle;}
 }

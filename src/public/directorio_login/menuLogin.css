@@ -31,6 +31,7 @@ Primary style
     height: 44px;
     width: 44px;
     z-index: 5;
+    top: 43px;
     /* image replacement */
     overflow: hidden;
     text-indent: 100%;
