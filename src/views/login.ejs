@@ -1,102 +1,130 @@
 
 <!doctype html>
 <html lang="en">
+
     <head>
+
         <meta charset="utf-8" />
         <title>Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <%- include ('./partials/resetPass_&_restablecerPass/header.ejs')%>
-        <link href="./directorio_login/menuLogin.css" rel="stylesheet">
-        <link href="./directorio_login/styleLogin.css" rel="stylesheet">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+         <!-- App favicon -->
+         <link rel="shortcut icon" href="../directorio_dash/images/favicon.png">
+        <!-- preloader css -->
+        <link rel="stylesheet" href="../directorio_dash/css/preloader.min.css" type="text/css" />
+        <!-- Bootstrap Css -->
+        <link href="../directorio_dash/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="../directorio_dash/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="../directorio_dash/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <!-- Tipo de letra -->
+        <link rel="stylesheet" href="../css/typeFont.css">
+        <!-- Estilos personalizados del login -->
+        <link rel="stylesheet" href="../directorio_login/styleLogin.css">
+
+   
     </head>
-    <body style="background-image: url('/img/banner_login.jpg');  background-size: cover;-webkit-background-size: cover; 
+
+    <body  style="background-image: url('/img/banner_login.jpg');  background-size: cover;-webkit-background-size: cover; 
     -moz-background-size: cover;  background-attachment: fixed; position: relative;">
     <!-- <body data-layout="horizontal"> -->
         <div class="auth-page">
-
             <div class="container-fluid p-0">
-                
                 <div class="row g-0">
-                    <header >
-                        <!-- ======\\ MENU //======== -->
-                       <nav>
-                           <ul class="cd-primary-nav">
-                               <li><a href="/" class="animated_link">Regresar</a></li>
-                           </ul>
-                       </nav>
-                        <a href="#0" class="cd-nav-trigger">Menu<span class="cd-icon"></span></a> 
-                       <div class="cd-overlay-nav">
-                           <span class="" style="transform: scaleX(0) scaleY(0); height: 3012.76px; width: 3012.76px; top: -1506.38px; left: -1506.38px;"></span>
-                       </div>
-                       <div class="cd-overlay-content">
-                           <span class="" style="transform: scaleX(0) scaleY(0); height: 3012.76px; width: 3012.76px; top: -1506.38px; left: -1506.38px;"></span>
-                       </div>
-                       <!-- ======\\ MENU //======== -->
-                   </header>
                     <div class="col-xxl-3 col-lg-4 col-md-5">
-                        
                         <div class="auth-full-page-content d-flex p-sm-5 p-4">
-                   
-                            <div class="contenedor-personalizado">
-                                
+                            <div class="w-100">
                                 <div class="d-flex flex-column h-100">
-                                    
                                     <div class="mb-4 mb-md-5 text-center">
-                                        
                                         <a href="#" class="d-block auth-logo">
                                             <img src="./img/logoBlanco.svg" id="logoBlanco" alt="LogoWhite" srcset="">
                                         </a>
                                     </div>
                                     <div class="auth-content my-auto">
-                                            <div class="content-inner-info">
-                                                <p class="bienvenida">Bienvenido a 3C Sigma Water System</p>
-                                                <h2 class="h2Id">Ingresa con tus datos</h2>
-                                                <br>
-                                                <br>
-                                                <p class="link_registrarse">¿Deseas convertirte en vendedor? <a href="/register" id="clickAqui">haz clic aquí.</a></p>
-                                                <br>
+                                        <div class="content-inner-info" style="margin-bottom: -53px;">
+                                            <p class="bienvenida">Bienvenido a 3C Sigma Water System</p>
+                                            <h2 class="h2Id">Ingresa con tus datos</h2>
+                                            <p class="link_registrarse">¿Deseas convertirte en vendedor? <a href="/register" id="clickAqui">haz clic aquí.</a></p>
+                                            <br>
+                                        </div>
+                                        <br>
+                                        <form class="mt-4 pt-2" action="/login" method="post" name="form1">
+                                            <div class="mb-3">
+                                                <label class="form-label" id="label">Correo</label>
+                                                <input type="email" class="form-control" id="correo" name="correo" placeholder="Introduce tu correo" >
                                             </div>
-                                            <form action="/login" method="post" name="form1">
-                                                <div class="mb-3">
-                                                    <label class="labelEmail">Email</label>
-                                                    <input type="email" class="cssCorreo" name="correo" id="correo" placeholder="Ejemplo@tudominio.com"/>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="labelPass">Contraseña</label>
-                                                    <input type="password" class="password" id="pass" name="pass" placeholder="**********" />
-                                                    <label style="margin-left: 8px; font-size: 10px; padding: 5px 9px;" id = "GFG_DOWN" ></label>
-                                                </div>
-                                                <div class="text-center">
-                                                    <div class="form-check form-switch form-switch-lg mb-3" dir="ltr">
-                                                        <input type="checkbox" class="form-check-input" id="remember_me" value="remember-me">
-                                                        <label class="form-check-label" for="remember_me">Recuérdame</label>
-                                                        <p class="text-muted mb-0" style="float: right; font-size: 11px;"><a href="https://app.3csigmawater.com/restablecer-clave" id="olvidarPass">¿Olvidaste tu contraseña?</a></p>
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-start">
+                                                    <div class="flex-grow-1">
+                                                        <label class="form-label" id="label">Contraseña</label>
+                                                    </div>
+                                                    <div class="flex-shrink-0">
+                                                        <div class="">
+                                                            <a href="https://app.3csigmawater.com/restablecer-clave" style="color:white ;">¿Olvidaste tu contraseña?</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <br>
-                                                <br>
-                                                <div class="mb-3 mt-4 divBtn">
-                                                     <button class="btn btn-primary" id="boton" type="submit">Ingresar</button>
+                                                <div class="input-group auth-pass-inputgroup">
+                                                    <input type="password" class="form-control" placeholder="Introduce tu contraseña" id="pass" name="pass" aria-label="Password" aria-describedby="password-addon">
+                                                    <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon" style="background: #ebebeb59;border: none;"><i class="mdi mdi-eye-outline" ></i></button>
                                                 </div>
-                                            </form>
-                                         </div>
+                                                <label style="font-size: 10px;color:white;" id = "GFG_DOWN" ></label>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <div class="form-check" style="margin-top: -19px;">
+                                                        <input type="checkbox" class="form-check-input" id="remember_me" value="remember-me">
+                                                        <label class="form-check-label" for="remember_me" style="color:white ;">
+                                                            Recuérdame
+                                                        </label>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <button class="btn btn-primary w-100 waves-effect waves-light" style="background: white;color: #812082;" type="submit">Ingresar</button>
+                                            </div>
+                                        </form>
+                                        <div class="mt-4 pt-2 text-center" style="margin-bottom: -23px;">
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item">
+                                                    <a href="https://www.facebook.com/3csigmawater" target="_blank"
+                                                        class="text-white">
+                                                        <i class="fab fa-facebook-f"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="https://instagram.com/3csigmawater" target="_blank"
+                                                        class="text-white">
+                                                        <i class="fab fa-instagram"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="mt-4 text-center" style="margin-top: 2.3em !important;">
+                                            <p class=" mb-0" style="color:white ;"> 3C Sigma Water System ®  <script>document.write(new Date().getFullYear())</script> </p>
+                                        </div>
                                     </div>
-                                 </div>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="footer-personalizado">
-                       <div class="redesSociales">
-                        <i><a href="https://www.facebook.com/3csigmawater" target="_blank"><i class="fab fa-facebook-f" id="face"></i></a></i>
-                        <i><a href="https://instagram.com/3csigmawater" target="_blank"><i class="fab fa-instagram" style="color: white;font-weight: 400;"></i></a></i>
-                       </div>
-                     <div class="copyRight">
-                    3C Sigma Water System ®  <script>document.write(new Date().getFullYear())</script> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
         </div>
-        <%- include ('./partials/resetPass_&_restablecerPass/footer.ejs')%>
+        <!-- JAVASCRIPT -->
+        <script src="../directorio_dash/libs/jquery/jquery.min.js"></script>
+        <script src="../directorio_dash/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../directorio_dash/libs/metismenu/metisMenu.min.js"></script>
+        <script src="../directorio_dash/libs/simplebar/simplebar.min.js"></script>
+        <script src="../directorio_dash/libs/node-waves/waves.min.js"></script>
+        <script src="../directorio_dash/libs/feather-icons/feather.min.js"></script>
+        <!-- pace js -->
+        <script src="../directorio_dash/libs/pace-js/pace.min.js"></script>
+        <!-- password addon init -->
+        <script src="../directorio_dash/js/pages/pass-addon.init.js"></script>
+
         <script>
 
             // {{!-- FUNCIÓN PARA RECORDAR LAS CREDENCIALES DE USUARIO --}}
@@ -153,11 +181,5 @@
                    })
            </script>
            <% } %>
-   <!-- Jquery-->
-     <script src="./js/jquery-3.6.0.min.js"></script>
-   <!-- Menu script -->
-     <script src="./js/velocity.min.js"></script>
-     <script src="./js/main.js"></script>
-   
-   </body>
-   </html>
+    </body>
+</html>
