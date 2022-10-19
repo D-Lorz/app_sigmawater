@@ -105,17 +105,17 @@ p.text-muted.mb-0 {float: right;font-size: 11px; margin: -14px 0 0 0; }
     .footer-personalizado{margin-right: 30px;}
     .contenedor-personalizado{width:auto ;}
     .content-inner-info{width: max-content}
-    .cssCorreo {width: 41em; height: 69px;font-size: 13px; }
-    .password{width: 41em; height: 69px;font-size: 13px; }
+    .cssCorreo {width: 33.3em;height: 66px;font-size: 16px; }
+    .password{width: 33.3em; height: 66px; font-size: 16px; }
     .labelEmail{ font-size: 15px;}
     .labelPass{ font-size: 15px; }
     ::placeholder {font-size: 15px; }
-    .bienvenida, .link_registrarse, #clickAqui{ font-size: 19px;}
+    .bienvenida, .link_registrarse, #clickAqui{ font-size: 18px;}
     #olvidarPass{ font-size: 16px;}
-    .h2Id{ font-size: 48px;}
+    .h2Id{ font-size: 46px;}
     #boton {font-size: 20px;padding: 0.7em 2.5em; margin-top: -14%;}
     .my-auto {margin-top: 11% !important;}
-    #logoBlanco {width: 42%;}
+    #logoBlanco {width: 37%;}
     .copyRight{font-size: 18px;}
     .redesSociales {font-size: 18px; margin-top: -91px;}
     .form-switch-lg .form-check-label {font-size: 16px;margin-top: -4px;}
@@ -127,19 +127,19 @@ p.text-muted.mb-0 {float: right;font-size: 11px; margin: -14px 0 0 0; }
     .footer-personalizado{margin-right: 30px;}
     .contenedor-personalizado{width:auto ;}
     .content-inner-info{width: max-content}
-    .cssCorreo {width: 27.2em;;height: 115px;font-size: 35px;border-radius: 13px;}
-    .password{width: 27.2em;;height: 115px;font-size: 35px;border-radius: 13px;} 
-    .labelEmail{ font-size: 24px;}
-    .labelPass{ font-size: 24px; }
+    .cssCorreo {width: 27em;height: 108px; font-size: 33px;border-radius: 13px;}
+    .password{width: 27em; height: 108px;font-size: 33px; border-radius: 13px;} 
+    .labelEmail{ font-size: 22px;}
+    .labelPass{ font-size: 22px; }
     ::placeholder {font-size: 30px;font-weight: 700; }
-    .bienvenida, .link_registrarse, #clickAqui{ font-size: 36px; margin-top: 31px;}
-    #olvidarPass{ font-size: 30px;}
-    .h2Id{ font-size: 88px;}
-    #boton {font-size: 38px;margin-top: 36px;padding: 0.7em 2.5em;border-radius: 17px; }
+    .bienvenida, .link_registrarse, #clickAqui{ font-size: 31px; margin-top: 31px;}
+    #olvidarPass{ font-size: 28px;}
+    .h2Id{ font-size: 78px;}
+    #boton {font-size: 35px;margin-top: 36px;padding: 0.7em 2.5em;border-radius: 17px; }
     .my-auto {margin-top: 11% !important;}
-    #logoBlanco {width: 34%;margin-top: 27px;}
+    #logoBlanco {width: 32%;margin-top: 27px;}
     #face{width: 48px;color: white;font-weight: 400;}
-    .copyRight{font-size: 32px;}
+    .copyRight{font-size: 30px;}
     .redesSociales {font-size: 37px;margin-top: -118px;}
     input[switch]:checked + label:after {left: 163px;}
     input[switch] + label:after { content: "";position: absolute; left: 4px; background-color: #e9e9ef;
@@ -150,7 +150,7 @@ p.text-muted.mb-0 {float: right;font-size: 11px; margin: -14px 0 0 0; }
         font-size: 24px;line-height: 21px;position: absolute;right: 1px; margin: 9px; top: 7px; min-width: 1.66667rem;overflow: hidden;
     }
     input[switch] + label { width: 208px; height: 53px;}
-    .form-switch .form-check-input { width: 5em;margin-left: -2.5em; margin-top: 9px;}
+    .form-switch .form-check-input { width: 4em;margin-left: -2.5em; margin-top: 9px;}
     .form-check-input {height: 2em; }
-    .form-switch-lg .form-check-label {font-size: 30px; margin-top: 15px; margin-left: 5px;vertical-align: middle;}
+    .form-switch-lg .form-check-label {font-size: 28px; margin-top: 17px; margin-left: 5px;vertical-align: middle;}
 }
