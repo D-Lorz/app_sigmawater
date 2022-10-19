@@ -1388,7 +1388,7 @@ exports.historial_clientes_admin = async (req, res) => {
   res.send("todo ok...");
 };
 
-// todo ===>>> INSERTAR DATOS A LA TABLA HISTORIAL CLIENTES ADMIN 
+// todo ===>>> INSERTAR DATOS A LA TABLA HISTORIAL VENDEDORES ADMIN 
 exports.historial_vendedores_admin = async (req, res) => {
 
   let vendedores = await conexion.query("SELECT * FROM registro_de_vendedores");
@@ -1426,7 +1426,7 @@ exports.historial_vendedores_admin = async (req, res) => {
 // todo ===>>> INSERTAR DATOS A LA TABLA FILTRO NUMVENTAS ADMIN 
 exports.filtro_numventas_admin = async (req, res) => {
 
-  // ==> CONSULTA PARA SACARLA INFORMACION DE FILTRO NUMVENTAS ADMINISTRADOR  
+  // ==> CONSULTA PARA SACAR INFORMACION DE FILTRO NUMVENTAS ADMINISTRADOR  
   let flNumventasAdm = await conexion.query("SELECT * FROM filtro_numventas_admin ");
 
   let numVentas 
@@ -1454,7 +1454,7 @@ exports.filtro_numventas_admin = async (req, res) => {
 
 };
 
-// todo ===>>> INSERTAR DATOS A LA TABLA FILTRO NUMVENTAS ADMIN 
+// todo ===>>> INSERTAR DATOS A LA TABLA GANANCIAS MENSUALES ADMIN
 exports.ganancias_mensuales_admin = async (req, res) => {
 
   const factura = await conexion.query("SELECT * FROM factura")
