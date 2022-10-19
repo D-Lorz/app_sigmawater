@@ -26,5 +26,21 @@ color: #BE95CE;
 .bienvenida{text-align: center;font-size: 16px;}
 .h2Id{text-align: center;font-size: 27px;}
 .divBtn, .link_registrarse{text-align: center;}
-
+/* Menu */
+.cd-nav-trigger {margin-top: -20px;}
 }
+
+/* 400pxhasta 480px ==>> PC */
+@media (min-width: 400px) and (max-width:480px) {
+  .cd-nav-trigger {margin-top: -17px;}
+}
+/* 1024px hasta 1280px ==>> PC */
+@media (min-width: 1024px) and (max-width:1280px) {
+  .auth-content.my-auto {width: max-content; }
+ }
+ /* 1368px hasta 1920px ==>> PC */
+ @media (min-width: 1368px) and (max-width: 1920px) {
+  .content-inner-info{width: max-content}
+  }
+
+
