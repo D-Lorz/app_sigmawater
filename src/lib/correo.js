@@ -138,7 +138,7 @@ const nuevoVendedorHTML = (nomAdmin, vendedor) => {
     <table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
     <tr>
     <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-    <div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://3csigmawater.com/correos_html/banner-Vaprobado.png" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>
+    <div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://3csigmawater.com/correos_html/banner-Saprobado.png" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>
     </td>
     </tr>
     </table>
@@ -445,7 +445,7 @@ const aceptarVendedorHTML = (nomVendedor, clave) => {
     <table border="0" cellpadding="0" cellspacing="0" class="image_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
     <tr>
     <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-    <div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://3csigmawater.com/correos_html/banner-Vaprobado.png" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>
+    <div align="center" class="alignment" style="line-height:10px"><img class="fullMobileWidth" src="https://3csigmawater.com/correos_html/banner-Saprobado.png" style="display: block; height: auto; border: 0; width: 600px; max-width: 100%;" width="600"/></div>
     </td>
     </tr>
     </table>
