@@ -711,18 +711,17 @@
                                     <div class="input-group">
                                         <label class="input-group-btn">
                                             <span class="btn btn-primary" style="padding: 10px;"> Cargar anverso
-                                                <input type="file" name="cliente_frontal" id="campoFile" accept="image/jpg"
-                                                    style="display: none;" id="licencia_cliente_frontal1" required>
+                                                <input type="file" name="cliente_frontal" onchange="licencia1()" accept="image/jpg" style="display: none;" id="licencia_cliente_frontal1" required>
                                             </span>
                                         </label>
                                         <input type="text" class="form-control" style="font-size: 15px;height: 43px;"
-                                            placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required readonly>
+                                            placeholder=" Solo archivos .jpg, jpeg y .png de max 5MB son permitidos" required readonly>
                                     </div>
                                     <br>
                                     <div class="input-group">
                                         <label class="input-group-btn">
                                             <span class="btn btn-primary" style="padding: 10px;"> Cargar reverso
-                                                <input type="file" name="cliente_trasera" id="campoFile" accept="image/jpg" style="display: none;" id="licencia_cliente_trasera1" required>
+                                                <input type="file" name="cliente_trasera" onchange="licencia2()" accept="image/jpg" style="display: none;" id="licencia_cliente_trasera1" required>
                                             </span>
                                         </label>
                                         <input type="text" class="form-control" style="font-size: 15px; height: 43px;"

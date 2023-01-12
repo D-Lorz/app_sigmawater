@@ -764,7 +764,8 @@ exports.historialVendedores = async (req, res) => {
   console.log("AÑO => ", yearActual);
 
   let mesActual = new Date().getMonth()
-  mesActual == 0 ? mesActual = 12 : mesActual = mesActual + 1
+  mesActual == 0 ? mesActual = 1 : mesActual = mesActual + 1
+  console.log("------->>" , mesActual);
 
   let numAfiliados = 0
   let vendedor = await conexion.query("SELECT id_vendedor FROM registro_de_vendedores;");
@@ -843,8 +844,9 @@ exports.historial_ganancias_vendedores = async (req, res) => {
   let vendedores = await conexion.query("SELECT id_vendedor FROM registro_de_vendedores");
 
   let mesActual = new Date().getMonth();
-  mesActual == 0 ? (mesActual = 12) : (mesActual = mesActual + 1);
+  mesActual == 0 ? (mesActual = 1) : (mesActual = mesActual + 1);
   const mesAnterior = mesActual - 1
+  mesAnterior == 12 ? year = year - 1 : false
   const year = new Date().getFullYear();
 
   vendedores.forEach(async (v)=> {

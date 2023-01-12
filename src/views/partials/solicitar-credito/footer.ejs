@@ -359,80 +359,102 @@ $.datepicker.regional['es'] = {
 
   //  /TODO: FUNCIONES PARA MASCARA  -->
 
+  // ==> LICENCIA DESDE EL FORMULARIO LARGO SOLICITAR CREDITO  == <==
+  function licencia1(){
+            let fileInput = document.getElementById('licencia_cliente_frontal1')
+                let filePath = fileInput.value;
+                let allowedExtensions = /(.jpg|.jpeg|.png)$/i;
+                let archivo = fileInput.files[0];
+                if(!allowedExtensions.exec(filePath)){
+                    alertify.set('notifier', 'position', 'top-center');
+                    alertify.error('Solo archivos .jpg, jpeg y .png son aceptados');
+                    fileInput.value = '';
+                    return false;
+                }else if(archivo.size > 5000000) {
+                    alertify.set('notifier', 'position', 'top-center');
+                    alertify.error('Tu archivo supera los 5MB de peso');
+                    fileInput.value = '';
+                    return false;
+                }else {
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                    $('#imagePre1').attr('src', e.target.result); // Renderizamos la imagen
+                }
+                 reader.readAsDataURL(fileInput.files[0]);
+              }
+           }
+       }
+        $("#imgInp").change(function () {
+        // Código a ejecutar cuando se detecta un cambio de archivO
+        readImage(this);
+     });
+  function licencia2(){
+            let fileInput = document.getElementById('licencia_cliente_trasera1')
+                let filePath = fileInput.value;
+                let allowedExtensions = /(.jpg|.jpeg|.png)$/i;
+                let archivo = fileInput.files[0];
+                if(!allowedExtensions.exec(filePath)){
+                    alertify.set('notifier', 'position', 'top-center');
+                    alertify.error('Solo archivos .jpg, jpeg y .png son aceptados');
+                    fileInput.value = '';
+                    return false;
+                }else if(archivo.size > 5000000) {
+                    alertify.set('notifier', 'position', 'top-center');
+                    alertify.error('Tu archivo supera los 5MB de peso');
+                    fileInput.value = '';
+                    return false;
+                }else {
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                    $('#imagePre1').attr('src', e.target.result); // Renderizamos la imagen
+                }
+                 reader.readAsDataURL(fileInput.files[0]);
+              }
+           }
+       }
+        $("#imgInp").change(function () {
+        // Código a ejecutar cuando se detecta un cambio de archivO
+        readImage(this);
+     });
 
-  $(document).on('change', '#campoFile', function () {
-    // this.files[0].size recupera el tamaño del archivo
-    // alert(this.files[0].size);
+  // $(document).on('change', '#campoFile', function () {
+  //   // this.files[0].size recupera el tamaño del archivo
+  //   // alert(this.files[0].size);
 
-    var fileName = this.files[0].name;
-    var fileSize = this.files[0].size;
+  //   var fileName = this.files[0].name;
+  //   var fileSize = this.files[0].size;
 
-    if (fileSize > 5000000) {
-      alertify.set('notifier', 'position', 'top-center');
-      alertify.error('El archivo supera los 5MB de peso');
-      this.value = '';
-      this.files[0].name = '';
-    } else {
-      // recuperamos la extensión del archivo
-      var ext = fileName.split('.').pop();
+  //   if (fileSize > 5000000) {
+  //     alertify.set('notifier', 'position', 'top-center');
+  //     alertify.error('El archivo supera los 5MB de peso');
+  //     this.value = '';
+  //     this.files[0].name = '';
+  //   } else {
+  //     // recuperamos la extensión del archivo
+  //     var ext = fileName.split('.').pop();
 
-      // Convertimos en minúscula porque 
-      // la extensión del archivo puede estar en mayúscula
-      ext = ext.toLowerCase();
+  //     // Convertimos en minúscula porque 
+  //     // la extensión del archivo puede estar en mayúscula
+  //     ext = ext.toLowerCase();
 
-      // console.log(ext);
-      switch (ext) {
-        case 'png':
-        case 'jpg':
-          break;
-        default:
-          alertify.set('notifier', 'position', 'top-center');
-          alertify.error('Solo archivos .jpg o .png son aceptados');
+  //     // console.log(ext);
+  //     switch (ext) {
+  //       case 'png':
+  //       case 'jpg':
+  //       case 'jpeg':
+  //         break;
+  //       default:
+  //         alertify.set('notifier', 'position', 'top-center');
+  //         alertify.error('Solo archivos .jpg, jpeg y .png son aceptados');
 
-          this.value = ''; // reset del valor
-          this.files[0].name = '';
-      }
-    }
-  });
+  //         this.value = ''; // reset del valor
+  //         this.files[0].name = '';
+  //     }
+  //   }
+  // });
 
-  /////////////////////////////////////////////////////////////////////////=-->
-
-  $(document).on('change', '#pdfFirmado', function () {
-    // this.files[0].size recupera el tamaño del archivo
-    // alert(this.files[0].size);
-
-    var fileName = this.files[0].name;
-    var fileSize = this.files[0].size;
-
-    if (fileSize > 3000000) {
-      alertify.set('notifier', 'position', 'top-center');
-      alertify.error('El archivo supera los 3MB de peso');
-      this.value = '';
-      this.files[0].name = '';
-    } else {
-      // recuperamos la extensión del archivo
-      var ext = fileName.split('.').pop();
-
-      // Convertimos en minúscula porque 
-      // la extensión del archivo puede estar en mayúscula
-      ext = ext.toLowerCase();
-
-      // console.log(ext);
-      switch (ext) {
-        case 'png':
-        case 'jpg':
-
-          break;
-        default:
-          alertify.set('notifier', 'position', 'top-center');
-          alertify.error('Solo archivos .jpg o .png son aceptados');
-
-          this.value = ''; // reset del valor
-          this.files[0].name = '';
-      }
-    }
-  });
- 
  
   // ====================================================================-->
   //  === ATRAPAR EL NOMBRE DEL CAMPO LICIENCIA Y REFLEJARLO EN EL INPUT == -->

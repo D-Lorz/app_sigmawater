@@ -19,6 +19,7 @@ cron.schedule('0 22 * * Sun', () => {
   filtro_numventas_admin();
 });
 
+
 // Ejecución Mensual
 cron.schedule('0 1 1 * *',() => {
   ganancias_mensuales_admin();

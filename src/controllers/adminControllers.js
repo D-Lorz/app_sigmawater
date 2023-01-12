@@ -1350,23 +1350,30 @@ exports.dashboardAdministrador = async (req, res) => {
     topVendedores,facturas_recientes,Agenda});
 } 
 
+capturarSemanaActual = () => {
+  currentdate = new Date();
+  const oneJan = new Date(currentdate.getFullYear(), 0, 1);
+  const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
+  console.log("Semana actual ==>> ", semanaActual);
+
+  return {semanaActual}
+
+}
+
 // todo ===>>> INSERTAR DATOS A LA TABLA HISTORIAL CLIENTES ADMIN 
 exports.historial_clientes_admin = async (req, res) => {
 
   let clientes = await conexion.query("SELECT * FROM nuevos_cliente");
   let fecha = new Date().toLocaleDateString("en-CA");
   let yearActual = new Date(fecha).getFullYear();
+  let numClientes = 0
 
-  currentdate = new Date();
-  const oneJan = new Date(currentdate.getFullYear(), 0, 1);
-  const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
-  console.log("Semana actual ==>> ", semanaActual);
-  let numClientes
-  
+  const objSemana =  capturarSemanaActual()
+  const semanaActual = objSemana.semanaActual;
+
   // ==> FILTRANDO CLIENTES POR SEMANA Y AÑO DE REGISTRO CON LA ACTUAL
   const resultado = clientes.filter((item) => item.semana == semanaActual && item.year == yearActual);
-
   if (resultado.length > 0) {
     numClientes = resultado.length;
     console.log("NUMERO DE CLIENTES >>>>>", numClientes);
@@ -1376,15 +1383,14 @@ exports.historial_clientes_admin = async (req, res) => {
     await conexion.query("INSERT INTO historial_clientes_admin SET ?", [datosHcl_admin]);
     console.log("Realizando registro en DB HISTORIAL CLIENTES ADMINISTRADOR....")
   } else {
-    let numRepetido = await conexion.query("SELECT * FROM historial_clientes_admin ORDER BY id DESC LIMIT 1");
-    numClientes = numRepetido[0].numClientes
+    let numRepetido = await conexion.query("SELECT numClientes FROM historial_clientes_admin ORDER BY id DESC LIMIT 1");
+    numRepetido > 0 ? numClientes = numRepetido[0] : numClientes
+
     // ==> ENVIANDO A LA TABLA HISTORIAL CLIENTES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
     const datosHcl_admin = { fecha, numClientes }; //==> DATOS HISTORIAL CLIENTES ADMIN
     await conexion.query("INSERT INTO historial_clientes_admin SET ?", [datosHcl_admin]);
     console.log("Realizando registro en DB HISTORIAL CLIENTES ADMINISTRADOR....")
   }
-
-
   res.send("todo ok...");
 };
 
@@ -1392,15 +1398,12 @@ exports.historial_clientes_admin = async (req, res) => {
 exports.historial_vendedores_admin = async (req, res) => {
 
   let vendedores = await conexion.query("SELECT * FROM registro_de_vendedores");
-  let numVendedores
+  let numVendedores = 0
   let fecha = new Date().toLocaleDateString("en-CA");
   let yearActual = new Date(fecha).getFullYear();
 
-  currentdate = new Date();
-  const oneJan = new Date(currentdate.getFullYear(), 0, 1);
-  const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semanaActual = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
-  console.log("Semana actual ==>> ", semanaActual);
+  const objSemana = capturarSemanaActual()
+  const semanaActual = objSemana.semanaActual;
   
   // ==> FILTRANDO CLIENTES POR SEMANA Y AÑO DE REGISTRO CON LA ACTUAL
   const resultado = vendedores.filter((item) => item.semana == semanaActual && item.year == yearActual);
@@ -1411,8 +1414,9 @@ exports.historial_vendedores_admin = async (req, res) => {
     await conexion.query("INSERT INTO historial_vendedores_admin SET ?", [datosHvd_admin]);
     console.log("Realizando registro en DB HISTORIAL VENDEDORES ADMINISTRADOR....")
   } else {
-    let numRepetido = await conexion.query("SELECT * FROM historial_vendedores_admin ORDER BY id DESC LIMIT 1");
-    numVendedores = numRepetido[0].numVendedores
+    let numRepetido = await conexion.query("SELECT numVendedores FROM historial_vendedores_admin ORDER BY id DESC LIMIT 1");
+    numRepetido > 0 ? numVendedores = numRepetido[0] : numVendedores
+
     // ==> ENVIANDO A LA TABLA HISTORIAL  VENDEDORES DEL ADMIN FILTRADOS POR SEMANA Y AÑO 
     const datosHcl_admin = { fecha, numVendedores }; //==> DATOS HISTORIAL VENDEDORES ADMIN
     await conexion.query("INSERT INTO historial_vendedores_admin SET ?", [datosHcl_admin]);
@@ -1432,13 +1436,12 @@ exports.filtro_numventas_admin = async (req, res) => {
   let numVentas 
   let fecha = new Date().toLocaleDateString("en-CA");
   let year = new Date(fecha).getFullYear();
-  currentdate = new Date();
-  const oneJan = new Date(currentdate.getFullYear(), 0, 1);
-  const numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-  const semana = Math.ceil((currentdate.getDay() + numberOfDays) / 7) - 1;
+  
+  const objSemana = capturarSemanaActual()
+  const semanaActual = objSemana.semanaActual;
 
   // ==>> FILTRANDO LA SEMANA DEL DATO VACIO DE LA TABLA "FILTRO NUMVENTAS ADMINISTRADOR"
-  const resultado = flNumventasAdm.filter((item) => item.semana == semana && item.year == year);
+  const resultado = flNumventasAdm.filter((item) => item.semana == semanaActual && item.year == year);
   let rsemana
   resultado.forEach(r => {
     rsemana = r.semana;
@@ -1446,7 +1449,7 @@ exports.filtro_numventas_admin = async (req, res) => {
   });
   // ==>> VALIDANDO SI EXISTE SEMANA ACTUAL CON LA QUE SE ENCUENTRA EN EL VALOR POR DEDFECTO DE LA TABLA
   const datos_insert = {fecha, numVentas}
-  if (rsemana == semana) {
+  if (rsemana == semanaActual) {
     await conexion.query("INSERT INTO historial_numventas_admin SET ?", [datos_insert]);
   }
   
@@ -1463,9 +1466,11 @@ exports.ganancias_mensuales_admin = async (req, res) => {
 
   let fecha = new Date().toLocaleDateString("en-CA");
   let mesActual = new Date().getMonth();
-  mesActual == 0 ? (mesActual = 12) : (mesActual = mesActual + 1);
-  const mesAnterior = mesActual - 1
   const year = new Date().getFullYear();
+
+  mesActual == 0 ? (mesActual = 1) : (mesActual = mesActual + 1);
+  let mesAnterior = mesActual - 1
+  mesAnterior == 12 ? year = year - 1 : false
 
   let filtroGanancias, gananciasEmpresa = 0, comisionEmpresa = 0 ;
   filtroGanancias = factura.filter((item) => mesAnterior == item.mes && year == item.year);

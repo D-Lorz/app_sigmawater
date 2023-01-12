@@ -163,9 +163,8 @@
                       <p class="titulolicencia">Licencia de conducir </p>
                       <div class="input-group">
                         <label class="input-group-btn">
-                          <span class="btn btn-primary" style="padding: 10px;">
-                            Cargar anverso<input type="file" name="licencia" id="campoFile" accept="image/jpg"
-                              style="display: none;" id="licencia" class="required">
+                          <span class="btn btn-primary" style="padding: 10px;">Cargar anverso
+                            <input type="file" name="licencia" onchange="licenciaRegister()" accept="image/jpg" style="display: none;" id="licencia" class="required">
                             <!-- style="display: none;" class="inputfile" multiple -->
                           </span>
                         </label>
@@ -175,7 +174,7 @@
                       <div class="input-group">
                         <label class="input-group-btn">
                           <span class="btn btn-primary" style="padding: 10px;"> Cargar reverso<input type="file" 
-                              name="licencia_trasera" id="campoFile" accept="image/jpg"
+                              name="licencia_trasera" onchange="licenciaRegister()" accept="image/jpg"
                               style="display: none;" id="licencia" class="required">
                           </span>
                         </label>
