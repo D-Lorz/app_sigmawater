@@ -6,4 +6,3 @@ public/licences/*.png
 public/licences_customers/*.jpg
 public/licences_customers/*.png
 src/ecosystem_config.js
-src/app.js
