@@ -9,7 +9,7 @@
   
                <% if(user.total_ventas >= 20.5) { %>
 
-             <input type="hidden" id="contenido-texto" value="/register?code=<%= user.id_vendedor %>">
+             <input type="hidden" id="contenido-texto" value="<%= btn_mydomain %>/register?code=<%= user.id_vendedor %>">
                 <span class="d-none d-xl-inline-block ms-1 fw-medium" >
                    <%= user.id_vendedor %> 
                 </span>
