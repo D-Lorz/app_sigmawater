@@ -5,3 +5,4 @@ public/licences/*.jpg
 public/licences/*.png
 public/licences_customers/*.jpg
 public/licences_customers/*.png
+src/ecosystem_config.js

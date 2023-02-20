@@ -1,16 +1,13 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var flash = require('express-flash');
-var session = require('express-session');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const flash = require('express-flash');
+const session = require('express-session');
 const dotenv = require('dotenv')
 const morgan = require('morgan'); // registra las solicitudes junto con alguna otra información
-var session = require('express-session');
+const {port} = require('./keys')
 
-
-var app = express();
+const app = express();
  
  app.use(session({ 
     secret: '123458cat',
@@ -69,7 +66,7 @@ app.get('*', (req, res, next) => {
 });
 
 // Configuraciones
-app.set('port', process.env.PORT || 3000);
+app.set('port' , port);
 
 app.listen(app.get('port'), () => {
   console.log("***********************************************************")
