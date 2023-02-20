@@ -1391,7 +1391,7 @@ exports.historial_clientes_admin = async (req, res) => {
     await conexion.query("INSERT INTO historial_clientes_admin SET ?", [datosHcl_admin]);
     console.log("Realizando registro en DB HISTORIAL CLIENTES ADMINISTRADOR....")
   }
-  res.send("todo ok...");
+  console.log("todo ok...");
 };
 
 // todo ===>>> INSERTAR DATOS A LA TABLA HISTORIAL VENDEDORES ADMIN 
@@ -1424,7 +1424,7 @@ exports.historial_vendedores_admin = async (req, res) => {
   }
   console.log("NUMERO DE VENDEDORES >>>>>", numVendedores);
 
- res.send("todo ok...");
+ console.log("todo ok...");
 };
 
 // todo ===>>> INSERTAR DATOS A LA TABLA FILTRO NUMVENTAS ADMIN 
@@ -1453,7 +1453,7 @@ exports.filtro_numventas_admin = async (req, res) => {
     await conexion.query("INSERT INTO historial_numventas_admin SET ?", [datos_insert]);
   }
   
-  res.send("todo ok...");
+  console.log("todo ok...");
 
 };
 
