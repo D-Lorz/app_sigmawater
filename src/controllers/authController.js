@@ -5,8 +5,7 @@ const bcrypt = require('bcrypt');
 const { promisify } = require('util')
 const randtoken = require('rand-token');
 const { recuperarClaveHTML, sendEmail } = require('../lib/correo');
-const { log } = require('console');
-
+const { my_domain } = require("../keys").config
 
 // todo: LOGIN
 exports.login = async (req, res) => {
