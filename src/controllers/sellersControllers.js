@@ -88,6 +88,7 @@ exports.registrar = async (req, res) => {
   const nomAdmin = admin.nombresUser
   const vendedor = nombresUser + " " + apellidosUser
   const email = admin.correo
+  console.log(" EMAIL DEL ADMINISTRADOR ==>> " , email);
   const asunto = "Nuevo vendedor registrado"
   const plantilla = nuevoVendedorHTML(nomAdmin, vendedor)
   // Enviar email
