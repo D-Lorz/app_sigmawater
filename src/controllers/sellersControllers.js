@@ -87,7 +87,7 @@ exports.registrar = async (req, res) => {
   // ! ************* PROCESO DEL EMAIL PARA EL ADMIN ************
   const nomAdmin = admin.nombresUser
   const vendedor = nombresUser + " " + apellidosUser
-  const email = "3csigmagroup@gmail.com"
+  const email = admin.correo
   const asunto = "Nuevo vendedor registrado"
   const plantilla = nuevoVendedorHTML(nomAdmin, vendedor)
   // Enviar email
