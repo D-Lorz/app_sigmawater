@@ -27,7 +27,7 @@ const mail = {
 let transporter = nodemailer.createTransport({
     host: "smtp.office365.com", // hostname
     port: 587,
-    secure: false, // TLS requires secureConnection to be false
+    secureConnection: true, // TLS requires secureConnection to be false
 	auth: {
 		user: mail.user, // generated ethereal user
 		pass: mail.pass, // generated ethereal password
