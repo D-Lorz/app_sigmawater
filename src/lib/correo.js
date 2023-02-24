@@ -25,7 +25,8 @@ const mail = {
 
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com", // hostname
+    service: "Outlook365",
+    host: "smtp.office365.com",
     port: 587,
     secureConnection: true, // TLS requires secureConnection to be false
 	auth: {
@@ -33,9 +34,11 @@ let transporter = nodemailer.createTransport({
 		user: mail.user, // generated ethereal user
 		pass: mail.pass, // generated ethereal password
 	},
-    tls:{
-        rejectUnauthorized: false
-   }
+   
+    tls: {
+        ciphers: "SSLv3",
+        rejectUnauthorized: false,
+      },
 });
 
 
