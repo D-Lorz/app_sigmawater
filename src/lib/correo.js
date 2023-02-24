@@ -25,12 +25,11 @@ const mail = {
 
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
-    service: "Outlook365",
-    //host: "smtp.office365.com",
+    // service: "Outlook365",
+    host: "smtp.office365.com",
     port: 587,
-    secureConnection: true, // TLS requires secureConnection to be false
+    secure: true, // TLS requires secureConnection to be false
 	auth: {
-        type: 'login',
 		user: mail.user, // generated ethereal user
 		pass: mail.pass, // generated ethereal password
 	},
@@ -41,13 +40,13 @@ let transporter = nodemailer.createTransport({
 });
 
 
-transporter.verify(function (error, success) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Server is ready to take our messages");
-    }
-  });
+// transporter.verify(function (error, success) {
+//     if (error) {
+//       console.log(error);
+//     } else {
+//       console.log("Server is ready to take our messages");
+//     }
+//   });
 
 
 /** Enviar el email */
