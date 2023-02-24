@@ -33,9 +33,10 @@ let transporter = nodemailer.createTransport({
 		pass: mail.pass, // generated ethereal password
 	},
     tls:{
-        rejectUnauthorized: true
+        rejectUnauthorized: false
    }
 });
+
 
 transporter.verify(function (error, success) {
     if (error) {
