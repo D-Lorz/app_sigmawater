@@ -20,7 +20,7 @@ const { my_domain } = require("../keys").config
 
 const mail = {
 	user: 'sales@3csigmawater.com',
-	pass: '4xK6-!%cC7-fHg!27'
+	pass: 'zihdih-fyBhad-tujvu4'
 }
 
 // create reusable transporter object using the default SMTP transport
