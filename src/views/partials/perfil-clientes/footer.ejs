@@ -81,12 +81,12 @@ function ShowSelected()  {
         inputWS.type= "text",
         inputWS.className= "form-control required",
         inputWS.style= "margin-left: 2%;",
-        inputWS.placeholder= "Máximo: $8,500",
+        inputWS.placeholder= "Máximo: $11,200",
         inputWS.name= 'montoAprobadoPorFuera',
         inputWS.id = 'inputWS'
         inputsMonto.appendChild(inputWS);
 
-        mascaraMonto(inputWS, 8500)
+        mascaraMonto(inputWS, 11200)
 
     } else if (cod == "Reverse Osmosis System"){
         btnCredito.prop('disabled', false);
@@ -95,12 +95,12 @@ function ShowSelected()  {
         inputROS.type= "text",
         inputROS.className= "form-control required",
         inputROS.style= "margin-left: 2%;",
-        inputROS.placeholder= "Máximo: $4,250",
+        inputROS.placeholder= "Máximo: $5,600",
         inputROS.name= 'montoAprobadoPorFuera'
         inputROS.id = 'inputROS'
         inputsMonto.appendChild(inputROS);
 
-        mascaraMonto(inputROS, 4250)
+        mascaraMonto(inputROS, 5600)
 
     } else {
         inputWS.value = ''

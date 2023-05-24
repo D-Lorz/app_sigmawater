@@ -593,15 +593,15 @@ exports.factura = async (req, res) => {
     cl.factura = {}
     cl.vendedores = []
 
-    // Comisiones máximas para el producto grande ($8.500 USD)
-    let comisionMax_nivel1 = 1400.0, comisionMax_nivel2 = 1900.0, comisionMax_nivel3 = 2400.0, gastos_empresa = 3000.0
+    // Comisiones máximas para el producto grande ($11.200 USD)
+    let comisionMax_nivel1 = 1000.0, comisionMax_nivel2 = 2000.0, comisionMax_nivel3 = 3000.0, gastos_empresa = 2500.0
 
-    // Comisiones máximas para el producto pequeño ($4.250 USD)
+    // Comisiones máximas para el producto pequeño ($5.600 USD)
     if (cl.sistema == "Reverse Osmosis System") {
-      comisionMax_nivel1 = 700.0
-      comisionMax_nivel2 = 950.0
-      comisionMax_nivel3 = 1200.0
-      gastos_empresa = 1500.0
+      comisionMax_nivel1 = 750.0
+      comisionMax_nivel2 = 1000.0
+      comisionMax_nivel3 = 1250.0
+      gastos_empresa = 1250.0
     }
 
     let v = vendedores.find(item => item.id == cl.id_vendedor)
