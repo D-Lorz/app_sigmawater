@@ -47,7 +47,7 @@ $("#nombreCl_Scredito,#SegundoNcl_Scredito,#apellidosCl_Scredito,#cHipotecaria,#
 });
 
 // => Solo numeros 
-$("#licencia_solicitante,#anio_residencia,#meses_residencia,#anios_trabajando,#meses_trabajando,#anio_bancarrota,#numero_ruta,#numero_cuenta,#licencia,#anios_trabajando_co,#meses_trabajando_co").bind('keypress', function(event) {
+$("#anio_residencia,#meses_residencia,#anios_trabajando,#meses_trabajando,#anio_bancarrota,#numero_ruta,#numero_cuenta,#licencia,#anios_trabajando_co,#meses_trabajando_co").bind('keypress', function(event) {
   var regex = new RegExp("^[0-9]+$");
   var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
   if (!regex.test(key)) {

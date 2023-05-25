@@ -1,45 +1,22 @@
 const nodemailer = require("nodemailer");
 const { my_domain } = require("../keys").config
 
-// const mail = {
-// 	user: 'noreply@3csigmawater.com',
-// 	pass: '3csigma3c'
-// }
-
-// // create reusable transporter object using the default SMTP transport
-// let transporter = nodemailer.createTransport({
-// 	host: "mail.3csigmawater.com",
-// 	port: 465,
-// 	// tls: { rejectUnauthorized: false },
-// 	secure: true, // true for 465, false for other ports
-// 	auth: {
-// 		user: mail.user, // generated ethereal user
-// 		pass: mail.pass, // generated ethereal password
-// 	},
-// });
-
 const mail = {
-	user: 'sales@3csigmawater.com',
-	pass: 'zihdih-fyBhad-tujvu4'
+	user: 'noreply@3csigmawater.com',
+	pass: '3csigma3c'
 }
 
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
-    //service: "Outlook365",
-    host: "localhost",
-    port: 25,
-    secureConnection: false, // TLS requires secureConnection to be false
+	host: "mail.3csigmawater.com",
+	port: 465,
+	// tls: { rejectUnauthorized: false },
+	secure: true, // true for 465, false for other ports
 	auth: {
-        type: "login",
 		user: mail.user, // generated ethereal user
 		pass: mail.pass, // generated ethereal password
 	},
-    tls:{
-        rejectUnauthorized: false, // true for 465, false for other ports
-    }
- 
 });
-
 
 // transporter.verify(function (error, success) {
 //     if (error) {
@@ -54,7 +31,7 @@ let transporter = nodemailer.createTransport({
 const sendEmail = async (email, subject, html) => {
 	try {
 		await transporter.sendMail({
-			from: `3C Sigma Water System <sales@3csigmawater.com>`, // sender address
+			from: `3C Sigma Water System <noreply@3csigmawater.com>`, // sender address
 			to: email, // list of receivers
 			subject, // Subject line
 			html, // html body
