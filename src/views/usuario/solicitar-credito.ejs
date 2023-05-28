@@ -36,6 +36,41 @@
                   <div class="card">
                     <div class="card-content collapse show">
                       <form action="/solicitarCredito" method="POST" class="steps-validation wizard-circle" id="validarForm" enctype="multipart/form-data">
+                           <!--================== *CARGAR ARCHIVOS* ==============-->
+                    <h6><b>CARGAR ARCHIVOS</b></h6>
+                    <fieldset>
+                        <div class="container">
+                            <div class="row" style=" display: flex; justify-content: center; align-items: center;padding-bottom: 3em;">
+                                <div class="col-6">
+                                    <label class="licencia">Por favor carga el documento solicitado para que
+                                        podamos realizar el proceso de verificación de identidad
+                                        <br>
+                                    </label>
+                                    <p class="titulolicencia">Licencia de conducir </p>
+                                    <div class="input-group">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary" style="padding: 10px;"> Cargar anverso
+                                                <input type="file" name="cliente_frontal" onchange="licencia1()" accept="image/jpg" style="display: none;" id="licencia_cliente_frontal1" required>
+                                            </span>
+                                        </label>
+                                        <input type="text" class="form-control" style="font-size: 15px;height: 43px;"
+                                            placeholder=" Solo archivos .jpg, jpeg y .png de max 5MB son permitidos" required readonly>
+                                    </div>
+                                    <br>
+                                    <div class="input-group">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-primary" style="padding: 10px;"> Cargar reverso
+                                                <input type="file" name="cliente_trasera" onchange="licencia2()" accept="image/jpg" style="display: none;" id="licencia_cliente_trasera1" required>
+                                            </span>
+                                        </label>
+                                        <input type="text" class="form-control" style="font-size: 15px; height: 43px;"
+                                            placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+            <!--================== *CARGAR ARCHIVOS* ==============-->
                     <!-- * ================== *SOLICITANTE* ================-->
                     <!-- Step 1 -->
                         <h6><b>SOLICITANTE</b></h6>
@@ -331,12 +366,11 @@
                                     <br>
                                     <div class="form-check form-check-inline ">
                                         <label class="form-check-label" for="si_bancarrota">Si</label>
-                                        <input class="form-check-input required" type="radio" name="bancarrota" id="si_bancarrota" value="Si"
-                                            checked>
+                                        <input class="form-check-input required" type="radio" name="bancarrota" id="si_bancarrota" value="Si">
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="no_bancarrota">No</label>
-                                        <input class="form-check-input" type="radio" name="bancarrota" id="no_bancarrota" value="No">
+                                        <input class="form-check-input" type="radio" name="bancarrota" id="no_bancarrota" checked value="No">
                                     </div>
                                     <div id="acc_pendiente">
                                         <br>
@@ -431,13 +465,28 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="numero_ruta">Número de ruta</label>
-                                        <input type="number" class="form-control" id="numero_ruta" name="numero_ruta_bancaria">
+                                        <input type="text" class="form-control" id="" name="numero_ruta_bancaria">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="numero_cuenta">Número de cuenta </label>
                                         <input type="number" class="form-control" id="numero_cuenta" name="numero_cuenta_bancaria">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="nombre_banco">Nombre del banco</label>
+                                        <input type="text" class="form-control" name="nombre_banco">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="date-credito" class="form-label">Fecha de vencimiento de tarjeta</label>
+                                        <input type="text" class="form-control" name="fecha_tarjeta" id="date-credito" placeholder=".mm.yyyy">
+                                        <div class="text-muted">mm.yyyy</div>
                                     </div>
                                 </div>
                             </div>
@@ -697,41 +746,6 @@
                         </div>
                     </fieldset>  
             <!--================== *REFERENCIAS* ==============-->
-            <!--================== *CARGAR ARCHIVOS* ==============-->
-                    <h6><b>CARGAR ARCHIVOS</b></h6>
-                    <fieldset>
-                        <div class="container">
-                            <div class="row" style=" display: flex; justify-content: center; align-items: center;padding-bottom: 3em;">
-                                <div class="col-6">
-                                    <label class="licencia">Por favor carga el documento solicitado para que
-                                        podamos realizar el proceso de verificación de identidad
-                                        <br>
-                                    </label>
-                                    <p class="titulolicencia">Licencia de conducir </p>
-                                    <div class="input-group">
-                                        <label class="input-group-btn">
-                                            <span class="btn btn-primary" style="padding: 10px;"> Cargar anverso
-                                                <input type="file" name="cliente_frontal" onchange="licencia1()" accept="image/jpg" style="display: none;" id="licencia_cliente_frontal1" required>
-                                            </span>
-                                        </label>
-                                        <input type="text" class="form-control" style="font-size: 15px;height: 43px;"
-                                            placeholder=" Solo archivos .jpg, jpeg y .png de max 5MB son permitidos" required readonly>
-                                    </div>
-                                    <br>
-                                    <div class="input-group">
-                                        <label class="input-group-btn">
-                                            <span class="btn btn-primary" style="padding: 10px;"> Cargar reverso
-                                                <input type="file" name="cliente_trasera" onchange="licencia2()" accept="image/jpg" style="display: none;" id="licencia_cliente_trasera1" required>
-                                            </span>
-                                        </label>
-                                        <input type="text" class="form-control" style="font-size: 15px; height: 43px;"
-                                            placeholder=" Solo archivos .jpg o .png de max 5MB son permitidos" required readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-            <!--================== *CARGAR ARCHIVOS* ==============-->
             <!--======== //======== * TERMINOS Y CONDICIONES* =========-->
                     <h6><b>TÉRMINOS Y CONDICIONES</b></h6>
                     <fieldset>

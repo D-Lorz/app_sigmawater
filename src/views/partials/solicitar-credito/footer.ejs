@@ -565,8 +565,21 @@ $.datepicker.regional['es'] = {
   // Cargar función initAutocomplete al acceder a la página
   google.maps.event.addDomListener(window, 'load', initAutocomplete);
 
- 
-
+  var dateMask = IMask(document.getElementById('date-credito'), {
+  mask: 'mm.yyyy',
+  blocks: {
+    mm: {
+      mask: IMask.MaskedRange,
+      from: 1,
+      to: 12,
+    },
+    yyyy: {
+      mask: IMask.MaskedRange,
+      from: 1990,
+      to: 2080,
+    },
+  },
+});
 
  
 </script>

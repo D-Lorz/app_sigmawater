@@ -116,6 +116,8 @@ exports.solicitarCredito = async (req, res) => {
   const tipo_cuenta_bancaria = req.body.tipo_cuenta_bancaria;
   const numero_ruta_bancaria = req.body.numero_ruta_bancaria;
   const numero_cuenta_bancaria = req.body.numero_cuenta_bancaria;
+  const nombre_banco = req.body.nombre_banco;
+  const fecha_tarjeta = req.body.fecha_tarjeta;
   const licencia_co_solicitante = req.body.licencia_co_solicitante;
   const expedicion_licencia_co_solicitante = req.body.expedicion_licencia_co_solicitante;
   const vencimiento_licencia_co_solicitante = req.body.vencimiento_licencia_co_solicitante;
@@ -166,7 +168,7 @@ exports.solicitarCredito = async (req, res) => {
     salario_mensual_ingresos, bancarrota, sacc_pendiente, ocupacion_ingresos,
     anio_bancarrota_ingresos, telefono_trabajo_ingresos, tipo_bancarrota_ingresos,
     empleador_anterior_ingresos, otros_ingresos_ingresos, ingresos_adicionales_ingresos,
-    tipo_cuenta_bancaria, numero_ruta_bancaria, numero_cuenta_bancaria,
+    tipo_cuenta_bancaria, numero_ruta_bancaria, numero_cuenta_bancaria, nombre_banco, fecha_tarjeta,
     licencia_co_solicitante, expedicion_licencia_co_solicitante, vencimiento_licencia_co_solicitante,
     numero_se_social_co_solicitante, tipo_seguro_co_solicitante, fecha_nacimiento_co_solicitante,
     nombre_co_solicitante, segundo_nombre_co_solicitante, apellido_co_solicitante,

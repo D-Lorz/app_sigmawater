@@ -437,6 +437,7 @@ exports.listarClientes_PerfilClientes = async (req, res) => {
   let mostrarDatoscreditos = await conexion.query("SELECT * FROM solicitar_credito WHERE id_cliente = ?", [info_clientes.id]);
   mostrarDatoscreditos = mostrarDatoscreditos[0]
   if (mostrarDatoscreditos) {
+    console.log(">>>>>>>>>>>>>>>>>>>",mostrarDatoscreditos.seguro_social_licencia);
     mostrarDatoscreditos.monto_financiar_cliente = formatear.format(mostrarDatoscreditos.monto_financiar_cliente)
   }
 

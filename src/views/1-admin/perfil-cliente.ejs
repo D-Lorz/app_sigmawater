@@ -101,7 +101,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for=""> Número de seguro Social / ITIN</label>
-                                                    <input type="number" class="form-control" value="<%= mostrarDatoscreditos.seguro_social_licencia%>"
+                                                    <input type="text" class="form-control" value="<%= mostrarDatoscreditos.seguro_social_licencia %>"
                                                         readonly>
                                                 </div>
                                             </div>
@@ -353,6 +353,26 @@
                                         <label for=""> Número de cuenta </label>
                                         <% if(mostrarDatoscreditos) { %> 
                                         <input type="number" class="form-control " value="<%= mostrarDatoscreditos.numero_cuenta_bancaria%>" readonly>
+                                        <% } else { %> 
+                                        <% } %> 
+                                    </div>
+                                </div>
+                                </div>      
+                            <div class="row text-align: center;">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for=""> Nombre del banco</label>
+                                        <% if(mostrarDatoscreditos) { %> 
+                                        <input type="text" class="form-control" value="<%= mostrarDatoscreditos.nombre_banco%>" readonly>
+                                        <% } else { %> 
+                                        <% } %> 
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for=""> Fecha de vencimiento de tarjeta</label>
+                                        <% if(mostrarDatoscreditos) { %> 
+                                        <input type="text" class="form-control" value="<%= mostrarDatoscreditos.fecha_tarjeta%>" readonly>
                                         <% } else { %> 
                                         <% } %> 
                                     </div>
