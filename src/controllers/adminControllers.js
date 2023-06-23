@@ -221,28 +221,28 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
 exports.ActualizarNivel = async (req, res) => {
   const id_vendedor = req.body.id_vendedor;
   const nivel = req.body.nivel;
-  let puntos_individuales = parseFloat(req.body.puntos_individuales)
+  let ventas_individuales = parseFloat(req.body.ventas_individuales)
   let total_ventas = parseFloat(req.body.total_ventas)
   let ventas_afiliados = parseFloat(req.body.ventas_afiliados)
   let codigo_afiliado
 
   if (nivel == 2) {
-    puntos_individuales = puntos_individuales + (20.5 - total_ventas)
-    total_ventas = puntos_individuales + ventas_afiliados
+    ventas_individuales = ventas_individuales + (20.5 - total_ventas)
+    total_ventas = ventas_individuales + ventas_afiliados
     codigo_afiliado = "N/A"
   } else if (nivel == 3) {
-    puntos_individuales = puntos_individuales + (40.5 - total_ventas)
-    total_ventas = puntos_individuales + ventas_afiliados
+    ventas_individuales = ventas_individuales + (40.5 - total_ventas)
+    total_ventas = ventas_individuales + ventas_afiliados
     codigo_afiliado = "N/A"
   } else if (nivel == 4) {
-    puntos_individuales = puntos_individuales + (60.5 - total_ventas)
-    total_ventas = puntos_individuales + ventas_afiliados
+    ventas_individuales = ventas_individuales + (60.5 - total_ventas)
+    total_ventas = ventas_individuales + ventas_afiliados
     codigo_afiliado = "N/A"
   }
 
-  console.log("VENTAS INDIVIDUALES ACTUALIZADO ==>> (", puntos_individuales, ")");
+  console.log("VENTAS INDIVIDUALES ACTUALIZADO ==>> (", ventas_individuales, ")");
   console.log("TOTAL VENTAS ACTUALIZADO ==>> (", total_ventas, ")");
-  const datosNivel = { nivel, puntos_individuales, total_ventas, codigo_afiliado, id_vendedor };
+  const datosNivel = { nivel, ventas_individuales, total_ventas, codigo_afiliado, id_vendedor };
   const datosNivel_usuarios = { codigo_afiliado };
   await conexion.query("UPDATE usuarios SET ? WHERE id_vendedor = ? ", [datosNivel_usuarios, id_vendedor])
   await conexion.query("UPDATE registro_de_vendedores SET ? WHERE id_vendedor = ? ", [datosNivel, id_vendedor], (err, result) => {
@@ -938,7 +938,7 @@ exports.factura = async (req, res) => {
    // ==> SUMANDO EL NUMERO TOTAL DE VENTAS EN GENERAL
    let sumaTotalVentas = 0;
    info_vendedores.forEach(iv => {
-     sumaTotalVentas += parseFloat(iv.puntos_individuales)
+     sumaTotalVentas += parseFloat(iv.ventas_individuales)
    })
 
   ventasTotales = arrayVentas;
@@ -1019,7 +1019,7 @@ exports.efectuarVenta = async (req, res) => {
 
   //* ******* CONSULTAS PARA LA CADENA
     const clientes = await conexion.query("SELECT cl.*, cr.id_cliente AS idCliente, cr.sistema FROM nuevos_cliente AS cl JOIN solicitar_credito AS cr ON cl.id = cr.id_cliente;")
-    const seller = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel, telefono_movil, total_ventas, puntos_individuales, ventas_afiliados FROM registro_de_vendedores")
+    const seller = await conexion.query("SELECT id, nombres, apellidos, codigo_afiliado, id_vendedor, nivel, telefono_movil, total_ventas, ventas_individuales, ventas_afiliados FROM registro_de_vendedores")
   //* ************************
 
   //* ==>> Apartado para sumar ventas individuales <<==
@@ -1031,15 +1031,15 @@ exports.efectuarVenta = async (req, res) => {
 
     if (v1) {
       producto_instalado == "Whole System" ? nuevaVenta = 1 : nuevaVenta  = 0.5;
-      const puntos_individuales = (parseFloat(v1.puntos_individuales) + nuevaVenta)
+      const ventas_individuales = (parseFloat(v1.ventas_individuales) + nuevaVenta)
       const ventas_afiliados = v1.ventas_afiliados
-      const total_ventasV1 = puntos_individuales + ventas_afiliados
+      const total_ventasV1 = ventas_individuales + ventas_afiliados
 
       // VALIDANDO SI NECESITA SUBIR DE NIVEL EL VENDEDOR PRINCIPAL
       const nivel = _subirNivelVendedor(total_ventasV1)
 
       // OBJETO PARA ENVIAR A LA BASE DE DATOS
-      const vendedorPrincipal = {nivel, puntos_individuales, ventas_afiliados, total_ventas: total_ventasV1}
+      const vendedorPrincipal = {nivel, ventas_individuales, ventas_afiliados, total_ventas: total_ventasV1}
       console.log("---------\nDATOS DE VENDEDOR PRINCIPAL", vendedorPrincipal);
 
       // Actualizando numero de ventas del vendedor que la hizo (Indivuales, afiliados, totales)
@@ -1077,7 +1077,7 @@ exports.efectuarVenta = async (req, res) => {
       if (v2) {
         // Sumando ventas de afiliados actuales con Total de ventas del vendedor anterior
         const ventas_afiliados = (parseFloat(v2.ventas_afiliados) + nuevaVenta)
-        const total_ventasV2 = v2.puntos_individuales + ventas_afiliados
+        const total_ventasV2 = v2.ventas_individuales + ventas_afiliados
 
         // VALIDANDO SI NECESITA SUBIR DE NIVEL EL VENDEDOR PRINCIPAL
         const nivel = _subirNivelVendedor(total_ventasV2)
@@ -1100,7 +1100,7 @@ exports.efectuarVenta = async (req, res) => {
         if (v3) {
           // Sumando ventas de afiliados actuales con Total de ventas del vendedor anterior
           const ventas_afiliados = (parseFloat(v3.ventas_afiliados) + nuevaVenta)
-          const total_ventasV3 = v3.puntos_individuales + ventas_afiliados
+          const total_ventasV3 = v3.ventas_individuales + ventas_afiliados
 
           // VALIDANDO SI NECESITA SUBIR DE NIVEL EL VENDEDOR PRINCIPAL
           const nivel = _subirNivelVendedor(total_ventasV3)
@@ -1123,7 +1123,7 @@ exports.efectuarVenta = async (req, res) => {
           if (v4) {
              // Sumando ventas de afiliados actuales con Total de ventas del vendedor anterior
             const ventas_afiliados = (parseFloat(v4.ventas_afiliados) + nuevaVenta)
-            const total_ventasV4 = v4.puntos_individuales + ventas_afiliados
+            const total_ventasV4 = v4.ventas_individuales + ventas_afiliados
 
             // VALIDANDO SI NECESITA SUBIR DE NIVEL EL VENDEDOR PRINCIPAL
             const nivel = _subirNivelVendedor(total_ventasV4)
@@ -1183,7 +1183,7 @@ exports.dashboardAdministrador = async (req, res) => {
   // ==> SUMANDO EL NUMERO TOTAL DE VENTAS EN GENERAL
   let sumaTotalVentas = 0;
   info_vendedores.forEach(iv => {
-    sumaTotalVentas += parseFloat(iv.puntos_individuales)
+    sumaTotalVentas += parseFloat(iv.ventas_individuales)
   });
 
   // ==>>  CONSULTA PARA SACAR LOS DATOS PARA LA GRAFICA "NÚMERO DE VENTAS" 
