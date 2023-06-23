@@ -573,7 +573,7 @@
                                         <% if(!facturaCliente) {%>
 
                                          <input type="hidden" id="coodigoActualizarId" name="coodigoActualizarxs" value="<%= info_vendedor.id_vendedor %>">
-                                         <input type="hidden" id="v_individualesId" name="v_individuales" value="<%= info_vendedor.ventas_individuales%>">
+                                         <input type="hidden" id="v_individualesId" name="v_individuales" value="<%= info_vendedor.puntos_individuales%>">
                                          <input type="hidden" id="total_ventasId" name="t_ventas" value="<%= info_vendedor.total_ventas%>">
                                          <input type="hidden" id="ventas_afiliadosId" name="v_afiliados" value="<%= info_vendedor.ventas_afiliados%>">
 
@@ -630,10 +630,10 @@
                                             <% } %> 
                                             <!-- </form> -->
                                             <br>
-                                            <h2 class="card-title mb-3" style="text-align: center;font-size: 13px;">Número de ventas</h2>
-                                            <center>Ventas individuales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.ventas_individuales %></div></center>  
-                                            <center>Ventas de afiliados: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.ventas_afiliados %></div></center>  
-                                            <center>Ventas totales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.total_ventas %></div></center>  
+                                            <h2 class="card-title mb-3" style="text-align: center;font-size: 13px;">Número de puntos</h2>
+                                            <center>Puntos individuales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.puntos_individuales %></div></center>  
+                                            <center>Puntos de afiliados: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.ventas_afiliados %></div></center>  
+                                            <center>Puntos totales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.total_ventas %></div></center>  
                                        
                                         </div>
                                    <!-- end card body -->

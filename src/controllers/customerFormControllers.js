@@ -595,13 +595,13 @@ exports.dashboardVendedor = async (req, res) => {
   // Consulta para ganancias propias
   const sellerLogin = allSellers.find(i => i.id_vendedor == idVendedor) //Buscar usuario vendedor logueado en la tabla de vendedores.
   if (sellerLogin) {
-    numVentas_.propias = parseFloat(sellerLogin.ventas_individuales)
+    numVentas_.propias = parseFloat(sellerLogin.puntos_individuales)
   }
   // Consulta para ganancias de afiliados del vendedor logueado
   const vAfiliados = allSellers.filter(i => i.codigo_afiliado == idVendedor)
   if (vAfiliados) {
     vAfiliados.forEach(x => {
-      numVentas_.afiliados += x.ventas_individuales
+      numVentas_.afiliados += x.puntos_individuales
     })
   }
 

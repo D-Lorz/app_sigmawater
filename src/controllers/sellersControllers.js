@@ -239,7 +239,7 @@ exports.facturacion = async (req, res) => {
   const id_vendedorA = req.user.id_vendedor;
   // Consultando en DB las ventas x vendedor
   const allSellers = await conexion.query(
-    "SELECT id_vendedor, ventas_individuales, ventas_afiliados, total_ventas, ganancias FROM registro_de_vendedores"
+    "SELECT id_vendedor, puntos_individuales, ventas_afiliados, total_ventas, ganancias FROM registro_de_vendedores"
   );
   const ventasVendedor = allSellers.find((i) => i.id_vendedor == id_vendedorA);
 
