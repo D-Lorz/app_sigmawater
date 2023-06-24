@@ -630,11 +630,20 @@
                                             <% } %> 
                                             <!-- </form> -->
                                             <br>
-                                            <h2 class="card-title mb-3" style="text-align: center;font-size: 13px;">Número de ventas</h2>
-                                            <center>Ventas individuales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.ventas_individuales %></div></center>  
-                                            <center>Ventas de afiliados: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.ventas_afiliados %></div></center>  
-                                            <center>Ventas totales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.total_ventas %></div></center>  
+                                            <h2 class="card-title mb-3" style="text-align: center;font-size: 13px;">Número de puntos</h2>
+                                            <center>Puntos individuales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.ventas_individuales %></div></center>  
+                                            <center>Puntos de afiliados: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.ventas_afiliados %></div></center>  
+                                            <center>Puntos totales: <div class="badge badge-soft-info font-size-12" ><%= info_vendedor.total_ventas %></div></center>  
                                        
+                                        </div>
+                                   <!-- end card body -->
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3" style="text-align: center;">Ventas del vendedor</h5>
+                                            <br>
+                                            <center>Ventas individuales: <div class="badge badge-soft-success font-size-12" ><%= info_vendedor.ventasReales_individuales %></div></center>  
+                                            <center>Ventas de afiliados: <div class="badge badge-soft-success font-size-12" ><%= info_vendedor.ventasReales_afiliados %></div></center>  
                                         </div>
                                    <!-- end card body -->
                                 </div>
