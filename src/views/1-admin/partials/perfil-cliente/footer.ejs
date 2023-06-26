@@ -94,6 +94,21 @@
 <script>
 // Mascara  para monto aprobado
 document.addEventListener("DOMContentLoaded", function () {
+    // FORMATEANDO PRECIO PARA EL CAMPO MONTO A FINANCIAR Y LIMITANDO SU VALOR
+    const montoFinanciar = document.getElementById('montoAprobadoUpdate');
+    const tipoSistema = document.getElementById('tipo_sistema_').textContent;
+    const valorMaximo_ = tipoSistema == 'Whole System' ? 11200 : 5600;
+    IMask(montoFinanciar, {
+        mask: '$num',
+        blocks: {
+            num: {
+                mask: Number,
+                thousandsSeparator: ',',
+                min: 500,
+                max: valorMaximo_
+            }
+        }
+    });
     // Pattern (Phone)
     var currencyMask = IMask(document.getElementById('montoAprobadoUpdate'), {
        mask: '$num',

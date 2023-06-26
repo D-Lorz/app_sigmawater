@@ -1,8 +1,8 @@
 node_modules
 env/.env
 keys.js 
-public/licences/*.jpg
-public/licences/*.png
-public/licences_customers/*.jpg
-public/licences_customers/*.png
+public/licences/*.*
+public/licences/*.*
+public/licences_customers/*.*
+public/licences_customers/*.*
 src/ecosystem_config.js

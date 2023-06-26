@@ -192,6 +192,20 @@ $.datepicker.regional['es'] = {
 
   $(document).ready(function () {
 
+    // FORMATEANDO PRECIO PARA EL CAMPO MONTO A FINANCIAR Y LIMITANDO SU VALOR
+    const montoFinanciar = document.getElementById('monto-financiar');
+    IMask(montoFinanciar, {
+        mask: '$num',
+        blocks: {
+            num: {
+                mask: Number,
+                thousandsSeparator: ',',
+                min: 500,
+                max: 11200
+            }
+        }
+    });
+
     $('#pagada').on('click', function () {
       var c = document.getElementById('pagada').checked;
       if (c) {

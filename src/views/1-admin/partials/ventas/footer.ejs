@@ -98,6 +98,7 @@
                 datos.vendedores[1] ? vendedor2 = datos.vendedores[1] : vendedor2 = false;
                 datos.vendedores[2] ? vendedor3 = datos.vendedores[2] : vendedor3 = false;
                 datos.vendedores[3] ? vendedor4 = datos.vendedores[3] : vendedor4 = false;
+                console.log("==>>",datos.vendedores);
 
                 $("#idVendedor1").text(vendedor_principal.nombre)
                 $("#nivelVendedor1").text(vendedor_principal.nivel)
@@ -219,7 +220,6 @@
                 $("#deduccionTotal1").val(comisionFinal)
 
                 if (vendedor2) {
-
                     vendedor2.comision_base = vendedor2.comision_base.toFixed(1)
                     $("#tabFactura2").css('display', 'block')
                     $("#idVendedor2").text(vendedor2.nombre)

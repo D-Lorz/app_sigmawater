@@ -5,7 +5,7 @@
         boton.setAttribute("disabled", "")
         boton.style.filter = "grayscale(1)";
     </script>
-            <%}%>
+<%}%>
     
  <!-- JAVASCRIPT -->
  <script src="../directorio_perfilClientes/libs/jquery/jquery.min.js"></script>
@@ -112,19 +112,20 @@ function ShowSelected()  {
         console.log("NINGÚN PRODUCTO SELECCIONADO")
     }
 }
-        // // Mascara para el input Monto Aprobado 
-        function mascaraMonto (input, maximo) {
-            IMask(input, {
-                mask: '$num',
-                blocks: {
-                    num: {
-                        mask: Number,
-                        thousandsSeparator: ',',
-                        min: 500,
-                        max: maximo
-                    }
-                }
-            });
+
+// // Mascara para el input Monto Aprobado 
+function mascaraMonto (input, maximo) {
+    IMask(input, {
+        mask: '$num',
+        blocks: {
+            num: {
+                mask: Number,
+                thousandsSeparator: ',',
+                min: 500,
+                max: maximo
+            }
         }
+    });
+}
                                                                 
 </script>

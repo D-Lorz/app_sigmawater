@@ -498,11 +498,16 @@ exports.ActualizarCredito = async (req, res) => {
 exports.ActualizarMontoAprobado = async (req, res) => {
   const id_cliente = req.body.id_cliente;
   const monto_aprobado = req.body.monto_aprobado.replace(/[$ ,]/g, '');
-  const datosUpdateMontoAprobado = { monto_aprobado, id_cliente };
-  await conexion.query("UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [datosUpdateMontoAprobado, id_cliente], (err, result) => {
-    if (err) res.send(false)
-    res.send(true)
-  });
+  const solicitud = (await conexion.query("SELECT * FROM solicitar_credito")).find(x => x.id_cliente == id_cliente)
+  if (solicitud) {
+    const porcentaje_aprobado = monto_aprobado == solicitud.monto_maximo ? 100 : ((monto_aprobado * 100) / monto_maximo).toFixed(1)
+    const actualizarSolicitud = { monto_aprobado, porcentaje_aprobado };
+    await conexion.query("UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [actualizarSolicitud, id_cliente], (err, result) => {
+      if (err) res.send(false)
+      res.send(true)
+    });
+    
+  }
 };
 
 // todo =======>>> Actualizar información del cliente - perfil-cliente
@@ -593,6 +598,9 @@ exports.factura = async (req, res) => {
     cl.monto_maximo = parseFloat(cl.monto_maximo)
     cl.factura = {}
     cl.vendedores = []
+
+    console.log("PORCENTAJE APROBADO >>>>> ")
+    console.log(cl.porcentaje_aprobado);
 
     // Comisiones máximas para el producto grande ($11.200 USD)
     let comisionMax_nivel1 = 1000.0, comisionMax_nivel2 = 2000.0, comisionMax_nivel3 = 3000.0, gastos_empresa = 2500.0
@@ -685,7 +693,9 @@ exports.factura = async (req, res) => {
 
       /********  Comisión Directa al Vendedor cuando el porcentaje aprobado es mayor al 80% ********/
       if (cl.porcentaje_aprobado >= 80) {
-
+        console.log("NIVEL v ====> ")
+        console.log(vendedor.nivel)
+        console.log(vendedor.nivel)
         switch (vendedor.nivel) {
           //VENDEDOR PRINCIPAL NIVEL 1
           case 1:
@@ -707,7 +717,6 @@ exports.factura = async (req, res) => {
               }
               cl.vendedores.push(vendedor2)
             }
-
             //COMISIÓN VENDEDOR 3 (NIVEL 3 o 4)
             if (v3) {
               if (v3.nivel == 3) {
@@ -736,6 +745,10 @@ exports.factura = async (req, res) => {
             vendedor.comision_base = comisionMax_nivel2;
             vendedor.comision_final = vendedor.comision_base;
             cl.vendedores.push(vendedor)
+
+            console.log("VENDEDOR PRINCIPAL")
+            console.log(comisionMax_nivel2)
+            console.log(vendedor.nivel)
 
             //COMISIÓN VENDEDOR 2 (NIVEL 3 o 4)
             if (v2) {

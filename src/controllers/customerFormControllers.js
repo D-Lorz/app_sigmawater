@@ -158,9 +158,9 @@ exports.solicitarCredito = async (req, res) => {
   const acuerdo_firmado = req.body.acuerdo_firmado
   const id_cliente = req.body.id_cliente
   const estado_del_credito = "En revisión"
-
+  const monto_maximo = sistema == 'Whole System' ? 11200 : 5600;
   const objeto_datos = {
-    monto_financiar_cliente, sistema, numero_licencia_cliente, estado_licencia_cliente,
+    monto_financiar_cliente, monto_maximo, sistema, numero_licencia_cliente, estado_licencia_cliente,
     fecha_expedicion_licencia_cliente, fecha_vencimiento_licencia_cliente, seguro_social_licencia,
     tipo_de_seguro, fecha_nacimiento_cliente, telefono_secundario_cliente, condicion_vivienda,
     compa_hipotecaria_cliente, anio_residencia_cliente, meses_residencia_cliente,
@@ -484,6 +484,9 @@ exports.elegirSistema = async (req, res) => {
   if (sistema == "Reverse Osmosis System") {
     monto_maximo = 5600
     porcentaje_aprobado = ((monto_aprobado * 100) / monto_maximo).toFixed(1)
+  }
+  if (monto_maximo == parseInt(monto_aprobado)) {
+    porcentaje_aprobado = 100;
   }
   const datosElegirSistema = { id_cliente, sistema, estado_del_credito, monto_aprobado, porcentaje_aprobado, monto_maximo };
   await conexion.query("INSERT INTO solicitar_credito SET ?", [datosElegirSistema], (err, result) => {
