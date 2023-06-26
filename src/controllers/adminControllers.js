@@ -498,9 +498,10 @@ exports.ActualizarCredito = async (req, res) => {
 exports.ActualizarMontoAprobado = async (req, res) => {
   const id_cliente = req.body.id_cliente;
   const monto_aprobado = req.body.monto_aprobado.replace(/[$ ,]/g, '');
+
   const solicitud = (await conexion.query("SELECT * FROM solicitar_credito")).find(x => x.id_cliente == id_cliente)
   if (solicitud) {
-    const porcentaje_aprobado = monto_aprobado == solicitud.monto_maximo ? 100 : ((monto_aprobado * 100) / monto_maximo).toFixed(1)
+    const porcentaje_aprobado = monto_aprobado == solicitud.monto_maximo ? 100 : ((monto_aprobado * 100) / solicitud.monto_maximo).toFixed(1)
     const actualizarSolicitud = { monto_aprobado, porcentaje_aprobado };
     await conexion.query("UPDATE solicitar_credito SET ? WHERE id_cliente = ? ", [actualizarSolicitud, id_cliente], (err, result) => {
       if (err) res.send(false)
