@@ -604,14 +604,14 @@ exports.factura = async (req, res) => {
     console.log(cl.porcentaje_aprobado);
 
     // Comisiones máximas para el producto grande ($11.200 USD)
-    let comisionMax_nivel1 = 1000.0, comisionMax_nivel2 = 2000.0, comisionMax_nivel3 = 3000.0, gastos_empresa = 2500.0
+    let comisionMax_nivel1 = 1000.0, comisionMax_nivel2 = 2000.0, comisionMax_nivel3 = 3000.0, gastos_empresa = 3000.0
 
     // Comisiones máximas para el producto pequeño ($5.600 USD)
     if (cl.sistema == "Reverse Osmosis System") {
       comisionMax_nivel1 = 750.0
       comisionMax_nivel2 = 1000.0
       comisionMax_nivel3 = 1250.0
-      gastos_empresa = 1250.0
+      gastos_empresa = 900.0
     }
 
     let v = vendedores.find(item => item.id == cl.id_vendedor)
@@ -757,7 +757,7 @@ exports.factura = async (req, res) => {
                 vendedor2.comision_base = (comisionMax_nivel3 - comisionMax_nivel2)
                 vendedor2.comision_final = vendedor2.comision_base;
               } else {
-                vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel3 - comisionMax_nivel2)
+                vendedor2.comision_base = (cl.monto_aprobado - gastos_empresa - comisionMax_nivel2)
                 vendedor2.comision_final = vendedor2.comision_base/2;
               }
               cl.vendedores.push(vendedor2)
@@ -957,7 +957,7 @@ exports.factura = async (req, res) => {
 
   ventasTotales = arrayVentas;
 
-  res.render("./1-admin/ventas", { user: req.user, arrayVentas, sumaTotalVentas, sumaValor, gananciasE,comisionesPagadas });
+  res.render("./1-admin/ventas", { user: req.user, arrayVentas, sumaTotalVentas, sumaValor, gananciasE, comisionesPagadas });
 }
 //todo ******************************** --FIN-- FACTURAS DE VENTAS + DISPERSIONES DE COMISIONES ******************************** */
 
