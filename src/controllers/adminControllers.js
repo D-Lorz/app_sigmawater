@@ -221,23 +221,20 @@ exports.listarVendedores_PerfilVendedores = async (req, res) => {
 exports.ActualizarNivel = async (req, res) => {
   const id_vendedor = req.body.id_vendedor;
   const nivel = req.body.nivel;
-  let ventas_individuales = parseFloat(req.body.ventas_individuales)
+  let ventas_individuales = parseFloat(req.body.puntos_individuales)
   let total_ventas = parseFloat(req.body.total_ventas)
   let ventas_afiliados = parseFloat(req.body.ventas_afiliados)
-  let codigo_afiliado
+  let codigo_afiliado = 'NaN'
 
   if (nivel == 2) {
     ventas_individuales = ventas_individuales + (20.5 - total_ventas)
     total_ventas = ventas_individuales + ventas_afiliados
-    codigo_afiliado = "N/A"
   } else if (nivel == 3) {
     ventas_individuales = ventas_individuales + (40.5 - total_ventas)
     total_ventas = ventas_individuales + ventas_afiliados
-    codigo_afiliado = "N/A"
   } else if (nivel == 4) {
     ventas_individuales = ventas_individuales + (60.5 - total_ventas)
     total_ventas = ventas_individuales + ventas_afiliados
-    codigo_afiliado = "N/A"
   }
 
   console.log("VENTAS INDIVIDUALES ACTUALIZADO ==>> (", ventas_individuales, ")");
