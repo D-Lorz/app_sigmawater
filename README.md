@@ -1,2 +1,10 @@
-# app_sigmawater
- Plataforma de control de ventas para purificadores de agua
+# Plataforma de Control de Ventas para Pruficadores de Agua
+
+## Tech Stack
+* Node.js
+* Express.js
+* MySQL
+* EJS
+* Passport
+* Json Web Token
+* Bcrypt
