@@ -1,4 +1,4 @@
-# Plataforma de Control de Ventas para Pruficadores de Agua
+# Control de Inventario & Facturación para Purificadores de Agua
 
 ## Tech Stack
 * Node.js
